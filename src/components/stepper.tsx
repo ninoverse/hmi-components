@@ -17,6 +17,7 @@ export type StepperProps<T extends string = string> = Omit<
     current: T;
     onChange?: (value: T) => void;
     orientation?: StepperOrientation;
+    spacing?: string | number;
 };
 
 const CheckIcon = () => (
@@ -39,7 +40,9 @@ export function Stepper<T extends string = string>({
     current,
     onChange,
     orientation = 'horizontal',
+    spacing,
     className,
+    style,
     'aria-label': ariaLabel = 'Progress steps',
     ...rest
 }: StepperProps<T>) {
@@ -48,8 +51,22 @@ export function Stepper<T extends string = string>({
     const tokens: string[] = ['stepper', `stepper--${orientation}`];
     if (className) tokens.push(className);
 
+    const resolvedStyle =
+        spacing !== undefined
+            ? {
+                  '--stepper-item-gap':
+                      typeof spacing === 'number' ? `${spacing}rem` : spacing,
+                  ...style,
+              }
+            : style;
+
     return (
-        <ol className={tokens.join(' ')} aria-label={ariaLabel} {...rest}>
+        <ol
+            className={tokens.join(' ')}
+            aria-label={ariaLabel}
+            style={resolvedStyle}
+            {...rest}
+        >
             {steps.map((step, i) => {
                 const status: 'completed' | 'active' | 'upcoming' =
                     i < currentIndex

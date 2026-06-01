@@ -4135,6 +4135,30 @@ export function Example() {
                     current={checkoutStep}
                     aria-label="Checkout progress vertical"
                 />
+                <Stepper
+                    orientation="vertical"
+                    spacing={4}
+                    steps={[
+                        {
+                            value: 'cart',
+                            label: 'Cart',
+                            description: '3 items',
+                        },
+                        {
+                            value: 'address',
+                            label: 'Address',
+                            description: 'Delivery details',
+                        },
+                        {
+                            value: 'payment',
+                            label: 'Payment',
+                            description: 'Choose method',
+                        },
+                        { value: 'review', label: 'Review' },
+                    ]}
+                    current={checkoutStep}
+                    aria-label="Checkout progress vertical spacing=4"
+                />
                 <div
                     style={{
                         display: 'flex',

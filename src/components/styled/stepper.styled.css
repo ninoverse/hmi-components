@@ -166,7 +166,7 @@ button.stepper__button:hover .stepper__label {
 }
 
 .stepper--vertical .stepper__item {
-    padding-bottom: 2rem;
+    padding-bottom: var(--stepper-item-gap, 2rem);
 }
 
 .stepper--vertical .stepper__item:last-child {
