@@ -59,24 +59,25 @@ phases are merged to `main`.
 
 ## Current gap list
 
-Components still to build as of the last audit:
+All phases (0–7) are built and merged to `main`. There are **no components left
+to build**; the roadmap is complete.
 
-**Phase 1:** `box`, `flex`, `grid`, `spacer`, `aspectRatio`, `text`, `heading`,
-`link`, `blockquote`, `code`, `visuallyHidden`, `scrollArea`.
-(`kbd`, `divider` exist → audit-pass only.)
+| Phase | Status |
+|-------|--------|
+| 1 — Layout + Typography + Utilities | ✅ Done |
+| 2 — Form primitives (`meter`) | ✅ Done |
+| 3 — Advanced inputs (`colorPicker`) | ✅ Done (`pinInput`, `rating` skipped as redundant — see `TODO.md`) |
+| 4 — Overlays (`hoverCard`, `contextMenu`) | ✅ Done |
+| 5 — Navigation / structure (`tree`) | ✅ Done |
+| 6 — Content / media (`image`, `carousel`, `timeline`, `stat`) | ✅ Done |
+| 7 — Data visualisation | ✅ Done — `lineChart`, `barChart`, `areaChart`, `donutChart`, `sparkline`, `bulletChart`, `gauge`, `scatterPlot`, `heatmap`, `funnelChart`, `radarChart`, `chartTooltip`, `legend`, `cartesianGrid`, `responsiveContainer` |
 
-**Phase 2:** `meter`.
+### Adding new components
 
-**Phase 3:** `pinInput`, `rating`, `colorPicker`.
+New components are no longer part of a phased roadmap — build each as a single
+isolated component on its own `feat/<name>` branch off `main`. Use the
+`/create-component` skill (`.claude/skills/create-component/`), which runs the
+full 9-step workflow from `.claude/component-workflow.md`.
 
-**Phase 4:** `hoverCard`, `contextMenu`.
+Update this table if a new category of work is planned.
 
-**Phase 5:** `tree`.
-
-**Phase 6:** `image`, `carousel`, `timeline`, `stat`.
-
-**Phase 7:** `lineChart`, `barChart`, `areaChart`, `donutChart`, `sparkline`,
-`bulletChart`, `gauge`, `scatterPlot`, `heatmap`, `funnelChart`, `radarChart`,
-`chartTooltip`, `legend`, `cartesianGrid`, `responsiveContainer`.
-
-Update this list as components land and phases merge.
