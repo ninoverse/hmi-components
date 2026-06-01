@@ -243,6 +243,10 @@
             "types": "./dist/components/progress.d.ts",
             "import": "./dist/progress.js"
         },
+        "./radar-chart": {
+            "types": "./dist/components/radarChart.d.ts",
+            "import": "./dist/radarChart.js"
+        },
         "./radio": {
             "types": "./dist/components/radio.d.ts",
             "import": "./dist/radio.js"

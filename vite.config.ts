@@ -98,6 +98,7 @@ export default defineConfig({
                 ),
                 popover: resolve(dirname, 'src/components/popover.tsx'),
                 progress: resolve(dirname, 'src/components/progress.tsx'),
+                radarChart: resolve(dirname, 'src/components/radarChart.tsx'),
                 radio: resolve(dirname, 'src/components/radio.tsx'),
                 radioGroup: resolve(dirname, 'src/components/radioGroup.tsx'),
                 responsiveContainer: resolve(
