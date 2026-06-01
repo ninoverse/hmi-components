@@ -32,12 +32,8 @@
 }
 
 .stepper--horizontal .stepper__item {
-    flex-direction: row;
-    align-items: flex-start;
-}
-
-.stepper--horizontal .stepper__item:last-child {
-    flex: 0 0 auto;
+    flex-direction: column;
+    align-items: center;
 }
 
 .stepper--vertical .stepper__item {
@@ -147,13 +143,12 @@ button.stepper__button:hover .stepper__label {
     transition: background var(--duration-medium-2) var(--easing-standard);
 }
 
-/* Horizontal: connector sits to the right of each step (except the
-   last), at a top margin that puts it at the vertical center of the
-   indicator. */
 .stepper--horizontal .stepper__connector {
-    flex: 1;
+    position: absolute;
+    top: 1.9375rem;
+    left: calc(50% + 2rem);
+    right: calc(-50% + 2rem);
     height: 0.125rem;
-    margin: 1.9375rem 1rem 0;
 }
 
 /* Vertical: connector hangs below each indicator. */
