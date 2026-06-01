@@ -59,6 +59,7 @@ import { Pagination } from './components/pagination';
 import { PasswordInput } from './components/passwordInput';
 import { Popover } from './components/popover';
 import { Progress } from './components/progress';
+import { RadarChart } from './components/radarChart';
 import { Radio } from './components/radio';
 import { RadioGroup } from './components/radioGroup';
 import { ResponsiveContainer } from './components/responsiveContainer';
@@ -2544,6 +2545,51 @@ export function Example() {
                             { label: 'Subscribed', value: 210 },
                         ]}
                     />
+                </div>
+            </section>
+
+            <section
+                style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '2rem',
+                }}
+            >
+                <h2 style={{ margin: 0, fontSize: '3rem' }}>RadarChart</h2>
+                <div style={{ paddingBottom: '4rem' }}>
+                    <RadarChart
+                        aria-label="Skill assessment by candidate"
+                        size={340}
+                        axes={[
+                            'Speed',
+                            'Power',
+                            'Range',
+                            'Defense',
+                            'Control',
+                            'Stamina',
+                        ]}
+                        series={[
+                            {
+                                name: 'Alpha',
+                                data: [80, 65, 70, 55, 90, 60],
+                                color: 'var(--primary)',
+                            },
+                            {
+                                name: 'Beta',
+                                data: [55, 80, 45, 75, 60, 85],
+                                color: 'var(--tertiary)',
+                            },
+                        ]}
+                    />
+                    <div style={{ marginTop: '1rem' }}>
+                        <Legend
+                            align="start"
+                            items={[
+                                { label: 'Alpha', color: 'var(--primary)' },
+                                { label: 'Beta', color: 'var(--tertiary)' },
+                            ]}
+                        />
+                    </div>
                 </div>
             </section>
 

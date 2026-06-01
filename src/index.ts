@@ -247,6 +247,11 @@ export {
     type PopoverProps,
 } from './components/popover';
 export { Progress, type ProgressProps } from './components/progress';
+export {
+    RadarChart,
+    type RadarChartProps,
+    type RadarChartSeries,
+} from './components/radarChart';
 export { Radio, type RadioProps } from './components/radio';
 export {
     RadioGroup,

@@ -1,0 +1,31 @@
+/* RadarChart — polar grid with series polygons. The series fill/stroke take
+   the consumer colour directly; grid rings, spokes and labels are tokenised. */
+
+.radar-chart {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+.radar-chart__ring {
+    fill: none;
+    stroke: var(--outline-variant);
+    stroke-width: 1;
+}
+
+.radar-chart__spoke {
+    stroke: var(--outline-variant);
+    stroke-width: 1;
+}
+
+.radar-chart__axis-label {
+    fill: var(--on-surface-variant);
+    font-family: var(--font-oxanium);
+    font-size: 1.25rem;
+}
+
+.radar-chart__area {
+    fill-opacity: 0.2;
+    stroke-width: 2;
+    stroke-linejoin: round;
+}
