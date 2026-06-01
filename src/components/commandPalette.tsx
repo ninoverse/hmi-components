@@ -11,6 +11,8 @@ import {
 import { createPortal } from 'react-dom';
 import './styled/commandPalette.styled.css';
 
+const EXIT_DURATION_MS = 310;
+
 export type CommandPaletteCommand = {
     id: string;
     label: string;
@@ -53,12 +55,32 @@ export function CommandPalette({
 }: CommandPaletteProps) {
     const [query, setQuery] = useState('');
     const [highlight, setHighlight] = useState(0);
+    const [mounted, setMounted] = useState(false);
+    const [exiting, setExiting] = useState(false);
+    const isMountedRef = useRef(false);
     const inputRef = useRef<HTMLInputElement | null>(null);
     const scrimRef = useRef<HTMLDivElement | null>(null);
     const surfaceRef = useRef<HTMLDivElement | null>(null);
     const previouslyFocused = useRef<HTMLElement | null>(null);
     const listboxId = useId();
     const optionId = (i: number) => `${listboxId}-opt-${i}`;
+
+    // Drive the mounted/exiting lifecycle for exit animations.
+    useEffect(() => {
+        if (open) {
+            isMountedRef.current = true;
+            setMounted(true);
+            setExiting(false);
+        } else if (isMountedRef.current) {
+            setExiting(true);
+            const timer = window.setTimeout(() => {
+                setMounted(false);
+                setExiting(false);
+                isMountedRef.current = false;
+            }, EXIT_DURATION_MS);
+            return () => window.clearTimeout(timer);
+        }
+    }, [open]);
 
     // Reset query and selection whenever the palette closes / reopens.
     useEffect(() => {
@@ -162,19 +184,24 @@ export function CommandPalette({
         }
     };
 
-    if (!open || typeof document === 'undefined') return null;
+    if (!mounted || typeof document === 'undefined') return null;
 
     const activeId =
         filtered[highlight] !== undefined ? optionId(highlight) : undefined;
 
     return createPortal(
-        <div ref={scrimRef} className="command-palette-scrim">
+        <div
+            ref={scrimRef}
+            className="command-palette-scrim"
+            data-exiting={exiting}
+        >
             <div
                 ref={surfaceRef}
                 role="dialog"
                 aria-modal="true"
                 aria-label={ariaLabel}
                 className="command-palette"
+                data-exiting={exiting}
             >
                 <div className="command-palette__searchbox">
                     <span

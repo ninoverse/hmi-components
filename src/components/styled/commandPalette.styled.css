@@ -13,7 +13,12 @@
     justify-content: center;
     padding-top: 12vh;
     animation: command-palette-scrim-fade var(--duration-medium-2)
-        var(--easing-standard);
+        var(--easing-standard) both;
+}
+
+.command-palette-scrim[data-exiting="true"] {
+    animation: command-palette-scrim-fade var(--duration-medium-2)
+        var(--easing-standard) reverse forwards;
 }
 
 .command-palette {
@@ -28,8 +33,13 @@
     overflow: hidden;
     font-family: var(--font-quicksand);
     outline: none;
-    animation: command-palette-pop var(--duration-medium-3)
-        var(--easing-emphasized-decelerate);
+    animation: command-palette-pop var(--duration-medium-3) var(--easing-spring)
+        both;
+}
+
+.command-palette[data-exiting="true"] {
+    animation: command-palette-pop var(--duration-medium-2)
+        var(--easing-emphasized-accelerate) reverse forwards;
 }
 
 .command-palette__searchbox {
@@ -97,7 +107,9 @@
     border-radius: var(--corner-extra-small);
     color: var(--on-surface);
     cursor: pointer;
-    transition: background var(--duration-short-1) var(--easing-standard);
+    transition:
+        background var(--duration-short-2) var(--easing-standard),
+        color var(--duration-short-2) var(--easing-standard);
 }
 
 .command-palette__option[data-highlighted="true"] {
@@ -165,7 +177,7 @@
 @keyframes command-palette-pop {
     from {
         opacity: 0;
-        transform: translateY(-1.5rem) scale(0.96);
+        transform: translateY(-0.75rem) scale(0.97);
     }
     to {
         opacity: 1;
