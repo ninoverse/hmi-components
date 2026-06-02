@@ -3,7 +3,7 @@
         "default": "ninoverse"
     },
     "targets": {
-        "ninoverse": {
+        "ninoverse-misc": {
             "hosting": {
                 "demo": ["ninoverse-hmi-components-demo"]
             }
