@@ -77,7 +77,6 @@ jobs:
       - name: Build
         run: pnpm build
 
-      # For now commented, release will be saved on releases page for now
       - name: Setup Node for npm publish
         if: steps.targets.outputs.deploy_npm == 'true'
         uses: actions/setup-node@v4
