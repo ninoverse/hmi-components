@@ -172,3 +172,41 @@ button.stepper__button:hover .stepper__label {
 .stepper--vertical .stepper__item:last-child {
     padding-bottom: 0;
 }
+
+/* On narrow viewports a horizontal stepper can't fit its steps side by
+   side, so fall back to the vertical layout. */
+@media (max-width: 40rem) {
+    .stepper--horizontal {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .stepper--horizontal .stepper__item {
+        flex: 1;
+        align-items: flex-start;
+        padding-bottom: 2rem;
+    }
+
+    .stepper--horizontal .stepper__item:last-child {
+        flex: 1;
+        padding-bottom: 0;
+    }
+
+    .stepper--horizontal .stepper__button {
+        flex-direction: row;
+        align-items: center;
+        text-align: left;
+        gap: 1rem;
+    }
+
+    .stepper--horizontal .stepper__connector {
+        flex: none;
+        width: 0.125rem;
+        height: auto;
+        position: absolute;
+        top: 4.25rem;
+        bottom: 0;
+        left: 1.9375rem;
+        margin: 0;
+    }
+}
