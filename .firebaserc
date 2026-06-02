@@ -1,0 +1,12 @@
+{
+    "projects": {
+        "default": "<firebase-project-id>"
+    },
+    "targets": {
+        "<firebase-project-id>": {
+            "hosting": {
+                "demo": ["<demo-site-id>"]
+            }
+        }
+    }
+}
