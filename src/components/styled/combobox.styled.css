@@ -119,6 +119,16 @@
     transition: background var(--duration-short-1) var(--easing-standard);
 }
 
+.combobox__listbox > .combobox__option:first-child {
+    border-top-left-radius: var(--corner-tl);
+    border-top-right-radius: var(--corner-tr);
+}
+
+.combobox__listbox > .combobox__option:last-child {
+    border-bottom-right-radius: var(--corner-br);
+    border-bottom-left-radius: var(--corner-bl);
+}
+
 .combobox__option[data-highlighted="true"] {
     background: var(--primary-container);
     color: var(--on-primary-container);
