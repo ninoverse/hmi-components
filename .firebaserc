@@ -1,11 +1,11 @@
 {
     "projects": {
-        "default": "<firebase-project-id>"
+        "default": "ninoverse"
     },
     "targets": {
-        "<firebase-project-id>": {
+        "ninoverse": {
             "hosting": {
-                "demo": ["<demo-site-id>"]
+                "demo": ["ninoverse-hmi-components-demo"]
             }
         }
     }
