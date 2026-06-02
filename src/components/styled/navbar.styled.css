@@ -83,3 +83,92 @@
     align-items: center;
     gap: var(--space-4);
 }
+
+/* The collapse wrapper is transparent on desktop (display: contents), so
+   the links and CTA participate in the navbar's flex row exactly as
+   before. On mobile it becomes the dropdown panel toggled by the
+   hamburger button. */
+.navbar__collapse {
+    display: contents;
+}
+
+/* Hamburger toggle — hidden on desktop, revealed at the mobile
+   breakpoint where the links/CTA collapse behind it. */
+.navbar__toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 4.5rem;
+    height: 4.5rem;
+    padding: 0;
+    margin-left: auto;
+    background: transparent;
+    border: 0;
+    border-radius: var(--corner-extra-small);
+    color: var(--on-surface-variant);
+    cursor: pointer;
+    transition:
+        background var(--duration-short-2) var(--easing-standard),
+        color var(--duration-short-2) var(--easing-standard),
+        box-shadow var(--duration-short-2) var(--easing-standard);
+}
+
+.navbar__toggle:hover {
+    background: var(--surface-container);
+    color: var(--on-background);
+}
+
+.navbar__toggle:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 0.375rem var(--ring);
+}
+
+.navbar__toggle svg {
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+/* On narrow viewports the links and CTA can't share the bar, so they
+   collapse into a dropdown behind the hamburger toggle. The bar itself
+   stays a single brand + toggle row; the panel drops below on its own
+   full-width row when opened. */
+@media (max-width: 40rem) {
+    .navbar {
+        height: auto;
+        min-height: 7.5rem;
+        flex-wrap: wrap;
+        padding: var(--space-6);
+        gap: var(--space-6);
+    }
+
+    .navbar__brand {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .navbar__toggle {
+        display: inline-flex;
+    }
+
+    .navbar__collapse {
+        display: none;
+        flex-basis: 100%;
+        flex-direction: column;
+        gap: var(--space-6);
+    }
+
+    .navbar__collapse[data-open="true"] {
+        display: flex;
+    }
+
+    .navbar__links {
+        flex-direction: column;
+        align-items: stretch;
+        gap: var(--space-1);
+        width: 100%;
+    }
+
+    .navbar__cta {
+        width: 100%;
+    }
+}
