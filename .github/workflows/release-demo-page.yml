@@ -38,6 +38,6 @@ jobs:
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_DEPLOY_SERVICE_ACCOUNT }}
-          projectId: ninoverse
+          projectId: ninoverse-misc
           target: demo
           channelId: live
