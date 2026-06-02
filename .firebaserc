@@ -1,6 +1,6 @@
 {
     "projects": {
-        "default": "ninoverse"
+        "default": "ninoverse-misc"
     },
     "targets": {
         "ninoverse-misc": {
