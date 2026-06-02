@@ -1,0 +1,12 @@
+{
+    "projects": {
+        "default": "ninoverse"
+    },
+    "targets": {
+        "ninoverse": {
+            "hosting": {
+                "demo": ["ninoverse-hmi-components-demo"]
+            }
+        }
+    }
+}
