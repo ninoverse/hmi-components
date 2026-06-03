@@ -1,6 +1,6 @@
 {
     "name": "@ninoverse/hmi-components",
-    "version": "1.22.0",
+    "version": "1.22.1",
     "type": "module",
     "license": "MIT",
     "description": "React HMI component library with Material Design 3 token system and warm asymmetric styling.",
