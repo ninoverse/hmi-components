@@ -13,7 +13,7 @@
     background: var(--surface-container-lowest);
     color: var(--on-background);
     border: 0.125rem solid var(--outline-variant);
-    font-family: var(--font-quicksand);
+    font-family: var(--font-default);
     font-size: 1.75rem;
     font-weight: 500;
     user-select: none;

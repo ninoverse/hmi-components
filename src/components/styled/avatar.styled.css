@@ -13,7 +13,7 @@
     border-radius: var(--corner-full);
     background: var(--primary-container);
     color: var(--on-primary-container);
-    font-family: var(--font-quicksand);
+    font-family: var(--font-default);
     font-weight: 600;
     font-size: 1.625rem;
     letter-spacing: 0.01em;

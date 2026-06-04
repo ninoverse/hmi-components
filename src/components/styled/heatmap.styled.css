@@ -9,13 +9,13 @@
 
 .heatmap__axis-label {
     fill: var(--on-surface-variant);
-    font-family: var(--font-oxanium);
+    font-family: var(--font-display);
     font-size: 1.25rem;
 }
 
 .heatmap__value {
     fill: var(--on-surface);
-    font-family: var(--font-oxanium);
+    font-family: var(--font-display);
     font-size: 1.25rem;
     font-weight: 600;
 }

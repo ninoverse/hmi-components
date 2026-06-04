@@ -35,7 +35,7 @@
 
 .empty-state__title {
     margin: 0;
-    font-family: var(--font-oxanium);
+    font-family: var(--font-display);
     font-size: 2.5rem;
     font-weight: 600;
     color: var(--on-surface);
@@ -44,7 +44,7 @@
 .empty-state__description {
     margin: 0;
     max-width: 48rem;
-    font-family: var(--font-quicksand);
+    font-family: var(--font-default);
     font-size: 1.75rem;
     line-height: 1.5;
     color: var(--on-surface-variant);

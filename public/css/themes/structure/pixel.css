@@ -1,0 +1,63 @@
+/* Pixel structure — retro / arcade. Square corners, tight density, fast snappy
+   motion, Pixelify Sans UI with Press Start 2P display type. Self-contained:
+   defines the full structural token set. */
+
+[data-structure='pixel'] {
+    /* Shape scale — all square */
+    --corner-none: 0;
+    --corner-extra-small: 0;
+    --corner-small: 0;
+    --corner-medium: 0;
+    --corner-large: 0;
+    --corner-extra-large: 0;
+    --corner-full: 0;
+
+    --corner-tl: 0;
+    --corner-tr: 0;
+    --corner-br: 0;
+    --corner-bl: 0;
+
+    /* Motion — snappy, no spring overshoot */
+    --easing-emphasized: cubic-bezier(0.2, 0, 0, 1);
+    --easing-emphasized-decelerate: cubic-bezier(0, 0, 0, 1);
+    --easing-emphasized-accelerate: cubic-bezier(0.3, 0, 1, 1);
+    --easing-standard: cubic-bezier(0.2, 0, 0, 1);
+    --easing-standard-decelerate: cubic-bezier(0, 0, 0, 1);
+    --easing-standard-accelerate: cubic-bezier(0.3, 0, 1, 1);
+    --easing-linear: cubic-bezier(0, 0, 1, 1);
+    --easing-spring: cubic-bezier(0.2, 0, 0, 1);
+
+    /* Motion — duration (short) */
+    --duration-short-1: 30ms;
+    --duration-short-2: 50ms;
+    --duration-short-3: 80ms;
+    --duration-short-4: 110ms;
+    --duration-medium-1: 140ms;
+    --duration-medium-2: 170ms;
+    --duration-medium-3: 200ms;
+    --duration-medium-4: 230ms;
+    --duration-long-1: 260ms;
+    --duration-long-2: 300ms;
+    --duration-long-3: 340ms;
+    --duration-long-4: 380ms;
+    --duration-extra-long-1: 440ms;
+    --duration-extra-long-2: 500ms;
+    --duration-extra-long-3: 560ms;
+    --duration-extra-long-4: 620ms;
+
+    /* Density — tighter */
+    --spacing-0: 0;
+    --spacing-1: 0.375rem;
+    --spacing-2: 0.75rem;
+    --spacing-3: 1.125rem;
+    --spacing-4: 1.5rem;
+    --spacing-5: 1.875rem;
+    --spacing-6: 2.25rem;
+    --spacing-7: 3rem;
+    --spacing-8: 3.75rem;
+    --spacing-9: 5.25rem;
+
+    /* Typography — retro pixel fonts */
+    --font-default: var(--font-pixelify-sans);
+    --font-display: var(--font-press-start-2p);
+}

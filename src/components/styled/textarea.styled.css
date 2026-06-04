@@ -10,7 +10,7 @@
     border: 0.125rem solid var(--outline-variant);
     border-radius: var(--corner-tl) var(--corner-tr) var(--corner-br)
         var(--corner-bl);
-    font-family: var(--font-quicksand);
+    font-family: var(--font-default);
     font-size: 1.75rem;
     color: var(--on-background);
     outline: none;

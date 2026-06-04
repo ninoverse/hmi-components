@@ -6,7 +6,7 @@
 .tree {
     display: flex;
     flex-direction: column;
-    font-family: var(--font-quicksand);
+    font-family: var(--font-default);
     color: var(--on-background);
 }
 

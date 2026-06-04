@@ -12,7 +12,7 @@
     border: 0.125rem solid var(--outline-variant);
     border-radius: var(--corner-tl) var(--corner-tr) var(--corner-br)
         var(--corner-bl);
-    font-family: var(--font-quicksand);
+    font-family: var(--font-default);
 }
 
 .stat__header {
@@ -42,7 +42,7 @@
 }
 
 .stat__value {
-    font-family: var(--font-oxanium);
+    font-family: var(--font-display);
     font-size: 4rem;
     font-weight: 700;
     line-height: 1;

@@ -9,7 +9,7 @@
     border-radius: 0 var(--corner-medium) var(--corner-medium) 0;
     background: var(--surface-container);
     color: var(--on-surface);
-    font-family: var(--font-quicksand);
+    font-family: var(--font-default);
 }
 
 .blockquote__body {

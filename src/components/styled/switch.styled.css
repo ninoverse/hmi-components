@@ -9,7 +9,7 @@
     gap: 1.25rem;
     cursor: default;
     user-select: none;
-    font-family: var(--font-quicksand);
+    font-family: var(--font-default);
     font-size: 1.75rem;
     color: var(--on-background);
 }

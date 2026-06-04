@@ -38,7 +38,7 @@
     min-width: 0;
     border: 0;
     background: transparent;
-    font-family: var(--font-quicksand);
+    font-family: var(--font-default);
     font-size: 1.75rem;
     color: var(--on-background);
     height: 100%;
@@ -105,7 +105,7 @@
         var(--corner-bl);
     box-shadow: var(--elevation-2);
     padding: 0.5rem;
-    font-family: var(--font-quicksand);
+    font-family: var(--font-default);
 }
 
 .combobox__option {

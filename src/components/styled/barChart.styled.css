@@ -9,6 +9,6 @@
 
 .bar-chart__axis-label {
     fill: var(--on-surface-variant);
-    font-family: var(--font-oxanium);
+    font-family: var(--font-display);
     font-size: 1.25rem;
 }

@@ -10,7 +10,7 @@
     margin: 0;
     padding: 0;
     list-style: none;
-    font-family: var(--font-quicksand);
+    font-family: var(--font-default);
 }
 
 .legend[data-align="start"] {

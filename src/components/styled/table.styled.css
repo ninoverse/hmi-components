@@ -14,7 +14,7 @@
 .table {
     width: 100%;
     border-collapse: collapse;
-    font-family: var(--font-quicksand);
+    font-family: var(--font-default);
     font-size: 1.625rem;
     color: var(--on-background);
 }

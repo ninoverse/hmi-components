@@ -1,3 +1,4 @@
+import { cpSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import react from '@vitejs/plugin-react';
@@ -15,6 +16,16 @@ export default defineConfig({
             exclude: ['src/App.tsx', 'src/main.tsx'],
             entryRoot: 'src',
         }),
+        {
+            name: 'copy-theme-css',
+            closeBundle() {
+                cpSync(
+                    resolve(dirname, 'public/css/themes'),
+                    resolve(dirname, 'dist/themes'),
+                    { recursive: true },
+                );
+            },
+        },
     ],
     resolve: {
         alias: {
@@ -126,6 +137,7 @@ export default defineConfig({
                 tabs: resolve(dirname, 'src/components/tabs.tsx'),
                 text: resolve(dirname, 'src/components/text.tsx'),
                 textarea: resolve(dirname, 'src/components/textarea.tsx'),
+                theme: resolve(dirname, 'src/theme.tsx'),
                 timeline: resolve(dirname, 'src/components/timeline.tsx'),
                 toast: resolve(dirname, 'src/components/toast.tsx'),
                 tooltip: resolve(dirname, 'src/components/tooltip.tsx'),

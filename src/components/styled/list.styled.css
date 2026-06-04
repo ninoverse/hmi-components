@@ -65,7 +65,7 @@
 
 .list__title {
     margin: 0;
-    font-family: var(--font-quicksand);
+    font-family: var(--font-default);
     font-size: 1.75rem;
     font-weight: 600;
     color: var(--on-background);
@@ -74,7 +74,7 @@
 
 .list__subtitle {
     margin: 0.25rem 0 0;
-    font-family: var(--font-quicksand);
+    font-family: var(--font-default);
     font-size: 1.5rem;
     color: var(--on-surface-variant);
     line-height: 1.3;

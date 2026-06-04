@@ -17,7 +17,7 @@
     background: transparent;
     border: 0;
     border-radius: var(--corner-extra-small);
-    font-family: var(--font-quicksand);
+    font-family: var(--font-default);
     font-size: 1.625rem;
     color: var(--on-background);
     text-align: left;
@@ -92,7 +92,7 @@
 
 .menu__label {
     padding: 1rem 1.25rem 0.5rem;
-    font-family: var(--font-quicksand);
+    font-family: var(--font-default);
     font-size: 1.25rem;
     font-weight: 700;
     text-transform: uppercase;

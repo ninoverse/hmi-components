@@ -27,7 +27,7 @@
     background: transparent;
     border: 0;
     border-radius: var(--corner-extra-small);
-    font-family: var(--font-quicksand);
+    font-family: var(--font-default);
     font-size: 1.625rem;
     font-weight: 600;
     color: var(--on-surface-variant);

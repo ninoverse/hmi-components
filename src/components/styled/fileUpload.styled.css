@@ -67,14 +67,14 @@
 }
 
 .file-upload__label {
-    font-family: var(--font-quicksand);
+    font-family: var(--font-default);
     font-size: 1.875rem;
     font-weight: 600;
     color: var(--on-surface);
 }
 
 .file-upload__hint {
-    font-family: var(--font-quicksand);
+    font-family: var(--font-default);
     font-size: 1.5rem;
     color: var(--on-surface-variant);
 }
@@ -96,7 +96,7 @@
     background: var(--surface-container-lowest);
     border: 0.125rem solid var(--outline-variant);
     border-radius: var(--corner-extra-small);
-    font-family: var(--font-quicksand);
+    font-family: var(--font-default);
     color: var(--on-surface);
 }
 

@@ -1,0 +1,123 @@
+/* Ocean color theme — cool blue/teal on a slate-tinted neutral palette.
+   An example second palette proving the [data-theme] axis; light + dark.
+   Swap the values (or copy this file) to add your own brand palette. */
+
+[data-theme='ocean'] {
+    /* Reference tones consumed directly by components */
+    --ref-primary-40: #1f6d7e;
+    --ref-neutral-60: #7a8e95;
+
+    /* System color roles (light) */
+    --primary: #2f7e8f;
+    --on-primary: #ffffff;
+    --primary-container: #cfeaef;
+    --on-primary-container: #0d3a44;
+
+    --secondary: #4f6b73;
+    --on-secondary: #ffffff;
+    --secondary-container: #dbe7ea;
+    --on-secondary-container: #313e44;
+
+    --tertiary: #5560c4;
+    --on-tertiary: #ffffff;
+    --tertiary-container: #e0e2fb;
+    --on-tertiary-container: #2a3287;
+
+    --error: #c0524c;
+    --on-error: #ffffff;
+    --error-container: #f4dad6;
+    --on-error-container: #7a2a26;
+
+    --background: #f3f7f8;
+    --on-background: #18242a;
+
+    --surface: #f3f7f8;
+    --on-surface: #18242a;
+    --surface-variant: #d8e6e9;
+    --on-surface-variant: #4a5b61;
+
+    --surface-container-lowest: #ffffff;
+    --surface-container-low: #f3f7f8;
+    --surface-container: #eaf1f3;
+    --surface-container-high: #e2ecee;
+    --surface-container-highest: #d8e6e9;
+
+    --outline: #8aa1a8;
+    --outline-variant: #cddfe2;
+
+    --shadow: #000000;
+    --scrim: rgba(16, 32, 38, 0.32);
+
+    --inverse-surface: #18242a;
+    --inverse-on-surface: #eaf1f3;
+    --inverse-primary: #8fd3df;
+
+    --success: #3f9a7d;
+    --on-success: #ffffff;
+    --success-container: #d7eee6;
+    --on-success-container: #14533f;
+    --warning: #cf9a3f;
+    --on-warning: #ffffff;
+    --warning-container: #f6e7c6;
+    --on-warning-container: #5f4410;
+}
+
+@media (prefers-color-scheme: dark) {
+    [data-theme='ocean'] {
+        --ref-primary-40: #8fd3df;
+        --ref-neutral-60: #7a8e95;
+
+        --primary: #8fd3df;
+        --on-primary: #08323b;
+        --primary-container: #1f5560;
+        --on-primary-container: #cfeaef;
+
+        --secondary: #c2d2d6;
+        --on-secondary: #2e3c42;
+        --secondary-container: #3a4a50;
+        --on-secondary-container: #dbe7ea;
+
+        --tertiary: #b9c0f5;
+        --on-tertiary: #1f2769;
+        --tertiary-container: #3b44a0;
+        --on-tertiary-container: #e0e2fb;
+
+        --error: #e89a93;
+        --on-error: #5a1410;
+        --error-container: #7a2a26;
+        --on-error-container: #f4dad6;
+
+        --background: #101b1f;
+        --on-background: #dbe7ea;
+
+        --surface: #101b1f;
+        --on-surface: #dbe7ea;
+        --surface-variant: #2e3c42;
+        --on-surface-variant: #c2d2d6;
+
+        --surface-container-lowest: #0b1417;
+        --surface-container-low: #152227;
+        --surface-container: #1a282e;
+        --surface-container-high: #223138;
+        --surface-container-highest: #2c3d44;
+
+        --outline: #7a8e95;
+        --outline-variant: #2e3c42;
+
+        --shadow: #000000;
+        --scrim: rgba(0, 0, 0, 0.6);
+
+        --inverse-surface: #dbe7ea;
+        --inverse-on-surface: #18242a;
+        --inverse-primary: #1f6d7e;
+
+        --success: #88d4b8;
+        --on-success: #0c3b2c;
+        --success-container: #14533f;
+        --on-success-container: #d7eee6;
+        --warning: #e8c07a;
+        --on-warning: #3d2c08;
+        --warning-container: #5f4410;
+        --on-warning-container: #f6e7c6;
+    }
+}

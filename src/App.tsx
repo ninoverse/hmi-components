@@ -87,6 +87,7 @@ import { Tooltip } from './components/tooltip';
 import { Tree, type TreeNode } from './components/tree';
 import { ValueScaleSelector } from './components/valueScaleSelector';
 import { VisuallyHidden } from './components/visuallyHidden';
+import { useTheme } from './theme';
 
 const SearchIcon = () => (
     <svg
@@ -104,6 +105,14 @@ const SearchIcon = () => (
 );
 
 export default function App() {
+    const {
+        theme,
+        setTheme,
+        structure,
+        setStructure,
+        colorThemes,
+        structures,
+    } = useTheme();
     const [plan, setPlan] = useState<'free' | 'pro' | 'team'>('pro');
     const [brandColor, setBrandColor] = useState('#e87a5d');
     const [filters, setFilters] = useState<Set<string>>(
@@ -230,6 +239,46 @@ export default function App() {
                 maxWidth: '120rem',
             }}
         >
+            <section
+                style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '2rem',
+                }}
+            >
+                <h2 style={{ margin: 0, fontSize: '3rem' }}>Theme</h2>
+                <FormControl label="Color theme">
+                    <SegmentedControl
+                        value={theme}
+                        onChange={setTheme}
+                        aria-label="Color theme"
+                        options={colorThemes.map((value) => ({
+                            value,
+                            label: value,
+                        }))}
+                    />
+                </FormControl>
+                <FormControl label="Structure (shape · density · motion · type)">
+                    <SegmentedControl
+                        value={structure}
+                        onChange={setStructure}
+                        aria-label="Structure"
+                        options={structures.map((value) => ({
+                            value,
+                            label: value,
+                        }))}
+                    />
+                </FormControl>
+                <p
+                    style={{
+                        margin: 0,
+                        fontSize: '1.625rem',
+                        color: 'var(--on-surface-variant)',
+                    }}
+                >
+                    Light and dark follow your OS automatically.
+                </p>
+            </section>
             <section
                 style={{
                     display: 'flex',
@@ -2967,7 +3016,7 @@ export function Example() {
                                 },
                                 {
                                     title: 'What about the theme?',
-                                    body: 'Drop the default.css file into your public dir and link it in your HTML. All components read its tokens at runtime.',
+                                    body: 'Import the theme CSS (constants + a color + a structure file) and wrap your app in ThemeProvider. Components read the tokens at runtime, so switching re-themes everything instantly.',
                                 },
                                 {
                                     title: 'Can I disable a section?',
@@ -4267,12 +4316,34 @@ export function Example() {
                                     setPaletteResult('Go to settings'),
                             },
                             {
-                                id: 'toggle-theme',
-                                label: 'Toggle theme',
-                                description: 'Switch between light and dark',
+                                id: 'cycle-theme',
+                                label: 'Cycle color theme',
+                                description: `Palette — now: ${theme}`,
                                 group: 'Preferences',
-                                onSelect: () =>
-                                    setPaletteResult('Toggle theme'),
+                                onSelect: () => {
+                                    const i = colorThemes.indexOf(theme);
+                                    const next =
+                                        colorThemes[
+                                            (i + 1) % colorThemes.length
+                                        ] ?? 'default';
+                                    setTheme(next);
+                                    setPaletteResult(`Color theme: ${next}`);
+                                },
+                            },
+                            {
+                                id: 'cycle-structure',
+                                label: 'Cycle structure',
+                                description: `Shape · type · motion — now: ${structure}`,
+                                group: 'Preferences',
+                                onSelect: () => {
+                                    const i = structures.indexOf(structure);
+                                    const next =
+                                        structures[
+                                            (i + 1) % structures.length
+                                        ] ?? 'default';
+                                    setStructure(next);
+                                    setPaletteResult(`Structure: ${next}`);
+                                },
                             },
                             {
                                 id: 'sign-out',
