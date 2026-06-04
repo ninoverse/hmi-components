@@ -45,7 +45,7 @@
     display: inline-flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.5rem;
+    gap: var(--space-2);
     text-align: center;
     background: transparent;
     border: 0;
@@ -59,7 +59,7 @@
     flex-direction: row;
     align-items: center;
     text-align: left;
-    gap: 1rem;
+    gap: var(--space-4);
 }
 
 button.stepper__button {
@@ -166,7 +166,7 @@ button.stepper__button:hover .stepper__label {
 }
 
 .stepper--vertical .stepper__item {
-    padding-bottom: var(--stepper-item-gap, 2rem);
+    padding-bottom: var(--stepper-item-gap, var(--space-8));
 }
 
 .stepper--vertical .stepper__item:last-child {

@@ -46,16 +46,21 @@
     --duration-extra-long-4: 1120ms;
 
     /* Density — roomier */
-    --spacing-0: 0;
-    --spacing-1: 0.625rem;
-    --spacing-2: 1.25rem;
-    --spacing-3: 1.875rem;
-    --spacing-4: 2.5rem;
-    --spacing-5: 3.125rem;
-    --spacing-6: 3.75rem;
-    --spacing-7: 5rem;
-    --spacing-8: 6.25rem;
-    --spacing-9: 8.75rem;
+    --space-0: 0;
+    --space-1: 0.25rem;
+    --space-2: 0.625rem;
+    --space-3: 0.875rem;
+    --space-4: 1.25rem;
+    --space-5: 1.5rem;
+    --space-6: 1.875rem;
+    --space-7: 2.125rem;
+    --space-8: 2.5rem;
+    --space-9: 2.75rem;
+    --space-10: 3.125rem;
+    --space-11: 3.75rem;
+    --space-12: 5rem;
+    --space-13: 6.25rem;
+    --space-14: 8.75rem;
 
     /* Typography — uniform, friendly */
     --font-default: var(--font-quicksand);

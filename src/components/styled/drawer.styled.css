@@ -35,8 +35,8 @@
 .drawer {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
-    padding: 2.5rem;
+    gap: var(--space-6);
+    padding: var(--space-10);
     background: var(--surface-container-lowest);
     box-shadow: var(--elevation-4);
     color: var(--on-surface);
@@ -102,10 +102,10 @@
 
 .drawer__actions {
     display: flex;
-    gap: 1rem;
+    gap: var(--space-4);
     flex-wrap: wrap;
     justify-content: flex-end;
-    padding-top: 1rem;
+    padding-top: var(--space-4);
     border-top: 0.0625rem solid var(--outline-variant);
 }
 

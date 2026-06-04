@@ -9,7 +9,7 @@
     border: 0.125rem solid var(--outline-variant);
     border-radius: var(--corner-tl) var(--corner-tr) var(--corner-br)
         var(--corner-bl);
-    padding: 2.5rem;
+    padding: var(--space-10);
     box-shadow: var(--elevation-1);
 }
 

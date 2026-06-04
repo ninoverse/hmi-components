@@ -6,7 +6,7 @@
 .switch {
     display: inline-flex;
     align-items: center;
-    gap: 1.25rem;
+    gap: var(--space-5);
     cursor: default;
     user-select: none;
     font-family: var(--font-default);

@@ -6,9 +6,9 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
+    gap: var(--space-4);
     height: 5rem;
-    padding: 0 2rem;
+    padding: 0 var(--space-8);
     border-radius: var(--corner-tl) var(--corner-tr) var(--corner-br)
         var(--corner-bl);
     border: 0.125rem solid transparent;
@@ -135,13 +135,13 @@
 /* Sizes */
 .button--small {
     height: 4rem;
-    padding: 0 1.5rem;
+    padding: 0 var(--space-6);
     font-size: 1.5rem;
 }
 
 .button--large {
     height: 6rem;
-    padding: 0 2.5rem;
+    padding: 0 var(--space-10);
     font-size: 2rem;
 }
 

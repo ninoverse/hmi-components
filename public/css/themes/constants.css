@@ -39,6 +39,20 @@
         0 0.5rem 0.5rem 0 rgba(43, 38, 32, 0.12),
         0 1rem 1.5rem 0.75rem rgba(43, 38, 32, 0.12);
 
+    /* Legacy spacing aliases — map the published --spacing-0..9 names onto the
+       active dense --space-* scale (defined per structure) so older consumers
+       keep working and gain density theming too. */
+    --spacing-0: var(--space-0);
+    --spacing-1: var(--space-2);
+    --spacing-2: var(--space-4);
+    --spacing-3: var(--space-6);
+    --spacing-4: var(--space-8);
+    --spacing-5: var(--space-10);
+    --spacing-6: var(--space-11);
+    --spacing-7: var(--space-12);
+    --spacing-8: var(--space-13);
+    --spacing-9: var(--space-14);
+
     /* Focus ring (derived from the active --primary) */
     --ring: color-mix(in oklab, var(--primary) 50%, transparent);
 

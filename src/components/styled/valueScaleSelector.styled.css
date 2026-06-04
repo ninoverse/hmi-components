@@ -21,7 +21,7 @@
 
 .value-scale-selector__row {
     display: flex;
-    gap: 0.25rem;
+    gap: var(--space-1);
 }
 
 .value-scale-selector__row--bg {
@@ -65,7 +65,7 @@
     position: absolute;
     inset: 0;
     display: flex;
-    gap: 0.25rem;
+    gap: var(--space-1);
 }
 
 .value-scale-selector__cell {

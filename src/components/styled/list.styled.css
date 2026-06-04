@@ -16,8 +16,8 @@
 .list__item {
     display: flex;
     align-items: center;
-    gap: 1.5rem;
-    padding: 1.5rem 2rem;
+    gap: var(--space-6);
+    padding: var(--space-6) var(--space-8);
     border-bottom: 0.125rem solid var(--outline-variant);
     transition:
         background var(--duration-short-3) var(--easing-standard),
@@ -49,7 +49,7 @@
     display: inline-flex;
     color: var(--ref-neutral-60);
     flex: none;
-    padding: 0.5rem;
+    padding: var(--space-2);
     border-radius: var(--corner-extra-small);
 }
 
@@ -73,7 +73,7 @@
 }
 
 .list__subtitle {
-    margin: 0.25rem 0 0;
+    margin: var(--space-1) 0 0;
     font-family: var(--font-default);
     font-size: 1.5rem;
     color: var(--on-surface-variant);
@@ -83,7 +83,7 @@
 .list__right {
     display: inline-flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: var(--space-3);
     flex: none;
     color: var(--on-surface-variant);
 }

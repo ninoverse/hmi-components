@@ -49,13 +49,13 @@
 }
 
 .flex--gap-small {
-    gap: 1rem;
+    gap: var(--space-4);
 }
 .flex--gap-medium {
-    gap: 2rem;
+    gap: var(--space-8);
 }
 .flex--gap-large {
-    gap: 3rem;
+    gap: var(--space-11);
 }
 
 .flex--wrap {

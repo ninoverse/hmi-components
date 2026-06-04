@@ -47,17 +47,23 @@
     --duration-extra-long-3: 900ms;
     --duration-extra-long-4: 1000ms;
 
-    /* Density — spacing scale (4dp grid) */
-    --spacing-0: 0;
-    --spacing-1: 0.5rem;
-    --spacing-2: 1rem;
-    --spacing-3: 1.5rem;
-    --spacing-4: 2rem;
-    --spacing-5: 2.5rem;
-    --spacing-6: 3rem;
-    --spacing-7: 4rem;
-    --spacing-8: 5rem;
-    --spacing-9: 7rem;
+    /* Density — dense spacing scale (2dp grid). Components reference these;
+       the legacy --spacing-0..9 are aliased onto this scale in constants.css. */
+    --space-0: 0;
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-5: 1.25rem;
+    --space-6: 1.5rem;
+    --space-7: 1.75rem;
+    --space-8: 2rem;
+    --space-9: 2.25rem;
+    --space-10: 2.5rem;
+    --space-11: 3rem;
+    --space-12: 4rem;
+    --space-13: 5rem;
+    --space-14: 7rem;
 
     /* Typography — active UI + display fonts */
     --font-default: var(--font-quicksand);

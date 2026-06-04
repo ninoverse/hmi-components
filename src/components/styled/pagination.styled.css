@@ -5,7 +5,7 @@
 .pager {
     display: inline-flex;
     align-items: center;
-    gap: 0.25rem;
+    gap: var(--space-1);
 }
 
 .pager__btn {
@@ -14,7 +14,7 @@
     justify-content: center;
     min-width: 4rem;
     height: 4rem;
-    padding: 0 1.25rem;
+    padding: 0 var(--space-5);
     background: transparent;
     border: 0;
     border-radius: var(--corner-extra-small);
@@ -55,7 +55,7 @@
 }
 
 .pager__ellipsis {
-    padding: 0 0.5rem;
+    padding: 0 var(--space-2);
     color: var(--ref-neutral-60);
     user-select: none;
 }

@@ -35,8 +35,8 @@
 .command-palette__searchbox {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    padding: 0 1.5rem;
+    gap: var(--space-4);
+    padding: 0 var(--space-6);
     border-bottom: 0.125rem solid var(--outline-variant);
     height: 5.5rem;
     flex-shrink: 0;
@@ -76,11 +76,11 @@
 .command-palette__list {
     flex: 1;
     overflow-y: auto;
-    padding: 0.75rem;
+    padding: var(--space-3);
 }
 
 .command-palette__group {
-    padding: 1rem 1rem 0.5rem;
+    padding: var(--space-4) var(--space-4) var(--space-2);
     font-family: var(--font-display);
     font-size: 1.25rem;
     font-weight: 700;
@@ -92,8 +92,8 @@
 .command-palette__option {
     display: flex;
     align-items: center;
-    gap: 1.25rem;
-    padding: 1rem 1.25rem;
+    gap: var(--space-5);
+    padding: var(--space-4) var(--space-5);
     border-radius: var(--corner-extra-small);
     color: var(--on-surface);
     cursor: pointer;
@@ -147,7 +147,7 @@
 }
 
 .command-palette__empty {
-    padding: 2.5rem 1.5rem;
+    padding: var(--space-10) var(--space-6);
     text-align: center;
     color: var(--on-surface-variant);
     font-size: 1.625rem;
