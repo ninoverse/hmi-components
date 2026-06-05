@@ -7,7 +7,7 @@
 .multi-input {
     display: inline-flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: var(--space-3);
     border: 0;
     margin: 0;
     padding: 0;
@@ -17,12 +17,12 @@
 .multi-input__slot {
     display: inline-flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: var(--space-3);
 }
 
 .multi-input__separator {
     color: var(--on-surface-variant);
-    font-family: var(--font-oxanium);
+    font-family: var(--font-display);
     font-size: 2.5rem;
     font-weight: 600;
     user-select: none;
@@ -32,7 +32,7 @@
     width: 5rem;
     height: 6rem;
     text-align: center;
-    font-family: var(--font-oxanium);
+    font-family: var(--font-display);
     font-size: 2.75rem;
     font-weight: 600;
     color: var(--on-background);

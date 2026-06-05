@@ -5,10 +5,10 @@
 .checkbox {
     display: inline-flex;
     align-items: center;
-    gap: 1.25rem;
+    gap: var(--space-5);
     cursor: default;
     user-select: none;
-    font-family: var(--font-quicksand);
+    font-family: var(--font-default);
     font-size: 1.75rem;
     color: var(--on-background);
 }

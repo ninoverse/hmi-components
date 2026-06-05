@@ -7,15 +7,15 @@
 .meter {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-    font-family: var(--font-quicksand);
+    gap: var(--space-2);
+    font-family: var(--font-default);
 }
 
 .meter__header {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    gap: 1rem;
+    gap: var(--space-4);
     font-size: 1.5rem;
 }
 

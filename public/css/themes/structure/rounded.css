@@ -1,0 +1,68 @@
+/* Rounded structure — soft, friendly. Symmetric generous radii, roomier
+   density, slower/smoother motion, uniform Quicksand type. Self-contained:
+   defines the full structural token set so it can be loaded on its own. */
+
+[data-structure='rounded'] {
+    /* Shape scale — larger, symmetric (no notch) */
+    --corner-none: 0;
+    --corner-extra-small: 0.75rem;
+    --corner-small: 1.25rem;
+    --corner-medium: 2rem;
+    --corner-large: 2.75rem;
+    --corner-extra-large: 4rem;
+    --corner-full: 9999px;
+
+    --corner-tl: var(--corner-large);
+    --corner-tr: var(--corner-large);
+    --corner-br: var(--corner-large);
+    --corner-bl: var(--corner-large);
+
+    /* Motion — softer, gently decelerating */
+    --easing-emphasized: cubic-bezier(0.05, 0.7, 0.1, 1);
+    --easing-emphasized-decelerate: cubic-bezier(0.05, 0.7, 0.1, 1);
+    --easing-emphasized-accelerate: cubic-bezier(0.3, 0, 0.8, 0.15);
+    --easing-standard: cubic-bezier(0.2, 0, 0, 1);
+    --easing-standard-decelerate: cubic-bezier(0, 0, 0, 1);
+    --easing-standard-accelerate: cubic-bezier(0.3, 0, 1, 1);
+    --easing-linear: cubic-bezier(0, 0, 1, 1);
+    --easing-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    /* Motion — duration (longer, more relaxed) */
+    --duration-short-1: 80ms;
+    --duration-short-2: 140ms;
+    --duration-short-3: 200ms;
+    --duration-short-4: 260ms;
+    --duration-medium-1: 320ms;
+    --duration-medium-2: 380ms;
+    --duration-medium-3: 440ms;
+    --duration-medium-4: 500ms;
+    --duration-long-1: 560ms;
+    --duration-long-2: 620ms;
+    --duration-long-3: 680ms;
+    --duration-long-4: 740ms;
+    --duration-extra-long-1: 820ms;
+    --duration-extra-long-2: 920ms;
+    --duration-extra-long-3: 1020ms;
+    --duration-extra-long-4: 1120ms;
+
+    /* Density — roomier */
+    --space-0: 0;
+    --space-1: 0.25rem;
+    --space-2: 0.625rem;
+    --space-3: 0.875rem;
+    --space-4: 1.25rem;
+    --space-5: 1.5rem;
+    --space-6: 1.875rem;
+    --space-7: 2.125rem;
+    --space-8: 2.5rem;
+    --space-9: 2.75rem;
+    --space-10: 3.125rem;
+    --space-11: 3.75rem;
+    --space-12: 5rem;
+    --space-13: 6.25rem;
+    --space-14: 8.75rem;
+
+    /* Typography — uniform, friendly */
+    --font-default: var(--font-quicksand);
+    --font-display: var(--font-quicksand);
+}

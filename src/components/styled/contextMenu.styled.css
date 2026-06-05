@@ -7,7 +7,7 @@
     position: fixed;
     z-index: 1000;
     min-width: 18rem;
-    padding: 0.5rem;
+    padding: var(--space-2);
     background: var(--surface-container-high);
     color: var(--on-background);
     border: 0.125rem solid var(--outline-variant);

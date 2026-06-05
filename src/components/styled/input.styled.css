@@ -4,9 +4,9 @@
 .input {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: var(--space-4);
     height: 5rem;
-    padding: 0 1.5rem;
+    padding: 0 var(--space-6);
     background: var(--surface-container-lowest);
     border: 0.125rem solid var(--outline-variant);
     border-radius: var(--corner-tl) var(--corner-tr) var(--corner-br)
@@ -50,11 +50,11 @@
     border: 0;
     background: transparent;
     font: inherit;
-    font-family: var(--font-quicksand);
+    font-family: var(--font-default);
     font-size: 1.75rem;
     color: var(--on-background);
     height: 100%;
-    padding: 0 0.5rem;
+    padding: 0 var(--space-2);
     outline: none;
 }
 

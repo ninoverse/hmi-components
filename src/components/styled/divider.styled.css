@@ -25,9 +25,9 @@
     height: auto;
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    gap: var(--space-6);
     color: var(--on-surface-variant);
-    font-family: var(--font-quicksand);
+    font-family: var(--font-default);
     font-size: 1.625rem;
 }
 

@@ -29,13 +29,13 @@
 }
 
 .box--pad-small {
-    padding: 1rem;
+    padding: var(--space-4);
 }
 .box--pad-medium {
-    padding: 2rem;
+    padding: var(--space-8);
 }
 .box--pad-large {
-    padding: 3rem;
+    padding: var(--space-11);
 }
 
 .box--radius-small {

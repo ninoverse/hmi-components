@@ -331,6 +331,11 @@
             "types": "./dist/components/textarea.d.ts",
             "import": "./dist/textarea.js"
         },
+        "./theme": {
+            "types": "./dist/theme.d.ts",
+            "import": "./dist/theme.js"
+        },
+        "./themes/*": "./dist/themes/*",
         "./timeline": {
             "types": "./dist/components/timeline.d.ts",
             "import": "./dist/timeline.js"

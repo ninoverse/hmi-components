@@ -5,14 +5,14 @@
 .crumbs {
     display: inline-flex;
     align-items: center;
-    font-family: var(--font-quicksand);
+    font-family: var(--font-default);
     font-size: 1.625rem;
 }
 
 .crumbs__list {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: var(--space-2);
     flex-wrap: wrap;
     margin: 0;
     padding: 0;
@@ -22,11 +22,11 @@
 .crumbs__item {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: var(--space-2);
 }
 
 .crumbs__link {
-    padding: 0.5rem 1rem;
+    padding: var(--space-2) var(--space-4);
     border-radius: var(--corner-extra-small);
     color: var(--on-surface-variant);
     text-decoration: none;
@@ -52,7 +52,7 @@
 }
 
 .crumbs__current {
-    padding: 0.5rem 1rem;
+    padding: var(--space-2) var(--space-4);
     color: var(--on-background);
     font-weight: 600;
 }

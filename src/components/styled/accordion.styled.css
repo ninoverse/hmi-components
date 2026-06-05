@@ -22,11 +22,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 2rem;
-    padding: 2.25rem 0.5rem;
+    gap: var(--space-8);
+    padding: var(--space-9) var(--space-2);
     background: transparent;
     border: 0;
-    font-family: var(--font-quicksand);
+    font-family: var(--font-default);
     font-size: 2rem;
     font-weight: 600;
     letter-spacing: -0.005em;
@@ -95,8 +95,8 @@
 }
 
 .acc__panel-body {
-    padding: 0 0.5rem 2.25rem;
-    font-family: var(--font-quicksand);
+    padding: 0 var(--space-2) var(--space-9);
+    font-family: var(--font-default);
     font-size: 1.75rem;
     line-height: 1.5;
     color: var(--on-surface-variant);

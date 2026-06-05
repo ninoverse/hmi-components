@@ -6,7 +6,7 @@
 .tree {
     display: flex;
     flex-direction: column;
-    font-family: var(--font-quicksand);
+    font-family: var(--font-default);
     color: var(--on-background);
 }
 
@@ -22,9 +22,9 @@
 .tree__row {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: var(--space-4);
     padding-block: 0.875rem;
-    padding-inline-end: 1.25rem;
+    padding-inline-end: var(--space-5);
     border-radius: var(--corner-extra-small);
     font-size: 1.625rem;
     line-height: 1.2;

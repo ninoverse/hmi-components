@@ -1,7 +1,19 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="default" data-structure="default">
     <head>
         <meta charset="UTF-8" />
+        <script>
+            // Apply the saved theme + structure before first paint (no flash).
+            try {
+                var el = document.documentElement;
+                var t = localStorage.getItem('hmi-theme');
+                var s = localStorage.getItem('hmi-structure');
+                if (t) el.setAttribute('data-theme', t);
+                if (s) el.setAttribute('data-structure', s);
+            } catch (e) {
+                /* localStorage unavailable — fall back to default attributes */
+            }
+        </script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Ninoverse HMI Components</title>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -10,7 +22,13 @@
             href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Oxanium:wght@200..800&family=Rubik+Glitch&family=Press+Start+2P&family=Pixelify+Sans:wght@400..700&display=swap"
             rel="stylesheet"
         />
-        <link rel="stylesheet" href="/css/themes/default.css" />
+        <link rel="stylesheet" href="/css/themes/constants.css" />
+        <link rel="stylesheet" href="/css/themes/color/default.css" />
+        <link rel="stylesheet" href="/css/themes/color/ocean.css" />
+        <link rel="stylesheet" href="/css/themes/structure/default.css" />
+        <link rel="stylesheet" href="/css/themes/structure/rounded.css" />
+        <link rel="stylesheet" href="/css/themes/structure/sharp.css" />
+        <link rel="stylesheet" href="/css/themes/structure/pixel.css" />
     </head>
     <body>
         <div id="root"></div>

@@ -10,7 +10,7 @@
 
 .bullet-chart__label {
     fill: var(--on-surface-variant);
-    font-family: var(--font-quicksand);
+    font-family: var(--font-default);
     font-size: 1.5rem;
     font-weight: 600;
 }

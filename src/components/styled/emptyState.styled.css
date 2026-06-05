@@ -8,8 +8,8 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    gap: 1.5rem;
-    padding: 4rem 3rem;
+    gap: var(--space-6);
+    padding: var(--space-12) var(--space-11);
     background: var(--surface-container);
     border: 1px dashed var(--outline-variant);
     border-radius: var(--corner-tl) var(--corner-tr) var(--corner-br)
@@ -35,7 +35,7 @@
 
 .empty-state__title {
     margin: 0;
-    font-family: var(--font-oxanium);
+    font-family: var(--font-display);
     font-size: 2.5rem;
     font-weight: 600;
     color: var(--on-surface);
@@ -44,16 +44,16 @@
 .empty-state__description {
     margin: 0;
     max-width: 48rem;
-    font-family: var(--font-quicksand);
+    font-family: var(--font-default);
     font-size: 1.75rem;
     line-height: 1.5;
     color: var(--on-surface-variant);
 }
 
 .empty-state__action {
-    margin-top: 0.5rem;
+    margin-top: var(--space-2);
     display: flex;
-    gap: 1rem;
+    gap: var(--space-4);
     flex-wrap: wrap;
     justify-content: center;
 }

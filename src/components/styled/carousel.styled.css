@@ -7,7 +7,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: var(--space-6);
 }
 
 .carousel__viewport {
@@ -84,7 +84,7 @@
 .carousel__dots {
     display: flex;
     justify-content: center;
-    gap: 1rem;
+    gap: var(--space-4);
 }
 
 .carousel__dot {

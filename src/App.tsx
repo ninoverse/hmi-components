@@ -87,6 +87,7 @@ import { Tooltip } from './components/tooltip';
 import { Tree, type TreeNode } from './components/tree';
 import { ValueScaleSelector } from './components/valueScaleSelector';
 import { VisuallyHidden } from './components/visuallyHidden';
+import { useTheme } from './theme';
 
 const SearchIcon = () => (
     <svg
@@ -104,6 +105,14 @@ const SearchIcon = () => (
 );
 
 export default function App() {
+    const {
+        theme,
+        setTheme,
+        structure,
+        setStructure,
+        colorThemes,
+        structures,
+    } = useTheme();
     const [plan, setPlan] = useState<'free' | 'pro' | 'team'>('pro');
     const [brandColor, setBrandColor] = useState('#e87a5d');
     const [filters, setFilters] = useState<Set<string>>(
@@ -230,6 +239,64 @@ export default function App() {
                 maxWidth: '120rem',
             }}
         >
+            <div
+                style={{
+                    position: 'sticky',
+                    top: 0,
+                    zIndex: 10,
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    alignItems: 'flex-end',
+                    gap: '2rem',
+                    padding: '2rem',
+                    background: 'var(--surface-container-high)',
+                    border: '0.125rem solid var(--outline-variant)',
+                    borderRadius:
+                        'var(--corner-tl) var(--corner-tr) var(--corner-br) var(--corner-bl)',
+                    boxShadow: 'var(--elevation-2)',
+                }}
+            >
+                <h2 style={{ margin: 0, fontSize: '2.5rem' }}>Theme</h2>
+                <FormControl label="Color (buttons)">
+                    <div
+                        style={{
+                            display: 'flex',
+                            gap: '1rem',
+                            flexWrap: 'wrap',
+                        }}
+                    >
+                        {colorThemes.map((value) => (
+                            <Button
+                                key={value}
+                                variant={
+                                    theme === value ? 'primary' : 'secondary'
+                                }
+                                onClick={() => setTheme(value)}
+                            >
+                                {value}
+                            </Button>
+                        ))}
+                    </div>
+                </FormControl>
+                <FormControl label="Structure (select)">
+                    <Select
+                        value={structure}
+                        onChange={setStructure}
+                        options={structures.map((value) => ({
+                            value,
+                            label: value,
+                        }))}
+                    />
+                </FormControl>
+                <span
+                    style={{
+                        fontSize: '1.5rem',
+                        color: 'var(--on-surface-variant)',
+                    }}
+                >
+                    Light/dark follows your OS automatically.
+                </span>
+            </div>
             <section
                 style={{
                     display: 'flex',
@@ -2967,7 +3034,7 @@ export function Example() {
                                 },
                                 {
                                     title: 'What about the theme?',
-                                    body: 'Drop the default.css file into your public dir and link it in your HTML. All components read its tokens at runtime.',
+                                    body: 'Import the theme CSS (constants + a color + a structure file) and wrap your app in ThemeProvider. Components read the tokens at runtime, so switching re-themes everything instantly.',
                                 },
                                 {
                                     title: 'Can I disable a section?',
@@ -4267,12 +4334,34 @@ export function Example() {
                                     setPaletteResult('Go to settings'),
                             },
                             {
-                                id: 'toggle-theme',
-                                label: 'Toggle theme',
-                                description: 'Switch between light and dark',
+                                id: 'cycle-theme',
+                                label: 'Cycle color theme',
+                                description: `Palette — now: ${theme}`,
                                 group: 'Preferences',
-                                onSelect: () =>
-                                    setPaletteResult('Toggle theme'),
+                                onSelect: () => {
+                                    const i = colorThemes.indexOf(theme);
+                                    const next =
+                                        colorThemes[
+                                            (i + 1) % colorThemes.length
+                                        ] ?? 'default';
+                                    setTheme(next);
+                                    setPaletteResult(`Color theme: ${next}`);
+                                },
+                            },
+                            {
+                                id: 'cycle-structure',
+                                label: 'Cycle structure',
+                                description: `Shape · type · motion — now: ${structure}`,
+                                group: 'Preferences',
+                                onSelect: () => {
+                                    const i = structures.indexOf(structure);
+                                    const next =
+                                        structures[
+                                            (i + 1) % structures.length
+                                        ] ?? 'default';
+                                    setStructure(next);
+                                    setPaletteResult(`Structure: ${next}`);
+                                },
                             },
                             {
                                 id: 'sign-out',
