@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en" data-theme="default" data-structure="default">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>HMI Web Components — drop-in demo</title>
+
+        <!-- Google Fonts (same families the React app loads). -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Oxanium:wght@200..800&family=Rubik+Glitch&family=Press+Start+2P&family=Pixelify+Sans:wght@400..700&display=swap"
+            rel="stylesheet"
+        />
+
+        <!-- Theme tokens: constants first, then one color + one structure theme.
+             Theming is pure CSS — no ThemeProvider needed outside React. -->
+        <link rel="stylesheet" href="../dist/themes/constants.css" />
+        <link rel="stylesheet" href="../dist/themes/color/default.css" />
+        <link rel="stylesheet" href="../dist/themes/color/ocean.css" />
+        <link rel="stylesheet" href="../dist/themes/structure/default.css" />
+        <link rel="stylesheet" href="../dist/themes/structure/pixel.css" />
+
+        <!-- Component styles (includes the html { font-size: 8px } base). -->
+        <link rel="stylesheet" href="../dist/hmi-components.css" />
+
+        <style>
+            body {
+                padding: 4rem;
+                display: flex;
+                flex-direction: column;
+                gap: 2rem;
+                align-items: flex-start;
+            }
+            .row {
+                display: flex;
+                gap: 1.5rem;
+                align-items: center;
+                flex-wrap: wrap;
+            }
+        </style>
+    </head>
+    <body>
+        <hmi-heading level="2" size="large">Web Components demo</hmi-heading>
+
+        <!-- Simple presentational components work fully from markup. -->
+        <div class="row">
+            <hmi-button variant="primary">Save</hmi-button>
+            <hmi-button variant="secondary">Cancel</hmi-button>
+            <hmi-button variant="danger">Delete</hmi-button>
+            <hmi-button variant="ghost" disabled>Disabled</hmi-button>
+            <hmi-badge variant="success">Live</hmi-badge>
+        </div>
+
+        <!-- Theme switching is pure CSS: flip the attributes on <html>. -->
+        <div class="row">
+            <hmi-button id="theme-toggle" variant="soft"
+                >Toggle ocean theme</hmi-button
+            >
+            <hmi-button id="structure-toggle" variant="soft"
+                >Toggle pixel structure</hmi-button
+            >
+        </div>
+
+        <!-- Data-/callback-driven components are wired via JS properties. -->
+        <hmi-button id="open-modal" variant="primary"
+            >Open modal</hmi-button
+        >
+        <hmi-modal id="demo-modal"></hmi-modal>
+
+        <!-- IIFE bundle: auto-registers every <hmi-*> element on load. -->
+        <script src="../dist/hmi-components.iife.js"></script>
+        <script>
+            const html = document.documentElement;
+
+            document
+                .getElementById('theme-toggle')
+                .addEventListener('click', () => {
+                    const next =
+                        html.getAttribute('data-theme') === 'ocean'
+                            ? 'default'
+                            : 'ocean';
+                    html.setAttribute('data-theme', next);
+                });
+
+            document
+                .getElementById('structure-toggle')
+                .addEventListener('click', () => {
+                    const next =
+                        html.getAttribute('data-structure') === 'pixel'
+                            ? 'default'
+                            : 'pixel';
+                    html.setAttribute('data-structure', next);
+                });
+
+            // Modal: title/actions are ReactNode and onClose is a callback, so
+            // they are set as JS properties on the element (not HTML attributes).
+            const modal = document.getElementById('demo-modal');
+            modal.title = 'Hello from a custom element';
+            modal.description =
+                'This modal is portalled to document.body and themed by the global CSS tokens.';
+            modal.onClose = () => {
+                modal.open = false;
+            };
+
+            document
+                .getElementById('open-modal')
+                .addEventListener('click', () => {
+                    modal.open = true;
+                });
+        </script>
+    </body>
+</html>

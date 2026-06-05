@@ -11,6 +11,9 @@ importers:
       '@biomejs/biome':
         specifier: ^2.4.9
         version: 2.4.15
+      '@r2wc/react-to-web-component':
+        specifier: ^2.1.1
+        version: 2.1.1(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@types/node':
         specifier: ^22.10.5
         version: 22.19.19
@@ -371,6 +374,15 @@ packages:
 
   '@microsoft/tsdoc@0.16.0':
     resolution: {integrity: sha512-xgAyonlVVS+q7Vc7qLW0UrJU7rSFcETRWsqdXZtjzRU8dF+6CkozTK4V4y1LwOX7j8r/vHphjDeMeGI4tNGeGA==}
+
+  '@r2wc/core@1.3.1':
+    resolution: {integrity: sha512-x9nMthXsTjqr1alE+boX1Zuzqb6/oFi4wAOdWaWcWKcrwq9M/PATK74c3DFJfRnUOkYWPlsz0e4CsFBXJGStSA==}
+
+  '@r2wc/react-to-web-component@2.1.1':
+    resolution: {integrity: sha512-AXsIdjxK9ALv0ySWjVadUg3uJ5nS8L4H8eZMYaaWuM+9LNj9DP/r4+sMjI+6jZwb7/FqwxRPHQUq8yimQwBfOA==}
+    peerDependencies:
+      react: ^18.0.0 || ^19.0.0
+      react-dom: ^18.0.0 || ^19.0.0
 
   '@rolldown/pluginutils@1.0.0-rc.3':
     resolution: {integrity: sha512-eybk3TjzzzV97Dlj5c+XrBFW57eTNhzod66y9HrBlzJ6NsCrWCp/2kaPS3K9wJmurBC0Tdw4yPjXKZqlznim3Q==}
@@ -1312,6 +1324,14 @@ snapshots:
       resolve: 1.22.12
 
   '@microsoft/tsdoc@0.16.0': {}
+
+  '@r2wc/core@1.3.1': {}
+
+  '@r2wc/react-to-web-component@2.1.1(react-dom@19.2.6(react@19.2.6))(react@19.2.6)':
+    dependencies:
+      '@r2wc/core': 1.3.1
+      react: 19.2.6
+      react-dom: 19.2.6(react@19.2.6)
 
   '@rolldown/pluginutils@1.0.0-rc.3': {}
 

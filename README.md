@@ -41,6 +41,68 @@ import { Button } from '@ninoverse/hmi-components/button';
 import { LineChart } from '@ninoverse/hmi-components/line-chart';
 ```
 
+## Use as Web Components
+
+Every component is also published as a native custom element, so the library works in **plain HTML, Vue, Angular, Svelte** — anywhere that renders HTML. Drop in a single self-contained `<script>` (React is bundled in) and the `<hmi-*>` elements register themselves on load. No build step required.
+
+```html
+<!doctype html>
+<html data-theme="default" data-structure="default">
+    <head>
+        <!-- Google Fonts the components use -->
+        <link
+            href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Oxanium:wght@200..800&family=Rubik+Glitch&family=Press+Start+2P&family=Pixelify+Sans:wght@400..700&display=swap"
+            rel="stylesheet"
+        />
+        <!-- Theme tokens: constants first, then one color + one structure theme -->
+        <link rel="stylesheet" href="hmi-components/dist/themes/constants.css" />
+        <link rel="stylesheet" href="hmi-components/dist/themes/color/default.css" />
+        <link rel="stylesheet" href="hmi-components/dist/themes/structure/default.css" />
+        <!-- Component styles (includes the html { font-size: 8px } base) -->
+        <link rel="stylesheet" href="hmi-components/dist/hmi-components.css" />
+    </head>
+    <body>
+        <hmi-button variant="primary">Save</hmi-button>
+
+        <!-- Drop-in bundle: auto-registers every <hmi-*> element -->
+        <script src="hmi-components/dist/hmi-components.iife.js"></script>
+    </body>
+</html>
+```
+
+When installed from npm, the bundle and its stylesheet are exposed as subpaths:
+
+```js
+import '@ninoverse/hmi-components/web-components'; // registers all <hmi-*> elements
+import '@ninoverse/hmi-components/web-components.css';
+```
+
+**Theming is pure CSS** — set `data-theme` and `data-structure` on `<html>` (or any ancestor) and the elements restyle live. There is **no** `ThemeProvider` outside React; the tokens come entirely from the theme stylesheets.
+
+### Attributes vs. JS properties
+
+Custom elements reflect kebab-case attributes onto camelCase props, with coercion for booleans/numbers/JSON:
+
+```html
+<hmi-button variant="primary" size="large" disabled>Save</hmi-button>
+<hmi-badge variant="success" dot></hmi-badge>
+```
+
+Props that are **rich content** (anything typed as a React node — e.g. a Modal's `title`/`actions`, a Table's `columns`) or **callbacks** (`onClose`, `onChange`) can't be expressed as HTML attributes. Set them as JS **properties** on the element instead:
+
+```html
+<hmi-modal id="m"></hmi-modal>
+<script>
+    const modal = document.getElementById('m');
+    modal.title = 'Hello';
+    modal.actions = '<button class="button button--primary">OK</button>';
+    modal.onClose = () => { modal.open = false; };
+    modal.open = true;
+</script>
+```
+
+Simple presentational components (Button, Badge, Alert, Card, inputs, etc.) work fully from markup; data-heavy ones need a line of JS. See [`examples/web-components.html`](./examples/web-components.html) for a runnable demo.
+
 ## Components
 
 | Category | Components |
