@@ -687,14 +687,11 @@ function registerAll(): void {
     define('visually-hidden', hmi.VisuallyHidden, { as: 'string' });
 }
 
-/* Register after the DOM is parsed so declaratively-authored elements are
-   upgraded with their child markup already present. */
-if (typeof document !== 'undefined' && typeof customElements !== 'undefined') {
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', registerAll, {
-            once: true,
-        });
-    } else {
-        registerAll();
-    }
+/* Register as soon as the bundle runs. Loaded at the end of <body> (or with
+   `defer`), every element authored above the script is already fully parsed, so
+   each upgrades with its child markup present. Registering eagerly (rather than
+   waiting for DOMContentLoaded) also means elements are defined before any
+   following consumer script sets properties on them. */
+if (typeof customElements !== 'undefined') {
+    registerAll();
 }
