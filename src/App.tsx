@@ -239,46 +239,64 @@ export default function App() {
                 maxWidth: '120rem',
             }}
         >
-            <section
+            <div
                 style={{
+                    position: 'sticky',
+                    top: 0,
+                    zIndex: 10,
                     display: 'flex',
-                    flexDirection: 'column',
+                    flexWrap: 'wrap',
+                    alignItems: 'flex-end',
                     gap: '2rem',
+                    padding: '2rem',
+                    background: 'var(--surface-container-high)',
+                    border: '0.125rem solid var(--outline-variant)',
+                    borderRadius:
+                        'var(--corner-tl) var(--corner-tr) var(--corner-br) var(--corner-bl)',
+                    boxShadow: 'var(--elevation-2)',
                 }}
             >
-                <h2 style={{ margin: 0, fontSize: '3rem' }}>Theme</h2>
-                <FormControl label="Color theme">
-                    <SegmentedControl
-                        value={theme}
-                        onChange={setTheme}
-                        aria-label="Color theme"
-                        options={colorThemes.map((value) => ({
-                            value,
-                            label: value,
-                        }))}
-                    />
+                <h2 style={{ margin: 0, fontSize: '2.5rem' }}>Theme</h2>
+                <FormControl label="Color (buttons)">
+                    <div
+                        style={{
+                            display: 'flex',
+                            gap: '1rem',
+                            flexWrap: 'wrap',
+                        }}
+                    >
+                        {colorThemes.map((value) => (
+                            <Button
+                                key={value}
+                                variant={
+                                    theme === value ? 'primary' : 'secondary'
+                                }
+                                onClick={() => setTheme(value)}
+                            >
+                                {value}
+                            </Button>
+                        ))}
+                    </div>
                 </FormControl>
-                <FormControl label="Structure (shape · density · motion · type)">
-                    <SegmentedControl
+                <FormControl label="Structure (select)">
+                    <Select
                         value={structure}
                         onChange={setStructure}
-                        aria-label="Structure"
                         options={structures.map((value) => ({
                             value,
                             label: value,
                         }))}
                     />
                 </FormControl>
-                <p
+                <span
                     style={{
-                        margin: 0,
-                        fontSize: '1.625rem',
+                        fontSize: '1.5rem',
                         color: 'var(--on-surface-variant)',
                     }}
                 >
-                    Light and dark follow your OS automatically.
-                </p>
-            </section>
+                    Light/dark follows your OS automatically.
+                </span>
+            </div>
             <section
                 style={{
                     display: 'flex',
