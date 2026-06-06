@@ -360,11 +360,14 @@
             "types": "./dist/components/visuallyHidden.d.ts",
             "import": "./dist/visuallyHidden.js"
         },
-        "./style.css": "./dist/style.css"
+        "./style.css": "./dist/style.css",
+        "./web-components": "./dist/hmi-components.iife.js",
+        "./web-components.css": "./dist/hmi-components.css"
     },
     "scripts": {
         "dev": "vite",
-        "build": "tsc -b && vite build",
+        "build": "tsc -b && vite build && vite build --config vite.wc.config.ts",
+        "build:wc": "vite build --config vite.wc.config.ts",
         "build:demo": "vite build --config vite.demo.config.ts",
         "preview": "vite preview",
         "lint": "biome check .",
@@ -376,6 +379,7 @@
     },
     "devDependencies": {
         "@biomejs/biome": "^2.4.9",
+        "@r2wc/react-to-web-component": "^2.1.1",
         "@types/node": "^22.10.5",
         "@types/react": "^19.0.7",
         "@types/react-dom": "^19.0.3",

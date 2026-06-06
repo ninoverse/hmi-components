@@ -41,6 +41,100 @@ import { Button } from '@ninoverse/hmi-components/button';
 import { LineChart } from '@ninoverse/hmi-components/line-chart';
 ```
 
+## Use as Web Components
+
+Every component is also published as a native custom element, so the library works in **plain HTML, Vue, Angular, Svelte** — anywhere that renders HTML. Drop in a single self-contained `<script>` (React is bundled in) and the `<hmi-*>` elements register themselves on load. No build step required.
+
+```html
+<!doctype html>
+<html data-theme="default" data-structure="default">
+    <head>
+        <!-- Google Fonts the components use -->
+        <link
+            href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Oxanium:wght@200..800&family=Rubik+Glitch&family=Press+Start+2P&family=Pixelify+Sans:wght@400..700&display=swap"
+            rel="stylesheet"
+        />
+        <!-- Theme tokens: constants first, then one color + one structure theme -->
+        <link rel="stylesheet" href="hmi-components/dist/themes/constants.css" />
+        <link rel="stylesheet" href="hmi-components/dist/themes/color/default.css" />
+        <link rel="stylesheet" href="hmi-components/dist/themes/structure/default.css" />
+        <!-- Component styles (includes the html { font-size: 8px } base) -->
+        <link rel="stylesheet" href="hmi-components/dist/hmi-components.css" />
+    </head>
+    <body>
+        <hmi-button variant="primary">Save</hmi-button>
+
+        <!-- Drop-in bundle: auto-registers every <hmi-*> element -->
+        <script src="hmi-components/dist/hmi-components.iife.js"></script>
+    </body>
+</html>
+```
+
+When installed from npm, the bundle and its stylesheet are exposed as subpaths:
+
+```js
+import '@ninoverse/hmi-components/web-components'; // registers all <hmi-*> elements
+import '@ninoverse/hmi-components/web-components.css';
+```
+
+**Theming is pure CSS** — set `data-theme` and `data-structure` on `<html>` (or any ancestor) and the elements restyle live. There is **no** `ThemeProvider` outside React; the tokens come entirely from the theme stylesheets.
+
+### Attributes vs. JS properties
+
+Custom elements reflect kebab-case attributes onto camelCase props, with coercion for booleans/numbers/JSON:
+
+```html
+<hmi-button variant="primary" size="large" disabled>Save</hmi-button>
+<hmi-badge variant="success" dot></hmi-badge>
+```
+
+Props that are **rich content** (anything typed as a React node — e.g. a Modal's `title`/`actions`, a Table's `columns`) or **callbacks** (`onClose`, `onChange`) can't be expressed as HTML attributes. Set them as JS **properties** on the element instead:
+
+```html
+<hmi-modal id="m"></hmi-modal>
+<script>
+    const modal = document.getElementById('m');
+    modal.title = 'Hello';
+    modal.actions = '<button class="button button--primary">OK</button>';
+    modal.onClose = () => { modal.open = false; };
+    modal.open = true;
+</script>
+```
+
+Simple presentational components (Button, Badge, Alert, Card, inputs, etc.) work fully from markup; data-heavy ones need a line of JS. See [`examples/web-components.html`](./examples/web-components.html) for a runnable demo.
+
+### Using with Dioxus (Rust)
+
+The custom elements work in any Dioxus renderer backed by a real browser DOM — **`dioxus-web`** (WASM), **`dioxus-desktop`/mobile** (webview), and **fullstack/liveview/SSR**. They do **not** work in the native/TUI/Blitz renderers, which have no DOM or JS engine.
+
+Load the bundle and theme stylesheets once in your HTML shell (e.g. the `index.html` template or the `Dioxus.toml` resources), and set the theme attributes on `<html>` exactly as above. Dioxus renders any tag containing a dash as an untyped web component, and non-HTML attributes are written quoted — so the simple, attribute-driven components work straight from `rsx!`:
+
+```rust
+rsx! {
+    hmi-button { "variant": "primary", "Save" }
+    hmi-badge  { "variant": "success", "Live" }
+    // boolean / number / json props also parse from string attributes:
+    hmi-modal  { "open": "true" }
+}
+```
+
+Callbacks (`onClose`, `onChange`) and rich React-node props (a Modal's `title`/`actions`, a Table's `columns`) can't be HTML attributes — same as the section above. In Dioxus you set them as JS **properties** via `onmounted`, downcasting the mounted handle to a `web_sys::Element`:
+
+```rust
+rsx! {
+    hmi-modal {
+        onmounted: move |evt| {
+            let el = evt.downcast::<web_sys::Element>().unwrap();
+            // js_sys::Reflect::set(&el, &"onClose".into(), &closure);
+            // js_sys::Reflect::set(&el, &"title".into(), &"Hello".into());
+            let _ = el.set_attribute("open", "true"); // boolean props can use attributes
+        }
+    }
+}
+```
+
+> Text children like `hmi-button { "Save" }` are captured from the rendered markup, but because Dioxus builds the DOM programmatically the timing can vary by renderer — if a label ever renders empty, pass the content via a property instead. Don't confuse this with the [`dioxus-web-component`](https://crates.io/crates/dioxus-web-component) crate, which does the *inverse* (exposes a Dioxus component as a web component).
+
 ## Components
 
 | Category | Components |
