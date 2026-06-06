@@ -103,6 +103,38 @@ Props that are **rich content** (anything typed as a React node — e.g. a Modal
 
 Simple presentational components (Button, Badge, Alert, Card, inputs, etc.) work fully from markup; data-heavy ones need a line of JS. See [`examples/web-components.html`](./examples/web-components.html) for a runnable demo.
 
+### Using with Dioxus (Rust)
+
+The custom elements work in any Dioxus renderer backed by a real browser DOM — **`dioxus-web`** (WASM), **`dioxus-desktop`/mobile** (webview), and **fullstack/liveview/SSR**. They do **not** work in the native/TUI/Blitz renderers, which have no DOM or JS engine.
+
+Load the bundle and theme stylesheets once in your HTML shell (e.g. the `index.html` template or the `Dioxus.toml` resources), and set the theme attributes on `<html>` exactly as above. Dioxus renders any tag containing a dash as an untyped web component, and non-HTML attributes are written quoted — so the simple, attribute-driven components work straight from `rsx!`:
+
+```rust
+rsx! {
+    hmi-button { "variant": "primary", "Save" }
+    hmi-badge  { "variant": "success", "Live" }
+    // boolean / number / json props also parse from string attributes:
+    hmi-modal  { "open": "true" }
+}
+```
+
+Callbacks (`onClose`, `onChange`) and rich React-node props (a Modal's `title`/`actions`, a Table's `columns`) can't be HTML attributes — same as the section above. In Dioxus you set them as JS **properties** via `onmounted`, downcasting the mounted handle to a `web_sys::Element`:
+
+```rust
+rsx! {
+    hmi-modal {
+        onmounted: move |evt| {
+            let el = evt.downcast::<web_sys::Element>().unwrap();
+            // js_sys::Reflect::set(&el, &"onClose".into(), &closure);
+            // js_sys::Reflect::set(&el, &"title".into(), &"Hello".into());
+            let _ = el.set_attribute("open", "true"); // boolean props can use attributes
+        }
+    }
+}
+```
+
+> Text children like `hmi-button { "Save" }` are captured from the rendered markup, but because Dioxus builds the DOM programmatically the timing can vary by renderer — if a label ever renders empty, pass the content via a property instead. Don't confuse this with the [`dioxus-web-component`](https://crates.io/crates/dioxus-web-component) crate, which does the *inverse* (exposes a Dioxus component as a web component).
+
 ## Components
 
 | Category | Components |
