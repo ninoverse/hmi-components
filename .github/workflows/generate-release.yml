@@ -87,6 +87,8 @@ jobs:
       - name: Publish to npm
         if: steps.targets.outputs.deploy_npm == 'true'
         run: pnpm publish --no-git-checks --provenance
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Authenticate to GCP
         if: steps.targets.outputs.deploy_gcp == 'true'
