@@ -1,0 +1,135 @@
+/* Forest color theme — deep green on a cool green-tinted neutral palette.
+   Light by default; dark variant resolved automatically via prefers-color-scheme. */
+
+[data-theme='forest'] {
+    /* Reference palette (tonal source colors) */
+    --ref-primary-40: #1e6e3e;
+    --ref-primary-50: #2d8a50;
+    --ref-primary-80: #8dcfab;
+    --ref-primary-90: #c8e8d8;
+    --ref-primary-95: #e5f4ed;
+
+    --ref-neutral-10: #1a2320;
+    --ref-neutral-20: #2d3d38;
+    --ref-neutral-40: #556660;
+    --ref-neutral-60: #8a9e97;
+    --ref-neutral-80: #c4d2ce;
+    --ref-neutral-90: #dde7e4;
+    --ref-neutral-95: #edf3f1;
+    --ref-neutral-98: #f5f9f7;
+    --ref-neutral-100: #ffffff;
+
+    /* System color roles (light) */
+    --primary: #2d8a50;
+    --on-primary: #ffffff;
+    --primary-container: #c8e8d8;
+    --on-primary-container: #0a3d20;
+
+    --secondary: #556660;
+    --on-secondary: #ffffff;
+    --secondary-container: #dde7e4;
+    --on-secondary-container: #2d3d38;
+
+    --tertiary: #7d6e38;
+    --on-tertiary: #ffffff;
+    --tertiary-container: #f0e6c0;
+    --on-tertiary-container: #403210;
+
+    --error: #c0524c;
+    --on-error: #ffffff;
+    --error-container: #f4dad6;
+    --on-error-container: #7a2a26;
+
+    --background: #f5f9f7;
+    --on-background: #1a2320;
+
+    --surface: #f5f9f7;
+    --on-surface: #1a2320;
+    --surface-variant: #dde7e4;
+    --on-surface-variant: #556660;
+
+    --surface-container-lowest: #ffffff;
+    --surface-container-low: #f5f9f7;
+    --surface-container: #eef5f1;
+    --surface-container-high: #e8f0ec;
+    --surface-container-highest: #dde7e4;
+
+    --outline: #8a9e97;
+    --outline-variant: #dde7e4;
+
+    --shadow: #000000;
+    --scrim: rgba(26, 35, 32, 0.32);
+
+    --inverse-surface: #1a2320;
+    --inverse-on-surface: #f5f9f7;
+    --inverse-primary: #8dcfab;
+
+    --success: #3d8a5c;
+    --on-success: #ffffff;
+    --success-container: #d0eadc;
+    --on-success-container: #1a4d30;
+    --warning: #c27f2a;
+    --on-warning: #ffffff;
+    --warning-container: #f7e4c0;
+    --on-warning-container: #5e3a0a;
+}
+
+@media (prefers-color-scheme: dark) {
+    [data-theme='forest'] {
+        --ref-primary-40: #8dcfab;
+        --ref-neutral-60: #8a9e97;
+
+        --primary: #8dcfab;
+        --on-primary: #08361e;
+        --primary-container: #1a5435;
+        --on-primary-container: #c8e8d8;
+
+        --secondary: #c4d2ce;
+        --on-secondary: #222e2b;
+        --secondary-container: #2d3d38;
+        --on-secondary-container: #dde7e4;
+
+        --tertiary: #d4c07a;
+        --on-tertiary: #3a2c08;
+        --tertiary-container: #564510;
+        --on-tertiary-container: #f0e6c0;
+
+        --error: #e89a93;
+        --on-error: #5a1410;
+        --error-container: #7a2a26;
+        --on-error-container: #f4dad6;
+
+        --background: #101c18;
+        --on-background: #dde7e4;
+
+        --surface: #101c18;
+        --on-surface: #dde7e4;
+        --surface-variant: #2d3d38;
+        --on-surface-variant: #c4d2ce;
+
+        --surface-container-lowest: #0b1511;
+        --surface-container-low: #141f1b;
+        --surface-container: #192420;
+        --surface-container-high: #202e29;
+        --surface-container-highest: #2d3d38;
+
+        --outline: #8a9e97;
+        --outline-variant: #2d3d38;
+
+        --shadow: #000000;
+        --scrim: rgba(0, 0, 0, 0.6);
+
+        --inverse-surface: #dde7e4;
+        --inverse-on-surface: #1a2320;
+        --inverse-primary: #1e6e3e;
+
+        --success: #80ccaa;
+        --on-success: #073824;
+        --success-container: #1a4d30;
+        --on-success-container: #d0eadc;
+        --warning: #e8ca8a;
+        --on-warning: #3a2200;
+        --warning-container: #5e3a0a;
+        --on-warning-container: #f7e4c0;
+    }
+}
