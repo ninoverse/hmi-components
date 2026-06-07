@@ -4,7 +4,7 @@
    the active structure drives html[data-structure] (shape, density, motion,
    typography). Token values live in public/css/themes/. */
 
-export const colorThemes = ['default', 'ocean'] as const;
+export const colorThemes = ['default', 'ocean', 'forest'] as const;
 export const structures = ['default', 'rounded', 'sharp', 'pixel'] as const;
 
 export type ColorTheme = (typeof colorThemes)[number];
