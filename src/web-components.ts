@@ -658,6 +658,7 @@ function registerAll(): void {
     define('stepper', hmi.Stepper, {
         steps: 'json',
         current: 'string',
+        defaultCurrent: 'string',
         onChange: 'function',
         orientation: 'string',
         spacing: 'string',
@@ -684,6 +685,7 @@ function registerAll(): void {
     });
     define('tabs', hmi.Tabs, {
         value: 'string',
+        defaultValue: 'string',
         onChange: 'function',
         options: 'json',
         variant: 'string',
