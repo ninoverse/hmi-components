@@ -1,11 +1,23 @@
 import type { ComponentPropsWithRef, ReactNode } from 'react';
 import './styled/switch.styled.css';
 
-export type SwitchProps = Omit<ComponentPropsWithRef<'input'>, 'type'> & {
+export type SwitchProps = Omit<
+    ComponentPropsWithRef<'input'>,
+    'type' | 'checked' | 'defaultChecked' | 'onChange'
+> & {
     label?: ReactNode;
+    checked?: boolean;
+    defaultChecked?: boolean;
+    onChange?: (checked: boolean) => void;
 };
 
-export function Switch({ label, className, ref, ...rest }: SwitchProps) {
+export function Switch({
+    label,
+    className,
+    ref,
+    onChange,
+    ...rest
+}: SwitchProps) {
     const tokens: string[] = ['switch'];
     if (className) tokens.push(className);
 
@@ -15,6 +27,7 @@ export function Switch({ label, className, ref, ...rest }: SwitchProps) {
                 ref={ref}
                 type="checkbox"
                 className="switch__input"
+                onChange={(event) => onChange?.(event.target.checked)}
                 {...rest}
             />
             <span className="switch__track" aria-hidden="true">
