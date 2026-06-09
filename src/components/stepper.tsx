@@ -1,4 +1,4 @@
-import type { HTMLAttributes, ReactNode } from 'react';
+import { type HTMLAttributes, type ReactNode, useState } from 'react';
 import './styled/stepper.styled.css';
 
 export type StepperOrientation = 'horizontal' | 'vertical';
@@ -14,7 +14,8 @@ export type StepperProps<T extends string = string> = Omit<
     'onChange'
 > & {
     steps: ReadonlyArray<StepperItem<T>>;
-    current: T;
+    current?: T;
+    defaultCurrent?: T;
     onChange?: (value: T) => void;
     orientation?: StepperOrientation;
     spacing?: string | number;
@@ -38,6 +39,7 @@ const CheckIcon = () => (
 export function Stepper<T extends string = string>({
     steps,
     current,
+    defaultCurrent,
     onChange,
     orientation = 'horizontal',
     spacing,
@@ -46,7 +48,11 @@ export function Stepper<T extends string = string>({
     'aria-label': ariaLabel = 'Progress steps',
     ...rest
 }: StepperProps<T>) {
-    const currentIndex = steps.findIndex((s) => s.value === current);
+    const isControlled = current !== undefined;
+    const [internal, setInternal] = useState<T | undefined>(defaultCurrent);
+    const active = isControlled ? current : internal;
+
+    const currentIndex = steps.findIndex((s) => s.value === active);
 
     const tokens: string[] = ['stepper', `stepper--${orientation}`];
     if (className) tokens.push(className);
@@ -75,7 +81,8 @@ export function Stepper<T extends string = string>({
                           ? 'active'
                           : 'upcoming';
                 const interactive =
-                    onChange !== undefined && status === 'completed';
+                    status === 'completed' &&
+                    (!isControlled || onChange !== undefined);
 
                 const indicator = (
                     <span className="stepper__indicator" aria-hidden="true">
@@ -111,7 +118,10 @@ export function Stepper<T extends string = string>({
                             <button
                                 type="button"
                                 className="stepper__button"
-                                onClick={() => onChange?.(step.value)}
+                                onClick={() => {
+                                    if (!isControlled) setInternal(step.value);
+                                    onChange?.(step.value);
+                                }}
                             >
                                 {indicator}
                                 {labelBlock}

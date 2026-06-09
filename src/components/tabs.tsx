@@ -21,8 +21,9 @@ export type TabsProps<T extends string = string> = Omit<
     HTMLAttributes<HTMLDivElement>,
     'onChange'
 > & {
-    value: T;
-    onChange: (value: T) => void;
+    value?: T;
+    defaultValue?: T;
+    onChange?: (value: T) => void;
     options: ReadonlyArray<TabOption<T>>;
     variant?: TabsVariant;
 };
@@ -31,12 +32,17 @@ type Indicator = { left: number; width: number; opacity: number };
 
 export function Tabs<T extends string = string>({
     value,
+    defaultValue,
     onChange,
     options,
     variant = 'pill',
     className,
     ...rest
 }: TabsProps<T>) {
+    const isControlled = value !== undefined;
+    const [internal, setInternal] = useState<T | undefined>(defaultValue);
+    const current = isControlled ? value : internal;
+
     const wrapRef = useRef<HTMLDivElement | null>(null);
     const [indicator, setIndicator] = useState<Indicator>({
         left: 0,
@@ -44,7 +50,7 @@ export function Tabs<T extends string = string>({
         opacity: 0,
     });
 
-    // biome-ignore lint/correctness/useExhaustiveDependencies: value and options drive the [data-active] selector queried inside measure.
+    // biome-ignore lint/correctness/useExhaustiveDependencies: current and options drive the [data-active] selector queried inside measure.
     useLayoutEffect(() => {
         const measure = () => {
             const wrap = wrapRef.current;
@@ -67,7 +73,7 @@ export function Tabs<T extends string = string>({
         measure();
         window.addEventListener('resize', measure);
         return () => window.removeEventListener('resize', measure);
-    }, [value, options]);
+    }, [current, options]);
 
     const tokens: string[] = ['tabs'];
     if (variant !== 'pill') tokens.push(`tabs--${variant}`);
@@ -90,7 +96,7 @@ export function Tabs<T extends string = string>({
                 }}
             />
             {options.map((opt) => {
-                const isActive = opt.value === value;
+                const isActive = opt.value === current;
                 return (
                     <button
                         key={opt.value}
@@ -99,7 +105,10 @@ export function Tabs<T extends string = string>({
                         aria-selected={isActive}
                         className="tab"
                         data-active={isActive}
-                        onClick={() => onChange(opt.value)}
+                        onClick={() => {
+                            if (!isControlled) setInternal(opt.value);
+                            onChange?.(opt.value);
+                        }}
                     >
                         {opt.icon && (
                             <span className="tab__icon">{opt.icon}</span>
