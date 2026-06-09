@@ -17,7 +17,9 @@ export type TreeNode<T extends string = string> = {
 
 export type TreeProps<T extends string = string> = {
     nodes: ReadonlyArray<TreeNode<T>>;
+    expanded?: ReadonlyArray<T>;
     defaultExpanded?: ReadonlyArray<T>;
+    onExpandedChange?: (expanded: T[]) => void;
     selected?: T;
     defaultSelected?: T;
     onSelect?: (value: T) => void;
@@ -72,37 +74,46 @@ function flatten<T extends string>(
 
 export function Tree<T extends string = string>({
     nodes,
+    expanded,
     defaultExpanded,
+    onExpandedChange,
     selected,
     defaultSelected,
     onSelect,
     'aria-label': ariaLabel = 'Tree',
 }: TreeProps<T>) {
-    const [expanded, setExpanded] = useState<ReadonlySet<T>>(
+    const isExpandedControlled = expanded !== undefined;
+    const [expandedInternal, setExpandedInternal] = useState<ReadonlySet<T>>(
         () => new Set(defaultExpanded ?? []),
     );
-    const isControlled = selected !== undefined;
+    const expandedSet = isExpandedControlled
+        ? new Set(expanded)
+        : expandedInternal;
+    const isSelectedControlled = selected !== undefined;
     const [selInternal, setSelInternal] = useState<T | undefined>(
         defaultSelected,
     );
-    const selValue = isControlled ? selected : selInternal;
+    const selValue = isSelectedControlled ? selected : selInternal;
     const [active, setActive] = useState<T | null>(
         () => nodes[0]?.value ?? null,
     );
     const itemRefs = useRef(new Map<T, HTMLDivElement>());
 
-    const flat = useMemo(() => flatten(nodes, expanded), [nodes, expanded]);
+    const flat = useMemo(
+        () => flatten(nodes, expandedSet),
+        [nodes, expandedSet],
+    );
 
-    const toggle = (value: T) =>
-        setExpanded((prev) => {
-            const next = new Set(prev);
-            if (next.has(value)) next.delete(value);
-            else next.add(value);
-            return next;
-        });
+    const toggle = (value: T) => {
+        const next = new Set(expandedSet);
+        if (next.has(value)) next.delete(value);
+        else next.add(value);
+        if (!isExpandedControlled) setExpandedInternal(next);
+        onExpandedChange?.(Array.from(next));
+    };
 
     const select = (value: T) => {
-        if (!isControlled) setSelInternal(value);
+        if (!isSelectedControlled) setSelInternal(value);
         onSelect?.(value);
     };
 
@@ -155,13 +166,13 @@ export function Tree<T extends string = string>({
             case 'ArrowRight':
                 event.preventDefault();
                 if (cur.hasChildren) {
-                    if (!expanded.has(value)) toggle(value);
+                    if (!expandedSet.has(value)) toggle(value);
                     else focusValue(flat[idx + 1]?.value);
                 }
                 break;
             case 'ArrowLeft':
                 event.preventDefault();
-                if (cur.hasChildren && expanded.has(value)) toggle(value);
+                if (cur.hasChildren && expandedSet.has(value)) toggle(value);
                 else if (cur.parent != null) focusValue(cur.parent);
                 break;
             case 'Enter':
@@ -183,7 +194,7 @@ export function Tree<T extends string = string>({
     ): ReactNode =>
         levelNodes.map((node) => {
             const hasChildren = !!node.children?.length;
-            const isExpanded = hasChildren && expanded.has(node.value);
+            const isExpanded = hasChildren && expandedSet.has(node.value);
             const isSelected = selValue === node.value;
             const flatNode: FlatNode<T> = {
                 value: node.value,

@@ -10,7 +10,9 @@ export type AccordionItem = {
 export type AccordionProps = HTMLAttributes<HTMLDivElement> & {
     items: ReadonlyArray<AccordionItem>;
     multiple?: boolean;
+    open?: ReadonlyArray<number>;
     defaultOpen?: ReadonlyArray<number>;
+    onOpenChange?: (open: number[]) => void;
 };
 
 const ChevronIcon = () => (
@@ -31,26 +33,29 @@ const ChevronIcon = () => (
 export function Accordion({
     items,
     multiple = false,
+    open,
     defaultOpen,
+    onOpenChange,
     className,
     ...rest
 }: AccordionProps) {
     const idRoot = useId();
-    const [open, setOpen] = useState<ReadonlySet<number>>(
+    const isControlled = open !== undefined;
+    const [internal, setInternal] = useState<ReadonlySet<number>>(
         () => new Set(defaultOpen ?? []),
     );
+    const current = isControlled ? new Set(open) : internal;
 
     const toggle = (index: number) => {
-        setOpen((prev) => {
-            const next = new Set(multiple ? prev : []);
-            if (prev.has(index)) {
-                next.delete(index);
-            } else {
-                if (!multiple) next.clear();
-                next.add(index);
-            }
-            return next;
-        });
+        const next = new Set(multiple ? current : []);
+        if (current.has(index)) {
+            next.delete(index);
+        } else {
+            if (!multiple) next.clear();
+            next.add(index);
+        }
+        if (!isControlled) setInternal(next);
+        onOpenChange?.(Array.from(next).sort((a, b) => a - b));
     };
 
     const tokens: string[] = ['acc'];
@@ -59,7 +64,7 @@ export function Accordion({
     return (
         <div className={tokens.join(' ')} {...rest}>
             {items.map((item, i) => {
-                const isOpen = open.has(i);
+                const isOpen = current.has(i);
                 const headerId = `${idRoot}-h-${i}`;
                 const panelId = `${idRoot}-p-${i}`;
                 return (

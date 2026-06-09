@@ -97,7 +97,9 @@ function registerAll(): void {
     define('accordion', hmi.Accordion, {
         items: 'json',
         multiple: 'boolean',
+        open: 'json',
         defaultOpen: 'json',
+        onOpenChange: 'function',
     });
     define('alert', hmi.Alert, {
         variant: 'string',
@@ -665,7 +667,9 @@ function registerAll(): void {
     });
     define('tree', hmi.Tree, {
         nodes: 'json',
+        expanded: 'json',
         defaultExpanded: 'json',
+        onExpandedChange: 'function',
         selected: 'string',
         defaultSelected: 'string',
         onSelect: 'function',
