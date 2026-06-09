@@ -44,8 +44,8 @@ export function RadioGroup<T extends string = string>({
                     {...(isControlled
                         ? { checked: opt.value === value }
                         : { defaultChecked: opt.value === defaultValue })}
-                    onChange={(e) => {
-                        if (e.target.checked) onChange?.(opt.value);
+                    onChange={(checked) => {
+                        if (checked) onChange?.(opt.value);
                     }}
                 />
             ))}

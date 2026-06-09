@@ -1,11 +1,23 @@
 import type { ComponentPropsWithRef, ReactNode } from 'react';
 import './styled/checkbox.styled.css';
 
-export type CheckboxProps = Omit<ComponentPropsWithRef<'input'>, 'type'> & {
+export type CheckboxProps = Omit<
+    ComponentPropsWithRef<'input'>,
+    'type' | 'checked' | 'defaultChecked' | 'onChange'
+> & {
     label?: ReactNode;
+    checked?: boolean;
+    defaultChecked?: boolean;
+    onChange?: (checked: boolean) => void;
 };
 
-export function Checkbox({ label, className, ref, ...rest }: CheckboxProps) {
+export function Checkbox({
+    label,
+    className,
+    ref,
+    onChange,
+    ...rest
+}: CheckboxProps) {
     const tokens: string[] = ['checkbox'];
     if (className) tokens.push(className);
 
@@ -15,6 +27,7 @@ export function Checkbox({ label, className, ref, ...rest }: CheckboxProps) {
                 ref={ref}
                 type="checkbox"
                 className="checkbox__input"
+                onChange={(event) => onChange?.(event.target.checked)}
                 {...rest}
             />
             <span className="checkbox__box" aria-hidden="true">

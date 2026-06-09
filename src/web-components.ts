@@ -66,11 +66,15 @@ function define<P extends object>(
     name: string,
     Component: ComponentType<P>,
     props: Partial<Record<Extract<keyof P, string>, WcType>> = {},
+    events: Partial<Record<Extract<keyof P, string>, EventInit>> = {},
 ): void {
     const tag = `hmi-${name}`;
     if (customElements.get(tag)) return;
 
-    const Base = r2wc(withChildren(Component), { props }) as unknown as {
+    const Base = r2wc(withChildren(Component), {
+        props,
+        events,
+    }) as unknown as {
         new (): ReactiveElement;
     };
 
@@ -203,13 +207,20 @@ function registerAll(): void {
         title: 'json',
         items: 'json',
     });
-    define('checkbox', hmi.Checkbox, {
-        label: 'json',
-        checked: 'boolean',
-        disabled: 'boolean',
-        name: 'string',
-        value: 'string',
-    });
+    define(
+        'checkbox',
+        hmi.Checkbox,
+        {
+            label: 'json',
+            checked: 'boolean',
+            defaultChecked: 'boolean',
+            onChange: 'function',
+            disabled: 'boolean',
+            name: 'string',
+            value: 'string',
+        },
+        { onChange: { bubbles: true } },
+    );
     define('chip', hmi.Chip, {
         selected: 'boolean',
         icon: 'json',
@@ -383,16 +394,23 @@ function registerAll(): void {
         fallback: 'json',
         loading: 'string',
     });
-    define('input', hmi.Input, {
-        leftIcon: 'json',
-        rightIcon: 'json',
-        error: 'boolean',
-        value: 'string',
-        placeholder: 'string',
-        disabled: 'boolean',
-        type: 'string',
-        name: 'string',
-    });
+    define(
+        'input',
+        hmi.Input,
+        {
+            leftIcon: 'json',
+            rightIcon: 'json',
+            error: 'boolean',
+            value: 'string',
+            defaultValue: 'string',
+            onChange: 'function',
+            placeholder: 'string',
+            disabled: 'boolean',
+            type: 'string',
+            name: 'string',
+        },
+        { onChange: { bubbles: true } },
+    );
     define('kbd', hmi.Kbd, { size: 'string' });
     define('legend', hmi.Legend, { items: 'json', align: 'string' });
     define('line-chart', hmi.LineChart, {
@@ -477,13 +495,20 @@ function registerAll(): void {
         total: 'number',
         onChange: 'function',
     });
-    define('password-input', hmi.PasswordInput, {
-        leftIcon: 'json',
-        error: 'boolean',
-        value: 'string',
-        placeholder: 'string',
-        disabled: 'boolean',
-    });
+    define(
+        'password-input',
+        hmi.PasswordInput,
+        {
+            leftIcon: 'json',
+            error: 'boolean',
+            value: 'string',
+            defaultValue: 'string',
+            onChange: 'function',
+            placeholder: 'string',
+            disabled: 'boolean',
+        },
+        { onChange: { bubbles: true } },
+    );
     define('popover', hmi.Popover, {
         open: 'boolean',
         onOpenChange: 'function',
@@ -505,13 +530,20 @@ function registerAll(): void {
         rings: 'number',
         'aria-label': 'string',
     });
-    define('radio', hmi.Radio, {
-        label: 'json',
-        checked: 'boolean',
-        disabled: 'boolean',
-        name: 'string',
-        value: 'string',
-    });
+    define(
+        'radio',
+        hmi.Radio,
+        {
+            label: 'json',
+            checked: 'boolean',
+            defaultChecked: 'boolean',
+            onChange: 'function',
+            disabled: 'boolean',
+            name: 'string',
+            value: 'string',
+        },
+        { onChange: { bubbles: true } },
+    );
     define('radio-group', hmi.RadioGroup, {
         name: 'string',
         value: 'string',
@@ -540,12 +572,19 @@ function registerAll(): void {
         orientation: 'string',
         maxHeight: 'string',
     });
-    define('search-input', hmi.SearchInput, {
-        error: 'boolean',
-        value: 'string',
-        placeholder: 'string',
-        disabled: 'boolean',
-    });
+    define(
+        'search-input',
+        hmi.SearchInput,
+        {
+            error: 'boolean',
+            value: 'string',
+            defaultValue: 'string',
+            onChange: 'function',
+            placeholder: 'string',
+            disabled: 'boolean',
+        },
+        { onChange: { bubbles: true } },
+    );
     define('segmented-control', hmi.SegmentedControl, {
         value: 'string',
         defaultValue: 'string',
@@ -621,13 +660,20 @@ function registerAll(): void {
         orientation: 'string',
         spacing: 'string',
     });
-    define('switch', hmi.Switch, {
-        label: 'json',
-        checked: 'boolean',
-        disabled: 'boolean',
-        name: 'string',
-        value: 'string',
-    });
+    define(
+        'switch',
+        hmi.Switch,
+        {
+            label: 'json',
+            checked: 'boolean',
+            defaultChecked: 'boolean',
+            onChange: 'function',
+            disabled: 'boolean',
+            name: 'string',
+            value: 'string',
+        },
+        { onChange: { bubbles: true } },
+    );
     define('table', hmi.Table, {
         columns: 'json',
         rows: 'json',
@@ -648,14 +694,21 @@ function registerAll(): void {
         align: 'string',
         truncate: 'boolean',
     });
-    define('textarea', hmi.Textarea, {
-        error: 'boolean',
-        value: 'string',
-        placeholder: 'string',
-        disabled: 'boolean',
-        rows: 'number',
-        name: 'string',
-    });
+    define(
+        'textarea',
+        hmi.Textarea,
+        {
+            error: 'boolean',
+            value: 'string',
+            defaultValue: 'string',
+            onChange: 'function',
+            placeholder: 'string',
+            disabled: 'boolean',
+            rows: 'number',
+            name: 'string',
+        },
+        { onChange: { bubbles: true } },
+    );
     define('timeline', hmi.Timeline, { items: 'json' });
     define('toast', hmi.ToastHost);
     define('tooltip', hmi.Tooltip, {
