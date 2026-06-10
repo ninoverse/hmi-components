@@ -78,6 +78,8 @@ export function useControlledTextCaret<T extends SelectionCapableElement>(
         const captured = captureRef.current;
         if (!captured) return;
         captureRef.current = null;
+        /* Uncontrolled usage — nothing to restore against. */
+        if (value === undefined) return;
         const element = innerRef.current;
         if (!element) return;
         if (document.activeElement !== element) return;
@@ -86,7 +88,7 @@ export function useControlledTextCaret<T extends SelectionCapableElement>(
            host transformations (uppercase, trim, normalise) still land the
            caret at the right spot. If the host rejected the input entirely
            and set a shorter string, the caret ends up at the new end. */
-        const len = value?.length ?? 0;
+        const len = value.length;
         const start = Math.min(captured.start, len);
         const end = Math.min(captured.end, len);
         element.setSelectionRange(start, end);
