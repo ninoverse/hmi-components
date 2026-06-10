@@ -1,4 +1,5 @@
 import type { ComponentPropsWithRef } from 'react';
+import { useControlledTextCaret } from '../lib/controlledTextCaret.utility';
 import './styled/textarea.styled.css';
 
 export type TextareaProps = Omit<
@@ -16,17 +17,24 @@ export function Textarea({
     className,
     ref,
     onChange,
+    value,
     ...rest
 }: TextareaProps) {
     const tokens: string[] = ['textarea'];
     if (error) tokens.push('textarea--error');
     if (className) tokens.push(className);
 
+    const caret = useControlledTextCaret<HTMLTextAreaElement>(value, ref);
+
     return (
         <textarea
-            ref={ref}
+            ref={caret.ref}
             className={tokens.join(' ')}
-            onChange={(event) => onChange?.(event.target.value)}
+            value={value}
+            onChange={(event) => {
+                caret.captureSelection(event);
+                onChange?.(event.target.value);
+            }}
             {...rest}
         />
     );
