@@ -82,11 +82,14 @@ export function useControlledTextCaret<T extends SelectionCapableElement>(
         if (!element) return;
         if (document.activeElement !== element) return;
         if (!supportsSelection(element)) return;
-        /* The prop disagrees with the user's edit (host transformed or
-           rejected the input). Let the default end-clamp stand — there is
-           no meaningful position to restore to. */
-        if (captured.value !== value) return;
-        element.setSelectionRange(captured.start, captured.end);
+        /* Clamp the captured position to the new value's length so that
+           host transformations (uppercase, trim, normalise) still land the
+           caret at the right spot. If the host rejected the input entirely
+           and set a shorter string, the caret ends up at the new end. */
+        const len = value?.length ?? 0;
+        const start = Math.min(captured.start, len);
+        const end = Math.min(captured.end, len);
+        element.setSelectionRange(start, end);
     }, [value]);
 
     return { ref, captureSelection };
