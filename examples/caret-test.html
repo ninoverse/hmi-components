@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en" data-theme="default" data-structure="default">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../dist/themes/constants.css" />
+    <link rel="stylesheet" href="../dist/themes/color/default.css" />
+    <link rel="stylesheet" href="../dist/themes/structure/default.css" />
+    <link rel="stylesheet" href="../dist/hmi-components.css" />
+</head>
+<body style="padding:2rem;display:flex;flex-direction:column;gap:1.5rem;">
+    <hmi-input      id="hmi-input"    value="abcdef"></hmi-input>
+    <hmi-textarea   id="hmi-textarea" value="abcdef"></hmi-textarea>
+    <hmi-password-input id="hmi-password" value="abcdef"></hmi-password-input>
+    <hmi-search-input   id="hmi-search"   value="abcdef"></hmi-search-input>
+
+    <script src="../dist/hmi-components.iife.js"></script>
+    <script>
+        /* mode controls how the host echoes the change event:
+           'echo'      → exact value back (normal async host)
+           'uppercase' → value.toUpperCase() (transform)
+           'reject'    → echo nothing (no-op; React keeps old prop)
+           'silent'    → no echo
+        */
+        window.__echoMode = 'echo';
+        window.__echoDelay = 'microtask'; // 'microtask' | 'timeout'
+
+        function wireEcho(id) {
+            const el = document.getElementById(id);
+            el.addEventListener('change', (e) => {
+                const incoming = e.detail;
+                const schedule = window.__echoDelay === 'microtask'
+                    ? queueMicrotask
+                    : (fn) => setTimeout(fn, 0);
+
+                schedule(() => {
+                    const mode = window.__echoMode;
+                    if (mode === 'echo')      el.value = incoming;
+                    if (mode === 'uppercase') el.value = incoming.toUpperCase();
+                    // 'reject' / 'silent' → do nothing; prop stays at old value
+                });
+            });
+        }
+
+        ['hmi-input','hmi-textarea','hmi-password','hmi-search'].forEach(wireEcho);
+    </script>
+</body>
+</html>
