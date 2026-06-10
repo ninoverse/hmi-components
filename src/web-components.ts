@@ -22,13 +22,35 @@ type WcType = 'string' | 'number' | 'boolean' | 'function' | 'json';
    before r2wc mounts React into it (which replaces the host's children). */
 const CAPTURED = Symbol('hmi.children');
 
+/** r2wc registers these symbols globally (`Symbol.for`), exposing its internal
+   props object and render method to subclasses. */
+const R2WC_PROPS = Symbol.for('r2wc.props');
+const R2WC_RENDER = Symbol.for('r2wc.render');
+
+/** Mirrors r2wc's camelCase prop → kebab-case attribute mapping exactly. */
+function toDashedCase(camel: string): string {
+    return camel.replace(
+        /([a-z0-9])([A-Z])/g,
+        (_match, lower: string, upper: string) =>
+            `${lower}-${upper.toLowerCase()}`,
+    );
+}
+
 interface ElementWithCapture extends HTMLElement {
     [CAPTURED]?: string;
 }
 
-/** Base element type produced by r2wc, exposing the lifecycle hook we override. */
+/** Base element type produced by r2wc, exposing the lifecycle hooks we
+   override plus its internal props object and render method. */
 interface ReactiveElement extends HTMLElement {
     connectedCallback(): void;
+    attributeChangedCallback(
+        name: string,
+        oldValue: string | null,
+        newValue: string | null,
+    ): void;
+    [R2WC_PROPS]: Record<string, unknown>;
+    [R2WC_RENDER](): void;
 }
 
 /**
@@ -78,10 +100,28 @@ function define<P extends object>(
         new (): ReactiveElement;
     };
 
+    const propNames = Object.keys(props) as Extract<keyof P, string>[];
+    const attributeToProp = new Map<string, Extract<keyof P, string>>();
+    for (const prop of propNames) attributeToProp.set(toDashedCase(prop), prop);
+
     class HmiElement extends Base {
         #captured = false;
 
         override connectedCallback(): void {
+            /* Upgrade-properties pattern: a prop set as an own property before
+               the element was defined shadows r2wc's prototype accessor and is
+               never applied — re-route it through the accessor. Function props
+               are skipped: r2wc replaces them internally with its CustomEvent
+               dispatcher, which reassignment would clobber. */
+            for (const prop of propNames) {
+                if (props[prop] === 'function') continue;
+                if (Object.hasOwn(this, prop)) {
+                    const self = this as unknown as Record<string, unknown>;
+                    const value = self[prop];
+                    delete self[prop];
+                    self[prop] = value;
+                }
+            }
             if (!this.#captured) {
                 this.#captured = true;
                 const html = this.innerHTML.trim();
@@ -90,6 +130,31 @@ function define<P extends object>(
                 }
             }
             super.connectedCallback();
+        }
+
+        override attributeChangedCallback(
+            name: string,
+            oldValue: string | null,
+            newValue: string | null,
+        ): void {
+            super.attributeChangedCallback(name, oldValue, newValue);
+            /* r2wc drops empty-string and removed attribute values, so a
+               controlled host can never clear a value. Apply them here: empty
+               string and false are real values; removal reverts the prop to
+               undefined (uncontrolled). */
+            if (newValue) return;
+            const prop = attributeToProp.get(name);
+            if (prop === undefined) return;
+            const type = props[prop];
+            this[R2WC_PROPS][prop] =
+                newValue === null
+                    ? undefined
+                    : type === 'string'
+                      ? ''
+                      : type === 'boolean'
+                        ? false
+                        : undefined;
+            this[R2WC_RENDER]();
         }
     }
 
