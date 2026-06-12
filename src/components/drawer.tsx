@@ -7,6 +7,7 @@ import {
     useRef,
 } from 'react';
 import { createPortal } from 'react-dom';
+import { type DialogAction, renderDialogActions } from './modal';
 import './styled/drawer.styled.css';
 
 export type DrawerSide = 'left' | 'right' | 'top' | 'bottom';
@@ -18,7 +19,8 @@ export type DrawerProps = HTMLAttributes<HTMLDivElement> & {
     size?: string | number;
     title?: ReactNode;
     description?: ReactNode;
-    actions?: ReactNode;
+    actions?: ReactNode | DialogAction[];
+    onAction?: (value: string) => void;
 };
 
 const toCss = (v: string | number) => (typeof v === 'number' ? `${v}px` : v);
@@ -31,6 +33,7 @@ export function Drawer({
     title,
     description,
     actions,
+    onAction,
     className,
     children,
     ...rest
@@ -102,7 +105,11 @@ export function Drawer({
                     </p>
                 )}
                 <div className="drawer__body">{children}</div>
-                {actions && <div className="drawer__actions">{actions}</div>}
+                {actions && (
+                    <div className="drawer__actions">
+                        {renderDialogActions(actions, onAction)}
+                    </div>
+                )}
             </div>
         </div>,
         document.body,

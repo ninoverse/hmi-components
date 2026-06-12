@@ -112,9 +112,12 @@ export {
     type ContextMenuProps,
 } from './components/contextMenu';
 export {
+    type DateInput,
     DatePicker,
     type DatePickerProps,
     type DateRange,
+    type DateRangeISO,
+    type DateRangeValue,
 } from './components/datePicker';
 export {
     Divider,
@@ -137,6 +140,7 @@ export {
     type EmptyStateProps,
 } from './components/emptyState';
 export {
+    type FileDescriptor,
     FileUpload,
     type FileUploadProps,
 } from './components/fileUpload';
@@ -215,6 +219,7 @@ export {
 } from './components/menu';
 export { Meter, type MeterProps } from './components/meter';
 export {
+    type DialogAction,
     Modal,
     type ModalProps,
     type ModalSize,

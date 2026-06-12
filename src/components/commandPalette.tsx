@@ -30,6 +30,10 @@ export type CommandPaletteProps = {
     commands: ReadonlyArray<CommandPaletteCommand>;
     placeholder?: string;
     emptyMessage?: ReactNode;
+    /** Fired with the chosen command's `id` when a command is committed. The
+       serializable counterpart to a per-command `onSelect`, so the selection
+       survives the Web Component boundary. */
+    onAction?: (value: string) => void;
     'aria-label'?: string;
 };
 
@@ -51,6 +55,7 @@ export function CommandPalette({
     commands,
     placeholder = 'Type a command or search…',
     emptyMessage = 'No matches',
+    onAction,
     'aria-label': ariaLabel = 'Command palette',
 }: CommandPaletteProps) {
     const [query, setQuery] = useState('');
@@ -159,6 +164,7 @@ export function CommandPalette({
 
     const commit = (cmd: CommandPaletteCommand) => {
         cmd.onSelect?.();
+        onAction?.(cmd.id);
         onOpenChange(false);
     };
 

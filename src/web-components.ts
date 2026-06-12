@@ -357,9 +357,13 @@ function registerAll(): void {
             commands: 'json',
             placeholder: 'string',
             emptyMessage: 'json',
+            onAction: 'function',
             'aria-label': 'string',
         },
-        { onOpenChange: { bubbles: true } },
+        {
+            onOpenChange: { bubbles: true },
+            onAction: { bubbles: true },
+        },
     );
     define(
         'confirm-dialog',
@@ -390,8 +394,8 @@ function registerAll(): void {
             value: 'json',
             defaultValue: 'json',
             onChange: 'function',
-            min: 'json',
-            max: 'json',
+            min: 'string',
+            max: 'string',
             placeholder: 'string',
             disabled: 'boolean',
             'aria-label': 'string',
@@ -421,8 +425,12 @@ function registerAll(): void {
             title: 'json',
             description: 'json',
             actions: 'json',
+            onAction: 'function',
         },
-        { onClose: { bubbles: true } },
+        {
+            onClose: { bubbles: true },
+            onAction: { bubbles: true },
+        },
     );
     define('empty-state', hmi.EmptyState, {
         icon: 'json',
@@ -434,8 +442,6 @@ function registerAll(): void {
         'file-upload',
         hmi.FileUpload,
         {
-            value: 'json',
-            defaultValue: 'json',
             onChange: 'function',
             accept: 'string',
             multiple: 'boolean',
@@ -590,8 +596,12 @@ function registerAll(): void {
             description: 'json',
             size: 'string',
             actions: 'json',
+            onAction: 'function',
         },
-        { onClose: { bubbles: true } },
+        {
+            onClose: { bubbles: true },
+            onAction: { bubbles: true },
+        },
     );
     define(
         'multi-input',
