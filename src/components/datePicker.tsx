@@ -2,11 +2,20 @@ import { type KeyboardEvent, useEffect, useMemo, useState } from 'react';
 import { Popover } from './popover';
 import './styled/datePicker.styled.css';
 
+/** Internal Date-pair shape used for range rendering and state. */
 export type DateRange = { start: Date; end: Date | null };
 
+/** A date accepted across the prop boundary: an ISO-8601 string (so it can
+   travel through an HTML attribute) or a live Date for the React API. */
+export type DateInput = Date | string;
+/** Range value accepted as props — each endpoint an ISO string or Date. */
+export type DateRangeValue = { start: DateInput; end: DateInput | null };
+/** Serializable range emitted by onChange (ISO-8601 strings). */
+export type DateRangeISO = { start: string; end: string | null };
+
 type CommonProps = {
-    min?: Date;
-    max?: Date;
+    min?: DateInput;
+    max?: DateInput;
     placeholder?: string;
     disabled?: boolean;
     'aria-label'?: string;
@@ -14,16 +23,16 @@ type CommonProps = {
 
 type SingleProps = CommonProps & {
     mode?: 'single';
-    value?: Date | null;
-    defaultValue?: Date;
-    onChange?: (date: Date | null) => void;
+    value?: DateInput | null;
+    defaultValue?: DateInput;
+    onChange?: (date: string | null) => void;
 };
 
 type RangeProps = CommonProps & {
     mode: 'range';
-    value?: DateRange | null;
-    defaultValue?: DateRange;
-    onChange?: (range: DateRange | null) => void;
+    value?: DateRangeValue | null;
+    defaultValue?: DateRangeValue;
+    onChange?: (range: DateRangeISO | null) => void;
 };
 
 export type DatePickerProps = SingleProps | RangeProps;
@@ -83,6 +92,20 @@ const isOutOfBounds = (d: Date, min?: Date, max?: Date) => {
     return false;
 };
 
+// Boundary helpers: parse ISO strings / Dates coming in as props into live
+// Date objects, and serialize selections back to ISO-8601 strings.
+const toDate = (v: DateInput): Date => (v instanceof Date ? v : new Date(v));
+const toDateOrNull = (v: DateInput | null | undefined): Date | null =>
+    v == null ? null : toDate(v);
+const toRange = (r: DateRangeValue | null | undefined): DateRange | null =>
+    r
+        ? { start: toDate(r.start), end: r.end == null ? null : toDate(r.end) }
+        : null;
+const rangeToISO = (r: DateRange): DateRangeISO => ({
+    start: r.start.toISOString(),
+    end: r.end ? r.end.toISOString() : null,
+});
+
 export function DatePicker(props: DatePickerProps) {
     const {
         min,
@@ -95,23 +118,32 @@ export function DatePicker(props: DatePickerProps) {
     const isRange = props.mode === 'range';
     const isControlled = props.value !== undefined;
 
-    // Single-mode state
+    // Parse the ISO/Date bounds once for comparisons below.
+    const minDate = min !== undefined ? toDate(min) : undefined;
+    const maxDate = max !== undefined ? toDate(max) : undefined;
+
+    // Single-mode state. Casts are sound because the runtime `isRange` guard
+    // selects the matching union member that TS can't narrow from a boolean.
     const [internalSingle, setInternalSingle] = useState<Date | null>(
-        !isRange ? (props.defaultValue ?? null) : null,
+        !isRange
+            ? toDateOrNull(props.defaultValue as DateInput | undefined)
+            : null,
     );
     const currentSingle = !isRange
         ? isControlled
-            ? (props.value ?? null)
+            ? toDateOrNull(props.value as DateInput | null | undefined)
             : internalSingle
         : null;
 
     // Range-mode state
     const [internalRange, setInternalRange] = useState<DateRange | null>(
-        isRange ? (props.defaultValue ?? null) : null,
+        isRange
+            ? toRange(props.defaultValue as DateRangeValue | undefined)
+            : null,
     );
     const currentRange: DateRange | null = isRange
         ? isControlled
-            ? (props.value ?? null)
+            ? toRange(props.value as DateRangeValue | null | undefined)
             : internalRange
         : null;
 
@@ -133,14 +165,14 @@ export function DatePicker(props: DatePickerProps) {
     const grid = useMemo(() => buildGrid(viewMonth), [viewMonth]);
 
     const selectSingle = (d: Date) => {
-        if (isOutOfBounds(d, min, max)) return;
+        if (isOutOfBounds(d, minDate, maxDate)) return;
         if (!isControlled) setInternalSingle(d);
-        if (!isRange) props.onChange?.(d);
+        if (!isRange) (props as SingleProps).onChange?.(d.toISOString());
         setOpen(false);
     };
 
     const selectRange = (d: Date) => {
-        if (isOutOfBounds(d, min, max)) return;
+        if (isOutOfBounds(d, minDate, maxDate)) return;
         const next: DateRange =
             !currentRange || currentRange.end !== null
                 ? { start: d, end: null }
@@ -148,7 +180,7 @@ export function DatePicker(props: DatePickerProps) {
                   ? { start: d, end: currentRange.start }
                   : { start: currentRange.start, end: d };
         if (!isControlled) setInternalRange(next);
-        if (isRange) props.onChange?.(next);
+        if (isRange) (props as RangeProps).onChange?.(rangeToISO(next));
         if (next.end !== null) setOpen(false);
     };
 
@@ -198,8 +230,8 @@ export function DatePicker(props: DatePickerProps) {
             if (isRange) setInternalRange(null);
             else setInternalSingle(null);
         }
-        if (isRange) props.onChange?.(null);
-        else props.onChange?.(null);
+        if (isRange) (props as RangeProps).onChange?.(null);
+        else (props as SingleProps).onChange?.(null);
     };
 
     const goPrevMonth = () =>
@@ -358,7 +390,7 @@ export function DatePicker(props: DatePickerProps) {
                     {grid.map((d) => {
                         const outOfMonth =
                             d.getMonth() !== viewMonth.getMonth();
-                        const disabledDay = isOutOfBounds(d, min, max);
+                        const disabledDay = isOutOfBounds(d, minDate, maxDate);
                         const selected = isSelected(d);
                         const inRange = isInRange(d);
                         const isToday = isSameDay(d, today);

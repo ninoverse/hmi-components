@@ -28,12 +28,12 @@ import {
 } from './components/commandPalette';
 import { ConfirmDialog } from './components/confirmDialog';
 import { ContextMenu } from './components/contextMenu';
-import { DatePicker, type DateRange } from './components/datePicker';
+import { DatePicker, type DateRangeISO } from './components/datePicker';
 import { Divider } from './components/divider';
 import { DonutChart } from './components/donutChart';
 import { Drawer } from './components/drawer';
 import { EmptyState } from './components/emptyState';
-import { FileUpload } from './components/fileUpload';
+import { type FileDescriptor, FileUpload } from './components/fileUpload';
 import { Flex } from './components/flex';
 import { FormControl } from './components/formControl';
 import { FunnelChart } from './components/funnelChart';
@@ -192,11 +192,11 @@ export default function App() {
     const [quantity, setQuantity] = useState<number | null>(1);
     const [age, setAge] = useState<number | null>(28);
     const [city, setCity] = useState<string | null>('paris');
-    const [pickedDate, setPickedDate] = useState<Date | null>(
-        new Date(2026, 4, 15),
+    const [pickedDate, setPickedDate] = useState<string | null>(
+        new Date(2026, 4, 15).toISOString(),
     );
-    const [pickedRange, setPickedRange] = useState<DateRange | null>(null);
-    const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
+    const [pickedRange, setPickedRange] = useState<DateRangeISO | null>(null);
+    const [uploadedFiles, setUploadedFiles] = useState<FileDescriptor[]>([]);
     const [productRating, setProductRating] = useState(3);
     const [halfRating, setHalfRating] = useState(2.5);
     const [otpCode, setOtpCode] = useState('');
@@ -3901,12 +3901,23 @@ export function Example() {
                 <h2 style={{ margin: 0, fontSize: '3rem' }}>File upload</h2>
                 <div style={{ maxWidth: '60rem' }}>
                     <FileUpload
-                        value={uploadedFiles}
                         onChange={setUploadedFiles}
                         multiple
                         hint="PNG, JPG, or PDF up to 10 MB each"
                         aria-label="Project attachments"
                     />
+                    {uploadedFiles.length > 0 && (
+                        <p
+                            style={{
+                                margin: '1rem 0 0',
+                                fontSize: '1.5rem',
+                                color: 'var(--on-surface-variant)',
+                            }}
+                        >
+                            {uploadedFiles.length} file
+                            {uploadedFiles.length === 1 ? '' : 's'} selected
+                        </p>
+                    )}
                 </div>
             </section>
             <section

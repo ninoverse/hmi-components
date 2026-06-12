@@ -1,14 +1,56 @@
 import {
     type HTMLAttributes,
+    isValidElement,
     type ReactNode,
     useEffect,
     useId,
     useRef,
 } from 'react';
 import { createPortal } from 'react-dom';
+import { Button } from './button';
 import './styled/modal.styled.css';
 
 export type ModalSize = 'medium' | 'large';
+
+/** A serializable dialog action, rendered as a Button. Crosses the Web
+   Component boundary as plain JSON, unlike a JSX action node. */
+export type DialogAction = {
+    label: string;
+    value: string;
+    variant?: 'primary' | 'secondary' | 'danger';
+};
+
+const isDialogActions = (a: unknown): a is DialogAction[] =>
+    Array.isArray(a) &&
+    a.every(
+        (x) =>
+            x != null &&
+            typeof x === 'object' &&
+            !isValidElement(x) &&
+            'label' in x &&
+            'value' in x,
+    );
+
+/** Render the `actions` prop: a serializable DialogAction[] becomes Buttons
+   that emit `onAction(value)`; any ReactNode is returned untouched so the
+   existing JSX API keeps working. */
+export function renderDialogActions(
+    actions: ReactNode | DialogAction[],
+    onAction?: (value: string) => void,
+): ReactNode {
+    if (isDialogActions(actions)) {
+        return actions.map((action) => (
+            <Button
+                key={action.value}
+                variant={action.variant ?? 'secondary'}
+                onClick={() => onAction?.(action.value)}
+            >
+                {action.label}
+            </Button>
+        ));
+    }
+    return actions as ReactNode;
+}
 
 export type ModalProps = Omit<HTMLAttributes<HTMLDivElement>, 'title'> & {
     open: boolean;
@@ -16,7 +58,8 @@ export type ModalProps = Omit<HTMLAttributes<HTMLDivElement>, 'title'> & {
     title?: ReactNode;
     description?: ReactNode;
     size?: ModalSize;
-    actions?: ReactNode;
+    actions?: ReactNode | DialogAction[];
+    onAction?: (value: string) => void;
 };
 
 export function Modal({
@@ -26,6 +69,7 @@ export function Modal({
     description,
     size = 'medium',
     actions,
+    onAction,
     className,
     children,
     ...rest
@@ -90,7 +134,11 @@ export function Modal({
                     </p>
                 )}
                 {children}
-                {actions && <div className="modal__actions">{actions}</div>}
+                {actions && (
+                    <div className="modal__actions">
+                        {renderDialogActions(actions, onAction)}
+                    </div>
+                )}
             </div>
         </div>,
         document.body,

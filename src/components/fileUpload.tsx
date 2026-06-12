@@ -7,10 +7,12 @@ import {
 } from 'react';
 import './styled/fileUpload.styled.css';
 
+/** Serializable descriptor of a selected file — safe to emit across the Web
+   Component boundary, where a raw File object cannot travel. */
+export type FileDescriptor = { name: string; size: number; type: string };
+
 export type FileUploadProps = {
-    value?: ReadonlyArray<File>;
-    defaultValue?: ReadonlyArray<File>;
-    onChange?: (files: File[]) => void;
+    onChange?: (files: FileDescriptor[]) => void;
     accept?: string;
     multiple?: boolean;
     disabled?: boolean;
@@ -29,9 +31,13 @@ const formatBytes = (bytes: number): string => {
 
 const fileKey = (f: File) => `${f.name}-${f.size}-${f.lastModified}`;
 
+const toDescriptor = (f: File): FileDescriptor => ({
+    name: f.name,
+    size: f.size,
+    type: f.type,
+});
+
 export function FileUpload({
-    value,
-    defaultValue,
     onChange,
     accept,
     multiple = false,
@@ -40,11 +46,9 @@ export function FileUpload({
     hint,
     'aria-label': ariaLabel = 'File upload',
 }: FileUploadProps) {
-    const isControlled = value !== undefined;
-    const [internal, setInternal] = useState<ReadonlyArray<File>>(
-        defaultValue ?? [],
-    );
-    const current = isControlled ? value : internal;
+    // Uncontrolled: a File cannot be reconstructed from an HTML attribute, so
+    // the component owns its selection internally and only emits descriptors.
+    const [current, setCurrent] = useState<ReadonlyArray<File>>([]);
 
     const [dragOver, setDragOver] = useState(false);
     const inputRef = useRef<HTMLInputElement | null>(null);
@@ -54,8 +58,8 @@ export function FileUpload({
     if (disabled) tokens.push('file-upload--disabled');
 
     const set = (next: File[]) => {
-        if (!isControlled) setInternal(next);
-        onChange?.(next);
+        setCurrent(next);
+        onChange?.(next.map(toDescriptor));
     };
 
     const addFiles = (incoming: FileList | null) => {
