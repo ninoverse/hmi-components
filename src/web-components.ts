@@ -163,13 +163,18 @@ function define<P extends object>(
 
 /** Define every component. Tag names mirror the kebab keys in package.json. */
 function registerAll(): void {
-    define('accordion', hmi.Accordion, {
-        items: 'json',
-        multiple: 'boolean',
-        open: 'json',
-        defaultOpen: 'json',
-        onOpenChange: 'function',
-    });
+    define(
+        'accordion',
+        hmi.Accordion,
+        {
+            items: 'json',
+            multiple: 'boolean',
+            open: 'json',
+            defaultOpen: 'json',
+            onOpenChange: 'function',
+        },
+        { onOpenChange: { bubbles: true } },
+    );
     define('alert', hmi.Alert, {
         variant: 'string',
         title: 'json',
@@ -198,14 +203,19 @@ function registerAll(): void {
         size: 'string',
     });
     define('badge', hmi.Badge, { variant: 'string', dot: 'boolean' });
-    define('banner', hmi.Banner, {
-        variant: 'string',
-        title: 'json',
-        icon: 'json',
-        action: 'json',
-        onDismiss: 'function',
-        dismissLabel: 'string',
-    });
+    define(
+        'banner',
+        hmi.Banner,
+        {
+            variant: 'string',
+            title: 'json',
+            icon: 'json',
+            action: 'json',
+            onDismiss: 'function',
+            dismissLabel: 'string',
+        },
+        { onDismiss: { bubbles: true } },
+    );
     define('bar-chart', hmi.BarChart, {
         series: 'json',
         labels: 'json',
@@ -250,17 +260,22 @@ function registerAll(): void {
         type: 'string',
     });
     define('card', hmi.Card, { variant: 'string' });
-    define('carousel', hmi.Carousel, {
-        slides: 'json',
-        index: 'number',
-        defaultIndex: 'number',
-        onIndexChange: 'function',
-        loop: 'boolean',
-        autoPlay: 'number',
-        showArrows: 'boolean',
-        showDots: 'boolean',
-        'aria-label': 'string',
-    });
+    define(
+        'carousel',
+        hmi.Carousel,
+        {
+            slides: 'json',
+            index: 'number',
+            defaultIndex: 'number',
+            onIndexChange: 'function',
+            loop: 'boolean',
+            autoPlay: 'number',
+            showArrows: 'boolean',
+            showDots: 'boolean',
+            'aria-label': 'string',
+        },
+        { onIndexChange: { bubbles: true } },
+    );
     define('cartesian-grid', hmi.CartesianGrid, {
         width: 'number',
         height: 'number',
@@ -288,65 +303,101 @@ function registerAll(): void {
         },
         { onChange: { bubbles: true } },
     );
-    define('chip', hmi.Chip, {
-        selected: 'boolean',
-        icon: 'json',
-        onSelect: 'function',
-        onClose: 'function',
-    });
+    define(
+        'chip',
+        hmi.Chip,
+        {
+            selected: 'boolean',
+            icon: 'json',
+            onSelect: 'function',
+            onClose: 'function',
+        },
+        {
+            onSelect: { bubbles: true },
+            onClose: { bubbles: true },
+        },
+    );
     define('code', hmi.Code, { block: 'boolean' });
-    define('color-picker', hmi.ColorPicker, {
-        value: 'string',
-        defaultValue: 'string',
-        onChange: 'function',
-        swatches: 'json',
-        disabled: 'boolean',
-        showInput: 'boolean',
-        'aria-label': 'string',
-    });
-    define('combobox', hmi.Combobox, {
-        value: 'string',
-        defaultValue: 'string',
-        onChange: 'function',
-        options: 'json',
-        placeholder: 'string',
-        disabled: 'boolean',
-        filterOption: 'function',
-        emptyMessage: 'json',
-        'aria-label': 'string',
-    });
-    define('command-palette', hmi.CommandPalette, {
-        open: 'boolean',
-        onOpenChange: 'function',
-        commands: 'json',
-        placeholder: 'string',
-        emptyMessage: 'json',
-        'aria-label': 'string',
-    });
-    define('confirm-dialog', hmi.ConfirmDialog, {
-        open: 'boolean',
-        onCancel: 'function',
-        onConfirm: 'function',
-        title: 'json',
-        description: 'json',
-        confirmLabel: 'json',
-        cancelLabel: 'json',
-        variant: 'string',
-        loading: 'boolean',
-        confirmDisabled: 'boolean',
-    });
+    define(
+        'color-picker',
+        hmi.ColorPicker,
+        {
+            value: 'string',
+            defaultValue: 'string',
+            onChange: 'function',
+            swatches: 'json',
+            disabled: 'boolean',
+            showInput: 'boolean',
+            'aria-label': 'string',
+        },
+        { onChange: { bubbles: true } },
+    );
+    define(
+        'combobox',
+        hmi.Combobox,
+        {
+            value: 'string',
+            defaultValue: 'string',
+            onChange: 'function',
+            options: 'json',
+            placeholder: 'string',
+            disabled: 'boolean',
+            filterOption: 'function',
+            emptyMessage: 'json',
+            'aria-label': 'string',
+        },
+        { onChange: { bubbles: true } },
+    );
+    define(
+        'command-palette',
+        hmi.CommandPalette,
+        {
+            open: 'boolean',
+            onOpenChange: 'function',
+            commands: 'json',
+            placeholder: 'string',
+            emptyMessage: 'json',
+            'aria-label': 'string',
+        },
+        { onOpenChange: { bubbles: true } },
+    );
+    define(
+        'confirm-dialog',
+        hmi.ConfirmDialog,
+        {
+            open: 'boolean',
+            onCancel: 'function',
+            onConfirm: 'function',
+            title: 'json',
+            description: 'json',
+            confirmLabel: 'json',
+            cancelLabel: 'json',
+            variant: 'string',
+            loading: 'boolean',
+            confirmDisabled: 'boolean',
+        },
+        {
+            onCancel: { bubbles: true },
+            onConfirm: { bubbles: true },
+        },
+    );
     define('context-menu', hmi.ContextMenu, { menu: 'json' });
-    define('date-picker', hmi.DatePicker, {
-        mode: 'string',
-        value: 'json',
-        defaultValue: 'json',
-        onChange: 'function',
-        min: 'json',
-        max: 'json',
-        placeholder: 'string',
-        disabled: 'boolean',
-        'aria-label': 'string',
-    });
+    define(
+        'date-picker',
+        hmi.DatePicker,
+        {
+            mode: 'string',
+            value: 'json',
+            defaultValue: 'json',
+            onChange: 'function',
+            min: 'json',
+            max: 'json',
+            placeholder: 'string',
+            disabled: 'boolean',
+            'aria-label': 'string',
+        },
+        { onChange: { bubbles: true } },
+    );
     define('divider', hmi.Divider, {
         orientation: 'string',
         align: 'string',
@@ -359,32 +410,42 @@ function registerAll(): void {
         centerLabel: 'json',
         'aria-label': 'string',
     });
-    define('drawer', hmi.Drawer, {
-        open: 'boolean',
-        onClose: 'function',
-        side: 'string',
-        size: 'string',
-        title: 'json',
-        description: 'json',
-        actions: 'json',
-    });
+    define(
+        'drawer',
+        hmi.Drawer,
+        {
+            open: 'boolean',
+            onClose: 'function',
+            side: 'string',
+            size: 'string',
+            title: 'json',
+            description: 'json',
+            actions: 'json',
+        },
+        { onClose: { bubbles: true } },
+    );
     define('empty-state', hmi.EmptyState, {
         icon: 'json',
         title: 'json',
         description: 'json',
         action: 'json',
     });
-    define('file-upload', hmi.FileUpload, {
-        value: 'json',
-        defaultValue: 'json',
-        onChange: 'function',
-        accept: 'string',
-        multiple: 'boolean',
-        disabled: 'boolean',
-        label: 'string',
-        hint: 'string',
-        'aria-label': 'string',
-    });
+    define(
+        'file-upload',
+        hmi.FileUpload,
+        {
+            value: 'json',
+            defaultValue: 'json',
+            onChange: 'function',
+            accept: 'string',
+            multiple: 'boolean',
+            disabled: 'boolean',
+            label: 'string',
+            hint: 'string',
+            'aria-label': 'string',
+        },
+        { onChange: { bubbles: true } },
+    );
     define('flex', hmi.Flex, {
         as: 'string',
         direction: 'string',
@@ -497,12 +558,17 @@ function registerAll(): void {
         href: 'string',
         target: 'string',
     });
-    define('list', hmi.List, {
-        items: 'json',
-        draggable: 'boolean',
-        onReorder: 'function',
-        renderItem: 'function',
-    });
+    define(
+        'list',
+        hmi.List,
+        {
+            items: 'json',
+            draggable: 'boolean',
+            onReorder: 'function',
+            renderItem: 'function',
+        },
+        { onReorder: { bubbles: true } },
+    );
     define('menu', hmi.Menu);
     define('meter', hmi.Meter, {
         value: 'number',
@@ -514,54 +580,82 @@ function registerAll(): void {
         label: 'json',
         showValue: 'boolean',
     });
-    define('modal', hmi.Modal, {
-        open: 'boolean',
-        onClose: 'function',
-        title: 'json',
-        description: 'json',
-        size: 'string',
-        actions: 'json',
-    });
-    define('multi-input', hmi.MultiInput, {
-        length: 'number',
-        groupSize: 'number',
-        separator: 'string',
-        value: 'string',
-        defaultValue: 'string',
-        onChange: 'function',
-        onComplete: 'function',
-        type: 'string',
-        mask: 'boolean',
-        disabled: 'boolean',
-        readOnly: 'boolean',
-        autoFocus: 'boolean',
-        autoComplete: 'string',
-        'aria-label': 'string',
-    });
-    define('navbar', hmi.Navbar, {
-        brand: 'json',
-        links: 'json',
-        current: 'string',
-        onNav: 'function',
-        right: 'json',
-        'aria-label': 'string',
-    });
-    define('number-input', hmi.NumberInput, {
-        value: 'number',
-        defaultValue: 'number',
-        min: 'number',
-        max: 'number',
-        step: 'number',
-        error: 'boolean',
-        onChange: 'function',
-        disabled: 'boolean',
-        placeholder: 'string',
-    });
-    define('pagination', hmi.Pagination, {
-        page: 'number',
-        total: 'number',
-        onChange: 'function',
-    });
+    define(
+        'modal',
+        hmi.Modal,
+        {
+            open: 'boolean',
+            onClose: 'function',
+            title: 'json',
+            description: 'json',
+            size: 'string',
+            actions: 'json',
+        },
+        { onClose: { bubbles: true } },
+    );
+    define(
+        'multi-input',
+        hmi.MultiInput,
+        {
+            length: 'number',
+            groupSize: 'number',
+            separator: 'string',
+            value: 'string',
+            defaultValue: 'string',
+            onChange: 'function',
+            onComplete: 'function',
+            type: 'string',
+            mask: 'boolean',
+            disabled: 'boolean',
+            readOnly: 'boolean',
+            autoFocus: 'boolean',
+            autoComplete: 'string',
+            'aria-label': 'string',
+        },
+        {
+            onChange: { bubbles: true },
+            onComplete: { bubbles: true },
+        },
+    );
+    define(
+        'navbar',
+        hmi.Navbar,
+        {
+            brand: 'json',
+            links: 'json',
+            current: 'string',
+            onNav: 'function',
+            right: 'json',
+            'aria-label': 'string',
+        },
+        { onNav: { bubbles: true } },
+    );
+    define(
+        'number-input',
+        hmi.NumberInput,
+        {
+            value: 'number',
+            defaultValue: 'number',
+            min: 'number',
+            max: 'number',
+            step: 'number',
+            error: 'boolean',
+            onChange: 'function',
+            disabled: 'boolean',
+            placeholder: 'string',
+        },
+        { onChange: { bubbles: true } },
+    );
+    define(
+        'pagination',
+        hmi.Pagination,
+        {
+            page: 'number',
+            total: 'number',
+            onChange: 'function',
+        },
+        { onChange: { bubbles: true } },
+    );
     define(
         'password-input',
         hmi.PasswordInput,
@@ -576,13 +670,18 @@ function registerAll(): void {
         },
         { onChange: { bubbles: true } },
     );
-    define('popover', hmi.Popover, {
-        open: 'boolean',
-        onOpenChange: 'function',
-        trigger: 'json',
-        align: 'string',
-        width: 'string',
-    });
+    define(
+        'popover',
+        hmi.Popover,
+        {
+            open: 'boolean',
+            onOpenChange: 'function',
+            trigger: 'json',
+            align: 'string',
+            width: 'string',
+        },
+        { onOpenChange: { bubbles: true } },
+    );
     define('progress', hmi.Progress, {
         value: 'number',
         indeterminate: 'boolean',
@@ -611,13 +710,18 @@ function registerAll(): void {
         },
         { onChange: { bubbles: true } },
     );
-    define('radio-group', hmi.RadioGroup, {
-        name: 'string',
-        value: 'string',
-        defaultValue: 'string',
-        options: 'json',
-        onChange: 'function',
-    });
+    define(
+        'radio-group',
+        hmi.RadioGroup,
+        {
+            name: 'string',
+            value: 'string',
+            defaultValue: 'string',
+            options: 'json',
+            onChange: 'function',
+        },
+        { onChange: { bubbles: true } },
+    );
     define('responsive-container', hmi.ResponsiveContainer, {
         height: 'number',
         aspect: 'number',
@@ -652,48 +756,68 @@ function registerAll(): void {
         },
         { onChange: { bubbles: true } },
     );
-    define('segmented-control', hmi.SegmentedControl, {
-        value: 'string',
-        defaultValue: 'string',
-        onChange: 'function',
-        options: 'json',
-        size: 'string',
-        fullWidth: 'boolean',
-        disabled: 'boolean',
-        'aria-label': 'string',
-    });
-    define('select', hmi.Select, {
-        value: 'string',
-        defaultValue: 'string',
-        onChange: 'function',
-        options: 'json',
-        placeholder: 'json',
-        align: 'string',
-        disabled: 'boolean',
-    });
-    define('sidebar', hmi.Sidebar, {
-        groups: 'json',
-        current: 'string',
-        onNav: 'function',
-        'aria-label': 'string',
-    });
+    define(
+        'segmented-control',
+        hmi.SegmentedControl,
+        {
+            value: 'string',
+            defaultValue: 'string',
+            onChange: 'function',
+            options: 'json',
+            size: 'string',
+            fullWidth: 'boolean',
+            disabled: 'boolean',
+            'aria-label': 'string',
+        },
+        { onChange: { bubbles: true } },
+    );
+    define(
+        'select',
+        hmi.Select,
+        {
+            value: 'string',
+            defaultValue: 'string',
+            onChange: 'function',
+            options: 'json',
+            placeholder: 'json',
+            align: 'string',
+            disabled: 'boolean',
+        },
+        { onChange: { bubbles: true } },
+    );
+    define(
+        'sidebar',
+        hmi.Sidebar,
+        {
+            groups: 'json',
+            current: 'string',
+            onNav: 'function',
+            'aria-label': 'string',
+        },
+        { onNav: { bubbles: true } },
+    );
     define('skeleton', hmi.Skeleton, {
         variant: 'string',
         width: 'string',
         height: 'string',
         radius: 'string',
     });
-    define('slider', hmi.Slider, {
-        value: 'number',
-        defaultValue: 'number',
-        min: 'number',
-        max: 'number',
-        step: 'number',
-        showValue: 'boolean',
-        formatValue: 'function',
-        onChange: 'function',
-        disabled: 'boolean',
-    });
+    define(
+        'slider',
+        hmi.Slider,
+        {
+            value: 'number',
+            defaultValue: 'number',
+            min: 'number',
+            max: 'number',
+            step: 'number',
+            showValue: 'boolean',
+            formatValue: 'function',
+            onChange: 'function',
+            disabled: 'boolean',
+        },
+        { onChange: { bubbles: true } },
+    );
     define('spacer', hmi.Spacer, {
         size: 'string',
         axis: 'string',
@@ -720,14 +844,19 @@ function registerAll(): void {
         delta: 'json',
         helpText: 'json',
     });
-    define('stepper', hmi.Stepper, {
-        steps: 'json',
-        current: 'string',
-        defaultCurrent: 'string',
-        onChange: 'function',
-        orientation: 'string',
-        spacing: 'string',
-    });
+    define(
+        'stepper',
+        hmi.Stepper,
+        {
+            steps: 'json',
+            current: 'string',
+            defaultCurrent: 'string',
+            onChange: 'function',
+            orientation: 'string',
+            spacing: 'string',
+        },
+        { onChange: { bubbles: true } },
+    );
     define(
         'switch',
         hmi.Switch,
@@ -748,13 +877,18 @@ function registerAll(): void {
         sortable: 'boolean',
         getRowKey: 'function',
     });
-    define('tabs', hmi.Tabs, {
-        value: 'string',
-        defaultValue: 'string',
-        onChange: 'function',
-        options: 'json',
-        variant: 'string',
-    });
+    define(
+        'tabs',
+        hmi.Tabs,
+        {
+            value: 'string',
+            defaultValue: 'string',
+            onChange: 'function',
+            options: 'json',
+            variant: 'string',
+        },
+        { onChange: { bubbles: true } },
+    );
     define('text', hmi.Text, {
         as: 'string',
         size: 'string',
@@ -785,29 +919,42 @@ function registerAll(): void {
         side: 'string',
         delay: 'number',
     });
-    define('tree', hmi.Tree, {
-        nodes: 'json',
-        expanded: 'json',
-        defaultExpanded: 'json',
-        onExpandedChange: 'function',
-        selected: 'string',
-        defaultSelected: 'string',
-        onSelect: 'function',
-        'aria-label': 'string',
-    });
-    define('value-scale-selector', hmi.ValueScaleSelector, {
-        value: 'number',
-        defaultValue: 'number',
-        onChange: 'function',
-        max: 'number',
-        allowHalf: 'boolean',
-        icon: 'json',
-        valueText: 'function',
-        readOnly: 'boolean',
-        disabled: 'boolean',
-        size: 'string',
-        'aria-label': 'string',
-    });
+    define(
+        'tree',
+        hmi.Tree,
+        {
+            nodes: 'json',
+            expanded: 'json',
+            defaultExpanded: 'json',
+            onExpandedChange: 'function',
+            selected: 'string',
+            defaultSelected: 'string',
+            onSelect: 'function',
+            'aria-label': 'string',
+        },
+        {
+            onExpandedChange: { bubbles: true },
+            onSelect: { bubbles: true },
+        },
+    );
+    define(
+        'value-scale-selector',
+        hmi.ValueScaleSelector,
+        {
+            value: 'number',
+            defaultValue: 'number',
+            onChange: 'function',
+            max: 'number',
+            allowHalf: 'boolean',
+            icon: 'json',
+            valueText: 'function',
+            readOnly: 'boolean',
+            disabled: 'boolean',
+            size: 'string',
+            'aria-label': 'string',
+        },
+        { onChange: { bubbles: true } },
+    );
     define('visually-hidden', hmi.VisuallyHidden, { as: 'string' });
 }
 
