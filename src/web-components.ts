@@ -212,7 +212,7 @@ function registerAll(): void {
     );
     define('alert', hmi.Alert, {
         variant: 'string',
-        title: 'json',
+        title: 'string',
         action: 'json',
     });
     define('area-chart', hmi.AreaChart, {
@@ -243,7 +243,7 @@ function registerAll(): void {
         hmi.Banner,
         {
             variant: 'string',
-            title: 'json',
+            title: 'string',
             icon: 'json',
             action: 'json',
             onDismiss: 'function',
@@ -261,7 +261,7 @@ function registerAll(): void {
         yTicks: 'number',
         'aria-label': 'string',
     });
-    define('blockquote', hmi.Blockquote, { cite: 'json' });
+    define('blockquote', hmi.Blockquote, { cite: 'string' });
     define('box', hmi.Box, {
         as: 'string',
         background: 'string',
@@ -271,7 +271,7 @@ function registerAll(): void {
     });
     define('breadcrumbs', hmi.Breadcrumbs, {
         items: 'json',
-        separator: 'json',
+        separator: 'string',
     });
     define('bullet-chart', hmi.BulletChart, {
         value: 'number',
@@ -321,14 +321,14 @@ function registerAll(): void {
         vertical: 'boolean',
     });
     define('chart-tooltip', hmi.ChartTooltip, {
-        title: 'json',
+        title: 'string',
         items: 'json',
     });
     define(
         'checkbox',
         hmi.Checkbox,
         {
-            label: 'json',
+            label: 'string',
             checked: 'boolean',
             defaultChecked: 'boolean',
             onChange: 'function',
@@ -378,7 +378,7 @@ function registerAll(): void {
             placeholder: 'string',
             disabled: 'boolean',
             filterOption: 'function',
-            emptyMessage: 'json',
+            emptyMessage: 'string',
             'aria-label': 'string',
         },
         { onChange: { bubbles: true } },
@@ -391,7 +391,7 @@ function registerAll(): void {
             onOpenChange: 'function',
             commands: 'json',
             placeholder: 'string',
-            emptyMessage: 'json',
+            emptyMessage: 'string',
             onAction: 'function',
             'aria-label': 'string',
         },
@@ -407,10 +407,10 @@ function registerAll(): void {
             open: 'boolean',
             onCancel: 'function',
             onConfirm: 'function',
-            title: 'json',
-            description: 'json',
-            confirmLabel: 'json',
-            cancelLabel: 'json',
+            title: 'string',
+            description: 'string',
+            confirmLabel: 'string',
+            cancelLabel: 'string',
             variant: 'string',
             loading: 'boolean',
             confirmDisabled: 'boolean',
@@ -446,7 +446,7 @@ function registerAll(): void {
         size: 'number',
         thickness: 'number',
         gap: 'number',
-        centerLabel: 'json',
+        centerLabel: 'string',
         'aria-label': 'string',
     });
     define(
@@ -457,8 +457,8 @@ function registerAll(): void {
             onClose: 'function',
             side: 'string',
             size: 'string',
-            title: 'json',
-            description: 'json',
+            title: 'string',
+            description: 'string',
             actions: 'json',
             onAction: 'function',
         },
@@ -469,8 +469,8 @@ function registerAll(): void {
     );
     define('empty-state', hmi.EmptyState, {
         icon: 'json',
-        title: 'json',
-        description: 'json',
+        title: 'string',
+        description: 'string',
         action: 'json',
     });
     define(
@@ -497,9 +497,9 @@ function registerAll(): void {
         inline: 'boolean',
     });
     define('form-control', hmi.FormControl, {
-        label: 'json',
-        hint: 'json',
-        error: 'json',
+        label: 'string',
+        hint: 'string',
+        error: 'string',
     });
     define('funnel-chart', hmi.FunnelChart, {
         stages: 'json',
@@ -518,7 +518,7 @@ function registerAll(): void {
         trackColor: 'string',
         thickness: 'number',
         size: 'number',
-        label: 'json',
+        label: 'string',
         'aria-label': 'string',
     });
     define('grid', hmi.Grid, {
@@ -618,7 +618,7 @@ function registerAll(): void {
         low: 'number',
         high: 'number',
         optimum: 'number',
-        label: 'json',
+        label: 'string',
         showValue: 'boolean',
     });
     define(
@@ -627,8 +627,8 @@ function registerAll(): void {
         {
             open: 'boolean',
             onClose: 'function',
-            title: 'json',
-            description: 'json',
+            title: 'string',
+            description: 'string',
             size: 'string',
             actions: 'json',
             onAction: 'function',
@@ -745,7 +745,7 @@ function registerAll(): void {
         'radio',
         hmi.Radio,
         {
-            label: 'json',
+            label: 'string',
             checked: 'boolean',
             defaultChecked: 'boolean',
             onChange: 'function',
@@ -824,7 +824,7 @@ function registerAll(): void {
             defaultValue: 'string',
             onChange: 'function',
             options: 'json',
-            placeholder: 'json',
+            placeholder: 'string',
             align: 'string',
             disabled: 'boolean',
         },
@@ -882,12 +882,12 @@ function registerAll(): void {
     });
     define('spinner', hmi.Spinner, { size: 'string', label: 'string' });
     define('stat', hmi.Stat, {
-        label: 'json',
-        value: 'json',
+        label: 'string',
+        value: 'string',
         icon: 'json',
         trend: 'string',
-        delta: 'json',
-        helpText: 'json',
+        delta: 'string',
+        helpText: 'string',
     });
     define(
         'stepper',
@@ -906,7 +906,7 @@ function registerAll(): void {
         'switch',
         hmi.Switch,
         {
-            label: 'json',
+            label: 'string',
             checked: 'boolean',
             defaultChecked: 'boolean',
             onChange: 'function',
@@ -960,7 +960,7 @@ function registerAll(): void {
     define('timeline', hmi.Timeline, { items: 'json' });
     define('toast', hmi.ToastHost);
     define('tooltip', hmi.Tooltip, {
-        label: 'json',
+        label: 'string',
         side: 'string',
         delay: 'number',
     });
