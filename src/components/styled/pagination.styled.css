@@ -5,6 +5,8 @@
 .pager {
     display: inline-flex;
     align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: var(--space-1);
 }
 

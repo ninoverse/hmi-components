@@ -4,7 +4,7 @@
    180deg for descending). */
 
 .table-wrap {
-    overflow: hidden;
+    overflow-x: auto;
     background: var(--surface-container-high);
     border: 0.125rem solid var(--outline-variant);
     border-radius: var(--corner-tl) var(--corner-tr) var(--corner-br)

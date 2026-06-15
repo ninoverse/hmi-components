@@ -20,8 +20,9 @@
     display: flex;
     align-items: flex-start;
     gap: var(--space-6);
-    min-width: 40rem;
-    max-width: 47.5rem;
+    min-width: 0;
+    width: 40rem;
+    max-width: min(47.5rem, calc(100vw - 6rem));
     padding: var(--space-7) var(--space-8);
     background: var(--surface-container-high);
     color: var(--on-background);
