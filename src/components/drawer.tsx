@@ -7,6 +7,7 @@ import {
     useRef,
 } from 'react';
 import { createPortal } from 'react-dom';
+import { usePortalTarget } from '../lib/portalTarget';
 import { type DialogAction, renderDialogActions } from './modal';
 import './styled/drawer.styled.css';
 
@@ -40,6 +41,7 @@ export function Drawer({
 }: DrawerProps) {
     const titleId = useId();
     const descId = useId();
+    const portalTarget = usePortalTarget();
     const scrimRef = useRef<HTMLDivElement | null>(null);
     const panelRef = useRef<HTMLDivElement | null>(null);
     const previouslyFocused = useRef<HTMLElement | null>(null);
@@ -112,6 +114,6 @@ export function Drawer({
                 )}
             </div>
         </div>,
-        document.body,
+        portalTarget ?? document.body,
     );
 }

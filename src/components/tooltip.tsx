@@ -1,12 +1,5 @@
 import {
-    Children,
-    cloneElement,
-    type FocusEvent,
-    isValidElement,
-    type MouseEvent,
-    type ReactElement,
     type ReactNode,
-    type Ref,
     useCallback,
     useEffect,
     useId,
@@ -14,24 +7,16 @@ import {
     useState,
 } from 'react';
 import { createPortal } from 'react-dom';
+import { renderTriggerAnchor } from '../lib/triggerAnchor';
 import './styled/tooltip.styled.css';
 
 export type TooltipSide = 'top' | 'bottom' | 'left' | 'right';
-
-type TriggerProps = {
-    ref?: Ref<HTMLElement> | undefined;
-    onMouseEnter?: ((event: MouseEvent<HTMLElement>) => void) | undefined;
-    onMouseLeave?: ((event: MouseEvent<HTMLElement>) => void) | undefined;
-    onFocus?: ((event: FocusEvent<HTMLElement>) => void) | undefined;
-    onBlur?: ((event: FocusEvent<HTMLElement>) => void) | undefined;
-    'aria-describedby'?: string | undefined;
-};
 
 export type TooltipProps = {
     label: ReactNode;
     side?: TooltipSide;
     delay?: number;
-    children: ReactElement<TriggerProps>;
+    children: ReactNode;
 };
 
 type Position = { x: number; y: number; transform: string };
@@ -103,31 +88,18 @@ export function Tooltip({
         setShow(false);
     }, []);
 
-    const only = Children.only(children);
-    if (!isValidElement(only)) return null;
-
-    const original = only.props;
-
-    const trigger = cloneElement<TriggerProps>(only, {
-        ref: triggerRef,
-        onMouseEnter: (event: MouseEvent<HTMLElement>) => {
-            original.onMouseEnter?.(event);
-            open();
+    const trigger = renderTriggerAnchor(
+        children,
+        triggerRef,
+        {
+            onMouseEnter: open,
+            onMouseLeave: close,
+            onFocus: open,
+            onBlur: close,
+            'aria-describedby': show ? id : undefined,
         },
-        onMouseLeave: (event: MouseEvent<HTMLElement>) => {
-            original.onMouseLeave?.(event);
-            close();
-        },
-        onFocus: (event: FocusEvent<HTMLElement>) => {
-            original.onFocus?.(event);
-            open();
-        },
-        onBlur: (event: FocusEvent<HTMLElement>) => {
-            original.onBlur?.(event);
-            close();
-        },
-        'aria-describedby': show ? id : original['aria-describedby'],
-    });
+        'tooltip-trigger',
+    );
 
     return (
         <>

@@ -7,6 +7,7 @@ import {
     useRef,
 } from 'react';
 import { createPortal } from 'react-dom';
+import { usePortalTarget } from '../lib/portalTarget';
 import { Button } from './button';
 import './styled/modal.styled.css';
 
@@ -76,6 +77,7 @@ export function Modal({
 }: ModalProps) {
     const titleId = useId();
     const descId = useId();
+    const portalTarget = usePortalTarget();
     const scrimRef = useRef<HTMLDivElement | null>(null);
     const modalRef = useRef<HTMLDivElement | null>(null);
     const previouslyFocused = useRef<HTMLElement | null>(null);
@@ -141,6 +143,6 @@ export function Modal({
                 )}
             </div>
         </div>,
-        document.body,
+        portalTarget ?? document.body,
     );
 }

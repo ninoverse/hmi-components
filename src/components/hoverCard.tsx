@@ -1,33 +1,20 @@
 import {
-    Children,
-    cloneElement,
-    type FocusEvent,
-    isValidElement,
-    type MouseEvent,
-    type ReactElement,
     type ReactNode,
-    type Ref,
     useCallback,
     useEffect,
     useRef,
     useState,
 } from 'react';
 import { createPortal } from 'react-dom';
+import { usePortalTarget } from '../lib/portalTarget';
+import { renderTriggerAnchor } from '../lib/triggerAnchor';
 import './styled/hoverCard.styled.css';
 
 export type HoverCardSide = 'top' | 'bottom' | 'left' | 'right';
 export type HoverCardAlign = 'start' | 'center' | 'end';
 
-type TriggerProps = {
-    ref?: Ref<HTMLElement> | undefined;
-    onMouseEnter?: ((event: MouseEvent<HTMLElement>) => void) | undefined;
-    onMouseLeave?: ((event: MouseEvent<HTMLElement>) => void) | undefined;
-    onFocus?: ((event: FocusEvent<HTMLElement>) => void) | undefined;
-    onBlur?: ((event: FocusEvent<HTMLElement>) => void) | undefined;
-};
-
 export type HoverCardProps = {
-    trigger: ReactElement<TriggerProps>;
+    trigger: ReactNode;
     children: ReactNode;
     side?: HoverCardSide;
     align?: HoverCardAlign;
@@ -54,6 +41,7 @@ export function HoverCard({
     closeDelay = 150,
     width,
 }: HoverCardProps) {
+    const portalTarget = usePortalTarget();
     const triggerRef = useRef<HTMLElement | null>(null);
     const timer = useRef<number | null>(null);
     const [show, setShow] = useState(false);
@@ -141,29 +129,17 @@ export function HoverCard({
         };
     }, [show, place]);
 
-    const only = Children.only(trigger);
-    if (!isValidElement(only)) return null;
-
-    const original = only.props;
-    const triggerEl = cloneElement<TriggerProps>(only, {
-        ref: triggerRef,
-        onMouseEnter: (event: MouseEvent<HTMLElement>) => {
-            original.onMouseEnter?.(event);
-            open();
+    const triggerEl = renderTriggerAnchor(
+        trigger,
+        triggerRef,
+        {
+            onMouseEnter: open,
+            onMouseLeave: close,
+            onFocus: open,
+            onBlur: close,
         },
-        onMouseLeave: (event: MouseEvent<HTMLElement>) => {
-            original.onMouseLeave?.(event);
-            close();
-        },
-        onFocus: (event: FocusEvent<HTMLElement>) => {
-            original.onFocus?.(event);
-            open();
-        },
-        onBlur: (event: FocusEvent<HTMLElement>) => {
-            original.onBlur?.(event);
-            close();
-        },
-    });
+        'hover-card-trigger',
+    );
 
     return (
         <>
@@ -190,7 +166,7 @@ export function HoverCard({
                             {children}
                         </div>
                     </div>,
-                    document.body,
+                    portalTarget ?? document.body,
                 )}
         </>
     );

@@ -1,9 +1,5 @@
 import {
-    Children,
-    cloneElement,
-    isValidElement,
     type MouseEvent,
-    type ReactElement,
     type ReactNode,
     useEffect,
     useLayoutEffect,
@@ -11,20 +7,20 @@ import {
     useState,
 } from 'react';
 import { createPortal } from 'react-dom';
+import { usePortalTarget } from '../lib/portalTarget';
+import { renderTriggerAnchor } from '../lib/triggerAnchor';
 import './styled/contextMenu.styled.css';
 
-type TriggerProps = {
-    onContextMenu?: ((event: MouseEvent<HTMLElement>) => void) | undefined;
-};
-
 export type ContextMenuProps = {
-    children: ReactElement<TriggerProps>;
+    children: ReactNode;
     menu: ReactNode;
 };
 
 type Coords = { x: number; y: number };
 
 export function ContextMenu({ children, menu }: ContextMenuProps) {
+    const portalTarget = usePortalTarget();
+    const triggerRef = useRef<HTMLElement | null>(null);
     const menuRef = useRef<HTMLDivElement | null>(null);
     const [open, setOpen] = useState(false);
     const [coords, setCoords] = useState<Coords>({ x: 0, y: 0 });
@@ -76,18 +72,18 @@ export function ContextMenu({ children, menu }: ContextMenuProps) {
         };
     }, [open]);
 
-    const only = Children.only(children);
-    if (!isValidElement(only)) return null;
-
-    const original = only.props;
-    const triggerEl = cloneElement<TriggerProps>(only, {
-        onContextMenu: (event: MouseEvent<HTMLElement>) => {
-            original.onContextMenu?.(event);
-            event.preventDefault();
-            setCoords({ x: event.clientX, y: event.clientY });
-            setOpen(true);
+    const triggerEl = renderTriggerAnchor(
+        children,
+        triggerRef,
+        {
+            onContextMenu: (event: MouseEvent<HTMLElement>) => {
+                event.preventDefault();
+                setCoords({ x: event.clientX, y: event.clientY });
+                setOpen(true);
+            },
         },
-    });
+        'context-menu-trigger',
+    );
 
     return (
         <>
@@ -102,7 +98,7 @@ export function ContextMenu({ children, menu }: ContextMenuProps) {
                     >
                         {menu}
                     </div>,
-                    document.body,
+                    portalTarget ?? document.body,
                 )}
         </>
     );

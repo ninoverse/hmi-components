@@ -4,6 +4,13 @@
    transform set from JS (combining side + align). Unlike Tooltip, the
    card is interactive, so the anchor keeps pointer events. */
 
+/* Fallback anchor box wrapping a non-element trigger (e.g. slotted live nodes
+   across the Web Component boundary): inline-block so it has a layout box for
+   getBoundingClientRect and can receive pointer/focus events. */
+.hover-card-trigger {
+    display: inline-block;
+}
+
 .hover-card-anchor {
     position: absolute;
     z-index: 1000;

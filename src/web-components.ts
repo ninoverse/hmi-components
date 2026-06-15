@@ -11,15 +11,22 @@ import {
     type ComponentType,
     createElement,
     type FunctionComponent,
+    type ReactElement,
+    useLayoutEffect,
+    useRef,
 } from 'react';
 import './globals.css';
 import * as hmi from './index';
+import { HostElementContext } from './lib/portalTarget';
 
 /** r2wc attribute-coercion types we use (a subset of r2wc's transforms). */
 type WcType = 'string' | 'number' | 'boolean' | 'function' | 'json';
 
-/** Symbol used to stash author-provided light-DOM markup on the host element
-   before r2wc mounts React into it (which replaces the host's children). */
+/** Symbol used to stash the host element's live light-DOM child nodes before
+   r2wc mounts React into it (which detaches the host's children). Real node
+   references — not a parsed HTML string — so interactive children keep their
+   live properties (`value`, `checked`), event listeners, and framework
+   bindings instead of being recreated. */
 const CAPTURED = Symbol('hmi.children');
 
 /** r2wc registers these symbols globally (`Symbol.for`), exposing its internal
@@ -37,7 +44,29 @@ function toDashedCase(camel: string): string {
 }
 
 interface ElementWithCapture extends HTMLElement {
-    [CAPTURED]?: string;
+    [CAPTURED]?: Node[];
+}
+
+/**
+ * Render captured live light-DOM nodes by physically moving them into the React
+ * tree via `appendChild` (which relocates rather than clones), preserving their
+ * identity, properties, listeners, and bindings. The wrapper uses
+ * `display: contents` so it adds no layout box. The cleanup detaches the nodes
+ * so a remount (e.g. React StrictMode) can re-append the same references.
+ */
+function SlottedChildren({ nodes }: { nodes: Node[] }): ReactElement {
+    const ref = useRef<HTMLSpanElement | null>(null);
+    useLayoutEffect(() => {
+        const host = ref.current;
+        if (!host) return;
+        for (const node of nodes) host.appendChild(node);
+        return () => {
+            for (const node of nodes) {
+                if (node.parentNode === host) host.removeChild(node);
+            }
+        };
+    }, [nodes]);
+    return createElement('span', { style: { display: 'contents' }, ref });
 }
 
 /** Base element type produced by r2wc, exposing the lifecycle hooks we
@@ -54,11 +83,10 @@ interface ReactiveElement extends HTMLElement {
 }
 
 /**
- * Wrap a React component so the host element's initial markup (captured before
- * r2wc takes over the container) is rendered as React `children`. r2wc passes
- * the host element to the component as the `container` prop, which we read the
- * stashed markup from. Without this, child content authored in HTML would be
- * discarded when React mounts into the host.
+ * Wrap a React component so the host element's initial light-DOM children
+ * (captured as live nodes before r2wc takes over the container) are projected
+ * back into the React tree, and so descendants can discover the host element
+ * for portal routing. r2wc passes the host element as the `container` prop.
  */
 function withChildren<P extends object>(
     Component: ComponentType<P>,
@@ -67,15 +95,16 @@ function withChildren<P extends object>(
         const { container, ...rest } = props as P & {
             container?: ElementWithCapture;
         };
-        const html = container ? container[CAPTURED] : undefined;
-        const children = html
-            ? createElement('span', {
-                  style: { display: 'contents' },
-                  // biome-ignore lint/security/noDangerouslySetInnerHtml: reproduces the host element's own author-provided light-DOM markup
-                  dangerouslySetInnerHTML: { __html: html },
-              })
-            : undefined;
-        return createElement(Component, rest as P, children);
+        const nodes = container ? container[CAPTURED] : undefined;
+        const children =
+            nodes && nodes.length > 0
+                ? createElement(SlottedChildren, { nodes })
+                : undefined;
+        return createElement(
+            HostElementContext.Provider,
+            { value: container ?? null },
+            createElement(Component, rest as P, children),
+        );
     };
 }
 
@@ -124,9 +153,15 @@ function define<P extends object>(
             }
             if (!this.#captured) {
                 this.#captured = true;
-                const html = this.innerHTML.trim();
-                if (html) {
-                    (this as ElementWithCapture)[CAPTURED] = html;
+                if (this.childNodes.length > 0) {
+                    /* Hold live references to the author's child nodes. r2wc's
+                       mount (in super.connectedCallback) detaches them from the
+                       host, but the nodes — with their properties, listeners,
+                       and bindings — survive and are re-projected by
+                       SlottedChildren. */
+                    (this as ElementWithCapture)[CAPTURED] = Array.from(
+                        this.childNodes,
+                    );
                 }
             }
             super.connectedCallback();

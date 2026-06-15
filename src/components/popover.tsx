@@ -1,33 +1,22 @@
 import {
-    Children,
     type CSSProperties,
-    cloneElement,
-    isValidElement,
-    type MouseEvent,
-    type ReactElement,
     type ReactNode,
-    type Ref,
     useEffect,
     useLayoutEffect,
     useRef,
     useState,
 } from 'react';
 import { createPortal } from 'react-dom';
+import { usePortalTarget } from '../lib/portalTarget';
+import { renderTriggerAnchor } from '../lib/triggerAnchor';
 import './styled/popover.styled.css';
 
 export type PopoverAlign = 'start' | 'end';
 
-type TriggerProps = {
-    ref?: Ref<HTMLElement> | undefined;
-    onClick?: ((event: MouseEvent<HTMLElement>) => void) | undefined;
-    'aria-expanded'?: boolean | undefined;
-    'aria-haspopup'?: boolean | undefined;
-};
-
 export type PopoverProps = {
     open: boolean;
     onOpenChange: (open: boolean) => void;
-    trigger: ReactElement<TriggerProps>;
+    trigger: ReactNode;
     children: ReactNode;
     align?: PopoverAlign;
     width?: number | string;
@@ -48,6 +37,7 @@ export function Popover({
     align = 'start',
     width,
 }: PopoverProps) {
+    const portalTarget = usePortalTarget();
     const anchorRef = useRef<HTMLElement | null>(null);
     const popRef = useRef<HTMLDivElement | null>(null);
     const [pos, setPos] = useState<AnchorPosition>({
@@ -105,19 +95,16 @@ export function Popover({
         };
     }, [open, onOpenChange]);
 
-    const only = Children.only(trigger);
-    if (!isValidElement(only)) return null;
-
-    const original = only.props;
-    const triggerEl = cloneElement<TriggerProps>(only, {
-        ref: anchorRef,
-        onClick: (event: MouseEvent<HTMLElement>) => {
-            original.onClick?.(event);
-            onOpenChange(!open);
+    const triggerEl = renderTriggerAnchor(
+        trigger,
+        anchorRef,
+        {
+            onClick: () => onOpenChange(!open),
+            'aria-expanded': open,
+            'aria-haspopup': true,
         },
-        'aria-expanded': open,
-        'aria-haspopup': true,
-    });
+        'popover-trigger',
+    );
 
     const style: CSSProperties = {
         top: pos.top,
@@ -139,7 +126,7 @@ export function Popover({
                     >
                         {children}
                     </div>,
-                    document.body,
+                    portalTarget ?? document.body,
                 )}
         </>
     );
