@@ -4,6 +4,13 @@
    from JS. Arrow is a 45deg-rotated square pinned to the opposite
    edge of the chosen side. */
 
+/* Fallback anchor box wrapping a non-element trigger (e.g. slotted live nodes
+   across the Web Component boundary): inline-block so it has a layout box for
+   getBoundingClientRect and can receive pointer/focus events. */
+.tooltip-trigger {
+    display: inline-block;
+}
+
 .tooltip-anchor {
     position: absolute;
     z-index: 1000;

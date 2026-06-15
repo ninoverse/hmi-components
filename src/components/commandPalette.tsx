@@ -9,6 +9,7 @@ import {
     useState,
 } from 'react';
 import { createPortal } from 'react-dom';
+import { usePortalTarget } from '../lib/portalTarget';
 import './styled/commandPalette.styled.css';
 
 const EXIT_DURATION_MS = 310;
@@ -58,6 +59,7 @@ export function CommandPalette({
     onAction,
     'aria-label': ariaLabel = 'Command palette',
 }: CommandPaletteProps) {
+    const portalTarget = usePortalTarget();
     const [query, setQuery] = useState('');
     const [highlight, setHighlight] = useState(0);
     const [mounted, setMounted] = useState(false);
@@ -314,6 +316,6 @@ export function CommandPalette({
                 </div>
             </div>
         </div>,
-        document.body,
+        portalTarget ?? document.body,
     );
 }

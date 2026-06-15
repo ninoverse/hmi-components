@@ -3,6 +3,13 @@
    edge, end to its right). Min-width defaults to the trigger's width
    so dropdowns line up cleanly. */
 
+/* Fallback anchor box wrapping a non-element trigger (e.g. slotted live nodes
+   across the Web Component boundary): inline-block so it has a layout box for
+   getBoundingClientRect and can receive pointer events. */
+.popover-trigger {
+    display: inline-block;
+}
+
 .popover {
     position: absolute;
     z-index: 1000;
