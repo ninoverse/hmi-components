@@ -12,7 +12,7 @@ export type ProgressProps = HTMLAttributes<HTMLDivElement> & {
 
 /**
  * Linear progress bar for a known or indeterminate task. For a scalar
- * measurement within a range, use {@link Meter} instead.
+ * measurement within a range, use `Meter` instead.
  *
  * @example
  * <Progress value={64} label="Uploading" />

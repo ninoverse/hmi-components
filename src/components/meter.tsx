@@ -42,7 +42,7 @@ function resolveLevel(
 /**
  * Scalar measurement bar within a known range (e.g. disk usage). Colour
  * reflects quality, mirroring the native `<meter>` algorithm via
- * `low`/`high`/`optimum`. For task progress, use {@link Progress} instead.
+ * `low`/`high`/`optimum`. For task progress, use `Progress` instead.
  *
  * @example
  * <Meter value={0.8} low={0.3} high={0.7} optimum={0.2} label="Disk" showValue />

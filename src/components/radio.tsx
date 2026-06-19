@@ -16,7 +16,7 @@ export type RadioProps = Omit<
 };
 
 /**
- * Single labelled radio button. Usually composed via {@link RadioGroup}; share
+ * Single labelled radio button. Usually composed via `RadioGroup`; share
  * a `name` to make radios mutually exclusive.
  *
  * @example

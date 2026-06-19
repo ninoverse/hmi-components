@@ -5,7 +5,7 @@ export type MenuProps = HTMLAttributes<HTMLDivElement>;
 
 /**
  * Menu container holding {@link MenuItem}, {@link MenuSeparator} and
- * {@link MenuLabel} children. Pair with {@link Popover}/{@link ContextMenu} for
+ * {@link MenuLabel} children. Pair with `Popover`/`ContextMenu` for
  * dropdown/right-click menus.
  *
  * @example
