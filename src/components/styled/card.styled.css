@@ -32,3 +32,10 @@
         var(--outline-variant)
     );
 }
+
+/* Active / selected — lifts the card off the page. Token-driven, so it is a
+   normal raised shadow in most structures and the flat accent offset under
+   Field Journal. Placed last so an active+flat card still lifts. */
+.card--active {
+    box-shadow: var(--elevation-3);
+}

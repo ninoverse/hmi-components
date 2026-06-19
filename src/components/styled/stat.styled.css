@@ -82,3 +82,10 @@
     font-size: 1.5rem;
     color: var(--on-surface-variant);
 }
+
+/* Field Journal — the derived value sits below a dashed rule. */
+[data-structure="journal"] .stat__footer {
+    margin-top: var(--space-2);
+    padding-top: var(--space-3);
+    border-top: 0.125rem dashed var(--outline-variant);
+}

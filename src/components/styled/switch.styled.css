@@ -83,3 +83,8 @@
 .switch__label {
     line-height: 1.4;
 }
+
+/* Field Journal — flat single plane: drop the thumb's blurred shadow. */
+[data-structure="journal"] .switch__thumb {
+    box-shadow: none;
+}
