@@ -11,13 +11,15 @@ export type HeatmapProps = {
     color?: string;
     /** Override the value range; defaults to the data extent. */
     min?: number;
+    /** Upper bound of the value range. Defaults to the data max. */
     max?: number;
-    /** Cell edge length in px. */
+    /** Cell edge length in px. @default 40 */
     cellSize?: number;
-    /** Gap between cells in px. */
+    /** Gap between cells in px. @default 4 */
     gap?: number;
-    /** Print each cell's value at its centre. */
+    /** Print each cell's value at its centre. @default false */
     showValues?: boolean;
+    /** Accessible name for the chart. @default 'Heatmap' */
     'aria-label'?: string;
 };
 

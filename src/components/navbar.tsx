@@ -2,19 +2,35 @@ import { type HTMLAttributes, type ReactNode, useId, useState } from 'react';
 import './styled/navbar.styled.css';
 
 export type NavbarLink<T extends string = string> = {
+    /** Unique link value, emitted via `onNav` and matched against `current`. */
     value: T;
+    /** Visible link text. */
     label: ReactNode;
+    /** Link target; when omitted, navigation is handled via `onNav` only. */
     href?: string;
 };
 
 export type NavbarProps<T extends string = string> =
     HTMLAttributes<HTMLElement> & {
+        /** Brand slot; a string renders a generated monogram + label. */
         brand?: ReactNode;
+        /** Navigation links shown in the (collapsible) menu. */
         links?: ReadonlyArray<NavbarLink<T>>;
+        /** Value of the active link, marked `aria-current="page"`. */
         current?: T;
+        /** Fires with a link's `value` when it is activated. */
         onNav?: (value: T) => void;
+        /** Trailing slot (e.g. a CTA button or account menu). */
         right?: ReactNode;
     };
+
+/**
+ * Responsive top navigation bar with a brand, links, an active state and a
+ * trailing slot. Collapses behind a menu toggle on narrow viewports.
+ *
+ * @example
+ * <Navbar brand="Ninoverse" links={links} current={tab} onNav={setTab} />
+ */
 
 const MenuIcon = () => (
     <svg

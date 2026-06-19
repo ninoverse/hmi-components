@@ -14,21 +14,34 @@ import { createPortal } from 'react-dom';
 import './styled/combobox.styled.css';
 
 export type ComboboxOption<T extends string = string> = {
+    /** Unique value committed on selection. */
     value: T;
+    /** Text shown in the input and option row, and matched while filtering. */
     label: string;
+    /** Optional secondary line under the label. */
     description?: ReactNode;
+    /** Prevent selecting this option. @default false */
     disabled?: boolean;
 };
 
 export type ComboboxProps<T extends string = string> = {
+    /** Controlled selected value, or `null` for none. Provide with `onChange`. */
     value?: T | null;
+    /** Initial selected value when uncontrolled. */
     defaultValue?: T;
+    /** Fires with the new value (or `null` when cleared). */
     onChange?: (value: T | null) => void;
+    /** Selectable options. */
     options: ReadonlyArray<ComboboxOption<T>>;
+    /** Input placeholder. @default 'Search…' */
     placeholder?: string;
+    /** Disable the input. @default false */
     disabled?: boolean;
+    /** Predicate for filtering options by query. Defaults to case-insensitive label match. */
     filterOption?: (option: ComboboxOption<T>, query: string) => boolean;
+    /** Content shown when no option matches. @default 'No matches' */
     emptyMessage?: ReactNode;
+    /** Accessible label for the input. @default 'Combobox' */
     'aria-label'?: string;
 };
 
@@ -37,6 +50,13 @@ const defaultFilter = <T extends string>(
     query: string,
 ) => opt.label.toLowerCase().includes(query.toLowerCase());
 
+/**
+ * Editable single-select with type-ahead filtering, keyboard navigation and a
+ * portalled listbox. Works controlled or uncontrolled.
+ *
+ * @example
+ * <Combobox options={cities} onChange={setCity} placeholder="City" />
+ */
 export function Combobox<T extends string = string>({
     value,
     defaultValue,

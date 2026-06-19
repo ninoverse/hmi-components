@@ -1,22 +1,28 @@
 import './styled/funnelChart.styled.css';
 
 export type FunnelChartStage = {
+    /** Stage name shown in the label column. */
     label: string;
+    /** Stage magnitude; sets the band width relative to the largest stage. */
     value: number;
     /** Stage colour. Defaults to a palette entry. */
     color?: string;
 };
 
 export type FunnelChartProps = {
+    /** Ordered stages, top (widest) to bottom. */
     stages: ReadonlyArray<FunnelChartStage>;
+    /** SVG width in px. @default 500 */
     width?: number;
+    /** SVG height in px. @default 280 */
     height?: number;
-    /** Vertical gap between stage bands in px. */
+    /** Vertical gap between stage bands in px. @default 4 */
     gap?: number;
-    /** Width reserved for the right-hand label column in px. */
+    /** Width reserved for the right-hand label column in px. @default 180 */
     labelWidth?: number;
-    /** Append each stage's value and share of the first stage to its label. */
+    /** Append each stage's value and share of the first stage to its label. @default false */
     showValues?: boolean;
+    /** Accessible name for the chart. @default 'Funnel chart' */
     'aria-label'?: string;
 };
 

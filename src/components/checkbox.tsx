@@ -5,12 +5,23 @@ export type CheckboxProps = Omit<
     ComponentPropsWithRef<'input'>,
     'type' | 'checked' | 'defaultChecked' | 'onChange'
 > & {
+    /** Text shown beside the checkbox. */
     label?: ReactNode;
+    /** Controlled checked state. Provide with `onChange`. */
     checked?: boolean;
+    /** Initial checked state when uncontrolled. */
     defaultChecked?: boolean;
+    /** Fires with the new checked state on toggle. */
     onChange?: (checked: boolean) => void;
 };
 
+/**
+ * Labelled checkbox. Forwards native `<input>` props; `onChange` is simplified
+ * to receive the boolean checked state.
+ *
+ * @example
+ * <Checkbox label="Subscribe" defaultChecked onChange={setOn} />
+ */
 export function Checkbox({
     label,
     className,

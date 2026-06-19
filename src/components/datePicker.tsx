@@ -14,24 +14,37 @@ export type DateRangeValue = { start: DateInput; end: DateInput | null };
 export type DateRangeISO = { start: string; end: string | null };
 
 type CommonProps = {
+    /** Earliest selectable date (ISO string or Date). */
     min?: DateInput;
+    /** Latest selectable date (ISO string or Date). */
     max?: DateInput;
+    /** Trigger text shown when nothing is selected. @default 'Pick a date' */
     placeholder?: string;
+    /** Disable the trigger. @default false */
     disabled?: boolean;
+    /** Accessible label for the trigger. @default 'Date picker' */
     'aria-label'?: string;
 };
 
 type SingleProps = CommonProps & {
+    /** Select a single date. @default 'single' */
     mode?: 'single';
+    /** Controlled value (ISO string or Date), or `null`. Provide with `onChange`. */
     value?: DateInput | null;
+    /** Initial value when uncontrolled. */
     defaultValue?: DateInput;
+    /** Fires with the selected date as an ISO-8601 string, or `null` when cleared. */
     onChange?: (date: string | null) => void;
 };
 
 type RangeProps = CommonProps & {
+    /** Select a start/end date range. */
     mode: 'range';
+    /** Controlled range value, or `null`. Provide with `onChange`. */
     value?: DateRangeValue | null;
+    /** Initial range when uncontrolled. */
     defaultValue?: DateRangeValue;
+    /** Fires with the selected range as ISO-8601 strings, or `null` when cleared. */
     onChange?: (range: DateRangeISO | null) => void;
 };
 
@@ -106,6 +119,16 @@ const rangeToISO = (r: DateRange): DateRangeISO => ({
     end: r.end ? r.end.toISOString() : null,
 });
 
+/**
+ * Calendar date picker in a popover, supporting single-date or start/end range
+ * selection, min/max bounds, and full keyboard navigation. Accepts ISO strings
+ * or `Date`s and emits ISO-8601 strings (Web Component-safe). Works controlled
+ * or uncontrolled.
+ *
+ * @example
+ * <DatePicker onChange={setDate} />
+ * <DatePicker mode="range" onChange={setRange} />
+ */
 export function DatePicker(props: DatePickerProps) {
     const {
         min,

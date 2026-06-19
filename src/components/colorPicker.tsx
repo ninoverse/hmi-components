@@ -3,12 +3,19 @@ import { Popover } from './popover';
 import './styled/colorPicker.styled.css';
 
 export type ColorPickerProps = {
+    /** Controlled hex value (e.g. `'#e87a5d'`). Provide with `onChange`. */
     value?: string;
+    /** Initial hex value when uncontrolled. @default '#e87a5d' */
     defaultValue?: string;
+    /** Fires with the new hex value on swatch/input/native change. */
     onChange?: (value: string) => void;
+    /** Preset swatch colours shown in the panel. */
     swatches?: string[];
+    /** Disable the trigger. @default false */
     disabled?: boolean;
+    /** Show the hex + native colour inputs below the swatches. @default true */
     showInput?: boolean;
+    /** Accessible label for the trigger. @default 'Choose color' */
     'aria-label'?: string;
 };
 
@@ -25,6 +32,13 @@ const DEFAULT_SWATCHES = [
 
 const HEX_PATTERN = /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/;
 
+/**
+ * Popover colour picker with preset swatches plus optional hex and native
+ * colour inputs. Works controlled or uncontrolled.
+ *
+ * @example
+ * <ColorPicker defaultValue="#5c9a6a" onChange={setColor} />
+ */
 export function ColorPicker({
     value,
     defaultValue = '#e87a5d',

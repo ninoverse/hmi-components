@@ -9,17 +9,30 @@ export type TimelineColor =
     | 'error';
 
 export type TimelineItem = {
+    /** Event title. */
     title: ReactNode;
+    /** Optional supporting text under the title. */
     description?: ReactNode;
+    /** Optional timestamp shown beside the title. */
     time?: ReactNode;
+    /** Optional icon shown in the marker. */
     icon?: ReactNode;
+    /** Marker colour. @default 'default' */
     color?: TimelineColor;
 };
 
 export type TimelineProps = HTMLAttributes<HTMLOListElement> & {
+    /** Events in chronological order. */
     items: ReadonlyArray<TimelineItem>;
 };
 
+/**
+ * Vertical timeline of events, each with a colour-coded marker, title and
+ * optional time/description.
+ *
+ * @example
+ * <Timeline items={[{ title: 'Deployed', time: '2m ago', color: 'success' }]} />
+ */
 export function Timeline({ items, className, ...rest }: TimelineProps) {
     const tokens: string[] = ['timeline'];
     if (className) tokens.push(className);

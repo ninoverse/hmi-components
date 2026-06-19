@@ -1,6 +1,14 @@
 /* CSS custom property names for the active theme palette.
    Read values imperatively with `getComputedStyle(document.documentElement).getPropertyValue(colors.primary)`. */
 
+/**
+ * Map of palette role → CSS custom property name for the active theme. Use to
+ * read theme colours imperatively in JS/TS.
+ *
+ * @example
+ * const primary = getComputedStyle(document.documentElement)
+ *     .getPropertyValue(colors.primary);
+ */
 export const colors = {
     primary: '--primary',
     onPrimary: '--on-primary',
@@ -56,4 +64,5 @@ export const colors = {
     onWarningContainer: '--on-warning-container',
 } as const;
 
+/** Union of palette role names (the keys of {@link colors}). */
 export type ColorToken = keyof typeof colors;

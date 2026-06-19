@@ -2,11 +2,21 @@ import type { HTMLAttributes } from 'react';
 import './styled/progress.styled.css';
 
 export type ProgressProps = HTMLAttributes<HTMLDivElement> & {
+    /** Completion percentage 0–100 (clamped). @default 0 */
     value?: number;
+    /** Show a looping animation for unknown duration; ignores `value`. @default false */
     indeterminate?: boolean;
+    /** Accessible label for the progress bar. */
     label?: string;
 };
 
+/**
+ * Linear progress bar for a known or indeterminate task. For a scalar
+ * measurement within a range, use {@link Meter} instead.
+ *
+ * @example
+ * <Progress value={64} label="Uploading" />
+ */
 export function Progress({
     value = 0,
     indeterminate = false,

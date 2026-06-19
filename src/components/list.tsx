@@ -8,19 +8,36 @@ import { Avatar } from './avatar';
 import './styled/list.styled.css';
 
 export type ListItem = {
+    /** Stable identity, used as the React key. */
     id: string | number;
+    /** Primary line. */
     title?: ReactNode;
+    /** Secondary line under the title. */
     subtitle?: ReactNode;
+    /** Name used to render a leading {@link Avatar} in the default row. */
     avatar?: string;
+    /** Trailing slot (e.g. an action or value). */
     right?: ReactNode;
 };
 
 export type ListProps = HTMLAttributes<HTMLDivElement> & {
+    /** Rows to render. */
     items: ReadonlyArray<ListItem>;
+    /** Enable drag-and-drop reordering. @default false */
     draggable?: boolean;
+    /** Fires with the reordered items after a drag-drop. */
     onReorder?: (items: ListItem[]) => void;
+    /** Custom row renderer, replacing the default avatar/title/subtitle layout. */
     renderItem?: (item: ListItem, index: number) => ReactNode;
 };
+
+/**
+ * Vertical list of rows with an optional avatar, title/subtitle and trailing
+ * slot. Supports drag-and-drop reordering and a custom row renderer.
+ *
+ * @example
+ * <List items={items} draggable onReorder={setItems} />
+ */
 
 const DragIcon = () => (
     <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">

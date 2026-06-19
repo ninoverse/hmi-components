@@ -4,13 +4,27 @@ import './styled/stat.styled.css';
 export type StatTrend = 'up' | 'down' | 'neutral';
 
 export type StatProps = HTMLAttributes<HTMLDivElement> & {
+    /** Metric name. */
     label: ReactNode;
+    /** Primary metric value. */
     value: ReactNode;
+    /** Optional icon shown beside the label. */
     icon?: ReactNode;
+    /** Direction of change; sets the delta colour and arrow. */
     trend?: StatTrend;
+    /** Change amount shown next to the trend arrow (requires `trend`). */
     delta?: ReactNode;
+    /** Secondary helper text in the footer. */
     helpText?: ReactNode;
 };
+
+/**
+ * Compact metric/KPI display with a label, value and an optional trend delta
+ * and help text.
+ *
+ * @example
+ * <Stat label="Revenue" value="$12.4k" trend="up" delta="8%" />
+ */
 
 const TrendIcon = ({ trend }: { trend: StatTrend }) => {
     const path =

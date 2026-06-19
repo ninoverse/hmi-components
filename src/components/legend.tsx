@@ -2,6 +2,7 @@ import type { HTMLAttributes, ReactNode } from 'react';
 import './styled/legend.styled.css';
 
 export type LegendItem = {
+    /** Series name shown beside the swatch. */
     label: ReactNode;
     /** Series colour — consumer data (e.g. a chart palette entry). */
     color: string;
@@ -12,7 +13,9 @@ export type LegendItem = {
 export type LegendAlign = 'start' | 'center' | 'end';
 
 export type LegendProps = HTMLAttributes<HTMLUListElement> & {
+    /** Series entries to list. */
     items: ReadonlyArray<LegendItem>;
+    /** Horizontal alignment of the row. @default 'center' */
     align?: LegendAlign;
 };
 

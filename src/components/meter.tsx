@@ -2,13 +2,21 @@ import type { HTMLAttributes, ReactNode } from 'react';
 import './styled/meter.styled.css';
 
 export type MeterProps = HTMLAttributes<HTMLDivElement> & {
+    /** Current measurement, clamped to `[min, max]`. */
     value: number;
+    /** Lower bound of the scale. @default 0 */
     min?: number;
+    /** Upper bound of the scale. @default 1 */
     max?: number;
+    /** Lower threshold; below it the value is in the "low" band. Defaults to `min`. */
     low?: number;
+    /** Upper threshold; above it the value is in the "high" band. Defaults to `max`. */
     high?: number;
+    /** Where the ideal value sits; drives the optimal/suboptimal/poor colour. Defaults to `max`. */
     optimum?: number;
+    /** Optional label shown above the bar. */
     label?: ReactNode;
+    /** Show the numeric value beside the label. @default false */
     showValue?: boolean;
 };
 
@@ -31,6 +39,14 @@ function resolveLevel(
     return 'poor';
 }
 
+/**
+ * Scalar measurement bar within a known range (e.g. disk usage). Colour
+ * reflects quality, mirroring the native `<meter>` algorithm via
+ * `low`/`high`/`optimum`. For task progress, use {@link Progress} instead.
+ *
+ * @example
+ * <Meter value={0.8} low={0.3} high={0.7} optimum={0.2} label="Disk" showValue />
+ */
 export function Meter({
     value,
     min = 0,

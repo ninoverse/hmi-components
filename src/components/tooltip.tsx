@@ -13,11 +13,23 @@ import './styled/tooltip.styled.css';
 export type TooltipSide = 'top' | 'bottom' | 'left' | 'right';
 
 export type TooltipProps = {
+    /** Tooltip content shown on hover/focus. */
     label: ReactNode;
+    /** Side of the trigger to position on. @default 'top' */
     side?: TooltipSide;
+    /** Delay before showing, in ms. @default 200 */
     delay?: number;
+    /** Trigger element the tooltip describes. */
     children: ReactNode;
 };
+
+/**
+ * Text tooltip shown on hover/focus, positioned in a portal and wired to the
+ * trigger via `aria-describedby`.
+ *
+ * @example
+ * <Tooltip label="Copy"><Button asIcon><CopyIcon /></Button></Tooltip>
+ */
 
 type Position = { x: number; y: number; transform: string };
 

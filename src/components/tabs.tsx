@@ -11,9 +11,13 @@ import './styled/tabs.styled.css';
 export type TabsVariant = 'pill' | 'underline';
 
 export type TabOption<T extends string = string> = {
+    /** Value selected when this tab is chosen. */
     value: T;
+    /** Visible tab label. */
     label: ReactNode;
+    /** Optional leading icon. */
     icon?: ReactNode;
+    /** Optional count shown as a trailing {@link Badge}. */
     count?: number;
 };
 
@@ -21,12 +25,26 @@ export type TabsProps<T extends string = string> = Omit<
     HTMLAttributes<HTMLDivElement>,
     'onChange'
 > & {
+    /** Controlled active tab value. Provide with `onChange`. */
     value?: T;
+    /** Initial active tab when uncontrolled. */
     defaultValue?: T;
+    /** Fires with the newly selected tab value. */
     onChange?: (value: T) => void;
+    /** Tabs to render. */
     options: ReadonlyArray<TabOption<T>>;
+    /** Visual style. @default 'pill' */
     variant?: TabsVariant;
 };
+
+/**
+ * Tab switcher with an animated active indicator. Renders the tab strip only —
+ * pair it with your own panel switching keyed on the active value. Works
+ * controlled or uncontrolled.
+ *
+ * @example
+ * <Tabs options={tabs} value={tab} onChange={setTab} variant="underline" />
+ */
 
 type Indicator = { left: number; width: number; opacity: number };
 

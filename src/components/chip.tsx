@@ -2,9 +2,13 @@ import type { HTMLAttributes, ReactNode } from 'react';
 import './styled/chip.styled.css';
 
 export type ChipProps = Omit<HTMLAttributes<HTMLDivElement>, 'onSelect'> & {
+    /** Selected (pressed) state. @default false */
     selected?: boolean;
+    /** Optional leading icon. */
     icon?: ReactNode;
+    /** When set, the chip becomes a toggle button calling this on click. */
     onSelect?: () => void;
+    /** When set, renders a trailing remove button calling this on click. */
     onClose?: () => void;
 };
 
@@ -22,6 +26,13 @@ const CloseIcon = () => (
     </svg>
 );
 
+/**
+ * Compact tag/filter element. Becomes an interactive toggle when `onSelect` is
+ * set, and gains a remove button when `onClose` is set.
+ *
+ * @example
+ * <Chip selected onSelect={toggle} onClose={remove}>Filter</Chip>
+ */
 export function Chip({
     selected = false,
     icon,

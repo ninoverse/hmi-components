@@ -16,8 +16,11 @@ export type ModalSize = 'medium' | 'large';
 /** A serializable dialog action, rendered as a Button. Crosses the Web
    Component boundary as plain JSON, unlike a JSX action node. */
 export type DialogAction = {
+    /** Button text. */
     label: string;
+    /** Value passed to `onAction` when the button is clicked. */
     value: string;
+    /** Button variant. @default 'secondary' */
     variant?: 'primary' | 'secondary' | 'danger';
 };
 
@@ -54,15 +57,29 @@ export function renderDialogActions(
 }
 
 export type ModalProps = Omit<HTMLAttributes<HTMLDivElement>, 'title'> & {
+    /** Whether the modal is open. */
     open: boolean;
+    /** Called on Escape or backdrop click. */
     onClose: () => void;
+    /** Heading, wired up as the dialog's accessible name. */
     title?: ReactNode;
+    /** Supporting text under the title, wired up as the accessible description. */
     description?: ReactNode;
+    /** Width preset. @default 'medium' */
     size?: ModalSize;
+    /** Footer actions: arbitrary nodes, or a serializable `DialogAction[]`. */
     actions?: ReactNode | DialogAction[];
+    /** Fires with a `DialogAction.value` when a declarative action is chosen. */
     onAction?: (value: string) => void;
 };
 
+/**
+ * Accessible modal dialog rendered in a portal, with scrim, focus management,
+ * Escape/backdrop close and an optional title/description/footer actions.
+ *
+ * @example
+ * <Modal open={open} onClose={close} title="Edit" actions={[{ label: 'Save', value: 'save', variant: 'primary' }]} onAction={onAction}>…</Modal>
+ */
 export function Modal({
     open,
     onClose,

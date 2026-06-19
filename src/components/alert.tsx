@@ -4,8 +4,11 @@ import './styled/alert.styled.css';
 export type AlertVariant = 'info' | 'success' | 'warning' | 'danger';
 
 export type AlertProps = HTMLAttributes<HTMLDivElement> & {
+    /** Tone, which also selects the leading status icon. @default 'info' */
     variant?: AlertVariant;
+    /** Optional bold heading above the message. */
     title?: ReactNode;
+    /** Trailing slot for an action (e.g. a button or dismiss control). */
     action?: ReactNode;
 };
 
@@ -79,6 +82,13 @@ const VARIANT_ICONS = {
     danger: DangerIcon,
 } as const;
 
+/**
+ * Inline message with a variant-matched icon, optional title and trailing
+ * action. The body is passed as `children`.
+ *
+ * @example
+ * <Alert variant="warning" title="Heads up">Disk almost full.</Alert>
+ */
 export function Alert({
     variant = 'info',
     title,

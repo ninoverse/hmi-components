@@ -12,12 +12,21 @@ import { renderTriggerAnchor } from '../lib/triggerAnchor';
 import './styled/contextMenu.styled.css';
 
 export type ContextMenuProps = {
+    /** Trigger element; right-clicking it opens the menu at the cursor. */
     children: ReactNode;
+    /** Menu content rendered in a viewport-clamped portal (e.g. a `<Menu>`). */
     menu: ReactNode;
 };
 
 type Coords = { x: number; y: number };
 
+/**
+ * Right-click (context) menu. Wraps a trigger and opens `menu` at the pointer,
+ * clamped within the viewport; closes on outside click, Escape or scroll.
+ *
+ * @example
+ * <ContextMenu menu={<Menu items={items} />}><div>Right-click me</div></ContextMenu>
+ */
 export function ContextMenu({ children, menu }: ContextMenuProps) {
     const portalTarget = usePortalTarget();
     const triggerRef = useRef<HTMLElement | null>(null);

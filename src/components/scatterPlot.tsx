@@ -1,31 +1,40 @@
 import { CartesianGrid } from './cartesianGrid';
 import './styled/scatterPlot.styled.css';
 
+/** A single `{x, y}` data point. */
 export type ScatterPlotPoint = { x: number; y: number };
 
 export type ScatterPlotSeries = {
+    /** Legend/label name for the series. */
     name: string;
+    /** Points to plot for this series. */
     data: ReadonlyArray<ScatterPlotPoint>;
     /** Series colour. Defaults to the primary token. */
     color?: string;
 };
 
 export type ScatterPlotProps = {
+    /** One or more series of points. */
     series: ReadonlyArray<ScatterPlotSeries>;
+    /** SVG viewport width in px. @default 520 */
     width?: number;
+    /** SVG viewport height in px. @default 260 */
     height?: number;
     /** Override the x range; defaults to the data extent. */
     xMin?: number;
+    /** Upper bound of the x range. Defaults to the data max. */
     xMax?: number;
     /** Override the y range; defaults to the data extent. */
     yMin?: number;
+    /** Upper bound of the y range. Defaults to the data max. */
     yMax?: number;
-    /** Number of x-axis ticks / vertical grid lines. */
+    /** Number of x-axis ticks / vertical grid lines. @default 5 */
     xTicks?: number;
-    /** Number of y-axis ticks / horizontal grid lines. */
+    /** Number of y-axis ticks / horizontal grid lines. @default 4 */
     yTicks?: number;
-    /** Marker radius in px. */
+    /** Marker radius in px. @default 4 */
     radius?: number;
+    /** Accessible name for the chart. @default 'Scatter plot' */
     'aria-label'?: string;
 };
 

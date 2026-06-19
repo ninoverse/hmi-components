@@ -50,11 +50,22 @@ function readStored<T extends string>(
 }
 
 export type ThemeProviderProps = {
+    /** App subtree that should react to theme changes. */
     children: ReactNode;
+    /** Initial color theme when none is persisted in localStorage. @default 'default' */
     defaultTheme?: ColorTheme;
+    /** Initial structure theme when none is persisted in localStorage. @default 'default' */
     defaultStructure?: Structure;
 };
 
+/**
+ * Provides runtime control of the two theme axes. Persists each choice to
+ * localStorage and reflects it onto `html[data-theme]` / `html[data-structure]`,
+ * so components re-theme instantly. Consume via {@link useTheme}.
+ *
+ * @example
+ * <ThemeProvider defaultTheme="ocean"><App /></ThemeProvider>
+ */
 export function ThemeProvider({
     children,
     defaultTheme = 'default',
@@ -93,6 +104,14 @@ export function ThemeProvider({
     );
 }
 
+/**
+ * Reads the current theme axes and their setters from {@link ThemeProvider}.
+ * Throws if used outside a provider. Returns the active `theme`/`structure`,
+ * their `setTheme`/`setStructure` setters, and the available option lists.
+ *
+ * @example
+ * const { theme, setTheme, colorThemes } = useTheme();
+ */
 export function useTheme(): ThemeContextValue {
     const context = useContext(ThemeContext);
     if (!context) {

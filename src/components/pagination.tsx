@@ -2,10 +2,21 @@ import { type HTMLAttributes, useMemo } from 'react';
 import './styled/pagination.styled.css';
 
 export type PaginationProps = Omit<HTMLAttributes<HTMLElement>, 'onChange'> & {
+    /** Current 1-based page. */
     page: number;
+    /** Total number of pages. */
     total: number;
+    /** Fires with the requested 1-based page number. */
     onChange: (page: number) => void;
 };
+
+/**
+ * Page navigation with prev/next buttons and truncated page numbers (ellipses
+ * for large ranges). Controlled via `page`/`onChange`.
+ *
+ * @example
+ * <Pagination page={page} total={20} onChange={setPage} />
+ */
 
 type PageEntry = number | 'ellipsis-start' | 'ellipsis-end';
 
