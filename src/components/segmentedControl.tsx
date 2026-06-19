@@ -10,9 +10,13 @@ import './styled/segmentedControl.styled.css';
 export type SegmentedControlSize = 'small' | 'medium' | 'large';
 
 export type SegmentedControlOption<T extends string = string> = {
+    /** Value selected when this segment is chosen. */
     value: T;
+    /** Visible segment label. */
     label: ReactNode;
+    /** Optional leading icon. */
     icon?: ReactNode;
+    /** Disable this segment. @default false */
     disabled?: boolean;
 };
 
@@ -20,16 +24,31 @@ export type SegmentedControlProps<T extends string = string> = Omit<
     HTMLAttributes<HTMLDivElement>,
     'onChange'
 > & {
+    /** Controlled selected value. Provide with `onChange`. */
     value?: T;
+    /** Initial selected value when uncontrolled. */
     defaultValue?: T;
+    /** Fires with the newly selected value. */
     onChange?: (value: T) => void;
+    /** Segments to render. */
     options: ReadonlyArray<SegmentedControlOption<T>>;
+    /** Control size. @default 'medium' */
     size?: SegmentedControlSize;
+    /** Stretch segments to fill the container width. @default false */
     fullWidth?: boolean;
+    /** Disable the whole control. @default false */
     disabled?: boolean;
+    /** Accessible label for the group. @default 'Segmented control' */
     'aria-label'?: string;
 };
 
+/**
+ * Single-select control rendering options as adjacent segments, with full
+ * keyboard (arrows/Home/End) support. Works controlled or uncontrolled.
+ *
+ * @example
+ * <SegmentedControl options={views} value={view} onChange={setView} />
+ */
 export function SegmentedControl<T extends string = string>({
     value,
     defaultValue,

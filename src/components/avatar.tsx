@@ -6,9 +6,13 @@ export type AvatarSize = 'small' | 'medium' | 'large' | 'xlarge';
 export type AvatarStatus = 'online' | 'away' | 'offline';
 
 export type AvatarProps = HTMLAttributes<HTMLSpanElement> & {
+    /** Person's name — used for the alt text, initials and deterministic colour. */
     name: string;
+    /** Image URL. When omitted, colour-hashed initials are shown instead. */
     src?: string;
+    /** Diameter preset. @default 'medium' */
     size?: AvatarSize;
+    /** Optional presence indicator dot. */
     status?: AvatarStatus;
 };
 
@@ -37,6 +41,13 @@ function initials(name: string): string {
     return ((parts[0]?.[0] ?? '') + (parts[1]?.[0] ?? '')).toUpperCase();
 }
 
+/**
+ * User avatar showing an image, or colour-hashed initials derived from `name`
+ * when no `src` is given, with an optional presence dot.
+ *
+ * @example
+ * <Avatar name="Ada Lovelace" status="online" />
+ */
 export function Avatar({
     name,
     src,

@@ -5,18 +5,36 @@ import { Modal } from './modal';
 export type ConfirmDialogVariant = 'default' | 'danger';
 
 export type ConfirmDialogProps = {
+    /** Whether the dialog is shown. */
     open: boolean;
+    /** Called on cancel, backdrop/escape close. */
     onCancel: () => void;
+    /** Called when the confirm button (or Enter) is activated. */
     onConfirm: () => void;
+    /** Dialog heading. */
     title: ReactNode;
+    /** Optional supporting text under the title. */
     description?: ReactNode;
+    /** Confirm button label. @default 'Confirm' */
     confirmLabel?: ReactNode;
+    /** Cancel button label. @default 'Cancel' */
     cancelLabel?: ReactNode;
+    /** `danger` styles the confirm button as destructive. @default 'default' */
     variant?: ConfirmDialogVariant;
+    /** Disable both buttons while an action is in flight. @default false */
     loading?: boolean;
+    /** Disable only the confirm button (e.g. failed validation). @default false */
     confirmDisabled?: boolean;
 };
 
+/**
+ * Confirmation dialog built on {@link Modal} with cancel/confirm buttons and
+ * Enter-to-confirm. Use for destructive or irreversible actions.
+ *
+ * @example
+ * <ConfirmDialog open={open} title="Delete?" variant="danger"
+ *     onCancel={close} onConfirm={remove} />
+ */
 export function ConfirmDialog({
     open,
     onCancel,

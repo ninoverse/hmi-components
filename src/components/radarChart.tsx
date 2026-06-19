@@ -1,6 +1,7 @@
 import './styled/radarChart.styled.css';
 
 export type RadarChartSeries = {
+    /** Legend/label name for the series. */
     name: string;
     /** One value per axis; length should match the axes length. */
     data: ReadonlyArray<number>;
@@ -11,13 +12,17 @@ export type RadarChartSeries = {
 export type RadarChartProps = {
     /** Axis labels, one per spoke. */
     axes: ReadonlyArray<string>;
+    /** One or more series drawn as closed polygons. */
     series: ReadonlyArray<RadarChartSeries>;
+    /** SVG width/height in px. @default 300 */
     size?: number;
     /** Override the value range; defaults to 0..max across all series. */
     min?: number;
+    /** Upper bound of the value range. Defaults to the max across all series. */
     max?: number;
-    /** Number of concentric grid rings. */
+    /** Number of concentric grid rings. @default 4 */
     rings?: number;
+    /** Accessible name for the chart. @default 'Radar chart' */
     'aria-label'?: string;
 };
 

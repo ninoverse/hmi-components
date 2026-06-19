@@ -4,8 +4,12 @@
    the active structure drives html[data-structure] (shape, density, motion,
    typography). Token values live in public/css/themes/. */
 
+/** Available color themes, driving `html[data-theme]`. */
 export const colorThemes = ['default', 'ocean', 'forest'] as const;
+/** Available structure themes, driving `html[data-structure]` (shape/density/motion/type). */
 export const structures = ['default', 'rounded', 'sharp', 'pixel'] as const;
 
+/** Union of color theme names (members of {@link colorThemes}). */
 export type ColorTheme = (typeof colorThemes)[number];
+/** Union of structure theme names (members of {@link structures}). */
 export type Structure = (typeof structures)[number];

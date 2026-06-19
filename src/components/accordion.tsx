@@ -2,16 +2,24 @@ import { type HTMLAttributes, type ReactNode, useId, useState } from 'react';
 import './styled/accordion.styled.css';
 
 export type AccordionItem = {
+    /** Header content shown on the always-visible trigger. */
     title: ReactNode;
+    /** Panel content revealed when the item is open. */
     body: ReactNode;
+    /** Disable the trigger so the panel can't be toggled. @default false */
     disabled?: boolean;
 };
 
 export type AccordionProps = HTMLAttributes<HTMLDivElement> & {
+    /** Ordered list of sections to render. */
     items: ReadonlyArray<AccordionItem>;
+    /** Allow multiple panels open at once instead of one. @default false */
     multiple?: boolean;
+    /** Controlled set of open item indices. Provide with `onOpenChange`. */
     open?: ReadonlyArray<number>;
+    /** Initially open item indices when uncontrolled. */
     defaultOpen?: ReadonlyArray<number>;
+    /** Fires after a toggle with the new sorted list of open indices. */
     onOpenChange?: (open: number[]) => void;
 };
 
@@ -30,6 +38,16 @@ const ChevronIcon = () => (
     </svg>
 );
 
+/**
+ * Vertically stacked, collapsible sections. Works controlled (`open` +
+ * `onOpenChange`) or uncontrolled (`defaultOpen`).
+ *
+ * @example
+ * <Accordion
+ *     multiple
+ *     items={[{ title: 'Section', body: 'Details…' }]}
+ * />
+ */
 export function Accordion({
     items,
     multiple = false,

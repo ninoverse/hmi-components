@@ -2,11 +2,21 @@ import type { HTMLAttributes, ReactNode } from 'react';
 import './styled/formControl.styled.css';
 
 export type FormControlProps = HTMLAttributes<HTMLDivElement> & {
+    /** Field label above the control. */
     label?: ReactNode;
+    /** Helper text below the control; hidden when `error` is set. */
     hint?: ReactNode;
+    /** Error message below the control; takes precedence over `hint`. */
     error?: ReactNode;
 };
 
+/**
+ * Wrapper that adds a label and a hint/error message around any form control
+ * passed as `children`.
+ *
+ * @example
+ * <FormControl label="Email" error={err}><Input /></FormControl>
+ */
 export function FormControl({
     label,
     hint,

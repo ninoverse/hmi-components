@@ -2,24 +2,32 @@ import { CartesianGrid } from './cartesianGrid';
 import './styled/lineChart.styled.css';
 
 export type LineChartSeries = {
+    /** Legend/label name for the series. */
     name: string;
+    /** Y values, one per category. */
     data: ReadonlyArray<number>;
     /** Series colour. Defaults to the primary token. */
     color?: string;
 };
 
 export type LineChartProps = {
+    /** One or more series, each drawn as a polyline. */
     series: ReadonlyArray<LineChartSeries>;
     /** X-axis category labels; length should match the series data length. */
     labels?: ReadonlyArray<string>;
+    /** SVG viewport width in px. @default 520 */
     width?: number;
+    /** SVG viewport height in px. @default 260 */
     height?: number;
     /** Override the value range; defaults to 0..max across all series. */
     min?: number;
+    /** Upper bound of the value range. Defaults to the max across all series. */
     max?: number;
-    /** Number of horizontal grid lines / y-axis ticks. */
+    /** Number of horizontal grid lines / y-axis ticks. @default 4 */
     yTicks?: number;
+    /** Draw a dot at each data point. @default false */
     showDots?: boolean;
+    /** Accessible name for the chart. @default 'Line chart' */
     'aria-label'?: string;
 };
 

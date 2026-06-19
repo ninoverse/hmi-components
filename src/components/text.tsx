@@ -7,15 +7,29 @@ export type TextTone = 'default' | 'muted' | 'primary' | 'error' | 'inherit';
 export type TextAlign = 'start' | 'center' | 'end';
 
 export type TextProps = HTMLAttributes<HTMLParagraphElement> & {
+    /** Element/component to render as. @default 'p' */
     as?: ElementType;
+    /** Font size preset. @default 'medium' */
     size?: TextSize;
+    /** Font weight preset. @default 'regular' */
     weight?: TextWeight;
+    /** Colour tone. @default 'default' */
     tone?: TextTone;
+    /** Text alignment. */
     align?: TextAlign;
+    /** Truncate to a single line with an ellipsis. @default false */
     truncate?: boolean;
+    /** Text content. */
     children?: ReactNode;
 };
 
+/**
+ * Body text primitive with size/weight/tone/alignment presets and optional
+ * truncation. Render as any element via `as`.
+ *
+ * @example
+ * <Text size="small" tone="muted">Last updated just now</Text>
+ */
 export function Text({
     as: Component = 'p',
     size = 'medium',

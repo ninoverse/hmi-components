@@ -15,26 +15,40 @@ import './styled/commandPalette.styled.css';
 const EXIT_DURATION_MS = 310;
 
 export type CommandPaletteCommand = {
+    /** Stable id, emitted via `onAction` and used as the React key. */
     id: string;
+    /** Primary command text, shown and matched while searching. */
     label: string;
+    /** Optional secondary line, also matched while searching. */
     description?: string;
+    /** Optional leading icon. */
     icon?: ReactNode;
+    /** Trailing hint (e.g. a keyboard shortcut). */
     shortcut?: ReactNode;
+    /** Group heading this command is listed under. */
     group?: string;
+    /** Extra terms matched while searching, beyond label/description. */
     keywords?: ReadonlyArray<string>;
+    /** Handler run when the command is chosen. */
     onSelect?: () => void;
 };
 
 export type CommandPaletteProps = {
+    /** Whether the palette is open. */
     open: boolean;
+    /** Called to request an open/close state change (Escape, backdrop, select). */
     onOpenChange: (open: boolean) => void;
+    /** Commands to list and search. */
     commands: ReadonlyArray<CommandPaletteCommand>;
+    /** Search input placeholder. @default 'Type a command or search…' */
     placeholder?: string;
+    /** Content shown when no command matches. @default 'No matches' */
     emptyMessage?: ReactNode;
     /** Fired with the chosen command's `id` when a command is committed. The
        serializable counterpart to a per-command `onSelect`, so the selection
        survives the Web Component boundary. */
     onAction?: (value: string) => void;
+    /** Accessible label for the dialog. @default 'Command palette' */
     'aria-label'?: string;
 };
 
@@ -50,6 +64,14 @@ const matchesQuery = (
     return false;
 };
 
+/**
+ * Modal command/search palette with grouped results, type-ahead filtering,
+ * keyboard navigation and animated enter/exit. Render it always and drive
+ * visibility via `open`/`onOpenChange`.
+ *
+ * @example
+ * <CommandPalette open={open} onOpenChange={setOpen} commands={commands} />
+ */
 export function CommandPalette({
     open,
     onOpenChange,

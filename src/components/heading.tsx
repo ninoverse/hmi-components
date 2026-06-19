@@ -6,13 +6,27 @@ export type HeadingSize = 'xsmall' | 'small' | 'medium' | 'large' | 'xlarge';
 export type HeadingTone = 'default' | 'muted' | 'primary' | 'inherit';
 
 export type HeadingProps = HTMLAttributes<HTMLHeadingElement> & {
+    /** Semantic heading level, rendered as `h1`–`h6`. @default 2 */
     level?: HeadingLevel;
+    /** Visual size, decoupled from `level`. Defaults to a size matching `level`. */
     size?: HeadingSize;
+    /** Colour tone. @default 'default' */
     tone?: HeadingTone;
+    /** Truncate to a single line with an ellipsis. @default false */
     truncate?: boolean;
+    /** Heading text. */
     children?: ReactNode;
 };
 
+/**
+ * Semantic heading (`h1`–`h6`) with visual size, tone and truncation decoupled
+ * from the level, so structure and appearance can differ.
+ *
+ * @example
+ * <Heading level={1} size="large">Dashboard</Heading>
+ */
+
+/** Default visual size applied for each heading level. */
 const SIZE_FOR_LEVEL: Record<HeadingLevel, HeadingSize> = {
     1: 'xlarge',
     2: 'large',

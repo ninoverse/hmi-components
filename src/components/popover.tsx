@@ -14,13 +14,27 @@ import './styled/popover.styled.css';
 export type PopoverAlign = 'start' | 'end';
 
 export type PopoverProps = {
+    /** Whether the popover is open. */
     open: boolean;
+    /** Called to request an open/close change (trigger click, outside click, Escape). */
     onOpenChange: (open: boolean) => void;
+    /** Element that toggles the popover; gets `aria-expanded`/`aria-haspopup`. */
     trigger: ReactNode;
+    /** Popover content. */
     children: ReactNode;
+    /** Horizontal alignment to the trigger. @default 'start' */
     align?: PopoverAlign;
+    /** Minimum width; number = px. Defaults to the trigger width. */
     width?: number | string;
 };
+
+/**
+ * Controlled popover anchored to a trigger, rendered in a portal and
+ * repositioned on scroll/resize. Closes on outside click or Escape.
+ *
+ * @example
+ * <Popover open={open} onOpenChange={setOpen} trigger={<Button>Menu</Button>}>…</Popover>
+ */
 
 type AnchorPosition = {
     left: number;

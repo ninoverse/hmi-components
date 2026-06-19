@@ -4,15 +4,25 @@ import './styled/skeleton.styled.css';
 export type SkeletonVariant = 'text' | 'rect' | 'circle';
 
 export type SkeletonProps = HTMLAttributes<HTMLSpanElement> & {
+    /** Shape preset. @default 'text' */
     variant?: SkeletonVariant;
+    /** Explicit width; number = px. */
     width?: string | number;
+    /** Explicit height; number = px. */
     height?: string | number;
+    /** Corner radius override; number = px. */
     radius?: string | number;
 };
 
 const toCssSize = (v: string | number) =>
     typeof v === 'number' ? `${v}px` : v;
 
+/**
+ * Animated loading placeholder. `aria-hidden` by default so it isn't announced.
+ *
+ * @example
+ * <Skeleton variant="circle" width={40} height={40} />
+ */
 export function Skeleton({
     variant = 'text',
     width,

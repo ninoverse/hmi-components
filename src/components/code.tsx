@@ -2,10 +2,19 @@ import type { HTMLAttributes, ReactNode } from 'react';
 import './styled/code.styled.css';
 
 export type CodeProps = HTMLAttributes<HTMLElement> & {
+    /** Render as a block (`<pre><code>`) instead of inline `<code>`. @default false */
     block?: boolean;
+    /** Code content. */
     children?: ReactNode;
 };
 
+/**
+ * Monospace code display, inline by default or as a block when `block` is set.
+ *
+ * @example
+ * <Code>npm i</Code>
+ * <Code block>{`const x = 1;`}</Code>
+ */
 export function Code({
     block = false,
     className,

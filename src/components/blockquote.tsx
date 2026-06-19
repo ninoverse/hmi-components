@@ -5,10 +5,18 @@ export type BlockquoteProps = Omit<
     BlockquoteHTMLAttributes<HTMLQuoteElement>,
     'cite'
 > & {
+    /** Attribution shown in the quote footer. */
     cite?: ReactNode;
+    /** Quotation body. */
     children?: ReactNode;
 };
 
+/**
+ * Styled block quotation with an optional citation footer.
+ *
+ * @example
+ * <Blockquote cite="Ada Lovelace">That brain of mine is something more than mortal.</Blockquote>
+ */
 export function Blockquote({
     cite,
     className,

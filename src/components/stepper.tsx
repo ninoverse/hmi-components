@@ -4,8 +4,11 @@ import './styled/stepper.styled.css';
 export type StepperOrientation = 'horizontal' | 'vertical';
 
 export type StepperItem<T extends string = string> = {
+    /** Unique step value, emitted via `onChange` and matched against `current`. */
     value: T;
+    /** Step title. */
     label: ReactNode;
+    /** Optional secondary line under the label. */
     description?: ReactNode;
 };
 
@@ -13,13 +16,28 @@ export type StepperProps<T extends string = string> = Omit<
     HTMLAttributes<HTMLOListElement>,
     'onChange'
 > & {
+    /** Ordered steps. */
     steps: ReadonlyArray<StepperItem<T>>;
+    /** Controlled active step value. Provide with `onChange`. */
     current?: T;
+    /** Initial active step when uncontrolled. */
     defaultCurrent?: T;
+    /** Fires with a completed step's `value` when it is clicked. */
     onChange?: (value: T) => void;
+    /** Layout direction. @default 'horizontal' */
     orientation?: StepperOrientation;
+    /** Gap between steps; number = rem. */
     spacing?: string | number;
 };
+
+/**
+ * Step progress indicator. Marks steps before `current` as completed (and
+ * clickable), the current step active, and the rest upcoming. Works controlled
+ * or uncontrolled.
+ *
+ * @example
+ * <Stepper steps={steps} current={step} onChange={setStep} />
+ */
 
 const CheckIcon = () => (
     <svg

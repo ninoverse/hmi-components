@@ -5,10 +5,13 @@ import './styled/toast.styled.css';
 export type ToastVariant = 'info' | 'success' | 'warning' | 'danger';
 
 export type ToastOptions = {
+    /** Tone, which selects the icon and colour. @default 'info' */
     variant?: ToastVariant;
+    /** Bold heading line. */
     title?: ReactNode;
+    /** Secondary message line. */
     body?: ReactNode;
-    /** Auto-dismiss after this many milliseconds. 0 disables auto-dismiss. */
+    /** Auto-dismiss after this many milliseconds. 0 disables auto-dismiss. @default 4000 */
     duration?: number;
 };
 
@@ -67,6 +70,16 @@ function show(opts: ToastOptions): number {
 
 type ShortcutOptions = Omit<ToastOptions, 'variant' | 'title' | 'body'>;
 
+/**
+ * Imperative toast API. Call `toast.show(...)` (or the `info`/`success`/
+ * `warning`/`danger` shortcuts) from anywhere to enqueue a toast; render a
+ * single {@link ToastHost} once near your app root to display them.
+ *
+ * @example
+ * toast.success('Saved', 'Your changes are live.');
+ * const id = toast.show({ variant: 'info', title: 'Working…', duration: 0 });
+ * toast.dismiss(id);
+ */
 export const toast = {
     show,
     dismiss,
@@ -164,6 +177,13 @@ const VARIANT_ICONS = {
     danger: DangerIcon,
 } as const;
 
+/**
+ * Renders queued toasts in a portal. Mount exactly once near your app root;
+ * trigger toasts via the {@link toast} API.
+ *
+ * @example
+ * <ToastHost />
+ */
 export function ToastHost() {
     const [list, setList] = useState<ToastItem[]>([]);
 

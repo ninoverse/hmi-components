@@ -10,11 +10,20 @@ export type BadgeVariant =
     | 'info';
 
 export type BadgeProps = HTMLAttributes<HTMLSpanElement> & {
+    /** Color/tone of the badge. @default 'default' */
     variant?: BadgeVariant;
+    /** Show a small leading status dot. @default false */
     dot?: boolean;
+    /** Badge label content. */
     children?: ReactNode;
 };
 
+/**
+ * Compact status label, optionally with a leading status dot.
+ *
+ * @example
+ * <Badge variant="success" dot>Online</Badge>
+ */
 export function Badge({
     variant = 'default',
     dot = false,

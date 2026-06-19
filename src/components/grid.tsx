@@ -9,12 +9,23 @@ import './styled/grid.styled.css';
 export type GridGap = 'none' | 'small' | 'medium' | 'large';
 
 export type GridProps = HTMLAttributes<HTMLDivElement> & {
+    /** Element/component to render as. @default 'div' */
     as?: ElementType;
+    /** Column count (equal columns) or a raw `grid-template-columns` value. @default 2 */
     columns?: number | string;
+    /** Gap preset between cells. @default 'none' */
     gap?: GridGap;
+    /** Grid children. */
     children?: ReactNode;
 };
 
+/**
+ * CSS Grid layout primitive. `columns` accepts a number (equal columns) or a
+ * raw `grid-template-columns` string.
+ *
+ * @example
+ * <Grid columns={3} gap="medium">…</Grid>
+ */
 export function Grid({
     as: Component = 'div',
     columns = 2,

@@ -10,19 +10,34 @@ export type ImageFit = 'cover' | 'contain' | 'fill' | 'none' | 'scale-down';
 export type ImageRadius = 'none' | 'small' | 'medium' | 'large' | 'full';
 
 type ImageOwnProps = {
+    /** Image source URL. */
     src: string;
+    /** Alternative text (required for accessibility). */
     alt: string;
+    /** Aspect ratio to reserve while loading (e.g. `16 / 9`). */
     ratio?: number;
+    /** `object-fit` for the image. @default 'cover' */
     fit?: ImageFit;
+    /** Corner radius preset. @default 'medium' */
     radius?: ImageRadius;
+    /** Explicit width; number = px. */
     width?: number | string;
+    /** Explicit height; number = px. */
     height?: number | string;
+    /** Content shown if the image fails to load. Defaults to a broken-image icon. */
     fallback?: ReactNode;
 };
 
 export type ImageProps = ImageOwnProps &
     Omit<ImgHTMLAttributes<HTMLImageElement>, keyof ImageOwnProps>;
 
+/**
+ * Image with loading/error states, aspect-ratio reservation, `object-fit` and
+ * radius presets, and a fallback when the source fails. Lazy-loads by default.
+ *
+ * @example
+ * <Image src="/cover.jpg" alt="Cover" ratio={16 / 9} radius="large" />
+ */
 export function Image({
     src,
     alt,

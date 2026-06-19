@@ -2,21 +2,26 @@ import type { ReactNode } from 'react';
 import './styled/donutChart.styled.css';
 
 export type DonutChartSegment = {
+    /** Segment name (used as the React key). */
     label: string;
+    /** Segment magnitude; its share of the total sets the arc size. */
     value: number;
     /** Segment colour. Falls back to a token from the default palette. */
     color?: string;
 };
 
 export type DonutChartProps = {
+    /** Segments to render around the ring. */
     segments: ReadonlyArray<DonutChartSegment>;
+    /** SVG width/height in px. @default 220 */
     size?: number;
-    /** Ring thickness as a fraction of the radius (0..1). */
+    /** Ring thickness as a fraction of the radius (0..1). @default 0.32 */
     thickness?: number;
-    /** Gap between segments, in degrees. */
+    /** Gap between segments, in degrees. @default 2 */
     gap?: number;
     /** Content shown in the centre hole (e.g. a total). */
     centerLabel?: ReactNode;
+    /** Accessible name for the chart. @default 'Donut chart' */
     'aria-label'?: string;
 };
 

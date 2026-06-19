@@ -1,19 +1,25 @@
 import './styled/sparkline.styled.css';
 
 export type SparklineProps = {
+    /** Values to plot, in order. */
     data: ReadonlyArray<number>;
+    /** SVG width in px. @default 120 */
     width?: number;
+    /** SVG height in px. @default 32 */
     height?: number;
     /** Line/area colour. Defaults to the primary token. */
     color?: string;
+    /** Line stroke width in px. @default 2 */
     strokeWidth?: number;
-    /** Fill the area under the line. */
+    /** Fill the area under the line. @default false */
     area?: boolean;
-    /** Show a dot at the last data point. */
+    /** Show a dot at the last data point. @default false */
     showDot?: boolean;
     /** Override the value range; defaults to the data's own min/max. */
     min?: number;
+    /** Upper bound of the value range. Defaults to the data max. */
     max?: number;
+    /** Accessible name for the chart. */
     'aria-label'?: string;
 };
 
