@@ -12,6 +12,7 @@
     --font-rubik-glitch: 'Rubik Glitch', ui-serif, serif;
     --font-press-start-2p: 'Press Start 2P', ui-monospace, 'SF Mono', Menlo, monospace;
     --font-pixelify-sans: 'Pixelify Sans', ui-sans-serif, system-ui, sans-serif;
+    --font-caveat: 'Caveat', ui-rounded, cursive;
 
     /* State-layer opacities (MD3 standard) */
     --state-hover-opacity: 0.08;

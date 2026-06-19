@@ -36,3 +36,8 @@
         animation-duration: 4200ms;
     }
 }
+
+/* Field Journal — a bordered track holding the filled color bar. */
+[data-structure="journal"] .progress {
+    border: 0.125rem solid var(--outline);
+}

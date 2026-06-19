@@ -87,3 +87,8 @@
     flex: none;
     color: var(--on-surface-variant);
 }
+
+/* Field Journal — penciled-in dashed row dividers. */
+[data-structure="journal"] .list__item {
+    border-bottom-style: dashed;
+}

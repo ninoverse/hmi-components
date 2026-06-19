@@ -7,7 +7,13 @@
 /** Available color themes, driving `html[data-theme]`. */
 export const colorThemes = ['default', 'ocean', 'forest'] as const;
 /** Available structure themes, driving `html[data-structure]` (shape/density/motion/type). */
-export const structures = ['default', 'rounded', 'sharp', 'pixel'] as const;
+export const structures = [
+    'default',
+    'rounded',
+    'sharp',
+    'pixel',
+    'journal',
+] as const;
 
 /** Union of color theme names (members of {@link colorThemes}). */
 export type ColorTheme = (typeof colorThemes)[number];
