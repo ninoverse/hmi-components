@@ -71,12 +71,12 @@
     --font-display: var(--font-caveat);
 
     /* Elevation — no blur, single plane. Rest is flat (border only); "lift" is
-       a hard offset in the primary, like cut paper. Overrides constants.css for
-       this structure only (wins on source order). */
+       a hard offset in the accent (--tertiary), like cut paper. Overrides
+       constants.css for this structure only (wins on source order). */
     --elevation-0: none;
     --elevation-1: none;
-    --elevation-2: 0.375rem 0.375rem 0 0 var(--primary);
-    --elevation-3: 0.5rem 0.5rem 0 0 var(--primary);
-    --elevation-4: 0.625rem 0.625rem 0 0 var(--primary);
-    --elevation-5: 0.75rem 0.75rem 0 0 var(--primary);
+    --elevation-2: 0.375rem 0.375rem 0 0 var(--tertiary);
+    --elevation-3: 0.5rem 0.5rem 0 0 var(--tertiary);
+    --elevation-4: 0.625rem 0.625rem 0 0 var(--tertiary);
+    --elevation-5: 0.75rem 0.75rem 0 0 var(--tertiary);
 }
