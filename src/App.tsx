@@ -2056,6 +2056,29 @@ export function Example() {
                         width={280}
                         radius="large"
                     />
+                    <Image
+                        src={sampleImage}
+                        alt="Top-aligned crop"
+                        ratio={4 / 3}
+                        width={280}
+                        position="top"
+                        placeholder="#1f5b58"
+                        radius="large"
+                    />
+                    <Image
+                        src={sampleImageTall}
+                        alt="Custom-rendered image"
+                        ratio={4 / 3}
+                        width={280}
+                        radius="large"
+                        renderImage={(p) => (
+                            <img
+                                {...p}
+                                alt={p.alt}
+                                style={{ objectFit: 'cover' }}
+                            />
+                        )}
+                    />
                 </div>
             </section>
 
