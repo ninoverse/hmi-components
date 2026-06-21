@@ -2,6 +2,8 @@ import {
     type CSSProperties,
     type ImgHTMLAttributes,
     type ReactNode,
+    useEffect,
+    useRef,
     useState,
 } from 'react';
 import './styled/image.styled.css';
@@ -54,6 +56,17 @@ export function Image({
     const [status, setStatus] = useState<'loading' | 'loaded' | 'error'>(
         'loading',
     );
+    const imgRef = useRef<HTMLImageElement>(null);
+
+    // If the image is already complete by the time the handlers are attached
+    // (cache hit, or SSR markup loaded before hydration), the load/error events
+    // never fire — resolve the status from the element itself on mount.
+    useEffect(() => {
+        const img = imgRef.current;
+        if (img?.complete) {
+            setStatus(img.naturalWidth > 0 ? 'loaded' : 'error');
+        }
+    }, []);
 
     const tokens: string[] = ['image', `image--radius-${radius}`];
     if (className) tokens.push(className);
@@ -68,6 +81,7 @@ export function Image({
         <div className={tokens.join(' ')} style={style} data-status={status}>
             {status !== 'error' && (
                 <img
+                    ref={imgRef}
                     className="image__img"
                     src={src}
                     alt={alt}
