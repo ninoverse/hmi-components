@@ -110,8 +110,11 @@ export default function App() {
         setTheme,
         structure,
         setStructure,
+        material,
+        setMaterial,
         colorThemes,
         structures,
+        materials,
     } = useTheme();
     const [plan, setPlan] = useState<'free' | 'pro' | 'team'>('pro');
     const [brandColor, setBrandColor] = useState('#e87a5d');
@@ -283,6 +286,16 @@ export default function App() {
                         value={structure}
                         onChange={setStructure}
                         options={structures.map((value) => ({
+                            value,
+                            label: value,
+                        }))}
+                    />
+                </FormControl>
+                <FormControl label="Material (select)">
+                    <Select
+                        value={material}
+                        onChange={setMaterial}
+                        options={materials.map((value) => ({
                             value,
                             label: value,
                         }))}

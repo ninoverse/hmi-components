@@ -19,20 +19,26 @@ import {
 import {
     type ColorTheme,
     colorThemes,
+    type Material,
+    materials,
     type Structure,
     structures,
 } from './configs/themes';
 
 const THEME_STORAGE_KEY = 'hmi-theme';
 const STRUCTURE_STORAGE_KEY = 'hmi-structure';
+const MATERIAL_STORAGE_KEY = 'hmi-material';
 
 type ThemeContextValue = {
     theme: ColorTheme;
     setTheme: (theme: ColorTheme) => void;
     structure: Structure;
     setStructure: (structure: Structure) => void;
+    material: Material;
+    setMaterial: (material: Material) => void;
     colorThemes: readonly ColorTheme[];
     structures: readonly Structure[];
+    materials: readonly Material[];
 };
 
 const ThemeContext = createContext<ThemeContextValue | null>(null);
@@ -56,6 +62,8 @@ export type ThemeProviderProps = {
     defaultTheme?: ColorTheme;
     /** Initial structure theme when none is persisted in localStorage. @default 'default' */
     defaultStructure?: Structure;
+    /** Initial surface material when none is persisted in localStorage. @default 'solid' */
+    defaultMaterial?: Material;
 };
 
 /**
@@ -70,12 +78,16 @@ export function ThemeProvider({
     children,
     defaultTheme = 'default',
     defaultStructure = 'default',
+    defaultMaterial = 'solid',
 }: ThemeProviderProps) {
     const [theme, setTheme] = useState<ColorTheme>(() =>
         readStored(THEME_STORAGE_KEY, colorThemes, defaultTheme),
     );
     const [structure, setStructure] = useState<Structure>(() =>
         readStored(STRUCTURE_STORAGE_KEY, structures, defaultStructure),
+    );
+    const [material, setMaterial] = useState<Material>(() =>
+        readStored(MATERIAL_STORAGE_KEY, materials, defaultMaterial),
     );
 
     useEffect(() => {
@@ -88,6 +100,11 @@ export function ThemeProvider({
         window.localStorage.setItem(STRUCTURE_STORAGE_KEY, structure);
     }, [structure]);
 
+    useEffect(() => {
+        document.documentElement.dataset.material = material;
+        window.localStorage.setItem(MATERIAL_STORAGE_KEY, material);
+    }, [material]);
+
     return (
         <ThemeContext.Provider
             value={{
@@ -95,8 +112,11 @@ export function ThemeProvider({
                 setTheme,
                 structure,
                 setStructure,
+                material,
+                setMaterial,
                 colorThemes,
                 structures,
+                materials,
             }}
         >
             {children}
