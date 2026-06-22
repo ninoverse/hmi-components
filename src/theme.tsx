@@ -30,13 +30,13 @@ const STRUCTURE_STORAGE_KEY = 'hmi-structure';
 const MATERIAL_STORAGE_KEY = 'hmi-material';
 
 type ThemeContextValue = {
-    theme: ColorTheme;
-    setTheme: (theme: ColorTheme) => void;
+    theme: ColorTheme | string;
+    setTheme: (theme: ColorTheme | (string & {})) => void;
     structure: Structure;
     setStructure: (structure: Structure) => void;
     material: Material;
     setMaterial: (material: Material) => void;
-    colorThemes: readonly ColorTheme[];
+    colorThemes: readonly string[];
     structures: readonly Structure[];
     materials: readonly Material[];
 };
@@ -59,11 +59,14 @@ export type ThemeProviderProps = {
     /** App subtree that should react to theme changes. */
     children: ReactNode;
     /** Initial color theme when none is persisted in localStorage. @default 'default' */
-    defaultTheme?: ColorTheme;
+    defaultTheme?: ColorTheme | (string & {});
     /** Initial structure theme when none is persisted in localStorage. @default 'default' */
     defaultStructure?: Structure;
     /** Initial surface material when none is persisted in localStorage. @default 'solid' */
     defaultMaterial?: Material;
+    /** Additional theme names beyond the built-ins. Each must have a corresponding
+     *  CSS file loaded that defines `[data-theme='<name>'] { --primary: ...; }`. */
+    customThemes?: readonly string[];
 };
 
 /**
@@ -79,9 +82,14 @@ export function ThemeProvider({
     defaultTheme = 'default',
     defaultStructure = 'default',
     defaultMaterial = 'solid',
+    customThemes,
 }: ThemeProviderProps) {
-    const [theme, setTheme] = useState<ColorTheme>(() =>
-        readStored(THEME_STORAGE_KEY, colorThemes, defaultTheme),
+    const allColorThemes: readonly string[] = customThemes?.length
+        ? [...colorThemes, ...customThemes]
+        : colorThemes;
+
+    const [theme, setTheme] = useState<ColorTheme | string>(() =>
+        readStored(THEME_STORAGE_KEY, allColorThemes, defaultTheme as string),
     );
     const [structure, setStructure] = useState<Structure>(() =>
         readStored(STRUCTURE_STORAGE_KEY, structures, defaultStructure),
@@ -114,7 +122,7 @@ export function ThemeProvider({
                 setStructure,
                 material,
                 setMaterial,
-                colorThemes,
+                colorThemes: allColorThemes,
                 structures,
                 materials,
             }}
