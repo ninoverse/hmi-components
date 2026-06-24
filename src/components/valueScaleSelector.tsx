@@ -4,6 +4,7 @@ import {
     type ReactNode,
     useState,
 } from 'react';
+import { applyTemplate } from '../lib/formatTemplate.utility';
 import './styled/valueScaleSelector.styled.css';
 
 export type ValueScaleSelectorSize = 'small' | 'medium' | 'large';
@@ -21,8 +22,12 @@ export type ValueScaleSelectorProps = {
     allowHalf?: boolean;
     /** Icon rendered for each position. Defaults to a star. */
     icon?: ReactNode;
-    /** Build the `aria-valuetext`. Defaults to `'{value} out of {max}'`. */
-    valueText?: (value: number, max: number) => string;
+    /**
+     * Build the `aria-valuetext`. A function `(value, max) => string`, or a
+     * `{value}`/`{max}` template string usable over the web-component
+     * boundary. Defaults to `'{value} out of {max}'`.
+     */
+    valueText?: string | ((value: number, max: number) => string);
     /** Display only; no interaction. @default false */
     readOnly?: boolean;
     /** Disable the control. @default false */
@@ -106,9 +111,12 @@ export function ValueScaleSelector({
     const fillStyle: CSSProperties = { width: `${fillPct}%` };
     const cellIcon = icon ?? <DefaultIcon />;
 
-    const computedValueText = valueText
-        ? valueText(current, max)
-        : `${current} out of ${max}`;
+    const computedValueText =
+        typeof valueText === 'function'
+            ? valueText(current, max)
+            : valueText
+              ? applyTemplate(valueText, { value: current, max })
+              : `${current} out of ${max}`;
 
     return (
         <div

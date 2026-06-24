@@ -1,5 +1,6 @@
 import type { CSSProperties, InputHTMLAttributes } from 'react';
 import { useState } from 'react';
+import { applyTemplate } from '../lib/formatTemplate.utility';
 import './styled/slider.styled.css';
 
 export type SliderProps = Omit<
@@ -18,8 +19,12 @@ export type SliderProps = Omit<
     step?: number;
     /** Show the current value beside the track. @default false */
     showValue?: boolean;
-    /** Format the displayed value (e.g. add a unit). */
-    formatValue?: (value: number) => string;
+    /**
+     * Format the displayed value. A function `(value) => string`, or a
+     * `{value}` template string (e.g. `"{value}%"`) usable over the
+     * web-component boundary.
+     */
+    formatValue?: string | ((value: number) => string);
     /** Fires with the new value as the thumb moves. */
     onChange?: (value: number) => void;
 };
@@ -78,7 +83,11 @@ export function Slider({
             />
             {showValue && (
                 <span className="slider__value">
-                    {formatValue ? formatValue(current) : current}
+                    {typeof formatValue === 'function'
+                        ? formatValue(current)
+                        : formatValue
+                          ? applyTemplate(formatValue, { value: current })
+                          : current}
                 </span>
             )}
         </div>
