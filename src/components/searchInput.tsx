@@ -1,5 +1,6 @@
 import { Input, type InputProps } from './input';
 
+/** Same as {@link InputProps}, minus `leftIcon` and `type` (set internally). */
 export type SearchInputProps = Omit<InputProps, 'leftIcon' | 'type'>;
 
 const SearchIcon = () => (
@@ -17,6 +18,13 @@ const SearchIcon = () => (
     </svg>
 );
 
+/**
+ * {@link Input} preconfigured for search, with a leading search icon and
+ * `type="search"`.
+ *
+ * @example
+ * <SearchInput value={q} onChange={setQ} />
+ */
 export function SearchInput({
     placeholder = 'Search…',
     ...rest

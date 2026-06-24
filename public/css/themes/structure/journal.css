@@ -1,0 +1,82 @@
+/* Field Journal structure — a well-worn naturalist's field notebook. Generous
+   symmetric rounding, a confident handwriting display face over a structured
+   companion body, calm comfortable motion/density, and a single-plane elevation
+   model: no blur — "lift" is a hard, blur-less offset in the primary ink, like
+   a card nudged off the page. Composes with any color theme. Self-contained:
+   defines the full structural token set (plus an elevation override). */
+
+[data-structure='journal'] {
+    /* Shape scale — generous, symmetric rounding */
+    --corner-none: 0;
+    --corner-extra-small: 0.75rem;
+    --corner-small: 1.25rem;
+    --corner-medium: 2rem;
+    --corner-large: 2.75rem;
+    --corner-extra-large: 4rem;
+    --corner-full: 9999px;
+
+    /* Per-corner — symmetric (no asymmetric notch) */
+    --corner-tl: var(--corner-large);
+    --corner-tr: var(--corner-large);
+    --corner-br: var(--corner-large);
+    --corner-bl: var(--corner-large);
+
+    /* Motion — calm, expressive (mirrors default) */
+    --easing-emphasized: cubic-bezier(0.2, 0, 0, 1);
+    --easing-emphasized-decelerate: cubic-bezier(0.05, 0.7, 0.1, 1);
+    --easing-emphasized-accelerate: cubic-bezier(0.3, 0, 0.8, 0.15);
+    --easing-standard: cubic-bezier(0.2, 0, 0, 1);
+    --easing-standard-decelerate: cubic-bezier(0, 0, 0, 1);
+    --easing-standard-accelerate: cubic-bezier(0.3, 0, 1, 1);
+    --easing-linear: cubic-bezier(0, 0, 1, 1);
+    --easing-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    /* Motion — duration */
+    --duration-short-1: 50ms;
+    --duration-short-2: 100ms;
+    --duration-short-3: 150ms;
+    --duration-short-4: 200ms;
+    --duration-medium-1: 250ms;
+    --duration-medium-2: 300ms;
+    --duration-medium-3: 350ms;
+    --duration-medium-4: 400ms;
+    --duration-long-1: 450ms;
+    --duration-long-2: 500ms;
+    --duration-long-3: 550ms;
+    --duration-long-4: 600ms;
+    --duration-extra-long-1: 700ms;
+    --duration-extra-long-2: 800ms;
+    --duration-extra-long-3: 900ms;
+    --duration-extra-long-4: 1000ms;
+
+    /* Density — comfortable (mirrors default) */
+    --space-0: 0;
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-5: 1.25rem;
+    --space-6: 1.5rem;
+    --space-7: 1.75rem;
+    --space-8: 2rem;
+    --space-9: 2.25rem;
+    --space-10: 2.5rem;
+    --space-11: 3rem;
+    --space-12: 4rem;
+    --space-13: 5rem;
+    --space-14: 7rem;
+
+    /* Typography — handwriting display over a structured companion body */
+    --font-default: var(--font-quicksand);
+    --font-display: var(--font-caveat);
+
+    /* Elevation — no blur, single plane. Rest is flat (border only); "lift" is
+       a hard offset in the accent (--tertiary), like cut paper. Overrides
+       constants.css for this structure only (wins on source order). */
+    --elevation-0: none;
+    --elevation-1: none;
+    --elevation-2: 0.375rem 0.375rem 0 0 var(--tertiary);
+    --elevation-3: 0.5rem 0.5rem 0 0 var(--tertiary);
+    --elevation-4: 0.625rem 0.625rem 0 0 var(--tertiary);
+    --elevation-5: 0.75rem 0.75rem 0 0 var(--tertiary);
+}

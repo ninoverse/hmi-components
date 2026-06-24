@@ -14,14 +14,29 @@ export type HoverCardSide = 'top' | 'bottom' | 'left' | 'right';
 export type HoverCardAlign = 'start' | 'center' | 'end';
 
 export type HoverCardProps = {
+    /** Element that opens the card on hover/focus. */
     trigger: ReactNode;
+    /** Rich card content. */
     children: ReactNode;
+    /** Preferred side relative to the trigger. @default 'bottom' */
     side?: HoverCardSide;
+    /** Alignment along the chosen side. @default 'center' */
     align?: HoverCardAlign;
+    /** Delay before opening, in ms. @default 300 */
     openDelay?: number;
+    /** Delay before closing after the pointer leaves, in ms. @default 150 */
     closeDelay?: number;
+    /** Fixed card width; number = px. */
     width?: number | string;
 };
+
+/**
+ * Rich hover/focus popover that stays open while the pointer is over its
+ * content, with configurable side, alignment and open/close delays.
+ *
+ * @example
+ * <HoverCard trigger={<a>@ada</a>}><Profile /></HoverCard>
+ */
 
 type Position = { x: number; y: number; transform: string };
 

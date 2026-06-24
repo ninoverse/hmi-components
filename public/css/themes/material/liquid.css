@@ -1,0 +1,145 @@
+/* Liquid Glass material — a refractive, glossy finish that composes with ANY
+   color theme and structure. Driven by html[data-material='liquid']; 'solid'
+   stays the default no-op. Distinct from the flat frosted 'glass': more
+   transparent, real backdrop refraction (SVG feDisplacementMap), a specular
+   sheen, a bright convex edge rim, and softer floating shadows. All values
+   derive from the active role tokens via color-mix, so it adapts to every
+   palette and to light/dark. Loaded last so its --elevation / body overrides
+   win on source order.
+
+   Refraction requires the #liquid-glass SVG filter to exist in the document.
+   The showcase ships it inline in index.html; library consumers should add the
+   same <svg><filter id="liquid-glass">…</filter></svg> to their app (without
+   it, liquid still renders sheen + rim + translucency, just no lensing). */
+
+[data-material='liquid'] {
+    /* Translucent surfaces (more see-through than frosted glass) */
+    --liquid-surface: color-mix(in srgb, var(--surface-container-high) 50%, transparent);
+    --liquid-surface-strong: color-mix(
+        in srgb,
+        var(--surface-container-lowest) 60%,
+        transparent
+    );
+    --liquid-stroke: color-mix(in srgb, white 55%, transparent);
+
+    /* Backdrop refraction + frost (one SVG filter displaces then blurs) */
+    --liquid-refract: url('#liquid-glass') saturate(1.6) brightness(1.06);
+
+    /* Glossy specular streak layered over the fill */
+    --liquid-sheen: linear-gradient(
+        135deg,
+        color-mix(in srgb, white 38%, transparent),
+        transparent 40%,
+        transparent 60%,
+        color-mix(in srgb, white 10%, transparent)
+    );
+
+    /* Convex lens rim — bright top highlight, soft dark underside, inner glow */
+    --liquid-rim:
+        inset 0 0.125rem 0.0625rem -0.0625rem
+        color-mix(in srgb, white 75%, transparent),
+        inset 0 -0.1875rem 0.375rem -0.125rem
+        color-mix(in srgb, var(--shadow) 22%, transparent),
+        inset 0 0 1.75rem color-mix(in srgb, white 14%, transparent);
+
+    /* Rim baked into the elevation scale, so every panel keeps its level and
+       gains the rim + a soft floating glow with no box-shadow overrides. */
+    --elevation-0: var(--liquid-rim);
+    --elevation-1: var(--liquid-rim),
+        0 0.5rem 1.5rem 0 color-mix(in srgb, var(--shadow) 14%, transparent);
+    --elevation-2: var(--liquid-rim),
+        0 0.625rem 1.75rem 0 color-mix(in srgb, var(--shadow) 16%, transparent);
+    --elevation-3: var(--liquid-rim),
+        0 0.875rem 2.25rem 0 color-mix(in srgb, var(--shadow) 18%, transparent);
+    --elevation-4: var(--liquid-rim),
+        0 1.25rem 3rem 0 color-mix(in srgb, var(--shadow) 22%, transparent);
+    --elevation-5: var(--liquid-rim),
+        0 1.75rem 4rem 0 color-mix(in srgb, var(--shadow) 26%, transparent);
+}
+
+@media (prefers-color-scheme: dark) {
+    [data-material='liquid'] {
+        --liquid-surface: color-mix(
+            in srgb,
+            var(--surface-container-high) 42%,
+            transparent
+        );
+        --liquid-surface-strong: color-mix(
+            in srgb,
+            var(--surface-container-lowest) 52%,
+            transparent
+        );
+        --liquid-stroke: color-mix(in srgb, white 20%, transparent);
+        --liquid-sheen: linear-gradient(
+            135deg,
+            color-mix(in srgb, white 16%, transparent),
+            transparent 40%,
+            transparent 60%,
+            color-mix(in srgb, white 5%, transparent)
+        );
+        --liquid-rim:
+            inset 0 0.125rem 0.0625rem -0.0625rem
+            color-mix(in srgb, white 28%, transparent),
+            inset 0 -0.1875rem 0.375rem -0.125rem
+            color-mix(in srgb, var(--shadow) 35%, transparent),
+            inset 0 0 1.75rem color-mix(in srgb, white 6%, transparent);
+    }
+}
+
+/* Vivid palette-derived gradient backdrop — something for the lens to refract. */
+[data-material='liquid'] body {
+    background:
+        radial-gradient(
+            at 16% 10%,
+            color-mix(in srgb, var(--primary) 42%, transparent),
+            transparent 45%
+        ),
+        radial-gradient(
+            at 86% 6%,
+            color-mix(in srgb, var(--tertiary) 38%, transparent),
+            transparent 48%
+        ),
+        radial-gradient(
+            at 50% 100%,
+            color-mix(in srgb, var(--secondary) 30%, transparent),
+            transparent 55%
+        ),
+        var(--background);
+    background-attachment: fixed;
+}
+
+/* Refractive glossy panels — sheen over a translucent fill, bright stroke,
+   backdrop refraction. The rim/glow arrive via the --elevation tokens above. */
+[data-material='liquid'] .card,
+[data-material='liquid'] .navbar,
+[data-material='liquid'] .sidebar,
+[data-material='liquid'] .popover,
+[data-material='liquid'] .context-menu,
+[data-material='liquid'] .hover-card,
+[data-material='liquid'] .toast {
+    background: var(--liquid-sheen), var(--liquid-surface);
+    border-color: var(--liquid-stroke);
+    backdrop-filter: var(--liquid-refract);
+    -webkit-backdrop-filter: var(--liquid-refract);
+}
+
+/* Dialogs / drawers / floating listboxes — a touch more opaque for legibility. */
+[data-material='liquid'] .modal,
+[data-material='liquid'] .drawer,
+[data-material='liquid'] .command-palette,
+[data-material='liquid'] .combobox__listbox {
+    background: var(--liquid-sheen), var(--liquid-surface-strong);
+    border-color: var(--liquid-stroke);
+    backdrop-filter: var(--liquid-refract);
+    -webkit-backdrop-filter: var(--liquid-refract);
+}
+
+/* Keep the tonal card variants meaningful — sheen over their own fills. */
+[data-material='liquid'] .card--ink {
+    background: var(--liquid-sheen),
+        color-mix(in srgb, var(--inverse-surface) 55%, transparent);
+}
+[data-material='liquid'] .card--accent {
+    background: var(--liquid-sheen),
+        color-mix(in srgb, var(--primary-container) 55%, transparent);
+}

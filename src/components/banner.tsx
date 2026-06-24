@@ -4,11 +4,17 @@ import './styled/banner.styled.css';
 export type BannerVariant = 'info' | 'success' | 'warning' | 'danger';
 
 export type BannerProps = HTMLAttributes<HTMLDivElement> & {
+    /** Tone, which sets the default icon and ARIA role. @default 'info' */
     variant?: BannerVariant;
+    /** Optional bold heading above the message. */
     title?: ReactNode;
+    /** Custom leading icon, overriding the variant default. */
     icon?: ReactNode;
+    /** Trailing slot for an action (e.g. a button). */
     action?: ReactNode;
+    /** When provided, renders a dismiss button that calls this on click. */
     onDismiss?: () => void;
+    /** Accessible label for the dismiss button. @default 'Dismiss' */
     dismissLabel?: string;
 };
 
@@ -82,6 +88,14 @@ const VARIANT_ICONS = {
     danger: DangerIcon,
 } as const;
 
+/**
+ * Page-level status banner with a variant icon, optional title/action and an
+ * optional dismiss button. `danger`/`warning` use `role="alert"`, others
+ * `role="status"`. The body is passed as `children`.
+ *
+ * @example
+ * <Banner variant="success" title="Saved" onDismiss={hide}>All set.</Banner>
+ */
 export function Banner({
     variant = 'info',
     title,

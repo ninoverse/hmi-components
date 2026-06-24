@@ -8,23 +8,45 @@ import {
 import './styled/tree.styled.css';
 
 export type TreeNode<T extends string = string> = {
+    /** Unique node value, used for selection/expansion and as the key. */
     value: T;
+    /** Visible node label. */
     label: ReactNode;
+    /** Optional leading icon. */
     icon?: ReactNode;
+    /** Child nodes; presence makes the node expandable. */
     children?: ReadonlyArray<TreeNode<T>>;
+    /** Disable selecting/focusing this node. @default false */
     disabled?: boolean;
 };
 
 export type TreeProps<T extends string = string> = {
+    /** Root nodes of the tree. */
     nodes: ReadonlyArray<TreeNode<T>>;
+    /** Controlled set of expanded node values. Provide with `onExpandedChange`. */
     expanded?: ReadonlyArray<T>;
+    /** Initially expanded node values when uncontrolled. */
     defaultExpanded?: ReadonlyArray<T>;
+    /** Fires with the new list of expanded node values. */
     onExpandedChange?: (expanded: T[]) => void;
+    /** Controlled selected node value. Provide with `onSelect`. */
     selected?: T;
+    /** Initially selected node value when uncontrolled. */
     defaultSelected?: T;
+    /** Fires with the newly selected node value. */
     onSelect?: (value: T) => void;
+    /** Accessible label for the tree. @default 'Tree' */
     'aria-label'?: string;
 };
+
+/**
+ * Accessible (WAI-ARIA) tree view with expand/collapse, single selection and
+ * full keyboard navigation. Expansion and selection each work controlled or
+ * uncontrolled.
+ *
+ * @example
+ * <Tree nodes={nodes} defaultExpanded={['root']} onSelect={setSelected} />
+ */
 
 const ChevronIcon = () => (
     <svg

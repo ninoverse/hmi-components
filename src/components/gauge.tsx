@@ -2,18 +2,23 @@ import type { ReactNode } from 'react';
 import './styled/gauge.styled.css';
 
 export type GaugeProps = {
+    /** Current value, clamped to `[min, max]`. */
     value: number;
+    /** Lower bound of the scale. @default 0 */
     min?: number;
+    /** Upper bound of the scale. @default 100 */
     max?: number;
     /** Arc colour. Defaults to the primary token. */
     color?: string;
     /** Track (unfilled arc) colour. */
     trackColor?: string;
-    /** Thickness of the arc as a fraction of the radius (0..1). */
+    /** Thickness of the arc as a fraction of the radius (0..1). @default 0.22 */
     thickness?: number;
+    /** SVG width in px (height is derived). @default 200 */
     size?: number;
     /** Content shown below the dial (e.g. the value). Defaults to the value. */
     label?: ReactNode;
+    /** Accessible name. Defaults to `'Gauge: {value} of {max}'`. */
     'aria-label'?: string;
 };
 

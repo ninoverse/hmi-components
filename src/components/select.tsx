@@ -4,20 +4,39 @@ import { Popover, type PopoverAlign } from './popover';
 import './styled/select.styled.css';
 
 export type SelectOption<T extends string = string> = {
+    /** Value selected when this option is chosen. */
     value: T;
+    /** Visible option label. */
     label: ReactNode;
+    /** Optional leading icon. */
     icon?: ReactNode;
 };
 
 export type SelectProps<T extends string = string> = {
+    /** Controlled selected value. Provide with `onChange`. */
     value?: T;
+    /** Initial selected value when uncontrolled. */
     defaultValue?: T;
+    /** Fires with the newly selected value. */
     onChange?: (value: T) => void;
+    /** Options to render in the dropdown. */
     options: ReadonlyArray<SelectOption<T>>;
+    /** Trigger text shown when nothing is selected. @default 'Select…' */
     placeholder?: ReactNode;
+    /** Dropdown alignment to the trigger. @default 'start' */
     align?: PopoverAlign;
+    /** Disable the trigger. @default false */
     disabled?: boolean;
 };
+
+/**
+ * Single-select dropdown built on {@link Popover} + {@link Menu}. For
+ * type-ahead filtering over many options, use {@link Combobox}. Works
+ * controlled or uncontrolled.
+ *
+ * @example
+ * <Select options={options} value={val} onChange={setVal} />
+ */
 
 const ChevronIcon = () => (
     <svg

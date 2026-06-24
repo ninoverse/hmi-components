@@ -110,8 +110,11 @@ export default function App() {
         setTheme,
         structure,
         setStructure,
+        material,
+        setMaterial,
         colorThemes,
         structures,
+        materials,
     } = useTheme();
     const [plan, setPlan] = useState<'free' | 'pro' | 'team'>('pro');
     const [brandColor, setBrandColor] = useState('#e87a5d');
@@ -283,6 +286,16 @@ export default function App() {
                         value={structure}
                         onChange={setStructure}
                         options={structures.map((value) => ({
+                            value,
+                            label: value,
+                        }))}
+                    />
+                </FormControl>
+                <FormControl label="Material (select)">
+                    <Select
+                        value={material}
+                        onChange={setMaterial}
+                        options={materials.map((value) => ({
                             value,
                             label: value,
                         }))}
@@ -1467,6 +1480,27 @@ export function Example() {
                             primary variants.
                         </p>
                     </Card>
+                    <Card active>
+                        <h3
+                            style={{
+                                margin: 0,
+                                fontSize: '2.25rem',
+                                fontWeight: 700,
+                            }}
+                        >
+                            Active
+                        </h3>
+                        <p
+                            style={{
+                                margin: '0.75rem 0 0',
+                                fontSize: '1.75rem',
+                                color: 'var(--on-surface-variant)',
+                            }}
+                        >
+                            Lifted off the page to mark the active / selected
+                            card.
+                        </p>
+                    </Card>
                 </div>
             </section>
 
@@ -2021,6 +2055,29 @@ export function Example() {
                         ratio={4 / 3}
                         width={280}
                         radius="large"
+                    />
+                    <Image
+                        src={sampleImage}
+                        alt="Top-aligned crop"
+                        ratio={4 / 3}
+                        width={280}
+                        position="top"
+                        placeholder="#1f5b58"
+                        radius="large"
+                    />
+                    <Image
+                        src={sampleImageTall}
+                        alt="Custom-rendered image"
+                        ratio={4 / 3}
+                        width={280}
+                        radius="large"
+                        renderImage={(p) => (
+                            <img
+                                {...p}
+                                alt={p.alt}
+                                style={{ objectFit: 'cover' }}
+                            />
+                        )}
                     />
                 </div>
             </section>

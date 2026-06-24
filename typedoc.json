@@ -1,0 +1,25 @@
+{
+    "$schema": "https://typedoc.org/schema.json",
+    "plugin": ["typedoc-plugin-markdown"],
+    "entryPoints": ["src/components", "src/configs", "src/theme.tsx"],
+    "entryPointStrategy": "expand",
+    "tsconfig": "tsconfig.app.json",
+    "out": "docs/api",
+    "name": "@ninoverse/hmi-components",
+    "readme": "none",
+    "githubPages": false,
+    "hideGenerator": true,
+    "excludeInternal": true,
+    "excludePrivate": true,
+    "exclude": ["**/styled/**", "src/components/**/*.styled.css"],
+    "intentionallyNotExported": [
+        "SingleProps",
+        "RangeProps",
+        "ImageOwnProps",
+        "ThemeContextValue",
+        "ShortcutOptions"
+    ],
+    "sort": ["alphabetical"],
+    "outputFileStrategy": "modules",
+    "entryFileName": "README"
+}

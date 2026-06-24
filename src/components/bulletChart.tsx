@@ -13,9 +13,13 @@ export type BulletChartProps = {
     ranges?: ReadonlyArray<number>;
     /** Measure bar colour. Defaults to the primary token. */
     color?: string;
+    /** Leading label rendered to the left of the track. */
     label?: string;
+    /** SVG width in px. @default 360 */
     width?: number;
+    /** SVG height in px. @default 48 */
     height?: number;
+    /** Accessible name. Falls back to `label`, then `'Bullet chart'`. */
     'aria-label'?: string;
 };
 

@@ -3,6 +3,14 @@ import './styled/menu.styled.css';
 
 export type MenuProps = HTMLAttributes<HTMLDivElement>;
 
+/**
+ * Menu container holding {@link MenuItem}, {@link MenuSeparator} and
+ * {@link MenuLabel} children. Pair with `Popover`/`ContextMenu` for
+ * dropdown/right-click menus.
+ *
+ * @example
+ * <Menu><MenuItem>Edit</MenuItem><MenuSeparator /><MenuItem danger>Delete</MenuItem></Menu>
+ */
 export function Menu({ className, children, ...rest }: MenuProps) {
     const tokens: string[] = ['menu'];
     if (className) tokens.push(className);
@@ -14,11 +22,15 @@ export function Menu({ className, children, ...rest }: MenuProps) {
 }
 
 export type MenuItemProps = ComponentPropsWithRef<'button'> & {
+    /** Leading icon. */
     icon?: ReactNode;
+    /** Trailing hint (e.g. a keyboard shortcut). */
     shortcut?: ReactNode;
+    /** Style as a destructive action. @default false */
     danger?: boolean;
 };
 
+/** Activatable menu row. Forwards native `<button>` props. */
 export function MenuItem({
     icon,
     shortcut,
@@ -45,6 +57,7 @@ export function MenuItem({
 
 export type MenuSeparatorProps = HTMLAttributes<HTMLHRElement>;
 
+/** Horizontal divider between groups of menu items. */
 export function MenuSeparator({ className, ...rest }: MenuSeparatorProps) {
     const tokens: string[] = ['menu__sep'];
     if (className) tokens.push(className);
@@ -53,6 +66,7 @@ export function MenuSeparator({ className, ...rest }: MenuSeparatorProps) {
 
 export type MenuLabelProps = HTMLAttributes<HTMLDivElement>;
 
+/** Non-interactive group heading within a menu. */
 export function MenuLabel({ className, children, ...rest }: MenuLabelProps) {
     const tokens: string[] = ['menu__label'];
     if (className) tokens.push(className);

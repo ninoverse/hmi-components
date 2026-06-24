@@ -5,11 +5,22 @@ export type DividerOrientation = 'horizontal' | 'vertical';
 export type DividerAlign = 'start' | 'center' | 'end';
 
 export type DividerProps = HTMLAttributes<HTMLDivElement> & {
+    /** Line direction. @default 'horizontal' */
     orientation?: DividerOrientation;
+    /** Label position; only applies to a labeled horizontal divider. @default 'center' */
     align?: DividerAlign;
+    /** Optional label rendered inline (horizontal only). */
     children?: ReactNode;
 };
 
+/**
+ * Separator line. Renders an `<hr>` when empty, or a labeled divider when
+ * `children` are provided (horizontal orientation only).
+ *
+ * @example
+ * <Divider />
+ * <Divider align="start">Section</Divider>
+ */
 export function Divider({
     orientation = 'horizontal',
     align = 'center',

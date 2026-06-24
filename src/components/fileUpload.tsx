@@ -12,12 +12,19 @@ import './styled/fileUpload.styled.css';
 export type FileDescriptor = { name: string; size: number; type: string };
 
 export type FileUploadProps = {
+    /** Fires with the current selection as serializable {@link FileDescriptor}s. */
     onChange?: (files: FileDescriptor[]) => void;
+    /** `accept` filter forwarded to the file input (e.g. `'image/*'`). */
     accept?: string;
+    /** Allow selecting multiple files. @default false */
     multiple?: boolean;
+    /** Disable the drop zone and remove buttons. @default false */
     disabled?: boolean;
+    /** Drop-zone prompt text. @default 'Drop files here or click to browse' */
     label?: string;
+    /** Secondary hint under the label (e.g. accepted types/size). */
     hint?: string;
+    /** Accessible label for the drop zone. @default 'File upload' */
     'aria-label'?: string;
 };
 
@@ -37,6 +44,14 @@ const toDescriptor = (f: File): FileDescriptor => ({
     type: f.type,
 });
 
+/**
+ * Drag-and-drop / click file picker. Uncontrolled — it owns the selection and
+ * emits serializable {@link FileDescriptor}s (not raw `File`s) via `onChange`,
+ * so it works across the Web Component boundary.
+ *
+ * @example
+ * <FileUpload multiple accept="image/*" onChange={setFiles} />
+ */
 export function FileUpload({
     onChange,
     accept,

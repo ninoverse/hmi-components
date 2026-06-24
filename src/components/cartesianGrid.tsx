@@ -1,7 +1,9 @@
 import './styled/cartesianGrid.styled.css';
 
 export type CartesianGridProps = {
+    /** Grid area width in px. */
     width: number;
+    /** Grid area height in px. */
     height: number;
     /** Number of horizontal grid lines (inclusive of the edges). */
     rows?: number;

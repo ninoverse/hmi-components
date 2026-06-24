@@ -6,14 +6,28 @@ export type InputProps = Omit<
     ComponentPropsWithRef<'input'>,
     'value' | 'defaultValue' | 'onChange'
 > & {
+    /** Icon rendered inside the field, before the text. */
     leftIcon?: ReactNode;
+    /** Icon rendered inside the field, after the text. */
     rightIcon?: ReactNode;
+    /** Apply error styling. @default false */
     error?: boolean;
+    /** Controlled value. Provide with `onChange`. */
     value?: string;
+    /** Initial value when uncontrolled. */
     defaultValue?: string;
+    /** Fires with the new string value on input. */
     onChange?: (value: string) => void;
 };
 
+/**
+ * Single-line text field with optional leading/trailing icons and an error
+ * state. `onChange` is simplified to receive the string value; caret position
+ * is preserved when controlled.
+ *
+ * @example
+ * <Input value={q} onChange={setQ} leftIcon={<SearchIcon />} />
+ */
 export function Input({
     leftIcon,
     rightIcon,

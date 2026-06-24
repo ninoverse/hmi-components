@@ -9,14 +9,23 @@ import {
 import './styled/carousel.styled.css';
 
 export type CarouselProps = {
+    /** Slide content, in order. */
     slides: ReadonlyArray<ReactNode>;
+    /** Controlled active slide index. Provide with `onIndexChange`. */
     index?: number;
+    /** Initial slide index when uncontrolled. @default 0 */
     defaultIndex?: number;
+    /** Fires with the new index whenever the active slide changes. */
     onIndexChange?: (index: number) => void;
+    /** Wrap around past the first/last slide. @default true */
     loop?: boolean;
+    /** Auto-advance interval in ms; pauses on hover/focus. Disabled when unset. */
     autoPlay?: number;
+    /** Show prev/next arrow buttons. @default true */
     showArrows?: boolean;
+    /** Show the dot pagination control. @default true */
     showDots?: boolean;
+    /** Accessible name for the carousel region. @default 'Carousel' */
     'aria-label'?: string;
 };
 
@@ -35,6 +44,13 @@ const ArrowIcon = ({ dir }: { dir: 'prev' | 'next' }) => (
     </svg>
 );
 
+/**
+ * Sliding content carousel with optional arrows, dot pagination, looping,
+ * autoplay and keyboard (←/→) support. Works controlled or uncontrolled.
+ *
+ * @example
+ * <Carousel slides={[<Slide1 />, <Slide2 />]} autoPlay={4000} />
+ */
 export function Carousel({
     slides,
     index,

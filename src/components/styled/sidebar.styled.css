@@ -4,7 +4,8 @@
    neutral surface. */
 
 .sidebar {
-    width: 30rem;
+    width: 100%;
+    max-width: 30rem;
     padding: var(--space-8);
     background: var(--surface-container-high);
     border: 0.125rem solid var(--outline-variant);

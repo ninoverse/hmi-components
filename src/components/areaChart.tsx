@@ -2,23 +2,30 @@ import { CartesianGrid } from './cartesianGrid';
 import './styled/areaChart.styled.css';
 
 export type AreaChartSeries = {
+    /** Legend/label name for the series. */
     name: string;
+    /** Y values, one per category. */
     data: ReadonlyArray<number>;
     /** Series colour. Defaults to the primary token. */
     color?: string;
 };
 
 export type AreaChartProps = {
+    /** One or more data series to overlay. */
     series: ReadonlyArray<AreaChartSeries>;
     /** X-axis category labels; length should match the series data length. */
     labels?: ReadonlyArray<string>;
+    /** SVG viewport width in px. @default 520 */
     width?: number;
+    /** SVG viewport height in px. @default 260 */
     height?: number;
     /** Override the value range; defaults to 0..max across all series. */
     min?: number;
+    /** Upper bound of the value range. Defaults to the max across all series. */
     max?: number;
-    /** Number of horizontal grid lines / y-axis ticks. */
+    /** Number of horizontal grid lines / y-axis ticks. @default 4 */
     yTicks?: number;
+    /** Accessible name for the chart. @default 'Area chart' */
     'aria-label'?: string;
 };
 

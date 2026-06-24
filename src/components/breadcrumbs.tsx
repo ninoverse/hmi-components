@@ -2,16 +2,27 @@ import type { HTMLAttributes, MouseEvent, ReactNode } from 'react';
 import './styled/breadcrumbs.styled.css';
 
 export type BreadcrumbItem = {
+    /** Visible crumb text. */
     label: ReactNode;
+    /** Link target. Ignored on the last (current) item. */
     href?: string;
+    /** Click handler; when set, default navigation is prevented. */
     onClick?: () => void;
 };
 
 export type BreadcrumbsProps = HTMLAttributes<HTMLElement> & {
+    /** Trail of crumbs; the last item is rendered as the current page. */
     items: ReadonlyArray<BreadcrumbItem>;
+    /** Separator between crumbs. @default '/' */
     separator?: ReactNode;
 };
 
+/**
+ * Navigation breadcrumb trail. The final item is marked `aria-current="page"`.
+ *
+ * @example
+ * <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Settings' }]} />
+ */
 export function Breadcrumbs({
     items,
     separator = '/',

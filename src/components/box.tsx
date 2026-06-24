@@ -12,14 +12,27 @@ export type BoxPadding = 'none' | 'small' | 'medium' | 'large';
 export type BoxRadius = 'none' | 'small' | 'medium' | 'large' | 'full' | 'leaf';
 
 export type BoxProps = HTMLAttributes<HTMLDivElement> & {
+    /** Element/component to render as. @default 'div' */
     as?: ElementType;
+    /** Surface token applied as the background. @default 'none' */
     background?: BoxBackground;
+    /** Inner padding preset. @default 'none' */
     padding?: BoxPadding;
+    /** Corner radius preset. @default 'none' */
     radius?: BoxRadius;
+    /** Add a 1px outline-variant border. @default false */
     bordered?: boolean;
+    /** Box content. */
     children?: ReactNode;
 };
 
+/**
+ * Primitive container that maps surface, padding, radius and border props to
+ * theme tokens. Render as any element via `as`.
+ *
+ * @example
+ * <Box as="section" background="surface-variant" padding="medium" radius="medium" bordered>…</Box>
+ */
 export function Box({
     as: Component = 'div',
     background = 'none',

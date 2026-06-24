@@ -6,15 +6,29 @@ export type NumberInputProps = Omit<
     InputHTMLAttributes<HTMLInputElement>,
     'type' | 'value' | 'defaultValue' | 'onChange' | 'min' | 'max' | 'step'
 > & {
+    /** Controlled value, or `null` when empty. Provide with `onChange`. */
     value?: number | null;
+    /** Initial value when uncontrolled. */
     defaultValue?: number;
+    /** Minimum value; clamped on blur and disables the decrement at the bound. */
     min?: number;
+    /** Maximum value; clamped on blur and disables the increment at the bound. */
     max?: number;
+    /** Increment/decrement step. @default 1 */
     step?: number;
+    /** Apply error styling. @default false */
     error?: boolean;
+    /** Fires with the new number, or `null` when the field is cleared. */
     onChange?: (value: number | null) => void;
 };
 
+/**
+ * Numeric field with stepper buttons and min/max clamping (applied on blur).
+ * Empty input is represented as `null`. Works controlled or uncontrolled.
+ *
+ * @example
+ * <NumberInput min={0} max={10} value={qty} onChange={setQty} />
+ */
 export function NumberInput({
     value,
     defaultValue,

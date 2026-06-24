@@ -7,16 +7,35 @@ export type SliderProps = Omit<
     InputHTMLAttributes<HTMLInputElement>,
     'type' | 'value' | 'defaultValue' | 'onChange' | 'min' | 'max' | 'step'
 > & {
+    /** Controlled value. Provide with `onChange`. */
     value?: number;
+    /** Initial value when uncontrolled. Defaults to `min`. */
     defaultValue?: number;
+    /** Minimum value. @default 0 */
     min?: number;
+    /** Maximum value. @default 100 */
     max?: number;
+    /** Step increment. @default 1 */
     step?: number;
+    /** Show the current value beside the track. @default false */
     showValue?: boolean;
+    /**
+     * Format the displayed value. A function `(value) => string`, or a
+     * `{value}` template string (e.g. `"{value}%"`) usable over the
+     * web-component boundary.
+     */
     formatValue?: string | ((value: number) => string);
+    /** Fires with the new value as the thumb moves. */
     onChange?: (value: number) => void;
 };
 
+/**
+ * Range slider over a native `range` input, with optional value display and
+ * formatting. Works controlled or uncontrolled.
+ *
+ * @example
+ * <Slider min={0} max={100} value={vol} onChange={setVol} showValue />
+ */
 export function Slider({
     value,
     defaultValue,

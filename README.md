@@ -150,9 +150,16 @@ rsx! {
 | **Charts & visualization** | `AreaChart`, `BarChart`, `BulletChart`, `CartesianGrid`, `ChartTooltip`, `DonutChart`, `FunnelChart`, `Heatmap`, `Legend`, `LineChart`, `RadarChart`, `ResponsiveContainer`, `ScatterPlot`, `Sparkline` |
 | **Media & disclosure** | `Carousel`, `Accordion` |
 
+## Documentation
+
+- **[Theming guide](./docs/theming.md)** — the two theme axes, `ThemeProvider` / `useTheme`, the full design-token reference, and how to author custom themes.
+- **[Component API reference](./docs/api/)** — generated per-component prop tables and examples (run `pnpm docs` to regenerate from source).
+
+Every component and prop also ships JSDoc, so your editor shows the same descriptions on hover and autocomplete.
+
 ## Design system
 
-Color tokens follow Material Design 3 naming (`--primary`, `--surface-variant`, `--on-surface`, etc.) and are defined as CSS custom properties in `public/css/themes/`. Import `src/configs/colors.ts` to reference them from TypeScript.
+Color tokens follow Material Design 3 naming (`--primary`, `--surface-variant`, `--on-surface`, etc.) and are defined as CSS custom properties in `public/css/themes/`. Import `src/configs/colors.ts` to reference them from TypeScript. See the **[theming guide](./docs/theming.md)** for the complete token reference and runtime theme switching.
 
 **Typography.** Base font size is `8px` (defined in `globals.css`); all `rem` units scale from this base. Available font families:
 
@@ -171,6 +178,7 @@ pnpm build     # production build (outputs to /dist)
 pnpm preview   # serve production build locally
 pnpm lint      # Biome check (lint + format)
 pnpm format    # Biome format with auto-write
+pnpm docs      # generate the component API reference (docs/api)
 ```
 
 ## Project structure
@@ -179,10 +187,11 @@ pnpm format    # Biome format with auto-write
 src/
 ├── components/         # React components (.tsx)
 │   └── styled/         # Component-scoped CSS (`*.styled.css`)
-├── configs/            # Color tokens and static config
-├── models/             # TypeScript interfaces and types
-└── lib/                # Shared utilities
+├── configs/            # Color/font tokens and theme config
+├── lib/                # Shared utilities
+└── theme.tsx           # ThemeProvider / useTheme
 
+docs/                   # Theming guide and generated API reference
 public/
 └── css/themes/         # Material Design 3 theme CSS variables
 ```

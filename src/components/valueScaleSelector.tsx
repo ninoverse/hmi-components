@@ -10,18 +10,42 @@ import './styled/valueScaleSelector.styled.css';
 export type ValueScaleSelectorSize = 'small' | 'medium' | 'large';
 
 export type ValueScaleSelectorProps = {
+    /** Controlled value. Provide with `onChange`. */
     value?: number;
+    /** Initial value when uncontrolled. @default 0 */
     defaultValue?: number;
+    /** Fires with the newly selected value. */
     onChange?: (value: number) => void;
+    /** Number of icons / maximum value. @default 5 */
     max?: number;
+    /** Allow half-step selection (e.g. 3.5). @default false */
     allowHalf?: boolean;
+    /** Icon rendered for each position. Defaults to a star. */
     icon?: ReactNode;
+    /**
+     * Build the `aria-valuetext`. A function `(value, max) => string`, or a
+     * `{value}`/`{max}` template string usable over the web-component
+     * boundary. Defaults to `'{value} out of {max}'`.
+     */
     valueText?: string | ((value: number, max: number) => string);
+    /** Display only; no interaction. @default false */
     readOnly?: boolean;
+    /** Disable the control. @default false */
     disabled?: boolean;
+    /** Icon size preset. @default 'medium' */
     size?: ValueScaleSelectorSize;
+    /** Accessible label for the slider. @default 'Value selector' */
     'aria-label'?: string;
 };
+
+/**
+ * Icon-based rating/scale selector (e.g. star rating) exposed as an accessible
+ * slider, with optional half-steps, custom icon and keyboard support. Works
+ * controlled or uncontrolled.
+ *
+ * @example
+ * <ValueScaleSelector max={5} allowHalf value={rating} onChange={setRating} />
+ */
 
 const DefaultIcon = () => (
     <svg viewBox="0 0 24 24" aria-hidden="true">

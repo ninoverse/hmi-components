@@ -2,14 +2,18 @@ import type { HTMLAttributes, ReactNode } from 'react';
 import './styled/chartTooltip.styled.css';
 
 export type ChartTooltipItem = {
+    /** Row label (e.g. the series name). */
     label: ReactNode;
+    /** Row value at the hovered point. */
     value: ReactNode;
     /** Series colour — consumer data (e.g. a chart palette entry). */
     color?: string;
 };
 
 export type ChartTooltipProps = HTMLAttributes<HTMLDivElement> & {
+    /** Optional heading (e.g. the hovered category/x value). */
     title?: ReactNode;
+    /** One row per series at the hovered point. */
     items: ReadonlyArray<ChartTooltipItem>;
 };
 

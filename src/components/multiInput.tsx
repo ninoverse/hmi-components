@@ -10,22 +10,46 @@ import './styled/multiInput.styled.css';
 export type MultiInputType = 'numeric' | 'text';
 
 export type MultiInputProps = {
+    /** Number of single-character cells. @default 6 */
     length?: number;
+    /** Insert a separator every N cells (e.g. `3` → `XXX–XXX`). */
     groupSize?: number;
+    /** Separator string shown between groups. @default '–' */
     separator?: string;
+    /** Controlled value (concatenated cells). Provide with `onChange`. */
     value?: string;
+    /** Initial value when uncontrolled. */
     defaultValue?: string;
+    /** Fires with the concatenated value on every edit. */
     onChange?: (value: string) => void;
+    /** Fires with the value once every cell is filled. */
     onComplete?: (value: string) => void;
+    /** Allowed characters and input mode. @default 'numeric' */
     type?: MultiInputType;
+    /** Custom single-character validation pattern, overriding `type`. */
     pattern?: RegExp;
+    /** Mask entered characters (password style). @default false */
     mask?: boolean;
+    /** Disable all cells. @default false */
     disabled?: boolean;
+    /** Make all cells read-only. @default false */
     readOnly?: boolean;
+    /** Focus the first cell on mount. @default false */
     autoFocus?: boolean;
+    /** `autocomplete` for the first cell (e.g. `'one-time-code'`). @default 'off' */
     autoComplete?: string;
+    /** Accessible label for the group. @default 'Segmented input' */
     'aria-label'?: string;
 };
+
+/**
+ * Segmented single-character input for codes/OTP/PIN, with auto-advance,
+ * paste-to-fill, keyboard navigation and optional grouping. Works controlled
+ * or uncontrolled.
+ *
+ * @example
+ * <MultiInput length={6} groupSize={3} onComplete={verify} />
+ */
 
 const NUMERIC_PATTERN = /^[0-9]$/;
 const NON_WHITESPACE_PATTERN = /^\S$/;

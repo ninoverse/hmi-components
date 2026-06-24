@@ -14,18 +14,33 @@ import './styled/drawer.styled.css';
 export type DrawerSide = 'left' | 'right' | 'top' | 'bottom';
 
 export type DrawerProps = HTMLAttributes<HTMLDivElement> & {
+    /** Whether the drawer is open. */
     open: boolean;
+    /** Called on Escape or backdrop click. */
     onClose: () => void;
+    /** Edge the panel slides in from. @default 'right' */
     side?: DrawerSide;
+    /** Panel size (width for left/right, height for top/bottom); number = px. */
     size?: string | number;
+    /** Heading shown at the top of the panel. */
     title?: ReactNode;
+    /** Supporting text under the title. */
     description?: ReactNode;
+    /** Footer actions: arbitrary nodes, or a serializable `DialogAction[]`. */
     actions?: ReactNode | DialogAction[];
+    /** Fires with a `DialogAction.value` when a declarative action is chosen. */
     onAction?: (value: string) => void;
 };
 
 const toCss = (v: string | number) => (typeof v === 'number' ? `${v}px` : v);
 
+/**
+ * Slide-out panel anchored to a screen edge, with scrim, focus management,
+ * Escape-to-close and optional title/description/footer actions.
+ *
+ * @example
+ * <Drawer open={open} onClose={close} side="right" title="Filters">…</Drawer>
+ */
 export function Drawer({
     open,
     onClose,

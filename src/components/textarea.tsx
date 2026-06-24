@@ -6,12 +6,23 @@ export type TextareaProps = Omit<
     ComponentPropsWithRef<'textarea'>,
     'value' | 'defaultValue' | 'onChange'
 > & {
+    /** Apply error styling. @default false */
     error?: boolean;
+    /** Controlled value. Provide with `onChange`. */
     value?: string;
+    /** Initial value when uncontrolled. */
     defaultValue?: string;
+    /** Fires with the new string value on input. */
     onChange?: (value: string) => void;
 };
 
+/**
+ * Multi-line text field with an error state. `onChange` is simplified to
+ * receive the string value; caret position is preserved when controlled.
+ *
+ * @example
+ * <Textarea value={bio} onChange={setBio} rows={4} />
+ */
 export function Textarea({
     error = false,
     className,

@@ -1,30 +1,31 @@
-/* Image — wrapper around a single <img> that reserves space (optional
-   aspect-ratio / explicit size), masks loading with a shimmer, applies
-   object-fit + token-based rounding, and swaps to a fallback on error.
-   The wrapper is the positioning context; the img and overlays fill it. */
+/* Image — wrapper around a single <img> (or a custom renderImage slot, e.g.
+   next/image) that reserves space (optional aspect-ratio / explicit size),
+   shows a placeholder *behind* the image while it loads, applies object-fit +
+   token-based rounding, and swaps to a fallback on error. The wrapper is the
+   positioning context and owns its own stacking context; the image paints
+   above the placeholder so it appears as soon as the browser has decoded it —
+   visibility is never gated on client JS. */
 
 .image {
     position: relative;
+    isolation: isolate;
     display: block;
     overflow: hidden;
     background: var(--surface-container-highest);
 }
 
 .image__img {
+    position: relative;
+    z-index: 1;
     display: block;
     width: 100%;
     height: 100%;
-    opacity: 1;
-    transition: opacity var(--duration-short-4) var(--easing-standard);
-}
-
-.image[data-status="loading"] .image__img {
-    opacity: 0;
 }
 
 .image__loader {
     position: absolute;
     inset: 0;
+    z-index: 0;
     background: linear-gradient(
         90deg,
         var(--surface-container-high) 0%,
@@ -45,6 +46,7 @@
 .image__fallback {
     position: absolute;
     inset: 0;
+    z-index: 1;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -79,9 +81,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .image__img {
-        transition: none;
-    }
     .image__loader {
         animation-duration: 4200ms;
     }

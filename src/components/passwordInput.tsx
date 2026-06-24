@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Input, type InputProps } from './input';
 import './styled/passwordInput.styled.css';
 
+/** Same as {@link InputProps}, minus `type` and `rightIcon` (used internally for the reveal toggle). */
 export type PasswordInputProps = Omit<InputProps, 'type' | 'rightIcon'>;
 
 const EyeIcon = () => (
@@ -33,6 +34,12 @@ const EyeOffIcon = () => (
     </svg>
 );
 
+/**
+ * {@link Input} preconfigured for passwords, with a built-in show/hide toggle.
+ *
+ * @example
+ * <PasswordInput value={pw} onChange={setPw} />
+ */
 export function PasswordInput(props: PasswordInputProps) {
     const [show, setShow] = useState(false);
     return (

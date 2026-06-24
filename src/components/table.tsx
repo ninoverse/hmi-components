@@ -9,14 +9,21 @@ import { applyTemplate } from '../lib/formatTemplate.utility';
 import './styled/table.styled.css';
 
 export type TableColumn<T extends Record<string, unknown>> = {
+    /** Row property this column reads (also the default cell value). */
     key: keyof T & string;
+    /** Header label. */
     label: ReactNode;
+    /** Allow sorting by this column; overrides the table-level `sortable`. */
     sortable?: boolean;
+    /** Custom cell renderer; defaults to `row[key]`. */
     render?: (row: T) => ReactNode;
-    /* Declarative cell formatter for web-component consumers (where `render`
-       cannot survive JSON serialization). A `{token}` template resolved against
-       the row, with `{value}` aliased to this column's cell value. */
+    /**
+     * Declarative cell formatter for web-component consumers (where `render`
+     * cannot survive JSON serialization). A `{token}` template resolved against
+     * the row, with `{value}` aliased to this column's cell value.
+     */
     format?: string;
+    /** Inline styles applied to the header and cells (e.g. width). */
     style?: CSSProperties;
 };
 
@@ -24,11 +31,23 @@ export type TableProps<T extends Record<string, unknown>> = Omit<
     HTMLAttributes<HTMLDivElement>,
     'children'
 > & {
+    /** Column definitions, left to right. */
     columns: ReadonlyArray<TableColumn<T>>;
+    /** Row data. */
     rows: ReadonlyArray<T>;
+    /** Enable click-to-sort headers (per-column overridable). @default true */
     sortable?: boolean;
+    /** Stable key per row; defaults to the row index. */
     getRowKey?: (row: T, index: number) => string | number;
 };
+
+/**
+ * Data table with optional client-side click-to-sort columns and custom cell
+ * renderers. Column keys are type-checked against the row shape `T`.
+ *
+ * @example
+ * <Table columns={columns} rows={rows} getRowKey={(r) => r.id} />
+ */
 
 type SortState = { key: string | null; dir: 'asc' | 'desc' };
 
