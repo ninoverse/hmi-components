@@ -4,6 +4,7 @@ import {
     type ReactNode,
     useState,
 } from 'react';
+import { applyTemplate } from '../lib/formatTemplate.utility';
 import './styled/valueScaleSelector.styled.css';
 
 export type ValueScaleSelectorSize = 'small' | 'medium' | 'large';
@@ -15,7 +16,7 @@ export type ValueScaleSelectorProps = {
     max?: number;
     allowHalf?: boolean;
     icon?: ReactNode;
-    valueText?: (value: number, max: number) => string;
+    valueText?: string | ((value: number, max: number) => string);
     readOnly?: boolean;
     disabled?: boolean;
     size?: ValueScaleSelectorSize;
@@ -86,9 +87,12 @@ export function ValueScaleSelector({
     const fillStyle: CSSProperties = { width: `${fillPct}%` };
     const cellIcon = icon ?? <DefaultIcon />;
 
-    const computedValueText = valueText
-        ? valueText(current, max)
-        : `${current} out of ${max}`;
+    const computedValueText =
+        typeof valueText === 'function'
+            ? valueText(current, max)
+            : valueText
+              ? applyTemplate(valueText, { value: current, max })
+              : `${current} out of ${max}`;
 
     return (
         <div

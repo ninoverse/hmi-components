@@ -5,6 +5,7 @@ import {
     useMemo,
     useState,
 } from 'react';
+import { applyTemplate } from '../lib/formatTemplate.utility';
 import './styled/table.styled.css';
 
 export type TableColumn<T extends Record<string, unknown>> = {
@@ -12,6 +13,10 @@ export type TableColumn<T extends Record<string, unknown>> = {
     label: ReactNode;
     sortable?: boolean;
     render?: (row: T) => ReactNode;
+    /* Declarative cell formatter for web-component consumers (where `render`
+       cannot survive JSON serialization). A `{token}` template resolved against
+       the row, with `{value}` aliased to this column's cell value. */
+    format?: string;
     style?: CSSProperties;
 };
 
@@ -146,7 +151,12 @@ export function Table<T extends Record<string, unknown>>({
                                 <td key={column.key} style={column.style}>
                                     {column.render
                                         ? column.render(row)
-                                        : (row[column.key] as ReactNode)}
+                                        : column.format
+                                          ? applyTemplate(column.format, {
+                                                ...row,
+                                                value: row[column.key],
+                                            })
+                                          : (row[column.key] as ReactNode)}
                                 </td>
                             ))}
                         </tr>

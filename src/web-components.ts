@@ -22,6 +22,13 @@ import { HostElementContext } from './lib/portalTarget';
 /** r2wc attribute-coercion types we use (a subset of r2wc's transforms). */
 type WcType = 'string' | 'number' | 'boolean' | 'function' | 'json';
 
+/** Marks a registration as a form-associated control and describes how its
+   value maps to a submitted form value:
+   - `text`     — string-valued controls (input, select, date-picker, …)
+   - `numeric`  — number-valued controls (number-input, slider)
+   - `checkable`— boolean controls (checkbox, radio, switch) */
+type FormKind = 'text' | 'numeric' | 'checkable';
+
 /** Symbol used to stash the host element's live light-DOM child nodes before
    r2wc mounts React into it (which detaches the host's children). Real node
    references — not a parsed HTML string — so interactive children keep their
@@ -73,6 +80,7 @@ function SlottedChildren({ nodes }: { nodes: Node[] }): ReactElement {
    override plus its internal props object and render method. */
 interface ReactiveElement extends HTMLElement {
     connectedCallback(): void;
+    disconnectedCallback(): void;
     attributeChangedCallback(
         name: string,
         oldValue: string | null,
@@ -118,6 +126,7 @@ function define<P extends object>(
     Component: ComponentType<P>,
     props: Partial<Record<Extract<keyof P, string>, WcType>> = {},
     events: Partial<Record<Extract<keyof P, string>, EventInit>> = {},
+    form?: FormKind,
 ): void {
     const tag = `hmi-${name}`;
     if (customElements.get(tag)) return;
@@ -134,7 +143,13 @@ function define<P extends object>(
     for (const prop of propNames) attributeToProp.set(toDashedCase(prop), prop);
 
     class HmiElement extends Base {
+        /* Read by the browser at customElements.define time. Only form
+           registrations opt in, so attachInternals is never reached for the
+           rest. */
+        static formAssociated = form !== undefined;
+
         #captured = false;
+        #internals?: ElementInternals;
 
         override connectedCallback(): void {
             /* Upgrade-properties pattern: a prop set as an own property before
@@ -165,6 +180,24 @@ function define<P extends object>(
                 }
             }
             super.connectedCallback();
+
+            /* Attach ElementInternals so the control participates in a native
+               <form>. The browser maps the host's `name` attribute to the
+               FormData key; we only report the value. */
+            if (
+                form &&
+                !this.#internals &&
+                typeof this.attachInternals === 'function'
+            ) {
+                this.#internals = this.attachInternals();
+                this.addEventListener('change', this.#onFormChange);
+                this.#syncFromProps();
+            }
+        }
+
+        override disconnectedCallback(): void {
+            this.removeEventListener('change', this.#onFormChange);
+            super.disconnectedCallback();
         }
 
         override attributeChangedCallback(
@@ -177,19 +210,54 @@ function define<P extends object>(
                controlled host can never clear a value. Apply them here: empty
                string and false are real values; removal reverts the prop to
                undefined (uncontrolled). */
-            if (newValue) return;
-            const prop = attributeToProp.get(name);
-            if (prop === undefined) return;
-            const type = props[prop];
-            this[R2WC_PROPS][prop] =
-                newValue === null
-                    ? undefined
-                    : type === 'string'
-                      ? ''
-                      : type === 'boolean'
-                        ? false
-                        : undefined;
-            this[R2WC_RENDER]();
+            if (!newValue) {
+                const prop = attributeToProp.get(name);
+                if (prop !== undefined) {
+                    const type = props[prop];
+                    this[R2WC_PROPS][prop] =
+                        newValue === null
+                            ? undefined
+                            : type === 'string'
+                              ? ''
+                              : type === 'boolean'
+                                ? false
+                                : undefined;
+                    this[R2WC_RENDER]();
+                }
+            }
+            /* Keep the submitted form value in step with a controlled host
+               that sets value/checked through attributes. */
+            if (this.#internals) this.#syncFromProps();
+        }
+
+        /* r2wc dispatches the React onChange as CustomEvent('change', {detail})
+           on the host; `detail` is the new (possibly uncontrolled) value — the
+           only signal of internal state. Native change events from inner
+           <input>s also bubble here but are plain Events with no detail, so we
+           ignore them. */
+        #onFormChange = (event: Event): void => {
+            if (!(event instanceof CustomEvent) || event.target !== this) {
+                return;
+            }
+            this.#internals?.setFormValue(this.#coerce(event.detail));
+        };
+
+        #syncFromProps(): void {
+            const bag = this[R2WC_PROPS];
+            const detail =
+                form === 'checkable'
+                    ? (bag.checked ?? bag.defaultChecked ?? false)
+                    : (bag.value ?? bag.defaultValue ?? null);
+            this.#internals?.setFormValue(this.#coerce(detail));
+        }
+
+        #coerce(detail: unknown): string | null {
+            if (form === 'checkable') {
+                return detail ? (this.getAttribute('value') ?? 'on') : null;
+            }
+            if (detail === null || detail === undefined) return null;
+            if (typeof detail === 'object') return JSON.stringify(detail);
+            return String(detail);
         }
     }
 
@@ -337,6 +405,7 @@ function registerAll(): void {
             value: 'string',
         },
         { onChange: { bubbles: true } },
+        'checkable',
     );
     define(
         'chip',
@@ -366,6 +435,7 @@ function registerAll(): void {
             'aria-label': 'string',
         },
         { onChange: { bubbles: true } },
+        'text',
     );
     define(
         'combobox',
@@ -382,6 +452,7 @@ function registerAll(): void {
             'aria-label': 'string',
         },
         { onChange: { bubbles: true } },
+        'text',
     );
     define(
         'command-palette',
@@ -436,6 +507,7 @@ function registerAll(): void {
             'aria-label': 'string',
         },
         { onChange: { bubbles: true } },
+        'text',
     );
     define('divider', hmi.Divider, {
         orientation: 'string',
@@ -579,6 +651,7 @@ function registerAll(): void {
             name: 'string',
         },
         { onChange: { bubbles: true } },
+        'text',
     );
     define('kbd', hmi.Kbd, { size: 'string' });
     define('legend', hmi.Legend, { items: 'json', align: 'string' });
@@ -661,6 +734,7 @@ function registerAll(): void {
             onChange: { bubbles: true },
             onComplete: { bubbles: true },
         },
+        'text',
     );
     define(
         'navbar',
@@ -690,6 +764,7 @@ function registerAll(): void {
             placeholder: 'string',
         },
         { onChange: { bubbles: true } },
+        'numeric',
     );
     define(
         'pagination',
@@ -714,6 +789,7 @@ function registerAll(): void {
             disabled: 'boolean',
         },
         { onChange: { bubbles: true } },
+        'text',
     );
     define(
         'popover',
@@ -754,6 +830,7 @@ function registerAll(): void {
             value: 'string',
         },
         { onChange: { bubbles: true } },
+        'checkable',
     );
     define(
         'radio-group',
@@ -766,6 +843,7 @@ function registerAll(): void {
             onChange: 'function',
         },
         { onChange: { bubbles: true } },
+        'text',
     );
     define('responsive-container', hmi.ResponsiveContainer, {
         height: 'number',
@@ -800,6 +878,7 @@ function registerAll(): void {
             disabled: 'boolean',
         },
         { onChange: { bubbles: true } },
+        'text',
     );
     define(
         'segmented-control',
@@ -815,6 +894,7 @@ function registerAll(): void {
             'aria-label': 'string',
         },
         { onChange: { bubbles: true } },
+        'text',
     );
     define(
         'select',
@@ -829,6 +909,7 @@ function registerAll(): void {
             disabled: 'boolean',
         },
         { onChange: { bubbles: true } },
+        'text',
     );
     define(
         'sidebar',
@@ -857,11 +938,12 @@ function registerAll(): void {
             max: 'number',
             step: 'number',
             showValue: 'boolean',
-            formatValue: 'function',
+            formatValue: 'string',
             onChange: 'function',
             disabled: 'boolean',
         },
         { onChange: { bubbles: true } },
+        'numeric',
     );
     define('spacer', hmi.Spacer, {
         size: 'string',
@@ -915,6 +997,7 @@ function registerAll(): void {
             value: 'string',
         },
         { onChange: { bubbles: true } },
+        'checkable',
     );
     define('table', hmi.Table, {
         columns: 'json',
@@ -956,6 +1039,7 @@ function registerAll(): void {
             name: 'string',
         },
         { onChange: { bubbles: true } },
+        'text',
     );
     define('timeline', hmi.Timeline, { items: 'json' });
     define('toast', hmi.ToastHost);
@@ -992,7 +1076,7 @@ function registerAll(): void {
             max: 'number',
             allowHalf: 'boolean',
             icon: 'json',
-            valueText: 'function',
+            valueText: 'string',
             readOnly: 'boolean',
             disabled: 'boolean',
             size: 'string',

@@ -1,5 +1,6 @@
 import type { CSSProperties, InputHTMLAttributes } from 'react';
 import { useState } from 'react';
+import { applyTemplate } from '../lib/formatTemplate.utility';
 import './styled/slider.styled.css';
 
 export type SliderProps = Omit<
@@ -12,7 +13,7 @@ export type SliderProps = Omit<
     max?: number;
     step?: number;
     showValue?: boolean;
-    formatValue?: (value: number) => string;
+    formatValue?: string | ((value: number) => string);
     onChange?: (value: number) => void;
 };
 
@@ -63,7 +64,11 @@ export function Slider({
             />
             {showValue && (
                 <span className="slider__value">
-                    {formatValue ? formatValue(current) : current}
+                    {typeof formatValue === 'function'
+                        ? formatValue(current)
+                        : formatValue
+                          ? applyTemplate(formatValue, { value: current })
+                          : current}
                 </span>
             )}
         </div>
