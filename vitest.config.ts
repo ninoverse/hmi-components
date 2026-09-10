@@ -16,6 +16,7 @@ export default defineConfig({
                     include: [
                         'lit',
                         'lit/decorators.js',
+                        'lit/directives/style-map.js',
                         '@lit/react',
                         'react',
                         'react-dom/client',

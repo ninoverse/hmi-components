@@ -4,6 +4,238 @@
   "modules": [
     {
       "kind": "javascript-module",
+      "path": "src/elements/avatar/avatar.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "User avatar showing an image, or colour-hashed initials derived from `name`\nwhen no `src` is given, with an optional presence dot.\n\nThe host carries the circle's box — size, radius and position — so that\n`hmi-avatar-stack` can put a rim on it through `::slotted(hmi-avatar)`.",
+          "name": "HmiAvatar",
+          "cssParts": [
+            {
+              "description": "The circle; paints the image or the hashed tint.",
+              "name": "base"
+            },
+            {
+              "description": "The `<img>`, present only when `src` is set.",
+              "name": "image"
+            },
+            {
+              "description": "The presence dot, present only when `status` is set.",
+              "name": "status"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Person's name — used for the alt text, initials and deterministic colour.",
+              "attribute": "name"
+            },
+            {
+              "kind": "field",
+              "name": "src",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Image URL. When omitted, colour-hashed initials are shown instead.",
+              "attribute": "src"
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "AvatarSize"
+              },
+              "default": "'medium'",
+              "description": "Diameter preset.",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "status",
+              "type": {
+                "text": "AvatarStatus | undefined"
+              },
+              "default": "undefined",
+              "description": "Optional presence indicator dot.",
+              "attribute": "status",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Person's name — used for the alt text, initials and deterministic colour.",
+              "fieldName": "name"
+            },
+            {
+              "name": "src",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Image URL. When omitted, colour-hashed initials are shown instead.",
+              "fieldName": "src"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "AvatarSize"
+              },
+              "default": "'medium'",
+              "description": "Diameter preset.",
+              "fieldName": "size"
+            },
+            {
+              "name": "status",
+              "type": {
+                "text": "AvatarStatus | undefined"
+              },
+              "default": "undefined",
+              "description": "Optional presence indicator dot.",
+              "fieldName": "status"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-avatar",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiAvatar",
+          "declaration": {
+            "name": "HmiAvatar",
+            "module": "src/elements/avatar/avatar.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-avatar",
+          "declaration": {
+            "name": "HmiAvatar",
+            "module": "src/elements/avatar/avatar.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/elements/avatar-stack/avatar-stack.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Overlapping row of avatars, collapsing any beyond `max` into a trailing\n`+N` chip.\n\nThe avatars are `<hmi-avatar>` elements rendered into this element's own\nshadow root, not slotted children: `size` has to reach every one of them and\n`max` has to hide the rest, and neither is possible on consumer-owned nodes\nwithout mutating light DOM.",
+          "name": "HmiAvatarStack",
+          "cssParts": [
+            {
+              "description": "The row.",
+              "name": "base"
+            },
+            {
+              "description": "Each rendered `<hmi-avatar>`.",
+              "name": "avatar"
+            },
+            {
+              "description": "The `+N` chip, present only when `names` exceeds `max`.",
+              "name": "overflow"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "names",
+              "type": {
+                "text": "readonly string[]"
+              },
+              "default": "[]",
+              "description": "Names to render as overlapping avatars, in display order."
+            },
+            {
+              "kind": "field",
+              "name": "max",
+              "type": {
+                "text": "number"
+              },
+              "default": "4",
+              "description": "Maximum avatars shown before collapsing the rest into a `+N` chip.",
+              "attribute": "max"
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "AvatarSize"
+              },
+              "default": "'medium'",
+              "description": "Diameter preset applied to every avatar.",
+              "attribute": "size",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "max",
+              "type": {
+                "text": "number"
+              },
+              "default": "4",
+              "description": "Maximum avatars shown before collapsing the rest into a `+N` chip.",
+              "fieldName": "max"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "AvatarSize"
+              },
+              "default": "'medium'",
+              "description": "Diameter preset applied to every avatar.",
+              "fieldName": "size"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-avatar-stack",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiAvatarStack",
+          "declaration": {
+            "name": "HmiAvatarStack",
+            "module": "src/elements/avatar-stack/avatar-stack.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-avatar-stack",
+          "declaration": {
+            "name": "HmiAvatarStack",
+            "module": "src/elements/avatar-stack/avatar-stack.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/badge/badge.ts",
       "declarations": [
         {

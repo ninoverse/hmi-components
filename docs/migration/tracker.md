@@ -48,8 +48,8 @@ gated: a phase may start only when every PR of the previous phase is merged
 |-------------|--------------|-------|------|-------|-------|--------|----|
 | `hmi-badge` | `badge.tsx` | 1 | low | | Pilot. Freezes the templates and the DoD. `dot` boolean, `variant`. | Done | [#115](https://github.com/ninoverse/hmi-components/pull/115) |
 | `hmi-alert` | `alert.tsx` | 2 | low | S | Slots `icon`, `title`, `action`. | Todo | |
-| `hmi-avatar` | `avatar.tsx` | 2 | low | | Computed tint stays inline style. | Todo | |
-| `hmi-avatar-stack` | `avatarStack.tsx` | 2 | low | X | No own CSS today; `.avatar-stack .avatar` → `::slotted(hmi-avatar)`. Children are `<hmi-avatar>` in the default slot. | Todo | |
+| `hmi-avatar` | `avatar.tsx` | 2 | low | | Computed tint stays inline style, on `part="base"`. Host carries the circle's box so `hmi-avatar-stack` can rim it via `::slotted(hmi-avatar)`. | In review | [#118](https://github.com/ninoverse/hmi-components/pull/118) |
+| `hmi-avatar-stack` | `avatarStack.tsx` | 2 | low | X | Its rules live in `avatar.styled.css`. Avatars are `<hmi-avatar>` rendered **into this element's own root**, not slotted — `size` must reach each one and `max` must hide the rest, neither possible on consumer nodes without mutating light DOM. So `.avatar-stack .avatar` becomes a plain `hmi-avatar` selector, not `::slotted()` (which cannot express the `+` overlap rule). `names` is a JS property. | In review | [#118](https://github.com/ninoverse/hmi-components/pull/118) |
 | `hmi-banner` | `banner.tsx` | 2 | low | S E | Slots `icon`, `title`, `action`; `hmi-dismiss` (cancelable). | Todo | |
 | `hmi-blockquote` | `blockquote.tsx` | 2 | low | S | Slot `cite`. | Todo | |
 | `hmi-card` | `card.tsx` | 2 | low | P | First `--panel-*` consumer; lands `shared/panel.ts` (`renderLiquidFilter()`). Slots `header`, `footer` are **new API** — the React card took only `children`, so no `S` conversion. Variants `ink`/`accent` map to `--panel-ink-bg`/`--panel-accent-bg`. | Done | [#116](https://github.com/ninoverse/hmi-components/pull/116) |

@@ -274,6 +274,14 @@
             "types": "./dist/react/index.d.ts",
             "import": "./dist/react/index.js"
         },
+        "./react/avatar": {
+            "types": "./dist/elements/avatar/avatar.react.d.ts",
+            "import": "./dist/react/avatar.js"
+        },
+        "./react/avatar-stack": {
+            "types": "./dist/elements/avatar-stack/avatar-stack.react.d.ts",
+            "import": "./dist/react/avatar-stack.js"
+        },
         "./react/badge": {
             "types": "./dist/elements/badge/badge.react.d.ts",
             "import": "./dist/react/badge.js"
@@ -390,6 +398,14 @@
         "./wc": {
             "types": "./dist/elements/index.d.ts",
             "import": "./dist/wc/index.js"
+        },
+        "./wc/avatar": {
+            "types": "./dist/elements/avatar/avatar.d.ts",
+            "import": "./dist/wc/avatar.js"
+        },
+        "./wc/avatar-stack": {
+            "types": "./dist/elements/avatar-stack/avatar-stack.d.ts",
+            "import": "./dist/wc/avatar-stack.js"
         },
         "./wc/badge": {
             "types": "./dist/elements/badge/badge.d.ts",
