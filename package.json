@@ -1,6 +1,6 @@
 {
     "name": "@ninoverse/hmi-components",
-    "version": "5.9.1",
+    "version": "5.10.0",
     "type": "module",
     "license": "MIT",
     "description": "HMI component library: Lit web components with React wrappers, Material Design 3 token system and warm asymmetric styling.",
