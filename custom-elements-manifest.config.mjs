@@ -14,4 +14,19 @@ export default {
     outdir: '.',
     litelement: true,
     packagejson: false,
+    plugins: [
+        {
+            /* The analyzer emits modules in filesystem enumeration order, which
+               differs between machines, so the committed manifest reordered
+               itself on CI and failed `git diff --exit-code`. Sort by path with
+               a plain codepoint comparison — not localeCompare, whose result
+               depends on the environment's ICU data. */
+            name: 'sort-modules-by-path',
+            packageLinkPhase({ customElementsManifest }) {
+                customElementsManifest.modules.sort((a, b) =>
+                    a.path < b.path ? -1 : a.path > b.path ? 1 : 0,
+                );
+            },
+        },
+    ],
 };
