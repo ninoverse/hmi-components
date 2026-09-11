@@ -19,7 +19,7 @@ pnpm build:site       # Storybook + demo
 pnpm preview          # Serve production build locally
 pnpm lint             # Biome check (lint + format check)
 pnpm format           # Biome format with auto-write
-pnpm docs             # TypeDoc → docs/api (legacy React API)
+pnpm run docs         # TypeDoc → docs/api (legacy React API); `pnpm docs` is pnpm's own command
 ```
 
 Lit element tooling (Vitest in Chromium through Playwright, Node SSR, manifest):

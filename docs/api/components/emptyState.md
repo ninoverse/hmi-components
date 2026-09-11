@@ -12,7 +12,7 @@
 
 > **EmptyStateProps** = `HTMLAttributes`\<`HTMLDivElement`\> & `object`
 
-Defined in: components/emptyState.tsx:4
+Defined in: [components/emptyState.tsx:4](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/emptyState.tsx#L4)
 
 #### Type Declaration
 
@@ -46,7 +46,7 @@ Primary heading.
 
 > **EmptyState**(`__namedParameters`): `Element`
 
-Defined in: components/emptyState.tsx:23
+Defined in: [components/emptyState.tsx:23](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/emptyState.tsx#L23)
 
 Placeholder shown when there's no content yet — an optional icon, a title,
 description and an action.

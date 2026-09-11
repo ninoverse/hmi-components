@@ -12,7 +12,7 @@
 
 > **ToastOptions** = `object`
 
-Defined in: components/toast.tsx:7
+Defined in: [components/toast.tsx:7](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/toast.tsx#L7)
 
 #### Properties
 
@@ -20,7 +20,7 @@ Defined in: components/toast.tsx:7
 
 > `optional` **body?**: `ReactNode`
 
-Defined in: components/toast.tsx:13
+Defined in: [components/toast.tsx:13](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/toast.tsx#L13)
 
 Secondary message line.
 
@@ -28,7 +28,7 @@ Secondary message line.
 
 > `optional` **duration?**: `number`
 
-Defined in: components/toast.tsx:15
+Defined in: [components/toast.tsx:15](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/toast.tsx#L15)
 
 Auto-dismiss after this many milliseconds. 0 disables auto-dismiss.
 
@@ -42,7 +42,7 @@ Auto-dismiss after this many milliseconds. 0 disables auto-dismiss.
 
 > `optional` **title?**: `ReactNode`
 
-Defined in: components/toast.tsx:11
+Defined in: [components/toast.tsx:11](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/toast.tsx#L11)
 
 Bold heading line.
 
@@ -50,7 +50,7 @@ Bold heading line.
 
 > `optional` **variant?**: [`ToastVariant`](#toastvariant)
 
-Defined in: components/toast.tsx:9
+Defined in: [components/toast.tsx:9](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/toast.tsx#L9)
 
 Tone, which selects the icon and colour.
 
@@ -66,7 +66,7 @@ Tone, which selects the icon and colour.
 
 > **ToastVariant** = `"info"` \| `"success"` \| `"warning"` \| `"danger"`
 
-Defined in: components/toast.tsx:5
+Defined in: [components/toast.tsx:5](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/toast.tsx#L5)
 
 ## Variables
 
@@ -74,7 +74,7 @@ Defined in: components/toast.tsx:5
 
 > `const` **toast**: `object`
 
-Defined in: components/toast.tsx:83
+Defined in: [components/toast.tsx:83](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/toast.tsx#L83)
 
 Imperative toast API. Call `toast.show(...)` (or the `info`/`success`/
 `warning`/`danger` shortcuts) from anywhere to enqueue a toast; render a
@@ -212,7 +212,7 @@ toast.dismiss(id);
 
 > **ToastHost**(): `ReactPortal` \| `null`
 
-Defined in: components/toast.tsx:187
+Defined in: [components/toast.tsx:187](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/toast.tsx#L187)
 
 Renders queued toasts in a portal. Mount exactly once near your app root;
 trigger toasts via the [toast](#toast) API.

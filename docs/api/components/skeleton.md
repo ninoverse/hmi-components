@@ -12,7 +12,7 @@
 
 > **SkeletonProps** = `HTMLAttributes`\<`HTMLSpanElement`\> & `object`
 
-Defined in: components/skeleton.tsx:6
+Defined in: [components/skeleton.tsx:6](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/skeleton.tsx#L6)
 
 #### Type Declaration
 
@@ -52,7 +52,7 @@ Explicit width; number = px.
 
 > **SkeletonVariant** = `"text"` \| `"rect"` \| `"circle"`
 
-Defined in: components/skeleton.tsx:4
+Defined in: [components/skeleton.tsx:4](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/skeleton.tsx#L4)
 
 ## Functions
 
@@ -60,7 +60,7 @@ Defined in: components/skeleton.tsx:4
 
 > **Skeleton**(`__namedParameters`): `Element`
 
-Defined in: components/skeleton.tsx:26
+Defined in: [components/skeleton.tsx:26](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/skeleton.tsx#L26)
 
 Animated loading placeholder. `aria-hidden` by default so it isn't announced.
 

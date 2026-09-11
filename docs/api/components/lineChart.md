@@ -12,7 +12,7 @@
 
 > **LineChartProps** = `object`
 
-Defined in: components/lineChart.tsx:13
+Defined in: [components/lineChart.tsx:13](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/lineChart.tsx#L13)
 
 #### Properties
 
@@ -20,7 +20,7 @@ Defined in: components/lineChart.tsx:13
 
 > `optional` **aria-label?**: `string`
 
-Defined in: components/lineChart.tsx:31
+Defined in: [components/lineChart.tsx:31](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/lineChart.tsx#L31)
 
 Accessible name for the chart.
 
@@ -34,7 +34,7 @@ Accessible name for the chart.
 
 > `optional` **height?**: `number`
 
-Defined in: components/lineChart.tsx:21
+Defined in: [components/lineChart.tsx:21](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/lineChart.tsx#L21)
 
 SVG viewport height in px.
 
@@ -48,7 +48,7 @@ SVG viewport height in px.
 
 > `optional` **labels?**: `ReadonlyArray`\<`string`\>
 
-Defined in: components/lineChart.tsx:17
+Defined in: [components/lineChart.tsx:17](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/lineChart.tsx#L17)
 
 X-axis category labels; length should match the series data length.
 
@@ -56,7 +56,7 @@ X-axis category labels; length should match the series data length.
 
 > `optional` **max?**: `number`
 
-Defined in: components/lineChart.tsx:25
+Defined in: [components/lineChart.tsx:25](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/lineChart.tsx#L25)
 
 Upper bound of the value range. Defaults to the max across all series.
 
@@ -64,7 +64,7 @@ Upper bound of the value range. Defaults to the max across all series.
 
 > `optional` **min?**: `number`
 
-Defined in: components/lineChart.tsx:23
+Defined in: [components/lineChart.tsx:23](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/lineChart.tsx#L23)
 
 Override the value range; defaults to 0..max across all series.
 
@@ -72,7 +72,7 @@ Override the value range; defaults to 0..max across all series.
 
 > **series**: `ReadonlyArray`\<[`LineChartSeries`](#linechartseries)\>
 
-Defined in: components/lineChart.tsx:15
+Defined in: [components/lineChart.tsx:15](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/lineChart.tsx#L15)
 
 One or more series, each drawn as a polyline.
 
@@ -80,7 +80,7 @@ One or more series, each drawn as a polyline.
 
 > `optional` **showDots?**: `boolean`
 
-Defined in: components/lineChart.tsx:29
+Defined in: [components/lineChart.tsx:29](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/lineChart.tsx#L29)
 
 Draw a dot at each data point.
 
@@ -94,7 +94,7 @@ false
 
 > `optional` **width?**: `number`
 
-Defined in: components/lineChart.tsx:19
+Defined in: [components/lineChart.tsx:19](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/lineChart.tsx#L19)
 
 SVG viewport width in px.
 
@@ -108,7 +108,7 @@ SVG viewport width in px.
 
 > `optional` **yTicks?**: `number`
 
-Defined in: components/lineChart.tsx:27
+Defined in: [components/lineChart.tsx:27](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/lineChart.tsx#L27)
 
 Number of horizontal grid lines / y-axis ticks.
 
@@ -124,7 +124,7 @@ Number of horizontal grid lines / y-axis ticks.
 
 > **LineChartSeries** = `object`
 
-Defined in: components/lineChart.tsx:4
+Defined in: [components/lineChart.tsx:4](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/lineChart.tsx#L4)
 
 #### Properties
 
@@ -132,7 +132,7 @@ Defined in: components/lineChart.tsx:4
 
 > `optional` **color?**: `string`
 
-Defined in: components/lineChart.tsx:10
+Defined in: [components/lineChart.tsx:10](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/lineChart.tsx#L10)
 
 Series colour. Defaults to the primary token.
 
@@ -140,7 +140,7 @@ Series colour. Defaults to the primary token.
 
 > **data**: `ReadonlyArray`\<`number`\>
 
-Defined in: components/lineChart.tsx:8
+Defined in: [components/lineChart.tsx:8](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/lineChart.tsx#L8)
 
 Y values, one per category.
 
@@ -148,7 +148,7 @@ Y values, one per category.
 
 > **name**: `string`
 
-Defined in: components/lineChart.tsx:6
+Defined in: [components/lineChart.tsx:6](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/lineChart.tsx#L6)
 
 Legend/label name for the series.
 
@@ -158,7 +158,7 @@ Legend/label name for the series.
 
 > **LineChart**(`__namedParameters`): `Element` \| `null`
 
-Defined in: components/lineChart.tsx:39
+Defined in: [components/lineChart.tsx:39](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/lineChart.tsx#L39)
 
 Multi-series Cartesian line chart. Self-contained SVG: plots each series
  as a polyline over a shared grid (CartesianGrid) with y-axis value ticks

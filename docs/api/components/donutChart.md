@@ -12,7 +12,7 @@
 
 > **DonutChartProps** = `object`
 
-Defined in: components/donutChart.tsx:13
+Defined in: [components/donutChart.tsx:13](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/donutChart.tsx#L13)
 
 #### Properties
 
@@ -20,7 +20,7 @@ Defined in: components/donutChart.tsx:13
 
 > `optional` **aria-label?**: `string`
 
-Defined in: components/donutChart.tsx:25
+Defined in: [components/donutChart.tsx:25](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/donutChart.tsx#L25)
 
 Accessible name for the chart.
 
@@ -34,7 +34,7 @@ Accessible name for the chart.
 
 > `optional` **centerLabel?**: `ReactNode`
 
-Defined in: components/donutChart.tsx:23
+Defined in: [components/donutChart.tsx:23](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/donutChart.tsx#L23)
 
 Content shown in the centre hole (e.g. a total).
 
@@ -42,7 +42,7 @@ Content shown in the centre hole (e.g. a total).
 
 > `optional` **gap?**: `number`
 
-Defined in: components/donutChart.tsx:21
+Defined in: [components/donutChart.tsx:21](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/donutChart.tsx#L21)
 
 Gap between segments, in degrees.
 
@@ -56,7 +56,7 @@ Gap between segments, in degrees.
 
 > **segments**: `ReadonlyArray`\<[`DonutChartSegment`](#donutchartsegment)\>
 
-Defined in: components/donutChart.tsx:15
+Defined in: [components/donutChart.tsx:15](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/donutChart.tsx#L15)
 
 Segments to render around the ring.
 
@@ -64,7 +64,7 @@ Segments to render around the ring.
 
 > `optional` **size?**: `number`
 
-Defined in: components/donutChart.tsx:17
+Defined in: [components/donutChart.tsx:17](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/donutChart.tsx#L17)
 
 SVG width/height in px.
 
@@ -78,7 +78,7 @@ SVG width/height in px.
 
 > `optional` **thickness?**: `number`
 
-Defined in: components/donutChart.tsx:19
+Defined in: [components/donutChart.tsx:19](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/donutChart.tsx#L19)
 
 Ring thickness as a fraction of the radius (0..1).
 
@@ -94,7 +94,7 @@ Ring thickness as a fraction of the radius (0..1).
 
 > **DonutChartSegment** = `object`
 
-Defined in: components/donutChart.tsx:4
+Defined in: [components/donutChart.tsx:4](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/donutChart.tsx#L4)
 
 #### Properties
 
@@ -102,7 +102,7 @@ Defined in: components/donutChart.tsx:4
 
 > `optional` **color?**: `string`
 
-Defined in: components/donutChart.tsx:10
+Defined in: [components/donutChart.tsx:10](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/donutChart.tsx#L10)
 
 Segment colour. Falls back to a token from the default palette.
 
@@ -110,7 +110,7 @@ Segment colour. Falls back to a token from the default palette.
 
 > **label**: `string`
 
-Defined in: components/donutChart.tsx:6
+Defined in: [components/donutChart.tsx:6](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/donutChart.tsx#L6)
 
 Segment name (used as the React key).
 
@@ -118,7 +118,7 @@ Segment name (used as the React key).
 
 > **value**: `number`
 
-Defined in: components/donutChart.tsx:8
+Defined in: [components/donutChart.tsx:8](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/donutChart.tsx#L8)
 
 Segment magnitude; its share of the total sets the arc size.
 
@@ -128,7 +128,7 @@ Segment magnitude; its share of the total sets the arc size.
 
 > **DonutChart**(`__namedParameters`): `Element` \| `null`
 
-Defined in: components/donutChart.tsx:46
+Defined in: [components/donutChart.tsx:46](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/donutChart.tsx#L46)
 
 Donut (ring) chart. Each segment is an SVG arc sized by its share of the
  total, with a hole in the centre for an optional summary label. Pure SVG

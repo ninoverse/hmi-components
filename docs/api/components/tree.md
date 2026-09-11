@@ -12,7 +12,7 @@
 
 > **TreeNode**\<`T`\> = `object`
 
-Defined in: components/tree.tsx:10
+Defined in: [components/tree.tsx:10](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/tree.tsx#L10)
 
 #### Type Parameters
 
@@ -26,7 +26,7 @@ Defined in: components/tree.tsx:10
 
 > `optional` **children?**: `ReadonlyArray`\<[`TreeNode`](#treenode)\<`T`\>\>
 
-Defined in: components/tree.tsx:18
+Defined in: [components/tree.tsx:18](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/tree.tsx#L18)
 
 Child nodes; presence makes the node expandable.
 
@@ -34,7 +34,7 @@ Child nodes; presence makes the node expandable.
 
 > `optional` **disabled?**: `boolean`
 
-Defined in: components/tree.tsx:20
+Defined in: [components/tree.tsx:20](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/tree.tsx#L20)
 
 Disable selecting/focusing this node.
 
@@ -48,7 +48,7 @@ false
 
 > `optional` **icon?**: `ReactNode`
 
-Defined in: components/tree.tsx:16
+Defined in: [components/tree.tsx:16](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/tree.tsx#L16)
 
 Optional leading icon.
 
@@ -56,7 +56,7 @@ Optional leading icon.
 
 > **label**: `ReactNode`
 
-Defined in: components/tree.tsx:14
+Defined in: [components/tree.tsx:14](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/tree.tsx#L14)
 
 Visible node label.
 
@@ -64,7 +64,7 @@ Visible node label.
 
 > **value**: `T`
 
-Defined in: components/tree.tsx:12
+Defined in: [components/tree.tsx:12](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/tree.tsx#L12)
 
 Unique node value, used for selection/expansion and as the key.
 
@@ -74,7 +74,7 @@ Unique node value, used for selection/expansion and as the key.
 
 > **TreeProps**\<`T`\> = `object`
 
-Defined in: components/tree.tsx:23
+Defined in: [components/tree.tsx:23](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/tree.tsx#L23)
 
 #### Type Parameters
 
@@ -88,7 +88,7 @@ Defined in: components/tree.tsx:23
 
 > `optional` **aria-label?**: `string`
 
-Defined in: components/tree.tsx:39
+Defined in: [components/tree.tsx:39](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/tree.tsx#L39)
 
 Accessible label for the tree.
 
@@ -102,7 +102,7 @@ Accessible label for the tree.
 
 > `optional` **defaultExpanded?**: `ReadonlyArray`\<`T`\>
 
-Defined in: components/tree.tsx:29
+Defined in: [components/tree.tsx:29](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/tree.tsx#L29)
 
 Initially expanded node values when uncontrolled.
 
@@ -110,7 +110,7 @@ Initially expanded node values when uncontrolled.
 
 > `optional` **defaultSelected?**: `T`
 
-Defined in: components/tree.tsx:35
+Defined in: [components/tree.tsx:35](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/tree.tsx#L35)
 
 Initially selected node value when uncontrolled.
 
@@ -118,7 +118,7 @@ Initially selected node value when uncontrolled.
 
 > `optional` **expanded?**: `ReadonlyArray`\<`T`\>
 
-Defined in: components/tree.tsx:27
+Defined in: [components/tree.tsx:27](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/tree.tsx#L27)
 
 Controlled set of expanded node values. Provide with `onExpandedChange`.
 
@@ -126,7 +126,7 @@ Controlled set of expanded node values. Provide with `onExpandedChange`.
 
 > **nodes**: `ReadonlyArray`\<[`TreeNode`](#treenode)\<`T`\>\>
 
-Defined in: components/tree.tsx:25
+Defined in: [components/tree.tsx:25](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/tree.tsx#L25)
 
 Root nodes of the tree.
 
@@ -134,7 +134,7 @@ Root nodes of the tree.
 
 > `optional` **onExpandedChange?**: (`expanded`) => `void`
 
-Defined in: components/tree.tsx:31
+Defined in: [components/tree.tsx:31](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/tree.tsx#L31)
 
 Fires with the new list of expanded node values.
 
@@ -152,7 +152,7 @@ Fires with the new list of expanded node values.
 
 > `optional` **onSelect?**: (`value`) => `void`
 
-Defined in: components/tree.tsx:37
+Defined in: [components/tree.tsx:37](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/tree.tsx#L37)
 
 Fires with the newly selected node value.
 
@@ -170,7 +170,7 @@ Fires with the newly selected node value.
 
 > `optional` **selected?**: `T`
 
-Defined in: components/tree.tsx:33
+Defined in: [components/tree.tsx:33](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/tree.tsx#L33)
 
 Controlled selected node value. Provide with `onSelect`.
 
@@ -180,7 +180,11 @@ Controlled selected node value. Provide with `onSelect`.
 
 > **Tree**\<`T`\>(`__namedParameters`): `Element`
 
-Defined in: components/tree.tsx:97
+Defined in: [components/tree.tsx:96](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/tree.tsx#L96)
+
+Accessible (WAI-ARIA) tree view with expand/collapse, single selection and
+full keyboard navigation. Expansion and selection each work controlled or
+uncontrolled.
 
 #### Type Parameters
 
@@ -197,3 +201,9 @@ Defined in: components/tree.tsx:97
 #### Returns
 
 `Element`
+
+#### Example
+
+```ts
+<Tree nodes={nodes} defaultExpanded={['root']} onSelect={setSelected} />
+```

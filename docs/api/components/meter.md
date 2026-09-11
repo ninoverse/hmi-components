@@ -12,7 +12,7 @@
 
 > **MeterProps** = `HTMLAttributes`\<`HTMLDivElement`\> & `object`
 
-Defined in: components/meter.tsx:4
+Defined in: [components/meter.tsx:4](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/meter.tsx#L4)
 
 #### Type Declaration
 
@@ -88,7 +88,7 @@ Current measurement, clamped to `[min, max]`.
 
 > **Meter**(`__namedParameters`): `Element`
 
-Defined in: components/meter.tsx:50
+Defined in: [components/meter.tsx:50](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/meter.tsx#L50)
 
 Scalar measurement bar within a known range (e.g. disk usage). Colour
 reflects quality, mirroring the native `<meter>` algorithm via

@@ -12,7 +12,7 @@
 
 > **ChipProps** = `Omit`\<`HTMLAttributes`\<`HTMLDivElement`\>, `"onSelect"`\> & `object`
 
-Defined in: components/chip.tsx:4
+Defined in: [components/chip.tsx:4](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/chip.tsx#L4)
 
 #### Type Declaration
 
@@ -60,7 +60,7 @@ false
 
 > **Chip**(`__namedParameters`): `Element`
 
-Defined in: components/chip.tsx:36
+Defined in: [components/chip.tsx:36](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/chip.tsx#L36)
 
 Compact tag/filter element. Becomes an interactive toggle when `onSelect` is
 set, and gains a remove button when `onClose` is set.

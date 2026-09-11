@@ -12,7 +12,7 @@
 
 > **SelectOption**\<`T`\> = `object`
 
-Defined in: components/select.tsx:6
+Defined in: [components/select.tsx:6](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/select.tsx#L6)
 
 #### Type Parameters
 
@@ -26,7 +26,7 @@ Defined in: components/select.tsx:6
 
 > `optional` **icon?**: `ReactNode`
 
-Defined in: components/select.tsx:12
+Defined in: [components/select.tsx:12](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/select.tsx#L12)
 
 Optional leading icon.
 
@@ -34,7 +34,7 @@ Optional leading icon.
 
 > **label**: `ReactNode`
 
-Defined in: components/select.tsx:10
+Defined in: [components/select.tsx:10](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/select.tsx#L10)
 
 Visible option label.
 
@@ -42,7 +42,7 @@ Visible option label.
 
 > **value**: `T`
 
-Defined in: components/select.tsx:8
+Defined in: [components/select.tsx:8](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/select.tsx#L8)
 
 Value selected when this option is chosen.
 
@@ -52,7 +52,7 @@ Value selected when this option is chosen.
 
 > **SelectProps**\<`T`\> = `object`
 
-Defined in: components/select.tsx:15
+Defined in: [components/select.tsx:15](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/select.tsx#L15)
 
 #### Type Parameters
 
@@ -66,7 +66,7 @@ Defined in: components/select.tsx:15
 
 > `optional` **align?**: [`PopoverAlign`](popover.md#popoveralign)
 
-Defined in: components/select.tsx:27
+Defined in: [components/select.tsx:27](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/select.tsx#L27)
 
 Dropdown alignment to the trigger.
 
@@ -80,7 +80,7 @@ Dropdown alignment to the trigger.
 
 > `optional` **defaultValue?**: `T`
 
-Defined in: components/select.tsx:19
+Defined in: [components/select.tsx:19](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/select.tsx#L19)
 
 Initial selected value when uncontrolled.
 
@@ -88,7 +88,7 @@ Initial selected value when uncontrolled.
 
 > `optional` **disabled?**: `boolean`
 
-Defined in: components/select.tsx:29
+Defined in: [components/select.tsx:29](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/select.tsx#L29)
 
 Disable the trigger.
 
@@ -102,7 +102,7 @@ false
 
 > `optional` **onChange?**: (`value`) => `void`
 
-Defined in: components/select.tsx:21
+Defined in: [components/select.tsx:21](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/select.tsx#L21)
 
 Fires with the newly selected value.
 
@@ -120,7 +120,7 @@ Fires with the newly selected value.
 
 > **options**: `ReadonlyArray`\<[`SelectOption`](#selectoption)\<`T`\>\>
 
-Defined in: components/select.tsx:23
+Defined in: [components/select.tsx:23](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/select.tsx#L23)
 
 Options to render in the dropdown.
 
@@ -128,7 +128,7 @@ Options to render in the dropdown.
 
 > `optional` **placeholder?**: `ReactNode`
 
-Defined in: components/select.tsx:25
+Defined in: [components/select.tsx:25](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/select.tsx#L25)
 
 Trigger text shown when nothing is selected.
 
@@ -142,7 +142,7 @@ Trigger text shown when nothing is selected.
 
 > `optional` **value?**: `T`
 
-Defined in: components/select.tsx:17
+Defined in: [components/select.tsx:17](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/select.tsx#L17)
 
 Controlled selected value. Provide with `onChange`.
 
@@ -152,7 +152,11 @@ Controlled selected value. Provide with `onChange`.
 
 > **Select**\<`T`\>(`__namedParameters`): `Element`
 
-Defined in: components/select.tsx:71
+Defined in: [components/select.tsx:70](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/select.tsx#L70)
+
+Single-select dropdown built on [Popover](popover.md#popover) + [Menu](menu.md#menu). For
+type-ahead filtering over many options, use Combobox. Works
+controlled or uncontrolled.
 
 #### Type Parameters
 
@@ -169,3 +173,9 @@ Defined in: components/select.tsx:71
 #### Returns
 
 `Element`
+
+#### Example
+
+```ts
+<Select options={options} value={val} onChange={setVal} />
+```

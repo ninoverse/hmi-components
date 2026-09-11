@@ -12,7 +12,7 @@
 
 > **TableColumn**\<`T`\> = `object`
 
-Defined in: components/table.tsx:10
+Defined in: [components/table.tsx:11](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/table.tsx#L11)
 
 #### Type Parameters
 
@@ -22,11 +22,21 @@ Defined in: components/table.tsx:10
 
 #### Properties
 
+##### format?
+
+> `optional` **format?**: `string`
+
+Defined in: [components/table.tsx:25](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/table.tsx#L25)
+
+Declarative cell formatter for web-component consumers (where `render`
+cannot survive JSON serialization). A `{token}` template resolved against
+the row, with `{value}` aliased to this column's cell value.
+
 ##### key
 
 > **key**: keyof `T` & `string`
 
-Defined in: components/table.tsx:12
+Defined in: [components/table.tsx:13](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/table.tsx#L13)
 
 Row property this column reads (also the default cell value).
 
@@ -34,7 +44,7 @@ Row property this column reads (also the default cell value).
 
 > **label**: `ReactNode`
 
-Defined in: components/table.tsx:14
+Defined in: [components/table.tsx:15](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/table.tsx#L15)
 
 Header label.
 
@@ -42,7 +52,7 @@ Header label.
 
 > `optional` **render?**: (`row`) => `ReactNode`
 
-Defined in: components/table.tsx:18
+Defined in: [components/table.tsx:19](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/table.tsx#L19)
 
 Custom cell renderer; defaults to `row[key]`.
 
@@ -60,7 +70,7 @@ Custom cell renderer; defaults to `row[key]`.
 
 > `optional` **sortable?**: `boolean`
 
-Defined in: components/table.tsx:16
+Defined in: [components/table.tsx:17](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/table.tsx#L17)
 
 Allow sorting by this column; overrides the table-level `sortable`.
 
@@ -68,7 +78,7 @@ Allow sorting by this column; overrides the table-level `sortable`.
 
 > `optional` **style?**: `CSSProperties`
 
-Defined in: components/table.tsx:20
+Defined in: [components/table.tsx:27](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/table.tsx#L27)
 
 Inline styles applied to the header and cells (e.g. width).
 
@@ -78,7 +88,7 @@ Inline styles applied to the header and cells (e.g. width).
 
 > **TableProps**\<`T`\> = `Omit`\<`HTMLAttributes`\<`HTMLDivElement`\>, `"children"`\> & `object`
 
-Defined in: components/table.tsx:23
+Defined in: [components/table.tsx:30](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/table.tsx#L30)
 
 #### Type Declaration
 
@@ -138,7 +148,10 @@ true
 
 > **Table**\<`T`\>(`__namedParameters`): `Element`
 
-Defined in: components/table.tsx:70
+Defined in: [components/table.tsx:76](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/table.tsx#L76)
+
+Data table with optional client-side click-to-sort columns and custom cell
+renderers. Column keys are type-checked against the row shape `T`.
 
 #### Type Parameters
 
@@ -155,3 +168,9 @@ Defined in: components/table.tsx:70
 #### Returns
 
 `Element`
+
+#### Example
+
+```ts
+<Table columns={columns} rows={rows} getRowKey={(r) => r.id} />
+```

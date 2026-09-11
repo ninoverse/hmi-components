@@ -12,7 +12,7 @@
 
 > **StatProps** = `HTMLAttributes`\<`HTMLDivElement`\> & `object`
 
-Defined in: components/stat.tsx:6
+Defined in: [components/stat.tsx:6](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/stat.tsx#L6)
 
 #### Type Declaration
 
@@ -58,7 +58,7 @@ Primary metric value.
 
 > **StatTrend** = `"up"` \| `"down"` \| `"neutral"`
 
-Defined in: components/stat.tsx:4
+Defined in: [components/stat.tsx:4](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/stat.tsx#L4)
 
 ## Functions
 
@@ -66,7 +66,10 @@ Defined in: components/stat.tsx:4
 
 > **Stat**(`__namedParameters`): `Element`
 
-Defined in: components/stat.tsx:52
+Defined in: [components/stat.tsx:51](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/stat.tsx#L51)
+
+Compact metric/KPI display with a label, value and an optional trend delta
+and help text.
 
 #### Parameters
 
@@ -77,3 +80,9 @@ Defined in: components/stat.tsx:52
 #### Returns
 
 `Element`
+
+#### Example
+
+```ts
+<Stat label="Revenue" value="$12.4k" trend="up" delta="8%" />
+```

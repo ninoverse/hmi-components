@@ -12,7 +12,7 @@
 
 > **TooltipProps** = `object`
 
-Defined in: components/tooltip.tsx:15
+Defined in: [components/tooltip.tsx:15](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/tooltip.tsx#L15)
 
 #### Properties
 
@@ -20,7 +20,7 @@ Defined in: components/tooltip.tsx:15
 
 > **children**: `ReactNode`
 
-Defined in: components/tooltip.tsx:23
+Defined in: [components/tooltip.tsx:23](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/tooltip.tsx#L23)
 
 Trigger element the tooltip describes.
 
@@ -28,7 +28,7 @@ Trigger element the tooltip describes.
 
 > `optional` **delay?**: `number`
 
-Defined in: components/tooltip.tsx:21
+Defined in: [components/tooltip.tsx:21](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/tooltip.tsx#L21)
 
 Delay before showing, in ms.
 
@@ -42,7 +42,7 @@ Delay before showing, in ms.
 
 > **label**: `ReactNode`
 
-Defined in: components/tooltip.tsx:17
+Defined in: [components/tooltip.tsx:17](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/tooltip.tsx#L17)
 
 Tooltip content shown on hover/focus.
 
@@ -50,7 +50,7 @@ Tooltip content shown on hover/focus.
 
 > `optional` **side?**: [`TooltipSide`](#tooltipside)
 
-Defined in: components/tooltip.tsx:19
+Defined in: [components/tooltip.tsx:19](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/tooltip.tsx#L19)
 
 Side of the trigger to position on.
 
@@ -66,7 +66,7 @@ Side of the trigger to position on.
 
 > **TooltipSide** = `"top"` \| `"bottom"` \| `"left"` \| `"right"`
 
-Defined in: components/tooltip.tsx:13
+Defined in: [components/tooltip.tsx:13](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/tooltip.tsx#L13)
 
 ## Functions
 
@@ -74,7 +74,10 @@ Defined in: components/tooltip.tsx:13
 
 > **Tooltip**(`__namedParameters`): `Element`
 
-Defined in: components/tooltip.tsx:36
+Defined in: [components/tooltip.tsx:35](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/tooltip.tsx#L35)
+
+Text tooltip shown on hover/focus, positioned in a portal and wired to the
+trigger via `aria-describedby`.
 
 #### Parameters
 
@@ -85,3 +88,9 @@ Defined in: components/tooltip.tsx:36
 #### Returns
 
 `Element`
+
+#### Example
+
+```ts
+<Tooltip label="Copy"><Button asIcon><CopyIcon /></Button></Tooltip>
+```

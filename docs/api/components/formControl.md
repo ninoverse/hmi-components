@@ -12,7 +12,7 @@
 
 > **FormControlProps** = `HTMLAttributes`\<`HTMLDivElement`\> & `object`
 
-Defined in: components/formControl.tsx:4
+Defined in: [components/formControl.tsx:4](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/formControl.tsx#L4)
 
 #### Type Declaration
 
@@ -40,7 +40,7 @@ Field label above the control.
 
 > **FormControl**(`__namedParameters`): `Element`
 
-Defined in: components/formControl.tsx:20
+Defined in: [components/formControl.tsx:20](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/formControl.tsx#L20)
 
 Wrapper that adds a label and a hint/error message around any form control
 passed as `children`.

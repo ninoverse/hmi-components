@@ -12,7 +12,7 @@
 
 > **NumberInputProps** = `Omit`\<`InputHTMLAttributes`\<`HTMLInputElement`\>, `"type"` \| `"value"` \| `"defaultValue"` \| `"onChange"` \| `"min"` \| `"max"` \| `"step"`\> & `object`
 
-Defined in: components/numberInput.tsx:5
+Defined in: [components/numberInput.tsx:5](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/numberInput.tsx#L5)
 
 #### Type Declaration
 
@@ -86,7 +86,7 @@ Controlled value, or `null` when empty. Provide with `onChange`.
 
 > **NumberInput**(`__namedParameters`): `Element`
 
-Defined in: components/numberInput.tsx:32
+Defined in: [components/numberInput.tsx:32](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/numberInput.tsx#L32)
 
 Numeric field with stepper buttons and min/max clamping (applied on blur).
 Empty input is represented as `null`. Works controlled or uncontrolled.

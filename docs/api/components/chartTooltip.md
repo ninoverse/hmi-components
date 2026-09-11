@@ -12,7 +12,7 @@
 
 > **ChartTooltipItem** = `object`
 
-Defined in: components/chartTooltip.tsx:4
+Defined in: [components/chartTooltip.tsx:4](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/chartTooltip.tsx#L4)
 
 #### Properties
 
@@ -20,7 +20,7 @@ Defined in: components/chartTooltip.tsx:4
 
 > `optional` **color?**: `string`
 
-Defined in: components/chartTooltip.tsx:10
+Defined in: [components/chartTooltip.tsx:10](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/chartTooltip.tsx#L10)
 
 Series colour — consumer data (e.g. a chart palette entry).
 
@@ -28,7 +28,7 @@ Series colour — consumer data (e.g. a chart palette entry).
 
 > **label**: `ReactNode`
 
-Defined in: components/chartTooltip.tsx:6
+Defined in: [components/chartTooltip.tsx:6](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/chartTooltip.tsx#L6)
 
 Row label (e.g. the series name).
 
@@ -36,7 +36,7 @@ Row label (e.g. the series name).
 
 > **value**: `ReactNode`
 
-Defined in: components/chartTooltip.tsx:8
+Defined in: [components/chartTooltip.tsx:8](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/chartTooltip.tsx#L8)
 
 Row value at the hovered point.
 
@@ -46,7 +46,7 @@ Row value at the hovered point.
 
 > **ChartTooltipProps** = `HTMLAttributes`\<`HTMLDivElement`\> & `object`
 
-Defined in: components/chartTooltip.tsx:13
+Defined in: [components/chartTooltip.tsx:13](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/chartTooltip.tsx#L13)
 
 #### Type Declaration
 
@@ -68,7 +68,7 @@ Optional heading (e.g. the hovered category/x value).
 
 > **ChartTooltip**(`__namedParameters`): `Element`
 
-Defined in: components/chartTooltip.tsx:23
+Defined in: [components/chartTooltip.tsx:23](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/chartTooltip.tsx#L23)
 
 Presentational tooltip card for charts: a title and one colour-swatched
  row per series. Charts position it (absolute/fixed) on hover; this

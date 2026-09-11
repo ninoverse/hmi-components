@@ -12,7 +12,7 @@
 
 > **AlertProps** = `HTMLAttributes`\<`HTMLDivElement`\> & `object`
 
-Defined in: components/alert.tsx:6
+Defined in: [components/alert.tsx:6](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/alert.tsx#L6)
 
 #### Type Declaration
 
@@ -46,7 +46,7 @@ Tone, which also selects the leading status icon.
 
 > **AlertVariant** = `"info"` \| `"success"` \| `"warning"` \| `"danger"`
 
-Defined in: components/alert.tsx:4
+Defined in: [components/alert.tsx:4](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/alert.tsx#L4)
 
 ## Functions
 
@@ -54,7 +54,7 @@ Defined in: components/alert.tsx:4
 
 > **Alert**(`__namedParameters`): `Element`
 
-Defined in: components/alert.tsx:92
+Defined in: [components/alert.tsx:92](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/alert.tsx#L92)
 
 Inline message with a variant-matched icon, optional title and trailing
 action. The body is passed as `children`.

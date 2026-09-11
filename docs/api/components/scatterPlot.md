@@ -12,7 +12,7 @@
 
 > **ScatterPlotPoint** = `object`
 
-Defined in: components/scatterPlot.tsx:5
+Defined in: [components/scatterPlot.tsx:5](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/scatterPlot.tsx#L5)
 
 A single `{x, y}` data point.
 
@@ -22,13 +22,13 @@ A single `{x, y}` data point.
 
 > **x**: `number`
 
-Defined in: components/scatterPlot.tsx:5
+Defined in: [components/scatterPlot.tsx:5](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/scatterPlot.tsx#L5)
 
 ##### y
 
 > **y**: `number`
 
-Defined in: components/scatterPlot.tsx:5
+Defined in: [components/scatterPlot.tsx:5](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/scatterPlot.tsx#L5)
 
 ***
 
@@ -36,7 +36,7 @@ Defined in: components/scatterPlot.tsx:5
 
 > **ScatterPlotProps** = `object`
 
-Defined in: components/scatterPlot.tsx:16
+Defined in: [components/scatterPlot.tsx:16](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/scatterPlot.tsx#L16)
 
 #### Properties
 
@@ -44,7 +44,7 @@ Defined in: components/scatterPlot.tsx:16
 
 > `optional` **aria-label?**: `string`
 
-Defined in: components/scatterPlot.tsx:38
+Defined in: [components/scatterPlot.tsx:38](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/scatterPlot.tsx#L38)
 
 Accessible name for the chart.
 
@@ -58,7 +58,7 @@ Accessible name for the chart.
 
 > `optional` **height?**: `number`
 
-Defined in: components/scatterPlot.tsx:22
+Defined in: [components/scatterPlot.tsx:22](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/scatterPlot.tsx#L22)
 
 SVG viewport height in px.
 
@@ -72,7 +72,7 @@ SVG viewport height in px.
 
 > `optional` **radius?**: `number`
 
-Defined in: components/scatterPlot.tsx:36
+Defined in: [components/scatterPlot.tsx:36](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/scatterPlot.tsx#L36)
 
 Marker radius in px.
 
@@ -86,7 +86,7 @@ Marker radius in px.
 
 > **series**: `ReadonlyArray`\<[`ScatterPlotSeries`](#scatterplotseries)\>
 
-Defined in: components/scatterPlot.tsx:18
+Defined in: [components/scatterPlot.tsx:18](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/scatterPlot.tsx#L18)
 
 One or more series of points.
 
@@ -94,7 +94,7 @@ One or more series of points.
 
 > `optional` **width?**: `number`
 
-Defined in: components/scatterPlot.tsx:20
+Defined in: [components/scatterPlot.tsx:20](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/scatterPlot.tsx#L20)
 
 SVG viewport width in px.
 
@@ -108,7 +108,7 @@ SVG viewport width in px.
 
 > `optional` **xMax?**: `number`
 
-Defined in: components/scatterPlot.tsx:26
+Defined in: [components/scatterPlot.tsx:26](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/scatterPlot.tsx#L26)
 
 Upper bound of the x range. Defaults to the data max.
 
@@ -116,7 +116,7 @@ Upper bound of the x range. Defaults to the data max.
 
 > `optional` **xMin?**: `number`
 
-Defined in: components/scatterPlot.tsx:24
+Defined in: [components/scatterPlot.tsx:24](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/scatterPlot.tsx#L24)
 
 Override the x range; defaults to the data extent.
 
@@ -124,7 +124,7 @@ Override the x range; defaults to the data extent.
 
 > `optional` **xTicks?**: `number`
 
-Defined in: components/scatterPlot.tsx:32
+Defined in: [components/scatterPlot.tsx:32](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/scatterPlot.tsx#L32)
 
 Number of x-axis ticks / vertical grid lines.
 
@@ -138,7 +138,7 @@ Number of x-axis ticks / vertical grid lines.
 
 > `optional` **yMax?**: `number`
 
-Defined in: components/scatterPlot.tsx:30
+Defined in: [components/scatterPlot.tsx:30](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/scatterPlot.tsx#L30)
 
 Upper bound of the y range. Defaults to the data max.
 
@@ -146,7 +146,7 @@ Upper bound of the y range. Defaults to the data max.
 
 > `optional` **yMin?**: `number`
 
-Defined in: components/scatterPlot.tsx:28
+Defined in: [components/scatterPlot.tsx:28](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/scatterPlot.tsx#L28)
 
 Override the y range; defaults to the data extent.
 
@@ -154,7 +154,7 @@ Override the y range; defaults to the data extent.
 
 > `optional` **yTicks?**: `number`
 
-Defined in: components/scatterPlot.tsx:34
+Defined in: [components/scatterPlot.tsx:34](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/scatterPlot.tsx#L34)
 
 Number of y-axis ticks / horizontal grid lines.
 
@@ -170,7 +170,7 @@ Number of y-axis ticks / horizontal grid lines.
 
 > **ScatterPlotSeries** = `object`
 
-Defined in: components/scatterPlot.tsx:7
+Defined in: [components/scatterPlot.tsx:7](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/scatterPlot.tsx#L7)
 
 #### Properties
 
@@ -178,7 +178,7 @@ Defined in: components/scatterPlot.tsx:7
 
 > `optional` **color?**: `string`
 
-Defined in: components/scatterPlot.tsx:13
+Defined in: [components/scatterPlot.tsx:13](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/scatterPlot.tsx#L13)
 
 Series colour. Defaults to the primary token.
 
@@ -186,7 +186,7 @@ Series colour. Defaults to the primary token.
 
 > **data**: `ReadonlyArray`\<[`ScatterPlotPoint`](#scatterplotpoint)\>
 
-Defined in: components/scatterPlot.tsx:11
+Defined in: [components/scatterPlot.tsx:11](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/scatterPlot.tsx#L11)
 
 Points to plot for this series.
 
@@ -194,7 +194,7 @@ Points to plot for this series.
 
 > **name**: `string`
 
-Defined in: components/scatterPlot.tsx:9
+Defined in: [components/scatterPlot.tsx:9](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/scatterPlot.tsx#L9)
 
 Legend/label name for the series.
 
@@ -204,7 +204,7 @@ Legend/label name for the series.
 
 > **ScatterPlot**(`__namedParameters`): `Element` \| `null`
 
-Defined in: components/scatterPlot.tsx:46
+Defined in: [components/scatterPlot.tsx:46](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/scatterPlot.tsx#L46)
 
 Cartesian scatter plot. Both axes are numeric: each series renders its
  {x, y} points as markers over a shared grid (CartesianGrid). Pure SVG,

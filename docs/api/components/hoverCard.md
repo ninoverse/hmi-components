@@ -12,7 +12,7 @@
 
 > **HoverCardAlign** = `"start"` \| `"center"` \| `"end"`
 
-Defined in: components/hoverCard.tsx:14
+Defined in: [components/hoverCard.tsx:14](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/hoverCard.tsx#L14)
 
 ***
 
@@ -20,7 +20,7 @@ Defined in: components/hoverCard.tsx:14
 
 > **HoverCardProps** = `object`
 
-Defined in: components/hoverCard.tsx:16
+Defined in: [components/hoverCard.tsx:16](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/hoverCard.tsx#L16)
 
 #### Properties
 
@@ -28,7 +28,7 @@ Defined in: components/hoverCard.tsx:16
 
 > `optional` **align?**: [`HoverCardAlign`](#hovercardalign)
 
-Defined in: components/hoverCard.tsx:24
+Defined in: [components/hoverCard.tsx:24](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/hoverCard.tsx#L24)
 
 Alignment along the chosen side.
 
@@ -42,7 +42,7 @@ Alignment along the chosen side.
 
 > **children**: `ReactNode`
 
-Defined in: components/hoverCard.tsx:20
+Defined in: [components/hoverCard.tsx:20](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/hoverCard.tsx#L20)
 
 Rich card content.
 
@@ -50,7 +50,7 @@ Rich card content.
 
 > `optional` **closeDelay?**: `number`
 
-Defined in: components/hoverCard.tsx:28
+Defined in: [components/hoverCard.tsx:28](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/hoverCard.tsx#L28)
 
 Delay before closing after the pointer leaves, in ms.
 
@@ -64,7 +64,7 @@ Delay before closing after the pointer leaves, in ms.
 
 > `optional` **openDelay?**: `number`
 
-Defined in: components/hoverCard.tsx:26
+Defined in: [components/hoverCard.tsx:26](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/hoverCard.tsx#L26)
 
 Delay before opening, in ms.
 
@@ -78,7 +78,7 @@ Delay before opening, in ms.
 
 > `optional` **side?**: [`HoverCardSide`](#hovercardside)
 
-Defined in: components/hoverCard.tsx:22
+Defined in: [components/hoverCard.tsx:22](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/hoverCard.tsx#L22)
 
 Preferred side relative to the trigger.
 
@@ -92,7 +92,7 @@ Preferred side relative to the trigger.
 
 > **trigger**: `ReactNode`
 
-Defined in: components/hoverCard.tsx:18
+Defined in: [components/hoverCard.tsx:18](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/hoverCard.tsx#L18)
 
 Element that opens the card on hover/focus.
 
@@ -100,7 +100,7 @@ Element that opens the card on hover/focus.
 
 > `optional` **width?**: `number` \| `string`
 
-Defined in: components/hoverCard.tsx:30
+Defined in: [components/hoverCard.tsx:30](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/hoverCard.tsx#L30)
 
 Fixed card width; number = px.
 
@@ -110,7 +110,7 @@ Fixed card width; number = px.
 
 > **HoverCardSide** = `"top"` \| `"bottom"` \| `"left"` \| `"right"`
 
-Defined in: components/hoverCard.tsx:13
+Defined in: [components/hoverCard.tsx:13](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/hoverCard.tsx#L13)
 
 ## Functions
 
@@ -118,7 +118,10 @@ Defined in: components/hoverCard.tsx:13
 
 > **HoverCard**(`__namedParameters`): `Element`
 
-Defined in: components/hoverCard.tsx:50
+Defined in: [components/hoverCard.tsx:49](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/hoverCard.tsx#L49)
+
+Rich hover/focus popover that stays open while the pointer is over its
+content, with configurable side, alignment and open/close delays.
 
 #### Parameters
 
@@ -129,3 +132,9 @@ Defined in: components/hoverCard.tsx:50
 #### Returns
 
 `Element`
+
+#### Example
+
+```ts
+<HoverCard trigger={<a>@ada</a>}><Profile /></HoverCard>
+```

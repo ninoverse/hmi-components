@@ -12,7 +12,7 @@
 
 > **HeatmapProps** = `object`
 
-Defined in: components/heatmap.tsx:3
+Defined in: [components/heatmap.tsx:3](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/heatmap.tsx#L3)
 
 #### Properties
 
@@ -20,7 +20,7 @@ Defined in: components/heatmap.tsx:3
 
 > `optional` **aria-label?**: `string`
 
-Defined in: components/heatmap.tsx:23
+Defined in: [components/heatmap.tsx:23](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/heatmap.tsx#L23)
 
 Accessible name for the chart.
 
@@ -34,7 +34,7 @@ Accessible name for the chart.
 
 > `optional` **cellSize?**: `number`
 
-Defined in: components/heatmap.tsx:17
+Defined in: [components/heatmap.tsx:17](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/heatmap.tsx#L17)
 
 Cell edge length in px.
 
@@ -48,7 +48,7 @@ Cell edge length in px.
 
 > `optional` **color?**: `string`
 
-Defined in: components/heatmap.tsx:11
+Defined in: [components/heatmap.tsx:11](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/heatmap.tsx#L11)
 
 Base cell colour; intensity is mapped to its opacity.
 
@@ -56,7 +56,7 @@ Base cell colour; intensity is mapped to its opacity.
 
 > **data**: `ReadonlyArray`\<`ReadonlyArray`\<`number`\>\>
 
-Defined in: components/heatmap.tsx:5
+Defined in: [components/heatmap.tsx:5](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/heatmap.tsx#L5)
 
 Row-major matrix of values; each inner array is one row.
 
@@ -64,7 +64,7 @@ Row-major matrix of values; each inner array is one row.
 
 > `optional` **gap?**: `number`
 
-Defined in: components/heatmap.tsx:19
+Defined in: [components/heatmap.tsx:19](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/heatmap.tsx#L19)
 
 Gap between cells in px.
 
@@ -78,7 +78,7 @@ Gap between cells in px.
 
 > `optional` **max?**: `number`
 
-Defined in: components/heatmap.tsx:15
+Defined in: [components/heatmap.tsx:15](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/heatmap.tsx#L15)
 
 Upper bound of the value range. Defaults to the data max.
 
@@ -86,7 +86,7 @@ Upper bound of the value range. Defaults to the data max.
 
 > `optional` **min?**: `number`
 
-Defined in: components/heatmap.tsx:13
+Defined in: [components/heatmap.tsx:13](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/heatmap.tsx#L13)
 
 Override the value range; defaults to the data extent.
 
@@ -94,7 +94,7 @@ Override the value range; defaults to the data extent.
 
 > `optional` **showValues?**: `boolean`
 
-Defined in: components/heatmap.tsx:21
+Defined in: [components/heatmap.tsx:21](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/heatmap.tsx#L21)
 
 Print each cell's value at its centre.
 
@@ -108,7 +108,7 @@ false
 
 > `optional` **xLabels?**: `ReadonlyArray`\<`string`\>
 
-Defined in: components/heatmap.tsx:7
+Defined in: [components/heatmap.tsx:7](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/heatmap.tsx#L7)
 
 Column (x-axis) labels; length should match the row length.
 
@@ -116,7 +116,7 @@ Column (x-axis) labels; length should match the row length.
 
 > `optional` **yLabels?**: `ReadonlyArray`\<`string`\>
 
-Defined in: components/heatmap.tsx:9
+Defined in: [components/heatmap.tsx:9](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/heatmap.tsx#L9)
 
 Row (y-axis) labels; length should match the number of rows.
 
@@ -126,7 +126,7 @@ Row (y-axis) labels; length should match the number of rows.
 
 > **Heatmap**(`__namedParameters`): `Element` \| `null`
 
-Defined in: components/heatmap.tsx:31
+Defined in: [components/heatmap.tsx:31](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/heatmap.tsx#L31)
 
 Matrix heatmap. Renders a grid of cells whose colour intensity (opacity)
  maps to each value, with optional row/column labels. Pure SVG, zero deps.

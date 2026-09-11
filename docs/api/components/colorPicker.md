@@ -12,7 +12,7 @@
 
 > **ColorPickerProps** = `object`
 
-Defined in: components/colorPicker.tsx:5
+Defined in: [components/colorPicker.tsx:5](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/colorPicker.tsx#L5)
 
 #### Properties
 
@@ -20,7 +20,7 @@ Defined in: components/colorPicker.tsx:5
 
 > `optional` **aria-label?**: `string`
 
-Defined in: components/colorPicker.tsx:19
+Defined in: [components/colorPicker.tsx:19](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/colorPicker.tsx#L19)
 
 Accessible label for the trigger.
 
@@ -34,7 +34,7 @@ Accessible label for the trigger.
 
 > `optional` **defaultValue?**: `string`
 
-Defined in: components/colorPicker.tsx:9
+Defined in: [components/colorPicker.tsx:9](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/colorPicker.tsx#L9)
 
 Initial hex value when uncontrolled.
 
@@ -48,7 +48,7 @@ Initial hex value when uncontrolled.
 
 > `optional` **disabled?**: `boolean`
 
-Defined in: components/colorPicker.tsx:15
+Defined in: [components/colorPicker.tsx:15](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/colorPicker.tsx#L15)
 
 Disable the trigger.
 
@@ -62,7 +62,7 @@ false
 
 > `optional` **onChange?**: (`value`) => `void`
 
-Defined in: components/colorPicker.tsx:11
+Defined in: [components/colorPicker.tsx:11](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/colorPicker.tsx#L11)
 
 Fires with the new hex value on swatch/input/native change.
 
@@ -80,7 +80,7 @@ Fires with the new hex value on swatch/input/native change.
 
 > `optional` **showInput?**: `boolean`
 
-Defined in: components/colorPicker.tsx:17
+Defined in: [components/colorPicker.tsx:17](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/colorPicker.tsx#L17)
 
 Show the hex + native colour inputs below the swatches.
 
@@ -94,7 +94,7 @@ true
 
 > `optional` **swatches?**: `string`[]
 
-Defined in: components/colorPicker.tsx:13
+Defined in: [components/colorPicker.tsx:13](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/colorPicker.tsx#L13)
 
 Preset swatch colours shown in the panel.
 
@@ -102,7 +102,7 @@ Preset swatch colours shown in the panel.
 
 > `optional` **value?**: `string`
 
-Defined in: components/colorPicker.tsx:7
+Defined in: [components/colorPicker.tsx:7](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/colorPicker.tsx#L7)
 
 Controlled hex value (e.g. `'#e87a5d'`). Provide with `onChange`.
 
@@ -112,7 +112,7 @@ Controlled hex value (e.g. `'#e87a5d'`). Provide with `onChange`.
 
 > **ColorPicker**(`__namedParameters`): `Element`
 
-Defined in: components/colorPicker.tsx:42
+Defined in: [components/colorPicker.tsx:42](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/colorPicker.tsx#L42)
 
 Popover colour picker with preset swatches plus optional hex and native
 colour inputs. Works controlled or uncontrolled.

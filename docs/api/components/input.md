@@ -12,7 +12,7 @@
 
 > **InputProps** = `Omit`\<`ComponentPropsWithRef`\<`"input"`\>, `"value"` \| `"defaultValue"` \| `"onChange"`\> & `object`
 
-Defined in: components/input.tsx:5
+Defined in: [components/input.tsx:5](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/input.tsx#L5)
 
 #### Type Declaration
 
@@ -74,7 +74,7 @@ Controlled value. Provide with `onChange`.
 
 > **Input**(`__namedParameters`): `Element`
 
-Defined in: components/input.tsx:31
+Defined in: [components/input.tsx:31](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/input.tsx#L31)
 
 Single-line text field with optional leading/trailing icons and an error
 state. `onChange` is simplified to receive the string value; caret position

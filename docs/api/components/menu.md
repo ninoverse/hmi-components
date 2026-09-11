@@ -12,7 +12,7 @@
 
 > **MenuItemProps** = `ComponentPropsWithRef`\<`"button"`\> & `object`
 
-Defined in: components/menu.tsx:24
+Defined in: [components/menu.tsx:24](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/menu.tsx#L24)
 
 #### Type Declaration
 
@@ -46,7 +46,7 @@ Trailing hint (e.g. a keyboard shortcut).
 
 > **MenuLabelProps** = `HTMLAttributes`\<`HTMLDivElement`\>
 
-Defined in: components/menu.tsx:67
+Defined in: [components/menu.tsx:67](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/menu.tsx#L67)
 
 ***
 
@@ -54,7 +54,7 @@ Defined in: components/menu.tsx:67
 
 > **MenuProps** = `HTMLAttributes`\<`HTMLDivElement`\>
 
-Defined in: components/menu.tsx:4
+Defined in: [components/menu.tsx:4](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/menu.tsx#L4)
 
 ***
 
@@ -62,7 +62,7 @@ Defined in: components/menu.tsx:4
 
 > **MenuSeparatorProps** = `HTMLAttributes`\<`HTMLHRElement`\>
 
-Defined in: components/menu.tsx:58
+Defined in: [components/menu.tsx:58](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/menu.tsx#L58)
 
 ## Functions
 
@@ -70,7 +70,7 @@ Defined in: components/menu.tsx:58
 
 > **Menu**(`__namedParameters`): `Element`
 
-Defined in: components/menu.tsx:14
+Defined in: [components/menu.tsx:14](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/menu.tsx#L14)
 
 Menu container holding [MenuItem](#menuitem), [MenuSeparator](#menuseparator) and
 [MenuLabel](#menulabel) children. Pair with `Popover`/`ContextMenu` for
@@ -98,7 +98,7 @@ dropdown/right-click menus.
 
 > **MenuItem**(`__namedParameters`): `Element`
 
-Defined in: components/menu.tsx:34
+Defined in: [components/menu.tsx:34](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/menu.tsx#L34)
 
 Activatable menu row. Forwards native `<button>` props.
 
@@ -118,7 +118,7 @@ Activatable menu row. Forwards native `<button>` props.
 
 > **MenuLabel**(`__namedParameters`): `Element`
 
-Defined in: components/menu.tsx:70
+Defined in: [components/menu.tsx:70](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/menu.tsx#L70)
 
 Non-interactive group heading within a menu.
 
@@ -138,7 +138,7 @@ Non-interactive group heading within a menu.
 
 > **MenuSeparator**(`__namedParameters`): `Element`
 
-Defined in: components/menu.tsx:61
+Defined in: [components/menu.tsx:61](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/menu.tsx#L61)
 
 Horizontal divider between groups of menu items.
 

@@ -11,7 +11,11 @@
     "hideGenerator": true,
     "excludeInternal": true,
     "excludePrivate": true,
-    "exclude": ["**/styled/**", "src/components/**/*.styled.css"],
+    "exclude": [
+        "**/styled/**",
+        "src/components/**/*.styled.css",
+        "**/*.stories.tsx"
+    ],
     "intentionallyNotExported": [
         "SingleProps",
         "RangeProps",

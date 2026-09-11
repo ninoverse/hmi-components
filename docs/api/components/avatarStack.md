@@ -12,7 +12,7 @@
 
 > **AvatarStackProps** = `HTMLAttributes`\<`HTMLSpanElement`\> & `object`
 
-Defined in: components/avatarStack.tsx:5
+Defined in: [components/avatarStack.tsx:5](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/avatarStack.tsx#L5)
 
 #### Type Declaration
 
@@ -52,7 +52,7 @@ Diameter preset applied to every avatar.
 
 > **AvatarStack**(`__namedParameters`): `Element`
 
-Defined in: components/avatarStack.tsx:21
+Defined in: [components/avatarStack.tsx:21](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/avatarStack.tsx#L21)
 
 Overlapping row of [Avatar](avatar.md#avatar)s, collapsing any beyond `max` into a
 trailing `+N` overflow badge.

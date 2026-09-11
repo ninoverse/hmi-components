@@ -12,7 +12,7 @@
 
 > **RadioProps** = `Omit`\<`ComponentPropsWithRef`\<`"input"`\>, `"type"` \| `"checked"` \| `"defaultChecked"` \| `"onChange"`\> & `object`
 
-Defined in: components/radio.tsx:4
+Defined in: [components/radio.tsx:4](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/radio.tsx#L4)
 
 #### Type Declaration
 
@@ -56,7 +56,7 @@ Fires with the new checked state on selection.
 
 > **Radio**(`__namedParameters`): `Element`
 
-Defined in: components/radio.tsx:25
+Defined in: [components/radio.tsx:25](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/radio.tsx#L25)
 
 Single labelled radio button. Usually composed via `RadioGroup`; share
 a `name` to make radios mutually exclusive.

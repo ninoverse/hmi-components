@@ -12,7 +12,7 @@
 
 > **ColorToken** = keyof *typeof* [`colors`](#colors)
 
-Defined in: configs/colors.ts:68
+Defined in: [configs/colors.ts:68](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/configs/colors.ts#L68)
 
 Union of palette role names (the keys of [colors](#colors)).
 
@@ -22,7 +22,7 @@ Union of palette role names (the keys of [colors](#colors)).
 
 > `const` **colors**: `object`
 
-Defined in: configs/colors.ts:12
+Defined in: [configs/colors.ts:12](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/configs/colors.ts#L12)
 
 Map of palette role → CSS custom property name for the active theme. Use to
 read theme colours imperatively in JS/TS.

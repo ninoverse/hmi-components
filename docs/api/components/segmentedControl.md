@@ -12,7 +12,7 @@
 
 > **SegmentedControlOption**\<`T`\> = `object`
 
-Defined in: components/segmentedControl.tsx:12
+Defined in: [components/segmentedControl.tsx:12](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/segmentedControl.tsx#L12)
 
 #### Type Parameters
 
@@ -26,7 +26,7 @@ Defined in: components/segmentedControl.tsx:12
 
 > `optional` **disabled?**: `boolean`
 
-Defined in: components/segmentedControl.tsx:20
+Defined in: [components/segmentedControl.tsx:20](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/segmentedControl.tsx#L20)
 
 Disable this segment.
 
@@ -40,7 +40,7 @@ false
 
 > `optional` **icon?**: `ReactNode`
 
-Defined in: components/segmentedControl.tsx:18
+Defined in: [components/segmentedControl.tsx:18](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/segmentedControl.tsx#L18)
 
 Optional leading icon.
 
@@ -48,7 +48,7 @@ Optional leading icon.
 
 > **label**: `ReactNode`
 
-Defined in: components/segmentedControl.tsx:16
+Defined in: [components/segmentedControl.tsx:16](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/segmentedControl.tsx#L16)
 
 Visible segment label.
 
@@ -56,7 +56,7 @@ Visible segment label.
 
 > **value**: `T`
 
-Defined in: components/segmentedControl.tsx:14
+Defined in: [components/segmentedControl.tsx:14](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/segmentedControl.tsx#L14)
 
 Value selected when this segment is chosen.
 
@@ -66,7 +66,7 @@ Value selected when this segment is chosen.
 
 > **SegmentedControlProps**\<`T`\> = `Omit`\<`HTMLAttributes`\<`HTMLDivElement`\>, `"onChange"`\> & `object`
 
-Defined in: components/segmentedControl.tsx:23
+Defined in: [components/segmentedControl.tsx:23](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/segmentedControl.tsx#L23)
 
 #### Type Declaration
 
@@ -164,7 +164,7 @@ Controlled selected value. Provide with `onChange`.
 
 > **SegmentedControlSize** = `"small"` \| `"medium"` \| `"large"`
 
-Defined in: components/segmentedControl.tsx:10
+Defined in: [components/segmentedControl.tsx:10](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/segmentedControl.tsx#L10)
 
 ## Functions
 
@@ -172,7 +172,7 @@ Defined in: components/segmentedControl.tsx:10
 
 > **SegmentedControl**\<`T`\>(`__namedParameters`): `Element`
 
-Defined in: components/segmentedControl.tsx:52
+Defined in: [components/segmentedControl.tsx:52](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/segmentedControl.tsx#L52)
 
 Single-select control rendering options as adjacent segments, with full
 keyboard (arrows/Home/End) support. Works controlled or uncontrolled.

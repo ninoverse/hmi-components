@@ -12,7 +12,7 @@
 
 > **RadarChartProps** = `object`
 
-Defined in: components/radarChart.tsx:12
+Defined in: [components/radarChart.tsx:12](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/radarChart.tsx#L12)
 
 #### Properties
 
@@ -20,7 +20,7 @@ Defined in: components/radarChart.tsx:12
 
 > `optional` **aria-label?**: `string`
 
-Defined in: components/radarChart.tsx:26
+Defined in: [components/radarChart.tsx:26](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/radarChart.tsx#L26)
 
 Accessible name for the chart.
 
@@ -34,7 +34,7 @@ Accessible name for the chart.
 
 > **axes**: `ReadonlyArray`\<`string`\>
 
-Defined in: components/radarChart.tsx:14
+Defined in: [components/radarChart.tsx:14](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/radarChart.tsx#L14)
 
 Axis labels, one per spoke.
 
@@ -42,7 +42,7 @@ Axis labels, one per spoke.
 
 > `optional` **max?**: `number`
 
-Defined in: components/radarChart.tsx:22
+Defined in: [components/radarChart.tsx:22](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/radarChart.tsx#L22)
 
 Upper bound of the value range. Defaults to the max across all series.
 
@@ -50,7 +50,7 @@ Upper bound of the value range. Defaults to the max across all series.
 
 > `optional` **min?**: `number`
 
-Defined in: components/radarChart.tsx:20
+Defined in: [components/radarChart.tsx:20](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/radarChart.tsx#L20)
 
 Override the value range; defaults to 0..max across all series.
 
@@ -58,7 +58,7 @@ Override the value range; defaults to 0..max across all series.
 
 > `optional` **rings?**: `number`
 
-Defined in: components/radarChart.tsx:24
+Defined in: [components/radarChart.tsx:24](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/radarChart.tsx#L24)
 
 Number of concentric grid rings.
 
@@ -72,7 +72,7 @@ Number of concentric grid rings.
 
 > **series**: `ReadonlyArray`\<[`RadarChartSeries`](#radarchartseries)\>
 
-Defined in: components/radarChart.tsx:16
+Defined in: [components/radarChart.tsx:16](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/radarChart.tsx#L16)
 
 One or more series drawn as closed polygons.
 
@@ -80,7 +80,7 @@ One or more series drawn as closed polygons.
 
 > `optional` **size?**: `number`
 
-Defined in: components/radarChart.tsx:18
+Defined in: [components/radarChart.tsx:18](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/radarChart.tsx#L18)
 
 SVG width/height in px.
 
@@ -96,7 +96,7 @@ SVG width/height in px.
 
 > **RadarChartSeries** = `object`
 
-Defined in: components/radarChart.tsx:3
+Defined in: [components/radarChart.tsx:3](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/radarChart.tsx#L3)
 
 #### Properties
 
@@ -104,7 +104,7 @@ Defined in: components/radarChart.tsx:3
 
 > `optional` **color?**: `string`
 
-Defined in: components/radarChart.tsx:9
+Defined in: [components/radarChart.tsx:9](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/radarChart.tsx#L9)
 
 Series colour. Defaults to a palette entry.
 
@@ -112,7 +112,7 @@ Series colour. Defaults to a palette entry.
 
 > **data**: `ReadonlyArray`\<`number`\>
 
-Defined in: components/radarChart.tsx:7
+Defined in: [components/radarChart.tsx:7](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/radarChart.tsx#L7)
 
 One value per axis; length should match the axes length.
 
@@ -120,7 +120,7 @@ One value per axis; length should match the axes length.
 
 > **name**: `string`
 
-Defined in: components/radarChart.tsx:5
+Defined in: [components/radarChart.tsx:5](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/radarChart.tsx#L5)
 
 Legend/label name for the series.
 
@@ -130,7 +130,7 @@ Legend/label name for the series.
 
 > **RadarChart**(`__namedParameters`): `Element` \| `null`
 
-Defined in: components/radarChart.tsx:46
+Defined in: [components/radarChart.tsx:46](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/radarChart.tsx#L46)
 
 Radar (spider) chart. Plots each series as a closed polygon over a polar
  grid of concentric rings and radial spokes. Pure SVG, zero deps.

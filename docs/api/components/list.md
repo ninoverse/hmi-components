@@ -12,7 +12,7 @@
 
 > **ListItem** = `object`
 
-Defined in: components/list.tsx:10
+Defined in: [components/list.tsx:10](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/list.tsx#L10)
 
 #### Properties
 
@@ -20,7 +20,7 @@ Defined in: components/list.tsx:10
 
 > `optional` **avatar?**: `string`
 
-Defined in: components/list.tsx:18
+Defined in: [components/list.tsx:18](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/list.tsx#L18)
 
 Name used to render a leading [Avatar](avatar.md#avatar) in the default row.
 
@@ -28,7 +28,7 @@ Name used to render a leading [Avatar](avatar.md#avatar) in the default row.
 
 > **id**: `string` \| `number`
 
-Defined in: components/list.tsx:12
+Defined in: [components/list.tsx:12](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/list.tsx#L12)
 
 Stable identity, used as the React key.
 
@@ -36,7 +36,7 @@ Stable identity, used as the React key.
 
 > `optional` **right?**: `ReactNode`
 
-Defined in: components/list.tsx:20
+Defined in: [components/list.tsx:20](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/list.tsx#L20)
 
 Trailing slot (e.g. an action or value).
 
@@ -44,7 +44,7 @@ Trailing slot (e.g. an action or value).
 
 > `optional` **subtitle?**: `ReactNode`
 
-Defined in: components/list.tsx:16
+Defined in: [components/list.tsx:16](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/list.tsx#L16)
 
 Secondary line under the title.
 
@@ -52,7 +52,7 @@ Secondary line under the title.
 
 > `optional` **title?**: `ReactNode`
 
-Defined in: components/list.tsx:14
+Defined in: [components/list.tsx:14](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/list.tsx#L14)
 
 Primary line.
 
@@ -62,7 +62,7 @@ Primary line.
 
 > **ListProps** = `HTMLAttributes`\<`HTMLDivElement`\> & `object`
 
-Defined in: components/list.tsx:23
+Defined in: [components/list.tsx:23](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/list.tsx#L23)
 
 #### Type Declaration
 
@@ -126,7 +126,10 @@ Custom row renderer, replacing the default avatar/title/subtitle layout.
 
 > **List**(`__namedParameters`): `Element`
 
-Defined in: components/list.tsx:54
+Defined in: [components/list.tsx:53](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/list.tsx#L53)
+
+Vertical list of rows with an optional avatar, title/subtitle and trailing
+slot. Supports drag-and-drop reordering and a custom row renderer.
 
 #### Parameters
 
@@ -137,3 +140,9 @@ Defined in: components/list.tsx:54
 #### Returns
 
 `Element`
+
+#### Example
+
+```ts
+<List items={items} draggable onReorder={setItems} />
+```
