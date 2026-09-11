@@ -12,7 +12,7 @@
 
 > **SidebarGroup**\<`T`\> = `object`
 
-Defined in: components/sidebar.tsx:20
+Defined in: [components/sidebar.tsx:20](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/sidebar.tsx#L20)
 
 #### Type Parameters
 
@@ -26,7 +26,7 @@ Defined in: components/sidebar.tsx:20
 
 > **items**: `ReadonlyArray`\<[`SidebarItem`](#sidebaritem)\<`T`\>\>
 
-Defined in: components/sidebar.tsx:24
+Defined in: [components/sidebar.tsx:24](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/sidebar.tsx#L24)
 
 Items in this group.
 
@@ -34,7 +34,7 @@ Items in this group.
 
 > `optional` **label?**: `ReactNode`
 
-Defined in: components/sidebar.tsx:22
+Defined in: [components/sidebar.tsx:22](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/sidebar.tsx#L22)
 
 Optional group heading.
 
@@ -44,7 +44,7 @@ Optional group heading.
 
 > **SidebarItem**\<`T`\> = `object`
 
-Defined in: components/sidebar.tsx:5
+Defined in: [components/sidebar.tsx:5](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/sidebar.tsx#L5)
 
 #### Type Parameters
 
@@ -58,7 +58,7 @@ Defined in: components/sidebar.tsx:5
 
 > `optional` **badge?**: `ReactNode`
 
-Defined in: components/sidebar.tsx:15
+Defined in: [components/sidebar.tsx:15](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/sidebar.tsx#L15)
 
 Optional trailing [Badge](badge.md#badge) content.
 
@@ -66,7 +66,7 @@ Optional trailing [Badge](badge.md#badge) content.
 
 > `optional` **badgeVariant?**: [`BadgeVariant`](badge.md#badgevariant)
 
-Defined in: components/sidebar.tsx:17
+Defined in: [components/sidebar.tsx:17](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/sidebar.tsx#L17)
 
 Variant for the trailing badge.
 
@@ -80,7 +80,7 @@ Variant for the trailing badge.
 
 > `optional` **href?**: `string`
 
-Defined in: components/sidebar.tsx:13
+Defined in: [components/sidebar.tsx:13](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/sidebar.tsx#L13)
 
 Link target; when omitted, navigation is handled via `onNav` only.
 
@@ -88,7 +88,7 @@ Link target; when omitted, navigation is handled via `onNav` only.
 
 > `optional` **icon?**: `ReactNode`
 
-Defined in: components/sidebar.tsx:11
+Defined in: [components/sidebar.tsx:11](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/sidebar.tsx#L11)
 
 Optional leading icon.
 
@@ -96,7 +96,7 @@ Optional leading icon.
 
 > **label**: `ReactNode`
 
-Defined in: components/sidebar.tsx:9
+Defined in: [components/sidebar.tsx:9](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/sidebar.tsx#L9)
 
 Visible item label.
 
@@ -104,7 +104,7 @@ Visible item label.
 
 > **value**: `T`
 
-Defined in: components/sidebar.tsx:7
+Defined in: [components/sidebar.tsx:7](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/sidebar.tsx#L7)
 
 Unique value, emitted via `onNav` and matched against `current`.
 
@@ -114,7 +114,7 @@ Unique value, emitted via `onNav` and matched against `current`.
 
 > **SidebarProps**\<`T`\> = `HTMLAttributes`\<`HTMLElement`\> & `object`
 
-Defined in: components/sidebar.tsx:27
+Defined in: [components/sidebar.tsx:27](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/sidebar.tsx#L27)
 
 #### Type Declaration
 
@@ -158,7 +158,7 @@ Fires with an item's `value` when it is activated.
 
 > **Sidebar**\<`T`\>(`__namedParameters`): `Element`
 
-Defined in: components/sidebar.tsx:44
+Defined in: [components/sidebar.tsx:44](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/sidebar.tsx#L44)
 
 Vertical side navigation with grouped, optionally-badged links and an active
 state.

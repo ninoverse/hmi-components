@@ -12,7 +12,7 @@
 
 > **SparklineProps** = `object`
 
-Defined in: components/sparkline.tsx:3
+Defined in: [components/sparkline.tsx:3](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/sparkline.tsx#L3)
 
 #### Properties
 
@@ -20,7 +20,7 @@ Defined in: components/sparkline.tsx:3
 
 > `optional` **area?**: `boolean`
 
-Defined in: components/sparkline.tsx:15
+Defined in: [components/sparkline.tsx:15](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/sparkline.tsx#L15)
 
 Fill the area under the line.
 
@@ -34,7 +34,7 @@ false
 
 > `optional` **aria-label?**: `string`
 
-Defined in: components/sparkline.tsx:23
+Defined in: [components/sparkline.tsx:23](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/sparkline.tsx#L23)
 
 Accessible name for the chart.
 
@@ -42,7 +42,7 @@ Accessible name for the chart.
 
 > `optional` **color?**: `string`
 
-Defined in: components/sparkline.tsx:11
+Defined in: [components/sparkline.tsx:11](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/sparkline.tsx#L11)
 
 Line/area colour. Defaults to the primary token.
 
@@ -50,7 +50,7 @@ Line/area colour. Defaults to the primary token.
 
 > **data**: `ReadonlyArray`\<`number`\>
 
-Defined in: components/sparkline.tsx:5
+Defined in: [components/sparkline.tsx:5](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/sparkline.tsx#L5)
 
 Values to plot, in order.
 
@@ -58,7 +58,7 @@ Values to plot, in order.
 
 > `optional` **height?**: `number`
 
-Defined in: components/sparkline.tsx:9
+Defined in: [components/sparkline.tsx:9](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/sparkline.tsx#L9)
 
 SVG height in px.
 
@@ -72,7 +72,7 @@ SVG height in px.
 
 > `optional` **max?**: `number`
 
-Defined in: components/sparkline.tsx:21
+Defined in: [components/sparkline.tsx:21](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/sparkline.tsx#L21)
 
 Upper bound of the value range. Defaults to the data max.
 
@@ -80,7 +80,7 @@ Upper bound of the value range. Defaults to the data max.
 
 > `optional` **min?**: `number`
 
-Defined in: components/sparkline.tsx:19
+Defined in: [components/sparkline.tsx:19](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/sparkline.tsx#L19)
 
 Override the value range; defaults to the data's own min/max.
 
@@ -88,7 +88,7 @@ Override the value range; defaults to the data's own min/max.
 
 > `optional` **showDot?**: `boolean`
 
-Defined in: components/sparkline.tsx:17
+Defined in: [components/sparkline.tsx:17](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/sparkline.tsx#L17)
 
 Show a dot at the last data point.
 
@@ -102,7 +102,7 @@ false
 
 > `optional` **strokeWidth?**: `number`
 
-Defined in: components/sparkline.tsx:13
+Defined in: [components/sparkline.tsx:13](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/sparkline.tsx#L13)
 
 Line stroke width in px.
 
@@ -116,7 +116,7 @@ Line stroke width in px.
 
 > `optional` **width?**: `number`
 
-Defined in: components/sparkline.tsx:7
+Defined in: [components/sparkline.tsx:7](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/sparkline.tsx#L7)
 
 SVG width in px.
 
@@ -132,7 +132,7 @@ SVG width in px.
 
 > **Sparkline**(`__namedParameters`): `Element` \| `null`
 
-Defined in: components/sparkline.tsx:28
+Defined in: [components/sparkline.tsx:28](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/sparkline.tsx#L28)
 
 Compact, axis-less trend line for inline contexts (table cells, cards).
  Pure SVG path math; the larger Cartesian charts reuse the same approach.

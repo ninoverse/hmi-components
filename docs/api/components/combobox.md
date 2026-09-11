@@ -12,7 +12,7 @@
 
 > **ComboboxOption**\<`T`\> = `object`
 
-Defined in: components/combobox.tsx:16
+Defined in: [components/combobox.tsx:16](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/combobox.tsx#L16)
 
 #### Type Parameters
 
@@ -26,7 +26,7 @@ Defined in: components/combobox.tsx:16
 
 > `optional` **description?**: `ReactNode`
 
-Defined in: components/combobox.tsx:22
+Defined in: [components/combobox.tsx:22](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/combobox.tsx#L22)
 
 Optional secondary line under the label.
 
@@ -34,7 +34,7 @@ Optional secondary line under the label.
 
 > `optional` **disabled?**: `boolean`
 
-Defined in: components/combobox.tsx:24
+Defined in: [components/combobox.tsx:24](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/combobox.tsx#L24)
 
 Prevent selecting this option.
 
@@ -48,7 +48,7 @@ false
 
 > **label**: `string`
 
-Defined in: components/combobox.tsx:20
+Defined in: [components/combobox.tsx:20](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/combobox.tsx#L20)
 
 Text shown in the input and option row, and matched while filtering.
 
@@ -56,7 +56,7 @@ Text shown in the input and option row, and matched while filtering.
 
 > **value**: `T`
 
-Defined in: components/combobox.tsx:18
+Defined in: [components/combobox.tsx:18](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/combobox.tsx#L18)
 
 Unique value committed on selection.
 
@@ -66,7 +66,7 @@ Unique value committed on selection.
 
 > **ComboboxProps**\<`T`\> = `object`
 
-Defined in: components/combobox.tsx:27
+Defined in: [components/combobox.tsx:27](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/combobox.tsx#L27)
 
 #### Type Parameters
 
@@ -80,7 +80,7 @@ Defined in: components/combobox.tsx:27
 
 > `optional` **aria-label?**: `string`
 
-Defined in: components/combobox.tsx:45
+Defined in: [components/combobox.tsx:45](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/combobox.tsx#L45)
 
 Accessible label for the input.
 
@@ -94,7 +94,7 @@ Accessible label for the input.
 
 > `optional` **defaultValue?**: `T`
 
-Defined in: components/combobox.tsx:31
+Defined in: [components/combobox.tsx:31](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/combobox.tsx#L31)
 
 Initial selected value when uncontrolled.
 
@@ -102,7 +102,7 @@ Initial selected value when uncontrolled.
 
 > `optional` **disabled?**: `boolean`
 
-Defined in: components/combobox.tsx:39
+Defined in: [components/combobox.tsx:39](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/combobox.tsx#L39)
 
 Disable the input.
 
@@ -116,7 +116,7 @@ false
 
 > `optional` **emptyMessage?**: `ReactNode`
 
-Defined in: components/combobox.tsx:43
+Defined in: [components/combobox.tsx:43](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/combobox.tsx#L43)
 
 Content shown when no option matches.
 
@@ -130,7 +130,7 @@ Content shown when no option matches.
 
 > `optional` **filterOption?**: (`option`, `query`) => `boolean`
 
-Defined in: components/combobox.tsx:41
+Defined in: [components/combobox.tsx:41](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/combobox.tsx#L41)
 
 Predicate for filtering options by query. Defaults to case-insensitive label match.
 
@@ -152,7 +152,7 @@ Predicate for filtering options by query. Defaults to case-insensitive label mat
 
 > `optional` **onChange?**: (`value`) => `void`
 
-Defined in: components/combobox.tsx:33
+Defined in: [components/combobox.tsx:33](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/combobox.tsx#L33)
 
 Fires with the new value (or `null` when cleared).
 
@@ -170,7 +170,7 @@ Fires with the new value (or `null` when cleared).
 
 > **options**: `ReadonlyArray`\<[`ComboboxOption`](#comboboxoption)\<`T`\>\>
 
-Defined in: components/combobox.tsx:35
+Defined in: [components/combobox.tsx:35](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/combobox.tsx#L35)
 
 Selectable options.
 
@@ -178,7 +178,7 @@ Selectable options.
 
 > `optional` **placeholder?**: `string`
 
-Defined in: components/combobox.tsx:37
+Defined in: [components/combobox.tsx:37](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/combobox.tsx#L37)
 
 Input placeholder.
 
@@ -192,7 +192,7 @@ Input placeholder.
 
 > `optional` **value?**: `T` \| `null`
 
-Defined in: components/combobox.tsx:29
+Defined in: [components/combobox.tsx:29](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/combobox.tsx#L29)
 
 Controlled selected value, or `null` for none. Provide with `onChange`.
 
@@ -202,7 +202,7 @@ Controlled selected value, or `null` for none. Provide with `onChange`.
 
 > **Combobox**\<`T`\>(`__namedParameters`): `Element`
 
-Defined in: components/combobox.tsx:60
+Defined in: [components/combobox.tsx:60](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/combobox.tsx#L60)
 
 Editable single-select with type-ahead filtering, keyboard navigation and a
 portalled listbox. Works controlled or uncontrolled.

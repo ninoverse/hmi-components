@@ -12,7 +12,7 @@
 
 > **BoxBackground** = `"none"` \| `"surface"` \| `"surface-variant"` \| `"surface-container"` \| `"surface-container-low"` \| `"surface-container-high"`
 
-Defined in: components/box.tsx:4
+Defined in: [components/box.tsx:4](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/box.tsx#L4)
 
 ***
 
@@ -20,7 +20,7 @@ Defined in: components/box.tsx:4
 
 > **BoxPadding** = `"none"` \| `"small"` \| `"medium"` \| `"large"`
 
-Defined in: components/box.tsx:11
+Defined in: [components/box.tsx:11](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/box.tsx#L11)
 
 ***
 
@@ -28,7 +28,7 @@ Defined in: components/box.tsx:11
 
 > **BoxProps** = `HTMLAttributes`\<`HTMLDivElement`\> & `object`
 
-Defined in: components/box.tsx:14
+Defined in: [components/box.tsx:14](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/box.tsx#L14)
 
 #### Type Declaration
 
@@ -104,7 +104,7 @@ Corner radius preset.
 
 > **BoxRadius** = `"none"` \| `"small"` \| `"medium"` \| `"large"` \| `"full"` \| `"leaf"`
 
-Defined in: components/box.tsx:12
+Defined in: [components/box.tsx:12](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/box.tsx#L12)
 
 ## Functions
 
@@ -112,7 +112,7 @@ Defined in: components/box.tsx:12
 
 > **Box**(`__namedParameters`): `Element`
 
-Defined in: components/box.tsx:36
+Defined in: [components/box.tsx:36](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/box.tsx#L36)
 
 Primitive container that maps surface, padding, radius and border props to
 theme tokens. Render as any element via `as`.

@@ -12,7 +12,7 @@
 
 > **CheckboxProps** = `Omit`\<`ComponentPropsWithRef`\<`"input"`\>, `"type"` \| `"checked"` \| `"defaultChecked"` \| `"onChange"`\> & `object`
 
-Defined in: components/checkbox.tsx:4
+Defined in: [components/checkbox.tsx:4](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/checkbox.tsx#L4)
 
 #### Type Declaration
 
@@ -56,7 +56,7 @@ Fires with the new checked state on toggle.
 
 > **Checkbox**(`__namedParameters`): `Element`
 
-Defined in: components/checkbox.tsx:25
+Defined in: [components/checkbox.tsx:25](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/checkbox.tsx#L25)
 
 Labelled checkbox. Forwards native `<input>` props; `onChange` is simplified
 to receive the boolean checked state.

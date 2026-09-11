@@ -12,7 +12,7 @@
 
 > **BulletChartProps** = `object`
 
-Defined in: components/bulletChart.tsx:3
+Defined in: [components/bulletChart.tsx:3](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/bulletChart.tsx#L3)
 
 #### Properties
 
@@ -20,7 +20,7 @@ Defined in: components/bulletChart.tsx:3
 
 > `optional` **aria-label?**: `string`
 
-Defined in: components/bulletChart.tsx:23
+Defined in: [components/bulletChart.tsx:23](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/bulletChart.tsx#L23)
 
 Accessible name. Falls back to `label`, then `'Bullet chart'`.
 
@@ -28,7 +28,7 @@ Accessible name. Falls back to `label`, then `'Bullet chart'`.
 
 > `optional` **color?**: `string`
 
-Defined in: components/bulletChart.tsx:15
+Defined in: [components/bulletChart.tsx:15](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/bulletChart.tsx#L15)
 
 Measure bar colour. Defaults to the primary token.
 
@@ -36,7 +36,7 @@ Measure bar colour. Defaults to the primary token.
 
 > `optional` **height?**: `number`
 
-Defined in: components/bulletChart.tsx:21
+Defined in: [components/bulletChart.tsx:21](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/bulletChart.tsx#L21)
 
 SVG height in px.
 
@@ -50,7 +50,7 @@ SVG height in px.
 
 > `optional` **label?**: `string`
 
-Defined in: components/bulletChart.tsx:17
+Defined in: [components/bulletChart.tsx:17](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/bulletChart.tsx#L17)
 
 Leading label rendered to the left of the track.
 
@@ -58,7 +58,7 @@ Leading label rendered to the left of the track.
 
 > `optional` **max?**: `number`
 
-Defined in: components/bulletChart.tsx:9
+Defined in: [components/bulletChart.tsx:9](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/bulletChart.tsx#L9)
 
 Upper bound of the scale. Defaults to max(value, target, last range).
 
@@ -66,7 +66,7 @@ Upper bound of the scale. Defaults to max(value, target, last range).
 
 > `optional` **min?**: `number`
 
-Defined in: components/bulletChart.tsx:11
+Defined in: [components/bulletChart.tsx:11](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/bulletChart.tsx#L11)
 
 Lower bound of the scale. Defaults to 0.
 
@@ -74,7 +74,7 @@ Lower bound of the scale. Defaults to 0.
 
 > `optional` **ranges?**: `ReadonlyArray`\<`number`\>
 
-Defined in: components/bulletChart.tsx:13
+Defined in: [components/bulletChart.tsx:13](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/bulletChart.tsx#L13)
 
 Ascending qualitative-range thresholds (e.g. [40, 75] → poor/ok/good).
 
@@ -82,7 +82,7 @@ Ascending qualitative-range thresholds (e.g. [40, 75] → poor/ok/good).
 
 > `optional` **target?**: `number`
 
-Defined in: components/bulletChart.tsx:7
+Defined in: [components/bulletChart.tsx:7](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/bulletChart.tsx#L7)
 
 Target/comparison marker.
 
@@ -90,7 +90,7 @@ Target/comparison marker.
 
 > **value**: `number`
 
-Defined in: components/bulletChart.tsx:5
+Defined in: [components/bulletChart.tsx:5](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/bulletChart.tsx#L5)
 
 The measured value (the primary bar).
 
@@ -98,7 +98,7 @@ The measured value (the primary bar).
 
 > `optional` **width?**: `number`
 
-Defined in: components/bulletChart.tsx:19
+Defined in: [components/bulletChart.tsx:19](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/bulletChart.tsx#L19)
 
 SVG width in px.
 
@@ -114,7 +114,7 @@ SVG width in px.
 
 > **BulletChart**(`__namedParameters`): `Element`
 
-Defined in: components/bulletChart.tsx:36
+Defined in: [components/bulletChart.tsx:36](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/bulletChart.tsx#L36)
 
 Bullet chart (bullet graph): a compact horizontal KPI gauge. Qualitative
  range bands sit behind a measure bar, with a target tick for comparison.

@@ -12,7 +12,7 @@
 
 > **SwitchProps** = `Omit`\<`ComponentPropsWithRef`\<`"input"`\>, `"type"` \| `"checked"` \| `"defaultChecked"` \| `"onChange"`\> & `object`
 
-Defined in: components/switch.tsx:4
+Defined in: [components/switch.tsx:4](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/switch.tsx#L4)
 
 #### Type Declaration
 
@@ -56,7 +56,7 @@ Fires with the new on/off state on toggle.
 
 > **Switch**(`__namedParameters`): `Element`
 
-Defined in: components/switch.tsx:25
+Defined in: [components/switch.tsx:25](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/switch.tsx#L25)
 
 Labelled on/off toggle. Forwards native checkbox `<input>` props; `onChange`
 is simplified to receive the boolean state.

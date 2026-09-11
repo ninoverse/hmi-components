@@ -12,7 +12,7 @@
 
 > **ButtonProps** = `ComponentPropsWithRef`\<`"button"`\> & `object`
 
-Defined in: components/button.tsx:14
+Defined in: [components/button.tsx:14](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/button.tsx#L14)
 
 #### Type Declaration
 
@@ -70,7 +70,7 @@ Visual style of the button.
 
 > **ButtonSize** = `"small"` \| `"medium"` \| `"large"`
 
-Defined in: components/button.tsx:12
+Defined in: [components/button.tsx:12](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/button.tsx#L12)
 
 ***
 
@@ -78,7 +78,7 @@ Defined in: components/button.tsx:12
 
 > **ButtonVariant** = `"primary"` \| `"secondary"` \| `"ghost"` \| `"soft"` \| `"danger"` \| `"link"`
 
-Defined in: components/button.tsx:4
+Defined in: [components/button.tsx:4](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/button.tsx#L4)
 
 ## Functions
 
@@ -86,7 +86,7 @@ Defined in: components/button.tsx:4
 
 > **Button**(`__namedParameters`): `Element`
 
-Defined in: components/button.tsx:34
+Defined in: [components/button.tsx:34](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/button.tsx#L34)
 
 Interactive button styled with MD3 tokens. Forwards all native `<button>`
 props (including `ref`), and defaults `type` to `"button"`.

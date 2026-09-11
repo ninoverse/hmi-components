@@ -12,7 +12,7 @@
 
 > **HeadingLevel** = `1` \| `2` \| `3` \| `4` \| `5` \| `6`
 
-Defined in: components/heading.tsx:4
+Defined in: [components/heading.tsx:4](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/heading.tsx#L4)
 
 ***
 
@@ -20,7 +20,7 @@ Defined in: components/heading.tsx:4
 
 > **HeadingProps** = `HTMLAttributes`\<`HTMLHeadingElement`\> & `object`
 
-Defined in: components/heading.tsx:8
+Defined in: [components/heading.tsx:8](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/heading.tsx#L8)
 
 #### Type Declaration
 
@@ -78,7 +78,7 @@ false
 
 > **HeadingSize** = `"xsmall"` \| `"small"` \| `"medium"` \| `"large"` \| `"xlarge"`
 
-Defined in: components/heading.tsx:5
+Defined in: [components/heading.tsx:5](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/heading.tsx#L5)
 
 ***
 
@@ -86,7 +86,7 @@ Defined in: components/heading.tsx:5
 
 > **HeadingTone** = `"default"` \| `"muted"` \| `"primary"` \| `"inherit"`
 
-Defined in: components/heading.tsx:6
+Defined in: [components/heading.tsx:6](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/heading.tsx#L6)
 
 ## Functions
 
@@ -94,7 +94,10 @@ Defined in: components/heading.tsx:6
 
 > **Heading**(`__namedParameters`): `Element`
 
-Defined in: components/heading.tsx:39
+Defined in: [components/heading.tsx:38](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/heading.tsx#L38)
+
+Semantic heading (`h1`–`h6`) with visual size, tone and truncation decoupled
+from the level, so structure and appearance can differ.
 
 #### Parameters
 
@@ -105,3 +108,9 @@ Defined in: components/heading.tsx:39
 #### Returns
 
 `Element`
+
+#### Example
+
+```ts
+<Heading level={1} size="large">Dashboard</Heading>
+```

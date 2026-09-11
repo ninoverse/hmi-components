@@ -12,7 +12,7 @@
 
 > **SpacerAxis** = `"vertical"` \| `"horizontal"`
 
-Defined in: components/spacer.tsx:5
+Defined in: [components/spacer.tsx:5](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/spacer.tsx#L5)
 
 ***
 
@@ -20,7 +20,7 @@ Defined in: components/spacer.tsx:5
 
 > **SpacerProps** = `HTMLAttributes`\<`HTMLSpanElement`\> & `object`
 
-Defined in: components/spacer.tsx:7
+Defined in: [components/spacer.tsx:7](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/spacer.tsx#L7)
 
 #### Type Declaration
 
@@ -66,7 +66,7 @@ Spacing amount preset.
 
 > **SpacerSize** = `"small"` \| `"medium"` \| `"large"`
 
-Defined in: components/spacer.tsx:4
+Defined in: [components/spacer.tsx:4](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/spacer.tsx#L4)
 
 ## Functions
 
@@ -74,7 +74,7 @@ Defined in: components/spacer.tsx:4
 
 > **Spacer**(`__namedParameters`): `Element`
 
-Defined in: components/spacer.tsx:24
+Defined in: [components/spacer.tsx:24](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/spacer.tsx#L24)
 
 Blank spacing element. Use a fixed `size`/`axis`, or `grow` to absorb free
 space in a flex layout.

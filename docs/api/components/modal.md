@@ -12,7 +12,7 @@
 
 > **DialogAction** = `object`
 
-Defined in: components/modal.tsx:18
+Defined in: [components/modal.tsx:18](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/modal.tsx#L18)
 
 A serializable dialog action, rendered as a Button. Crosses the Web
 Component boundary as plain JSON, unlike a JSX action node.
@@ -23,7 +23,7 @@ Component boundary as plain JSON, unlike a JSX action node.
 
 > **label**: `string`
 
-Defined in: components/modal.tsx:20
+Defined in: [components/modal.tsx:20](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/modal.tsx#L20)
 
 Button text.
 
@@ -31,7 +31,7 @@ Button text.
 
 > **value**: `string`
 
-Defined in: components/modal.tsx:22
+Defined in: [components/modal.tsx:22](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/modal.tsx#L22)
 
 Value passed to `onAction` when the button is clicked.
 
@@ -39,7 +39,7 @@ Value passed to `onAction` when the button is clicked.
 
 > `optional` **variant?**: `"primary"` \| `"secondary"` \| `"danger"`
 
-Defined in: components/modal.tsx:24
+Defined in: [components/modal.tsx:24](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/modal.tsx#L24)
 
 Button variant.
 
@@ -55,7 +55,7 @@ Button variant.
 
 > **ModalProps** = `Omit`\<`HTMLAttributes`\<`HTMLDivElement`\>, `"title"`\> & `object`
 
-Defined in: components/modal.tsx:59
+Defined in: [components/modal.tsx:59](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/modal.tsx#L59)
 
 #### Type Declaration
 
@@ -127,7 +127,7 @@ Heading, wired up as the dialog's accessible name.
 
 > **ModalSize** = `"medium"` \| `"large"`
 
-Defined in: components/modal.tsx:14
+Defined in: [components/modal.tsx:14](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/modal.tsx#L14)
 
 ## Functions
 
@@ -135,7 +135,7 @@ Defined in: components/modal.tsx:14
 
 > **Modal**(`__namedParameters`): `ReactPortal` \| `null`
 
-Defined in: components/modal.tsx:83
+Defined in: [components/modal.tsx:83](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/modal.tsx#L83)
 
 Accessible modal dialog rendered in a portal, with scrim, focus management,
 Escape/backdrop close and an optional title/description/footer actions.
@@ -162,7 +162,7 @@ Escape/backdrop close and an optional title/description/footer actions.
 
 > **renderDialogActions**(`actions`, `onAction?`): `ReactNode`
 
-Defined in: components/modal.tsx:41
+Defined in: [components/modal.tsx:41](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/modal.tsx#L41)
 
 Render the `actions` prop: a serializable DialogAction[] becomes Buttons
 that emit `onAction(value)`; any ReactNode is returned untouched so the

@@ -12,7 +12,7 @@
 
 > **BadgeProps** = `HTMLAttributes`\<`HTMLSpanElement`\> & `object`
 
-Defined in: components/badge.tsx:12
+Defined in: [components/badge.tsx:12](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/badge.tsx#L12)
 
 #### Type Declaration
 
@@ -52,7 +52,7 @@ Color/tone of the badge.
 
 > **BadgeVariant** = `"default"` \| `"primary"` \| `"success"` \| `"warning"` \| `"danger"` \| `"info"`
 
-Defined in: components/badge.tsx:4
+Defined in: [components/badge.tsx:4](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/badge.tsx#L4)
 
 ## Functions
 
@@ -60,7 +60,7 @@ Defined in: components/badge.tsx:4
 
 > **Badge**(`__namedParameters`): `Element`
 
-Defined in: components/badge.tsx:27
+Defined in: [components/badge.tsx:27](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/badge.tsx#L27)
 
 Compact status label, optionally with a leading status dot.
 

@@ -12,7 +12,7 @@
 
 > **GaugeProps** = `object`
 
-Defined in: components/gauge.tsx:4
+Defined in: [components/gauge.tsx:4](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/gauge.tsx#L4)
 
 #### Properties
 
@@ -20,7 +20,7 @@ Defined in: components/gauge.tsx:4
 
 > `optional` **aria-label?**: `string`
 
-Defined in: components/gauge.tsx:22
+Defined in: [components/gauge.tsx:22](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/gauge.tsx#L22)
 
 Accessible name. Defaults to `'Gauge: {value} of {max}'`.
 
@@ -28,7 +28,7 @@ Accessible name. Defaults to `'Gauge: {value} of {max}'`.
 
 > `optional` **color?**: `string`
 
-Defined in: components/gauge.tsx:12
+Defined in: [components/gauge.tsx:12](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/gauge.tsx#L12)
 
 Arc colour. Defaults to the primary token.
 
@@ -36,7 +36,7 @@ Arc colour. Defaults to the primary token.
 
 > `optional` **label?**: `ReactNode`
 
-Defined in: components/gauge.tsx:20
+Defined in: [components/gauge.tsx:20](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/gauge.tsx#L20)
 
 Content shown below the dial (e.g. the value). Defaults to the value.
 
@@ -44,7 +44,7 @@ Content shown below the dial (e.g. the value). Defaults to the value.
 
 > `optional` **max?**: `number`
 
-Defined in: components/gauge.tsx:10
+Defined in: [components/gauge.tsx:10](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/gauge.tsx#L10)
 
 Upper bound of the scale.
 
@@ -58,7 +58,7 @@ Upper bound of the scale.
 
 > `optional` **min?**: `number`
 
-Defined in: components/gauge.tsx:8
+Defined in: [components/gauge.tsx:8](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/gauge.tsx#L8)
 
 Lower bound of the scale.
 
@@ -72,7 +72,7 @@ Lower bound of the scale.
 
 > `optional` **size?**: `number`
 
-Defined in: components/gauge.tsx:18
+Defined in: [components/gauge.tsx:18](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/gauge.tsx#L18)
 
 SVG width in px (height is derived).
 
@@ -86,7 +86,7 @@ SVG width in px (height is derived).
 
 > `optional` **thickness?**: `number`
 
-Defined in: components/gauge.tsx:16
+Defined in: [components/gauge.tsx:16](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/gauge.tsx#L16)
 
 Thickness of the arc as a fraction of the radius (0..1).
 
@@ -100,7 +100,7 @@ Thickness of the arc as a fraction of the radius (0..1).
 
 > `optional` **trackColor?**: `string`
 
-Defined in: components/gauge.tsx:14
+Defined in: [components/gauge.tsx:14](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/gauge.tsx#L14)
 
 Track (unfilled arc) colour.
 
@@ -108,7 +108,7 @@ Track (unfilled arc) colour.
 
 > **value**: `number`
 
-Defined in: components/gauge.tsx:6
+Defined in: [components/gauge.tsx:6](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/gauge.tsx#L6)
 
 Current value, clamped to `[min, max]`.
 
@@ -118,7 +118,7 @@ Current value, clamped to `[min, max]`.
 
 > **Gauge**(`__namedParameters`): `Element`
 
-Defined in: components/gauge.tsx:49
+Defined in: [components/gauge.tsx:49](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/gauge.tsx#L49)
 
 Semicircular gauge dial. A value arc fills a 180° track from left to right;
  an optional label sits beneath. Pure SVG arc math, zero deps.

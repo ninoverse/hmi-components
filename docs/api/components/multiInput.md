@@ -12,7 +12,7 @@
 
 > **MultiInputProps** = `object`
 
-Defined in: components/multiInput.tsx:12
+Defined in: [components/multiInput.tsx:12](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/multiInput.tsx#L12)
 
 #### Properties
 
@@ -20,7 +20,7 @@ Defined in: components/multiInput.tsx:12
 
 > `optional` **aria-label?**: `string`
 
-Defined in: components/multiInput.tsx:42
+Defined in: [components/multiInput.tsx:42](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/multiInput.tsx#L42)
 
 Accessible label for the group.
 
@@ -34,7 +34,7 @@ Accessible label for the group.
 
 > `optional` **autoComplete?**: `string`
 
-Defined in: components/multiInput.tsx:40
+Defined in: [components/multiInput.tsx:40](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/multiInput.tsx#L40)
 
 `autocomplete` for the first cell (e.g. `'one-time-code'`).
 
@@ -48,7 +48,7 @@ Defined in: components/multiInput.tsx:40
 
 > `optional` **autoFocus?**: `boolean`
 
-Defined in: components/multiInput.tsx:38
+Defined in: [components/multiInput.tsx:38](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/multiInput.tsx#L38)
 
 Focus the first cell on mount.
 
@@ -62,7 +62,7 @@ false
 
 > `optional` **defaultValue?**: `string`
 
-Defined in: components/multiInput.tsx:22
+Defined in: [components/multiInput.tsx:22](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/multiInput.tsx#L22)
 
 Initial value when uncontrolled.
 
@@ -70,7 +70,7 @@ Initial value when uncontrolled.
 
 > `optional` **disabled?**: `boolean`
 
-Defined in: components/multiInput.tsx:34
+Defined in: [components/multiInput.tsx:34](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/multiInput.tsx#L34)
 
 Disable all cells.
 
@@ -84,7 +84,7 @@ false
 
 > `optional` **groupSize?**: `number`
 
-Defined in: components/multiInput.tsx:16
+Defined in: [components/multiInput.tsx:16](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/multiInput.tsx#L16)
 
 Insert a separator every N cells (e.g. `3` → `XXX–XXX`).
 
@@ -92,7 +92,7 @@ Insert a separator every N cells (e.g. `3` → `XXX–XXX`).
 
 > `optional` **length?**: `number`
 
-Defined in: components/multiInput.tsx:14
+Defined in: [components/multiInput.tsx:14](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/multiInput.tsx#L14)
 
 Number of single-character cells.
 
@@ -106,7 +106,7 @@ Number of single-character cells.
 
 > `optional` **mask?**: `boolean`
 
-Defined in: components/multiInput.tsx:32
+Defined in: [components/multiInput.tsx:32](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/multiInput.tsx#L32)
 
 Mask entered characters (password style).
 
@@ -120,7 +120,7 @@ false
 
 > `optional` **onChange?**: (`value`) => `void`
 
-Defined in: components/multiInput.tsx:24
+Defined in: [components/multiInput.tsx:24](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/multiInput.tsx#L24)
 
 Fires with the concatenated value on every edit.
 
@@ -138,7 +138,7 @@ Fires with the concatenated value on every edit.
 
 > `optional` **onComplete?**: (`value`) => `void`
 
-Defined in: components/multiInput.tsx:26
+Defined in: [components/multiInput.tsx:26](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/multiInput.tsx#L26)
 
 Fires with the value once every cell is filled.
 
@@ -156,7 +156,7 @@ Fires with the value once every cell is filled.
 
 > `optional` **pattern?**: `RegExp`
 
-Defined in: components/multiInput.tsx:30
+Defined in: [components/multiInput.tsx:30](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/multiInput.tsx#L30)
 
 Custom single-character validation pattern, overriding `type`.
 
@@ -164,7 +164,7 @@ Custom single-character validation pattern, overriding `type`.
 
 > `optional` **readOnly?**: `boolean`
 
-Defined in: components/multiInput.tsx:36
+Defined in: [components/multiInput.tsx:36](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/multiInput.tsx#L36)
 
 Make all cells read-only.
 
@@ -178,7 +178,7 @@ false
 
 > `optional` **separator?**: `string`
 
-Defined in: components/multiInput.tsx:18
+Defined in: [components/multiInput.tsx:18](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/multiInput.tsx#L18)
 
 Separator string shown between groups.
 
@@ -192,7 +192,7 @@ Separator string shown between groups.
 
 > `optional` **type?**: [`MultiInputType`](#multiinputtype)
 
-Defined in: components/multiInput.tsx:28
+Defined in: [components/multiInput.tsx:28](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/multiInput.tsx#L28)
 
 Allowed characters and input mode.
 
@@ -206,7 +206,7 @@ Allowed characters and input mode.
 
 > `optional` **value?**: `string`
 
-Defined in: components/multiInput.tsx:20
+Defined in: [components/multiInput.tsx:20](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/multiInput.tsx#L20)
 
 Controlled value (concatenated cells). Provide with `onChange`.
 
@@ -216,7 +216,7 @@ Controlled value (concatenated cells). Provide with `onChange`.
 
 > **MultiInputType** = `"numeric"` \| `"text"`
 
-Defined in: components/multiInput.tsx:10
+Defined in: [components/multiInput.tsx:10](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/multiInput.tsx#L10)
 
 ## Functions
 
@@ -224,7 +224,11 @@ Defined in: components/multiInput.tsx:10
 
 > **MultiInput**(`__namedParameters`): `Element`
 
-Defined in: components/multiInput.tsx:57
+Defined in: [components/multiInput.tsx:56](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/multiInput.tsx#L56)
+
+Segmented single-character input for codes/OTP/PIN, with auto-advance,
+paste-to-fill, keyboard navigation and optional grouping. Works controlled
+or uncontrolled.
 
 #### Parameters
 
@@ -235,3 +239,9 @@ Defined in: components/multiInput.tsx:57
 #### Returns
 
 `Element`
+
+#### Example
+
+```ts
+<MultiInput length={6} groupSize={3} onComplete={verify} />
+```

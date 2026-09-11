@@ -12,7 +12,7 @@
 
 > **LinkProps** = `AnchorHTMLAttributes`\<`HTMLAnchorElement`\> & `object`
 
-Defined in: components/link.tsx:7
+Defined in: [components/link.tsx:7](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/link.tsx#L7)
 
 #### Type Declaration
 
@@ -52,7 +52,7 @@ When to show the underline.
 
 > **LinkTone** = `"primary"` \| `"muted"`
 
-Defined in: components/link.tsx:5
+Defined in: [components/link.tsx:5](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/link.tsx#L5)
 
 ***
 
@@ -60,7 +60,7 @@ Defined in: components/link.tsx:5
 
 > **LinkUnderline** = `"always"` \| `"hover"` \| `"none"`
 
-Defined in: components/link.tsx:4
+Defined in: [components/link.tsx:4](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/link.tsx#L4)
 
 ## Functions
 
@@ -68,7 +68,7 @@ Defined in: components/link.tsx:4
 
 > **Link**(`__namedParameters`): `Element`
 
-Defined in: components/link.tsx:23
+Defined in: [components/link.tsx:23](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/link.tsx#L23)
 
 Styled anchor. Automatically adds `rel="noopener noreferrer"` for
 `target="_blank"` links to prevent reverse-tabnabbing.

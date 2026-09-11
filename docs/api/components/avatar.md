@@ -12,7 +12,7 @@
 
 > **AvatarProps** = `HTMLAttributes`\<`HTMLSpanElement`\> & `object`
 
-Defined in: components/avatar.tsx:8
+Defined in: [components/avatar.tsx:8](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/avatar.tsx#L8)
 
 #### Type Declaration
 
@@ -52,7 +52,7 @@ Optional presence indicator dot.
 
 > **AvatarSize** = `"small"` \| `"medium"` \| `"large"` \| `"xlarge"`
 
-Defined in: components/avatar.tsx:4
+Defined in: [components/avatar.tsx:4](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/avatar.tsx#L4)
 
 ***
 
@@ -60,7 +60,7 @@ Defined in: components/avatar.tsx:4
 
 > **AvatarStatus** = `"online"` \| `"away"` \| `"offline"`
 
-Defined in: components/avatar.tsx:6
+Defined in: [components/avatar.tsx:6](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/avatar.tsx#L6)
 
 ## Functions
 
@@ -68,7 +68,7 @@ Defined in: components/avatar.tsx:6
 
 > **Avatar**(`__namedParameters`): `Element`
 
-Defined in: components/avatar.tsx:51
+Defined in: [components/avatar.tsx:51](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/avatar.tsx#L51)
 
 User avatar showing an image, or colour-hashed initials derived from `name`
 when no `src` is given, with an optional presence dot.

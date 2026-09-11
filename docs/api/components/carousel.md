@@ -12,7 +12,7 @@
 
 > **CarouselProps** = `object`
 
-Defined in: components/carousel.tsx:11
+Defined in: [components/carousel.tsx:11](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/carousel.tsx#L11)
 
 #### Properties
 
@@ -20,7 +20,7 @@ Defined in: components/carousel.tsx:11
 
 > `optional` **aria-label?**: `string`
 
-Defined in: components/carousel.tsx:29
+Defined in: [components/carousel.tsx:29](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/carousel.tsx#L29)
 
 Accessible name for the carousel region.
 
@@ -34,7 +34,7 @@ Accessible name for the carousel region.
 
 > `optional` **autoPlay?**: `number`
 
-Defined in: components/carousel.tsx:23
+Defined in: [components/carousel.tsx:23](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/carousel.tsx#L23)
 
 Auto-advance interval in ms; pauses on hover/focus. Disabled when unset.
 
@@ -42,7 +42,7 @@ Auto-advance interval in ms; pauses on hover/focus. Disabled when unset.
 
 > `optional` **defaultIndex?**: `number`
 
-Defined in: components/carousel.tsx:17
+Defined in: [components/carousel.tsx:17](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/carousel.tsx#L17)
 
 Initial slide index when uncontrolled.
 
@@ -56,7 +56,7 @@ Initial slide index when uncontrolled.
 
 > `optional` **index?**: `number`
 
-Defined in: components/carousel.tsx:15
+Defined in: [components/carousel.tsx:15](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/carousel.tsx#L15)
 
 Controlled active slide index. Provide with `onIndexChange`.
 
@@ -64,7 +64,7 @@ Controlled active slide index. Provide with `onIndexChange`.
 
 > `optional` **loop?**: `boolean`
 
-Defined in: components/carousel.tsx:21
+Defined in: [components/carousel.tsx:21](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/carousel.tsx#L21)
 
 Wrap around past the first/last slide.
 
@@ -78,7 +78,7 @@ true
 
 > `optional` **onIndexChange?**: (`index`) => `void`
 
-Defined in: components/carousel.tsx:19
+Defined in: [components/carousel.tsx:19](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/carousel.tsx#L19)
 
 Fires with the new index whenever the active slide changes.
 
@@ -96,7 +96,7 @@ Fires with the new index whenever the active slide changes.
 
 > `optional` **showArrows?**: `boolean`
 
-Defined in: components/carousel.tsx:25
+Defined in: [components/carousel.tsx:25](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/carousel.tsx#L25)
 
 Show prev/next arrow buttons.
 
@@ -110,7 +110,7 @@ true
 
 > `optional` **showDots?**: `boolean`
 
-Defined in: components/carousel.tsx:27
+Defined in: [components/carousel.tsx:27](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/carousel.tsx#L27)
 
 Show the dot pagination control.
 
@@ -124,7 +124,7 @@ true
 
 > **slides**: `ReadonlyArray`\<`ReactNode`\>
 
-Defined in: components/carousel.tsx:13
+Defined in: [components/carousel.tsx:13](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/carousel.tsx#L13)
 
 Slide content, in order.
 
@@ -134,7 +134,7 @@ Slide content, in order.
 
 > **Carousel**(`__namedParameters`): `Element` \| `null`
 
-Defined in: components/carousel.tsx:54
+Defined in: [components/carousel.tsx:54](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/carousel.tsx#L54)
 
 Sliding content carousel with optional arrows, dot pagination, looping,
 autoplay and keyboard (←/→) support. Works controlled or uncontrolled.

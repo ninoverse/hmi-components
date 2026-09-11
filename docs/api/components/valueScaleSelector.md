@@ -12,7 +12,7 @@
 
 > **ValueScaleSelectorProps** = `object`
 
-Defined in: components/valueScaleSelector.tsx:11
+Defined in: [components/valueScaleSelector.tsx:12](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/valueScaleSelector.tsx#L12)
 
 #### Properties
 
@@ -20,7 +20,7 @@ Defined in: components/valueScaleSelector.tsx:11
 
 > `optional` **allowHalf?**: `boolean`
 
-Defined in: components/valueScaleSelector.tsx:21
+Defined in: [components/valueScaleSelector.tsx:22](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/valueScaleSelector.tsx#L22)
 
 Allow half-step selection (e.g. 3.5).
 
@@ -34,7 +34,7 @@ false
 
 > `optional` **aria-label?**: `string`
 
-Defined in: components/valueScaleSelector.tsx:33
+Defined in: [components/valueScaleSelector.tsx:38](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/valueScaleSelector.tsx#L38)
 
 Accessible label for the slider.
 
@@ -48,7 +48,7 @@ Accessible label for the slider.
 
 > `optional` **defaultValue?**: `number`
 
-Defined in: components/valueScaleSelector.tsx:15
+Defined in: [components/valueScaleSelector.tsx:16](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/valueScaleSelector.tsx#L16)
 
 Initial value when uncontrolled.
 
@@ -62,7 +62,7 @@ Initial value when uncontrolled.
 
 > `optional` **disabled?**: `boolean`
 
-Defined in: components/valueScaleSelector.tsx:29
+Defined in: [components/valueScaleSelector.tsx:34](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/valueScaleSelector.tsx#L34)
 
 Disable the control.
 
@@ -76,7 +76,7 @@ false
 
 > `optional` **icon?**: `ReactNode`
 
-Defined in: components/valueScaleSelector.tsx:23
+Defined in: [components/valueScaleSelector.tsx:24](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/valueScaleSelector.tsx#L24)
 
 Icon rendered for each position. Defaults to a star.
 
@@ -84,7 +84,7 @@ Icon rendered for each position. Defaults to a star.
 
 > `optional` **max?**: `number`
 
-Defined in: components/valueScaleSelector.tsx:19
+Defined in: [components/valueScaleSelector.tsx:20](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/valueScaleSelector.tsx#L20)
 
 Number of icons / maximum value.
 
@@ -98,7 +98,7 @@ Number of icons / maximum value.
 
 > `optional` **onChange?**: (`value`) => `void`
 
-Defined in: components/valueScaleSelector.tsx:17
+Defined in: [components/valueScaleSelector.tsx:18](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/valueScaleSelector.tsx#L18)
 
 Fires with the newly selected value.
 
@@ -116,7 +116,7 @@ Fires with the newly selected value.
 
 > `optional` **readOnly?**: `boolean`
 
-Defined in: components/valueScaleSelector.tsx:27
+Defined in: [components/valueScaleSelector.tsx:32](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/valueScaleSelector.tsx#L32)
 
 Display only; no interaction.
 
@@ -130,7 +130,7 @@ false
 
 > `optional` **size?**: [`ValueScaleSelectorSize`](#valuescaleselectorsize)
 
-Defined in: components/valueScaleSelector.tsx:31
+Defined in: [components/valueScaleSelector.tsx:36](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/valueScaleSelector.tsx#L36)
 
 Icon size preset.
 
@@ -144,31 +144,19 @@ Icon size preset.
 
 > `optional` **value?**: `number`
 
-Defined in: components/valueScaleSelector.tsx:13
+Defined in: [components/valueScaleSelector.tsx:14](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/valueScaleSelector.tsx#L14)
 
 Controlled value. Provide with `onChange`.
 
 ##### valueText?
 
-> `optional` **valueText?**: (`value`, `max`) => `string`
+> `optional` **valueText?**: `string` \| ((`value`, `max`) => `string`)
 
-Defined in: components/valueScaleSelector.tsx:25
+Defined in: [components/valueScaleSelector.tsx:30](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/valueScaleSelector.tsx#L30)
 
-Build the `aria-valuetext`. Defaults to `'{value} out of {max}'`.
-
-###### Parameters
-
-###### value
-
-`number`
-
-###### max
-
-`number`
-
-###### Returns
-
-`string`
+Build the `aria-valuetext`. A function `(value, max) => string`, or a
+`{value}`/`{max}` template string usable over the web-component
+boundary. Defaults to `'{value} out of {max}'`.
 
 ***
 
@@ -176,7 +164,7 @@ Build the `aria-valuetext`. Defaults to `'{value} out of {max}'`.
 
 > **ValueScaleSelectorSize** = `"small"` \| `"medium"` \| `"large"`
 
-Defined in: components/valueScaleSelector.tsx:9
+Defined in: [components/valueScaleSelector.tsx:10](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/valueScaleSelector.tsx#L10)
 
 ## Functions
 
@@ -184,7 +172,11 @@ Defined in: components/valueScaleSelector.tsx:9
 
 > **ValueScaleSelector**(`__namedParameters`): `Element`
 
-Defined in: components/valueScaleSelector.tsx:52
+Defined in: [components/valueScaleSelector.tsx:56](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/valueScaleSelector.tsx#L56)
+
+Icon-based rating/scale selector (e.g. star rating) exposed as an accessible
+slider, with optional half-steps, custom icon and keyboard support. Works
+controlled or uncontrolled.
 
 #### Parameters
 
@@ -195,3 +187,9 @@ Defined in: components/valueScaleSelector.tsx:52
 #### Returns
 
 `Element`
+
+#### Example
+
+```ts
+<ValueScaleSelector max={5} allowHalf value={rating} onChange={setRating} />
+```

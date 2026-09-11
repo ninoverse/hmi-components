@@ -12,7 +12,7 @@
 
 > **FunnelChartProps** = `object`
 
-Defined in: components/funnelChart.tsx:12
+Defined in: [components/funnelChart.tsx:12](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/funnelChart.tsx#L12)
 
 #### Properties
 
@@ -20,7 +20,7 @@ Defined in: components/funnelChart.tsx:12
 
 > `optional` **aria-label?**: `string`
 
-Defined in: components/funnelChart.tsx:26
+Defined in: [components/funnelChart.tsx:26](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/funnelChart.tsx#L26)
 
 Accessible name for the chart.
 
@@ -34,7 +34,7 @@ Accessible name for the chart.
 
 > `optional` **gap?**: `number`
 
-Defined in: components/funnelChart.tsx:20
+Defined in: [components/funnelChart.tsx:20](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/funnelChart.tsx#L20)
 
 Vertical gap between stage bands in px.
 
@@ -48,7 +48,7 @@ Vertical gap between stage bands in px.
 
 > `optional` **height?**: `number`
 
-Defined in: components/funnelChart.tsx:18
+Defined in: [components/funnelChart.tsx:18](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/funnelChart.tsx#L18)
 
 SVG height in px.
 
@@ -62,7 +62,7 @@ SVG height in px.
 
 > `optional` **labelWidth?**: `number`
 
-Defined in: components/funnelChart.tsx:22
+Defined in: [components/funnelChart.tsx:22](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/funnelChart.tsx#L22)
 
 Width reserved for the right-hand label column in px.
 
@@ -76,7 +76,7 @@ Width reserved for the right-hand label column in px.
 
 > `optional` **showValues?**: `boolean`
 
-Defined in: components/funnelChart.tsx:24
+Defined in: [components/funnelChart.tsx:24](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/funnelChart.tsx#L24)
 
 Append each stage's value and share of the first stage to its label.
 
@@ -90,7 +90,7 @@ false
 
 > **stages**: `ReadonlyArray`\<[`FunnelChartStage`](#funnelchartstage)\>
 
-Defined in: components/funnelChart.tsx:14
+Defined in: [components/funnelChart.tsx:14](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/funnelChart.tsx#L14)
 
 Ordered stages, top (widest) to bottom.
 
@@ -98,7 +98,7 @@ Ordered stages, top (widest) to bottom.
 
 > `optional` **width?**: `number`
 
-Defined in: components/funnelChart.tsx:16
+Defined in: [components/funnelChart.tsx:16](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/funnelChart.tsx#L16)
 
 SVG width in px.
 
@@ -114,7 +114,7 @@ SVG width in px.
 
 > **FunnelChartStage** = `object`
 
-Defined in: components/funnelChart.tsx:3
+Defined in: [components/funnelChart.tsx:3](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/funnelChart.tsx#L3)
 
 #### Properties
 
@@ -122,7 +122,7 @@ Defined in: components/funnelChart.tsx:3
 
 > `optional` **color?**: `string`
 
-Defined in: components/funnelChart.tsx:9
+Defined in: [components/funnelChart.tsx:9](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/funnelChart.tsx#L9)
 
 Stage colour. Defaults to a palette entry.
 
@@ -130,7 +130,7 @@ Stage colour. Defaults to a palette entry.
 
 > **label**: `string`
 
-Defined in: components/funnelChart.tsx:5
+Defined in: [components/funnelChart.tsx:5](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/funnelChart.tsx#L5)
 
 Stage name shown in the label column.
 
@@ -138,7 +138,7 @@ Stage name shown in the label column.
 
 > **value**: `number`
 
-Defined in: components/funnelChart.tsx:7
+Defined in: [components/funnelChart.tsx:7](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/funnelChart.tsx#L7)
 
 Stage magnitude; sets the band width relative to the largest stage.
 
@@ -148,7 +148,7 @@ Stage magnitude; sets the band width relative to the largest stage.
 
 > **FunnelChart**(`__namedParameters`): `Element` \| `null`
 
-Defined in: components/funnelChart.tsx:42
+Defined in: [components/funnelChart.tsx:42](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/funnelChart.tsx#L42)
 
 Funnel chart. Stacks centred trapezoid bands that narrow from stage to
  stage, so each band's width maps to its value. Stage labels sit in a

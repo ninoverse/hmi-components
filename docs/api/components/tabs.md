@@ -12,7 +12,7 @@
 
 > **TabOption**\<`T`\> = `object`
 
-Defined in: components/tabs.tsx:13
+Defined in: [components/tabs.tsx:13](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/tabs.tsx#L13)
 
 #### Type Parameters
 
@@ -26,7 +26,7 @@ Defined in: components/tabs.tsx:13
 
 > `optional` **count?**: `number`
 
-Defined in: components/tabs.tsx:21
+Defined in: [components/tabs.tsx:21](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/tabs.tsx#L21)
 
 Optional count shown as a trailing [Badge](badge.md#badge).
 
@@ -34,7 +34,7 @@ Optional count shown as a trailing [Badge](badge.md#badge).
 
 > `optional` **icon?**: `ReactNode`
 
-Defined in: components/tabs.tsx:19
+Defined in: [components/tabs.tsx:19](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/tabs.tsx#L19)
 
 Optional leading icon.
 
@@ -42,7 +42,7 @@ Optional leading icon.
 
 > **label**: `ReactNode`
 
-Defined in: components/tabs.tsx:17
+Defined in: [components/tabs.tsx:17](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/tabs.tsx#L17)
 
 Visible tab label.
 
@@ -50,7 +50,7 @@ Visible tab label.
 
 > **value**: `T`
 
-Defined in: components/tabs.tsx:15
+Defined in: [components/tabs.tsx:15](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/tabs.tsx#L15)
 
 Value selected when this tab is chosen.
 
@@ -60,7 +60,7 @@ Value selected when this tab is chosen.
 
 > **TabsProps**\<`T`\> = `Omit`\<`HTMLAttributes`\<`HTMLDivElement`\>, `"onChange"`\> & `object`
 
-Defined in: components/tabs.tsx:24
+Defined in: [components/tabs.tsx:24](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/tabs.tsx#L24)
 
 #### Type Declaration
 
@@ -122,7 +122,7 @@ Visual style.
 
 > **TabsVariant** = `"pill"` \| `"underline"`
 
-Defined in: components/tabs.tsx:11
+Defined in: [components/tabs.tsx:11](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/tabs.tsx#L11)
 
 ## Functions
 
@@ -130,7 +130,11 @@ Defined in: components/tabs.tsx:11
 
 > **Tabs**\<`T`\>(`__namedParameters`): `Element`
 
-Defined in: components/tabs.tsx:51
+Defined in: [components/tabs.tsx:50](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/tabs.tsx#L50)
+
+Tab switcher with an animated active indicator. Renders the tab strip only —
+pair it with your own panel switching keyed on the active value. Works
+controlled or uncontrolled.
 
 #### Type Parameters
 
@@ -147,3 +151,9 @@ Defined in: components/tabs.tsx:51
 #### Returns
 
 `Element`
+
+#### Example
+
+```ts
+<Tabs options={tabs} value={tab} onChange={setTab} variant="underline" />
+```

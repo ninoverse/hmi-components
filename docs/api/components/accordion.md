@@ -12,7 +12,7 @@
 
 > **AccordionItem** = `object`
 
-Defined in: components/accordion.tsx:4
+Defined in: [components/accordion.tsx:4](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/accordion.tsx#L4)
 
 #### Properties
 
@@ -20,7 +20,7 @@ Defined in: components/accordion.tsx:4
 
 > **body**: `ReactNode`
 
-Defined in: components/accordion.tsx:8
+Defined in: [components/accordion.tsx:8](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/accordion.tsx#L8)
 
 Panel content revealed when the item is open.
 
@@ -28,7 +28,7 @@ Panel content revealed when the item is open.
 
 > `optional` **disabled?**: `boolean`
 
-Defined in: components/accordion.tsx:10
+Defined in: [components/accordion.tsx:10](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/accordion.tsx#L10)
 
 Disable the trigger so the panel can't be toggled.
 
@@ -42,7 +42,7 @@ false
 
 > **title**: `ReactNode`
 
-Defined in: components/accordion.tsx:6
+Defined in: [components/accordion.tsx:6](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/accordion.tsx#L6)
 
 Header content shown on the always-visible trigger.
 
@@ -52,7 +52,7 @@ Header content shown on the always-visible trigger.
 
 > **AccordionProps** = `HTMLAttributes`\<`HTMLDivElement`\> & `object`
 
-Defined in: components/accordion.tsx:13
+Defined in: [components/accordion.tsx:13](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/accordion.tsx#L13)
 
 #### Type Declaration
 
@@ -108,7 +108,7 @@ Controlled set of open item indices. Provide with `onOpenChange`.
 
 > **Accordion**(`__namedParameters`): `Element`
 
-Defined in: components/accordion.tsx:51
+Defined in: [components/accordion.tsx:51](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/accordion.tsx#L51)
 
 Vertically stacked, collapsible sections. Works controlled (`open` +
 `onOpenChange`) or uncontrolled (`defaultOpen`).

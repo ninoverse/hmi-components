@@ -12,7 +12,7 @@
 
 > **FileDescriptor** = `object`
 
-Defined in: components/fileUpload.tsx:12
+Defined in: [components/fileUpload.tsx:12](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/fileUpload.tsx#L12)
 
 Serializable descriptor of a selected file — safe to emit across the Web
 Component boundary, where a raw File object cannot travel.
@@ -23,19 +23,19 @@ Component boundary, where a raw File object cannot travel.
 
 > **name**: `string`
 
-Defined in: components/fileUpload.tsx:12
+Defined in: [components/fileUpload.tsx:12](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/fileUpload.tsx#L12)
 
 ##### size
 
 > **size**: `number`
 
-Defined in: components/fileUpload.tsx:12
+Defined in: [components/fileUpload.tsx:12](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/fileUpload.tsx#L12)
 
 ##### type
 
 > **type**: `string`
 
-Defined in: components/fileUpload.tsx:12
+Defined in: [components/fileUpload.tsx:12](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/fileUpload.tsx#L12)
 
 ***
 
@@ -43,7 +43,7 @@ Defined in: components/fileUpload.tsx:12
 
 > **FileUploadProps** = `object`
 
-Defined in: components/fileUpload.tsx:14
+Defined in: [components/fileUpload.tsx:14](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/fileUpload.tsx#L14)
 
 #### Properties
 
@@ -51,7 +51,7 @@ Defined in: components/fileUpload.tsx:14
 
 > `optional` **accept?**: `string`
 
-Defined in: components/fileUpload.tsx:18
+Defined in: [components/fileUpload.tsx:18](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/fileUpload.tsx#L18)
 
 `accept` filter forwarded to the file input (e.g. `'image/*'`).
 
@@ -59,7 +59,7 @@ Defined in: components/fileUpload.tsx:18
 
 > `optional` **aria-label?**: `string`
 
-Defined in: components/fileUpload.tsx:28
+Defined in: [components/fileUpload.tsx:28](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/fileUpload.tsx#L28)
 
 Accessible label for the drop zone.
 
@@ -73,7 +73,7 @@ Accessible label for the drop zone.
 
 > `optional` **disabled?**: `boolean`
 
-Defined in: components/fileUpload.tsx:22
+Defined in: [components/fileUpload.tsx:22](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/fileUpload.tsx#L22)
 
 Disable the drop zone and remove buttons.
 
@@ -87,7 +87,7 @@ false
 
 > `optional` **hint?**: `string`
 
-Defined in: components/fileUpload.tsx:26
+Defined in: [components/fileUpload.tsx:26](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/fileUpload.tsx#L26)
 
 Secondary hint under the label (e.g. accepted types/size).
 
@@ -95,7 +95,7 @@ Secondary hint under the label (e.g. accepted types/size).
 
 > `optional` **label?**: `string`
 
-Defined in: components/fileUpload.tsx:24
+Defined in: [components/fileUpload.tsx:24](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/fileUpload.tsx#L24)
 
 Drop-zone prompt text.
 
@@ -109,7 +109,7 @@ Drop-zone prompt text.
 
 > `optional` **multiple?**: `boolean`
 
-Defined in: components/fileUpload.tsx:20
+Defined in: [components/fileUpload.tsx:20](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/fileUpload.tsx#L20)
 
 Allow selecting multiple files.
 
@@ -123,7 +123,7 @@ false
 
 > `optional` **onChange?**: (`files`) => `void`
 
-Defined in: components/fileUpload.tsx:16
+Defined in: [components/fileUpload.tsx:16](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/fileUpload.tsx#L16)
 
 Fires with the current selection as serializable [FileDescriptor](#filedescriptor)s.
 
@@ -143,7 +143,7 @@ Fires with the current selection as serializable [FileDescriptor](#filedescripto
 
 > **FileUpload**(`__namedParameters`): `Element`
 
-Defined in: components/fileUpload.tsx:55
+Defined in: [components/fileUpload.tsx:55](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/fileUpload.tsx#L55)
 
 Drag-and-drop / click file picker. Uncontrolled — it owns the selection and
 emits serializable [FileDescriptor](#filedescriptor)s (not raw `File`s) via `onChange`,

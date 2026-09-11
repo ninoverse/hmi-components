@@ -12,7 +12,7 @@
 
 > **SpinnerProps** = `HTMLAttributes`\<`HTMLSpanElement`\> & `object`
 
-Defined in: components/spinner.tsx:6
+Defined in: [components/spinner.tsx:6](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/spinner.tsx#L6)
 
 #### Type Declaration
 
@@ -46,7 +46,7 @@ Diameter preset.
 
 > **SpinnerSize** = `"small"` \| `"medium"` \| `"large"`
 
-Defined in: components/spinner.tsx:4
+Defined in: [components/spinner.tsx:4](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/spinner.tsx#L4)
 
 ## Functions
 
@@ -54,7 +54,7 @@ Defined in: components/spinner.tsx:4
 
 > **Spinner**(`__namedParameters`): `Element`
 
-Defined in: components/spinner.tsx:19
+Defined in: [components/spinner.tsx:19](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/spinner.tsx#L19)
 
 Indeterminate loading spinner with `role="status"`.
 

@@ -12,7 +12,7 @@
 
 > **DividerAlign** = `"start"` \| `"center"` \| `"end"`
 
-Defined in: components/divider.tsx:5
+Defined in: [components/divider.tsx:5](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/divider.tsx#L5)
 
 ***
 
@@ -20,7 +20,7 @@ Defined in: components/divider.tsx:5
 
 > **DividerOrientation** = `"horizontal"` \| `"vertical"`
 
-Defined in: components/divider.tsx:4
+Defined in: [components/divider.tsx:4](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/divider.tsx#L4)
 
 ***
 
@@ -28,7 +28,7 @@ Defined in: components/divider.tsx:4
 
 > **DividerProps** = `HTMLAttributes`\<`HTMLDivElement`\> & `object`
 
-Defined in: components/divider.tsx:7
+Defined in: [components/divider.tsx:7](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/divider.tsx#L7)
 
 #### Type Declaration
 
@@ -68,7 +68,7 @@ Line direction.
 
 > **Divider**(`__namedParameters`): `Element`
 
-Defined in: components/divider.tsx:24
+Defined in: [components/divider.tsx:24](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/divider.tsx#L24)
 
 Separator line. Renders an `<hr>` when empty, or a labeled divider when
 `children` are provided (horizontal orientation only).

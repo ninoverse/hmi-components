@@ -12,7 +12,7 @@
 
 > **PopoverAlign** = `"start"` \| `"end"`
 
-Defined in: components/popover.tsx:14
+Defined in: [components/popover.tsx:14](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/popover.tsx#L14)
 
 ***
 
@@ -20,7 +20,7 @@ Defined in: components/popover.tsx:14
 
 > **PopoverProps** = `object`
 
-Defined in: components/popover.tsx:16
+Defined in: [components/popover.tsx:16](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/popover.tsx#L16)
 
 #### Properties
 
@@ -28,7 +28,7 @@ Defined in: components/popover.tsx:16
 
 > `optional` **align?**: [`PopoverAlign`](#popoveralign)
 
-Defined in: components/popover.tsx:26
+Defined in: [components/popover.tsx:26](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/popover.tsx#L26)
 
 Horizontal alignment to the trigger.
 
@@ -42,7 +42,7 @@ Horizontal alignment to the trigger.
 
 > **children**: `ReactNode`
 
-Defined in: components/popover.tsx:24
+Defined in: [components/popover.tsx:24](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/popover.tsx#L24)
 
 Popover content.
 
@@ -50,7 +50,7 @@ Popover content.
 
 > **onOpenChange**: (`open`) => `void`
 
-Defined in: components/popover.tsx:20
+Defined in: [components/popover.tsx:20](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/popover.tsx#L20)
 
 Called to request an open/close change (trigger click, outside click, Escape).
 
@@ -68,7 +68,7 @@ Called to request an open/close change (trigger click, outside click, Escape).
 
 > **open**: `boolean`
 
-Defined in: components/popover.tsx:18
+Defined in: [components/popover.tsx:18](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/popover.tsx#L18)
 
 Whether the popover is open.
 
@@ -76,7 +76,7 @@ Whether the popover is open.
 
 > **trigger**: `ReactNode`
 
-Defined in: components/popover.tsx:22
+Defined in: [components/popover.tsx:22](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/popover.tsx#L22)
 
 Element that toggles the popover; gets `aria-expanded`/`aria-haspopup`.
 
@@ -84,7 +84,7 @@ Element that toggles the popover; gets `aria-expanded`/`aria-haspopup`.
 
 > `optional` **width?**: `number` \| `string`
 
-Defined in: components/popover.tsx:28
+Defined in: [components/popover.tsx:28](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/popover.tsx#L28)
 
 Minimum width; number = px. Defaults to the trigger width.
 
@@ -94,7 +94,10 @@ Minimum width; number = px. Defaults to the trigger width.
 
 > **Popover**(`__namedParameters`): `Element`
 
-Defined in: components/popover.tsx:46
+Defined in: [components/popover.tsx:45](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/popover.tsx#L45)
+
+Controlled popover anchored to a trigger, rendered in a portal and
+repositioned on scroll/resize. Closes on outside click or Escape.
 
 #### Parameters
 
@@ -105,3 +108,9 @@ Defined in: components/popover.tsx:46
 #### Returns
 
 `Element`
+
+#### Example
+
+```ts
+<Popover open={open} onOpenChange={setOpen} trigger={<Button>Menu</Button>}>…</Popover>
+```

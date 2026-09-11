@@ -12,7 +12,7 @@
 
 > **BreadcrumbItem** = `object`
 
-Defined in: components/breadcrumbs.tsx:4
+Defined in: [components/breadcrumbs.tsx:4](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/breadcrumbs.tsx#L4)
 
 #### Properties
 
@@ -20,7 +20,7 @@ Defined in: components/breadcrumbs.tsx:4
 
 > `optional` **href?**: `string`
 
-Defined in: components/breadcrumbs.tsx:8
+Defined in: [components/breadcrumbs.tsx:8](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/breadcrumbs.tsx#L8)
 
 Link target. Ignored on the last (current) item.
 
@@ -28,7 +28,7 @@ Link target. Ignored on the last (current) item.
 
 > **label**: `ReactNode`
 
-Defined in: components/breadcrumbs.tsx:6
+Defined in: [components/breadcrumbs.tsx:6](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/breadcrumbs.tsx#L6)
 
 Visible crumb text.
 
@@ -36,7 +36,7 @@ Visible crumb text.
 
 > `optional` **onClick?**: () => `void`
 
-Defined in: components/breadcrumbs.tsx:10
+Defined in: [components/breadcrumbs.tsx:10](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/breadcrumbs.tsx#L10)
 
 Click handler; when set, default navigation is prevented.
 
@@ -50,7 +50,7 @@ Click handler; when set, default navigation is prevented.
 
 > **BreadcrumbsProps** = `HTMLAttributes`\<`HTMLElement`\> & `object`
 
-Defined in: components/breadcrumbs.tsx:13
+Defined in: [components/breadcrumbs.tsx:13](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/breadcrumbs.tsx#L13)
 
 #### Type Declaration
 
@@ -78,7 +78,7 @@ Separator between crumbs.
 
 > **Breadcrumbs**(`__namedParameters`): `Element`
 
-Defined in: components/breadcrumbs.tsx:26
+Defined in: [components/breadcrumbs.tsx:26](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/breadcrumbs.tsx#L26)
 
 Navigation breadcrumb trail. The final item is marked `aria-current="page"`.
 

@@ -12,7 +12,7 @@
 
 > **KbdProps** = `HTMLAttributes`\<`HTMLElement`\> & `object`
 
-Defined in: components/kbd.tsx:6
+Defined in: [components/kbd.tsx:6](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/kbd.tsx#L6)
 
 #### Type Declaration
 
@@ -40,7 +40,7 @@ Key cap size.
 
 > **KbdSize** = `"small"` \| `"medium"`
 
-Defined in: components/kbd.tsx:4
+Defined in: [components/kbd.tsx:4](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/kbd.tsx#L4)
 
 ## Functions
 
@@ -48,7 +48,7 @@ Defined in: components/kbd.tsx:4
 
 > **Kbd**(`__namedParameters`): `Element`
 
-Defined in: components/kbd.tsx:19
+Defined in: [components/kbd.tsx:19](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/kbd.tsx#L19)
 
 Renders a keyboard key cap (`<kbd>`).
 

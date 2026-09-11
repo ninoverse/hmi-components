@@ -12,7 +12,7 @@
 
 > **BannerProps** = `HTMLAttributes`\<`HTMLDivElement`\> & `object`
 
-Defined in: components/banner.tsx:6
+Defined in: [components/banner.tsx:6](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/banner.tsx#L6)
 
 #### Type Declaration
 
@@ -74,7 +74,7 @@ Tone, which sets the default icon and ARIA role.
 
 > **BannerVariant** = `"info"` \| `"success"` \| `"warning"` \| `"danger"`
 
-Defined in: components/banner.tsx:4
+Defined in: [components/banner.tsx:4](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/banner.tsx#L4)
 
 ## Functions
 
@@ -82,7 +82,7 @@ Defined in: components/banner.tsx:4
 
 > **Banner**(`__namedParameters`): `Element`
 
-Defined in: components/banner.tsx:99
+Defined in: [components/banner.tsx:99](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/banner.tsx#L99)
 
 Page-level status banner with a variant icon, optional title/action and an
 optional dismiss button. `danger`/`warning` use `role="alert"`, others

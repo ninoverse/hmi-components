@@ -12,7 +12,7 @@
 
 > **ConfirmDialogProps** = `object`
 
-Defined in: components/confirmDialog.tsx:7
+Defined in: [components/confirmDialog.tsx:7](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/confirmDialog.tsx#L7)
 
 #### Properties
 
@@ -20,7 +20,7 @@ Defined in: components/confirmDialog.tsx:7
 
 > `optional` **cancelLabel?**: `ReactNode`
 
-Defined in: components/confirmDialog.tsx:21
+Defined in: [components/confirmDialog.tsx:21](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/confirmDialog.tsx#L21)
 
 Cancel button label.
 
@@ -34,7 +34,7 @@ Cancel button label.
 
 > `optional` **confirmDisabled?**: `boolean`
 
-Defined in: components/confirmDialog.tsx:27
+Defined in: [components/confirmDialog.tsx:27](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/confirmDialog.tsx#L27)
 
 Disable only the confirm button (e.g. failed validation).
 
@@ -48,7 +48,7 @@ false
 
 > `optional` **confirmLabel?**: `ReactNode`
 
-Defined in: components/confirmDialog.tsx:19
+Defined in: [components/confirmDialog.tsx:19](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/confirmDialog.tsx#L19)
 
 Confirm button label.
 
@@ -62,7 +62,7 @@ Confirm button label.
 
 > `optional` **description?**: `ReactNode`
 
-Defined in: components/confirmDialog.tsx:17
+Defined in: [components/confirmDialog.tsx:17](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/confirmDialog.tsx#L17)
 
 Optional supporting text under the title.
 
@@ -70,7 +70,7 @@ Optional supporting text under the title.
 
 > `optional` **loading?**: `boolean`
 
-Defined in: components/confirmDialog.tsx:25
+Defined in: [components/confirmDialog.tsx:25](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/confirmDialog.tsx#L25)
 
 Disable both buttons while an action is in flight.
 
@@ -84,7 +84,7 @@ false
 
 > **onCancel**: () => `void`
 
-Defined in: components/confirmDialog.tsx:11
+Defined in: [components/confirmDialog.tsx:11](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/confirmDialog.tsx#L11)
 
 Called on cancel, backdrop/escape close.
 
@@ -96,7 +96,7 @@ Called on cancel, backdrop/escape close.
 
 > **onConfirm**: () => `void`
 
-Defined in: components/confirmDialog.tsx:13
+Defined in: [components/confirmDialog.tsx:13](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/confirmDialog.tsx#L13)
 
 Called when the confirm button (or Enter) is activated.
 
@@ -108,7 +108,7 @@ Called when the confirm button (or Enter) is activated.
 
 > **open**: `boolean`
 
-Defined in: components/confirmDialog.tsx:9
+Defined in: [components/confirmDialog.tsx:9](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/confirmDialog.tsx#L9)
 
 Whether the dialog is shown.
 
@@ -116,7 +116,7 @@ Whether the dialog is shown.
 
 > **title**: `ReactNode`
 
-Defined in: components/confirmDialog.tsx:15
+Defined in: [components/confirmDialog.tsx:15](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/confirmDialog.tsx#L15)
 
 Dialog heading.
 
@@ -124,7 +124,7 @@ Dialog heading.
 
 > `optional` **variant?**: [`ConfirmDialogVariant`](#confirmdialogvariant)
 
-Defined in: components/confirmDialog.tsx:23
+Defined in: [components/confirmDialog.tsx:23](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/confirmDialog.tsx#L23)
 
 `danger` styles the confirm button as destructive.
 
@@ -140,7 +140,7 @@ Defined in: components/confirmDialog.tsx:23
 
 > **ConfirmDialogVariant** = `"default"` \| `"danger"`
 
-Defined in: components/confirmDialog.tsx:5
+Defined in: [components/confirmDialog.tsx:5](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/confirmDialog.tsx#L5)
 
 ## Functions
 
@@ -148,7 +148,7 @@ Defined in: components/confirmDialog.tsx:5
 
 > **ConfirmDialog**(`__namedParameters`): `Element` \| `null`
 
-Defined in: components/confirmDialog.tsx:38
+Defined in: [components/confirmDialog.tsx:38](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/confirmDialog.tsx#L38)
 
 Confirmation dialog built on [Modal](modal.md#modal) with cancel/confirm buttons and
 Enter-to-confirm. Use for destructive or irreversible actions.

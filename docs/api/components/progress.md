@@ -12,7 +12,7 @@
 
 > **ProgressProps** = `HTMLAttributes`\<`HTMLDivElement`\> & `object`
 
-Defined in: components/progress.tsx:4
+Defined in: [components/progress.tsx:4](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/progress.tsx#L4)
 
 #### Type Declaration
 
@@ -52,7 +52,7 @@ Completion percentage 0–100 (clamped).
 
 > **Progress**(`__namedParameters`): `Element`
 
-Defined in: components/progress.tsx:20
+Defined in: [components/progress.tsx:20](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/progress.tsx#L20)
 
 Linear progress bar for a known or indeterminate task. For a scalar
 measurement within a range, use `Meter` instead.

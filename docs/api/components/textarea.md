@@ -12,7 +12,7 @@
 
 > **TextareaProps** = `Omit`\<`ComponentPropsWithRef`\<`"textarea"`\>, `"value"` \| `"defaultValue"` \| `"onChange"`\> & `object`
 
-Defined in: components/textarea.tsx:5
+Defined in: [components/textarea.tsx:5](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/textarea.tsx#L5)
 
 #### Type Declaration
 
@@ -62,7 +62,7 @@ Controlled value. Provide with `onChange`.
 
 > **Textarea**(`__namedParameters`): `Element`
 
-Defined in: components/textarea.tsx:26
+Defined in: [components/textarea.tsx:26](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/textarea.tsx#L26)
 
 Multi-line text field with an error state. `onChange` is simplified to
 receive the string value; caret position is preserved when controlled.

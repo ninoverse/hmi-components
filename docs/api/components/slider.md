@@ -12,7 +12,7 @@
 
 > **SliderProps** = `Omit`\<`InputHTMLAttributes`\<`HTMLInputElement`\>, `"type"` \| `"value"` \| `"defaultValue"` \| `"onChange"` \| `"min"` \| `"max"` \| `"step"`\> & `object`
 
-Defined in: components/slider.tsx:5
+Defined in: [components/slider.tsx:6](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/slider.tsx#L6)
 
 #### Type Declaration
 
@@ -24,19 +24,11 @@ Initial value when uncontrolled. Defaults to `min`.
 
 ##### formatValue?
 
-> `optional` **formatValue?**: (`value`) => `string`
+> `optional` **formatValue?**: `string` \| ((`value`) => `string`)
 
-Format the displayed value (e.g. add a unit).
-
-###### Parameters
-
-###### value
-
-`number`
-
-###### Returns
-
-`string`
+Format the displayed value. A function `(value) => string`, or a
+`{value}` template string (e.g. `"{value}%"`) usable over the
+web-component boundary.
 
 ##### max?
 
@@ -114,7 +106,7 @@ Controlled value. Provide with `onChange`.
 
 > **Slider**(`__namedParameters`): `Element`
 
-Defined in: components/slider.tsx:34
+Defined in: [components/slider.tsx:39](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/slider.tsx#L39)
 
 Range slider over a native `range` input, with optional value display and
 formatting. Works controlled or uncontrolled.

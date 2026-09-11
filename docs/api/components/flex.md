@@ -12,7 +12,7 @@
 
 > **FlexAlign** = `"start"` \| `"center"` \| `"end"` \| `"stretch"` \| `"baseline"`
 
-Defined in: components/flex.tsx:5
+Defined in: [components/flex.tsx:5](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/flex.tsx#L5)
 
 ***
 
@@ -20,7 +20,7 @@ Defined in: components/flex.tsx:5
 
 > **FlexDirection** = `"row"` \| `"column"` \| `"row-reverse"` \| `"column-reverse"`
 
-Defined in: components/flex.tsx:4
+Defined in: [components/flex.tsx:4](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/flex.tsx#L4)
 
 ***
 
@@ -28,7 +28,7 @@ Defined in: components/flex.tsx:4
 
 > **FlexGap** = `"none"` \| `"small"` \| `"medium"` \| `"large"`
 
-Defined in: components/flex.tsx:13
+Defined in: [components/flex.tsx:13](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/flex.tsx#L13)
 
 ***
 
@@ -36,7 +36,7 @@ Defined in: components/flex.tsx:13
 
 > **FlexJustify** = `"start"` \| `"center"` \| `"end"` \| `"between"` \| `"around"` \| `"evenly"`
 
-Defined in: components/flex.tsx:6
+Defined in: [components/flex.tsx:6](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/flex.tsx#L6)
 
 ***
 
@@ -44,7 +44,7 @@ Defined in: components/flex.tsx:6
 
 > **FlexProps** = `HTMLAttributes`\<`HTMLDivElement`\> & `object`
 
-Defined in: components/flex.tsx:15
+Defined in: [components/flex.tsx:15](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/flex.tsx#L15)
 
 #### Type Declaration
 
@@ -144,7 +144,7 @@ false
 
 > **Flex**(`__namedParameters`): `Element`
 
-Defined in: components/flex.tsx:40
+Defined in: [components/flex.tsx:40](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/flex.tsx#L40)
 
 Flexbox layout primitive mapping direction/alignment/gap props to tokens.
 

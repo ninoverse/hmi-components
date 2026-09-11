@@ -12,7 +12,7 @@
 
 > **DateInput** = `Date` \| `string`
 
-Defined in: components/datePicker.tsx:10
+Defined in: [components/datePicker.tsx:10](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/datePicker.tsx#L10)
 
 A date accepted across the prop boundary: an ISO-8601 string (so it can
 travel through an HTML attribute) or a live Date for the React API.
@@ -23,7 +23,7 @@ travel through an HTML attribute) or a live Date for the React API.
 
 > **DatePickerProps** = `SingleProps` \| `RangeProps`
 
-Defined in: components/datePicker.tsx:51
+Defined in: [components/datePicker.tsx:51](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/datePicker.tsx#L51)
 
 ***
 
@@ -31,7 +31,7 @@ Defined in: components/datePicker.tsx:51
 
 > **DateRange** = `object`
 
-Defined in: components/datePicker.tsx:6
+Defined in: [components/datePicker.tsx:6](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/datePicker.tsx#L6)
 
 Internal Date-pair shape used for range rendering and state.
 
@@ -41,13 +41,13 @@ Internal Date-pair shape used for range rendering and state.
 
 > **end**: `Date` \| `null`
 
-Defined in: components/datePicker.tsx:6
+Defined in: [components/datePicker.tsx:6](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/datePicker.tsx#L6)
 
 ##### start
 
 > **start**: `Date`
 
-Defined in: components/datePicker.tsx:6
+Defined in: [components/datePicker.tsx:6](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/datePicker.tsx#L6)
 
 ***
 
@@ -55,7 +55,7 @@ Defined in: components/datePicker.tsx:6
 
 > **DateRangeISO** = `object`
 
-Defined in: components/datePicker.tsx:14
+Defined in: [components/datePicker.tsx:14](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/datePicker.tsx#L14)
 
 Serializable range emitted by onChange (ISO-8601 strings).
 
@@ -65,13 +65,13 @@ Serializable range emitted by onChange (ISO-8601 strings).
 
 > **end**: `string` \| `null`
 
-Defined in: components/datePicker.tsx:14
+Defined in: [components/datePicker.tsx:14](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/datePicker.tsx#L14)
 
 ##### start
 
 > **start**: `string`
 
-Defined in: components/datePicker.tsx:14
+Defined in: [components/datePicker.tsx:14](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/datePicker.tsx#L14)
 
 ***
 
@@ -79,7 +79,7 @@ Defined in: components/datePicker.tsx:14
 
 > **DateRangeValue** = `object`
 
-Defined in: components/datePicker.tsx:12
+Defined in: [components/datePicker.tsx:12](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/datePicker.tsx#L12)
 
 Range value accepted as props — each endpoint an ISO string or Date.
 
@@ -89,13 +89,13 @@ Range value accepted as props — each endpoint an ISO string or Date.
 
 > **end**: [`DateInput`](#dateinput) \| `null`
 
-Defined in: components/datePicker.tsx:12
+Defined in: [components/datePicker.tsx:12](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/datePicker.tsx#L12)
 
 ##### start
 
 > **start**: [`DateInput`](#dateinput)
 
-Defined in: components/datePicker.tsx:12
+Defined in: [components/datePicker.tsx:12](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/datePicker.tsx#L12)
 
 ## Functions
 
@@ -103,7 +103,7 @@ Defined in: components/datePicker.tsx:12
 
 > **DatePicker**(`props`): `Element`
 
-Defined in: components/datePicker.tsx:132
+Defined in: [components/datePicker.tsx:132](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/datePicker.tsx#L132)
 
 Calendar date picker in a popover, supporting single-date or start/end range
 selection, min/max bounds, and full keyboard navigation. Accepts ISO strings

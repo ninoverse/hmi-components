@@ -12,7 +12,7 @@
 
 > **DrawerProps** = `HTMLAttributes`\<`HTMLDivElement`\> & `object`
 
-Defined in: components/drawer.tsx:16
+Defined in: [components/drawer.tsx:16](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/drawer.tsx#L16)
 
 #### Type Declaration
 
@@ -90,7 +90,7 @@ Heading shown at the top of the panel.
 
 > **DrawerSide** = `"left"` \| `"right"` \| `"top"` \| `"bottom"`
 
-Defined in: components/drawer.tsx:14
+Defined in: [components/drawer.tsx:14](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/drawer.tsx#L14)
 
 ## Functions
 
@@ -98,7 +98,7 @@ Defined in: components/drawer.tsx:14
 
 > **Drawer**(`__namedParameters`): `ReactPortal` \| `null`
 
-Defined in: components/drawer.tsx:44
+Defined in: [components/drawer.tsx:44](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/drawer.tsx#L44)
 
 Slide-out panel anchored to a screen edge, with scrim, focus management,
 Escape-to-close and optional title/description/footer actions.

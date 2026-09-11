@@ -12,7 +12,7 @@
 
 > **GridGap** = `"none"` \| `"small"` \| `"medium"` \| `"large"`
 
-Defined in: components/grid.tsx:9
+Defined in: [components/grid.tsx:9](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/grid.tsx#L9)
 
 ***
 
@@ -20,7 +20,7 @@ Defined in: components/grid.tsx:9
 
 > **GridProps** = `HTMLAttributes`\<`HTMLDivElement`\> & `object`
 
-Defined in: components/grid.tsx:11
+Defined in: [components/grid.tsx:11](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/grid.tsx#L11)
 
 #### Type Declaration
 
@@ -72,7 +72,7 @@ Gap preset between cells.
 
 > **Grid**(`__namedParameters`): `Element`
 
-Defined in: components/grid.tsx:29
+Defined in: [components/grid.tsx:29](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/grid.tsx#L29)
 
 CSS Grid layout primitive. `columns` accepts a number (equal columns) or a
 raw `grid-template-columns` string.

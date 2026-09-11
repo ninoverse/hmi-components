@@ -12,7 +12,7 @@
 
 > **ScrollAreaOrientation** = `"vertical"` \| `"horizontal"` \| `"both"`
 
-Defined in: components/scrollArea.tsx:4
+Defined in: [components/scrollArea.tsx:4](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/scrollArea.tsx#L4)
 
 ***
 
@@ -20,7 +20,7 @@ Defined in: components/scrollArea.tsx:4
 
 > **ScrollAreaProps** = `HTMLAttributes`\<`HTMLDivElement`\> & `object`
 
-Defined in: components/scrollArea.tsx:6
+Defined in: [components/scrollArea.tsx:6](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/scrollArea.tsx#L6)
 
 #### Type Declaration
 
@@ -54,7 +54,7 @@ Scroll axis to enable.
 
 > **ScrollArea**(`__namedParameters`): `Element`
 
-Defined in: components/scrollArea.tsx:21
+Defined in: [components/scrollArea.tsx:21](https://github.com/ninoverse/hmi-components/blob/c9083464b65c6e54e28cb104615de5c2407c5879/src/components/scrollArea.tsx#L21)
 
 Scrollable container with themed custom scrollbars on the chosen axis.
 
