@@ -48,7 +48,7 @@ gated: a phase may start only when every PR of the previous phase is merged
 |-------------|--------------|-------|------|-------|-------|--------|----|
 | `hmi-badge` | `badge.tsx` | 1 | low | | Pilot. Freezes the templates and the DoD. `dot` boolean, `variant`. | Done | [#115](https://github.com/ninoverse/hmi-components/pull/115) |
 | `hmi-alert` | `alert.tsx` | 2 | low | S | Slots `icon`, `title`, `action`. | Todo | |
-| `hmi-avatar` | `avatar.tsx` | 2 | low | | Computed tint stays inline style, on `part="base"`. Host carries the circle's box so `hmi-avatar-stack` can rim it via `::slotted(hmi-avatar)`. | Done | [#118](https://github.com/ninoverse/hmi-components/pull/118) |
+| `hmi-avatar` | `avatar.tsx` | 2 | low | | Computed tint stays inline style, on `part="base"`. Host carries the circle's box so `hmi-avatar-stack` can rim it with a plain `hmi-avatar` rule inside its own root. | Done | [#118](https://github.com/ninoverse/hmi-components/pull/118) |
 | `hmi-avatar-stack` | `avatarStack.tsx` | 2 | low | X | Its rules live in `avatar.styled.css`. Avatars are `<hmi-avatar>` rendered **into this element's own root**, not slotted — `size` must reach each one and `max` must hide the rest, neither possible on consumer nodes without mutating light DOM. So `.avatar-stack .avatar` becomes a plain `hmi-avatar` selector, not `::slotted()` (which cannot express the `+` overlap rule). `names` is a JS property. | Done | [#118](https://github.com/ninoverse/hmi-components/pull/118) |
 | `hmi-banner` | `banner.tsx` | 2 | low | S E | Slots `icon`, `title`, `action`; `hmi-dismiss` (cancelable). | Todo | |
 | `hmi-blockquote` | `blockquote.tsx` | 2 | low | S | Slot `cite`. | Todo | |
