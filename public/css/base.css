@@ -74,7 +74,8 @@ body {
 hmi-avatar:not(:defined),
 hmi-avatar-stack:not(:defined),
 hmi-badge:not(:defined),
-hmi-card:not(:defined) {
+hmi-card:not(:defined),
+hmi-code:not(:defined) {
     visibility: hidden;
 }
 /* @generated not-defined end */

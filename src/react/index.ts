@@ -10,3 +10,4 @@ export {
 export { AvatarStack } from '../elements/avatar-stack/avatar-stack.react.js';
 export { Badge, type BadgeVariant } from '../elements/badge/badge.react.js';
 export { Card, type CardVariant } from '../elements/card/card.react.js';
+export { Code } from '../elements/code/code.react.js';
