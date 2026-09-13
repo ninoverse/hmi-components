@@ -290,6 +290,10 @@
             "types": "./dist/elements/card/card.react.d.ts",
             "import": "./dist/react/card.js"
         },
+        "./react/code": {
+            "types": "./dist/elements/code/code.react.d.ts",
+            "import": "./dist/react/code.js"
+        },
         "./responsive-container": {
             "types": "./dist/components/responsiveContainer.d.ts",
             "import": "./dist/responsiveContainer.js"
@@ -414,6 +418,10 @@
         "./wc/card": {
             "types": "./dist/elements/card/card.d.ts",
             "import": "./dist/wc/card.js"
+        },
+        "./wc/code": {
+            "types": "./dist/elements/code/code.d.ts",
+            "import": "./dist/wc/code.js"
         },
         "./style.css": "./dist/style.css",
         "./web-components": "./dist/hmi-components.iife.js",
