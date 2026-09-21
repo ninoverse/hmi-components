@@ -302,6 +302,10 @@
             "types": "./dist/elements/skeleton/skeleton.react.d.ts",
             "import": "./dist/react/skeleton.js"
         },
+        "./react/spinner": {
+            "types": "./dist/elements/spinner/spinner.react.d.ts",
+            "import": "./dist/react/spinner.js"
+        },
         "./responsive-container": {
             "types": "./dist/components/responsiveContainer.d.ts",
             "import": "./dist/responsiveContainer.js"
@@ -438,6 +442,10 @@
         "./wc/skeleton": {
             "types": "./dist/elements/skeleton/skeleton.d.ts",
             "import": "./dist/wc/skeleton.js"
+        },
+        "./wc/spinner": {
+            "types": "./dist/elements/spinner/spinner.d.ts",
+            "import": "./dist/wc/spinner.js"
         },
         "./style.css": "./dist/style.css",
         "./web-components": "./dist/hmi-components.iife.js",

@@ -80,6 +80,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/skeleton/skeleton.react.ts',
                 ),
+                'wc/spinner': resolve(
+                    dirname,
+                    'src/elements/spinner/spinner.ts',
+                ),
+                'react/spinner': resolve(
+                    dirname,
+                    'src/elements/spinner/spinner.react.ts',
+                ),
                 accordion: resolve(dirname, 'src/components/accordion.tsx'),
                 alert: resolve(dirname, 'src/components/alert.tsx'),
                 areaChart: resolve(dirname, 'src/components/areaChart.tsx'),

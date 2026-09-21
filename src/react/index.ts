@@ -16,3 +16,7 @@ export {
     Skeleton,
     type SkeletonVariant,
 } from '../elements/skeleton/skeleton.react.js';
+export {
+    Spinner,
+    type SpinnerSize,
+} from '../elements/spinner/spinner.react.js';

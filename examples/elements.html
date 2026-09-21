@@ -245,6 +245,22 @@ export function Example() {
             </div>
         </section>
 
+        <section>
+            <h2>Spinner</h2>
+            <div class="row">
+                <hmi-spinner size="small"></hmi-spinner>
+                <hmi-spinner></hmi-spinner>
+                <hmi-spinner size="large" label="Fetching"></hmi-spinner>
+            </div>
+            <!-- the ring is drawn from currentColor, which inherits across
+                 the shadow boundary. -->
+            <div class="row">
+                <span style="color: var(--primary)"><hmi-spinner></hmi-spinner></span>
+                <span style="color: var(--error)"><hmi-spinner></hmi-spinner></span>
+                <span style="color: var(--tertiary)"><hmi-spinner></hmi-spinner></span>
+            </div>
+        </section>
+
         <!-- Lit IIFE bundle: registers every migrated <hmi-*> element on load.
              Never load ../dist/hmi-components.iife.js (the r2wc bundle) on the
              same page: both define the same tags. -->
