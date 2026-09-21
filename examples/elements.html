@@ -180,6 +180,29 @@
             </div>
         </section>
 
+        <section>
+            <h2>Code</h2>
+            <p>
+                Install with
+                <hmi-code>pnpm add @ninoverse/hmi-components</hmi-code> then
+                import the <hmi-code>Code</hmi-code> component.
+            </p>
+            <!-- `block` uses HTML presence semantics (R2): the attribute being
+                 present is true, so `block="false"` would be true as well.
+                 The snippet starts immediately after the tag and the closing
+                 tag follows the last character — <pre> keeps every character,
+                 and the parser's drop-the-newline-after-<pre> rule does not
+                 reach slotted content. -->
+            <hmi-code block>import { Code } from '@ninoverse/hmi-components';
+
+export function Example() {
+    return &lt;Code block&gt;{'const x = 42;'}&lt;/Code&gt;;
+}</hmi-code>
+            <div class="row">
+                <hmi-code id="code-slot"><b>Slotted</b>&nbsp;content</hmi-code>
+            </div>
+        </section>
+
         <!-- Lit IIFE bundle: registers every migrated <hmi-*> element on load.
              Never load ../dist/hmi-components.iife.js (the r2wc bundle) on the
              same page: both define the same tags. -->

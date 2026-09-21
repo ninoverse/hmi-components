@@ -65,6 +65,11 @@ export default defineConfig({
                     dirname,
                     'src/elements/card/card.react.ts',
                 ),
+                'wc/code': resolve(dirname, 'src/elements/code/code.ts'),
+                'react/code': resolve(
+                    dirname,
+                    'src/elements/code/code.react.ts',
+                ),
                 accordion: resolve(dirname, 'src/components/accordion.tsx'),
                 alert: resolve(dirname, 'src/components/alert.tsx'),
                 areaChart: resolve(dirname, 'src/components/areaChart.tsx'),

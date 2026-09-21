@@ -439,6 +439,81 @@
           }
         }
       ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/elements/code/code.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Monospace code display, inline by default or as a block when `block` is set.",
+          "name": "HmiCode",
+          "cssParts": [
+            {
+              "description": "The inline `<code>`, or the `<pre>` when `block` is set.",
+              "name": "base"
+            },
+            {
+              "description": "The inner `<code>`; block mode only.",
+              "name": "content"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Code content.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "block",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Render as a block (`<pre><code>`) instead of inline `<code>`.",
+              "attribute": "block",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "block",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Render as a block (`<pre><code>`) instead of inline `<code>`.",
+              "fieldName": "block"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-code",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiCode",
+          "declaration": {
+            "name": "HmiCode",
+            "module": "src/elements/code/code.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-code",
+          "declaration": {
+            "name": "HmiCode",
+            "module": "src/elements/code/code.ts"
+          }
+        }
+      ]
     }
   ]
 }
