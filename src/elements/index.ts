@@ -8,3 +8,4 @@ export * from './badge/badge.js';
 export * from './card/card.js';
 export * from './code/code.js';
 export * from './kbd/kbd.js';
+export * from './skeleton/skeleton.js';

@@ -72,6 +72,14 @@ export default defineConfig({
                 ),
                 'wc/kbd': resolve(dirname, 'src/elements/kbd/kbd.ts'),
                 'react/kbd': resolve(dirname, 'src/elements/kbd/kbd.react.ts'),
+                'wc/skeleton': resolve(
+                    dirname,
+                    'src/elements/skeleton/skeleton.ts',
+                ),
+                'react/skeleton': resolve(
+                    dirname,
+                    'src/elements/skeleton/skeleton.react.ts',
+                ),
                 accordion: resolve(dirname, 'src/components/accordion.tsx'),
                 alert: resolve(dirname, 'src/components/alert.tsx'),
                 areaChart: resolve(dirname, 'src/components/areaChart.tsx'),

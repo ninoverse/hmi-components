@@ -298,6 +298,10 @@
             "types": "./dist/elements/kbd/kbd.react.d.ts",
             "import": "./dist/react/kbd.js"
         },
+        "./react/skeleton": {
+            "types": "./dist/elements/skeleton/skeleton.react.d.ts",
+            "import": "./dist/react/skeleton.js"
+        },
         "./responsive-container": {
             "types": "./dist/components/responsiveContainer.d.ts",
             "import": "./dist/responsiveContainer.js"
@@ -430,6 +434,10 @@
         "./wc/kbd": {
             "types": "./dist/elements/kbd/kbd.d.ts",
             "import": "./dist/wc/kbd.js"
+        },
+        "./wc/skeleton": {
+            "types": "./dist/elements/skeleton/skeleton.d.ts",
+            "import": "./dist/wc/skeleton.js"
         },
         "./style.css": "./dist/style.css",
         "./web-components": "./dist/hmi-components.iife.js",
