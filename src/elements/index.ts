@@ -7,3 +7,4 @@ export * from './avatar-stack/avatar-stack.js';
 export * from './badge/badge.js';
 export * from './card/card.js';
 export * from './code/code.js';
+export * from './kbd/kbd.js';

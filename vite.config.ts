@@ -70,6 +70,8 @@ export default defineConfig({
                     dirname,
                     'src/elements/code/code.react.ts',
                 ),
+                'wc/kbd': resolve(dirname, 'src/elements/kbd/kbd.ts'),
+                'react/kbd': resolve(dirname, 'src/elements/kbd/kbd.react.ts'),
                 accordion: resolve(dirname, 'src/components/accordion.tsx'),
                 alert: resolve(dirname, 'src/components/alert.tsx'),
                 areaChart: resolve(dirname, 'src/components/areaChart.tsx'),

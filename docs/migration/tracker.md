@@ -56,7 +56,7 @@ gated: a phase may start only when every PR of the previous phase is merged
 | `hmi-chip` | `chip.tsx` | 2 | low | S E | Slot `icon`; `hmi-select { selected }`, `hmi-close` (cancelable). | Todo | |
 | `hmi-code` | `code.tsx` | 2 | low | | Two render modes: inline `<code>`, or `<pre><code>` when `block` is set. `block` gains HTML presence semantics (r2wc parsed the string, so bare `block` was false). | Done | [#122](https://github.com/ninoverse/hmi-components/pull/122) |
 | `hmi-empty-state` | `emptyState.tsx` | 2 | low | S | Slots `icon`, `title`, `description`, `action`; `.empty-state__icon > svg` → `::slotted(svg)`. | Todo | |
-| `hmi-kbd` | `kbd.tsx` | 2 | low | | | Todo | |
+| `hmi-kbd` | `kbd.tsx` | 2 | low | | `size` reflected; combos are composed by the consumer. | In progress | |
 | `hmi-meter` | `meter.tsx` | 2 | low | S | Slot `label`. | Todo | |
 | `hmi-progress` | `progress.tsx` | 2 | low | X | `[data-structure="journal"] .progress` → `--progress-track-border` token (defined). | Todo | |
 | `hmi-skeleton` | `skeleton.tsx` | 2 | low | | Inline size styles stay. | Todo | |

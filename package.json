@@ -294,6 +294,10 @@
             "types": "./dist/elements/code/code.react.d.ts",
             "import": "./dist/react/code.js"
         },
+        "./react/kbd": {
+            "types": "./dist/elements/kbd/kbd.react.d.ts",
+            "import": "./dist/react/kbd.js"
+        },
         "./responsive-container": {
             "types": "./dist/components/responsiveContainer.d.ts",
             "import": "./dist/responsiveContainer.js"
@@ -422,6 +426,10 @@
         "./wc/code": {
             "types": "./dist/elements/code/code.d.ts",
             "import": "./dist/wc/code.js"
+        },
+        "./wc/kbd": {
+            "types": "./dist/elements/kbd/kbd.d.ts",
+            "import": "./dist/wc/kbd.js"
         },
         "./style.css": "./dist/style.css",
         "./web-components": "./dist/hmi-components.iife.js",
