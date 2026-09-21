@@ -54,13 +54,13 @@ gated: a phase may start only when every PR of the previous phase is merged
 | `hmi-blockquote` | `blockquote.tsx` | 2 | low | S | Slot `cite`. | Todo | |
 | `hmi-card` | `card.tsx` | 2 | low | P | First `--panel-*` consumer; lands `shared/panel.ts` (`renderLiquidFilter()`). Slots `header`, `footer` are **new API** — the React card took only `children`, so no `S` conversion. Variants `ink`/`accent` map to `--panel-ink-bg`/`--panel-accent-bg`. | Done | [#116](https://github.com/ninoverse/hmi-components/pull/116) |
 | `hmi-chip` | `chip.tsx` | 2 | low | S E | Slot `icon`; `hmi-select { selected }`, `hmi-close` (cancelable). | Todo | |
-| `hmi-code` | `code.tsx` | 2 | low | | Two render modes: inline `<code>`, or `<pre><code>` when `block` is set. `block` gains HTML presence semantics (r2wc parsed the string, so bare `block` was false). | In review | [#122](https://github.com/ninoverse/hmi-components/pull/122) |
+| `hmi-code` | `code.tsx` | 2 | low | | Two render modes: inline `<code>`, or `<pre><code>` when `block` is set. `block` gains HTML presence semantics (r2wc parsed the string, so bare `block` was false). | Done | [#122](https://github.com/ninoverse/hmi-components/pull/122) |
 | `hmi-empty-state` | `emptyState.tsx` | 2 | low | S | Slots `icon`, `title`, `description`, `action`; `.empty-state__icon > svg` → `::slotted(svg)`. | Todo | |
-| `hmi-kbd` | `kbd.tsx` | 2 | low | | | Todo | |
+| `hmi-kbd` | `kbd.tsx` | 2 | low | | `size` reflected; combos are composed by the consumer. | In review | [#124](https://github.com/ninoverse/hmi-components/pull/124) |
 | `hmi-meter` | `meter.tsx` | 2 | low | S | Slot `label`. | Todo | |
 | `hmi-progress` | `progress.tsx` | 2 | low | X | `[data-structure="journal"] .progress` → `--progress-track-border` token (defined). | Todo | |
-| `hmi-skeleton` | `skeleton.tsx` | 2 | low | | Inline size styles stay. | Todo | |
-| `hmi-spinner` | `spinner.tsx` | 2 | low | | Keyframes move into `styles`. | Todo | |
+| `hmi-skeleton` | `skeleton.tsx` | 2 | low | | Inline size styles stay: `width`/`height`/`radius` are written to the host in `updated()`. Variant sizing lives on `:host` so `width: 100%` resolves against the containing block. | In review | [#124](https://github.com/ninoverse/hmi-components/pull/124) |
+| `hmi-spinner` | `spinner.tsx` | 2 | low | | Keyframes move into `styles`. `label` stays a string forwarded to `aria-label`, not a slot. | In review | [#124](https://github.com/ninoverse/hmi-components/pull/124) |
 | `hmi-stat` | `stat.tsx` | 2 | low | S X | Slots `label`, `value`, `icon`, `delta`, `help-text`; `[data-structure="journal"] .stat__footer` → `--stat-rule` token. | Todo | |
 | `hmi-aspect-ratio` | `aspectRatio.tsx` | 3 | low | | `ratio` reflected → `aspect-ratio` on `:host`. | Todo | |
 | `hmi-box` | `box.tsx` | 3 | low | | `as` dropped; reflected spacing attrs. | Todo | |

@@ -203,6 +203,64 @@ export function Example() {
             </div>
         </section>
 
+        <section>
+            <h2>Kbd</h2>
+            <div class="row">
+                <hmi-kbd>⌘</hmi-kbd>
+                <hmi-kbd>⇧</hmi-kbd>
+                <hmi-kbd>P</hmi-kbd>
+                <hmi-kbd>Ctrl</hmi-kbd>
+                <hmi-kbd size="small">Ctrl</hmi-kbd>
+            </div>
+            <div class="row">
+                <hmi-kbd>←</hmi-kbd>
+                <hmi-kbd>↑</hmi-kbd>
+                <hmi-kbd>↓</hmi-kbd>
+                <hmi-kbd>→</hmi-kbd>
+            </div>
+        </section>
+
+        <section>
+            <h2>Skeleton</h2>
+            <!-- width/height/radius accept a CSS length string here; the
+                 number form (40 → 40px) is only reachable from JS, since an
+                 attribute is always a string. -->
+            <!-- a plain block box, not .row: the page's rows shrink-to-fit,
+                 and a percentage width has nothing to resolve against inside
+                 one. -->
+            <div
+                style="display: flex; flex-direction: column; gap: 1rem; width: 40rem; max-width: 100%"
+            >
+                <hmi-skeleton variant="text" width="80%"></hmi-skeleton>
+                <hmi-skeleton variant="text" width="100%"></hmi-skeleton>
+                <hmi-skeleton variant="rect" height="1.5rem"></hmi-skeleton>
+            </div>
+            <div class="row">
+                <hmi-skeleton
+                    variant="circle"
+                    width="6rem"
+                    height="6rem"
+                ></hmi-skeleton>
+                <hmi-skeleton id="skeleton-js" variant="rect"></hmi-skeleton>
+            </div>
+        </section>
+
+        <section>
+            <h2>Spinner</h2>
+            <div class="row">
+                <hmi-spinner size="small"></hmi-spinner>
+                <hmi-spinner></hmi-spinner>
+                <hmi-spinner size="large" label="Fetching"></hmi-spinner>
+            </div>
+            <!-- the ring is drawn from currentColor, which inherits across
+                 the shadow boundary. -->
+            <div class="row">
+                <span style="color: var(--primary)"><hmi-spinner></hmi-spinner></span>
+                <span style="color: var(--error)"><hmi-spinner></hmi-spinner></span>
+                <span style="color: var(--tertiary)"><hmi-spinner></hmi-spinner></span>
+            </div>
+        </section>
+
         <!-- Lit IIFE bundle: registers every migrated <hmi-*> element on load.
              Never load ../dist/hmi-components.iife.js (the r2wc bundle) on the
              same page: both define the same tags. -->
@@ -237,6 +295,12 @@ export function Example() {
             ]) {
                 document.getElementById(id).names = names;
             }
+
+            // Numbers mean pixels; only reachable through the property.
+            const skeleton = document.getElementById('skeleton-js');
+            skeleton.width = 240;
+            skeleton.height = 24;
+            skeleton.radius = 12;
         </script>
     </body>
 </html>

@@ -514,6 +514,301 @@
           }
         }
       ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/elements/kbd/kbd.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Renders a keyboard key cap.",
+          "name": "HmiKbd",
+          "cssParts": [
+            {
+              "description": "The key cap.",
+              "name": "base"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Key label (e.g. `⌘`, `Ctrl`).",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "KbdSize"
+              },
+              "default": "'medium'",
+              "description": "Key cap size.",
+              "attribute": "size",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "size",
+              "type": {
+                "text": "KbdSize"
+              },
+              "default": "'medium'",
+              "description": "Key cap size.",
+              "fieldName": "size"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-kbd",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiKbd",
+          "declaration": {
+            "name": "HmiKbd",
+            "module": "src/elements/kbd/kbd.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-kbd",
+          "declaration": {
+            "name": "HmiKbd",
+            "module": "src/elements/kbd/kbd.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/elements/skeleton/skeleton.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Animated loading placeholder. `aria-hidden` by default so it isn't announced.\n\n`width`, `height` and `radius` are written to the host's inline style, so\nthey override the variant defaults exactly as they did in React.",
+          "name": "HmiSkeleton",
+          "cssParts": [
+            {
+              "description": "The shimmering surface, filling the host.",
+              "name": "base"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "SkeletonVariant"
+              },
+              "default": "'text'",
+              "description": "Shape preset.",
+              "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "width",
+              "type": {
+                "text": "string | number | undefined"
+              },
+              "description": "Explicit width; number = px.",
+              "attribute": "width"
+            },
+            {
+              "kind": "field",
+              "name": "height",
+              "type": {
+                "text": "string | number | undefined"
+              },
+              "description": "Explicit height; number = px.",
+              "attribute": "height"
+            },
+            {
+              "kind": "field",
+              "name": "radius",
+              "type": {
+                "text": "string | number | undefined"
+              },
+              "description": "Corner radius override; number = px.",
+              "attribute": "radius"
+            },
+            {
+              "kind": "method",
+              "name": "#size",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "property",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "value",
+                  "type": {
+                    "text": "string | number | undefined"
+                  }
+                }
+              ]
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "SkeletonVariant"
+              },
+              "default": "'text'",
+              "description": "Shape preset.",
+              "fieldName": "variant"
+            },
+            {
+              "name": "width",
+              "type": {
+                "text": "string | number | undefined"
+              },
+              "description": "Explicit width; number = px.",
+              "fieldName": "width"
+            },
+            {
+              "name": "height",
+              "type": {
+                "text": "string | number | undefined"
+              },
+              "description": "Explicit height; number = px.",
+              "fieldName": "height"
+            },
+            {
+              "name": "radius",
+              "type": {
+                "text": "string | number | undefined"
+              },
+              "description": "Corner radius override; number = px.",
+              "fieldName": "radius"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-skeleton",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiSkeleton",
+          "declaration": {
+            "name": "HmiSkeleton",
+            "module": "src/elements/skeleton/skeleton.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-skeleton",
+          "declaration": {
+            "name": "HmiSkeleton",
+            "module": "src/elements/skeleton/skeleton.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/elements/spinner/spinner.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Indeterminate loading spinner with `role=\"status\"`.\n\n`label` is announced, never drawn, so it stays a string property forwarded\nto `aria-label` on the ring rather than becoming a slot.",
+          "name": "HmiSpinner",
+          "cssParts": [
+            {
+              "description": "The ring; carries `role=\"status\"` and the accessible label.",
+              "name": "base"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "SpinnerSize"
+              },
+              "default": "'medium'",
+              "description": "Diameter preset.",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Loading'",
+              "description": "Accessible status label.",
+              "attribute": "label"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "size",
+              "type": {
+                "text": "SpinnerSize"
+              },
+              "default": "'medium'",
+              "description": "Diameter preset.",
+              "fieldName": "size"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Loading'",
+              "description": "Accessible status label.",
+              "fieldName": "label"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-spinner",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiSpinner",
+          "declaration": {
+            "name": "HmiSpinner",
+            "module": "src/elements/spinner/spinner.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-spinner",
+          "declaration": {
+            "name": "HmiSpinner",
+            "module": "src/elements/spinner/spinner.ts"
+          }
+        }
+      ]
     }
   ]
 }

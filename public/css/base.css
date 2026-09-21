@@ -75,7 +75,10 @@ hmi-avatar:not(:defined),
 hmi-avatar-stack:not(:defined),
 hmi-badge:not(:defined),
 hmi-card:not(:defined),
-hmi-code:not(:defined) {
+hmi-code:not(:defined),
+hmi-kbd:not(:defined),
+hmi-skeleton:not(:defined),
+hmi-spinner:not(:defined) {
     visibility: hidden;
 }
 /* @generated not-defined end */
