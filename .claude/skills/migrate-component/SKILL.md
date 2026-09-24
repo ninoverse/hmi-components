@@ -84,5 +84,9 @@ Produce, in this order, and then **WAIT for approval**:
   implementations coexist until the v6 flip.
 - Never batch two elements in one run unless the user asked for a phase batch
   (phases 2, 3 and 8 allow up to five leaves per PR, one commit each).
+- In a batch, each element is scaffolded, wired, verified **and committed**
+  before the next one starts. Do not run a phase across all of them at once —
+  they share six wiring files, and interleaved edits cannot be split back into
+  one commit per element (`.claude/execution-order.md`).
 - Do not proceed past phase 3 until the user has approved the screenshot pair.
 - After the draft PR is open, **stop** and wait for the user.

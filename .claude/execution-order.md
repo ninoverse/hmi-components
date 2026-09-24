@@ -53,6 +53,13 @@ previous phase is merged to `main`.
 
 - Migrate **one element at a time** (one commit each); batches of up to five
   leaves per PR only in phases 2, 3 and 8.
+- **Run each element's full cycle through to its commit before starting the
+  next one.** Never wire a second element into the shared files
+  (`src/elements/index.ts`, `src/react/index.ts`, `vite.config.ts`,
+  `package.json`, `examples/elements.html`, the tracker) while the first is
+  still uncommitted. Every element edits those same files, so doing a batch
+  breadth-first — scaffold all, then wire all — interleaves their changes and
+  leaves no clean way to split them back into one commit per element.
 - Follow `.claude/component-workflow.md` for each element.
 - Stop and confirm with the user after each element before starting the next.
 - The first element of a phase that introduces shared infrastructure
