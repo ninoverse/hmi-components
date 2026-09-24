@@ -204,6 +204,9 @@ active UI/display fonts:
 
 - `--font-quicksand`, `--font-oxanium`, `--font-rubik-glitch`, `--font-press-start-2p`, `--font-pixelify-sans`, `--font-caveat`
 - `--font-default` (active UI font), `--font-display` (active display font)
+- `--font-mono` (monospace role, consumed by `hmi-code`). Unlike the families
+  above it is a system stack, so it needs no Google Font; a structure theme can
+  override it like any other token.
 
 The matching Google Fonts URL is exported as `googleFontsHref`. Fonts must be loaded
 by the document (`<link>`); `@font-face` cannot be declared inside a shadow root.

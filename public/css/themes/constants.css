@@ -18,6 +18,11 @@
     --font-pixelify-sans: 'Pixelify Sans', ui-sans-serif, system-ui, sans-serif;
     --font-caveat: 'Caveat', ui-rounded, cursive;
 
+    /* Monospace role. A system stack, not a Google Font, so nothing to load.
+       A structure theme may override it — `pixel` already runs a mono display
+       face (--font-press-start-2p). */
+    --font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace;
+
     /* State-layer opacities (MD3 standard) */
     --state-hover-opacity: 0.08;
     --state-focus-opacity: 0.12;

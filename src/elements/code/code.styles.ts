@@ -2,9 +2,9 @@ import { css } from 'lit';
 
 /* Code — monospace code rendering in two modes. Inline is a tinted <code>
    chip that sits within running text; block wraps a <pre><code> for
-   multi-line snippets with horizontal scroll. The mono stack is spelled out
-   here because the themes define no --font-mono token; it matches the one
-   already used in menu shortcuts. Ported 1:1 from
+   multi-line snippets with horizontal scroll. The mono face comes from
+   --font-mono (constants.css), which carries the same stack the legacy
+   code and menu-shortcut CSS hardcode. Ported from
    src/components/styled/code.styled.css. */
 export const styles = css`
     :host {
@@ -16,7 +16,7 @@ export const styles = css`
     }
 
     .base {
-        font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace;
+        font-family: var(--font-mono);
         color: var(--on-surface);
     }
 
