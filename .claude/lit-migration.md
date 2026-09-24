@@ -55,6 +55,21 @@ stem (`AreaChart`), the tag is `hmi-<kebab>`, the class is `Hmi<Pascal>`,
   is `false`, and `disabled="false"` is **true**. Never write a converter that
   parses `"false"`. Document the property route for string-attribute hosts
   (Dioxus: set `el.disabled` from `onmounted`).
+- **This flips the v5 behaviour, and the bare attribute is the dangerous case.**
+  r2wc parses the attribute string, and `src/web-components.ts` maps an
+  empty-string value to `false`, so today the bare attribute is **off**:
+
+  | Markup | r2wc (v5) | Lit (v6) |
+  |--------|-----------|----------|
+  | `<hmi-x foo>` | **false** | **true** |
+  | `<hmi-x foo="true">` | true | true |
+  | `<hmi-x foo="false">` | false | **true** |
+
+  Existing HTML that reads `<hmi-button disabled>` silently changes meaning —
+  no error, no type change. React consumers are unaffected: the wrapper prop
+  stays a real boolean. Every element with a boolean prop **must** list this in
+  its PR's behaviour-differences section; see `hmi-code`
+  ([#122](https://github.com/ninoverse/hmi-components/pull/122)) for the wording.
 - **Controlled/uncontrolled** collapses into one model: the element owns its
   state. `value` (or `checked`, `open`, `index`) is the current value; setting
   it from outside overrides; user interaction updates it and dispatches the
