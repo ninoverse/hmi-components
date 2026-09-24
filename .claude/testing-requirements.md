@@ -21,7 +21,7 @@ Named `it` blocks, in this order:
 | Block | Asserts |
 |-------|---------|
 | `registers` | `customElements.get('hmi-<kebab>')` is defined |
-| `renders` | `[part="base"]` exists in the shadow root |
+| `renders` | `[part~="base"]` exists in the shadow root **and** paints a non-zero `getBoundingClientRect()`. Always the `~=` token selector, never `[part="base"]`: a panel-like element's base carries two tokens (`part="base panel"`) and an exact match misses it. Presence alone passes for a node that renders invisibly (R4, `display` on sized nodes). Deliberately zero-sized elements (`spacer`, `visually-hidden`) assert their intended dimension instead. |
 | `reflects <prop>` (one per reflected property) | property → attribute and attribute → property |
 | `boolean attribute presence` | bare attribute is `true`, removal is `false` |
 | `dispatches hmi-<event> with detail` (one per event) | `detail` shape, `bubbles: true`, `composed: true`, `cancelable` where R5 requires it; listener attached on `document` |

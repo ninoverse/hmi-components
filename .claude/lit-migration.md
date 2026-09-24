@@ -121,6 +121,14 @@ stem (`AreaChart`), the tag is `hmi-<kebab>`, the class is `Hmi<Pascal>`,
   `:host([hidden]) { display: none !important; }` and the `:focus-visible`
   ring. Elements never repeat these.
 - `:host { display: … }` is mandatory (custom elements default to `inline`).
+- **So is `display` on any inner node that CSS gives a size.** A bare
+  `<span part="base">` computes to `display: inline`, and inline boxes ignore
+  `width` and `height`: a `.base { width: 100%; height: 100% }` surface then
+  renders 0×0 and the element is invisible everywhere, with no error. Set
+  `display` explicitly on every node you give a width, a height, or a
+  percentage size. Cost the first time it was missed: `hmi-skeleton` shipped
+  invisible through lint, build, tests and the manifest
+  ([#124](https://github.com/ninoverse/hmi-components/pull/124)).
 - **Units.** `rem` is forbidden in `src/elements/`. Translate `Nrem` to
   `calc(var(--_base) * N)` (`0.125rem` → `calc(var(--_base) * 0.125)`);
   font-relative values use `em`. Theme tokens (`--space-*`, `--corner-*`) are
