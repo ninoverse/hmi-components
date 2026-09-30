@@ -9,6 +9,7 @@ Companion documents:
 - `.claude/lit-migration.md` — the strict rules every element must follow (R1–R12).
 - `translation-guide.md` — pattern-by-pattern React → Lit mapping, event catalog, templates, Button worked example.
 - `adr-0001-lit-web-components.md` — why each decision was taken and what was rejected.
+- `adr-0002-agentcfg-adoption.md` — the decisions for adopting agentcfg's rules and the organisation's shared workflows, D1 to D55.
 - `tracker.md` — status of every element, grouped by phase.
 
 ## 1. Goals
