@@ -189,7 +189,7 @@ automates this. By hand:
 3. Read `src/components/<camel>.tsx`, `src/components/styled/<camel>.styled.css`, `src/components/<camel>.stories.tsx`, the `define('<kebab>', …)` block in `src/web-components.ts`, and `docs/api/components/<camel>.md`.
 4. Write the **API mapping sheet** (React prop → property/attribute, slot, event + detail, part) and the hazard list (portals, document listeners, `activeElement`, `useId`, `className` passthrough, `as`, cross-boundary CSS, `rem` count). Get it approved.
 5. Scaffold the six files from the templates in `translation-guide.md` §18.
-6. Wire: `src/elements/index.ts`, `src/react/index.ts`, `vite.config.ts` entries `wc/<kebab>` and `react/<kebab>`, `package.json` exports, a section in `examples/elements.html`, the story. Set the tracker row to *In progress*.
+6. Wire: `src/elements/index.ts`, `src/react/index.ts`, `vite.config.ts` entries `wc/<kebab>` and `react/<kebab>`, `package.json` exports, a section in `examples/elements.html`, the story.
 7. Verify:
    ```bash
    pnpm format && pnpm lint
@@ -201,7 +201,7 @@ automates this. By hand:
    pnpm build:storybook
    ```
    Then produce the side-by-side screenshot (React section of `src/App.tsx` vs the Lit story in Storybook) and get it approved.
-8. Commit `feat(ui): migrate <Name> to lit`, push, open a draft PR with the mapping sheet, screenshots and the R12 checklist. Set the tracker row to *In review*.
+8. Commit `feat(ui): migrate <Name> to lit`, push, open a draft PR with the mapping sheet, screenshots and the R12 checklist. In the same PR, set the tracker row to *Done* and link the PR in its **PR** column: the row reaches `main` only when the PR merges.
 
 ## 8. Host verification matrix
 
