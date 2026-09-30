@@ -8,11 +8,15 @@ frozen. Every Lit element under `src/elements/` ships tests, run by Vitest
 ## Gate before "ready for review"
 
 - [ ] `pnpm lint` — zero warnings, zero errors, no new `biome-ignore`
+- [ ] `pnpm typecheck` — `tsc -b`
+- [ ] `pnpm test` — both Vitest projects: the browser project in Chromium
+  through Playwright, and the node project running `*.ssr.test.ts`
 - [ ] `pnpm build` — `tsc -b`, ESM library, r2wc IIFE, Lit IIFE
-- [ ] `pnpm test` — Vitest browser mode (Chromium through Playwright)
-- [ ] `pnpm test:ssr` — Vitest node project running `*.ssr.test.ts`
 
-CI (`ci-gate.yml`) runs the same four commands on every PR.
+`pnpm run ci` runs the four in this order and stops at the first failure. CI
+(`ci-gate.yml`) runs them on every PR, with the type check inside `pnpm build`,
+and also checks that `custom-elements.json` and `public/css/base.css` are up to
+date.
 
 ## What every `src/elements/<kebab>/<kebab>.test.ts` must contain
 
