@@ -34,7 +34,8 @@ stem (`AreaChart`), the tag is `hmi-<kebab>`, the class is `Hmi<Pascal>`,
   (`import '../button/button.js'`). Never import a class to render it.
 - No imports between `src/elements/` and `src/components/` in either direction.
   The React tree is frozen until the v6 flip and then deleted.
-- `src/components/<camel>.tsx` is **never edited** by a migration PR.
+- `src/components/<camel>.tsx` is **never edited** by a migration PR, except for
+  one line: its JSDoc gains `@deprecated`, naming the wrapper that replaces it.
 
 ## R2 — Props → properties
 
@@ -319,5 +320,5 @@ Copy this list into the PR body and tick every box before leaving draft.
 - [ ] API mapping sheet in the PR body; behaviour differences from the React version listed (incl. hmi-input/hmi-change)
 - [ ] Side-by-side screenshot React vs Lit (default axes; plus journal + glass for panel-like) approved by the user
 - [ ] docs/migration/tracker.md row → In review with PR link (→ Done after merge)
-- [ ] src/components/<camel>.tsx untouched; branch cut from merged main, not stacked
+- [ ] src/components/<camel>.tsx untouched but for its `@deprecated` line; branch cut from merged main, not stacked
 ```

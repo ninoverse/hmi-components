@@ -23,6 +23,7 @@ export type BadgeProps = HTMLAttributes<HTMLSpanElement> & {
  *
  * @example
  * <Badge variant="success" dot>Online</Badge>
+ * @deprecated Use `Badge` from `@ninoverse/hmi-components/react/badge`. Removed in 6.0.0.
  */
 export function Badge({
     variant = 'default',

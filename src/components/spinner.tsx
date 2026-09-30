@@ -15,6 +15,7 @@ export type SpinnerProps = HTMLAttributes<HTMLSpanElement> & {
  *
  * @example
  * <Spinner size="large" label="Fetching" />
+ * @deprecated Use `Spinner` from `@ninoverse/hmi-components/react/spinner`. Removed in 6.0.0.
  */
 export function Spinner({
     size = 'medium',

@@ -17,6 +17,7 @@ export type AvatarStackProps = HTMLAttributes<HTMLSpanElement> & {
  *
  * @example
  * <AvatarStack names={['Ada', 'Alan', 'Grace', 'Linus', 'Edsger']} max={3} />
+ * @deprecated Use `AvatarStack` from `@ninoverse/hmi-components/react/avatar-stack`. Removed in 6.0.0.
  */
 export function AvatarStack({
     names,
