@@ -47,6 +47,7 @@ function initials(name: string): string {
  *
  * @example
  * <Avatar name="Ada Lovelace" status="online" />
+ * @deprecated Use `Avatar` from `@ninoverse/hmi-components/react/avatar`. Removed in 6.0.0.
  */
 export function Avatar({
     name,

@@ -17,6 +17,7 @@ export type CardProps = HTMLAttributes<HTMLDivElement> & {
  * <Card variant="accent">…</Card>
  * @example
  * <Card active>…</Card>
+ * @deprecated Use `Card` from `@ninoverse/hmi-components/react/card`. Removed in 6.0.0.
  */
 export function Card({
     variant = 'default',

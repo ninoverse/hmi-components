@@ -33,7 +33,7 @@ pnpm build:elements   # Lit drop-in bundle dist/hmi-elements.iife.js
 
 ## Architecture & Framework Rules
 
-**Web Components on Lit.** Every component is a native custom element `hmi-<name>` built with Lit 3 (`LitElement`, Shadow DOM, `static styles`). React is supported only through `@lit/react` wrappers exported under `./react`. The React tree in `src/components/` is the **legacy** implementation being migrated one element per PR; it is frozen — never add to it, never edit it in a migration PR.
+**Web Components on Lit.** Every component is a native custom element `hmi-<name>` built with Lit 3 (`LitElement`, Shadow DOM, `static styles`). React is supported only through `@lit/react` wrappers exported under `./react`. The React tree in `src/components/` is the **legacy** implementation being migrated one element per PR; it is frozen — never add to it, never edit it in a migration PR, with one exception: the PR that ships an element adds one `@deprecated` line to its React counterpart's JSDoc, naming the wrapper that replaces it.
 
 Read `.claude/lit-migration.md` before touching anything under `src/elements/`. Progress and phase gates: `docs/migration/tracker.md`.
 

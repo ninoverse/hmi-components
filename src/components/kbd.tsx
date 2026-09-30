@@ -15,6 +15,7 @@ export type KbdProps = HTMLAttributes<HTMLElement> & {
  *
  * @example
  * <Kbd>⌘</Kbd> <Kbd>K</Kbd>
+ * @deprecated Use `Kbd` from `@ninoverse/hmi-components/react/kbd`. Removed in 6.0.0.
  */
 export function Kbd({
     size = 'medium',

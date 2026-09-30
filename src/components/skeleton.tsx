@@ -22,6 +22,7 @@ const toCssSize = (v: string | number) =>
  *
  * @example
  * <Skeleton variant="circle" width={40} height={40} />
+ * @deprecated Use `Skeleton` from `@ninoverse/hmi-components/react/skeleton`. Removed in 6.0.0.
  */
 export function Skeleton({
     variant = 'text',

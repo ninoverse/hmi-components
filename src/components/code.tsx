@@ -14,6 +14,7 @@ export type CodeProps = HTMLAttributes<HTMLElement> & {
  * @example
  * <Code>npm i</Code>
  * <Code block>{`const x = 1;`}</Code>
+ * @deprecated Use `Code` from `@ninoverse/hmi-components/react/code`. Removed in 6.0.0.
  */
 export function Code({
     block = false,
