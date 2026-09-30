@@ -1,8 +1,9 @@
 # Lit migration tracker
 
-One row per element. Update the **Status** and **PR** columns in the same PR that
-migrates the element (see `.claude/skills/ship-component/SKILL.md`). Phases are
-gated: a phase may start only when every PR of the previous phase is merged
+One row per element. The PR that migrates an element sets its row to `Done` and
+links itself in the **PR** column. A row reaches `main` only when that PR
+merges, so on `main`, `Done` is always true. Phases are gated: a phase may start
+only when every PR of the previous phase is merged
 (`.claude/execution-order.md`).
 
 ## Status vocabulary
@@ -10,10 +11,10 @@ gated: a phase may start only when every PR of the previous phase is merged
 | Status | Meaning |
 |--------|---------|
 | `Todo` | Not started |
-| `In progress` | Branch open, no PR yet |
-| `In review` | Draft/ready PR open |
 | `Done` | Merged; element available under `./wc/<kebab>` and `./react/<kebab>` |
 | `Flipped` | Root export points at the Lit element (v6) |
+
+There is no status for work under way: its open PR already shows that.
 
 ## Flags
 
@@ -56,11 +57,11 @@ gated: a phase may start only when every PR of the previous phase is merged
 | `hmi-chip` | `chip.tsx` | 2 | low | S E | Slot `icon`; `hmi-select { selected }`, `hmi-close` (cancelable). | Todo | |
 | `hmi-code` | `code.tsx` | 2 | low | | Two render modes: inline `<code>`, or `<pre><code>` when `block` is set. `block` gains HTML presence semantics (r2wc parsed the string, so bare `block` was false). | Done | [#122](https://github.com/ninoverse/hmi-components/pull/122) |
 | `hmi-empty-state` | `emptyState.tsx` | 2 | low | S | Slots `icon`, `title`, `description`, `action`; `.empty-state__icon > svg` → `::slotted(svg)`. | Todo | |
-| `hmi-kbd` | `kbd.tsx` | 2 | low | | `size` reflected; combos are composed by the consumer. | In review | [#124](https://github.com/ninoverse/hmi-components/pull/124) |
+| `hmi-kbd` | `kbd.tsx` | 2 | low | | `size` reflected; combos are composed by the consumer. | Done | [#124](https://github.com/ninoverse/hmi-components/pull/124) |
 | `hmi-meter` | `meter.tsx` | 2 | low | S | Slot `label`. | Todo | |
 | `hmi-progress` | `progress.tsx` | 2 | low | X | `[data-structure="journal"] .progress` → `--progress-track-border` token (defined). | Todo | |
-| `hmi-skeleton` | `skeleton.tsx` | 2 | low | | Inline size styles stay: `width`/`height`/`radius` are written to the host in `updated()`. Variant sizing lives on `:host` so `width: 100%` resolves against the containing block. | In review | [#124](https://github.com/ninoverse/hmi-components/pull/124) |
-| `hmi-spinner` | `spinner.tsx` | 2 | low | | Keyframes move into `styles`. `label` stays a string forwarded to `aria-label`, not a slot. | In review | [#124](https://github.com/ninoverse/hmi-components/pull/124) |
+| `hmi-skeleton` | `skeleton.tsx` | 2 | low | | Inline size styles stay: `width`/`height`/`radius` are written to the host in `updated()`. Variant sizing lives on `:host` so `width: 100%` resolves against the containing block. | Done | [#124](https://github.com/ninoverse/hmi-components/pull/124) |
+| `hmi-spinner` | `spinner.tsx` | 2 | low | | Keyframes move into `styles`. `label` stays a string forwarded to `aria-label`, not a slot. | Done | [#124](https://github.com/ninoverse/hmi-components/pull/124) |
 | `hmi-stat` | `stat.tsx` | 2 | low | S X | Slots `label`, `value`, `icon`, `delta`, `help-text`; `[data-structure="journal"] .stat__footer` → `--stat-rule` token. | Todo | |
 | `hmi-aspect-ratio` | `aspectRatio.tsx` | 3 | low | | `ratio` reflected → `aspect-ratio` on `:host`. | Todo | |
 | `hmi-box` | `box.tsx` | 3 | low | | `as` dropped; reflected spacing attrs. | Todo | |
