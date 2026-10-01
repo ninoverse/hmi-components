@@ -1,0 +1,25 @@
+# Owners must be a GitHub user (@username) or a team (@org/team-slug) with write
+# access. A bare organization name is not valid — `@ninoverse` is the org that
+# owns this repo, not an owner GitHub can resolve.
+#
+# Once the org has a team, prefer @ninoverse/<team-slug>: a team survives people
+# joining and leaving, a personal handle does not.
+
+# Every file, unless overridden below.
+*                       @nicolapasqua99
+
+# The agent rules: a change to them changes what every agent working here does.
+/CLAUDE.md              @nicolapasqua99
+/.claude/               @nicolapasqua99
+
+# Supply chain and CI: a change here can weaken the merge gates. The pnpm
+# settings decide which dependencies may run install scripts.
+/.github/workflows/     @nicolapasqua99
+/package.json           @nicolapasqua99
+/.nvmrc                 @nicolapasqua99
+/pnpm-workspace.yaml    @nicolapasqua99
+/renovate.json          @nicolapasqua99
+
+# The docs site: what every tag deploys, and where.
+/firebase.json          @nicolapasqua99
+/.firebaserc            @nicolapasqua99
