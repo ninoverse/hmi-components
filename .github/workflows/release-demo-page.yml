@@ -1,41 +1,40 @@
 name: Release Docs Site on Tag Push
 
+# A caller into ninoverse/.github. On every tag, the shared workflow installs
+# the dependencies and runs `firebase deploy --only hosting:demo`, whose
+# predeploy hook in firebase.json builds the site: Storybook at /, the demo
+# page at /demo.
+#
+# While 5.x is released, the site follows the tag, so it shows the migration as
+# it lands, ahead of npm by however many releases are unpublished. Once v6 is
+# live, the deploy moves after the publish in publish-npm.yml (ADR-0002, D53).
+#
+# The tag this watches for is the one bump-version.yml pushes. That only works
+# because that workflow pushes with a GitHub App token: a tag pushed with
+# GITHUB_TOKEN deliberately does not trigger other workflows.
+
 on:
   push:
     tags:
-      - 'v[0-9]+.[0-9]+.[0-9]+'
+      - "v[0-9]+.[0-9]+.[0-9]+"
 
 permissions:
-  contents: write
-  id-token: write
+  contents: read
+
+# Two tags in quick succession would otherwise deploy side by side, and the
+# older one could finish last and leave the site behind. Queue them instead, so
+# the newest tag deploys last.
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
 
 jobs:
-  release:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: .nvmrc
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Build site (Storybook at /, demo page at /demo)
-        run: pnpm build:site
-
-      - uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: ${{ secrets.GITHUB_TOKEN }}
-          firebaseServiceAccount: ${{ secrets.FIREBASE_DEPLOY_SERVICE_ACCOUNT }}
-          projectId: ninoverse-misc
-          target: demo
-          channelId: live
+  deploy:
+    # Pinned to a released version, not @main or a short @v1: @main lands here
+    # with no pull request, and @v1 never moves. Renovate opens the bump.
+    uses: ninoverse/.github/.github/workflows/firebase-deploy.yml@v1.10.0
+    with:
+      project: ninoverse-misc
+      only: hosting:demo
+    secrets:
+      firebase-service-account: ${{ secrets.FIREBASE_DEPLOY_SERVICE_ACCOUNT }}

@@ -3,6 +3,7 @@
         {
             "target": "demo",
             "public": "dist-site",
+            "predeploy": ["pnpm build:site"],
             "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
             "rewrites": [
                 { "source": "/demo/**", "destination": "/demo/index.html" },
