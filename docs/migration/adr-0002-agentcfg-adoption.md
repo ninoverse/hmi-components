@@ -1,4 +1,4 @@
-# ADR 0002 — Adopt agentcfg and the organisation's shared workflows
+# ADR 0002 — Adopt agentcfg and the organization's shared workflows
 
 - **Status:** Accepted, 2026-09-28 (batches A to H decided from 25 to 28 September)
 - **Deciders:** library maintainer
@@ -7,11 +7,11 @@
 ## Context
 
 hmi's agent rules are its own: `CLAUDE.md`, the rule files in `.claude/` and
-six element skills, all written by hand. The repositories the organisation
+six element skills, all written by hand. The repositories the organization
 already manages, `agent-config-sync` and the three `claude-mit-*` templates,
 compose theirs instead. `agentcfg` builds `AGENTS.md`, `CLAUDE.md`, `.agents/`
 and `.claude/` from central fragments, pinned by `config_version` in
-`.agentprofile.yml` and bumped by the organisation's central Renovate run. The
+`.agentprofile.yml` and bumped by the organization's central Renovate run. The
 same repositories call `ninoverse/.github`'s reusable workflows for CI, audits
 and releases.
 
@@ -32,7 +32,7 @@ found:
   on `main`, and it tested on Node 20, which Vitest 5 doesn't support.
 - npm served 5.4.0, 22 releases behind. Nothing since v5.5.0 had been
   published, including v5.8.0, the first with a Lit element.
-- hmi had no `renovate.json`, so the organisation's Renovate skipped it, and
+- hmi had no `renovate.json`, so the organization's Renovate skipped it, and
   Dependabot security updates were its only dependency PRs.
 - The element procedure existed three times (the six skills,
   `.claude/component-workflow.md` and the R12 checklist), and the copies had
@@ -56,7 +56,7 @@ alternatives rejected:
 |---|----------|-----------------------|
 | D1 | The language owns `unit`: TypeScript declares `unit: package`. A framework adds its own work unit on top, as `framework/lit` adds element sequencing on the *Execution order* trigger, the way `architecture/ddd` already adds to it. Core is untouched. | The framework owning `unit` for TypeScript (breaks the code-unit sentences, such as "move shared error type into an errors element", and makes a framework mandatory); a framework's vocabulary overriding its language's (reverses agentcfg's "one name, one value"); splitting the word into `unit` and `work_unit` (edits core and every language, and only a framework could supply `work_unit`). If three or more framework values restate the same sequencing, that is the case for the split, as a major release. |
 | D2 | The TypeScript toolchain is pnpm and tsc, with Biome and Vitest as defaults behind the script contract, pinned by `packageManager` and `.nvmrc`, with `engines.node` as the floor. A framework value records what it needs from those tools, such as NestJS's Biome option for parameter decorators. Only the format-on-edit hook names Biome, and it does nothing where Biome isn't installed. | Biome and Vitest as a fixed toolchain (binds every future TypeScript template to them, and NestJS sets up Jest and needs a Biome option for its decorators); naming no tool (the format hook and parts of the review rules can't be written). |
-| D3 | The script contract is `lint`, `typecheck`, `test`, `build` and `format`, plus `ci`, which runs every gate in order and is called as `pnpm run ci`, because pnpm reserves `pnpm ci`. CI and the turn-end check call the scripts. Each repository adds its own gates to `ci`: for hmi, `test:ssr` and the manifest drift check. Revised in HMI-4: `test` runs both Vitest projects, which covers `test:ssr`, and the drift check stays a CI step, because run before a commit it fails on files regenerated correctly but not yet staged. | `pnpm gates` (saves typing `run`, loses the organisation's word). |
+| D3 | The script contract is `lint`, `typecheck`, `test`, `build` and `format`, plus `ci`, which runs every gate in order and is called as `pnpm run ci`, because pnpm reserves `pnpm ci`. CI and the turn-end check call the scripts. Each repository adds its own gates to `ci`: for hmi, `test:ssr` and the manifest drift check. Revised in HMI-4: `test` runs both Vitest projects, which covers `test:ssr`, and the drift check stays a CI step, because run before a commit it fails on files regenerated correctly but not yet staged. | `pnpm gates` (saves typing `run`, loses the organization's word). |
 | D4 | Zero warnings, enforced: `lint` runs `biome check --error-on-warnings`, so the rule and the gate agree. | Plain `biome check`, which passes on warnings. |
 | D5 | The turn-end type check runs only when a `.ts` or `.tsx` file changed since the last commit. | Every turn (`tsc -b` takes about 10 s warm and 18 s cold here). |
 | D6 | `framework/lit` holds what stops being true only when a repository stops using Lit: element shape, properties, lifecycle and SSR safety, the generic half of the styling rules, events, slots, forms, overlays, the element tests and review checklist, the file layout, element sequencing and `/new-element`. The design system (MD3 token names, `--hmi-base`, no `rem`, `--panel-*`, the liquid filter), the `hmi-` prefix, the wiring list, the tracker and the React wrappers stay in hmi; the wrappers go central the day a second Lit repository ships them. What only the migration needs retires at v6. | — |
@@ -71,7 +71,7 @@ alternatives rejected:
 | D10 | Squash-only merges. The PR title is what lands on `main` and picks the release, and commits inside a PR are review steps. Each repository allows only squash merging, with the PR title as the squash message. | One commit per branch (a review fix means amending and force-pushing; it stays the fallback where a repository's settings can't change). |
 | D11 | A branch is updated only when a conflict or a required check needs it, by merging `main` into it. A branch under review is never rebased or force-pushed. | Rebasing before review, hmi's rule (rewrites commits a reviewer has read, for the same result on `main` under squash). |
 | D12 | Where the environment assigns a branch, such as `claude/<words>`, the agent asks which branch to use before creating another or pushing. A reused branch restarts from `main` after each merge. Whether work merged is read from its PR or from `main`'s log, never from whether its branch still exists: branches are deleted by hand, and not always. | — |
-| D13 | D8 to D12, with any rule reversals from batch C, ship as one major release, agent-config v1.0.0. The organisation's CONTRIBUTING and PR template change in the same wave; D47 widens that wave. | Separate releases (D8 reverses a rule and D10 removes one, so each would be a major, and every consumer approves every major on its Dependency Dashboard). |
+| D13 | D8 to D12, with any rule reversals from batch C, ship as one major release, agent-config v1.0.0. The organization's CONTRIBUTING and PR template change in the same wave; D47 widens that wave. | Separate releases (D8 reverses a rule and D10 removes one, so each would be a major, and every consumer approves every major on its Dependency Dashboard). |
 
 ### C — Branch, commit and PR specifics, 26 September
 
@@ -117,7 +117,7 @@ alternatives rejected:
 |---|----------|-----------------------|
 | D37 | `node-ci.yml` in `.github`: four gates calling `lint`, `typecheck`, `test` and `build`, and a Node-floor job that installs the exact `engines.node` floor with pnpm's `engine-strict` on. pnpm and Node come from `packageManager` and `.nvmrc`, Playwright browsers are an input, a repository's own checks stay jobs in its caller, and CI runs on `main` as well as on pull requests. The raise of hmi's floor to 22.12 was revised by D51. | — |
 | D38 | `node-audit.yml`: `pnpm audit` every Monday and on dependency changes, with the policy in the repository's pnpm configuration. No licence gate until a Node repository has a licence policy. | — |
-| D39 | `node-bump-version.yml`: the shared commit-type rules, `pnpm version`, an annotated tag after checking it is new, pushed with the organisation's release app. hmi's own `APP_ID` and `APP_PRIVATE_KEY` retire. | Keeping hmi's copy (lightweight tags, every local tag pushed, no check for an existing tag, `GITHUB_TOKEN` with write access). |
+| D39 | `node-bump-version.yml`: the shared commit-type rules, `pnpm version`, an annotated tag after checking it is new, pushed with the organization's release app. hmi's own `APP_ID` and `APP_PRIVATE_KEY` retire. | Keeping hmi's copy (lightweight tags, every local tag pushed, no check for an existing tag, `GITHUB_TOKEN` with write access). |
 | D40 | `node-release.yml`: a GitHub release on every tag, with the packed tarball, its checksum and the conventional-commit changelog `rust-release.yml` writes, `extra-notes` included. Publishing to a registry is separate. | GitHub's generated notes, as `release-github.yml` writes them. |
 | D41 | npm and a second registry are published only by hand, through one reusable `npm-publish.yml` that publishes a release's tarball, byte for byte, to any npm-protocol registry. hmi's two publish workflows become its callers. The second registry is Nora, decided in the plan on 28 September, so no Google token step is needed. | Publishing on every tag; Artifact Registry (needs a step that mints a Google token). |
 | D42 | `firebase-deploy.yml` in `.github` runs `firebase deploy --only <targets> --project <project> --non-interactive`, with `firebase.json` and its predeploy hooks as the contract, covering Hosting, rules and Functions. hmi's docs deploy is its first caller. | A deploy of hmi's own (it has to be rewritten for its pins and permissions anyway). |
@@ -127,10 +127,10 @@ alternatives rejected:
 
 | # | Decision | Rejected alternatives |
 |---|----------|-----------------------|
-| D44 | hmi opts into the organisation's Renovate. Dependabot's alerts stay on, since Renovate's security PRs are built from them; its security updates go off, so fixes don't arrive twice. #123 was merged on 29 September. | Dependabot alone (bumps neither the workflow pins nor the `agentcfg` pin). |
-| D45 | The organisation's preset keeps Renovate off `engines`; `.nvmrc` and `packageManager` stay managed. A `node-library` preset updates only the lockfile for a library's dependencies and widens its peer ranges, and hmi extends it. | The preset's `rangeStrategy: bump` for a library (raises `lit`'s floor, and narrows the React peer range, for everyone who installs hmi). |
+| D44 | hmi opts into the organization's Renovate. Dependabot's alerts stay on, since Renovate's security PRs are built from them; its security updates go off, so fixes don't arrive twice. #123 was merged on 29 September. | Dependabot alone (bumps neither the workflow pins nor the `agentcfg` pin). |
+| D45 | The organization's preset keeps Renovate off `engines`; `.nvmrc` and `packageManager` stay managed. A `node-library` preset updates only the lockfile for a library's dependencies and widens its peer ranges, and hmi extends it. | The preset's `rangeStrategy: bump` for a library (raises `lit`'s floor, and narrows the React peer range, for everyone who installs hmi). |
 | D46 | hmi gets a `CODEOWNERS` in the managed repositories' shape: the maintainer for every file, then again, explicitly, for the rule files, the workflows, the pins, `renovate.json` and the Firebase configuration. | — |
-| D47 | hmi keeps inheriting the organisation's PR template and CONTRIBUTING. The v1.0.0 wave covers all 15 files, across five repositories, that repeat the reversed rules, and the templates' copies point to the rules instead of repeating them. | A copy of each in hmi (one more place to keep in step). |
+| D47 | hmi keeps inheriting the organization's PR template and CONTRIBUTING. The v1.0.0 wave covers all 15 files, across five repositories, that repeat the reversed rules, and the templates' copies point to the rules instead of repeating them. | A copy of each in hmi (one more place to keep in step). |
 | D48 | A POSIX `scripts/agentcfg.sh` fetches the pinned `agentcfg` and runs it, as `pnpm agentcfg <command>` locally and as `sh scripts/agentcfg.sh check` in CI, without installing dependencies. `/.agentcfg/` is ignored, because Renovate collects its post-upgrade changes from `git status`. | An npm package of agentcfg (a second pin that could drift from `config_version`); the logic in a `package.json` string. |
 | D49 | "Automatically delete head branches" is turned on. | Deleting branches by hand, as today. |
 
