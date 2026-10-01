@@ -1,43 +1,37 @@
 name: Publish to npm
 
+# A caller into ninoverse/.github, run by hand with a release's tag. The shared
+# workflow downloads the tarball release.yml attached to that tag's GitHub
+# release and publishes it to npmjs.org, so npm serves byte for byte what the
+# release holds. A tag makes a release; only this makes a publish.
+#
+# Trusted publishing, so no token: npm trades the job's OIDC token for a
+# short-lived publish token, and adds provenance. The trusted publisher on
+# npmjs.com names this file, not the shared one, because npm checks the
+# workflow that started the run.
+
 on:
   workflow_dispatch:
     inputs:
       tag:
-        description: 'Release tag to publish (e.g. v1.2.3)'
+        description: The release to publish, such as v1.2.3
         required: true
         type: string
 
 permissions:
   contents: read
-  id-token: write
 
 jobs:
   publish:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Validate tag format
-        env:
-          TAG: ${{ inputs.tag }}
-        run: |
-          if [[ ! "$TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-            echo "::error::'$TAG' is not a valid vX.Y.Z tag."
-            exit 1
-          fi
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          registry-url: 'https://registry.npmjs.org'
-
-      - name: Download tarball from GitHub Release
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TAG: ${{ inputs.tag }}
-        run: gh release download "$TAG" --repo "${{ github.repository }}" --pattern '*.tgz'
-
-      - name: Publish to npm
-        run: npm publish ./*.tgz --provenance
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+    # Required here, on the calling job: the shared job asks for
+    # `id-token: write`, and GitHub refuses to start a called job that asks for
+    # more than its caller grants.
+    permissions:
+      contents: read
+      id-token: write
+    # Pinned to a released version, not @main or a short @v1: @main lands here
+    # with no pull request, and @v1 never moves. Renovate opens the bump.
+    uses: ninoverse/.github/.github/workflows/npm-publish.yml@v1.10.0
+    with:
+      tag: ${{ inputs.tag }}
+      registry-url: https://registry.npmjs.org
