@@ -38,6 +38,6 @@ jobs:
         run: gh release download "$TAG" --repo "${{ github.repository }}" --pattern '*.tgz'
 
       - name: Publish to npm
-        run: npm publish *.tgz --provenance
+        run: npm publish ./*.tgz --provenance
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

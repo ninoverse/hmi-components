@@ -14,9 +14,12 @@ frozen. Every Lit element under `src/elements/` ships tests, run by Vitest
 - [ ] `pnpm build` — `tsc -b`, ESM library, r2wc IIFE, Lit IIFE
 
 `pnpm run ci` runs the four in this order and stops at the first failure. CI
-(`ci-gate.yml`) runs them on every PR, with the type check inside `pnpm build`,
-and also checks that `custom-elements.json` and `public/css/base.css` are up to
-date.
+(`ci-gate.yml`) runs each as its own job through the organization's
+`node-ci.yml`, on every PR and on `main`. It also installs the packed package
+on the `engines.node` floor, Node 20.0.0, and imports it; checks that
+`custom-elements.json` and `public/css/base.css` are up to date; and lints the
+workflows with actionlint. `audit.yml` runs `pnpm audit` every Monday and on
+dependency changes, against the policy in `pnpm-workspace.yaml`.
 
 ## What every `src/elements/<kebab>/<kebab>.test.ts` must contain
 

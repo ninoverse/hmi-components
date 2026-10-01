@@ -48,4 +48,4 @@ jobs:
           npx google-artifactregistry-auth --repo-config .npmrc
 
       - name: Publish to Artifact Registry
-        run: npm publish *.tgz
+        run: npm publish ./*.tgz
