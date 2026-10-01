@@ -1,0 +1,38 @@
+name: Release
+
+# A caller into ninoverse/.github. On a tag, the shared workflow builds the
+# package, packs it with `pnpm pack`, and attaches the tarball and a SHA256SUMS
+# to the tag's GitHub release, under the conventional-commit changelog since the
+# previous tag. A release is not a publish: the registries are published by
+# hand, from this release's tarball.
+#
+# The tag this watches for is the one bump-version.yml pushes. That only works
+# because that workflow pushes with a GitHub App token: a tag pushed with
+# GITHUB_TOKEN deliberately does not trigger other workflows, so this would
+# never fire.
+
+on:
+  push:
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+"
+
+permissions:
+  contents: read
+
+# A re-run of the same tag must not race the first. Queue rather than cancel:
+# cancelling between the upload and the release leaves a tag with some of its
+# assets and no release to hold them.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    # Required here, on the calling job. A called workflow can only downgrade
+    # the permissions it is given, never raise them, so the `contents: write`
+    # its publish job asks for is capped by whatever this grants.
+    permissions:
+      contents: write
+    # Pinned to a released version, not @main or a short @v1: @main lands here
+    # with no pull request, and @v1 never moves. Renovate opens the bump.
+    uses: ninoverse/.github/.github/workflows/node-release.yml@v1.8.0
