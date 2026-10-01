@@ -1,0 +1,22 @@
+name: Audit
+
+# Advisories are published against dependencies hmi already has, with no
+# commit here to trigger CI, so this runs weekly as well as on dependency
+# changes. The policy, which advisories are accepted, is pnpm-workspace.yaml.
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+  push:
+    branches: [main]
+    paths: ["package.json", "pnpm-lock.yaml", "pnpm-workspace.yaml"]
+  pull_request:
+    paths: ["package.json", "pnpm-lock.yaml", "pnpm-workspace.yaml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    uses: ninoverse/.github/.github/workflows/node-audit.yml@v1.7.0

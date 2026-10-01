@@ -1,45 +1,45 @@
 name: CI
 
 on:
-  pull_request:
+  push:
     branches: [main]
+  pull_request:
 
 permissions:
   contents: read
 
 concurrency:
-  group: ci-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  verify:
+  # The four gates as separate jobs, and the Node floor, from the organization's
+  # shared workflow. pnpm comes from `packageManager` and Node from `.nvmrc`.
+  ci:
+    uses: ninoverse/.github/.github/workflows/node-ci.yml@v1.7.0
+    with:
+      # The lower bound of engines.node, as an exact version.
+      node-floor: "20.0.0"
+      # The barrel registers every element, so a new element is imported on the
+      # floor without editing this line. The root and ./react entries need
+      # React, an optional peer, so they stay out.
+      imports: "@ninoverse/hmi-components/wc"
+      playwright: chromium
+
+  # actionlint over these workflows, with ShellCheck on their `run:` blocks.
+  workflows:
+    uses: ninoverse/.github/.github/workflows/actionlint.yml@v1.7.0
+
+  # hmi's own check: the committed manifest and base.css match the source.
+  drift:
+    name: Manifest and base.css are up to date
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Lint
-        run: pnpm lint
-
-      - name: Build
-        run: pnpm build
-
-      - name: Install Playwright Chromium
-        run: pnpm exec playwright install --with-deps chromium
-
-      - name: Test
-        run: pnpm test
-
-      - name: Manifest and base.css are up to date
-        run: pnpm cem && git diff --exit-code custom-elements.json public/css/base.css
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm cem && git diff --exit-code custom-elements.json public/css/base.css

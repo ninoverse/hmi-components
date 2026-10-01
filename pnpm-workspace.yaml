@@ -9,3 +9,34 @@
 ignoredBuiltDependencies:
   - esbuild
   - rs-module-lexer
+
+# Accepted until v6. `pnpm audit` reports 28 advisories under these 22 IDs, all
+# in development dependencies: `pnpm audit --prod` finds none, so the published
+# package carries none of them. Renovate's monthly lockfile refresh clears them
+# all, but it also brings Biome 2.5, whose warnings in the legacy CSS fail lint,
+# so it waits for v6, which deletes that CSS. Remove this list with that
+# refresh. An advisory not listed here still fails the audit.
+auditConfig:
+  ignoreGhsas:
+    - GHSA-w5vr-8v7q-w6rv # baseline-browser-mapping
+    - GHSA-3jxr-9vmj-r5cp # brace-expansion
+    - GHSA-6j4f-fj2g-mc7p # brace-expansion
+    - GHSA-mh99-v99m-4gvg # brace-expansion
+    - GHSA-q2hr-2g5m-vwhr # brace-expansion
+    - GHSA-qhr7-859c-m2p7 # brace-expansion
+    - GHSA-rgw5-rvv9-x895 # brace-expansion
+    - GHSA-73wf-gq98-2v4g # browserslist
+    - GHSA-c83g-rgw3-j3cx # browserslist
+    - GHSA-g7r4-m6w7-qqqr # esbuild
+    - GHSA-4c8g-83qw-93j6 # fast-uri
+    - GHSA-7p8r-x3mc-p8w7 # fast-uri
+    - GHSA-f65p-4m7j-42xc # fast-uri
+    - GHSA-fph4-wmhf-6fwf # fast-uri
+    - GHSA-hrr3-gc8f-f4qj # fast-uri
+    - GHSA-jqff-g426-hqxp # fast-uri
+    - GHSA-qw65-cvwx-89v3 # fast-uri
+    - GHSA-v2hh-gcrm-f6hx # fast-uri
+    - GHSA-v245-v573-v5vm # linkify-it
+    - GHSA-253c-mchw-3w2r # markdown-it
+    - GHSA-fx2h-pf6j-xcff # vite
+    - GHSA-v6wh-96g9-6wx3 # vite
