@@ -1,0 +1,11 @@
+# pnpm's settings for this repository. It is a single package, so there is no
+# `packages:` list.
+
+# pnpm 10 runs no dependency's install script unless it is allowed. These two
+# check that their platform's native binary, which pnpm installs as an optional
+# dependency, loads, and fetch a fallback if it does not. The build, both test
+# projects and `pnpm cem` pass without them, so they stay off; listing them
+# records that choice and stops pnpm warning about it on every install.
+ignoredBuiltDependencies:
+  - esbuild
+  - rs-module-lexer

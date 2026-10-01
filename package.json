@@ -461,12 +461,14 @@
         "build:storybook": "storybook build -o dist-site",
         "build:site": "pnpm build:storybook && pnpm build:demo",
         "preview": "vite preview",
-        "lint": "biome check .",
+        "lint": "biome check --error-on-warnings .",
+        "typecheck": "tsc -b",
         "format": "biome format --write .",
-        "test": "vitest run --project browser",
+        "test": "vitest run",
         "test:ssr": "vitest run --project ssr",
         "cem": "cem analyze && node scripts/gen-base-css.mjs",
-        "docs": "typedoc"
+        "docs": "typedoc",
+        "ci": "pnpm lint && pnpm typecheck && pnpm test && pnpm build"
     },
     "dependencies": {
         "@lit/react": "^1.0.8",
@@ -516,5 +518,6 @@
     ],
     "engines": {
         "node": ">=20"
-    }
+    },
+    "packageManager": "pnpm@10.33.0"
 }

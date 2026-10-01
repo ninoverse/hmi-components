@@ -17,16 +17,18 @@ pnpm storybook        # Storybook dev server on :6006
 pnpm build:storybook  # Storybook → dist-site
 pnpm build:site       # Storybook + demo
 pnpm preview          # Serve production build locally
-pnpm lint             # Biome check (lint + format check)
+pnpm lint             # Biome check (lint + format check); a warning fails it
+pnpm typecheck        # tsc -b
 pnpm format           # Biome format with auto-write
 pnpm run docs         # TypeDoc → docs/api (legacy React API); `pnpm docs` is pnpm's own command
+pnpm run ci           # The four gates in order: lint, typecheck, test, build; `pnpm ci` is pnpm's own command
 ```
 
 Lit element tooling (Vitest in Chromium through Playwright, Node SSR, manifest):
 
 ```bash
-pnpm test             # Vitest browser mode (Chromium via Playwright)
-pnpm test:ssr         # Vitest node project for *.ssr.test.ts
+pnpm test             # Both Vitest projects: browser (Chromium via Playwright) and SSR
+pnpm test:ssr         # The SSR project alone: *.ssr.test.ts in Node
 pnpm cem              # Regenerate custom-elements.json
 pnpm build:elements   # Lit drop-in bundle dist/hmi-elements.iife.js
 ```
