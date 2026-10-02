@@ -103,7 +103,10 @@ pnpm agentcfg <cmd>   # agentcfg at the pinned version: check, sync, why
 
 `pnpm test` runs both Vitest projects: the browser one in Chromium through
 Playwright, and the SSR one in Node. CI also fails when `custom-elements.json`
-or `public/css/base.css` is stale, and `pnpm cem` regenerates both.
+or `public/css/base.css` is stale, and `pnpm cem` regenerates both. Its
+`agentcfg check` fails on a hand edit between the `agentcfg` markers, or on a
+change to `.agentprofile.yml` without `pnpm agentcfg sync`, which rewrites the
+composed files.
 
 <!-- agentcfg:start -->
 <!-- language/typescript/tooling.md · v1.0.0 -->
