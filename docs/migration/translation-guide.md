@@ -927,9 +927,10 @@ import { Button } from '@ninoverse/hmi-components/react/button';
 
 ## 18. File templates
 
-The `scaffold-component` skill embeds these templates. They are reproduced here
-so humans and agents share one source. Placeholders: `<kebab>`, `<Pascal>`,
-`<Category>`.
+hmi's templates for the six files. `/new-element` starts from the generic four
+in `.agents/new-element/`, and `.agents/new-element.local.md` adds what these
+already hold: the prefix, `baseStyles`, the React wrapper, the story and the
+wrapper test. Placeholders: `<kebab>`, `<Pascal>`, `<Category>`.
 
 ### `<kebab>.ts`
 

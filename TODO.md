@@ -11,7 +11,7 @@
 
 A dedicated rule for updating design tokens when a new design file or style
 direction arrives — distinct from the full reproduction guide (build from scratch)
-and from component-workflow (build a single component).
+and from `/new-element` (build a single element).
 
 ### Open questions to decide before writing the rule
 

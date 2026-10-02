@@ -15,7 +15,8 @@
             "*.json",
             "*.mjs",
             "scripts/**",
-            "!custom-elements.json"
+            "!custom-elements.json",
+            "!.agentcfg-manifest.json"
         ]
     },
     "formatter": {

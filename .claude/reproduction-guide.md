@@ -382,8 +382,9 @@ Do not proceed to Step 4 until all four commands pass cleanly.
 
 ## Step 4 — Per-component build (repeat for each component)
 
-See **`.claude/component-workflow.md`** for the full procedure:
-pre-flight check, 10-step checklist, group verification gate, and screenshot method.
+See **`/new-element`** (`.agents/new-element.md`) and hmi's steps for it in
+**`.agents/new-element.local.md`** for the full procedure: pre-flight, the
+checklist, the verification gate, and the visual check.
 
 ---
 
@@ -406,5 +407,6 @@ component hardcoded a color (which it should never do — if found, fix it).
 
 ## Branching, PR strategy, and execution order
 
-See **`.claude/execution-order.md`** for the full phase table, branching strategy,
-current gap list, and audit-pass checklist for existing components.
+See **`.agents/execution-order.md`** and **`.agents/lit-execution-order.md`** for
+the branching strategy and the audit-pass checklist for existing components, and
+`docs/migration/README.md` §6 for the phase table.

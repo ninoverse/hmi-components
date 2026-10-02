@@ -1,92 +1,117 @@
 ---
 name: migrate-component
-description: Migrate one existing React component of ninoverse-hmi-components to a Lit custom element end to end — read its .tsx / .styled.css / story / r2wc registration, derive the props-slots-events-parts mapping per docs/migration/translation-guide.md, get the mapping approved, then scaffold, wire, verify (lint, build, tests, manifest, storybook, side-by-side screenshot) and ship a draft PR. Use when the user says "migrate <Name>", "/migrate-component badge", or "next component in the tracker".
+description: Migrate one legacy React component to a Lit element, around /new-element
+argument-hint: "<component name, or next>"
 ---
 
-# Migrate Component
+# Migrate a component
 
-End-to-end orchestrator for converting **one existing React component** into a
-Lit element. Runs the four focused sub-skills after an analysis phase that the
-user must approve. Each sub-skill can also be invoked on its own.
+The migration's own steps for one component of the legacy React tree, around
+`/new-element`, which builds the element itself. This skill retires at v6, with
+the tracker.
+
+The component: $ARGUMENTS
 
 ## Step 0 — Read the rules
 
-Read `.claude/lit-migration.md` in full. Every rule (R1–R12) is mandatory.
-Keep `docs/migration/translation-guide.md` open for the pattern mappings.
+`.claude/lit-migration.md`, hmi's element rules R1 to R12, and the composed
+element rules beside it. Keep `docs/migration/translation-guide.md` open for
+the pattern mappings and the event catalog.
 
 ## Inputs
 
-- **Component name** (required): any form (`AvatarStack`, `avatarStack`,
-  `avatar-stack`). Derive:
-  - React file stem (camelCase): `avatarStack`
-  - kebab name: `avatar-stack` (folder, files, tag suffix, subpath)
-  - PascalCase: `AvatarStack` → class `HmiAvatarStack`, wrapper export `AvatarStack`
-  - tag: `hmi-avatar-stack`
-- If no name was given, ask before doing anything else. If the user says
-  "next", pick the first `Todo` row of the lowest open phase in
-  `docs/migration/tracker.md`.
+- The component, in any form (`AvatarStack`, `avatarStack`, `avatar-stack`).
+  Derive the React file stem (`avatarStack`), the element name
+  (`avatar-stack`), the class `HmiAvatarStack` and the wrapper export
+  `AvatarStack`.
+- With no name, ask. With "next", take the first `Todo` row of the lowest open
+  phase in `docs/migration/tracker.md`.
 
 ## Step 1 — Gate check
 
-Open `docs/migration/tracker.md`. The element's phase may start only when
-every PR of the previous phase is merged. If the gate is not met, say which
-PRs are still open and stop, unless the user explicitly overrides.
+The element's phase may start only when every PR of the previous phase has
+merged (`docs/migration/README.md` §6). If the gate is not met, say which PRs
+are still open and stop, unless the user explicitly overrides.
 
 ## Step 2 — Read the sources
 
-Read all of these; some may be absent (avatar-stack, radio-group,
-confirm-dialog and search-input have no CSS of their own):
+Some may be absent (avatar-stack, radio-group, confirm-dialog and search-input
+have no CSS of their own):
 
 - `src/components/<camel>.tsx`
 - `src/components/styled/<camel>.styled.css`
 - `src/components/<camel>.stories.tsx`
-- the `define('<kebab>', …)` block in `src/web-components.ts` (prop types,
-  `events`, form kind)
+- the `define('<kebab>', …)` block in `src/web-components.ts`: prop types,
+  `events`, form kind
 - `docs/api/components/<camel>.md`
 - the tracker row's flags and notes
 
-## Step 3 — API mapping sheet
+## Step 3 — The mapping sheet
 
-Produce, in this order, and then **WAIT for approval**:
+Produce, in this order, then **wait for approval**:
 
-1. The mapping table (this exact shape goes into the PR body later):
+1. The element's API table, as *Element API table* lays it out, with a React
+   prop column in front:
 
-   | React prop | Element property / attribute | Slot | Event (detail) | Part |
-   |------------|------------------------------|------|----------------|------|
+   | React prop | Property / attribute | Slot | Event (detail) | Part |
+   |------------|----------------------|------|----------------|------|
 
-   Apply the rules: R2 for props, R6 for `ReactNode` props (singular → slot,
-   array fields → string + `label-<value>` slot, render functions → three
-   tiers), R5 for callbacks (use the event catalog in the translation guide §6).
-2. The hazard list found in the source, each with the replacement:
-   `createPortal`, `document`/`window` listeners, `document.activeElement`,
-   `useId`, `className` / `...rest` passthrough, `as`, cross-boundary CSS
-   (`[data-structure=…]`, another component's class), `rem` count
+   R2 for props, R6 for `ReactNode` props, and R5 with the event catalog
+   (translation guide §6) for callbacks.
+2. The hazards in the source, each with its replacement: `createPortal`,
+   `document`/`window` listeners, `document.activeElement`, `useId`,
+   `className` and `...rest` passthrough, `as`, cross-boundary CSS
+   (`[data-structure=…]`, another component's class), the `rem` count
    (`grep -c rem src/components/styled/<camel>.styled.css`), inline `style`
    with custom properties, native form participation.
-3. Behaviour differences the React consumer will notice (for example
-   `hmi-input` + `hmi-change` instead of per-keystroke `onChange`).
-4. Which templates blocks apply: form-associated block (R7), panel block
-   (R4), overlay skeleton (R8).
+3. The behaviour differences a React consumer will notice: `hmi-input` with
+   `hmi-change` instead of a per-keystroke `onChange`, and, for every boolean
+   prop, the bare attribute's flip (R2).
+4. Which of hmi's rules apply: form-associated (R7), panel-like (R4), overlay
+   (R8).
 
-## Step 4 — Run the phases
+## Step 4 — Build the element
 
-| Phase | Skill | What it does |
-|-------|-------|--------------|
-| 1 | `scaffold-component` (migration mode) | branch `migrate/<kebab>` from `origin/main`, collision check, create the six files from the templates pre-filled with the mapping sheet |
-| 2 | `wire-component` | `src/elements/index.ts`, `src/react/index.ts`, `vite.config.ts`, `package.json` exports, `examples/elements.html`, story, tracker row → In progress |
-| 3 | `verify-component` | format → lint → build → artifacts → `test` → `test:ssr` → `cem` → storybook → side-by-side screenshot → user approval |
-| 4 | `ship-component` | commit `feat(ui): migrate <Name> to lit`, push, draft PR with mapping sheet + R12 checklist, tracker row → In review, stop |
+Run `/new-element <kebab>` with the approved table, minus its React column. Its
+local steps, `.agents/new-element.local.md`, add the wrapper, the story and the
+wiring. The branch is `feat/<kebab>`, or the one the environment assigned
+(*Branch naming*).
+
+In the same change:
+
+- `src/components/<camel>.tsx`'s JSDoc gains one line, and nothing else in the
+  React tree changes:
+  ``@deprecated Use `<Pascal>` from `@ninoverse/hmi-components/react/<kebab>`. Removed in 6.0.0.``
+- The tracker row goes to `Done`, with the PR linked in its **PR** column once
+  the PR exists: the row reaches `main` only when the PR merges.
+
+## Step 5 — The visual check
+
+With `/take-screenshot`, capture the React section of `src/App.tsx`, matched by
+its `<h2>` text, from `pnpm dev`, and the element's section of
+`examples/elements.html`, which loads the built `dist/`, so after `pnpm build`.
+Use the default theme axes, and for a panel-like element add a pair with
+`data-structure="journal"` and `data-material="glass"`. Show the pair and wait
+for approval; *Visual check* says what the PR records.
+
+## Step 6 — The PR
+
+Commit `feat(ui): migrate <Pascal> to lit` and open the PR as *Git flow* and
+*PR instructions* say. Its description adds, after the API table with its React
+column: the behaviour differences, the visual-check record, the tracker row's
+link, and R12's checklist from `.claude/lit-migration.md`, every box ticked.
+
+## Batches
+
+Phases 2, 3 and 8 allow up to five leaf elements per PR, one commit each. Each
+element goes through steps 2 to 5 and its commit before the next starts, since
+they share the wiring files (*Element sequencing*). Never batch outside those
+phases unless the user asks.
 
 ## Rules
 
-- `pnpm` only.
-- Never edit or delete `src/components/<camel>.tsx` or its CSS; both
-  implementations coexist until the v6 flip.
-- Never batch two elements in one run unless the user asked for a phase batch
-  (phases 2, 3 and 8 allow up to five leaves per PR, one commit each).
-- In a batch, each element is scaffolded, wired, verified **and committed**
-  before the next one starts. Do not run a phase across all of them at once —
-  they share six wiring files, and interleaved edits cannot be split back into
-  one commit per element (`.claude/execution-order.md`).
-- Do not proceed past phase 3 until the user has approved the screenshot pair.
-- After the draft PR is open, **stop** and wait for the user.
+- Never edit or delete `src/components/<camel>.tsx` or its CSS beyond the
+  `@deprecated` line: both implementations coexist until the v6 flip.
+- Open the PR once the user has approved the visual check, or as a draft until
+  they do (*PR instructions*).
+- After the PR is open, stop and wait for the user.

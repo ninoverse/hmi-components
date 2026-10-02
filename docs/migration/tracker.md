@@ -4,7 +4,7 @@ One row per element. The PR that migrates an element sets its row to `Done` and
 links itself in the **PR** column. A row reaches `main` only when that PR
 merges, so on `main`, `Done` is always true. Phases are gated: a phase may start
 only when every PR of the previous phase is merged
-(`.claude/execution-order.md`).
+(`README.md` §6).
 
 ## Status vocabulary
 

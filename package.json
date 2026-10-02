@@ -468,6 +468,7 @@
         "test:ssr": "vitest run --project ssr",
         "cem": "cem analyze && node scripts/gen-base-css.mjs",
         "docs": "typedoc",
+        "agentcfg": "sh scripts/agentcfg.sh",
         "ci": "pnpm lint && pnpm typecheck && pnpm test && pnpm build"
     },
     "dependencies": {

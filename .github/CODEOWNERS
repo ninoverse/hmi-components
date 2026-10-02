@@ -9,8 +9,15 @@
 *                       @nicolapasqua99
 
 # The agent rules: a change to them changes what every agent working here does.
+# The profile picks the composed ones, and scripts/agentcfg.sh downloads and
+# runs the binary that composes them.
+/.agentprofile.yml      @nicolapasqua99
+/.agentcfg-manifest.json @nicolapasqua99
+/AGENTS.md              @nicolapasqua99
 /CLAUDE.md              @nicolapasqua99
+/.agents/               @nicolapasqua99
 /.claude/               @nicolapasqua99
+/scripts/agentcfg.sh    @nicolapasqua99
 
 # Supply chain and CI: a change here can weaken the merge gates. The pnpm
 # settings decide which dependencies may run install scripts.
