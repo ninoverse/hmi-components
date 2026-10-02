@@ -62,6 +62,10 @@ stability*, which deploys docs with the publish: while 5.x is released, the site
 shows the migration as it lands, ahead of npm. Once v6 is live, the deploy
 follows the npm publish, and this paragraph goes.
 
+A publish is staged: `publish-npm.yml` uploads the release, and the version
+goes live on npm only once a maintainer approves it on npmjs.com, behind their
+second factor. A green run of it is not a published version.
+
 ## The migration, until v6
 
 The React components in `src/components/` are the legacy implementation, being

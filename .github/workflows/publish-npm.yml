@@ -2,13 +2,19 @@ name: Publish to npm
 
 # A caller into ninoverse/.github, run by hand with a release's tag. The shared
 # workflow downloads the tarball release.yml attached to that tag's GitHub
-# release and publishes it to npmjs.org, so npm serves byte for byte what the
-# release holds. A tag makes a release; only this makes a publish.
+# release and stages it on npmjs.org, so npm serves byte for byte what the
+# release holds. A tag makes a release; only this, once approved, makes a
+# publish.
 #
 # Trusted publishing, so no token: npm trades the job's OIDC token for a
 # short-lived publish token, and adds provenance. The trusted publisher on
 # npmjs.com names this file, not the shared one, because npm checks the
 # workflow that started the run.
+#
+# Staged, so a person releases: the version goes live only once a maintainer
+# approves it on npmjs.com, or runs the `npm stage approve` line the run's
+# summary gives, behind their second factor. The trusted publisher allows
+# staging alone, so a plain publish from here fails with E403.
 
 on:
   workflow_dispatch:
@@ -31,7 +37,8 @@ jobs:
       id-token: write
     # Pinned to a released version, not @main or a short @v1: @main lands here
     # with no pull request, and @v1 never moves. Renovate opens the bump.
-    uses: ninoverse/.github/.github/workflows/npm-publish.yml@v1.10.0
+    uses: ninoverse/.github/.github/workflows/npm-publish.yml@v1.11.0
     with:
       tag: ${{ inputs.tag }}
       registry-url: https://registry.npmjs.org
+      stage: true

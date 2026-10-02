@@ -7,7 +7,8 @@ name: Release Docs Site on Tag Push
 #
 # While 5.x is released, the site follows the tag, so it shows the migration as
 # it lands, ahead of npm by however many releases are unpublished. Once v6 is
-# live, the deploy moves after the publish in publish-npm.yml (ADR-0002, D53).
+# live, the deploy moves after the publish (ADR-0002, D53). publish-npm.yml only
+# stages, so the deploy needs a trigger of its own.
 #
 # The tag this watches for is the one bump-version.yml pushes. That only works
 # because that workflow pushes with a GitHub App token: a tag pushed with
