@@ -182,26 +182,21 @@ Rules: one element per commit; batches of up to five leaves per PR in phases
 ## 7. Running one migration end to end
 
 The `migrate-component` skill (`.claude/skills/migrate-component/SKILL.md`)
-automates this. By hand:
+automates this, around `/new-element`, which builds the element. By hand:
 
-1. Read `.claude/lit-migration.md`. Check `tracker.md`: the element's phase gate must be met.
-2. `git fetch origin main && git checkout -b migrate/<kebab> origin/main`.
+1. Read `.claude/lit-migration.md` and the composed element rules it sits beside (`.agents/lit-elements.md`, `lit-element-styles.md`, `lit-forms-and-overlays.md`). Check `tracker.md`: the element's phase gate must be met.
+2. `git fetch origin main && git switch -c feat/<kebab> origin/main`.
 3. Read `src/components/<camel>.tsx`, `src/components/styled/<camel>.styled.css`, `src/components/<camel>.stories.tsx`, the `define('<kebab>', …)` block in `src/web-components.ts`, and `docs/api/components/<camel>.md`.
-4. Write the **API mapping sheet** (React prop → property/attribute, slot, event + detail, part) and the hazard list (portals, document listeners, `activeElement`, `useId`, `className` passthrough, `as`, cross-boundary CSS, `rem` count). Get it approved.
-5. Scaffold the six files from the templates in `translation-guide.md` §18.
-6. Wire: `src/elements/index.ts`, `src/react/index.ts`, `vite.config.ts` entries `wc/<kebab>` and `react/<kebab>`, `package.json` exports, a section in `examples/elements.html`, the story.
-7. Verify:
+4. Write the element's **API table** with a React prop column (React prop → property/attribute, slot, event + detail, part), the hazard list (portals, document listeners, `activeElement`, `useId`, `className` passthrough, `as`, cross-boundary CSS, `rem` count) and the behaviour differences. Get them approved.
+5. Build the element as `/new-element` does: the element, its styles and its two tests from the templates in `.agents/new-element/`, then hmi's steps in `.agents/new-element.local.md`: the wrapper and the story (hmi's templates for all six files are in `translation-guide.md` §18), the wiring, `pnpm cem`.
+6. Verify:
    ```bash
-   pnpm format && pnpm lint
-   pnpm build
+   pnpm run ci
    ls dist/wc/<kebab>.js dist/react/<kebab>.js dist/elements/<kebab>/<kebab>.d.ts dist/elements/<kebab>/<kebab>.react.d.ts
-   pnpm test -- src/elements/<kebab>
-   pnpm test:ssr -- src/elements/<kebab>
-   pnpm cem && git diff --stat custom-elements.json
    pnpm build:storybook
    ```
-   Then produce the side-by-side screenshot (React section of `src/App.tsx` vs the Lit story in Storybook) and get it approved.
-8. Commit `feat(ui): migrate <Name> to lit`, push, open a draft PR with the mapping sheet, screenshots and the R12 checklist. In the same PR, set the tracker row to *Done* and link the PR in its **PR** column: the row reaches `main` only when the PR merges.
+   Then capture the visual check with `/take-screenshot`: the React section of `src/App.tsx` against the element's section of `examples/elements.html`. Get it approved.
+7. Commit `feat(ui): migrate <Name> to lit`. The same commit adds the `@deprecated` line to the React component's JSDoc and sets the tracker row to *Done*, with the PR linked in its **PR** column: the row reaches `main` only when the PR merges. Push and open the PR with the API table, the behaviour differences, the visual-check record and the R12 checklist. It is a draft only while the visual check waits for approval.
 
 ## 8. Host verification matrix
 

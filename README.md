@@ -245,21 +245,20 @@ public/
 | Config | `camelCase.ts` | `colors.ts` |
 | Utility | `[name].utility.ts` | `formatTemplate.utility.ts` |
 
-Details: [`.claude/file-naming.md`](./.claude/file-naming.md).
+Details: [`.agents/typescript-file-naming.md`](./.agents/typescript-file-naming.md)
+and [`.agents/lit-file-naming.md`](./.agents/lit-file-naming.md).
 
 ## Contributing
 
 - Follow [Conventional Commits](https://www.conventionalcommits.org/): `feat(ui): migrate badge to lit`
 - Run `pnpm lint` before opening a PR
-- Detailed rules live in `.claude/`:
-  - [`lit-migration.md`](./.claude/lit-migration.md) — the element rules
-  - [`commit-conventions.md`](./.claude/commit-conventions.md)
-  - [`branch-naming.md`](./.claude/branch-naming.md)
-  - [`component-workflow.md`](./.claude/component-workflow.md)
-  - [`pr-guidelines.md`](./.claude/pr-guidelines.md)
-  - [`code-review.md`](./.claude/code-review.md)
-  - [`file-naming.md`](./.claude/file-naming.md)
-  - [`testing-requirements.md`](./.claude/testing-requirements.md)
+- The rules live in [`AGENTS.md`](./AGENTS.md), which links each of them in
+  `.agents/`. Most are composed by
+  [agentcfg](https://github.com/ninoverse/agent-config-sync) from
+  [`.agentprofile.yml`](./.agentprofile.yml); hmi's own are the section at the
+  top of `AGENTS.md`, the element rules in
+  [`.claude/lit-migration.md`](./.claude/lit-migration.md), and the element
+  steps in [`.agents/new-element.local.md`](./.agents/new-element.local.md).
 
 ## License
 

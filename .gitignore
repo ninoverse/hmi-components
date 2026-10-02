@@ -16,6 +16,11 @@
 .DS_Store
 *.pem
 
+# The agentcfg binary `pnpm agentcfg` fetches. Downloaded per pin, never
+# committed — Renovate collects post-upgrade changes from `git status`, so an
+# unignored copy would land three megabytes in a pull request about prose.
+/.agentcfg/
+
 # debug
 npm-debug.log*
 yarn-debug.log*
