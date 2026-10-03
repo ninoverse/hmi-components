@@ -169,6 +169,28 @@
         </section>
 
         <section>
+            <h2>Banner</h2>
+            <!-- hmi-dismiss is cancelable: without preventDefault() the banner
+                 hides itself. The last one cancels it and logs the detail. -->
+            <div style="display: flex; flex-direction: column; gap: 1rem; width: 40rem; max-width: 100%">
+                <hmi-banner>Your changes were saved.</hmi-banner>
+                <hmi-banner variant="success" dismissible>
+                    <span slot="title">Deployed</span>
+                    Version 5.16 is live.
+                </hmi-banner>
+                <hmi-banner variant="warning">
+                    <span slot="title">Update available</span>
+                    A new version is ready to install.
+                    <hmi-button slot="action" size="small">Update</hmi-button>
+                </hmi-banner>
+                <hmi-banner id="banner-cancel" variant="danger" dismissible>
+                    <span slot="title">Cannot be closed</span>
+                    The listener cancels the dismissal.
+                </hmi-banner>
+            </div>
+        </section>
+
+        <section>
             <h2>Card</h2>
             <div class="row">
                 <hmi-card class="demo-card">
@@ -330,6 +352,11 @@ export function Example() {
 
         <script src="../dist/hmi-elements.iife.js"></script>
         <script>
+            document.getElementById('banner-cancel').addEventListener('hmi-dismiss', (event) => {
+                event.preventDefault();
+                console.log('hmi-dismiss', event.detail);
+            });
+
             const html = document.documentElement;
             const toggle = (id, attribute, on, off) =>
                 document.getElementById(id).addEventListener('click', () => {

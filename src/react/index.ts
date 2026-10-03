@@ -11,6 +11,11 @@ export {
 export { AvatarStack } from '../elements/avatar-stack/avatar-stack.react.js';
 export { Badge, type BadgeVariant } from '../elements/badge/badge.react.js';
 export {
+    Banner,
+    type BannerDismissDetail,
+    type BannerVariant,
+} from '../elements/banner/banner.react.js';
+export {
     Button,
     type ButtonSize,
     type ButtonType,

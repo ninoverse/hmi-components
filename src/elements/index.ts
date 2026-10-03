@@ -6,6 +6,7 @@ export * from './alert/alert.js';
 export * from './avatar/avatar.js';
 export * from './avatar-stack/avatar-stack.js';
 export * from './badge/badge.js';
+export * from './banner/banner.js';
 export * from './button/button.js';
 export * from './card/card.js';
 export * from './code/code.js';

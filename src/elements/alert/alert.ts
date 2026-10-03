@@ -1,33 +1,10 @@
-import { html, LitElement, nothing, svg } from 'lit';
+import { html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { baseStyles } from '../shared/base.styles.js';
+import { type StatusVariant, statusIcon } from '../shared/status-icon.js';
 import { styles } from './alert.styles.js';
 
-export type AlertVariant = 'info' | 'success' | 'warning' | 'danger';
-
-/* Library-owned status icons, shown while the `icon` slot is empty. */
-const ICON_PATHS: Record<AlertVariant, readonly string[]> = {
-    info: ['M10 9v5M10 6.5v.01'],
-    success: ['M6.5 10l2.5 2.5 4.5-5'],
-    warning: ['M10 2.5L18 16.5H2L10 2.5z', 'M10 8v4M10 14.5v.01'],
-    danger: ['M10 6v4M10 13.5v.01'],
-};
-
-const icon = (variant: AlertVariant) =>
-    html`<svg
-        viewBox="0 0 20 20"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="1.7"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        aria-hidden="true"
-    >
-        ${variant === 'warning' ? nothing : svg`<circle cx="10" cy="10" r="8" />`}
-        ${(ICON_PATHS[variant] ?? ICON_PATHS.info).map(
-            (d) => svg`<path d=${d} />`,
-        )}
-    </svg>`;
+export type AlertVariant = StatusVariant;
 
 /**
  * Inline message with a variant-matched icon, an optional title and an
@@ -59,7 +36,7 @@ export class HmiAlert extends LitElement {
         return html`
             <div part="base" class="base">
                 <span part="icon" class="icon">
-                    <slot name="icon">${icon(this.variant)}</slot>
+                    <slot name="icon">${statusIcon(this.variant)}</slot>
                 </span>
                 <div class="content">
                     <slot name="title"></slot>

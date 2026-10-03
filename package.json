@@ -290,6 +290,10 @@
             "types": "./dist/elements/badge/badge.react.d.ts",
             "import": "./dist/react/badge.js"
         },
+        "./react/banner": {
+            "types": "./dist/elements/banner/banner.react.d.ts",
+            "import": "./dist/react/banner.js"
+        },
         "./react/button": {
             "types": "./dist/elements/button/button.react.d.ts",
             "import": "./dist/react/button.js"
@@ -438,6 +442,10 @@
         "./wc/badge": {
             "types": "./dist/elements/badge/badge.d.ts",
             "import": "./dist/wc/badge.js"
+        },
+        "./wc/banner": {
+            "types": "./dist/elements/banner/banner.d.ts",
+            "import": "./dist/wc/banner.js"
         },
         "./wc/button": {
             "types": "./dist/elements/button/button.d.ts",

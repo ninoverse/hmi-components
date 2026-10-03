@@ -95,6 +95,7 @@ const VARIANT_ICONS = {
  *
  * @example
  * <Banner variant="success" title="Saved" onDismiss={hide}>All set.</Banner>
+ * @deprecated Use `Banner` from `@ninoverse/hmi-components/react/banner`. Removed in 6.0.0.
  */
 export function Banner({
     variant = 'info',
