@@ -297,6 +297,27 @@ export function Example() {
         </section>
 
         <section>
+            <h2>Meter</h2>
+            <!-- no events: the label is a slot, low/high/optimum pick the
+                 colour band like the native <meter>. -->
+            <div style="display: flex; flex-direction: column; gap: 1.5rem; width: 40rem; max-width: 100%">
+                <hmi-meter value="0.9" low="0.3" high="0.7" show-value>
+                    <span slot="label">Optimal</span>
+                </hmi-meter>
+                <hmi-meter value="0.5" low="0.3" high="0.7" show-value>
+                    <span slot="label">Suboptimal</span>
+                </hmi-meter>
+                <hmi-meter value="0.1" low="0.3" high="0.7" show-value>
+                    <span slot="label">Poor</span>
+                </hmi-meter>
+                <hmi-meter value="0.85" low="0.3" high="0.7" optimum="0.1" show-value>
+                    <span slot="label">Disk usage (low is good)</span>
+                </hmi-meter>
+                <hmi-meter value="0.4"></hmi-meter>
+            </div>
+        </section>
+
+        <section>
             <h2>Skeleton</h2>
             <!-- width/height/radius accept a CSS length string here; the
                  number form (40 → 40px) is only reachable from JS, since an

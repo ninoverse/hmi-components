@@ -318,6 +318,10 @@
             "types": "./dist/elements/kbd/kbd.react.d.ts",
             "import": "./dist/react/kbd.js"
         },
+        "./react/meter": {
+            "types": "./dist/elements/meter/meter.react.d.ts",
+            "import": "./dist/react/meter.js"
+        },
         "./react/skeleton": {
             "types": "./dist/elements/skeleton/skeleton.react.d.ts",
             "import": "./dist/react/skeleton.js"
@@ -478,6 +482,10 @@
         "./wc/kbd": {
             "types": "./dist/elements/kbd/kbd.d.ts",
             "import": "./dist/wc/kbd.js"
+        },
+        "./wc/meter": {
+            "types": "./dist/elements/meter/meter.d.ts",
+            "import": "./dist/wc/meter.js"
         },
         "./wc/skeleton": {
             "types": "./dist/elements/skeleton/skeleton.d.ts",

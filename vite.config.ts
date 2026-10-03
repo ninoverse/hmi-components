@@ -103,6 +103,11 @@ export default defineConfig({
                 ),
                 'wc/kbd': resolve(dirname, 'src/elements/kbd/kbd.ts'),
                 'react/kbd': resolve(dirname, 'src/elements/kbd/kbd.react.ts'),
+                'wc/meter': resolve(dirname, 'src/elements/meter/meter.ts'),
+                'react/meter': resolve(
+                    dirname,
+                    'src/elements/meter/meter.react.ts',
+                ),
                 'wc/skeleton': resolve(
                     dirname,
                     'src/elements/skeleton/skeleton.ts',

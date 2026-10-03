@@ -1217,6 +1217,216 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/meter/meter.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Scalar measurement bar within a known range, such as disk usage. The fill\ncolour reflects quality, following the native `<meter>` algorithm through\n`low`, `high` and `optimum`. For task completion use `hmi-progress`.\n\nThe label is the `label` slot. It names the track through\n`aria-labelledby`, so there is no `label` property.",
+          "name": "HmiMeter",
+          "cssParts": [
+            {
+              "description": "The track; carries `role=\"meter\"` and the `aria-value*` attributes.",
+              "name": "base"
+            },
+            {
+              "description": "The label wrapper.",
+              "name": "label"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Text shown above the bar; also its accessible name.",
+              "name": "label"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "Current measurement, clamped to `[min, max]`.",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "min",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "Lower bound of the scale.",
+              "attribute": "min"
+            },
+            {
+              "kind": "field",
+              "name": "max",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "description": "Upper bound of the scale.",
+              "attribute": "max"
+            },
+            {
+              "kind": "field",
+              "name": "low",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "Below this the value is in the \"low\" band. Defaults to `min`.",
+              "attribute": "low"
+            },
+            {
+              "kind": "field",
+              "name": "high",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "Above this the value is in the \"high\" band. Defaults to `max`.",
+              "attribute": "high"
+            },
+            {
+              "kind": "field",
+              "name": "optimum",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "Where the ideal value sits; drives optimal, suboptimal or poor. Defaults to `max`.",
+              "attribute": "optimum"
+            },
+            {
+              "kind": "field",
+              "name": "showValue",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Shows the numeric value beside the label.",
+              "attribute": "show-value",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "#hasLabel",
+              "privacy": "private",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "method",
+              "name": "#onLabelChange",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "Current measurement, clamped to `[min, max]`.",
+              "fieldName": "value"
+            },
+            {
+              "name": "min",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "Lower bound of the scale.",
+              "fieldName": "min"
+            },
+            {
+              "name": "max",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "description": "Upper bound of the scale.",
+              "fieldName": "max"
+            },
+            {
+              "name": "low",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "Below this the value is in the \"low\" band. Defaults to `min`.",
+              "fieldName": "low"
+            },
+            {
+              "name": "high",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "Above this the value is in the \"high\" band. Defaults to `max`.",
+              "fieldName": "high"
+            },
+            {
+              "name": "optimum",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "Where the ideal value sits; drives optimal, suboptimal or poor. Defaults to `max`.",
+              "fieldName": "optimum"
+            },
+            {
+              "name": "show-value",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Shows the numeric value beside the label.",
+              "fieldName": "showValue"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-meter",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiMeter",
+          "declaration": {
+            "name": "HmiMeter",
+            "module": "src/elements/meter/meter.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-meter",
+          "declaration": {
+            "name": "HmiMeter",
+            "module": "src/elements/meter/meter.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/skeleton/skeleton.ts",
       "declarations": [
         {

@@ -82,6 +82,7 @@ hmi-card:not(:defined),
 hmi-code:not(:defined),
 hmi-empty-state:not(:defined),
 hmi-kbd:not(:defined),
+hmi-meter:not(:defined),
 hmi-skeleton:not(:defined),
 hmi-spinner:not(:defined) {
     visibility: hidden;

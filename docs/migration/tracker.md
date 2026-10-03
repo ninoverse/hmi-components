@@ -58,7 +58,7 @@ There is no status for work under way: its open PR already shows that.
 | `hmi-code` | `code.tsx` | 2 | low | | Two render modes: inline `<code>`, or `<pre><code>` when `block` is set. `block` gains HTML presence semantics (r2wc parsed the string, so bare `block` was false). | Done | [#122](https://github.com/ninoverse/hmi-components/pull/122) |
 | `hmi-empty-state` | `emptyState.tsx` | 2 | low | S | Slots `icon`, `title`, `description`, `action`; `.empty-state__icon > svg` → `::slotted(svg)`. | Done | [#146](https://github.com/ninoverse/hmi-components/pull/146) |
 | `hmi-kbd` | `kbd.tsx` | 2 | low | | `size` reflected; combos are composed by the consumer. | Done | [#124](https://github.com/ninoverse/hmi-components/pull/124) |
-| `hmi-meter` | `meter.tsx` | 2 | low | S | Slot `label`. | Todo | |
+| `hmi-meter` | `meter.tsx` | 2 | low | S | Slot `label`. | Done | |
 | `hmi-progress` | `progress.tsx` | 2 | low | X | `[data-structure="journal"] .progress` → `--progress-track-border` token (defined). | Todo | |
 | `hmi-skeleton` | `skeleton.tsx` | 2 | low | | Inline size styles stay: `width`/`height`/`radius` are written to the host in `updated()`. Variant sizing lives on `:host` so `width: 100%` resolves against the containing block. | Done | [#124](https://github.com/ninoverse/hmi-components/pull/124) |
 | `hmi-spinner` | `spinner.tsx` | 2 | low | | Keyframes move into `styles`. `label` stays a string forwarded to `aria-label`, not a slot. | Done | [#124](https://github.com/ninoverse/hmi-components/pull/124) |

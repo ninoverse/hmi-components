@@ -26,6 +26,7 @@ export { Card, type CardVariant } from '../elements/card/card.react.js';
 export { Code } from '../elements/code/code.react.js';
 export { EmptyState } from '../elements/empty-state/empty-state.react.js';
 export { Kbd, type KbdSize } from '../elements/kbd/kbd.react.js';
+export { Meter, type MeterLevel } from '../elements/meter/meter.react.js';
 export {
     Skeleton,
     type SkeletonVariant,
