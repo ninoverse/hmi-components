@@ -15,6 +15,7 @@ export {
     type BannerDismissDetail,
     type BannerVariant,
 } from '../elements/banner/banner.react.js';
+export { Blockquote } from '../elements/blockquote/blockquote.react.js';
 export {
     Button,
     type ButtonSize,

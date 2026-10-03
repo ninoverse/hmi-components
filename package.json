@@ -294,6 +294,10 @@
             "types": "./dist/elements/banner/banner.react.d.ts",
             "import": "./dist/react/banner.js"
         },
+        "./react/blockquote": {
+            "types": "./dist/elements/blockquote/blockquote.react.d.ts",
+            "import": "./dist/react/blockquote.js"
+        },
         "./react/button": {
             "types": "./dist/elements/button/button.react.d.ts",
             "import": "./dist/react/button.js"
@@ -450,6 +454,10 @@
         "./wc/banner": {
             "types": "./dist/elements/banner/banner.d.ts",
             "import": "./dist/wc/banner.js"
+        },
+        "./wc/blockquote": {
+            "types": "./dist/elements/blockquote/blockquote.d.ts",
+            "import": "./dist/wc/blockquote.js"
         },
         "./wc/button": {
             "types": "./dist/elements/button/button.d.ts",

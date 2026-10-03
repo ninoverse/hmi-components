@@ -567,6 +567,62 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/blockquote/blockquote.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Block quotation with a primary accent rule on the leading edge and an\noptional attribution below. The quote is the default slot.\n\nThere is no `cite` property: the attribution is the `cite` slot only, so the\nnative `cite` URL attribute is not used. Give the slotted element\n`<footer slot=\"cite\">` when the attribution should be a footer.",
+          "name": "HmiBlockquote",
+          "cssParts": [
+            {
+              "description": "The inner `<blockquote>`.",
+              "name": "base"
+            },
+            {
+              "description": "The paragraph around the quotation.",
+              "name": "body"
+            }
+          ],
+          "slots": [
+            {
+              "description": "The quotation body.",
+              "name": ""
+            },
+            {
+              "description": "Attribution shown below the quote.",
+              "name": "cite"
+            }
+          ],
+          "members": [],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-blockquote",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiBlockquote",
+          "declaration": {
+            "name": "HmiBlockquote",
+            "module": "src/elements/blockquote/blockquote.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-blockquote",
+          "declaration": {
+            "name": "HmiBlockquote",
+            "module": "src/elements/blockquote/blockquote.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/button/button.ts",
       "declarations": [
         {

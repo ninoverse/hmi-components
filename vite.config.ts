@@ -70,6 +70,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/banner/banner.react.ts',
                 ),
+                'wc/blockquote': resolve(
+                    dirname,
+                    'src/elements/blockquote/blockquote.ts',
+                ),
+                'react/blockquote': resolve(
+                    dirname,
+                    'src/elements/blockquote/blockquote.react.ts',
+                ),
                 'wc/button': resolve(dirname, 'src/elements/button/button.ts'),
                 'react/button': resolve(
                     dirname,

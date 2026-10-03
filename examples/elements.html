@@ -191,6 +191,19 @@
         </section>
 
         <section>
+            <h2>Blockquote</h2>
+            <!-- no events and no boolean props: the default slot and the cite
+                 slot. -->
+            <div style="display: flex; flex-direction: column; gap: 1rem; width: 40rem; max-width: 100%">
+                <hmi-blockquote>That brain of mine is something more than mortal.</hmi-blockquote>
+                <hmi-blockquote>
+                    It is only with the heart that one can see rightly.
+                    <span slot="cite">— Antoine de Saint-Exupéry, The Little Prince</span>
+                </hmi-blockquote>
+            </div>
+        </section>
+
+        <section>
             <h2>Card</h2>
             <div class="row">
                 <hmi-card class="demo-card">
