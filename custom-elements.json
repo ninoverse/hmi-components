@@ -418,6 +418,241 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/button/button.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Interactive button styled with MD3 tokens. `type=\"submit\"` and\n`type=\"reset\"` act on the host form through `ElementInternals`, and a\ndisabled `<fieldset>` around the button disables it.\n\n`aria-label` set on the host does not name the inner `<button>`, so an\nicon-only button takes its accessible name from `label`.",
+          "name": "HmiButton",
+          "cssParts": [
+            {
+              "description": "The inner `<button>`.",
+              "name": "base"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Label.",
+              "name": ""
+            },
+            {
+              "description": "Rendered before the label.",
+              "name": "left-icon"
+            },
+            {
+              "description": "Rendered after the label.",
+              "name": "right-icon"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "formAssociated",
+              "type": {
+                "text": "boolean"
+              },
+              "static": true,
+              "default": "true"
+            },
+            {
+              "kind": "field",
+              "name": "shadowRootOptions",
+              "type": {
+                "text": "object"
+              },
+              "static": true,
+              "default": "{ ...LitElement.shadowRootOptions, delegatesFocus: true, }"
+            },
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "ButtonVariant"
+              },
+              "default": "'primary'",
+              "description": "Visual style.",
+              "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "ButtonSize"
+              },
+              "default": "'medium'",
+              "description": "Control height.",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "asIcon",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Square, icon-only button.",
+              "attribute": "as-icon",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Disables interaction.",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "type",
+              "type": {
+                "text": "ButtonType"
+              },
+              "default": "'button'",
+              "description": "Native button type.",
+              "attribute": "type"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "Accessible name, forwarded to `aria-label` on the inner button.",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "#internals",
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "#fieldsetDisabled",
+              "privacy": "private",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "method",
+              "name": "formDisabledCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "disabled",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onClick",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "ButtonVariant"
+              },
+              "default": "'primary'",
+              "description": "Visual style.",
+              "fieldName": "variant"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "ButtonSize"
+              },
+              "default": "'medium'",
+              "description": "Control height.",
+              "fieldName": "size"
+            },
+            {
+              "name": "as-icon",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Square, icon-only button.",
+              "fieldName": "asIcon"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Disables interaction.",
+              "fieldName": "disabled"
+            },
+            {
+              "name": "type",
+              "type": {
+                "text": "ButtonType"
+              },
+              "default": "'button'",
+              "description": "Native button type.",
+              "fieldName": "type"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "Accessible name, forwarded to `aria-label` on the inner button.",
+              "fieldName": "label"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-button",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiButton",
+          "declaration": {
+            "name": "HmiButton",
+            "module": "src/elements/button/button.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-button",
+          "declaration": {
+            "name": "HmiButton",
+            "module": "src/elements/button/button.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/card/card.ts",
       "declarations": [
         {

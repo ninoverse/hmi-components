@@ -10,6 +10,12 @@ export {
 } from '../elements/avatar/avatar.react.js';
 export { AvatarStack } from '../elements/avatar-stack/avatar-stack.react.js';
 export { Badge, type BadgeVariant } from '../elements/badge/badge.react.js';
+export {
+    Button,
+    type ButtonSize,
+    type ButtonType,
+    type ButtonVariant,
+} from '../elements/button/button.react.js';
 export { Card, type CardVariant } from '../elements/card/card.react.js';
 export { Code } from '../elements/code/code.react.js';
 export { Kbd, type KbdSize } from '../elements/kbd/kbd.react.js';

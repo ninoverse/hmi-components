@@ -65,6 +65,11 @@ export default defineConfig({
                     dirname,
                     'src/elements/badge/badge.react.ts',
                 ),
+                'wc/button': resolve(dirname, 'src/elements/button/button.ts'),
+                'react/button': resolve(
+                    dirname,
+                    'src/elements/button/button.react.ts',
+                ),
                 'wc/card': resolve(dirname, 'src/elements/card/card.ts'),
                 'react/card': resolve(
                     dirname,

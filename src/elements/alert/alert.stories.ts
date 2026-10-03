@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
+import '../button/button.js';
 import './alert.js';
 import type { HmiAlert } from './alert.js';
 
@@ -63,7 +64,7 @@ export const WithAction: Story = {
         html`<hmi-alert variant=${args.variant}>
             <span slot="title">Upload failed</span>
             The file could not be sent.
-            <button slot="action">Retry</button>
+            <hmi-button slot="action" size="small" variant="danger">Retry</hmi-button>
         </hmi-alert>`,
 };
 

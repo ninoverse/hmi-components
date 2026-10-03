@@ -92,7 +92,7 @@
                 <hmi-alert variant="danger">
                     <span slot="title">Upload failed</span>
                     The file could not be sent.
-                    <button slot="action">Retry</button>
+                    <hmi-button slot="action" size="small" variant="danger">Retry</hmi-button>
                 </hmi-alert>
                 <hmi-alert>
                     <svg slot="icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M10 2l2.4 5 5.6.8-4 3.9 1 5.5-5-2.7-5 2.7 1-5.5-4-3.9 5.6-.8z" /></svg>
@@ -287,6 +287,38 @@ export function Example() {
         <!-- Lit IIFE bundle: registers every migrated <hmi-*> element on load.
              Never load ../dist/hmi-components.iife.js (the r2wc bundle) on the
              same page: both define the same tags. -->
+        <section>
+            <h2>Button</h2>
+            <div class="row">
+                <hmi-button>Primary</hmi-button>
+                <hmi-button variant="secondary">Secondary</hmi-button>
+                <hmi-button variant="ghost">Ghost</hmi-button>
+                <hmi-button variant="soft">Soft</hmi-button>
+                <hmi-button variant="danger">Danger</hmi-button>
+                <hmi-button variant="link">Link</hmi-button>
+            </div>
+            <div class="row">
+                <hmi-button size="small">Small</hmi-button>
+                <hmi-button size="large">Large</hmi-button>
+                <hmi-button disabled>Disabled</hmi-button>
+                <hmi-button as-icon label="Favourite">
+                    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M10 2l2.4 5 5.6.8-4 3.9 1 5.5-5-2.7-5 2.7 1-5.5-4-3.9 5.6-.8z" /></svg>
+                </hmi-button>
+            </div>
+            <div class="row">
+                <hmi-button>
+                    <svg slot="left-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M10 4v12M4 10h12" /></svg>
+                    Add
+                </hmi-button>
+                <!-- no hmi-* event: click is native and composed, so a plain
+                     listener sees it; type="submit" acts on the form. -->
+                <form id="button-form" class="row">
+                    <hmi-button type="submit">Submit</hmi-button>
+                    <hmi-button type="reset" variant="secondary">Reset</hmi-button>
+                </form>
+            </div>
+        </section>
+
         <script src="../dist/hmi-elements.iife.js"></script>
         <script>
             const html = document.documentElement;
@@ -318,6 +350,11 @@ export function Example() {
             ]) {
                 document.getElementById(id).names = names;
             }
+
+            document.getElementById('button-form').addEventListener('submit', (event) => {
+                event.preventDefault();
+                console.log('hmi-button submit reached the form');
+            });
 
             // Numbers mean pixels; only reachable through the property.
             const skeleton = document.getElementById('skeleton-js');
