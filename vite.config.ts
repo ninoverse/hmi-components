@@ -42,6 +42,11 @@ export default defineConfig({
                 // Element PRs add 'wc/<kebab>' and 'react/<kebab>' here.
                 'wc/index': resolve(dirname, 'src/elements/index.ts'),
                 'react/index': resolve(dirname, 'src/react/index.ts'),
+                'wc/alert': resolve(dirname, 'src/elements/alert/alert.ts'),
+                'react/alert': resolve(
+                    dirname,
+                    'src/elements/alert/alert.react.ts',
+                ),
                 'wc/avatar': resolve(dirname, 'src/elements/avatar/avatar.ts'),
                 'react/avatar': resolve(
                     dirname,
@@ -59,6 +64,11 @@ export default defineConfig({
                 'react/badge': resolve(
                     dirname,
                     'src/elements/badge/badge.react.ts',
+                ),
+                'wc/button': resolve(dirname, 'src/elements/button/button.ts'),
+                'react/button': resolve(
+                    dirname,
+                    'src/elements/button/button.react.ts',
                 ),
                 'wc/card': resolve(dirname, 'src/elements/card/card.ts'),
                 'react/card': resolve(

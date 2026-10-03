@@ -30,6 +30,7 @@ export type ButtonProps = ComponentPropsWithRef<'button'> & {
  *
  * @example
  * <Button variant="primary" size="large">Launch</Button>
+ * @deprecated Use `Button` from `@ninoverse/hmi-components/react/button`. Removed in 6.0.0.
  */
 export function Button({
     variant = 'primary',

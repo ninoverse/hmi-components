@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
+import '../button/button.js';
 import './spinner.js';
 import type { HmiSpinner } from './spinner.js';
 
@@ -64,5 +65,19 @@ export const Inherited: Story = {
                 <hmi-spinner label=${args.label}></hmi-spinner>
             </span>
         </div>
+    `,
+};
+
+/** A `small` spinner composed into a button's `left-icon` slot. */
+export const InButton: Story = {
+    render: (args) => html`
+        <hmi-button disabled>
+            <hmi-spinner
+                slot="left-icon"
+                size="small"
+                label=${args.label}
+            ></hmi-spinner>
+            Saving
+        </hmi-button>
     `,
 };

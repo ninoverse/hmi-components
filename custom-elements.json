@@ -4,6 +4,93 @@
   "modules": [
     {
       "kind": "javascript-module",
+      "path": "src/elements/alert/alert.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Inline message with a variant-matched icon, an optional title and an\noptional trailing action. The body is the default slot.\n\nThere is no `title` property: `title` is the native tooltip attribute on\nevery element, so the heading is the `title` slot only. The element carries\nno ARIA role; add `role` to the host when the message must be announced.",
+          "name": "HmiAlert",
+          "cssParts": [
+            {
+              "description": "The alert container.",
+              "name": "base"
+            },
+            {
+              "description": "The icon wrapper.",
+              "name": "icon"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Message body.",
+              "name": ""
+            },
+            {
+              "description": "Replaces the built-in status icon.",
+              "name": "icon"
+            },
+            {
+              "description": "Bold heading above the body.",
+              "name": "title"
+            },
+            {
+              "description": "Trailing action, such as a button or dismiss control.",
+              "name": "action"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "AlertVariant"
+              },
+              "default": "'info'",
+              "description": "Tone, which also selects the built-in status icon.",
+              "attribute": "variant",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "AlertVariant"
+              },
+              "default": "'info'",
+              "description": "Tone, which also selects the built-in status icon.",
+              "fieldName": "variant"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-alert",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiAlert",
+          "declaration": {
+            "name": "HmiAlert",
+            "module": "src/elements/alert/alert.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-alert",
+          "declaration": {
+            "name": "HmiAlert",
+            "module": "src/elements/alert/alert.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/avatar-stack/avatar-stack.ts",
       "declarations": [
         {
@@ -325,6 +412,279 @@
           "declaration": {
             "name": "HmiBadge",
             "module": "src/elements/badge/badge.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/elements/button/button.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Interactive button styled with MD3 tokens. `type=\"submit\"` and\n`type=\"reset\"` act on the host form through `ElementInternals`, after the\nclick handlers have run, so a handler's `preventDefault()` cancels them as\non a native button. That costs one timer tick.\n\n`ignore-prevent-default` opts out: the button then submits or resets during\nthe click itself, without that tick, and a handler's `preventDefault()` can\nno longer cancel it. Set it only where nothing cancels the click and the\nsubmit must be synchronous.\nA disabled `<fieldset>` around the button disables it.\n\n`aria-label` set on the host does not name the inner `<button>`, so an\nicon-only button takes its accessible name from `label`.",
+          "name": "HmiButton",
+          "cssParts": [
+            {
+              "description": "The inner `<button>`.",
+              "name": "base"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Label.",
+              "name": ""
+            },
+            {
+              "description": "Rendered before the label.",
+              "name": "left-icon"
+            },
+            {
+              "description": "Rendered after the label.",
+              "name": "right-icon"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "formAssociated",
+              "type": {
+                "text": "boolean"
+              },
+              "static": true,
+              "default": "true"
+            },
+            {
+              "kind": "field",
+              "name": "shadowRootOptions",
+              "type": {
+                "text": "object"
+              },
+              "static": true,
+              "default": "{ ...LitElement.shadowRootOptions, delegatesFocus: true, }"
+            },
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "ButtonVariant"
+              },
+              "default": "'primary'",
+              "description": "Visual style.",
+              "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "ButtonSize"
+              },
+              "default": "'medium'",
+              "description": "Control height.",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "asIcon",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Square, icon-only button.",
+              "attribute": "as-icon",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Disables interaction.",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "type",
+              "type": {
+                "text": "ButtonType"
+              },
+              "default": "'button'",
+              "description": "Native button type.",
+              "attribute": "type"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "Accessible name, forwarded to `aria-label` on the inner button.",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "ignorePreventDefault",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Submit or reset during the click, ignoring `preventDefault()` in click\nhandlers, instead of one timer tick later.",
+              "attribute": "ignore-prevent-default",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "#internals",
+              "privacy": "private",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "#fieldsetDisabled",
+              "privacy": "private",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "method",
+              "name": "formDisabledCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "disabled",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onClick",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "MouseEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#act",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "ButtonVariant"
+              },
+              "default": "'primary'",
+              "description": "Visual style.",
+              "fieldName": "variant"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "ButtonSize"
+              },
+              "default": "'medium'",
+              "description": "Control height.",
+              "fieldName": "size"
+            },
+            {
+              "name": "as-icon",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Square, icon-only button.",
+              "fieldName": "asIcon"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Disables interaction.",
+              "fieldName": "disabled"
+            },
+            {
+              "name": "type",
+              "type": {
+                "text": "ButtonType"
+              },
+              "default": "'button'",
+              "description": "Native button type.",
+              "fieldName": "type"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "Accessible name, forwarded to `aria-label` on the inner button.",
+              "fieldName": "label"
+            },
+            {
+              "name": "ignore-prevent-default",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Submit or reset during the click, ignoring `preventDefault()` in click\nhandlers, instead of one timer tick later.",
+              "fieldName": "ignorePreventDefault"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-button",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiButton",
+          "declaration": {
+            "name": "HmiButton",
+            "module": "src/elements/button/button.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-button",
+          "declaration": {
+            "name": "HmiButton",
+            "module": "src/elements/button/button.ts"
           }
         }
       ]

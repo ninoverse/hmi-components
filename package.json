@@ -274,6 +274,10 @@
             "types": "./dist/react/index.d.ts",
             "import": "./dist/react/index.js"
         },
+        "./react/alert": {
+            "types": "./dist/elements/alert/alert.react.d.ts",
+            "import": "./dist/react/alert.js"
+        },
         "./react/avatar": {
             "types": "./dist/elements/avatar/avatar.react.d.ts",
             "import": "./dist/react/avatar.js"
@@ -285,6 +289,10 @@
         "./react/badge": {
             "types": "./dist/elements/badge/badge.react.d.ts",
             "import": "./dist/react/badge.js"
+        },
+        "./react/button": {
+            "types": "./dist/elements/button/button.react.d.ts",
+            "import": "./dist/react/button.js"
         },
         "./react/card": {
             "types": "./dist/elements/card/card.react.d.ts",
@@ -415,6 +423,10 @@
             "types": "./dist/elements/index.d.ts",
             "import": "./dist/wc/index.js"
         },
+        "./wc/alert": {
+            "types": "./dist/elements/alert/alert.d.ts",
+            "import": "./dist/wc/alert.js"
+        },
         "./wc/avatar": {
             "types": "./dist/elements/avatar/avatar.d.ts",
             "import": "./dist/wc/avatar.js"
@@ -426,6 +438,10 @@
         "./wc/badge": {
             "types": "./dist/elements/badge/badge.d.ts",
             "import": "./dist/wc/badge.js"
+        },
+        "./wc/button": {
+            "types": "./dist/elements/button/button.d.ts",
+            "import": "./dist/wc/button.js"
         },
         "./wc/card": {
             "types": "./dist/elements/card/card.d.ts",

@@ -88,6 +88,7 @@ const VARIANT_ICONS = {
  *
  * @example
  * <Alert variant="warning" title="Heads up">Disk almost full.</Alert>
+ * @deprecated Use `Alert` from `@ninoverse/hmi-components/react/alert`. Removed in 6.0.0.
  */
 export function Alert({
     variant = 'info',

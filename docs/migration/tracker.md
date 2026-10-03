@@ -48,7 +48,7 @@ There is no status for work under way: its open PR already shows that.
 | Element tag | React source | Phase | Risk | Flags | Notes | Status | PR |
 |-------------|--------------|-------|------|-------|-------|--------|----|
 | `hmi-badge` | `badge.tsx` | 1 | low | | Pilot. Freezes the templates and the DoD. `dot` boolean, `variant`. | Done | [#115](https://github.com/ninoverse/hmi-components/pull/115) |
-| `hmi-alert` | `alert.tsx` | 2 | low | S | Slots `icon`, `title`, `action`. | Todo | |
+| `hmi-alert` | `alert.tsx` | 2 | low | S | Slots `icon`, `title`, `action`. No `title` property: it would collide with the native tooltip attribute, so the heading is the slot only. `icon` is new API and defaults to the variant's built-in SVG. Empty slots have no box, so no wrapper or `slotchange` bookkeeping. | Done | [#145](https://github.com/ninoverse/hmi-components/pull/145) |
 | `hmi-avatar` | `avatar.tsx` | 2 | low | | Computed tint stays inline style, on `part="base"`. Host carries the circle's box so `hmi-avatar-stack` can rim it with a plain `hmi-avatar` rule inside its own root. | Done | [#118](https://github.com/ninoverse/hmi-components/pull/118) |
 | `hmi-avatar-stack` | `avatarStack.tsx` | 2 | low | X | Its rules live in `avatar.styled.css`. Avatars are `<hmi-avatar>` rendered **into this element's own root**, not slotted — `size` must reach each one and `max` must hide the rest, neither possible on consumer nodes without mutating light DOM. So `.avatar-stack .avatar` becomes a plain `hmi-avatar` selector, not `::slotted()` (which cannot express the `+` overlap rule). `names` is a JS property. | Done | [#118](https://github.com/ninoverse/hmi-components/pull/118) |
 | `hmi-banner` | `banner.tsx` | 2 | low | S E | Slots `icon`, `title`, `action`; `hmi-dismiss` (cancelable). | Todo | |
@@ -74,7 +74,7 @@ There is no status for work under way: its open PR already shows that.
 | `hmi-spacer` | `spacer.tsx` | 3 | low | | | Todo | |
 | `hmi-text` | `text.tsx` | 3 | low | | `as` dropped; `variant`/`tone` reflected. | Todo | |
 | `hmi-visually-hidden` | `visuallyHidden.tsx` | 3 | low | | | Todo | |
-| `hmi-button` | `button.tsx` | 4 | med | S F | Worked example in `translation-guide.md`. Slots `left-icon`, `right-icon`; `formAssociated` for `type="submit"/"reset"`; `delegatesFocus`. When this lands, re-add the Spinner `InButton` story dropped in [#124](https://github.com/ninoverse/hmi-components/pull/124): it composes a `small` spinner into the button's `left-icon` slot. | Todo | |
+| `hmi-button` | `button.tsx` | 4 | med | S F | Worked example in `translation-guide.md`. Slots `left-icon`, `right-icon`; `formAssociated` for `type="submit"/"reset"`; `delegatesFocus`. `label` is forwarded to the inner `aria-label`, since the host's own does not name the inner button. Submit and reset wait one timer tick so a click handler's `preventDefault()` cancels them; `ignore-prevent-default` skips the wait and ignores `preventDefault()`. A fieldset's disabled state is kept apart from `disabled`. The Spinner `InButton` story is back. | Done | [#145](https://github.com/ninoverse/hmi-components/pull/145) |
 | `hmi-form-control` | `formControl.tsx` | 4 | low | S | Deprecated at birth: layout-only wrapper; label/hint/error move onto each input. | Todo | |
 | `hmi-input` | `input.tsx` | 4 | med | S F E D | Lands `shared/form.ts`. Slots `left-icon`, `right-icon`; `hmi-input` + `hmi-change`; `controlledTextCaret` obsolete. | Todo | |
 | `hmi-textarea` | `textarea.tsx` | 4 | med | F E | `hmi-input` + `hmi-change`. | Todo | |
