@@ -41,3 +41,4 @@ export {
     Spinner,
     type SpinnerSize,
 } from '../elements/spinner/spinner.react.js';
+export { Stat, type StatTrend } from '../elements/stat/stat.react.js';

@@ -338,6 +338,10 @@
             "types": "./dist/elements/spinner/spinner.react.d.ts",
             "import": "./dist/react/spinner.js"
         },
+        "./react/stat": {
+            "types": "./dist/elements/stat/stat.react.d.ts",
+            "import": "./dist/react/stat.js"
+        },
         "./responsive-container": {
             "types": "./dist/components/responsiveContainer.d.ts",
             "import": "./dist/responsiveContainer.js"
@@ -510,6 +514,10 @@
         "./wc/spinner": {
             "types": "./dist/elements/spinner/spinner.d.ts",
             "import": "./dist/wc/spinner.js"
+        },
+        "./wc/stat": {
+            "types": "./dist/elements/stat/stat.d.ts",
+            "import": "./dist/wc/stat.js"
         },
         "./style.css": "./dist/style.css",
         "./web-components": "./dist/hmi-components.iife.js",

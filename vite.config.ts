@@ -137,6 +137,11 @@ export default defineConfig({
                     dirname,
                     'src/elements/spinner/spinner.react.ts',
                 ),
+                'wc/stat': resolve(dirname, 'src/elements/stat/stat.ts'),
+                'react/stat': resolve(
+                    dirname,
+                    'src/elements/stat/stat.react.ts',
+                ),
                 accordion: resolve(dirname, 'src/components/accordion.tsx'),
                 alert: resolve(dirname, 'src/components/alert.tsx'),
                 areaChart: resolve(dirname, 'src/components/areaChart.tsx'),

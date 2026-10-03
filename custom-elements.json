@@ -1935,6 +1935,159 @@
           }
         }
       ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/elements/stat/stat.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Compact metric (KPI) block: a label with an optional icon, a large value,\nand an optional footer with a coloured trend delta and help text.\n\nEvery piece of text is a slot. `trend` sets the delta's colour and arrow,\nand the delta shows only while both `trend` and the `delta` slot are set. The\nfooter is drawn only when it has something to show. `divider` draws a dashed\nrule above it, with the spacing the rule needs.",
+          "name": "HmiStat",
+          "cssParts": [
+            {
+              "description": "The surface.",
+              "name": "base"
+            },
+            {
+              "description": "The label wrapper.",
+              "name": "label"
+            },
+            {
+              "description": "The icon slot.",
+              "name": "icon"
+            },
+            {
+              "description": "The footer row holding the delta and the help text.",
+              "name": "footer"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Metric name.",
+              "name": "label"
+            },
+            {
+              "description": "Primary metric value.",
+              "name": "value"
+            },
+            {
+              "description": "Icon beside the label, such as an `svg`.",
+              "name": "icon"
+            },
+            {
+              "description": "Change amount next to the trend arrow; needs `trend`.",
+              "name": "delta"
+            },
+            {
+              "description": "Secondary helper text in the footer.",
+              "name": "help-text"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "trend",
+              "type": {
+                "text": "StatTrend | undefined"
+              },
+              "description": "Direction of change; sets the delta colour and arrow.",
+              "attribute": "trend",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "divider",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Draws a dashed rule above the footer.",
+              "attribute": "divider",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "hasDelta",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "hasHelp",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "method",
+              "name": "#onSlotChange",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            }
+          ],
+          "attributes": [
+            {
+              "name": "trend",
+              "type": {
+                "text": "StatTrend | undefined"
+              },
+              "description": "Direction of change; sets the delta colour and arrow.",
+              "fieldName": "trend"
+            },
+            {
+              "name": "divider",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Draws a dashed rule above the footer.",
+              "fieldName": "divider"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-stat",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiStat",
+          "declaration": {
+            "name": "HmiStat",
+            "module": "src/elements/stat/stat.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-stat",
+          "declaration": {
+            "name": "HmiStat",
+            "module": "src/elements/stat/stat.ts"
+          }
+        }
+      ]
     }
   ]
 }

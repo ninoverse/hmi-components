@@ -395,6 +395,36 @@ export function Example() {
              Never load ../dist/hmi-components.iife.js (the r2wc bundle) on the
              same page: both define the same tags. -->
         <section>
+            <h2>Stat</h2>
+            <!-- no events: label, value, icon, delta and help-text are slots,
+                 trend sets the arrow and colour of the delta, divider draws the
+                 rule above the footer. -->
+            <div class="row">
+                <hmi-stat trend="up" divider style="width: 22rem">
+                    <span slot="label">Revenue</span>
+                    <span slot="value">$12.4k</span>
+                    <span slot="delta">8%</span>
+                    <span slot="help-text">vs last month</span>
+                </hmi-stat>
+                <hmi-stat trend="down" divider style="width: 22rem">
+                    <span slot="label">Errors</span>
+                    <svg slot="icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M10 3l8 14H2z M10 8v4 M10 14.5v.01" /></svg>
+                    <span slot="value">3</span>
+                    <span slot="delta">2</span>
+                </hmi-stat>
+                <hmi-stat trend="neutral" style="width: 22rem">
+                    <span slot="label">Sessions</span>
+                    <span slot="value">1,204</span>
+                    <span slot="delta">0%</span>
+                </hmi-stat>
+                <hmi-stat style="width: 22rem">
+                    <span slot="label">Users</span>
+                    <span slot="value">98</span>
+                </hmi-stat>
+            </div>
+        </section>
+
+        <section>
             <h2>Button</h2>
             <div class="row">
                 <hmi-button>Primary</hmi-button>
