@@ -81,9 +81,8 @@
     --elevation-5: calc(var(--hmi-base, 8px) * 0.75) calc(var(--hmi-base, 8px) * 0.75) 0 0 var(--tertiary);
 
     /* Per-element hooks — penciled-in dividers, a bordered progress track, a
-       dashed rule under a stat's derived value, a flat switch thumb. */
+       flat switch thumb. */
     --list-divider-style: dashed;
     --progress-track-border: calc(var(--hmi-base, 8px) * 0.125) solid var(--outline);
-    --stat-rule: calc(var(--hmi-base, 8px) * 0.125) dashed var(--outline-variant);
     --switch-thumb-shadow: none;
 }

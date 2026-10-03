@@ -47,6 +47,7 @@ const TrendIcon = ({ trend }: { trend: StatTrend }) => {
  *
  * @example
  * <Stat label="Revenue" value="$12.4k" trend="up" delta="8%" />
+ * @deprecated Use `Stat` from `@ninoverse/hmi-components/react/stat`. Removed in 6.0.0.
  */
 export function Stat({
     label,

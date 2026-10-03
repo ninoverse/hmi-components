@@ -306,6 +306,10 @@
             "types": "./dist/elements/card/card.react.d.ts",
             "import": "./dist/react/card.js"
         },
+        "./react/chip": {
+            "types": "./dist/elements/chip/chip.react.d.ts",
+            "import": "./dist/react/chip.js"
+        },
         "./react/code": {
             "types": "./dist/elements/code/code.react.d.ts",
             "import": "./dist/react/code.js"
@@ -318,6 +322,14 @@
             "types": "./dist/elements/kbd/kbd.react.d.ts",
             "import": "./dist/react/kbd.js"
         },
+        "./react/meter": {
+            "types": "./dist/elements/meter/meter.react.d.ts",
+            "import": "./dist/react/meter.js"
+        },
+        "./react/progress": {
+            "types": "./dist/elements/progress/progress.react.d.ts",
+            "import": "./dist/react/progress.js"
+        },
         "./react/skeleton": {
             "types": "./dist/elements/skeleton/skeleton.react.d.ts",
             "import": "./dist/react/skeleton.js"
@@ -325,6 +337,10 @@
         "./react/spinner": {
             "types": "./dist/elements/spinner/spinner.react.d.ts",
             "import": "./dist/react/spinner.js"
+        },
+        "./react/stat": {
+            "types": "./dist/elements/stat/stat.react.d.ts",
+            "import": "./dist/react/stat.js"
         },
         "./responsive-container": {
             "types": "./dist/components/responsiveContainer.d.ts",
@@ -467,6 +483,10 @@
             "types": "./dist/elements/card/card.d.ts",
             "import": "./dist/wc/card.js"
         },
+        "./wc/chip": {
+            "types": "./dist/elements/chip/chip.d.ts",
+            "import": "./dist/wc/chip.js"
+        },
         "./wc/code": {
             "types": "./dist/elements/code/code.d.ts",
             "import": "./dist/wc/code.js"
@@ -479,6 +499,14 @@
             "types": "./dist/elements/kbd/kbd.d.ts",
             "import": "./dist/wc/kbd.js"
         },
+        "./wc/meter": {
+            "types": "./dist/elements/meter/meter.d.ts",
+            "import": "./dist/wc/meter.js"
+        },
+        "./wc/progress": {
+            "types": "./dist/elements/progress/progress.d.ts",
+            "import": "./dist/wc/progress.js"
+        },
         "./wc/skeleton": {
             "types": "./dist/elements/skeleton/skeleton.d.ts",
             "import": "./dist/wc/skeleton.js"
@@ -486,6 +514,10 @@
         "./wc/spinner": {
             "types": "./dist/elements/spinner/spinner.d.ts",
             "import": "./dist/wc/spinner.js"
+        },
+        "./wc/stat": {
+            "types": "./dist/elements/stat/stat.d.ts",
+            "import": "./dist/wc/stat.js"
         },
         "./style.css": "./dist/style.css",
         "./web-components": "./dist/hmi-components.iife.js",

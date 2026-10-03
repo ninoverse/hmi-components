@@ -23,9 +23,16 @@ export {
     type ButtonVariant,
 } from '../elements/button/button.react.js';
 export { Card, type CardVariant } from '../elements/card/card.react.js';
+export {
+    Chip,
+    type ChipCloseDetail,
+    type ChipSelectDetail,
+} from '../elements/chip/chip.react.js';
 export { Code } from '../elements/code/code.react.js';
 export { EmptyState } from '../elements/empty-state/empty-state.react.js';
 export { Kbd, type KbdSize } from '../elements/kbd/kbd.react.js';
+export { Meter, type MeterLevel } from '../elements/meter/meter.react.js';
+export { Progress } from '../elements/progress/progress.react.js';
 export {
     Skeleton,
     type SkeletonVariant,
@@ -34,3 +41,4 @@ export {
     Spinner,
     type SpinnerSize,
 } from '../elements/spinner/spinner.react.js';
+export { Stat, type StatTrend } from '../elements/stat/stat.react.js';

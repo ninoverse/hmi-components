@@ -46,6 +46,7 @@ function resolveLevel(
  *
  * @example
  * <Meter value={0.8} low={0.3} high={0.7} optimum={0.2} label="Disk" showValue />
+ * @deprecated Use `Meter` from `@ninoverse/hmi-components/react/meter`. Removed in 6.0.0.
  */
 export function Meter({
     value,

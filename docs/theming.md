@@ -130,7 +130,7 @@ do **not** cross the boundary, which changes how themes may be written:
   override them. Each of those elements also exposes `part="panel"` for anything
   a token cannot express: `hmi-card::part(panel) { … }`.
 - **Per-element hooks** replace the journal-specific rules that v5 keeps inside
-  component CSS: `--list-divider-style`, `--progress-track-border`, `--stat-rule`,
+  component CSS: `--list-divider-style`, `--progress-track-border`,
   `--switch-thumb-shadow` (defaults in `constants.css`, overridden by
   `structure/journal.css`).
 - **Sizing base.** The elements never use `rem`. They size from `--hmi-base`

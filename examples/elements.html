@@ -297,6 +297,60 @@ export function Example() {
         </section>
 
         <section>
+            <h2>Meter</h2>
+            <!-- no events: the label is a slot, low/high/optimum pick the
+                 colour band like the native <meter>. -->
+            <div style="display: flex; flex-direction: column; gap: 1.5rem; width: 40rem; max-width: 100%">
+                <hmi-meter value="0.9" low="0.3" high="0.7" show-value>
+                    <span slot="label">Optimal</span>
+                </hmi-meter>
+                <hmi-meter value="0.5" low="0.3" high="0.7" show-value>
+                    <span slot="label">Suboptimal</span>
+                </hmi-meter>
+                <hmi-meter value="0.1" low="0.3" high="0.7" show-value>
+                    <span slot="label">Poor</span>
+                </hmi-meter>
+                <hmi-meter value="0.85" low="0.3" high="0.7" optimum="0.1" show-value>
+                    <span slot="label">Disk usage (low is good)</span>
+                </hmi-meter>
+                <hmi-meter value="0.4"></hmi-meter>
+            </div>
+        </section>
+
+        <section>
+            <h2>Progress</h2>
+            <!-- no events: value is clamped to 0–100, indeterminate loops and
+                 ignores it. The captions are plain text: label only sets
+                 aria-label. -->
+            <div style="display: flex; flex-direction: column; gap: 1.5rem; width: 40rem; max-width: 100%">
+                <div><p>Determinate (0%)</p><hmi-progress value="0" label="Empty"></hmi-progress></div>
+                <div><p>Determinate (35%)</p><hmi-progress value="35" label="Uploading"></hmi-progress></div>
+                <div><p>Determinate (80%)</p><hmi-progress value="80" label="Almost there"></hmi-progress></div>
+                <div><p>Determinate (100%)</p><hmi-progress value="100" label="Done"></hmi-progress></div>
+                <div><p>Indeterminate</p><hmi-progress indeterminate label="Working"></hmi-progress></div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Chip</h2>
+            <!-- hmi-select and hmi-close are cancelable: without preventDefault()
+                 the chip flips selected or hides itself. The pinned chip cancels
+                 hmi-close and logs the detail. -->
+            <div class="row">
+                <hmi-chip>Static</hmi-chip>
+                <hmi-chip selected>Selected</hmi-chip>
+                <hmi-chip selectable>Selectable</hmi-chip>
+                <hmi-chip selectable selected>Pressed</hmi-chip>
+                <hmi-chip closable>Closable</hmi-chip>
+                <hmi-chip id="chip-pinned" selectable closable selected>Pinned</hmi-chip>
+                <hmi-chip selectable closable>
+                    <svg slot="icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 4h12M4 8h8M6 12h4" /></svg>
+                    With icon
+                </hmi-chip>
+            </div>
+        </section>
+
+        <section>
             <h2>Skeleton</h2>
             <!-- width/height/radius accept a CSS length string here; the
                  number form (40 → 40px) is only reachable from JS, since an
@@ -340,6 +394,36 @@ export function Example() {
         <!-- Lit IIFE bundle: registers every migrated <hmi-*> element on load.
              Never load ../dist/hmi-components.iife.js (the r2wc bundle) on the
              same page: both define the same tags. -->
+        <section>
+            <h2>Stat</h2>
+            <!-- no events: label, value, icon, delta and help-text are slots,
+                 trend sets the arrow and colour of the delta, divider draws the
+                 rule above the footer. -->
+            <div class="row">
+                <hmi-stat trend="up" divider style="width: 22rem">
+                    <span slot="label">Revenue</span>
+                    <span slot="value">$12.4k</span>
+                    <span slot="delta">8%</span>
+                    <span slot="help-text">vs last month</span>
+                </hmi-stat>
+                <hmi-stat trend="down" divider style="width: 22rem">
+                    <span slot="label">Errors</span>
+                    <svg slot="icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M10 3l8 14H2z M10 8v4 M10 14.5v.01" /></svg>
+                    <span slot="value">3</span>
+                    <span slot="delta">2</span>
+                </hmi-stat>
+                <hmi-stat trend="neutral" style="width: 22rem">
+                    <span slot="label">Sessions</span>
+                    <span slot="value">1,204</span>
+                    <span slot="delta">0%</span>
+                </hmi-stat>
+                <hmi-stat style="width: 22rem">
+                    <span slot="label">Users</span>
+                    <span slot="value">98</span>
+                </hmi-stat>
+            </div>
+        </section>
+
         <section>
             <h2>Button</h2>
             <div class="row">
@@ -386,6 +470,13 @@ export function Example() {
             document.getElementById('banner-cancel').addEventListener('hmi-dismiss', (event) => {
                 event.preventDefault();
                 console.log('hmi-dismiss', event.detail);
+            });
+
+            const pinned = document.getElementById('chip-pinned');
+            pinned.addEventListener('hmi-select', (event) => console.log('hmi-select', event.detail));
+            pinned.addEventListener('hmi-close', (event) => {
+                event.preventDefault();
+                console.log('hmi-close', event.detail);
             });
 
             const html = document.documentElement;

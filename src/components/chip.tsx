@@ -32,6 +32,7 @@ const CloseIcon = () => (
  *
  * @example
  * <Chip selected onSelect={toggle} onClose={remove}>Filter</Chip>
+ * @deprecated Use `Chip` from `@ninoverse/hmi-components/react/chip`. Removed in 6.0.0.
  */
 export function Chip({
     selected = false,

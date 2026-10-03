@@ -88,6 +88,11 @@ export default defineConfig({
                     dirname,
                     'src/elements/card/card.react.ts',
                 ),
+                'wc/chip': resolve(dirname, 'src/elements/chip/chip.ts'),
+                'react/chip': resolve(
+                    dirname,
+                    'src/elements/chip/chip.react.ts',
+                ),
                 'wc/code': resolve(dirname, 'src/elements/code/code.ts'),
                 'react/code': resolve(
                     dirname,
@@ -103,6 +108,19 @@ export default defineConfig({
                 ),
                 'wc/kbd': resolve(dirname, 'src/elements/kbd/kbd.ts'),
                 'react/kbd': resolve(dirname, 'src/elements/kbd/kbd.react.ts'),
+                'wc/meter': resolve(dirname, 'src/elements/meter/meter.ts'),
+                'react/meter': resolve(
+                    dirname,
+                    'src/elements/meter/meter.react.ts',
+                ),
+                'wc/progress': resolve(
+                    dirname,
+                    'src/elements/progress/progress.ts',
+                ),
+                'react/progress': resolve(
+                    dirname,
+                    'src/elements/progress/progress.react.ts',
+                ),
                 'wc/skeleton': resolve(
                     dirname,
                     'src/elements/skeleton/skeleton.ts',
@@ -118,6 +136,11 @@ export default defineConfig({
                 'react/spinner': resolve(
                     dirname,
                     'src/elements/spinner/spinner.react.ts',
+                ),
+                'wc/stat': resolve(dirname, 'src/elements/stat/stat.ts'),
+                'react/stat': resolve(
+                    dirname,
+                    'src/elements/stat/stat.react.ts',
                 ),
                 accordion: resolve(dirname, 'src/components/accordion.tsx'),
                 alert: resolve(dirname, 'src/components/alert.tsx'),
