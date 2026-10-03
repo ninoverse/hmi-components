@@ -18,7 +18,12 @@ export type ButtonType = 'button' | 'submit' | 'reset';
  * Interactive button styled with MD3 tokens. `type="submit"` and
  * `type="reset"` act on the host form through `ElementInternals`, after the
  * click handlers have run, so a handler's `preventDefault()` cancels them as
- * on a native button. That costs one timer tick; `immediate` skips the wait.
+ * on a native button. That costs one timer tick.
+ *
+ * `ignore-prevent-default` opts out: the button then submits or resets during
+ * the click itself, without that tick, and a handler's `preventDefault()` can
+ * no longer cancel it. Set it only where nothing cancels the click and the
+ * submit must be synchronous.
  * A disabled `<fieldset>` around the button disables it.
  *
  * `aria-label` set on the host does not name the inner `<button>`, so an
@@ -62,10 +67,15 @@ export class HmiButton extends LitElement {
     @property() accessor label: string | undefined;
 
     /**
-     * Submit or reset at once, without waiting for click handlers, so
-     * `preventDefault()` no longer cancels it. @default false
+     * Submit or reset during the click, ignoring `preventDefault()` in click
+     * handlers, instead of one timer tick later. @default false
      */
-    @property({ type: Boolean, reflect: true }) accessor immediate = false;
+    @property({
+        type: Boolean,
+        reflect: true,
+        attribute: 'ignore-prevent-default',
+    })
+    accessor ignorePreventDefault = false;
 
     readonly #internals = this.attachInternals();
     #fieldsetDisabled = false;
@@ -79,7 +89,7 @@ export class HmiButton extends LitElement {
 
     #onClick(event: MouseEvent): void {
         if (this.type === 'button') return;
-        if (this.immediate) this.#act();
+        if (this.ignorePreventDefault) this.#act();
         else
             setTimeout(() => {
                 if (!event.defaultPrevented) this.#act();

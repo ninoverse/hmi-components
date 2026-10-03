@@ -62,7 +62,7 @@ const meta = {
         docs: {
             description: {
                 component:
-                    'React: `import { Button } from \'@ninoverse/hmi-components/react/button\'` — `<Button variant="primary"><Icon slot="left-icon" />Save</Button>`. `leftIcon` and `rightIcon` are the `left-icon` and `right-icon` slots.',
+                    'React: `import { Button } from \'@ninoverse/hmi-components/react/button\'` — `<Button variant="primary"><Icon slot="left-icon" />Save</Button>`. `leftIcon` and `rightIcon` are the `left-icon` and `right-icon` slots. `type="submit"` and `"reset"` act one timer tick after the click, so a click handler\'s `preventDefault()` cancels them like on a native button; `ignore-prevent-default` skips that tick and ignores `preventDefault()`.',
             },
         },
     },
@@ -129,5 +129,29 @@ export const Disabled: Story = {
                     html`<hmi-button variant=${variant} disabled>${variant}</hmi-button>`,
             )}
         </div>
+    `,
+};
+
+/** `preventDefault()` in a click handler cancels the reset, as on a native
+    button. Add `ignore-prevent-default` and the reset runs during the click
+    regardless, without the one-tick wait. */
+export const IgnorePreventDefault: Story = {
+    render: () => html`
+        <form style="display: flex; gap: 1.5rem; align-items: center">
+            <input value="edit me" />
+            <hmi-button
+                type="reset"
+                variant="secondary"
+                @click=${(event: Event) => event.preventDefault()}
+                >Reset (cancelled)</hmi-button
+            >
+            <hmi-button
+                type="reset"
+                variant="secondary"
+                ignore-prevent-default
+                @click=${(event: Event) => event.preventDefault()}
+                >Reset (ignores preventDefault)</hmi-button
+            >
+        </form>
     `,
 };

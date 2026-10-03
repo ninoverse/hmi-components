@@ -167,13 +167,13 @@ describe('hmi-button', () => {
         expect(input.value).toBe('b');
     });
 
-    it('immediate acts synchronously and ignores preventDefault', async () => {
+    it('ignore-prevent-default acts synchronously and ignores preventDefault', async () => {
         const form = document.createElement('form');
         document.body.append(form);
         const submit = vi.fn((event: Event) => event.preventDefault());
         form.addEventListener('submit', submit);
         const el = await fixture(
-            html`<hmi-button type="submit" immediate>Send</hmi-button>`,
+            html`<hmi-button type="submit" ignore-prevent-default>Send</hmi-button>`,
             form,
         );
         el.addEventListener('click', (event) => event.preventDefault());
@@ -181,12 +181,14 @@ describe('hmi-button', () => {
         expect(submit).toHaveBeenCalledOnce();
     });
 
-    it('reflects immediate', async () => {
-        const el = await fixture(html`<hmi-button immediate>Go</hmi-button>`);
-        expect(el.immediate).toBe(true);
-        el.immediate = false;
+    it('reflects ignore-prevent-default', async () => {
+        const el = await fixture(
+            html`<hmi-button ignore-prevent-default>Go</hmi-button>`,
+        );
+        expect(el.ignorePreventDefault).toBe(true);
+        el.ignorePreventDefault = false;
         await el.updateComplete;
-        expect(el.hasAttribute('immediate')).toBe(false);
+        expect(el.hasAttribute('ignore-prevent-default')).toBe(false);
     });
 
     it('type="reset" resets the host form', async () => {

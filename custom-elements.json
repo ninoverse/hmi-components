@@ -422,7 +422,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "Interactive button styled with MD3 tokens. `type=\"submit\"` and\n`type=\"reset\"` act on the host form through `ElementInternals`, after the\nclick handlers have run, so a handler's `preventDefault()` cancels them as\non a native button. That costs one timer tick; `immediate` skips the wait.\nA disabled `<fieldset>` around the button disables it.\n\n`aria-label` set on the host does not name the inner `<button>`, so an\nicon-only button takes its accessible name from `label`.",
+          "description": "Interactive button styled with MD3 tokens. `type=\"submit\"` and\n`type=\"reset\"` act on the host form through `ElementInternals`, after the\nclick handlers have run, so a handler's `preventDefault()` cancels them as\non a native button. That costs one timer tick.\n\n`ignore-prevent-default` opts out: the button then submits or resets during\nthe click itself, without that tick, and a handler's `preventDefault()` can\nno longer cancel it. Set it only where nothing cancels the click and the\nsubmit must be synchronous.\nA disabled `<fieldset>` around the button disables it.\n\n`aria-label` set on the host does not name the inner `<button>`, so an\nicon-only button takes its accessible name from `label`.",
           "name": "HmiButton",
           "cssParts": [
             {
@@ -528,13 +528,13 @@
             },
             {
               "kind": "field",
-              "name": "immediate",
+              "name": "ignorePreventDefault",
               "type": {
                 "text": "boolean"
               },
               "default": "false",
-              "description": "Submit or reset at once, without waiting for click handlers, so\n`preventDefault()` no longer cancels it.",
-              "attribute": "immediate",
+              "description": "Submit or reset during the click, ignoring `preventDefault()` in click\nhandlers, instead of one timer tick later.",
+              "attribute": "ignore-prevent-default",
               "reflects": true
             },
             {
@@ -653,13 +653,13 @@
               "fieldName": "label"
             },
             {
-              "name": "immediate",
+              "name": "ignore-prevent-default",
               "type": {
                 "text": "boolean"
               },
               "default": "false",
-              "description": "Submit or reset at once, without waiting for click handlers, so\n`preventDefault()` no longer cancels it.",
-              "fieldName": "immediate"
+              "description": "Submit or reset during the click, ignoring `preventDefault()` in click\nhandlers, instead of one timer tick later.",
+              "fieldName": "ignorePreventDefault"
             }
           ],
           "superclass": {
