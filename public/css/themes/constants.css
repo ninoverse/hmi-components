@@ -78,7 +78,6 @@
     /* Per-element hooks a structure may override (the journal structure does) */
     --list-divider-style: solid;
     --progress-track-border: none;
-    --stat-rule: none;
     --switch-thumb-shadow:
         0 calc(var(--hmi-base, 8px) * 0.125) calc(var(--hmi-base, 8px) * 0.25) rgba(0, 0, 0, 0.2),
         0 calc(var(--hmi-base, 8px) * 0.125) 0 rgba(0, 0, 0, 0.05);

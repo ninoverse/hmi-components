@@ -246,7 +246,7 @@ PR 2 was the only infrastructure PR; it added no elements. What it settled:
 
 - Theme files define **only** custom properties. Never a component class, never an element selector.
 - Panel look: `--panel-bg`, `--panel-bg-strong`, `--panel-border`, `--panel-filter` (a `backdrop-filter` value), `--panel-ink-bg`, `--panel-accent-bg` (defaults in `constants.css`; `glass` and `liquid` override them; shadows stay on `--elevation-*`). Panel-like elements expose `part="panel"` for anything a theme cannot express as a token.
-- Journal-specific looks that v5 keeps in component CSS are tokens: `--list-divider-style`, `--progress-track-border`, `--stat-rule`, `--switch-thumb-shadow` (defaults in `constants.css`, overrides in `structure/journal.css`).
+- Journal-specific looks that v5 keeps in component CSS are tokens: `--list-divider-style`, `--progress-track-border`, `--switch-thumb-shadow` (defaults in `constants.css`, overrides in `structure/journal.css`).
 - `--hmi-base` (default `8px`) is the sizing base. Elements never use `rem`. A host may scale the whole library with `hmi-*, :root { --hmi-base: 10px }`.
 - The liquid refraction filter is embedded by each panel-like element (`renderLiquidFilter()`), so `url('#liquid-glass')` resolves inside the root.
 - Light/dark keeps following `prefers-color-scheme` inside each colour theme file.

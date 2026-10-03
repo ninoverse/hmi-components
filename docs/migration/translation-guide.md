@@ -409,7 +409,8 @@ Rules in R4. Mechanical translations:
 | `.empty-state__icon > svg` | `.icon ::slotted(svg)` |
 | `.avatar-stack .avatar` (`avatar.styled.css:76,80`) | in `avatar-stack.styles.ts`: `::slotted(hmi-avatar) { … }` and `::slotted(hmi-avatar:not(:first-child)) { margin-inline-start: … }` |
 | `[data-structure="journal"] .list__item` (`list.styled.css:92`) | `.item { border-bottom-style: var(--list-divider-style, solid); }` — `--list-divider-style` is `dashed` in `structure/journal.css` |
-| `[data-structure="journal"] .progress` / `.stat__footer` / `.switch__thumb` | `border: var(--progress-track-border, none)`, `border-top: var(--stat-rule, none)`, `box-shadow: var(--switch-thumb-shadow)` — defaults in `constants.css`, journal overrides in `structure/journal.css` |
+| `[data-structure="journal"] .progress` / `.switch__thumb` | `border: var(--progress-track-border, none)`, `box-shadow: var(--switch-thumb-shadow)` — defaults in `constants.css`, journal overrides in `structure/journal.css` |
+| `[data-structure="journal"] .stat__footer` (`stat.styled.css`) | a boolean property: `:host([divider]) .footer { border-top: … dashed … }` — presence is the consumer's choice, not the theme's |
 | `height: 5rem` | `height: calc(var(--_base) * 5)` |
 | `border: 0.125rem solid` | `border: calc(var(--_base) * 0.125) solid` |
 | `font-size: 1.75rem` | `font-size: calc(var(--_base) * 1.75)` |
