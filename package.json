@@ -306,6 +306,10 @@
             "types": "./dist/elements/code/code.react.d.ts",
             "import": "./dist/react/code.js"
         },
+        "./react/empty-state": {
+            "types": "./dist/elements/empty-state/empty-state.react.d.ts",
+            "import": "./dist/react/empty-state.js"
+        },
         "./react/kbd": {
             "types": "./dist/elements/kbd/kbd.react.d.ts",
             "import": "./dist/react/kbd.js"
@@ -458,6 +462,10 @@
         "./wc/code": {
             "types": "./dist/elements/code/code.d.ts",
             "import": "./dist/wc/code.js"
+        },
+        "./wc/empty-state": {
+            "types": "./dist/elements/empty-state/empty-state.d.ts",
+            "import": "./dist/wc/empty-state.js"
         },
         "./wc/kbd": {
             "types": "./dist/elements/kbd/kbd.d.ts",

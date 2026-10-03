@@ -79,6 +79,7 @@ hmi-banner:not(:defined),
 hmi-button:not(:defined),
 hmi-card:not(:defined),
 hmi-code:not(:defined),
+hmi-empty-state:not(:defined),
 hmi-kbd:not(:defined),
 hmi-skeleton:not(:defined),
 hmi-spinner:not(:defined) {

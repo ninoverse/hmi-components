@@ -1026,6 +1026,70 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/empty-state/empty-state.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Placeholder shown when a list, table or search has no content: an optional\nicon, a title, a description and an action, centred on a soft surface.\n\nEvery part of the content is a slot. The icon is drawn into a circle by the\nelement, so it is purely decorative: give the slotted icon `aria-hidden=\"true\"`.\nThe title sits in an `<h3>`. Wrap several actions in one element, since the\n`action` slot lays out a single child.",
+          "name": "HmiEmptyState",
+          "cssParts": [
+            {
+              "description": "The empty-state container.",
+              "name": "base"
+            },
+            {
+              "description": "The heading element around the `title` slot.",
+              "name": "title"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Decorative illustration, such as an `svg`, drawn inside a circle.",
+              "name": "icon"
+            },
+            {
+              "description": "Primary heading, inside an `<h3>`.",
+              "name": "title"
+            },
+            {
+              "description": "Supporting text under the title.",
+              "name": "description"
+            },
+            {
+              "description": "Call to action, such as a button.",
+              "name": "action"
+            }
+          ],
+          "members": [],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-empty-state",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiEmptyState",
+          "declaration": {
+            "name": "HmiEmptyState",
+            "module": "src/elements/empty-state/empty-state.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-empty-state",
+          "declaration": {
+            "name": "HmiEmptyState",
+            "module": "src/elements/empty-state/empty-state.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/kbd/kbd.ts",
       "declarations": [
         {

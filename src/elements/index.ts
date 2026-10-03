@@ -10,6 +10,7 @@ export * from './banner/banner.js';
 export * from './button/button.js';
 export * from './card/card.js';
 export * from './code/code.js';
+export * from './empty-state/empty-state.js';
 export * from './kbd/kbd.js';
 export * from './skeleton/skeleton.js';
 export * from './spinner/spinner.js';

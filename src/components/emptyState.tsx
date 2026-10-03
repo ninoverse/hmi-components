@@ -19,6 +19,7 @@ export type EmptyStateProps = HTMLAttributes<HTMLDivElement> & {
  * @example
  * <EmptyState title="No results" description="Try another search."
  *     action={<Button>Reset</Button>} />
+ * @deprecated Use `EmptyState` from `@ninoverse/hmi-components/react/empty-state`. Removed in 6.0.0.
  */
 export function EmptyState({
     icon,

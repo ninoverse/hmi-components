@@ -85,6 +85,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/code/code.react.ts',
                 ),
+                'wc/empty-state': resolve(
+                    dirname,
+                    'src/elements/empty-state/empty-state.ts',
+                ),
+                'react/empty-state': resolve(
+                    dirname,
+                    'src/elements/empty-state/empty-state.react.ts',
+                ),
                 'wc/kbd': resolve(dirname, 'src/elements/kbd/kbd.ts'),
                 'react/kbd': resolve(dirname, 'src/elements/kbd/kbd.react.ts'),
                 'wc/skeleton': resolve(
