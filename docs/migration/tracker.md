@@ -54,7 +54,7 @@ There is no status for work under way: its open PR already shows that.
 | `hmi-banner` | `banner.tsx` | 2 | low | S E | Slots `icon`, `title`, `action`; `hmi-dismiss` (cancelable). | Done | [#146](https://github.com/ninoverse/hmi-components/pull/146) |
 | `hmi-blockquote` | `blockquote.tsx` | 2 | low | S | Slot `cite`. | Done | [#146](https://github.com/ninoverse/hmi-components/pull/146) |
 | `hmi-card` | `card.tsx` | 2 | low | P | First `--panel-*` consumer; lands `shared/panel.ts` (`renderLiquidFilter()`). Slots `header`, `footer` are **new API** — the React card took only `children`, so no `S` conversion. Variants `ink`/`accent` map to `--panel-ink-bg`/`--panel-accent-bg`. | Done | [#116](https://github.com/ninoverse/hmi-components/pull/116) |
-| `hmi-chip` | `chip.tsx` | 2 | low | S E | Slot `icon`; `hmi-select { selected }`, `hmi-close` (cancelable). | Todo | |
+| `hmi-chip` | `chip.tsx` | 2 | low | S E | Slot `icon`; `hmi-select { selected }`, `hmi-close` (cancelable). | Done | |
 | `hmi-code` | `code.tsx` | 2 | low | | Two render modes: inline `<code>`, or `<pre><code>` when `block` is set. `block` gains HTML presence semantics (r2wc parsed the string, so bare `block` was false). | Done | [#122](https://github.com/ninoverse/hmi-components/pull/122) |
 | `hmi-empty-state` | `emptyState.tsx` | 2 | low | S | Slots `icon`, `title`, `description`, `action`; `.empty-state__icon > svg` → `::slotted(svg)`. | Done | [#146](https://github.com/ninoverse/hmi-components/pull/146) |
 | `hmi-kbd` | `kbd.tsx` | 2 | low | | `size` reflected; combos are composed by the consumer. | Done | [#124](https://github.com/ninoverse/hmi-components/pull/124) |

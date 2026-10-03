@@ -23,6 +23,11 @@ export {
     type ButtonVariant,
 } from '../elements/button/button.react.js';
 export { Card, type CardVariant } from '../elements/card/card.react.js';
+export {
+    Chip,
+    type ChipCloseDetail,
+    type ChipSelectDetail,
+} from '../elements/chip/chip.react.js';
 export { Code } from '../elements/code/code.react.js';
 export { EmptyState } from '../elements/empty-state/empty-state.react.js';
 export { Kbd, type KbdSize } from '../elements/kbd/kbd.react.js';

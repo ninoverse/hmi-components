@@ -332,6 +332,25 @@ export function Example() {
         </section>
 
         <section>
+            <h2>Chip</h2>
+            <!-- hmi-select and hmi-close are cancelable: without preventDefault()
+                 the chip flips selected or hides itself. The pinned chip cancels
+                 hmi-close and logs the detail. -->
+            <div class="row">
+                <hmi-chip>Static</hmi-chip>
+                <hmi-chip selected>Selected</hmi-chip>
+                <hmi-chip selectable>Selectable</hmi-chip>
+                <hmi-chip selectable selected>Pressed</hmi-chip>
+                <hmi-chip closable>Closable</hmi-chip>
+                <hmi-chip id="chip-pinned" selectable closable selected>Pinned</hmi-chip>
+                <hmi-chip selectable closable>
+                    <svg slot="icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 4h12M4 8h8M6 12h4" /></svg>
+                    With icon
+                </hmi-chip>
+            </div>
+        </section>
+
+        <section>
             <h2>Skeleton</h2>
             <!-- width/height/radius accept a CSS length string here; the
                  number form (40 → 40px) is only reachable from JS, since an
@@ -421,6 +440,13 @@ export function Example() {
             document.getElementById('banner-cancel').addEventListener('hmi-dismiss', (event) => {
                 event.preventDefault();
                 console.log('hmi-dismiss', event.detail);
+            });
+
+            const pinned = document.getElementById('chip-pinned');
+            pinned.addEventListener('hmi-select', (event) => console.log('hmi-select', event.detail));
+            pinned.addEventListener('hmi-close', (event) => {
+                event.preventDefault();
+                console.log('hmi-close', event.detail);
             });
 
             const html = document.documentElement;

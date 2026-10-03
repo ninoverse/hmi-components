@@ -306,6 +306,10 @@
             "types": "./dist/elements/card/card.react.d.ts",
             "import": "./dist/react/card.js"
         },
+        "./react/chip": {
+            "types": "./dist/elements/chip/chip.react.d.ts",
+            "import": "./dist/react/chip.js"
+        },
         "./react/code": {
             "types": "./dist/elements/code/code.react.d.ts",
             "import": "./dist/react/code.js"
@@ -474,6 +478,10 @@
         "./wc/card": {
             "types": "./dist/elements/card/card.d.ts",
             "import": "./dist/wc/card.js"
+        },
+        "./wc/chip": {
+            "types": "./dist/elements/chip/chip.d.ts",
+            "import": "./dist/wc/chip.js"
         },
         "./wc/code": {
             "types": "./dist/elements/code/code.d.ts",

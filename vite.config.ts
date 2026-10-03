@@ -88,6 +88,11 @@ export default defineConfig({
                     dirname,
                     'src/elements/card/card.react.ts',
                 ),
+                'wc/chip': resolve(dirname, 'src/elements/chip/chip.ts'),
+                'react/chip': resolve(
+                    dirname,
+                    'src/elements/chip/chip.react.ts',
+                ),
                 'wc/code': resolve(dirname, 'src/elements/code/code.ts'),
                 'react/code': resolve(
                     dirname,

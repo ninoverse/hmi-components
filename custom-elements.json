@@ -1007,6 +1007,192 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/chip/chip.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Compact pill for a tag or filter. It is static by default. `selectable`\nturns the label into a toggle button, and `closable` adds a trailing remove\nbutton, so the two controls are never nested.\n\nBoth actions are cancelable events. A click on the toggle fires\n`hmi-select` with the state the chip would take, and unless a listener calls\n`preventDefault()` the chip then sets `selected` itself. A click on the\nremove button fires `hmi-close`, and unless it is cancelled the chip sets\n`hidden` on itself; remove the attribute to show it again.",
+          "name": "HmiChip",
+          "cssParts": [
+            {
+              "description": "The pill.",
+              "name": "base"
+            },
+            {
+              "description": "The toggle surface: a button when `selectable`, a span otherwise.",
+              "name": "control"
+            },
+            {
+              "description": "The icon slot.",
+              "name": "icon"
+            },
+            {
+              "description": "The label wrapper.",
+              "name": "label"
+            },
+            {
+              "description": "The remove button.",
+              "name": "close"
+            }
+          ],
+          "slots": [
+            {
+              "description": "The label.",
+              "name": ""
+            },
+            {
+              "description": "Optional leading icon, such as an `svg`.",
+              "name": "icon"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "selected",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Selected (pressed) state.",
+              "attribute": "selected",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "selectable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Makes the label a toggle button that fires `hmi-select`.",
+              "attribute": "selectable",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "closable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Adds a trailing remove button that fires `hmi-close`.",
+              "attribute": "closable",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "closeLabel",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Remove'",
+              "description": "Accessible label of the remove button.",
+              "attribute": "close-label"
+            },
+            {
+              "kind": "method",
+              "name": "#select",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#close",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "type": {
+                "text": "CustomEvent<ChipSelectDetail>"
+              },
+              "description": "The toggle was clicked. Cancelable: without `preventDefault()` the chip flips `selected`.",
+              "name": "hmi-select"
+            },
+            {
+              "type": {
+                "text": "CustomEvent<ChipCloseDetail>"
+              },
+              "description": "The remove button was clicked. Cancelable: without `preventDefault()` the chip hides itself.",
+              "name": "hmi-close"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "selected",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Selected (pressed) state.",
+              "fieldName": "selected"
+            },
+            {
+              "name": "selectable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Makes the label a toggle button that fires `hmi-select`.",
+              "fieldName": "selectable"
+            },
+            {
+              "name": "closable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Adds a trailing remove button that fires `hmi-close`.",
+              "fieldName": "closable"
+            },
+            {
+              "name": "close-label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Remove'",
+              "description": "Accessible label of the remove button.",
+              "fieldName": "closeLabel"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-chip",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiChip",
+          "declaration": {
+            "name": "HmiChip",
+            "module": "src/elements/chip/chip.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-chip",
+          "declaration": {
+            "name": "HmiChip",
+            "module": "src/elements/chip/chip.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/code/code.ts",
       "declarations": [
         {

@@ -281,7 +281,7 @@ Wrapper prop = `on` + PascalCase of the event minus `hmi-`.
 | accordion | `onOpenChange(number[])` | `hmi-open-change` | `{ open: number[] }` |
 | popover, hover-card, tooltip, command-palette | `onOpenChange(boolean)` | `hmi-open-change` | `{ open: boolean }` |
 | modal, drawer | `onClose()` | `hmi-close` (cancelable) | `{ reason: 'escape' \| 'backdrop' \| 'action' \| 'programmatic' }` |
-| chip | `onClose()` / `onSelect()` | `hmi-close` (cancelable) / `hmi-select` | `{}` / `{ selected: boolean }` |
+| chip | `onClose()` / `onSelect()` | `hmi-close` (cancelable) / `hmi-select` (cancelable) | `{}` / `{ selected: boolean }` |
 | modal, drawer, command-palette, table (`actions` cells) | `onAction(string)` | `hmi-action` | `{ value: string, row?: Row }` |
 | confirm-dialog | `onCancel()` / `onConfirm()` | `hmi-cancel` (cancelable) / `hmi-confirm` | `{}` |
 | banner | `onDismiss()` | `hmi-dismiss` (cancelable) | `{}` |
