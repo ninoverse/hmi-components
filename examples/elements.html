@@ -310,6 +310,15 @@ export function Example() {
                     <svg slot="left-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M10 4v12M4 10h12" /></svg>
                     Add
                 </hmi-button>
+                <hmi-button variant="secondary">
+                    Next
+                    <svg slot="right-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5" /></svg>
+                </hmi-button>
+                <hmi-button variant="soft">
+                    <svg slot="left-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3v10M5 9l5 5 5-5M4 17h12" /></svg>
+                    Download
+                    <svg slot="right-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5" /></svg>
+                </hmi-button>
                 <!-- no hmi-* event: click is native and composed, so a plain
                      listener sees it; type="submit" acts on the form. -->
                 <form id="button-form" class="row">
