@@ -1427,6 +1427,107 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/progress/progress.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Linear progress bar for a known or indeterminate task. For a scalar\nmeasurement within a range, use `hmi-meter`.\n\nWith `indeterminate` the bar loops across the track, `value` is ignored and\n`aria-valuenow` is omitted. The track border comes from the\n`--progress-track-border` token, which the Field Journal structure theme sets.",
+          "name": "HmiProgress",
+          "cssParts": [
+            {
+              "description": "The track; carries `role=\"progressbar\"`.",
+              "name": "base"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "Completion percentage, clamped to 0–100.",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "indeterminate",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Loops an animation for an unknown duration and ignores `value`.",
+              "attribute": "indeterminate",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "Accessible label of the progress bar.",
+              "attribute": "label"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "Completion percentage, clamped to 0–100.",
+              "fieldName": "value"
+            },
+            {
+              "name": "indeterminate",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Loops an animation for an unknown duration and ignores `value`.",
+              "fieldName": "indeterminate"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "Accessible label of the progress bar.",
+              "fieldName": "label"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-progress",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiProgress",
+          "declaration": {
+            "name": "HmiProgress",
+            "module": "src/elements/progress/progress.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-progress",
+          "declaration": {
+            "name": "HmiProgress",
+            "module": "src/elements/progress/progress.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/skeleton/skeleton.ts",
       "declarations": [
         {

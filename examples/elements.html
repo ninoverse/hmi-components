@@ -318,6 +318,20 @@ export function Example() {
         </section>
 
         <section>
+            <h2>Progress</h2>
+            <!-- no events: value is clamped to 0–100, indeterminate loops and
+                 ignores it. The captions are plain text: label only sets
+                 aria-label. -->
+            <div style="display: flex; flex-direction: column; gap: 1.5rem; width: 40rem; max-width: 100%">
+                <div><p>Determinate (0%)</p><hmi-progress value="0" label="Empty"></hmi-progress></div>
+                <div><p>Determinate (35%)</p><hmi-progress value="35" label="Uploading"></hmi-progress></div>
+                <div><p>Determinate (80%)</p><hmi-progress value="80" label="Almost there"></hmi-progress></div>
+                <div><p>Determinate (100%)</p><hmi-progress value="100" label="Done"></hmi-progress></div>
+                <div><p>Indeterminate</p><hmi-progress indeterminate label="Working"></hmi-progress></div>
+            </div>
+        </section>
+
+        <section>
             <h2>Skeleton</h2>
             <!-- width/height/radius accept a CSS length string here; the
                  number form (40 → 40px) is only reachable from JS, since an

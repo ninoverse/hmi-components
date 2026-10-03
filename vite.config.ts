@@ -108,6 +108,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/meter/meter.react.ts',
                 ),
+                'wc/progress': resolve(
+                    dirname,
+                    'src/elements/progress/progress.ts',
+                ),
+                'react/progress': resolve(
+                    dirname,
+                    'src/elements/progress/progress.react.ts',
+                ),
                 'wc/skeleton': resolve(
                     dirname,
                     'src/elements/skeleton/skeleton.ts',

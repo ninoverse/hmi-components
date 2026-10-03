@@ -14,5 +14,6 @@ export * from './code/code.js';
 export * from './empty-state/empty-state.js';
 export * from './kbd/kbd.js';
 export * from './meter/meter.js';
+export * from './progress/progress.js';
 export * from './skeleton/skeleton.js';
 export * from './spinner/spinner.js';

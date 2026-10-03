@@ -59,7 +59,7 @@ There is no status for work under way: its open PR already shows that.
 | `hmi-empty-state` | `emptyState.tsx` | 2 | low | S | Slots `icon`, `title`, `description`, `action`; `.empty-state__icon > svg` → `::slotted(svg)`. | Done | [#146](https://github.com/ninoverse/hmi-components/pull/146) |
 | `hmi-kbd` | `kbd.tsx` | 2 | low | | `size` reflected; combos are composed by the consumer. | Done | [#124](https://github.com/ninoverse/hmi-components/pull/124) |
 | `hmi-meter` | `meter.tsx` | 2 | low | S | Slot `label`. | Done | |
-| `hmi-progress` | `progress.tsx` | 2 | low | X | `[data-structure="journal"] .progress` → `--progress-track-border` token (defined). | Todo | |
+| `hmi-progress` | `progress.tsx` | 2 | low | X | `[data-structure="journal"] .progress` → `--progress-track-border` token (defined). | Done | |
 | `hmi-skeleton` | `skeleton.tsx` | 2 | low | | Inline size styles stay: `width`/`height`/`radius` are written to the host in `updated()`. Variant sizing lives on `:host` so `width: 100%` resolves against the containing block. | Done | [#124](https://github.com/ninoverse/hmi-components/pull/124) |
 | `hmi-spinner` | `spinner.tsx` | 2 | low | | Keyframes move into `styles`. `label` stays a string forwarded to `aria-label`, not a slot. | Done | [#124](https://github.com/ninoverse/hmi-components/pull/124) |
 | `hmi-stat` | `stat.tsx` | 2 | low | S X | Slots `label`, `value`, `icon`, `delta`, `help-text`; `[data-structure="journal"] .stat__footer` → `--stat-rule` token. | Todo | |

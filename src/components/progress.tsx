@@ -16,6 +16,7 @@ export type ProgressProps = HTMLAttributes<HTMLDivElement> & {
  *
  * @example
  * <Progress value={64} label="Uploading" />
+ * @deprecated Use `Progress` from `@ninoverse/hmi-components/react/progress`. Removed in 6.0.0.
  */
 export function Progress({
     value = 0,

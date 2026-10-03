@@ -322,6 +322,10 @@
             "types": "./dist/elements/meter/meter.react.d.ts",
             "import": "./dist/react/meter.js"
         },
+        "./react/progress": {
+            "types": "./dist/elements/progress/progress.react.d.ts",
+            "import": "./dist/react/progress.js"
+        },
         "./react/skeleton": {
             "types": "./dist/elements/skeleton/skeleton.react.d.ts",
             "import": "./dist/react/skeleton.js"
@@ -486,6 +490,10 @@
         "./wc/meter": {
             "types": "./dist/elements/meter/meter.d.ts",
             "import": "./dist/wc/meter.js"
+        },
+        "./wc/progress": {
+            "types": "./dist/elements/progress/progress.d.ts",
+            "import": "./dist/wc/progress.js"
         },
         "./wc/skeleton": {
             "types": "./dist/elements/skeleton/skeleton.d.ts",
