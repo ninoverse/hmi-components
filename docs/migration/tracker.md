@@ -74,7 +74,7 @@ There is no status for work under way: its open PR already shows that.
 | `hmi-spacer` | `spacer.tsx` | 3 | low | | | Todo | |
 | `hmi-text` | `text.tsx` | 3 | low | | `as` dropped; `variant`/`tone` reflected. | Todo | |
 | `hmi-visually-hidden` | `visuallyHidden.tsx` | 3 | low | | | Todo | |
-| `hmi-button` | `button.tsx` | 4 | med | S F | Worked example in `translation-guide.md`. Slots `left-icon`, `right-icon`; `formAssociated` for `type="submit"/"reset"`; `delegatesFocus`. `label` is forwarded to the inner `aria-label`, since the host's own does not name the inner button. A fieldset's disabled state is kept apart from `disabled`. The Spinner `InButton` story is back. | Done | [#145](https://github.com/ninoverse/hmi-components/pull/145) |
+| `hmi-button` | `button.tsx` | 4 | med | S F | Worked example in `translation-guide.md`. Slots `left-icon`, `right-icon`; `formAssociated` for `type="submit"/"reset"`; `delegatesFocus`. `label` is forwarded to the inner `aria-label`, since the host's own does not name the inner button. Submit and reset wait one timer tick so a click handler's `preventDefault()` cancels them; `immediate` skips the wait. A fieldset's disabled state is kept apart from `disabled`. The Spinner `InButton` story is back. | Done | [#145](https://github.com/ninoverse/hmi-components/pull/145) |
 | `hmi-form-control` | `formControl.tsx` | 4 | low | S | Deprecated at birth: layout-only wrapper; label/hint/error move onto each input. | Todo | |
 | `hmi-input` | `input.tsx` | 4 | med | S F E D | Lands `shared/form.ts`. Slots `left-icon`, `right-icon`; `hmi-input` + `hmi-change`; `controlledTextCaret` obsolete. | Todo | |
 | `hmi-textarea` | `textarea.tsx` | 4 | med | F E | `hmi-input` + `hmi-change`. | Todo | |

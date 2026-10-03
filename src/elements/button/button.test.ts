@@ -18,6 +18,8 @@ async function fixture(
     return el;
 }
 
+const tick = () => new Promise<void>((resolve) => setTimeout(resolve));
+
 function inner(el: HmiButton): HTMLButtonElement {
     return el.shadowRoot?.querySelector('[part~="base"]') as HTMLButtonElement;
 }
@@ -134,7 +136,57 @@ describe('hmi-button', () => {
             form,
         );
         inner(el).click();
+        await tick();
         expect(submit).toHaveBeenCalledOnce();
+    });
+
+    it('preventDefault in a click handler cancels submit and reset', async () => {
+        const form = document.createElement('form');
+        document.body.append(form);
+        const input = document.createElement('input');
+        input.defaultValue = 'a';
+        form.append(input);
+        const submit = vi.fn((event: Event) => event.preventDefault());
+        form.addEventListener('submit', submit);
+        const send = await fixture(
+            html`<hmi-button type="submit">Send</hmi-button>`,
+            form,
+        );
+        const reset = await fixture(
+            html`<hmi-button type="reset">Reset</hmi-button>`,
+            form,
+        );
+        for (const el of [send, reset]) {
+            el.addEventListener('click', (event) => event.preventDefault());
+        }
+        input.value = 'b';
+        inner(send).click();
+        inner(reset).click();
+        await tick();
+        expect(submit).not.toHaveBeenCalled();
+        expect(input.value).toBe('b');
+    });
+
+    it('immediate acts synchronously and ignores preventDefault', async () => {
+        const form = document.createElement('form');
+        document.body.append(form);
+        const submit = vi.fn((event: Event) => event.preventDefault());
+        form.addEventListener('submit', submit);
+        const el = await fixture(
+            html`<hmi-button type="submit" immediate>Send</hmi-button>`,
+            form,
+        );
+        el.addEventListener('click', (event) => event.preventDefault());
+        inner(el).click();
+        expect(submit).toHaveBeenCalledOnce();
+    });
+
+    it('reflects immediate', async () => {
+        const el = await fixture(html`<hmi-button immediate>Go</hmi-button>`);
+        expect(el.immediate).toBe(true);
+        el.immediate = false;
+        await el.updateComplete;
+        expect(el.hasAttribute('immediate')).toBe(false);
     });
 
     it('type="reset" resets the host form', async () => {
@@ -149,6 +201,7 @@ describe('hmi-button', () => {
         );
         input.value = 'b';
         inner(el).click();
+        await tick();
         expect(input.value).toBe('a');
     });
 
@@ -159,6 +212,7 @@ describe('hmi-button', () => {
         form.addEventListener('submit', submit);
         const el = await fixture(html`<hmi-button>Plain</hmi-button>`, form);
         inner(el).click();
+        await tick();
         expect(submit).not.toHaveBeenCalled();
     });
 

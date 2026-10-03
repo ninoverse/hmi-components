@@ -16,8 +16,10 @@ export type ButtonType = 'button' | 'submit' | 'reset';
 
 /**
  * Interactive button styled with MD3 tokens. `type="submit"` and
- * `type="reset"` act on the host form through `ElementInternals`, and a
- * disabled `<fieldset>` around the button disables it.
+ * `type="reset"` act on the host form through `ElementInternals`, after the
+ * click handlers have run, so a handler's `preventDefault()` cancels them as
+ * on a native button. That costs one timer tick; `immediate` skips the wait.
+ * A disabled `<fieldset>` around the button disables it.
  *
  * `aria-label` set on the host does not name the inner `<button>`, so an
  * icon-only button takes its accessible name from `label`.
@@ -59,6 +61,12 @@ export class HmiButton extends LitElement {
     /** Accessible name, forwarded to `aria-label` on the inner button. */
     @property() accessor label: string | undefined;
 
+    /**
+     * Submit or reset at once, without waiting for click handlers, so
+     * `preventDefault()` no longer cancels it. @default false
+     */
+    @property({ type: Boolean, reflect: true }) accessor immediate = false;
+
     readonly #internals = this.attachInternals();
     #fieldsetDisabled = false;
 
@@ -69,8 +77,19 @@ export class HmiButton extends LitElement {
         this.requestUpdate();
     }
 
-    #onClick(): void {
-        if (this.disabled || this.#fieldsetDisabled) return;
+    #onClick(event: MouseEvent): void {
+        if (this.type === 'button') return;
+        if (this.immediate) this.#act();
+        else
+            setTimeout(() => {
+                if (!event.defaultPrevented) this.#act();
+            });
+    }
+
+    #act(): void {
+        if (!this.isConnected || this.disabled || this.#fieldsetDisabled) {
+            return;
+        }
         if (this.type === 'submit') this.#internals.form?.requestSubmit();
         else if (this.type === 'reset') this.#internals.form?.reset();
     }

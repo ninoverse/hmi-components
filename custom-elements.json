@@ -422,7 +422,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "Interactive button styled with MD3 tokens. `type=\"submit\"` and\n`type=\"reset\"` act on the host form through `ElementInternals`, and a\ndisabled `<fieldset>` around the button disables it.\n\n`aria-label` set on the host does not name the inner `<button>`, so an\nicon-only button takes its accessible name from `label`.",
+          "description": "Interactive button styled with MD3 tokens. `type=\"submit\"` and\n`type=\"reset\"` act on the host form through `ElementInternals`, after the\nclick handlers have run, so a handler's `preventDefault()` cancels them as\non a native button. That costs one timer tick; `immediate` skips the wait.\nA disabled `<fieldset>` around the button disables it.\n\n`aria-label` set on the host does not name the inner `<button>`, so an\nicon-only button takes its accessible name from `label`.",
           "name": "HmiButton",
           "cssParts": [
             {
@@ -528,6 +528,17 @@
             },
             {
               "kind": "field",
+              "name": "immediate",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Submit or reset at once, without waiting for click handlers, so\n`preventDefault()` no longer cancels it.",
+              "attribute": "immediate",
+              "reflects": true
+            },
+            {
+              "kind": "field",
               "name": "#internals",
               "privacy": "private",
               "readonly": true
@@ -561,6 +572,24 @@
             {
               "kind": "method",
               "name": "#onClick",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "MouseEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#act",
               "privacy": "private",
               "return": {
                 "type": {
@@ -622,6 +651,15 @@
               },
               "description": "Accessible name, forwarded to `aria-label` on the inner button.",
               "fieldName": "label"
+            },
+            {
+              "name": "immediate",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Submit or reset at once, without waiting for click handlers, so\n`preventDefault()` no longer cancels it.",
+              "fieldName": "immediate"
             }
           ],
           "superclass": {
