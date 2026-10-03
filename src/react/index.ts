@@ -2,6 +2,7 @@
    `useTheme` once the theme module lands). Built to dist/react/index.js.
    Keep the list alphabetical. */
 
+export { Alert, type AlertVariant } from '../elements/alert/alert.react.js';
 export {
     Avatar,
     type AvatarSize,

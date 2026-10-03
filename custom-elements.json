@@ -4,6 +4,93 @@
   "modules": [
     {
       "kind": "javascript-module",
+      "path": "src/elements/alert/alert.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Inline message with a variant-matched icon, an optional title and an\noptional trailing action. The body is the default slot.\n\nThere is no `title` property: `title` is the native tooltip attribute on\nevery element, so the heading is the `title` slot only. The element carries\nno ARIA role; add `role` to the host when the message must be announced.",
+          "name": "HmiAlert",
+          "cssParts": [
+            {
+              "description": "The alert container.",
+              "name": "base"
+            },
+            {
+              "description": "The icon wrapper.",
+              "name": "icon"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Message body.",
+              "name": ""
+            },
+            {
+              "description": "Replaces the built-in status icon.",
+              "name": "icon"
+            },
+            {
+              "description": "Bold heading above the body.",
+              "name": "title"
+            },
+            {
+              "description": "Trailing action, such as a button or dismiss control.",
+              "name": "action"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "AlertVariant"
+              },
+              "default": "'info'",
+              "description": "Tone, which also selects the built-in status icon.",
+              "attribute": "variant",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "AlertVariant"
+              },
+              "default": "'info'",
+              "description": "Tone, which also selects the built-in status icon.",
+              "fieldName": "variant"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-alert",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiAlert",
+          "declaration": {
+            "name": "HmiAlert",
+            "module": "src/elements/alert/alert.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-alert",
+          "declaration": {
+            "name": "HmiAlert",
+            "module": "src/elements/alert/alert.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/avatar-stack/avatar-stack.ts",
       "declarations": [
         {

@@ -79,6 +79,29 @@
              of docs/migration/tracker.md. -->
 
         <section>
+            <h2>Alert</h2>
+            <!-- no events and no boolean props: variants, then the title,
+                 action and icon slots. -->
+            <div style="display: flex; flex-direction: column; gap: 1rem; width: 40rem; max-width: 100%">
+                <hmi-alert>Your changes were saved.</hmi-alert>
+                <hmi-alert variant="success">Deployed to production.</hmi-alert>
+                <hmi-alert variant="warning">
+                    <span slot="title">Heads up</span>
+                    Disk almost full.
+                </hmi-alert>
+                <hmi-alert variant="danger">
+                    <span slot="title">Upload failed</span>
+                    The file could not be sent.
+                    <button slot="action">Retry</button>
+                </hmi-alert>
+                <hmi-alert>
+                    <svg slot="icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M10 2l2.4 5 5.6.8-4 3.9 1 5.5-5-2.7-5 2.7 1-5.5-4-3.9 5.6-.8z" /></svg>
+                    A custom icon.
+                </hmi-alert>
+            </div>
+        </section>
+
+        <section>
             <h2>Avatar</h2>
             <div class="row">
                 <hmi-avatar name="Ada Lovelace" size="small"></hmi-avatar>
