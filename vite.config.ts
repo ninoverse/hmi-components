@@ -65,6 +65,19 @@ export default defineConfig({
                     dirname,
                     'src/elements/badge/badge.react.ts',
                 ),
+                'wc/banner': resolve(dirname, 'src/elements/banner/banner.ts'),
+                'react/banner': resolve(
+                    dirname,
+                    'src/elements/banner/banner.react.ts',
+                ),
+                'wc/blockquote': resolve(
+                    dirname,
+                    'src/elements/blockquote/blockquote.ts',
+                ),
+                'react/blockquote': resolve(
+                    dirname,
+                    'src/elements/blockquote/blockquote.react.ts',
+                ),
                 'wc/button': resolve(dirname, 'src/elements/button/button.ts'),
                 'react/button': resolve(
                     dirname,
@@ -79,6 +92,14 @@ export default defineConfig({
                 'react/code': resolve(
                     dirname,
                     'src/elements/code/code.react.ts',
+                ),
+                'wc/empty-state': resolve(
+                    dirname,
+                    'src/elements/empty-state/empty-state.ts',
+                ),
+                'react/empty-state': resolve(
+                    dirname,
+                    'src/elements/empty-state/empty-state.react.ts',
                 ),
                 'wc/kbd': resolve(dirname, 'src/elements/kbd/kbd.ts'),
                 'react/kbd': resolve(dirname, 'src/elements/kbd/kbd.react.ts'),

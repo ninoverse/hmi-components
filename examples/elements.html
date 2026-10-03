@@ -169,6 +169,41 @@
         </section>
 
         <section>
+            <h2>Banner</h2>
+            <!-- hmi-dismiss is cancelable: without preventDefault() the banner
+                 hides itself. The last one cancels it and logs the detail. -->
+            <div style="display: flex; flex-direction: column; gap: 1rem; width: 40rem; max-width: 100%">
+                <hmi-banner>Your changes were saved.</hmi-banner>
+                <hmi-banner variant="success" dismissible>
+                    <span slot="title">Deployed</span>
+                    Version 5.16 is live.
+                </hmi-banner>
+                <hmi-banner variant="warning">
+                    <span slot="title">Update available</span>
+                    A new version is ready to install.
+                    <hmi-button slot="action" size="small">Update</hmi-button>
+                </hmi-banner>
+                <hmi-banner id="banner-cancel" variant="danger" dismissible>
+                    <span slot="title">Cannot be closed</span>
+                    The listener cancels the dismissal.
+                </hmi-banner>
+            </div>
+        </section>
+
+        <section>
+            <h2>Blockquote</h2>
+            <!-- no events and no boolean props: the default slot and the cite
+                 slot. -->
+            <div style="display: flex; flex-direction: column; gap: 1rem; width: 40rem; max-width: 100%">
+                <hmi-blockquote>That brain of mine is something more than mortal.</hmi-blockquote>
+                <hmi-blockquote>
+                    It is only with the heart that one can see rightly.
+                    <span slot="cite">— Antoine de Saint-Exupéry, The Little Prince</span>
+                </hmi-blockquote>
+            </div>
+        </section>
+
+        <section>
             <h2>Card</h2>
             <div class="row">
                 <hmi-card class="demo-card">
@@ -223,6 +258,24 @@ export function Example() {
 }</hmi-code>
             <div class="row">
                 <hmi-code id="code-slot"><b>Slotted</b>&nbsp;content</hmi-code>
+            </div>
+        </section>
+
+        <section>
+            <h2>EmptyState</h2>
+            <!-- no events and no boolean props: the icon, title, description
+                 and action slots. -->
+            <div style="display: flex; flex-direction: column; gap: 1rem; width: 40rem; max-width: 100%">
+                <hmi-empty-state>
+                    <span slot="title">No results</span>
+                    <span slot="description">Try another search.</span>
+                </hmi-empty-state>
+                <hmi-empty-state>
+                    <svg slot="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="M20 20l-3.5-3.5" /></svg>
+                    <span slot="title">No results</span>
+                    <span slot="description">Nothing matches your search.</span>
+                    <hmi-button slot="action">Reset filters</hmi-button>
+                </hmi-empty-state>
             </div>
         </section>
 
@@ -330,6 +383,11 @@ export function Example() {
 
         <script src="../dist/hmi-elements.iife.js"></script>
         <script>
+            document.getElementById('banner-cancel').addEventListener('hmi-dismiss', (event) => {
+                event.preventDefault();
+                console.log('hmi-dismiss', event.detail);
+            });
+
             const html = document.documentElement;
             const toggle = (id, attribute, on, off) =>
                 document.getElementById(id).addEventListener('click', () => {

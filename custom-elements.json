@@ -418,6 +418,211 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/banner/banner.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Full-width, persistent status banner with a variant-matched icon, an\noptional title and action, and an optional dismiss button. The body is the\ndefault slot.\n\n`danger` and `warning` set `role=\"alert\"` on the container, the others\n`role=\"status\"`. There is no `title` property: `title` is the native tooltip\nattribute on every element, so the heading is the `title` slot only.\n\nWith `dismissible`, the X button fires the cancelable `hmi-dismiss`. Unless a\nlistener calls `preventDefault()`, the banner then sets `hidden` on itself;\nremove the attribute to show it again.",
+          "name": "HmiBanner",
+          "cssParts": [
+            {
+              "description": "The banner container.",
+              "name": "base"
+            },
+            {
+              "description": "The icon wrapper.",
+              "name": "icon"
+            },
+            {
+              "description": "The dismiss button.",
+              "name": "dismiss"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Message body.",
+              "name": ""
+            },
+            {
+              "description": "Replaces the built-in status icon.",
+              "name": "icon"
+            },
+            {
+              "description": "Bold heading above the body.",
+              "name": "title"
+            },
+            {
+              "description": "Trailing action, such as a button.",
+              "name": "action"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "BannerVariant"
+              },
+              "default": "'info'",
+              "description": "Tone, which also selects the built-in icon and the ARIA role.",
+              "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "dismissible",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Shows the dismiss button.",
+              "attribute": "dismissible",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "dismissLabel",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Dismiss'",
+              "description": "Accessible label of the dismiss button.",
+              "attribute": "dismiss-label"
+            },
+            {
+              "kind": "method",
+              "name": "#dismiss",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "type": {
+                "text": "CustomEvent<BannerDismissDetail>"
+              },
+              "description": "The dismiss button was clicked. Cancelable: without `preventDefault()` the banner hides itself.",
+              "name": "hmi-dismiss"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "variant",
+              "type": {
+                "text": "BannerVariant"
+              },
+              "default": "'info'",
+              "description": "Tone, which also selects the built-in icon and the ARIA role.",
+              "fieldName": "variant"
+            },
+            {
+              "name": "dismissible",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Shows the dismiss button.",
+              "fieldName": "dismissible"
+            },
+            {
+              "name": "dismiss-label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Dismiss'",
+              "description": "Accessible label of the dismiss button.",
+              "fieldName": "dismissLabel"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-banner",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiBanner",
+          "declaration": {
+            "name": "HmiBanner",
+            "module": "src/elements/banner/banner.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-banner",
+          "declaration": {
+            "name": "HmiBanner",
+            "module": "src/elements/banner/banner.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/elements/blockquote/blockquote.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Block quotation with a primary accent rule on the leading edge and an\noptional attribution below. The quote is the default slot.\n\nThere is no `cite` property: the attribution is the `cite` slot only, so the\nnative `cite` URL attribute is not used. Give the slotted element\n`<footer slot=\"cite\">` when the attribution should be a footer.",
+          "name": "HmiBlockquote",
+          "cssParts": [
+            {
+              "description": "The inner `<blockquote>`.",
+              "name": "base"
+            },
+            {
+              "description": "The paragraph around the quotation.",
+              "name": "body"
+            }
+          ],
+          "slots": [
+            {
+              "description": "The quotation body.",
+              "name": ""
+            },
+            {
+              "description": "Attribution shown below the quote.",
+              "name": "cite"
+            }
+          ],
+          "members": [],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-blockquote",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiBlockquote",
+          "declaration": {
+            "name": "HmiBlockquote",
+            "module": "src/elements/blockquote/blockquote.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-blockquote",
+          "declaration": {
+            "name": "HmiBlockquote",
+            "module": "src/elements/blockquote/blockquote.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/button/button.ts",
       "declarations": [
         {
@@ -871,6 +1076,70 @@
           "declaration": {
             "name": "HmiCode",
             "module": "src/elements/code/code.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/elements/empty-state/empty-state.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Placeholder shown when a list, table or search has no content: an optional\nicon, a title, a description and an action, centred on a soft surface.\n\nEvery part of the content is a slot. The icon is drawn into a circle by the\nelement, so it is purely decorative: give the slotted icon `aria-hidden=\"true\"`.\nThe title sits in an `<h3>`. Wrap several actions in one element, since the\n`action` slot lays out a single child.",
+          "name": "HmiEmptyState",
+          "cssParts": [
+            {
+              "description": "The empty-state container.",
+              "name": "base"
+            },
+            {
+              "description": "The heading element around the `title` slot.",
+              "name": "title"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Decorative illustration, such as an `svg`, drawn inside a circle.",
+              "name": "icon"
+            },
+            {
+              "description": "Primary heading, inside an `<h3>`.",
+              "name": "title"
+            },
+            {
+              "description": "Supporting text under the title.",
+              "name": "description"
+            },
+            {
+              "description": "Call to action, such as a button.",
+              "name": "action"
+            }
+          ],
+          "members": [],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-empty-state",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiEmptyState",
+          "declaration": {
+            "name": "HmiEmptyState",
+            "module": "src/elements/empty-state/empty-state.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-empty-state",
+          "declaration": {
+            "name": "HmiEmptyState",
+            "module": "src/elements/empty-state/empty-state.ts"
           }
         }
       ]

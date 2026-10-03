@@ -290,6 +290,14 @@
             "types": "./dist/elements/badge/badge.react.d.ts",
             "import": "./dist/react/badge.js"
         },
+        "./react/banner": {
+            "types": "./dist/elements/banner/banner.react.d.ts",
+            "import": "./dist/react/banner.js"
+        },
+        "./react/blockquote": {
+            "types": "./dist/elements/blockquote/blockquote.react.d.ts",
+            "import": "./dist/react/blockquote.js"
+        },
         "./react/button": {
             "types": "./dist/elements/button/button.react.d.ts",
             "import": "./dist/react/button.js"
@@ -301,6 +309,10 @@
         "./react/code": {
             "types": "./dist/elements/code/code.react.d.ts",
             "import": "./dist/react/code.js"
+        },
+        "./react/empty-state": {
+            "types": "./dist/elements/empty-state/empty-state.react.d.ts",
+            "import": "./dist/react/empty-state.js"
         },
         "./react/kbd": {
             "types": "./dist/elements/kbd/kbd.react.d.ts",
@@ -439,6 +451,14 @@
             "types": "./dist/elements/badge/badge.d.ts",
             "import": "./dist/wc/badge.js"
         },
+        "./wc/banner": {
+            "types": "./dist/elements/banner/banner.d.ts",
+            "import": "./dist/wc/banner.js"
+        },
+        "./wc/blockquote": {
+            "types": "./dist/elements/blockquote/blockquote.d.ts",
+            "import": "./dist/wc/blockquote.js"
+        },
         "./wc/button": {
             "types": "./dist/elements/button/button.d.ts",
             "import": "./dist/wc/button.js"
@@ -450,6 +470,10 @@
         "./wc/code": {
             "types": "./dist/elements/code/code.d.ts",
             "import": "./dist/wc/code.js"
+        },
+        "./wc/empty-state": {
+            "types": "./dist/elements/empty-state/empty-state.d.ts",
+            "import": "./dist/wc/empty-state.js"
         },
         "./wc/kbd": {
             "types": "./dist/elements/kbd/kbd.d.ts",

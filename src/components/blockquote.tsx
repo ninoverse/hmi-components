@@ -16,6 +16,7 @@ export type BlockquoteProps = Omit<
  *
  * @example
  * <Blockquote cite="Ada Lovelace">That brain of mine is something more than mortal.</Blockquote>
+ * @deprecated Use `Blockquote` from `@ninoverse/hmi-components/react/blockquote`. Removed in 6.0.0.
  */
 export function Blockquote({
     cite,
