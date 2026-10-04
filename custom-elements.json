@@ -91,6 +91,76 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/aspect-ratio/aspect-ratio.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Locks its content to a width-to-height ratio and clips the first child to\nfill the frame, so images and embeds keep their proportions at any width.\n\n`ratio` is a number (`1.5`) or a CSS ratio string (`16/9`). It reaches the\ninner `base` element through the CSSOM, so an invalid value is ignored and\nnothing is written into the host's own `style`.",
+          "name": "HmiAspectRatio",
+          "cssParts": [
+            {
+              "description": "The frame that holds the ratio and clips its content.",
+              "name": "base"
+            }
+          ],
+          "slots": [
+            {
+              "description": "The content; its first child is stretched to fill the frame with `object-fit: cover`.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "ratio",
+              "type": {
+                "text": "number | string"
+              },
+              "default": "1",
+              "description": "Width over height: a number or a CSS ratio such as `16/9`.",
+              "attribute": "ratio"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "ratio",
+              "type": {
+                "text": "number | string"
+              },
+              "default": "1",
+              "description": "Width over height: a number or a CSS ratio such as `16/9`.",
+              "fieldName": "ratio"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-aspect-ratio",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiAspectRatio",
+          "declaration": {
+            "name": "HmiAspectRatio",
+            "module": "src/elements/aspect-ratio/aspect-ratio.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-aspect-ratio",
+          "declaration": {
+            "name": "HmiAspectRatio",
+            "module": "src/elements/aspect-ratio/aspect-ratio.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/avatar-stack/avatar-stack.ts",
       "declarations": [
         {
@@ -617,6 +687,131 @@
           "declaration": {
             "name": "HmiBlockquote",
             "module": "src/elements/blockquote/blockquote.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/elements/box/box.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "The foundational layout container. By default an unstyled block; background,\npadding, radius and border are opt-in, so it composes under every other\nsurface. The `leaf` radius mirrors the asymmetric corners of `hmi-card`.\n\nThe host is the box: put `role`, `class` and `style` on it. There is no `as`\nproperty, so wrap the content in the semantic element you need.",
+          "name": "HmiBox",
+          "slots": [
+            {
+              "description": "Box content.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "background",
+              "type": {
+                "text": "BoxBackground"
+              },
+              "default": "'none'",
+              "description": "Surface colour; also sets the matching text colour.",
+              "attribute": "background",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "padding",
+              "type": {
+                "text": "BoxPadding"
+              },
+              "default": "'none'",
+              "description": "Inner spacing preset.",
+              "attribute": "padding",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "radius",
+              "type": {
+                "text": "BoxRadius"
+              },
+              "default": "'none'",
+              "description": "Corner radius preset.",
+              "attribute": "radius",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "bordered",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Draws a 1-unit outline-variant border.",
+              "attribute": "bordered",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "background",
+              "type": {
+                "text": "BoxBackground"
+              },
+              "default": "'none'",
+              "description": "Surface colour; also sets the matching text colour.",
+              "fieldName": "background"
+            },
+            {
+              "name": "padding",
+              "type": {
+                "text": "BoxPadding"
+              },
+              "default": "'none'",
+              "description": "Inner spacing preset.",
+              "fieldName": "padding"
+            },
+            {
+              "name": "radius",
+              "type": {
+                "text": "BoxRadius"
+              },
+              "default": "'none'",
+              "description": "Corner radius preset.",
+              "fieldName": "radius"
+            },
+            {
+              "name": "bordered",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Draws a 1-unit outline-variant border.",
+              "fieldName": "bordered"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-box",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiBox",
+          "declaration": {
+            "name": "HmiBox",
+            "module": "src/elements/box/box.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-box",
+          "declaration": {
+            "name": "HmiBox",
+            "module": "src/elements/box/box.ts"
           }
         }
       ]
@@ -1332,6 +1527,261 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/flex/flex.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Flexbox layout primitive. A plain row with stretch alignment and no gap by\ndefault; direction, alignment, justification, gap and wrapping are opt-in.\nThe gap scale matches `hmi-box` padding.\n\nThe host is the flex container and the slotted children are its items. There\nis no `as` property: put `role` on the host or wrap it.",
+          "name": "HmiFlex",
+          "slots": [
+            {
+              "description": "The flex items.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "direction",
+              "type": {
+                "text": "FlexDirection"
+              },
+              "default": "'row'",
+              "description": "Main axis.",
+              "attribute": "direction",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "align",
+              "type": {
+                "text": "FlexAlign"
+              },
+              "default": "'stretch'",
+              "description": "Cross-axis alignment (`align-items`).",
+              "attribute": "align",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "justify",
+              "type": {
+                "text": "FlexJustify"
+              },
+              "default": "'start'",
+              "description": "Main-axis distribution (`justify-content`).",
+              "attribute": "justify",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "gap",
+              "type": {
+                "text": "FlexGap"
+              },
+              "default": "'none'",
+              "description": "Space between items.",
+              "attribute": "gap",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "wrap",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Lets items wrap onto further lines.",
+              "attribute": "wrap",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "inline",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Lays the container out inline (`inline-flex`).",
+              "attribute": "inline",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "direction",
+              "type": {
+                "text": "FlexDirection"
+              },
+              "default": "'row'",
+              "description": "Main axis.",
+              "fieldName": "direction"
+            },
+            {
+              "name": "align",
+              "type": {
+                "text": "FlexAlign"
+              },
+              "default": "'stretch'",
+              "description": "Cross-axis alignment (`align-items`).",
+              "fieldName": "align"
+            },
+            {
+              "name": "justify",
+              "type": {
+                "text": "FlexJustify"
+              },
+              "default": "'start'",
+              "description": "Main-axis distribution (`justify-content`).",
+              "fieldName": "justify"
+            },
+            {
+              "name": "gap",
+              "type": {
+                "text": "FlexGap"
+              },
+              "default": "'none'",
+              "description": "Space between items.",
+              "fieldName": "gap"
+            },
+            {
+              "name": "wrap",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Lets items wrap onto further lines.",
+              "fieldName": "wrap"
+            },
+            {
+              "name": "inline",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Lays the container out inline (`inline-flex`).",
+              "fieldName": "inline"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-flex",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiFlex",
+          "declaration": {
+            "name": "HmiFlex",
+            "module": "src/elements/flex/flex.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-flex",
+          "declaration": {
+            "name": "HmiFlex",
+            "module": "src/elements/flex/flex.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/elements/grid/grid.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "CSS grid layout primitive. A number of `columns` gives equal\n`minmax(0, 1fr)` tracks, and a string is used as the\n`grid-template-columns` value as-is. The gap scale matches `hmi-box` padding\nand `hmi-flex`.\n\nThe grid lives in an inner `base` element that carries the template through\nthe CSSOM, so an arbitrary string cannot escape into the stylesheet and the\nhost's own `style` stays yours. The slotted children are the grid items.\nThere is no `as` property: put `role` on the host or wrap it.",
+          "name": "HmiGrid",
+          "cssParts": [
+            {
+              "description": "The grid container.",
+              "name": "base"
+            }
+          ],
+          "slots": [
+            {
+              "description": "The grid items.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "columns",
+              "type": {
+                "text": "| number\n        | string"
+              },
+              "default": "2",
+              "description": "Equal tracks when a number (or digits), else a `grid-template-columns` value.",
+              "attribute": "columns"
+            },
+            {
+              "kind": "field",
+              "name": "gap",
+              "type": {
+                "text": "GridGap"
+              },
+              "default": "'none'",
+              "description": "Space between rows and columns.",
+              "attribute": "gap",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "columns",
+              "type": {
+                "text": "| number\n        | string"
+              },
+              "default": "2",
+              "description": "Equal tracks when a number (or digits), else a `grid-template-columns` value.",
+              "fieldName": "columns"
+            },
+            {
+              "name": "gap",
+              "type": {
+                "text": "GridGap"
+              },
+              "default": "'none'",
+              "description": "Space between rows and columns.",
+              "fieldName": "gap"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-grid",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiGrid",
+          "declaration": {
+            "name": "HmiGrid",
+            "module": "src/elements/grid/grid.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-grid",
+          "declaration": {
+            "name": "HmiGrid",
+            "module": "src/elements/grid/grid.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/kbd/kbd.ts",
       "declarations": [
         {
@@ -1848,6 +2298,105 @@
           "declaration": {
             "name": "HmiSkeleton",
             "module": "src/elements/skeleton/skeleton.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/elements/spacer/spacer.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Inserts empty space between siblings. A fixed `size` applies on the chosen\n`axis` (height when vertical, width when horizontal); `grow` instead\nexpands to fill the free space of a flex container, pushing its neighbours\napart. Purely presentational: the host sets `aria-hidden=\"true\"` unless you\nset `aria-hidden` yourself.",
+          "name": "HmiSpacer",
+          "members": [
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "SpacerSize"
+              },
+              "default": "'medium'",
+              "description": "Length of the gap: 1, 2 or 3 base units. Ignored with `grow`.",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "axis",
+              "type": {
+                "text": "SpacerAxis"
+              },
+              "default": "'vertical'",
+              "description": "Direction the space applies along. Ignored with `grow`.",
+              "attribute": "axis",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "grow",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Fills the free space of a flex container instead of a fixed size.",
+              "attribute": "grow",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "size",
+              "type": {
+                "text": "SpacerSize"
+              },
+              "default": "'medium'",
+              "description": "Length of the gap: 1, 2 or 3 base units. Ignored with `grow`.",
+              "fieldName": "size"
+            },
+            {
+              "name": "axis",
+              "type": {
+                "text": "SpacerAxis"
+              },
+              "default": "'vertical'",
+              "description": "Direction the space applies along. Ignored with `grow`.",
+              "fieldName": "axis"
+            },
+            {
+              "name": "grow",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Fills the free space of a flex container instead of a fixed size.",
+              "fieldName": "grow"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-spacer",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiSpacer",
+          "declaration": {
+            "name": "HmiSpacer",
+            "module": "src/elements/spacer/spacer.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-spacer",
+          "declaration": {
+            "name": "HmiSpacer",
+            "module": "src/elements/spacer/spacer.ts"
           }
         }
       ]

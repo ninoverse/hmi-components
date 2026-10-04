@@ -3,6 +3,7 @@
    Keep the list alphabetical. */
 
 export { Alert, type AlertVariant } from '../elements/alert/alert.react.js';
+export { AspectRatio } from '../elements/aspect-ratio/aspect-ratio.react.js';
 export {
     Avatar,
     type AvatarSize,
@@ -17,6 +18,12 @@ export {
 } from '../elements/banner/banner.react.js';
 export { Blockquote } from '../elements/blockquote/blockquote.react.js';
 export {
+    Box,
+    type BoxBackground,
+    type BoxPadding,
+    type BoxRadius,
+} from '../elements/box/box.react.js';
+export {
     Button,
     type ButtonSize,
     type ButtonType,
@@ -30,6 +37,14 @@ export {
 } from '../elements/chip/chip.react.js';
 export { Code } from '../elements/code/code.react.js';
 export { EmptyState } from '../elements/empty-state/empty-state.react.js';
+export {
+    Flex,
+    type FlexAlign,
+    type FlexDirection,
+    type FlexGap,
+    type FlexJustify,
+} from '../elements/flex/flex.react.js';
+export { Grid, type GridGap } from '../elements/grid/grid.react.js';
 export { Kbd, type KbdSize } from '../elements/kbd/kbd.react.js';
 export { Meter, type MeterLevel } from '../elements/meter/meter.react.js';
 export { Progress } from '../elements/progress/progress.react.js';
@@ -37,6 +52,11 @@ export {
     Skeleton,
     type SkeletonVariant,
 } from '../elements/skeleton/skeleton.react.js';
+export {
+    Spacer,
+    type SpacerAxis,
+    type SpacerSize,
+} from '../elements/spacer/spacer.react.js';
 export {
     Spinner,
     type SpinnerSize,

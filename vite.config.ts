@@ -47,6 +47,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/alert/alert.react.ts',
                 ),
+                'wc/aspect-ratio': resolve(
+                    dirname,
+                    'src/elements/aspect-ratio/aspect-ratio.ts',
+                ),
+                'react/aspect-ratio': resolve(
+                    dirname,
+                    'src/elements/aspect-ratio/aspect-ratio.react.ts',
+                ),
                 'wc/avatar': resolve(dirname, 'src/elements/avatar/avatar.ts'),
                 'react/avatar': resolve(
                     dirname,
@@ -78,6 +86,8 @@ export default defineConfig({
                     dirname,
                     'src/elements/blockquote/blockquote.react.ts',
                 ),
+                'wc/box': resolve(dirname, 'src/elements/box/box.ts'),
+                'react/box': resolve(dirname, 'src/elements/box/box.react.ts'),
                 'wc/button': resolve(dirname, 'src/elements/button/button.ts'),
                 'react/button': resolve(
                     dirname,
@@ -106,6 +116,16 @@ export default defineConfig({
                     dirname,
                     'src/elements/empty-state/empty-state.react.ts',
                 ),
+                'wc/flex': resolve(dirname, 'src/elements/flex/flex.ts'),
+                'react/flex': resolve(
+                    dirname,
+                    'src/elements/flex/flex.react.ts',
+                ),
+                'wc/grid': resolve(dirname, 'src/elements/grid/grid.ts'),
+                'react/grid': resolve(
+                    dirname,
+                    'src/elements/grid/grid.react.ts',
+                ),
                 'wc/kbd': resolve(dirname, 'src/elements/kbd/kbd.ts'),
                 'react/kbd': resolve(dirname, 'src/elements/kbd/kbd.react.ts'),
                 'wc/meter': resolve(dirname, 'src/elements/meter/meter.ts'),
@@ -128,6 +148,11 @@ export default defineConfig({
                 'react/skeleton': resolve(
                     dirname,
                     'src/elements/skeleton/skeleton.react.ts',
+                ),
+                'wc/spacer': resolve(dirname, 'src/elements/spacer/spacer.ts'),
+                'react/spacer': resolve(
+                    dirname,
+                    'src/elements/spacer/spacer.react.ts',
                 ),
                 'wc/spinner': resolve(
                     dirname,

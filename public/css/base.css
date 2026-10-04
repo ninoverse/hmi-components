@@ -72,20 +72,25 @@ body {
    scripts/gen-base-css.mjs (`pnpm cem`). Do not edit by hand. */
 /* @generated not-defined start */
 hmi-alert:not(:defined),
+hmi-aspect-ratio:not(:defined),
 hmi-avatar:not(:defined),
 hmi-avatar-stack:not(:defined),
 hmi-badge:not(:defined),
 hmi-banner:not(:defined),
 hmi-blockquote:not(:defined),
+hmi-box:not(:defined),
 hmi-button:not(:defined),
 hmi-card:not(:defined),
 hmi-chip:not(:defined),
 hmi-code:not(:defined),
 hmi-empty-state:not(:defined),
+hmi-flex:not(:defined),
+hmi-grid:not(:defined),
 hmi-kbd:not(:defined),
 hmi-meter:not(:defined),
 hmi-progress:not(:defined),
 hmi-skeleton:not(:defined),
+hmi-spacer:not(:defined),
 hmi-spinner:not(:defined),
 hmi-stat:not(:defined) {
     visibility: hidden;

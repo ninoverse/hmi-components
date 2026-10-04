@@ -351,6 +351,151 @@ export function Example() {
         </section>
 
         <section>
+            <h2>Box</h2>
+            <!-- no events: background, padding, radius and bordered are
+                 reflected attributes, the host is the box. -->
+            <div style="display: flex; flex-direction: column; gap: 1rem; width: 40rem; max-width: 100%">
+                <hmi-box>Plain box: an unstyled block.</hmi-box>
+                <hmi-box background="surface-container" padding="small" radius="small">Small padding, small radius</hmi-box>
+                <hmi-box background="surface-container-high" padding="medium" radius="medium" bordered>Medium padding, bordered</hmi-box>
+                <hmi-box background="surface-variant" padding="large" radius="leaf">Large padding, leaf radius</hmi-box>
+                <hmi-box background="surface" padding="medium" radius="full" bordered>Full radius</hmi-box>
+            </div>
+        </section>
+
+        <section>
+            <h2>Flex</h2>
+            <!-- no events: the dashed outline is the flex container, the boxes
+                 are its slotted children. -->
+            <div style="display: flex; flex-direction: column; gap: 1.25rem; width: 40rem; max-width: 100%">
+                <div>
+                    <p style="margin: 0 0 0.25rem; font-size: 0.875rem"><code>&lt;hmi-flex gap="small"&gt;</code> a row (the default direction), small gap between items</p>
+                    <hmi-flex gap="small" style="outline: 1px dashed var(--outline-variant); ">
+                        <hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">1</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">2</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">3</hmi-box>
+                    </hmi-flex>
+                </div>
+                <div>
+                    <p style="margin: 0 0 0.25rem; font-size: 0.875rem"><code>&lt;hmi-flex direction="column" gap="small"&gt;</code> items stacked, stretched to the full width</p>
+                    <hmi-flex direction="column" gap="small" style="outline: 1px dashed var(--outline-variant); ">
+                        <hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">1</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">2</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">3</hmi-box>
+                    </hmi-flex>
+                </div>
+                <div>
+                    <p style="margin: 0 0 0.25rem; font-size: 0.875rem"><code>&lt;hmi-flex justify="between"&gt;</code> the free space goes between the items</p>
+                    <hmi-flex justify="between" style="outline: 1px dashed var(--outline-variant); ">
+                        <hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">1</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">2</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">3</hmi-box>
+                    </hmi-flex>
+                </div>
+                <div>
+                    <p style="margin: 0 0 0.25rem; font-size: 0.875rem"><code>&lt;hmi-flex align="center"&gt;</code> items centred on the cross axis (box 2 is taller)</p>
+                    <hmi-flex align="center" style="outline: 1px dashed var(--outline-variant); gap: 0.5rem">
+                        <hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">1</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="height: 4rem">2</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">3</hmi-box>
+                    </hmi-flex>
+                </div>
+                <div>
+                    <p style="margin: 0 0 0.25rem; font-size: 0.875rem"><code>&lt;hmi-flex align="end" justify="center"&gt;</code> items at the bottom, centred on the main axis (box 2 is taller)</p>
+                    <hmi-flex align="end" justify="center" style="outline: 1px dashed var(--outline-variant); gap: 0.5rem">
+                        <hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">1</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="height: 4rem">2</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">3</hmi-box>
+                    </hmi-flex>
+                </div>
+                <div>
+                    <p style="margin: 0 0 0.25rem; font-size: 0.875rem"><code>&lt;hmi-flex wrap gap="small"&gt;</code> a narrow container: the items wrap onto a second line</p>
+                    <hmi-flex wrap gap="small" style="outline: 1px dashed var(--outline-variant); width: 14rem">
+                        <hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">1</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">2</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">3</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">4</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">5</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">6</hmi-box>
+                    </hmi-flex>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Grid</h2>
+            <!-- no events: the dashed outline is the grid container, the boxes
+                 are its slotted children. -->
+            <div style="display: flex; flex-direction: column; gap: 1.25rem; width: 40rem; max-width: 100%">
+                <div>
+                    <p style="margin: 0 0 0.25rem; font-size: 0.875rem"><code>&lt;hmi-grid columns="3" gap="small"&gt;</code> three equal columns</p>
+                    <hmi-grid columns="3" gap="small" style="outline: 1px dashed var(--outline-variant); ">
+                        <hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">1</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">2</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">3</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">4</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">5</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">6</hmi-box>
+                    </hmi-grid>
+                </div>
+                <div>
+                    <p style="margin: 0 0 0.25rem; font-size: 0.875rem"><code>&lt;hmi-grid columns="1fr 2fr" gap="small"&gt;</code> a template string: the second column is twice as wide</p>
+                    <hmi-grid columns="1fr 2fr" gap="small" style="outline: 1px dashed var(--outline-variant); ">
+                        <hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">1fr</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">2fr</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">1fr</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">2fr</hmi-box>
+                    </hmi-grid>
+                </div>
+                <div>
+                    <p style="margin: 0 0 0.25rem; font-size: 0.875rem"><code>&lt;hmi-grid columns="4" gap="large"&gt;</code> four equal columns, large gap</p>
+                    <hmi-grid columns="4" gap="large" style="outline: 1px dashed var(--outline-variant); ">
+                        <hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">1</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">2</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">3</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">4</hmi-box>
+                    </hmi-grid>
+                </div>
+                <div>
+                    <p style="margin: 0 0 0.25rem; font-size: 0.875rem"><code>&lt;hmi-grid columns="2"&gt;</code> no gap (the default)</p>
+                    <hmi-grid columns="2" style="outline: 1px dashed var(--outline-variant); ">
+                        <hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">1</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">2</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">3</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">4</hmi-box>
+                    </hmi-grid>
+                </div>
+                <div>
+                    <p style="margin: 0 0 0.25rem; font-size: 0.875rem"><code>&lt;hmi-grid columns="3" gap="small"&gt;</code> rows 1–2 are <code>1fr 2fr</code> (one cell, then <code>grid-column: span 2</code>), row 3 is one full-width cell (<code>grid-column: 1 / -1</code>)</p>
+                    <hmi-grid columns="3" gap="small" style="outline: 1px dashed var(--outline-variant)">
+                        <hmi-box background="surface-container-high" padding="small" radius="small" bordered>1fr</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="grid-column: span 2">2fr</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered>1fr</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="grid-column: span 2">2fr</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="grid-column: 1 / -1">3fr: full width</hmi-box>
+                    </hmi-grid>
+                </div>
+                <div>
+                    <p style="margin: 0 0 0.25rem; font-size: 0.875rem"><code>&lt;hmi-grid columns="6" gap="small"&gt;</code> finer tracks, so each row can split differently: 2 + 4, 3 + 3, 1 + 2 + 3</p>
+                    <hmi-grid columns="6" gap="small" style="outline: 1px dashed var(--outline-variant)">
+                        <hmi-box background="surface-container-high" padding="small" radius="small" bordered style="grid-column: span 2">2/6</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="grid-column: span 4">4/6</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="grid-column: span 3">3/6</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="grid-column: span 3">3/6</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered>1/6</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="grid-column: span 2">2/6</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="grid-column: span 3">3/6</hmi-box>
+                    </hmi-grid>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Spacer</h2>
+            <!-- no events: size and axis give a fixed gap, grow fills the free
+                 space of a flex container. -->
+            <div style="display: flex; flex-direction: column; gap: 1rem; width: 40rem; max-width: 100%">
+                <div style="outline: 1px dashed var(--outline-variant)">
+                    <hmi-badge>Above</hmi-badge>
+                    <hmi-spacer size="small" style="background: var(--primary-container)"></hmi-spacer>
+                    <hmi-badge>small</hmi-badge>
+                    <hmi-spacer size="medium" style="background: var(--primary-container)"></hmi-spacer>
+                    <hmi-badge>medium</hmi-badge>
+                    <hmi-spacer size="large" style="background: var(--primary-container)"></hmi-spacer>
+                    <hmi-badge>large</hmi-badge>
+                </div>
+                <div style="display: flex; align-items: center; outline: 1px dashed var(--outline-variant)">
+                    <hmi-badge>Left</hmi-badge>
+                    <hmi-spacer axis="horizontal" size="large" style="background: var(--primary-container); align-self: stretch"></hmi-spacer>
+                    <hmi-badge>Right</hmi-badge>
+                </div>
+                <div style="display: flex; align-items: center; outline: 1px dashed var(--outline-variant)">
+                    <hmi-badge>Start</hmi-badge>
+                    <hmi-spacer grow></hmi-spacer>
+                    <hmi-badge>End</hmi-badge>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>AspectRatio</h2>
+            <!-- no events: ratio is a number or a CSS ratio, the first child
+                 fills the frame. -->
+            <div class="row" style="align-items: flex-start">
+                <hmi-aspect-ratio ratio="1" style="width: 10rem">
+                    <div style="background: var(--primary-container); display: flex; align-items: center; justify-content: center">1</div>
+                </hmi-aspect-ratio>
+                <hmi-aspect-ratio ratio="4/3" style="width: 12rem">
+                    <div style="background: var(--secondary-container); display: flex; align-items: center; justify-content: center">4/3</div>
+                </hmi-aspect-ratio>
+                <hmi-aspect-ratio ratio="16/9" style="width: 16rem">
+                    <div style="background: var(--tertiary-container); display: flex; align-items: center; justify-content: center">16/9</div>
+                </hmi-aspect-ratio>
+            </div>
+        </section>
+
+        <section>
             <h2>Skeleton</h2>
             <!-- width/height/radius accept a CSS length string here; the
                  number form (40 → 40px) is only reachable from JS, since an

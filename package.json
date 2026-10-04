@@ -278,6 +278,10 @@
             "types": "./dist/elements/alert/alert.react.d.ts",
             "import": "./dist/react/alert.js"
         },
+        "./react/aspect-ratio": {
+            "types": "./dist/elements/aspect-ratio/aspect-ratio.react.d.ts",
+            "import": "./dist/react/aspect-ratio.js"
+        },
         "./react/avatar": {
             "types": "./dist/elements/avatar/avatar.react.d.ts",
             "import": "./dist/react/avatar.js"
@@ -297,6 +301,10 @@
         "./react/blockquote": {
             "types": "./dist/elements/blockquote/blockquote.react.d.ts",
             "import": "./dist/react/blockquote.js"
+        },
+        "./react/box": {
+            "types": "./dist/elements/box/box.react.d.ts",
+            "import": "./dist/react/box.js"
         },
         "./react/button": {
             "types": "./dist/elements/button/button.react.d.ts",
@@ -318,6 +326,14 @@
             "types": "./dist/elements/empty-state/empty-state.react.d.ts",
             "import": "./dist/react/empty-state.js"
         },
+        "./react/flex": {
+            "types": "./dist/elements/flex/flex.react.d.ts",
+            "import": "./dist/react/flex.js"
+        },
+        "./react/grid": {
+            "types": "./dist/elements/grid/grid.react.d.ts",
+            "import": "./dist/react/grid.js"
+        },
         "./react/kbd": {
             "types": "./dist/elements/kbd/kbd.react.d.ts",
             "import": "./dist/react/kbd.js"
@@ -333,6 +349,10 @@
         "./react/skeleton": {
             "types": "./dist/elements/skeleton/skeleton.react.d.ts",
             "import": "./dist/react/skeleton.js"
+        },
+        "./react/spacer": {
+            "types": "./dist/elements/spacer/spacer.react.d.ts",
+            "import": "./dist/react/spacer.js"
         },
         "./react/spinner": {
             "types": "./dist/elements/spinner/spinner.react.d.ts",
@@ -455,6 +475,10 @@
             "types": "./dist/elements/alert/alert.d.ts",
             "import": "./dist/wc/alert.js"
         },
+        "./wc/aspect-ratio": {
+            "types": "./dist/elements/aspect-ratio/aspect-ratio.d.ts",
+            "import": "./dist/wc/aspect-ratio.js"
+        },
         "./wc/avatar": {
             "types": "./dist/elements/avatar/avatar.d.ts",
             "import": "./dist/wc/avatar.js"
@@ -474,6 +498,10 @@
         "./wc/blockquote": {
             "types": "./dist/elements/blockquote/blockquote.d.ts",
             "import": "./dist/wc/blockquote.js"
+        },
+        "./wc/box": {
+            "types": "./dist/elements/box/box.d.ts",
+            "import": "./dist/wc/box.js"
         },
         "./wc/button": {
             "types": "./dist/elements/button/button.d.ts",
@@ -495,6 +523,14 @@
             "types": "./dist/elements/empty-state/empty-state.d.ts",
             "import": "./dist/wc/empty-state.js"
         },
+        "./wc/flex": {
+            "types": "./dist/elements/flex/flex.d.ts",
+            "import": "./dist/wc/flex.js"
+        },
+        "./wc/grid": {
+            "types": "./dist/elements/grid/grid.d.ts",
+            "import": "./dist/wc/grid.js"
+        },
         "./wc/kbd": {
             "types": "./dist/elements/kbd/kbd.d.ts",
             "import": "./dist/wc/kbd.js"
@@ -510,6 +546,10 @@
         "./wc/skeleton": {
             "types": "./dist/elements/skeleton/skeleton.d.ts",
             "import": "./dist/wc/skeleton.js"
+        },
+        "./wc/spacer": {
+            "types": "./dist/elements/spacer/spacer.d.ts",
+            "import": "./dist/wc/spacer.js"
         },
         "./wc/spinner": {
             "types": "./dist/elements/spinner/spinner.d.ts",
