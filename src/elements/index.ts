@@ -8,6 +8,7 @@ export * from './avatar-stack/avatar-stack.js';
 export * from './badge/badge.js';
 export * from './banner/banner.js';
 export * from './blockquote/blockquote.js';
+export * from './box/box.js';
 export * from './button/button.js';
 export * from './card/card.js';
 export * from './chip/chip.js';

@@ -78,6 +78,8 @@ export default defineConfig({
                     dirname,
                     'src/elements/blockquote/blockquote.react.ts',
                 ),
+                'wc/box': resolve(dirname, 'src/elements/box/box.ts'),
+                'react/box': resolve(dirname, 'src/elements/box/box.react.ts'),
                 'wc/button': resolve(dirname, 'src/elements/button/button.ts'),
                 'react/button': resolve(
                     dirname,

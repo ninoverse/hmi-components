@@ -623,6 +623,131 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/box/box.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "The foundational layout container. By default an unstyled block; background,\npadding, radius and border are opt-in, so it composes under every other\nsurface. The `leaf` radius mirrors the asymmetric corners of `hmi-card`.\n\nThe host is the box: put `role`, `class` and `style` on it. There is no `as`\nproperty, so wrap the content in the semantic element you need.",
+          "name": "HmiBox",
+          "slots": [
+            {
+              "description": "Box content.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "background",
+              "type": {
+                "text": "BoxBackground"
+              },
+              "default": "'none'",
+              "description": "Surface colour; also sets the matching text colour.",
+              "attribute": "background",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "padding",
+              "type": {
+                "text": "BoxPadding"
+              },
+              "default": "'none'",
+              "description": "Inner spacing preset.",
+              "attribute": "padding",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "radius",
+              "type": {
+                "text": "BoxRadius"
+              },
+              "default": "'none'",
+              "description": "Corner radius preset.",
+              "attribute": "radius",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "bordered",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Draws a 1-unit outline-variant border.",
+              "attribute": "bordered",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "background",
+              "type": {
+                "text": "BoxBackground"
+              },
+              "default": "'none'",
+              "description": "Surface colour; also sets the matching text colour.",
+              "fieldName": "background"
+            },
+            {
+              "name": "padding",
+              "type": {
+                "text": "BoxPadding"
+              },
+              "default": "'none'",
+              "description": "Inner spacing preset.",
+              "fieldName": "padding"
+            },
+            {
+              "name": "radius",
+              "type": {
+                "text": "BoxRadius"
+              },
+              "default": "'none'",
+              "description": "Corner radius preset.",
+              "fieldName": "radius"
+            },
+            {
+              "name": "bordered",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Draws a 1-unit outline-variant border.",
+              "fieldName": "bordered"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-box",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiBox",
+          "declaration": {
+            "name": "HmiBox",
+            "module": "src/elements/box/box.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-box",
+          "declaration": {
+            "name": "HmiBox",
+            "module": "src/elements/box/box.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/button/button.ts",
       "declarations": [
         {

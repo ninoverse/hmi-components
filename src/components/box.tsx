@@ -32,6 +32,7 @@ export type BoxProps = HTMLAttributes<HTMLDivElement> & {
  *
  * @example
  * <Box as="section" background="surface-variant" padding="medium" radius="medium" bordered>…</Box>
+ * @deprecated Use `Box` from `@ninoverse/hmi-components/react/box`. Removed in 6.0.0.
  */
 export function Box({
     as: Component = 'div',

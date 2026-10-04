@@ -64,7 +64,7 @@ There is no status for work under way: its open PR already shows that.
 | `hmi-spinner` | `spinner.tsx` | 2 | low | | Keyframes move into `styles`. `label` stays a string forwarded to `aria-label`, not a slot. | Done | [#124](https://github.com/ninoverse/hmi-components/pull/124) |
 | `hmi-stat` | `stat.tsx` | 2 | low | S X | Slots `label`, `value`, `icon`, `delta`, `help-text`; `[data-structure="journal"] .stat__footer` → boolean `divider` property. | Done | [#147](https://github.com/ninoverse/hmi-components/pull/147) |
 | `hmi-aspect-ratio` | `aspectRatio.tsx` | 3 | low | | `ratio` reflected → `aspect-ratio` on `:host`. | Todo | |
-| `hmi-box` | `box.tsx` | 3 | low | | `as` dropped; reflected spacing attrs. | Todo | |
+| `hmi-box` | `box.tsx` | 3 | low | | `as` dropped; reflected spacing attrs. | Done | |
 | `hmi-divider` | `divider.tsx` | 3 | low | | Labeled variant a11y note in `TODO.md` still applies. | Todo | |
 | `hmi-flex` | `flex.tsx` | 3 | low | | `:host { display: flex }`; `direction`, `align`, `justify`, `gap`, `wrap` reflected. | Todo | |
 | `hmi-grid` | `grid.tsx` | 3 | low | | `columns` → `--_columns` on host. | Todo | |

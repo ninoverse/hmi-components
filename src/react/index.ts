@@ -17,6 +17,12 @@ export {
 } from '../elements/banner/banner.react.js';
 export { Blockquote } from '../elements/blockquote/blockquote.react.js';
 export {
+    Box,
+    type BoxBackground,
+    type BoxPadding,
+    type BoxRadius,
+} from '../elements/box/box.react.js';
+export {
     Button,
     type ButtonSize,
     type ButtonType,

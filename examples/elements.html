@@ -351,6 +351,19 @@ export function Example() {
         </section>
 
         <section>
+            <h2>Box</h2>
+            <!-- no events: background, padding, radius and bordered are
+                 reflected attributes, the host is the box. -->
+            <div style="display: flex; flex-direction: column; gap: 1rem; width: 40rem; max-width: 100%">
+                <hmi-box>Plain box: an unstyled block.</hmi-box>
+                <hmi-box background="surface-container" padding="small" radius="small">Small padding, small radius</hmi-box>
+                <hmi-box background="surface-container-high" padding="medium" radius="medium" bordered>Medium padding, bordered</hmi-box>
+                <hmi-box background="surface-variant" padding="large" radius="leaf">Large padding, leaf radius</hmi-box>
+                <hmi-box background="surface" padding="medium" radius="full" bordered>Full radius</hmi-box>
+            </div>
+        </section>
+
+        <section>
             <h2>Skeleton</h2>
             <!-- width/height/radius accept a CSS length string here; the
                  number form (40 → 40px) is only reachable from JS, since an
