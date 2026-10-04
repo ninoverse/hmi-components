@@ -1904,6 +1904,135 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/heading/heading.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Display-level title in the display font. The semantic `level` (an inner\n`<h1>`–`<h6>`) is decoupled from the visual `size`: each level picks a\ndefault size, and `size` overrides it independently. Tones reuse the\nstandard text roles.\n\nThe heading element is inside the shadow root, so it is in the\naccessibility tree and the page outline, but a `querySelectorAll('h2')` on\nthe document does not find it. A `level` outside 1–6 falls back to 2.",
+          "name": "HmiHeading",
+          "cssParts": [
+            {
+              "description": "The inner `<h1>`–`<h6>` element.",
+              "name": "base"
+            }
+          ],
+          "slots": [
+            {
+              "description": "The heading text.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "level",
+              "type": {
+                "text": "HeadingLevel"
+              },
+              "default": "2",
+              "description": "Semantic level, the tag of the inner heading.",
+              "attribute": "level",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "HeadingSize | undefined"
+              },
+              "description": "Visual size. Defaults to the size that goes with `level`.",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "tone",
+              "type": {
+                "text": "HeadingTone"
+              },
+              "default": "'default'",
+              "description": "Colour role.",
+              "attribute": "tone",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "truncate",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Keeps the heading on one line and ends it with an ellipsis.",
+              "attribute": "truncate",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "level",
+              "type": {
+                "text": "HeadingLevel"
+              },
+              "default": "2",
+              "description": "Semantic level, the tag of the inner heading.",
+              "fieldName": "level"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "HeadingSize | undefined"
+              },
+              "description": "Visual size. Defaults to the size that goes with `level`.",
+              "fieldName": "size"
+            },
+            {
+              "name": "tone",
+              "type": {
+                "text": "HeadingTone"
+              },
+              "default": "'default'",
+              "description": "Colour role.",
+              "fieldName": "tone"
+            },
+            {
+              "name": "truncate",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Keeps the heading on one line and ends it with an ellipsis.",
+              "fieldName": "truncate"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-heading",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiHeading",
+          "declaration": {
+            "name": "HmiHeading",
+            "module": "src/elements/heading/heading.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-heading",
+          "declaration": {
+            "name": "HmiHeading",
+            "module": "src/elements/heading/heading.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/kbd/kbd.ts",
       "declarations": [
         {

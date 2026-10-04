@@ -18,6 +18,7 @@ export * from './divider/divider.js';
 export * from './empty-state/empty-state.js';
 export * from './flex/flex.js';
 export * from './grid/grid.js';
+export * from './heading/heading.js';
 export * from './kbd/kbd.js';
 export * from './meter/meter.js';
 export * from './progress/progress.js';

@@ -134,6 +134,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/grid/grid.react.ts',
                 ),
+                'wc/heading': resolve(
+                    dirname,
+                    'src/elements/heading/heading.ts',
+                ),
+                'react/heading': resolve(
+                    dirname,
+                    'src/elements/heading/heading.react.ts',
+                ),
                 'wc/kbd': resolve(dirname, 'src/elements/kbd/kbd.ts'),
                 'react/kbd': resolve(dirname, 'src/elements/kbd/kbd.react.ts'),
                 'wc/meter': resolve(dirname, 'src/elements/meter/meter.ts'),

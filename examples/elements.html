@@ -586,6 +586,31 @@ export function Example() {
         </section>
 
         <section>
+            <h2>Heading</h2>
+            <!-- no events: level is the semantic tag, size the visual size. -->
+            <div style="display: flex; flex-direction: column; gap: 1rem; width: 40rem; max-width: 100%">
+                <hmi-heading level="1">Heading level 1 (xlarge)</hmi-heading>
+                <hmi-heading level="2">Heading level 2 (large)</hmi-heading>
+                <hmi-heading level="3">Heading level 3 (medium)</hmi-heading>
+                <hmi-heading level="4">Heading level 4 (small)</hmi-heading>
+                <hmi-heading level="6">Heading level 6 (xsmall)</hmi-heading>
+                <div>
+                    <p style="margin: 0 0 0.25rem; font-size: 0.875rem"><code>level="3" size="xsmall"</code> the tag stays h3, the size is overridden</p>
+                    <hmi-heading level="3" size="xsmall">A level 3 heading, drawn small</hmi-heading>
+                </div>
+                <div>
+                    <p style="margin: 0 0 0.25rem; font-size: 0.875rem"><code>tone="muted"  tone="primary"</code> colour roles</p>
+                    <hmi-heading level="4" tone="muted">Muted heading</hmi-heading>
+                    <hmi-heading level="4" tone="primary">Primary heading</hmi-heading>
+                </div>
+                <div>
+                    <p style="margin: 0 0 0.25rem; font-size: 0.875rem"><code>truncate</code> one line, in a 20rem-wide box</p>
+                    <hmi-heading level="4" truncate style="width: 20rem; outline: 1px dashed var(--outline-variant)">A heading far too long to fit in the box it sits in</hmi-heading>
+                </div>
+            </div>
+        </section>
+
+        <section>
             <h2>Skeleton</h2>
             <!-- width/height/radius accept a CSS length string here; the
                  number form (40 → 40px) is only reachable from JS, since an
