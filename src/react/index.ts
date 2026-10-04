@@ -50,7 +50,18 @@ export {
     type FlexJustify,
 } from '../elements/flex/flex.react.js';
 export { Grid, type GridGap } from '../elements/grid/grid.react.js';
+export {
+    Heading,
+    type HeadingLevel,
+    type HeadingSize,
+    type HeadingTone,
+} from '../elements/heading/heading.react.js';
 export { Kbd, type KbdSize } from '../elements/kbd/kbd.react.js';
+export {
+    Link,
+    type LinkTone,
+    type LinkUnderline,
+} from '../elements/link/link.react.js';
 export { Meter, type MeterLevel } from '../elements/meter/meter.react.js';
 export { Progress } from '../elements/progress/progress.react.js';
 export {
@@ -71,4 +82,11 @@ export {
     type SpinnerSize,
 } from '../elements/spinner/spinner.react.js';
 export { Stat, type StatTrend } from '../elements/stat/stat.react.js';
+export {
+    Text,
+    type TextAlign,
+    type TextSize,
+    type TextTone,
+    type TextWeight,
+} from '../elements/text/text.react.js';
 export { VisuallyHidden } from '../elements/visually-hidden/visually-hidden.react.js';

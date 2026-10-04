@@ -29,6 +29,7 @@ export type TextProps = HTMLAttributes<HTMLParagraphElement> & {
  *
  * @example
  * <Text size="small" tone="muted">Last updated just now</Text>
+ * @deprecated Use `Text` from `@ninoverse/hmi-components/react/text`. Removed in 6.0.0.
  */
 export function Text({
     as: Component = 'p',

@@ -19,6 +19,7 @@ export type LinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
  *
  * @example
  * <Link href="/docs" underline="hover">Docs</Link>
+ * @deprecated Use `Link` from `@ninoverse/hmi-components/react/link`. Removed in 6.0.0.
  */
 export function Link({
     underline = 'always',

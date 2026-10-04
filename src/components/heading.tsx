@@ -34,6 +34,7 @@ const SIZE_FOR_LEVEL: Record<HeadingLevel, HeadingSize> = {
  *
  * @example
  * <Heading level={1} size="large">Dashboard</Heading>
+ * @deprecated Use `Heading` from `@ninoverse/hmi-components/react/heading`. Removed in 6.0.0.
  */
 export function Heading({
     level = 2,

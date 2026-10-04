@@ -134,8 +134,21 @@ export default defineConfig({
                     dirname,
                     'src/elements/grid/grid.react.ts',
                 ),
+                'wc/heading': resolve(
+                    dirname,
+                    'src/elements/heading/heading.ts',
+                ),
+                'react/heading': resolve(
+                    dirname,
+                    'src/elements/heading/heading.react.ts',
+                ),
                 'wc/kbd': resolve(dirname, 'src/elements/kbd/kbd.ts'),
                 'react/kbd': resolve(dirname, 'src/elements/kbd/kbd.react.ts'),
+                'wc/link': resolve(dirname, 'src/elements/link/link.ts'),
+                'react/link': resolve(
+                    dirname,
+                    'src/elements/link/link.react.ts',
+                ),
                 'wc/meter': resolve(dirname, 'src/elements/meter/meter.ts'),
                 'react/meter': resolve(
                     dirname,
@@ -182,6 +195,11 @@ export default defineConfig({
                 'react/stat': resolve(
                     dirname,
                     'src/elements/stat/stat.react.ts',
+                ),
+                'wc/text': resolve(dirname, 'src/elements/text/text.ts'),
+                'react/text': resolve(
+                    dirname,
+                    'src/elements/text/text.react.ts',
                 ),
                 'wc/visually-hidden': resolve(
                     dirname,

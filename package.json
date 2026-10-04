@@ -338,9 +338,17 @@
             "types": "./dist/elements/grid/grid.react.d.ts",
             "import": "./dist/react/grid.js"
         },
+        "./react/heading": {
+            "types": "./dist/elements/heading/heading.react.d.ts",
+            "import": "./dist/react/heading.js"
+        },
         "./react/kbd": {
             "types": "./dist/elements/kbd/kbd.react.d.ts",
             "import": "./dist/react/kbd.js"
+        },
+        "./react/link": {
+            "types": "./dist/elements/link/link.react.d.ts",
+            "import": "./dist/react/link.js"
         },
         "./react/meter": {
             "types": "./dist/elements/meter/meter.react.d.ts",
@@ -369,6 +377,10 @@
         "./react/stat": {
             "types": "./dist/elements/stat/stat.react.d.ts",
             "import": "./dist/react/stat.js"
+        },
+        "./react/text": {
+            "types": "./dist/elements/text/text.react.d.ts",
+            "import": "./dist/react/text.js"
         },
         "./react/visually-hidden": {
             "types": "./dist/elements/visually-hidden/visually-hidden.react.d.ts",
@@ -547,9 +559,17 @@
             "types": "./dist/elements/grid/grid.d.ts",
             "import": "./dist/wc/grid.js"
         },
+        "./wc/heading": {
+            "types": "./dist/elements/heading/heading.d.ts",
+            "import": "./dist/wc/heading.js"
+        },
         "./wc/kbd": {
             "types": "./dist/elements/kbd/kbd.d.ts",
             "import": "./dist/wc/kbd.js"
+        },
+        "./wc/link": {
+            "types": "./dist/elements/link/link.d.ts",
+            "import": "./dist/wc/link.js"
         },
         "./wc/meter": {
             "types": "./dist/elements/meter/meter.d.ts",
@@ -578,6 +598,10 @@
         "./wc/stat": {
             "types": "./dist/elements/stat/stat.d.ts",
             "import": "./dist/wc/stat.js"
+        },
+        "./wc/text": {
+            "types": "./dist/elements/text/text.d.ts",
+            "import": "./dist/wc/text.js"
         },
         "./wc/visually-hidden": {
             "types": "./dist/elements/visually-hidden/visually-hidden.d.ts",
