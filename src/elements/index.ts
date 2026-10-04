@@ -20,5 +20,6 @@ export * from './kbd/kbd.js';
 export * from './meter/meter.js';
 export * from './progress/progress.js';
 export * from './skeleton/skeleton.js';
+export * from './spacer/spacer.js';
 export * from './spinner/spinner.js';
 export * from './stat/stat.js';

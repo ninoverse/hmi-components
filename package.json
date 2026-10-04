@@ -346,6 +346,10 @@
             "types": "./dist/elements/skeleton/skeleton.react.d.ts",
             "import": "./dist/react/skeleton.js"
         },
+        "./react/spacer": {
+            "types": "./dist/elements/spacer/spacer.react.d.ts",
+            "import": "./dist/react/spacer.js"
+        },
         "./react/spinner": {
             "types": "./dist/elements/spinner/spinner.react.d.ts",
             "import": "./dist/react/spinner.js"
@@ -534,6 +538,10 @@
         "./wc/skeleton": {
             "types": "./dist/elements/skeleton/skeleton.d.ts",
             "import": "./dist/wc/skeleton.js"
+        },
+        "./wc/spacer": {
+            "types": "./dist/elements/spacer/spacer.d.ts",
+            "import": "./dist/wc/spacer.js"
         },
         "./wc/spinner": {
             "types": "./dist/elements/spinner/spinner.d.ts",

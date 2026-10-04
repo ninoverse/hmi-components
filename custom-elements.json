@@ -2234,6 +2234,105 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/spacer/spacer.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Inserts empty space between siblings. A fixed `size` applies on the chosen\n`axis` (height when vertical, width when horizontal); `grow` instead\nexpands to fill the free space of a flex container, pushing its neighbours\napart. Purely presentational: the host sets `aria-hidden=\"true\"` unless you\nset `aria-hidden` yourself.",
+          "name": "HmiSpacer",
+          "members": [
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "SpacerSize"
+              },
+              "default": "'medium'",
+              "description": "Length of the gap: 1, 2 or 3 base units. Ignored with `grow`.",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "axis",
+              "type": {
+                "text": "SpacerAxis"
+              },
+              "default": "'vertical'",
+              "description": "Direction the space applies along. Ignored with `grow`.",
+              "attribute": "axis",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "grow",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Fills the free space of a flex container instead of a fixed size.",
+              "attribute": "grow",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "size",
+              "type": {
+                "text": "SpacerSize"
+              },
+              "default": "'medium'",
+              "description": "Length of the gap: 1, 2 or 3 base units. Ignored with `grow`.",
+              "fieldName": "size"
+            },
+            {
+              "name": "axis",
+              "type": {
+                "text": "SpacerAxis"
+              },
+              "default": "'vertical'",
+              "description": "Direction the space applies along. Ignored with `grow`.",
+              "fieldName": "axis"
+            },
+            {
+              "name": "grow",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Fills the free space of a flex container instead of a fixed size.",
+              "fieldName": "grow"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-spacer",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiSpacer",
+          "declaration": {
+            "name": "HmiSpacer",
+            "module": "src/elements/spacer/spacer.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-spacer",
+          "declaration": {
+            "name": "HmiSpacer",
+            "module": "src/elements/spacer/spacer.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/spinner/spinner.ts",
       "declarations": [
         {

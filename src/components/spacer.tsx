@@ -20,6 +20,7 @@ export type SpacerProps = HTMLAttributes<HTMLSpanElement> & {
  * @example
  * <Spacer size="large" />
  * <Flex><A /><Spacer grow /><B /></Flex>
+ * @deprecated Use `Spacer` from `@ninoverse/hmi-components/react/spacer`. Removed in 6.0.0.
  */
 export function Spacer({
     size = 'medium',

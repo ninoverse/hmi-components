@@ -440,6 +440,33 @@ export function Example() {
         </section>
 
         <section>
+            <h2>Spacer</h2>
+            <!-- no events: size and axis give a fixed gap, grow fills the free
+                 space of a flex container. -->
+            <div style="display: flex; flex-direction: column; gap: 1rem; width: 40rem; max-width: 100%">
+                <div style="outline: 1px dashed var(--outline-variant)">
+                    <hmi-badge>Above</hmi-badge>
+                    <hmi-spacer size="small" style="background: var(--primary-container)"></hmi-spacer>
+                    <hmi-badge>small</hmi-badge>
+                    <hmi-spacer size="medium" style="background: var(--primary-container)"></hmi-spacer>
+                    <hmi-badge>medium</hmi-badge>
+                    <hmi-spacer size="large" style="background: var(--primary-container)"></hmi-spacer>
+                    <hmi-badge>large</hmi-badge>
+                </div>
+                <div style="display: flex; align-items: center; outline: 1px dashed var(--outline-variant)">
+                    <hmi-badge>Left</hmi-badge>
+                    <hmi-spacer axis="horizontal" size="large" style="background: var(--primary-container); align-self: stretch"></hmi-spacer>
+                    <hmi-badge>Right</hmi-badge>
+                </div>
+                <div style="display: flex; align-items: center; outline: 1px dashed var(--outline-variant)">
+                    <hmi-badge>Start</hmi-badge>
+                    <hmi-spacer grow></hmi-spacer>
+                    <hmi-badge>End</hmi-badge>
+                </div>
+            </div>
+        </section>
+
+        <section>
             <h2>Skeleton</h2>
             <!-- width/height/radius accept a CSS length string here; the
                  number form (40 → 40px) is only reachable from JS, since an
