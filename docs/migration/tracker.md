@@ -66,7 +66,7 @@ There is no status for work under way: its open PR already shows that.
 | `hmi-aspect-ratio` | `aspectRatio.tsx` | 3 | low | | `ratio` reflected → `aspect-ratio` on `:host`. | Todo | |
 | `hmi-box` | `box.tsx` | 3 | low | | `as` dropped; reflected spacing attrs. | Done | |
 | `hmi-divider` | `divider.tsx` | 3 | low | | Labeled variant a11y note in `TODO.md` still applies. | Todo | |
-| `hmi-flex` | `flex.tsx` | 3 | low | | `:host { display: flex }`; `direction`, `align`, `justify`, `gap`, `wrap` reflected. | Todo | |
+| `hmi-flex` | `flex.tsx` | 3 | low | | `:host { display: flex }`; `direction`, `align`, `justify`, `gap`, `wrap` reflected. | Done | |
 | `hmi-grid` | `grid.tsx` | 3 | low | | `columns` → `--_columns` on host. | Todo | |
 | `hmi-heading` | `heading.tsx` | 3 | low | | `level` picks the inner `h1`–`h6`. | Todo | |
 | `hmi-link` | `link.tsx` | 3 | low | | Inner `<a part="base">`; `href`, `target`, `rel` mirrored. | Todo | |

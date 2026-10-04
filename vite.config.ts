@@ -108,6 +108,11 @@ export default defineConfig({
                     dirname,
                     'src/elements/empty-state/empty-state.react.ts',
                 ),
+                'wc/flex': resolve(dirname, 'src/elements/flex/flex.ts'),
+                'react/flex': resolve(
+                    dirname,
+                    'src/elements/flex/flex.react.ts',
+                ),
                 'wc/kbd': resolve(dirname, 'src/elements/kbd/kbd.ts'),
                 'react/kbd': resolve(dirname, 'src/elements/kbd/kbd.react.ts'),
                 'wc/meter': resolve(dirname, 'src/elements/meter/meter.ts'),

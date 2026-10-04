@@ -36,6 +36,7 @@ export type FlexProps = HTMLAttributes<HTMLDivElement> & {
  *
  * @example
  * <Flex align="center" justify="between" gap="medium">…</Flex>
+ * @deprecated Use `Flex` from `@ninoverse/hmi-components/react/flex`. Removed in 6.0.0.
  */
 export function Flex({
     as: Component = 'div',

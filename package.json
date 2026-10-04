@@ -322,6 +322,10 @@
             "types": "./dist/elements/empty-state/empty-state.react.d.ts",
             "import": "./dist/react/empty-state.js"
         },
+        "./react/flex": {
+            "types": "./dist/elements/flex/flex.react.d.ts",
+            "import": "./dist/react/flex.js"
+        },
         "./react/kbd": {
             "types": "./dist/elements/kbd/kbd.react.d.ts",
             "import": "./dist/react/kbd.js"
@@ -502,6 +506,10 @@
         "./wc/empty-state": {
             "types": "./dist/elements/empty-state/empty-state.d.ts",
             "import": "./dist/wc/empty-state.js"
+        },
+        "./wc/flex": {
+            "types": "./dist/elements/flex/flex.d.ts",
+            "import": "./dist/wc/flex.js"
         },
         "./wc/kbd": {
             "types": "./dist/elements/kbd/kbd.d.ts",

@@ -14,6 +14,7 @@ export * from './card/card.js';
 export * from './chip/chip.js';
 export * from './code/code.js';
 export * from './empty-state/empty-state.js';
+export * from './flex/flex.js';
 export * from './kbd/kbd.js';
 export * from './meter/meter.js';
 export * from './progress/progress.js';

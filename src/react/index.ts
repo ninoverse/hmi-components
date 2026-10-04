@@ -36,6 +36,13 @@ export {
 } from '../elements/chip/chip.react.js';
 export { Code } from '../elements/code/code.react.js';
 export { EmptyState } from '../elements/empty-state/empty-state.react.js';
+export {
+    Flex,
+    type FlexAlign,
+    type FlexDirection,
+    type FlexGap,
+    type FlexJustify,
+} from '../elements/flex/flex.react.js';
 export { Kbd, type KbdSize } from '../elements/kbd/kbd.react.js';
 export { Meter, type MeterLevel } from '../elements/meter/meter.react.js';
 export { Progress } from '../elements/progress/progress.react.js';

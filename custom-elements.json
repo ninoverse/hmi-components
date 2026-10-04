@@ -1457,6 +1457,171 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/flex/flex.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Flexbox layout primitive. A plain row with stretch alignment and no gap by\ndefault; direction, alignment, justification, gap and wrapping are opt-in.\nThe gap scale matches `hmi-box` padding.\n\nThe host is the flex container and the slotted children are its items. There\nis no `as` property: put `role` on the host or wrap it.",
+          "name": "HmiFlex",
+          "slots": [
+            {
+              "description": "The flex items.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "direction",
+              "type": {
+                "text": "FlexDirection"
+              },
+              "default": "'row'",
+              "description": "Main axis.",
+              "attribute": "direction",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "align",
+              "type": {
+                "text": "FlexAlign"
+              },
+              "default": "'stretch'",
+              "description": "Cross-axis alignment (`align-items`).",
+              "attribute": "align",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "justify",
+              "type": {
+                "text": "FlexJustify"
+              },
+              "default": "'start'",
+              "description": "Main-axis distribution (`justify-content`).",
+              "attribute": "justify",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "gap",
+              "type": {
+                "text": "FlexGap"
+              },
+              "default": "'none'",
+              "description": "Space between items.",
+              "attribute": "gap",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "wrap",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Lets items wrap onto further lines.",
+              "attribute": "wrap",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "inline",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Lays the container out inline (`inline-flex`).",
+              "attribute": "inline",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "direction",
+              "type": {
+                "text": "FlexDirection"
+              },
+              "default": "'row'",
+              "description": "Main axis.",
+              "fieldName": "direction"
+            },
+            {
+              "name": "align",
+              "type": {
+                "text": "FlexAlign"
+              },
+              "default": "'stretch'",
+              "description": "Cross-axis alignment (`align-items`).",
+              "fieldName": "align"
+            },
+            {
+              "name": "justify",
+              "type": {
+                "text": "FlexJustify"
+              },
+              "default": "'start'",
+              "description": "Main-axis distribution (`justify-content`).",
+              "fieldName": "justify"
+            },
+            {
+              "name": "gap",
+              "type": {
+                "text": "FlexGap"
+              },
+              "default": "'none'",
+              "description": "Space between items.",
+              "fieldName": "gap"
+            },
+            {
+              "name": "wrap",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Lets items wrap onto further lines.",
+              "fieldName": "wrap"
+            },
+            {
+              "name": "inline",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Lays the container out inline (`inline-flex`).",
+              "fieldName": "inline"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-flex",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiFlex",
+          "declaration": {
+            "name": "HmiFlex",
+            "module": "src/elements/flex/flex.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-flex",
+          "declaration": {
+            "name": "HmiFlex",
+            "module": "src/elements/flex/flex.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/kbd/kbd.ts",
       "declarations": [
         {
