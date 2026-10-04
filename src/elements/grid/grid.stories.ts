@@ -60,6 +60,23 @@ export const CustomTemplate: Story = {
     args: { columns: '1fr 2fr', gap: 'small' },
 };
 
+/**
+ * A grid has one column template, so rows share its tracks. To give rows
+ * different splits, use common tracks and let the children span them:
+ * `grid-column: span 2`, or `1 / -1` for a full-width row.
+ */
+export const SpanningRows: Story = {
+    args: { columns: 6, gap: 'small' },
+    render: (args) =>
+        html`<hmi-grid .columns=${args.columns} gap=${args.gap}>
+            <div style="grid-column: span 2">${cell('2/6')}</div>
+            <div style="grid-column: span 4">${cell('4/6')}</div>
+            <div style="grid-column: span 3">${cell('3/6')}</div>
+            <div style="grid-column: span 3">${cell('3/6')}</div>
+            <div style="grid-column: 1 / -1">${cell('full width')}</div>
+        </hmi-grid>`,
+};
+
 export const Gaps: Story = {
     render: () => html`
         <div style="display: flex; flex-direction: column; gap: 1.5rem">

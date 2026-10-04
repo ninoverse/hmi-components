@@ -436,6 +436,18 @@ export function Example() {
                         <hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">1</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">2</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">3</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">4</hmi-box>
                     </hmi-grid>
                 </div>
+                <div>
+                    <p style="margin: 0 0 0.25rem; font-size: 0.875rem"><code>&lt;hmi-grid columns="3" gap="small"&gt;</code> rows 1–2 are <code>1fr 2fr</code> (one cell, then <code>grid-column: span 2</code>), row 3 is one full-width cell (<code>grid-column: 1 / -1</code>)</p>
+                    <hmi-grid columns="3" gap="small" style="outline: 1px dashed var(--outline-variant)">
+                        <hmi-box background="surface-container-high" padding="small" radius="small" bordered>1fr</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="grid-column: span 2">2fr</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered>1fr</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="grid-column: span 2">2fr</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="grid-column: 1 / -1">3fr: full width</hmi-box>
+                    </hmi-grid>
+                </div>
+                <div>
+                    <p style="margin: 0 0 0.25rem; font-size: 0.875rem"><code>&lt;hmi-grid columns="6" gap="small"&gt;</code> finer tracks, so each row can split differently: 2 + 4, 3 + 3, 1 + 2 + 3</p>
+                    <hmi-grid columns="6" gap="small" style="outline: 1px dashed var(--outline-variant)">
+                        <hmi-box background="surface-container-high" padding="small" radius="small" bordered style="grid-column: span 2">2/6</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="grid-column: span 4">4/6</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="grid-column: span 3">3/6</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="grid-column: span 3">3/6</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered>1/6</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="grid-column: span 2">2/6</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="grid-column: span 3">3/6</hmi-box>
+                    </hmi-grid>
+                </div>
             </div>
         </section>
 
