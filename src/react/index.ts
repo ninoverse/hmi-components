@@ -71,3 +71,4 @@ export {
     type SpinnerSize,
 } from '../elements/spinner/spinner.react.js';
 export { Stat, type StatTrend } from '../elements/stat/stat.react.js';
+export { VisuallyHidden } from '../elements/visually-hidden/visually-hidden.react.js';

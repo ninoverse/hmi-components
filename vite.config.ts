@@ -183,6 +183,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/stat/stat.react.ts',
                 ),
+                'wc/visually-hidden': resolve(
+                    dirname,
+                    'src/elements/visually-hidden/visually-hidden.ts',
+                ),
+                'react/visually-hidden': resolve(
+                    dirname,
+                    'src/elements/visually-hidden/visually-hidden.react.ts',
+                ),
                 accordion: resolve(dirname, 'src/components/accordion.tsx'),
                 alert: resolve(dirname, 'src/components/alert.tsx'),
                 areaChart: resolve(dirname, 'src/components/areaChart.tsx'),

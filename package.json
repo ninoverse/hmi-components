@@ -370,6 +370,10 @@
             "types": "./dist/elements/stat/stat.react.d.ts",
             "import": "./dist/react/stat.js"
         },
+        "./react/visually-hidden": {
+            "types": "./dist/elements/visually-hidden/visually-hidden.react.d.ts",
+            "import": "./dist/react/visually-hidden.js"
+        },
         "./responsive-container": {
             "types": "./dist/components/responsiveContainer.d.ts",
             "import": "./dist/responsiveContainer.js"
@@ -574,6 +578,10 @@
         "./wc/stat": {
             "types": "./dist/elements/stat/stat.d.ts",
             "import": "./dist/wc/stat.js"
+        },
+        "./wc/visually-hidden": {
+            "types": "./dist/elements/visually-hidden/visually-hidden.d.ts",
+            "import": "./dist/wc/visually-hidden.js"
         },
         "./style.css": "./dist/style.css",
         "./web-components": "./dist/hmi-components.iife.js",

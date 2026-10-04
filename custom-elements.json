@@ -2847,6 +2847,48 @@
           }
         }
       ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/elements/visually-hidden/visually-hidden.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Hides its content visually while keeping it available to assistive\ntechnology (the standard `sr-only` clip technique). Use it for labels,\nheadings and live-region text that sighted users don't need.\n\nThe host is the hidden box. There is no `as` property: wrap the host in the\nelement you need, such as `<h2><hmi-visually-hidden>Title</hmi-visually-hidden></h2>`,\nso the heading or label keeps its semantics.",
+          "name": "HmiVisuallyHidden",
+          "slots": [
+            {
+              "description": "The content that stays available to assistive technology.",
+              "name": ""
+            }
+          ],
+          "members": [],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-visually-hidden",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiVisuallyHidden",
+          "declaration": {
+            "name": "HmiVisuallyHidden",
+            "module": "src/elements/visually-hidden/visually-hidden.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-visually-hidden",
+          "declaration": {
+            "name": "HmiVisuallyHidden",
+            "module": "src/elements/visually-hidden/visually-hidden.ts"
+          }
+        }
+      ]
     }
   ]
 }
