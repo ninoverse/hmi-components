@@ -496,6 +496,40 @@ export function Example() {
         </section>
 
         <section>
+            <h2>Divider</h2>
+            <!-- no events: the label is the default slot; a plain divider is a
+                 separator, a labelled one is not (see TODO.md). -->
+            <div style="display: flex; flex-direction: column; gap: 1.25rem; width: 40rem; max-width: 100%">
+                <div>
+                    <p style="margin: 0 0 0.25rem; font-size: 0.875rem"><code>&lt;hmi-divider&gt;</code> a plain rule</p>
+                    <hmi-divider></hmi-divider>
+                </div>
+                <div>
+                    <p style="margin: 0 0 0.25rem; font-size: 0.875rem"><code>&lt;hmi-divider&gt;OR&lt;/hmi-divider&gt;</code> labelled, centred</p>
+                    <hmi-divider>OR</hmi-divider>
+                </div>
+                <div>
+                    <p style="margin: 0 0 0.25rem; font-size: 0.875rem"><code>align="start"</code> label at the start</p>
+                    <hmi-divider align="start">Details</hmi-divider>
+                </div>
+                <div>
+                    <p style="margin: 0 0 0.25rem; font-size: 0.875rem"><code>align="end"</code> label at the end</p>
+                    <hmi-divider align="end">More</hmi-divider>
+                </div>
+                <div>
+                    <p style="margin: 0 0 0.25rem; font-size: 0.875rem"><code>orientation="vertical"</code> stretches to the row's height</p>
+                    <hmi-flex gap="medium">
+                        <span>One</span>
+                        <hmi-divider orientation="vertical"></hmi-divider>
+                        <span>Two</span>
+                        <hmi-divider orientation="vertical"></hmi-divider>
+                        <span>Three</span>
+                    </hmi-flex>
+                </div>
+            </div>
+        </section>
+
+        <section>
             <h2>Skeleton</h2>
             <!-- width/height/radius accept a CSS length string here; the
                  number form (40 → 40px) is only reachable from JS, since an

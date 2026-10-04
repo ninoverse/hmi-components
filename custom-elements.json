@@ -1463,6 +1463,128 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/divider/divider.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A thin rule that separates stacked or inline content. Horizontal and vertical\norientations are supported. With a label in the default slot, a horizontal\ndivider becomes a row with the text in the middle (or aligned to the start or\nend) and a rule on each side. A vertical divider is never labelled.\n\nThe plain divider carries `role=\"separator\"` and `aria-orientation`, as the\n`<hr>` it replaces did. The labelled divider is not announced as a separator,\nexactly as in the React version: its rules are `aria-hidden` and the visible\nlabel is real text (see `TODO.md`). The label is detected from the slot, so\nbefore the element upgrades, including in server-rendered HTML, a divider\ndraws as a plain rule.",
+          "name": "HmiDivider",
+          "cssParts": [
+            {
+              "description": "The rule, or the row that holds the label and its rules.",
+              "name": "base"
+            },
+            {
+              "description": "The label wrapper.",
+              "name": "label"
+            }
+          ],
+          "slots": [
+            {
+              "description": "The label, shown on a horizontal divider.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "orientation",
+              "type": {
+                "text": "DividerOrientation"
+              },
+              "default": "'horizontal'",
+              "description": "Direction of the rule.",
+              "attribute": "orientation",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "align",
+              "type": {
+                "text": "DividerAlign"
+              },
+              "default": "'center'",
+              "description": "Where the label sits on the rule.",
+              "attribute": "align",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "hasLabel",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "method",
+              "name": "#onSlotChange",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            }
+          ],
+          "attributes": [
+            {
+              "name": "orientation",
+              "type": {
+                "text": "DividerOrientation"
+              },
+              "default": "'horizontal'",
+              "description": "Direction of the rule.",
+              "fieldName": "orientation"
+            },
+            {
+              "name": "align",
+              "type": {
+                "text": "DividerAlign"
+              },
+              "default": "'center'",
+              "description": "Where the label sits on the rule.",
+              "fieldName": "align"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-divider",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiDivider",
+          "declaration": {
+            "name": "HmiDivider",
+            "module": "src/elements/divider/divider.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-divider",
+          "declaration": {
+            "name": "HmiDivider",
+            "module": "src/elements/divider/divider.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/empty-state/empty-state.ts",
       "declarations": [
         {

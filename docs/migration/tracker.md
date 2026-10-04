@@ -65,7 +65,7 @@ There is no status for work under way: its open PR already shows that.
 | `hmi-stat` | `stat.tsx` | 2 | low | S X | Slots `label`, `value`, `icon`, `delta`, `help-text`; `[data-structure="journal"] .stat__footer` → boolean `divider` property. | Done | [#147](https://github.com/ninoverse/hmi-components/pull/147) |
 | `hmi-aspect-ratio` | `aspectRatio.tsx` | 3 | low | | `ratio` reflected → `aspect-ratio` on `:host`. | Done | [#148](https://github.com/ninoverse/hmi-components/pull/148) |
 | `hmi-box` | `box.tsx` | 3 | low | | `as` dropped; reflected spacing attrs. | Done | [#148](https://github.com/ninoverse/hmi-components/pull/148) |
-| `hmi-divider` | `divider.tsx` | 3 | low | | Labeled variant a11y note in `TODO.md` still applies. | Todo | |
+| `hmi-divider` | `divider.tsx` | 3 | low | | Labeled variant a11y note in `TODO.md` still applies. | Done | |
 | `hmi-flex` | `flex.tsx` | 3 | low | | `:host { display: flex }`; `direction`, `align`, `justify`, `gap`, `wrap` reflected. | Done | [#148](https://github.com/ninoverse/hmi-components/pull/148) |
 | `hmi-grid` | `grid.tsx` | 3 | low | | `columns` → `--_columns` on host. | Done | [#148](https://github.com/ninoverse/hmi-components/pull/148) |
 | `hmi-heading` | `heading.tsx` | 3 | low | | `level` picks the inner `h1`–`h6`. | Todo | |

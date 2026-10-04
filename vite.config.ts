@@ -108,6 +108,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/code/code.react.ts',
                 ),
+                'wc/divider': resolve(
+                    dirname,
+                    'src/elements/divider/divider.ts',
+                ),
+                'react/divider': resolve(
+                    dirname,
+                    'src/elements/divider/divider.react.ts',
+                ),
                 'wc/empty-state': resolve(
                     dirname,
                     'src/elements/empty-state/empty-state.ts',

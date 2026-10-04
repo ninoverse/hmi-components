@@ -14,6 +14,7 @@ export * from './button/button.js';
 export * from './card/card.js';
 export * from './chip/chip.js';
 export * from './code/code.js';
+export * from './divider/divider.js';
 export * from './empty-state/empty-state.js';
 export * from './flex/flex.js';
 export * from './grid/grid.js';

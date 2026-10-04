@@ -36,6 +36,11 @@ export {
     type ChipSelectDetail,
 } from '../elements/chip/chip.react.js';
 export { Code } from '../elements/code/code.react.js';
+export {
+    Divider,
+    type DividerAlign,
+    type DividerOrientation,
+} from '../elements/divider/divider.react.js';
 export { EmptyState } from '../elements/empty-state/empty-state.react.js';
 export {
     Flex,

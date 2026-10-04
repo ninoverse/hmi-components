@@ -322,6 +322,10 @@
             "types": "./dist/elements/code/code.react.d.ts",
             "import": "./dist/react/code.js"
         },
+        "./react/divider": {
+            "types": "./dist/elements/divider/divider.react.d.ts",
+            "import": "./dist/react/divider.js"
+        },
         "./react/empty-state": {
             "types": "./dist/elements/empty-state/empty-state.react.d.ts",
             "import": "./dist/react/empty-state.js"
@@ -518,6 +522,10 @@
         "./wc/code": {
             "types": "./dist/elements/code/code.d.ts",
             "import": "./dist/wc/code.js"
+        },
+        "./wc/divider": {
+            "types": "./dist/elements/divider/divider.d.ts",
+            "import": "./dist/wc/divider.js"
         },
         "./wc/empty-state": {
             "types": "./dist/elements/empty-state/empty-state.d.ts",
