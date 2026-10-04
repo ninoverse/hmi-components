@@ -2979,6 +2979,169 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/text/text.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "The body-copy primitive. Defaults to medium size, regular weight and the\nstandard on-surface tone in the UI font; size, weight, tone, alignment and\nsingle-line truncation are opt-in.\n\nThe host is the text: a block by default, or inline with `inline`, with no\ninner element and so no paragraph semantics. Wrap it in a `<p>`, or set\n`role=\"paragraph\"` on the host, where the text is a paragraph. There is no\n`as` property. `truncate` needs a block, so it has no effect with `inline`.",
+          "name": "HmiText",
+          "slots": [
+            {
+              "description": "The text.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "TextSize"
+              },
+              "default": "'medium'",
+              "description": "Font size.",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "weight",
+              "type": {
+                "text": "TextWeight"
+              },
+              "default": "'regular'",
+              "description": "Font weight.",
+              "attribute": "weight",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "tone",
+              "type": {
+                "text": "TextTone"
+              },
+              "default": "'default'",
+              "description": "Colour role.",
+              "attribute": "tone",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "align",
+              "type": {
+                "text": "TextAlign | undefined"
+              },
+              "description": "Horizontal alignment. Unset by default, so the text inherits it.",
+              "attribute": "align",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "truncate",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Keeps the text on one line and ends it with an ellipsis.",
+              "attribute": "truncate",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "inline",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Lays the text out inline instead of as a block.",
+              "attribute": "inline",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "size",
+              "type": {
+                "text": "TextSize"
+              },
+              "default": "'medium'",
+              "description": "Font size.",
+              "fieldName": "size"
+            },
+            {
+              "name": "weight",
+              "type": {
+                "text": "TextWeight"
+              },
+              "default": "'regular'",
+              "description": "Font weight.",
+              "fieldName": "weight"
+            },
+            {
+              "name": "tone",
+              "type": {
+                "text": "TextTone"
+              },
+              "default": "'default'",
+              "description": "Colour role.",
+              "fieldName": "tone"
+            },
+            {
+              "name": "align",
+              "type": {
+                "text": "TextAlign | undefined"
+              },
+              "description": "Horizontal alignment. Unset by default, so the text inherits it.",
+              "fieldName": "align"
+            },
+            {
+              "name": "truncate",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Keeps the text on one line and ends it with an ellipsis.",
+              "fieldName": "truncate"
+            },
+            {
+              "name": "inline",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Lays the text out inline instead of as a block.",
+              "fieldName": "inline"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-text",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiText",
+          "declaration": {
+            "name": "HmiText",
+            "module": "src/elements/text/text.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-text",
+          "declaration": {
+            "name": "HmiText",
+            "module": "src/elements/text/text.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/visually-hidden/visually-hidden.ts",
       "declarations": [
         {

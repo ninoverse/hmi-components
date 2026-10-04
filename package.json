@@ -374,6 +374,10 @@
             "types": "./dist/elements/stat/stat.react.d.ts",
             "import": "./dist/react/stat.js"
         },
+        "./react/text": {
+            "types": "./dist/elements/text/text.react.d.ts",
+            "import": "./dist/react/text.js"
+        },
         "./react/visually-hidden": {
             "types": "./dist/elements/visually-hidden/visually-hidden.react.d.ts",
             "import": "./dist/react/visually-hidden.js"
@@ -586,6 +590,10 @@
         "./wc/stat": {
             "types": "./dist/elements/stat/stat.d.ts",
             "import": "./dist/wc/stat.js"
+        },
+        "./wc/text": {
+            "types": "./dist/elements/text/text.d.ts",
+            "import": "./dist/wc/text.js"
         },
         "./wc/visually-hidden": {
             "types": "./dist/elements/visually-hidden/visually-hidden.d.ts",

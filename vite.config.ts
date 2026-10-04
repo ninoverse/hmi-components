@@ -191,6 +191,11 @@ export default defineConfig({
                     dirname,
                     'src/elements/stat/stat.react.ts',
                 ),
+                'wc/text': resolve(dirname, 'src/elements/text/text.ts'),
+                'react/text': resolve(
+                    dirname,
+                    'src/elements/text/text.react.ts',
+                ),
                 'wc/visually-hidden': resolve(
                     dirname,
                     'src/elements/visually-hidden/visually-hidden.ts',

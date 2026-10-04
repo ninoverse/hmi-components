@@ -96,6 +96,7 @@ hmi-skeleton:not(:defined),
 hmi-spacer:not(:defined),
 hmi-spinner:not(:defined),
 hmi-stat:not(:defined),
+hmi-text:not(:defined),
 hmi-visually-hidden:not(:defined) {
     visibility: hidden;
 }

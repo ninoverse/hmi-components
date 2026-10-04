@@ -27,4 +27,5 @@ export * from './skeleton/skeleton.js';
 export * from './spacer/spacer.js';
 export * from './spinner/spinner.js';
 export * from './stat/stat.js';
+export * from './text/text.js';
 export * from './visually-hidden/visually-hidden.js';

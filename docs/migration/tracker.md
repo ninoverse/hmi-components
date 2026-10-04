@@ -72,7 +72,7 @@ There is no status for work under way: its open PR already shows that.
 | `hmi-link` | `link.tsx` | 3 | low | | Inner `<a part="base">`; `href`, `target`, `rel` mirrored. | Todo | |
 | `hmi-scroll-area` | `scrollArea.tsx` | 3 | low | | Scrollbar styles move into `styles`. | Done | [#149](https://github.com/ninoverse/hmi-components/pull/149) |
 | `hmi-spacer` | `spacer.tsx` | 3 | low | | | Done | [#148](https://github.com/ninoverse/hmi-components/pull/148) |
-| `hmi-text` | `text.tsx` | 3 | low | | `as` dropped; `variant`/`tone` reflected. | Todo | |
+| `hmi-text` | `text.tsx` | 3 | low | | `as` dropped; `variant`/`tone` reflected. | Done | |
 | `hmi-visually-hidden` | `visuallyHidden.tsx` | 3 | low | | | Done | [#149](https://github.com/ninoverse/hmi-components/pull/149) |
 | `hmi-button` | `button.tsx` | 4 | med | S F | Worked example in `translation-guide.md`. Slots `left-icon`, `right-icon`; `formAssociated` for `type="submit"/"reset"`; `delegatesFocus`. `label` is forwarded to the inner `aria-label`, since the host's own does not name the inner button. Submit and reset wait one timer tick so a click handler's `preventDefault()` cancels them; `ignore-prevent-default` skips the wait and ignores `preventDefault()`. A fieldset's disabled state is kept apart from `disabled`. The Spinner `InButton` story is back. | Done | [#145](https://github.com/ninoverse/hmi-components/pull/145) |
 | `hmi-form-control` | `formControl.tsx` | 4 | low | S | Deprecated at birth: layout-only wrapper; label/hint/error move onto each input. | Todo | |
