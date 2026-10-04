@@ -25,6 +25,7 @@ export type GridProps = HTMLAttributes<HTMLDivElement> & {
  *
  * @example
  * <Grid columns={3} gap="medium">…</Grid>
+ * @deprecated Use `Grid` from `@ninoverse/hmi-components/react/grid`. Removed in 6.0.0.
  */
 export function Grid({
     as: Component = 'div',

@@ -1622,6 +1622,96 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/grid/grid.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "CSS grid layout primitive. A number of `columns` gives equal\n`minmax(0, 1fr)` tracks, and a string is used as the\n`grid-template-columns` value as-is. The gap scale matches `hmi-box` padding\nand `hmi-flex`.\n\nThe grid lives in an inner `base` element that carries the template through\nthe CSSOM, so an arbitrary string cannot escape into the stylesheet and the\nhost's own `style` stays yours. The slotted children are the grid items.\nThere is no `as` property: put `role` on the host or wrap it.",
+          "name": "HmiGrid",
+          "cssParts": [
+            {
+              "description": "The grid container.",
+              "name": "base"
+            }
+          ],
+          "slots": [
+            {
+              "description": "The grid items.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "columns",
+              "type": {
+                "text": "| number\n        | string"
+              },
+              "default": "2",
+              "description": "Equal tracks when a number (or digits), else a `grid-template-columns` value.",
+              "attribute": "columns"
+            },
+            {
+              "kind": "field",
+              "name": "gap",
+              "type": {
+                "text": "GridGap"
+              },
+              "default": "'none'",
+              "description": "Space between rows and columns.",
+              "attribute": "gap",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "columns",
+              "type": {
+                "text": "| number\n        | string"
+              },
+              "default": "2",
+              "description": "Equal tracks when a number (or digits), else a `grid-template-columns` value.",
+              "fieldName": "columns"
+            },
+            {
+              "name": "gap",
+              "type": {
+                "text": "GridGap"
+              },
+              "default": "'none'",
+              "description": "Space between rows and columns.",
+              "fieldName": "gap"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-grid",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiGrid",
+          "declaration": {
+            "name": "HmiGrid",
+            "module": "src/elements/grid/grid.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-grid",
+          "declaration": {
+            "name": "HmiGrid",
+            "module": "src/elements/grid/grid.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/kbd/kbd.ts",
       "declarations": [
         {

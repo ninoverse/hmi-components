@@ -43,6 +43,7 @@ export {
     type FlexGap,
     type FlexJustify,
 } from '../elements/flex/flex.react.js';
+export { Grid, type GridGap } from '../elements/grid/grid.react.js';
 export { Kbd, type KbdSize } from '../elements/kbd/kbd.react.js';
 export { Meter, type MeterLevel } from '../elements/meter/meter.react.js';
 export { Progress } from '../elements/progress/progress.react.js';

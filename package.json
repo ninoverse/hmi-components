@@ -326,6 +326,10 @@
             "types": "./dist/elements/flex/flex.react.d.ts",
             "import": "./dist/react/flex.js"
         },
+        "./react/grid": {
+            "types": "./dist/elements/grid/grid.react.d.ts",
+            "import": "./dist/react/grid.js"
+        },
         "./react/kbd": {
             "types": "./dist/elements/kbd/kbd.react.d.ts",
             "import": "./dist/react/kbd.js"
@@ -510,6 +514,10 @@
         "./wc/flex": {
             "types": "./dist/elements/flex/flex.d.ts",
             "import": "./dist/wc/flex.js"
+        },
+        "./wc/grid": {
+            "types": "./dist/elements/grid/grid.d.ts",
+            "import": "./dist/wc/grid.js"
         },
         "./wc/kbd": {
             "types": "./dist/elements/kbd/kbd.d.ts",

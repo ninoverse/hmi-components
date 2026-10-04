@@ -408,6 +408,38 @@ export function Example() {
         </section>
 
         <section>
+            <h2>Grid</h2>
+            <!-- no events: the dashed outline is the grid container, the boxes
+                 are its slotted children. -->
+            <div style="display: flex; flex-direction: column; gap: 1.25rem; width: 40rem; max-width: 100%">
+                <div>
+                    <p style="margin: 0 0 0.25rem; font-size: 0.875rem"><code>&lt;hmi-grid columns="3" gap="small"&gt;</code> three equal columns</p>
+                    <hmi-grid columns="3" gap="small" style="outline: 1px dashed var(--outline-variant); ">
+                        <hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">1</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">2</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">3</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">4</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">5</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">6</hmi-box>
+                    </hmi-grid>
+                </div>
+                <div>
+                    <p style="margin: 0 0 0.25rem; font-size: 0.875rem"><code>&lt;hmi-grid columns="1fr 2fr" gap="small"&gt;</code> a template string: the second column is twice as wide</p>
+                    <hmi-grid columns="1fr 2fr" gap="small" style="outline: 1px dashed var(--outline-variant); ">
+                        <hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">1fr</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">2fr</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">1fr</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">2fr</hmi-box>
+                    </hmi-grid>
+                </div>
+                <div>
+                    <p style="margin: 0 0 0.25rem; font-size: 0.875rem"><code>&lt;hmi-grid columns="4" gap="large"&gt;</code> four equal columns, large gap</p>
+                    <hmi-grid columns="4" gap="large" style="outline: 1px dashed var(--outline-variant); ">
+                        <hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">1</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">2</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">3</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">4</hmi-box>
+                    </hmi-grid>
+                </div>
+                <div>
+                    <p style="margin: 0 0 0.25rem; font-size: 0.875rem"><code>&lt;hmi-grid columns="2"&gt;</code> no gap (the default)</p>
+                    <hmi-grid columns="2" style="outline: 1px dashed var(--outline-variant); ">
+                        <hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">1</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">2</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">3</hmi-box><hmi-box background="surface-container-high" padding="small" radius="small" bordered style="">4</hmi-box>
+                    </hmi-grid>
+                </div>
+            </div>
+        </section>
+
+        <section>
             <h2>Skeleton</h2>
             <!-- width/height/radius accept a CSS length string here; the
                  number form (40 → 40px) is only reachable from JS, since an

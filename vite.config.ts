@@ -113,6 +113,11 @@ export default defineConfig({
                     dirname,
                     'src/elements/flex/flex.react.ts',
                 ),
+                'wc/grid': resolve(dirname, 'src/elements/grid/grid.ts'),
+                'react/grid': resolve(
+                    dirname,
+                    'src/elements/grid/grid.react.ts',
+                ),
                 'wc/kbd': resolve(dirname, 'src/elements/kbd/kbd.ts'),
                 'react/kbd': resolve(dirname, 'src/elements/kbd/kbd.react.ts'),
                 'wc/meter': resolve(dirname, 'src/elements/meter/meter.ts'),
