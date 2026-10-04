@@ -65,15 +65,15 @@ There is no status for work under way: its open PR already shows that.
 | `hmi-stat` | `stat.tsx` | 2 | low | S X | Slots `label`, `value`, `icon`, `delta`, `help-text`; `[data-structure="journal"] .stat__footer` → boolean `divider` property. | Done | [#147](https://github.com/ninoverse/hmi-components/pull/147) |
 | `hmi-aspect-ratio` | `aspectRatio.tsx` | 3 | low | | `ratio` reflected → `aspect-ratio` on `:host`. | Done | [#148](https://github.com/ninoverse/hmi-components/pull/148) |
 | `hmi-box` | `box.tsx` | 3 | low | | `as` dropped; reflected spacing attrs. | Done | [#148](https://github.com/ninoverse/hmi-components/pull/148) |
-| `hmi-divider` | `divider.tsx` | 3 | low | | Labeled variant a11y note in `TODO.md` still applies. | Done | |
+| `hmi-divider` | `divider.tsx` | 3 | low | | Labeled variant a11y note in `TODO.md` still applies. | Done | [#149](https://github.com/ninoverse/hmi-components/pull/149) |
 | `hmi-flex` | `flex.tsx` | 3 | low | | `:host { display: flex }`; `direction`, `align`, `justify`, `gap`, `wrap` reflected. | Done | [#148](https://github.com/ninoverse/hmi-components/pull/148) |
 | `hmi-grid` | `grid.tsx` | 3 | low | | `columns` → `--_columns` on host. | Done | [#148](https://github.com/ninoverse/hmi-components/pull/148) |
 | `hmi-heading` | `heading.tsx` | 3 | low | | `level` picks the inner `h1`–`h6`. | Todo | |
 | `hmi-link` | `link.tsx` | 3 | low | | Inner `<a part="base">`; `href`, `target`, `rel` mirrored. | Todo | |
-| `hmi-scroll-area` | `scrollArea.tsx` | 3 | low | | Scrollbar styles move into `styles`. | Done | |
+| `hmi-scroll-area` | `scrollArea.tsx` | 3 | low | | Scrollbar styles move into `styles`. | Done | [#149](https://github.com/ninoverse/hmi-components/pull/149) |
 | `hmi-spacer` | `spacer.tsx` | 3 | low | | | Done | [#148](https://github.com/ninoverse/hmi-components/pull/148) |
 | `hmi-text` | `text.tsx` | 3 | low | | `as` dropped; `variant`/`tone` reflected. | Todo | |
-| `hmi-visually-hidden` | `visuallyHidden.tsx` | 3 | low | | | Done | |
+| `hmi-visually-hidden` | `visuallyHidden.tsx` | 3 | low | | | Done | [#149](https://github.com/ninoverse/hmi-components/pull/149) |
 | `hmi-button` | `button.tsx` | 4 | med | S F | Worked example in `translation-guide.md`. Slots `left-icon`, `right-icon`; `formAssociated` for `type="submit"/"reset"`; `delegatesFocus`. `label` is forwarded to the inner `aria-label`, since the host's own does not name the inner button. Submit and reset wait one timer tick so a click handler's `preventDefault()` cancels them; `ignore-prevent-default` skips the wait and ignores `preventDefault()`. A fieldset's disabled state is kept apart from `disabled`. The Spinner `InButton` story is back. | Done | [#145](https://github.com/ninoverse/hmi-components/pull/145) |
 | `hmi-form-control` | `formControl.tsx` | 4 | low | S | Deprecated at birth: layout-only wrapper; label/hint/error move onto each input. | Todo | |
 | `hmi-input` | `input.tsx` | 4 | med | S F E D | Lands `shared/form.ts`. Slots `left-icon`, `right-icon`; `hmi-input` + `hmi-change`; `controlledTextCaret` obsolete. | Todo | |
