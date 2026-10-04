@@ -83,16 +83,19 @@ hmi-button:not(:defined),
 hmi-card:not(:defined),
 hmi-chip:not(:defined),
 hmi-code:not(:defined),
+hmi-divider:not(:defined),
 hmi-empty-state:not(:defined),
 hmi-flex:not(:defined),
 hmi-grid:not(:defined),
 hmi-kbd:not(:defined),
 hmi-meter:not(:defined),
 hmi-progress:not(:defined),
+hmi-scroll-area:not(:defined),
 hmi-skeleton:not(:defined),
 hmi-spacer:not(:defined),
 hmi-spinner:not(:defined),
-hmi-stat:not(:defined) {
+hmi-stat:not(:defined),
+hmi-visually-hidden:not(:defined) {
     visibility: hidden;
 }
 /* @generated not-defined end */

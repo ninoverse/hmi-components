@@ -36,6 +36,11 @@ export {
     type ChipSelectDetail,
 } from '../elements/chip/chip.react.js';
 export { Code } from '../elements/code/code.react.js';
+export {
+    Divider,
+    type DividerAlign,
+    type DividerOrientation,
+} from '../elements/divider/divider.react.js';
 export { EmptyState } from '../elements/empty-state/empty-state.react.js';
 export {
     Flex,
@@ -48,6 +53,10 @@ export { Grid, type GridGap } from '../elements/grid/grid.react.js';
 export { Kbd, type KbdSize } from '../elements/kbd/kbd.react.js';
 export { Meter, type MeterLevel } from '../elements/meter/meter.react.js';
 export { Progress } from '../elements/progress/progress.react.js';
+export {
+    ScrollArea,
+    type ScrollAreaOrientation,
+} from '../elements/scroll-area/scroll-area.react.js';
 export {
     Skeleton,
     type SkeletonVariant,
@@ -62,3 +71,4 @@ export {
     type SpinnerSize,
 } from '../elements/spinner/spinner.react.js';
 export { Stat, type StatTrend } from '../elements/stat/stat.react.js';
+export { VisuallyHidden } from '../elements/visually-hidden/visually-hidden.react.js';

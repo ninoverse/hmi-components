@@ -14,6 +14,7 @@ export type VisuallyHiddenProps = HTMLAttributes<HTMLElement> & {
  *
  * @example
  * <VisuallyHidden>Close menu</VisuallyHidden>
+ * @deprecated Use `VisuallyHidden` from `@ninoverse/hmi-components/react/visually-hidden`. Removed in 6.0.0.
  */
 export function VisuallyHidden({
     as: Component = 'span',

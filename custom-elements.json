@@ -1463,6 +1463,128 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/divider/divider.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A thin rule that separates stacked or inline content. Horizontal and vertical\norientations are supported. With a label in the default slot, a horizontal\ndivider becomes a row with the text in the middle (or aligned to the start or\nend) and a rule on each side. A vertical divider is never labelled.\n\nThe plain divider carries `role=\"separator\"` and `aria-orientation`, as the\n`<hr>` it replaces did. The labelled divider is not announced as a separator,\nexactly as in the React version: its rules are `aria-hidden` and the visible\nlabel is real text (see `TODO.md`). The label is detected from the slot, so\nbefore the element upgrades, including in server-rendered HTML, a divider\ndraws as a plain rule.",
+          "name": "HmiDivider",
+          "cssParts": [
+            {
+              "description": "The rule, or the row that holds the label and its rules.",
+              "name": "base"
+            },
+            {
+              "description": "The label wrapper.",
+              "name": "label"
+            }
+          ],
+          "slots": [
+            {
+              "description": "The label, shown on a horizontal divider.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "orientation",
+              "type": {
+                "text": "DividerOrientation"
+              },
+              "default": "'horizontal'",
+              "description": "Direction of the rule.",
+              "attribute": "orientation",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "align",
+              "type": {
+                "text": "DividerAlign"
+              },
+              "default": "'center'",
+              "description": "Where the label sits on the rule.",
+              "attribute": "align",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "hasLabel",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "method",
+              "name": "#onSlotChange",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            }
+          ],
+          "attributes": [
+            {
+              "name": "orientation",
+              "type": {
+                "text": "DividerOrientation"
+              },
+              "default": "'horizontal'",
+              "description": "Direction of the rule.",
+              "fieldName": "orientation"
+            },
+            {
+              "name": "align",
+              "type": {
+                "text": "DividerAlign"
+              },
+              "default": "'center'",
+              "description": "Where the label sits on the rule.",
+              "fieldName": "align"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-divider",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiDivider",
+          "declaration": {
+            "name": "HmiDivider",
+            "module": "src/elements/divider/divider.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-divider",
+          "declaration": {
+            "name": "HmiDivider",
+            "module": "src/elements/divider/divider.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/empty-state/empty-state.ts",
       "declarations": [
         {
@@ -2164,6 +2286,94 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/scroll-area/scroll-area.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A constrained, scrollable container with themed scrollbars. `orientation`\npicks the axis that scrolls (the other is hidden). Limit its size with\n`maxHeight` or a CSS `max-height` on the host for a vertical area, or with a\n`width` or `max-width` on the host for a horizontal one.\n\nThe scroller is an inner `base` element that inherits the host's\n`max-height`, so both routes work. A `height` on the host does not make it\nscroll: use `max-height`.",
+          "name": "HmiScrollArea",
+          "cssParts": [
+            {
+              "description": "The scroll container.",
+              "name": "base"
+            }
+          ],
+          "slots": [
+            {
+              "description": "The scrollable content.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "orientation",
+              "type": {
+                "text": "ScrollAreaOrientation"
+              },
+              "default": "'vertical'",
+              "description": "Axis that scrolls; the other is hidden.",
+              "attribute": "orientation",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "maxHeight",
+              "type": {
+                "text": "number | string | undefined"
+              },
+              "description": "Height at which a vertical area starts to scroll: a number is pixels, a string is any CSS length.",
+              "attribute": "max-height"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "orientation",
+              "type": {
+                "text": "ScrollAreaOrientation"
+              },
+              "default": "'vertical'",
+              "description": "Axis that scrolls; the other is hidden.",
+              "fieldName": "orientation"
+            },
+            {
+              "name": "max-height",
+              "type": {
+                "text": "number | string | undefined"
+              },
+              "description": "Height at which a vertical area starts to scroll: a number is pixels, a string is any CSS length.",
+              "fieldName": "maxHeight"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-scroll-area",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiScrollArea",
+          "declaration": {
+            "name": "HmiScrollArea",
+            "module": "src/elements/scroll-area/scroll-area.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-scroll-area",
+          "declaration": {
+            "name": "HmiScrollArea",
+            "module": "src/elements/scroll-area/scroll-area.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/skeleton/skeleton.ts",
       "declarations": [
         {
@@ -2634,6 +2844,48 @@
           "declaration": {
             "name": "HmiStat",
             "module": "src/elements/stat/stat.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/elements/visually-hidden/visually-hidden.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Hides its content visually while keeping it available to assistive\ntechnology (the standard `sr-only` clip technique). Use it for labels,\nheadings and live-region text that sighted users don't need.\n\nThe host is the hidden box. There is no `as` property: wrap the host in the\nelement you need, such as `<h2><hmi-visually-hidden>Title</hmi-visually-hidden></h2>`,\nso the heading or label keeps its semantics.",
+          "name": "HmiVisuallyHidden",
+          "slots": [
+            {
+              "description": "The content that stays available to assistive technology.",
+              "name": ""
+            }
+          ],
+          "members": [],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-visually-hidden",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiVisuallyHidden",
+          "declaration": {
+            "name": "HmiVisuallyHidden",
+            "module": "src/elements/visually-hidden/visually-hidden.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-visually-hidden",
+          "declaration": {
+            "name": "HmiVisuallyHidden",
+            "module": "src/elements/visually-hidden/visually-hidden.ts"
           }
         }
       ]

@@ -496,6 +496,96 @@ export function Example() {
         </section>
 
         <section>
+            <h2>Divider</h2>
+            <!-- no events: the label is the default slot; a plain divider is a
+                 separator, a labelled one is not (see TODO.md). -->
+            <div style="display: flex; flex-direction: column; gap: 1.25rem; width: 40rem; max-width: 100%">
+                <div>
+                    <p style="margin: 0 0 0.25rem; font-size: 0.875rem"><code>&lt;hmi-divider&gt;</code> a plain rule</p>
+                    <hmi-divider></hmi-divider>
+                </div>
+                <div>
+                    <p style="margin: 0 0 0.25rem; font-size: 0.875rem"><code>&lt;hmi-divider&gt;OR&lt;/hmi-divider&gt;</code> labelled, centred</p>
+                    <hmi-divider>OR</hmi-divider>
+                </div>
+                <div>
+                    <p style="margin: 0 0 0.25rem; font-size: 0.875rem"><code>align="start"</code> label at the start</p>
+                    <hmi-divider align="start">Details</hmi-divider>
+                </div>
+                <div>
+                    <p style="margin: 0 0 0.25rem; font-size: 0.875rem"><code>align="end"</code> label at the end</p>
+                    <hmi-divider align="end">More</hmi-divider>
+                </div>
+                <div>
+                    <p style="margin: 0 0 0.25rem; font-size: 0.875rem"><code>orientation="vertical"</code> stretches to the row's height</p>
+                    <hmi-flex gap="medium">
+                        <span>One</span>
+                        <hmi-divider orientation="vertical"></hmi-divider>
+                        <span>Two</span>
+                        <hmi-divider orientation="vertical"></hmi-divider>
+                        <span>Three</span>
+                    </hmi-flex>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>ScrollArea</h2>
+            <!-- no events: orientation picks the scrolling axis, maxHeight
+                 (a number is px) or a CSS max-height limits it. -->
+            <div style="display: flex; flex-direction: column; gap: 1.25rem; width: 40rem; max-width: 100%">
+                <div>
+                    <p style="margin: 0 0 0.25rem; font-size: 0.875rem"><code>max-height="100"</code> vertical (default): 100px tall, so the last line is cut off and scrolls</p>
+                    <hmi-scroll-area max-height="100" style="outline: 1px dashed var(--outline-variant)">
+                        <p style="margin: 0.25rem 0">Line 1</p><p style="margin: 0.25rem 0">Line 2</p><p style="margin: 0.25rem 0">Line 3</p><p style="margin: 0.25rem 0">Line 4</p><p style="margin: 0.25rem 0">Line 5</p><p style="margin: 0.25rem 0">Line 6</p><p style="margin: 0.25rem 0">Line 7</p><p style="margin: 0.25rem 0">Line 8</p><p style="margin: 0.25rem 0">Line 9</p><p style="margin: 0.25rem 0">Line 10</p>
+                    </hmi-scroll-area>
+                </div>
+                <div>
+                    <p style="margin: 0 0 0.25rem; font-size: 0.875rem"><code>style="max-height: 6rem"</code> a CSS max-height on the host works too</p>
+                    <hmi-scroll-area style="max-height: 6rem; outline: 1px dashed var(--outline-variant)">
+                        <p style="margin: 0.25rem 0">Line 1</p><p style="margin: 0.25rem 0">Line 2</p><p style="margin: 0.25rem 0">Line 3</p><p style="margin: 0.25rem 0">Line 4</p><p style="margin: 0.25rem 0">Line 5</p><p style="margin: 0.25rem 0">Line 6</p><p style="margin: 0.25rem 0">Line 7</p>
+                    </hmi-scroll-area>
+                </div>
+                <div>
+                    <p style="margin: 0 0 0.25rem; font-size: 0.875rem"><code>orientation="horizontal"</code> in a 24rem-wide box: six cards, the last ones are cut off and scroll sideways</p>
+                    <hmi-scroll-area orientation="horizontal" style="width: 24rem; outline: 1px dashed var(--outline-variant)">
+                        <div style="display: flex; gap: 0.5rem; width: max-content; padding: 0.25rem">
+                            <hmi-box background="surface-container-high" padding="medium" radius="small" bordered>Card 1</hmi-box>
+                            <hmi-box background="surface-container-high" padding="medium" radius="small" bordered>Card 2</hmi-box>
+                            <hmi-box background="surface-container-high" padding="medium" radius="small" bordered>Card 3</hmi-box>
+                            <hmi-box background="surface-container-high" padding="medium" radius="small" bordered>Card 4</hmi-box>
+                            <hmi-box background="surface-container-high" padding="medium" radius="small" bordered>Card 5</hmi-box>
+                            <hmi-box background="surface-container-high" padding="medium" radius="small" bordered>Card 6</hmi-box>
+                        </div>
+                    </hmi-scroll-area>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>VisuallyHidden</h2>
+            <!-- no events: the content is hidden visually but stays in the
+                 accessibility tree. The dashed boxes show where it sits. -->
+            <div style="display: flex; flex-direction: column; gap: 1.25rem; width: 40rem; max-width: 100%">
+                <div>
+                    <p style="margin: 0 0 0.25rem; font-size: 0.875rem"><code>&lt;hmi-visually-hidden&gt;</code> between two visible words: nothing shows, no space is taken</p>
+                    <p style="margin: 0; outline: 1px dashed var(--outline-variant)">Visible<hmi-visually-hidden>, and this text only a screen reader announces,</hmi-visually-hidden> text</p>
+                </div>
+                <div>
+                    <p style="margin: 0 0 0.25rem; font-size: 0.875rem">an icon-only button named "Search" by hidden text</p>
+                    <hmi-button variant="soft">
+                        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true" width="20" height="20"><circle cx="9" cy="9" r="5" /><path d="M13 13l4 4" /></svg>
+                        <hmi-visually-hidden>Search</hmi-visually-hidden>
+                    </hmi-button>
+                </div>
+                <div>
+                    <p style="margin: 0 0 0.25rem; font-size: 0.875rem">inside a heading: it stays in the page outline but draws nothing</p>
+                    <div style="outline: 1px dashed var(--outline-variant); min-height: 1.5rem"><h3 style="margin: 0"><hmi-visually-hidden>Account settings</hmi-visually-hidden></h3></div>
+                </div>
+            </div>
+        </section>
+
+        <section>
             <h2>Skeleton</h2>
             <!-- width/height/radius accept a CSS length string here; the
                  number form (40 → 40px) is only reachable from JS, since an

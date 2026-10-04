@@ -17,6 +17,7 @@ export type ScrollAreaProps = HTMLAttributes<HTMLDivElement> & {
  *
  * @example
  * <ScrollArea maxHeight={240}>…</ScrollArea>
+ * @deprecated Use `ScrollArea` from `@ninoverse/hmi-components/react/scroll-area`. Removed in 6.0.0.
  */
 export function ScrollArea({
     orientation = 'vertical',

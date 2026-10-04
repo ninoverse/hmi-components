@@ -20,6 +20,7 @@ export type DividerProps = HTMLAttributes<HTMLDivElement> & {
  * @example
  * <Divider />
  * <Divider align="start">Section</Divider>
+ * @deprecated Use `Divider` from `@ninoverse/hmi-components/react/divider`. Removed in 6.0.0.
  */
 export function Divider({
     orientation = 'horizontal',

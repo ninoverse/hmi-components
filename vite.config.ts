@@ -108,6 +108,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/code/code.react.ts',
                 ),
+                'wc/divider': resolve(
+                    dirname,
+                    'src/elements/divider/divider.ts',
+                ),
+                'react/divider': resolve(
+                    dirname,
+                    'src/elements/divider/divider.react.ts',
+                ),
                 'wc/empty-state': resolve(
                     dirname,
                     'src/elements/empty-state/empty-state.ts',
@@ -141,6 +149,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/progress/progress.react.ts',
                 ),
+                'wc/scroll-area': resolve(
+                    dirname,
+                    'src/elements/scroll-area/scroll-area.ts',
+                ),
+                'react/scroll-area': resolve(
+                    dirname,
+                    'src/elements/scroll-area/scroll-area.react.ts',
+                ),
                 'wc/skeleton': resolve(
                     dirname,
                     'src/elements/skeleton/skeleton.ts',
@@ -166,6 +182,14 @@ export default defineConfig({
                 'react/stat': resolve(
                     dirname,
                     'src/elements/stat/stat.react.ts',
+                ),
+                'wc/visually-hidden': resolve(
+                    dirname,
+                    'src/elements/visually-hidden/visually-hidden.ts',
+                ),
+                'react/visually-hidden': resolve(
+                    dirname,
+                    'src/elements/visually-hidden/visually-hidden.react.ts',
                 ),
                 accordion: resolve(dirname, 'src/components/accordion.tsx'),
                 alert: resolve(dirname, 'src/components/alert.tsx'),
