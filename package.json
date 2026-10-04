@@ -350,6 +350,10 @@
             "types": "./dist/elements/progress/progress.react.d.ts",
             "import": "./dist/react/progress.js"
         },
+        "./react/scroll-area": {
+            "types": "./dist/elements/scroll-area/scroll-area.react.d.ts",
+            "import": "./dist/react/scroll-area.js"
+        },
         "./react/skeleton": {
             "types": "./dist/elements/skeleton/skeleton.react.d.ts",
             "import": "./dist/react/skeleton.js"
@@ -550,6 +554,10 @@
         "./wc/progress": {
             "types": "./dist/elements/progress/progress.d.ts",
             "import": "./dist/wc/progress.js"
+        },
+        "./wc/scroll-area": {
+            "types": "./dist/elements/scroll-area/scroll-area.d.ts",
+            "import": "./dist/wc/scroll-area.js"
         },
         "./wc/skeleton": {
             "types": "./dist/elements/skeleton/skeleton.d.ts",

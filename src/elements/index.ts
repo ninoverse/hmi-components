@@ -21,6 +21,7 @@ export * from './grid/grid.js';
 export * from './kbd/kbd.js';
 export * from './meter/meter.js';
 export * from './progress/progress.js';
+export * from './scroll-area/scroll-area.js';
 export * from './skeleton/skeleton.js';
 export * from './spacer/spacer.js';
 export * from './spinner/spinner.js';

@@ -530,6 +530,39 @@ export function Example() {
         </section>
 
         <section>
+            <h2>ScrollArea</h2>
+            <!-- no events: orientation picks the scrolling axis, maxHeight
+                 (a number is px) or a CSS max-height limits it. -->
+            <div style="display: flex; flex-direction: column; gap: 1.25rem; width: 40rem; max-width: 100%">
+                <div>
+                    <p style="margin: 0 0 0.25rem; font-size: 0.875rem"><code>max-height="100"</code> vertical (default): 100px tall, so the last line is cut off and scrolls</p>
+                    <hmi-scroll-area max-height="100" style="outline: 1px dashed var(--outline-variant)">
+                        <p style="margin: 0.25rem 0">Line 1</p><p style="margin: 0.25rem 0">Line 2</p><p style="margin: 0.25rem 0">Line 3</p><p style="margin: 0.25rem 0">Line 4</p><p style="margin: 0.25rem 0">Line 5</p><p style="margin: 0.25rem 0">Line 6</p><p style="margin: 0.25rem 0">Line 7</p><p style="margin: 0.25rem 0">Line 8</p><p style="margin: 0.25rem 0">Line 9</p><p style="margin: 0.25rem 0">Line 10</p>
+                    </hmi-scroll-area>
+                </div>
+                <div>
+                    <p style="margin: 0 0 0.25rem; font-size: 0.875rem"><code>style="max-height: 6rem"</code> a CSS max-height on the host works too</p>
+                    <hmi-scroll-area style="max-height: 6rem; outline: 1px dashed var(--outline-variant)">
+                        <p style="margin: 0.25rem 0">Line 1</p><p style="margin: 0.25rem 0">Line 2</p><p style="margin: 0.25rem 0">Line 3</p><p style="margin: 0.25rem 0">Line 4</p><p style="margin: 0.25rem 0">Line 5</p><p style="margin: 0.25rem 0">Line 6</p><p style="margin: 0.25rem 0">Line 7</p>
+                    </hmi-scroll-area>
+                </div>
+                <div>
+                    <p style="margin: 0 0 0.25rem; font-size: 0.875rem"><code>orientation="horizontal"</code> in a 24rem-wide box: six cards, the last ones are cut off and scroll sideways</p>
+                    <hmi-scroll-area orientation="horizontal" style="width: 24rem; outline: 1px dashed var(--outline-variant)">
+                        <div style="display: flex; gap: 0.5rem; width: max-content; padding: 0.25rem">
+                            <hmi-box background="surface-container-high" padding="medium" radius="small" bordered>Card 1</hmi-box>
+                            <hmi-box background="surface-container-high" padding="medium" radius="small" bordered>Card 2</hmi-box>
+                            <hmi-box background="surface-container-high" padding="medium" radius="small" bordered>Card 3</hmi-box>
+                            <hmi-box background="surface-container-high" padding="medium" radius="small" bordered>Card 4</hmi-box>
+                            <hmi-box background="surface-container-high" padding="medium" radius="small" bordered>Card 5</hmi-box>
+                            <hmi-box background="surface-container-high" padding="medium" radius="small" bordered>Card 6</hmi-box>
+                        </div>
+                    </hmi-scroll-area>
+                </div>
+            </div>
+        </section>
+
+        <section>
             <h2>Skeleton</h2>
             <!-- width/height/radius accept a CSS length string here; the
                  number form (40 → 40px) is only reachable from JS, since an

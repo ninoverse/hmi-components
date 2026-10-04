@@ -149,6 +149,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/progress/progress.react.ts',
                 ),
+                'wc/scroll-area': resolve(
+                    dirname,
+                    'src/elements/scroll-area/scroll-area.ts',
+                ),
+                'react/scroll-area': resolve(
+                    dirname,
+                    'src/elements/scroll-area/scroll-area.react.ts',
+                ),
                 'wc/skeleton': resolve(
                     dirname,
                     'src/elements/skeleton/skeleton.ts',

@@ -2286,6 +2286,94 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/scroll-area/scroll-area.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A constrained, scrollable container with themed scrollbars. `orientation`\npicks the axis that scrolls (the other is hidden). Limit its size with\n`maxHeight` or a CSS `max-height` on the host for a vertical area, or with a\n`width` or `max-width` on the host for a horizontal one.\n\nThe scroller is an inner `base` element that inherits the host's\n`max-height`, so both routes work. A `height` on the host does not make it\nscroll: use `max-height`.",
+          "name": "HmiScrollArea",
+          "cssParts": [
+            {
+              "description": "The scroll container.",
+              "name": "base"
+            }
+          ],
+          "slots": [
+            {
+              "description": "The scrollable content.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "orientation",
+              "type": {
+                "text": "ScrollAreaOrientation"
+              },
+              "default": "'vertical'",
+              "description": "Axis that scrolls; the other is hidden.",
+              "attribute": "orientation",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "maxHeight",
+              "type": {
+                "text": "number | string | undefined"
+              },
+              "description": "Height at which a vertical area starts to scroll: a number is pixels, a string is any CSS length.",
+              "attribute": "max-height"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "orientation",
+              "type": {
+                "text": "ScrollAreaOrientation"
+              },
+              "default": "'vertical'",
+              "description": "Axis that scrolls; the other is hidden.",
+              "fieldName": "orientation"
+            },
+            {
+              "name": "max-height",
+              "type": {
+                "text": "number | string | undefined"
+              },
+              "description": "Height at which a vertical area starts to scroll: a number is pixels, a string is any CSS length.",
+              "fieldName": "maxHeight"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-scroll-area",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiScrollArea",
+          "declaration": {
+            "name": "HmiScrollArea",
+            "module": "src/elements/scroll-area/scroll-area.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-scroll-area",
+          "declaration": {
+            "name": "HmiScrollArea",
+            "module": "src/elements/scroll-area/scroll-area.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/skeleton/skeleton.ts",
       "declarations": [
         {

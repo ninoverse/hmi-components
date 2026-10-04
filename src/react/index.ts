@@ -54,6 +54,10 @@ export { Kbd, type KbdSize } from '../elements/kbd/kbd.react.js';
 export { Meter, type MeterLevel } from '../elements/meter/meter.react.js';
 export { Progress } from '../elements/progress/progress.react.js';
 export {
+    ScrollArea,
+    type ScrollAreaOrientation,
+} from '../elements/scroll-area/scroll-area.react.js';
+export {
     Skeleton,
     type SkeletonVariant,
 } from '../elements/skeleton/skeleton.react.js';
