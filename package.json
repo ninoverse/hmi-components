@@ -278,6 +278,10 @@
             "types": "./dist/elements/alert/alert.react.d.ts",
             "import": "./dist/react/alert.js"
         },
+        "./react/aspect-ratio": {
+            "types": "./dist/elements/aspect-ratio/aspect-ratio.react.d.ts",
+            "import": "./dist/react/aspect-ratio.js"
+        },
         "./react/avatar": {
             "types": "./dist/elements/avatar/avatar.react.d.ts",
             "import": "./dist/react/avatar.js"
@@ -470,6 +474,10 @@
         "./wc/alert": {
             "types": "./dist/elements/alert/alert.d.ts",
             "import": "./dist/wc/alert.js"
+        },
+        "./wc/aspect-ratio": {
+            "types": "./dist/elements/aspect-ratio/aspect-ratio.d.ts",
+            "import": "./dist/wc/aspect-ratio.js"
         },
         "./wc/avatar": {
             "types": "./dist/elements/avatar/avatar.d.ts",

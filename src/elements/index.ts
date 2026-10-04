@@ -3,6 +3,7 @@
    bundled as dist/hmi-elements.iife.js. Keep the list alphabetical. */
 
 export * from './alert/alert.js';
+export * from './aspect-ratio/aspect-ratio.js';
 export * from './avatar/avatar.js';
 export * from './avatar-stack/avatar-stack.js';
 export * from './badge/badge.js';

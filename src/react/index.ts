@@ -3,6 +3,7 @@
    Keep the list alphabetical. */
 
 export { Alert, type AlertVariant } from '../elements/alert/alert.react.js';
+export { AspectRatio } from '../elements/aspect-ratio/aspect-ratio.react.js';
 export {
     Avatar,
     type AvatarSize,

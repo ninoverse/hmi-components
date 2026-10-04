@@ -47,6 +47,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/alert/alert.react.ts',
                 ),
+                'wc/aspect-ratio': resolve(
+                    dirname,
+                    'src/elements/aspect-ratio/aspect-ratio.ts',
+                ),
+                'react/aspect-ratio': resolve(
+                    dirname,
+                    'src/elements/aspect-ratio/aspect-ratio.react.ts',
+                ),
                 'wc/avatar': resolve(dirname, 'src/elements/avatar/avatar.ts'),
                 'react/avatar': resolve(
                     dirname,

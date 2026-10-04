@@ -467,6 +467,23 @@ export function Example() {
         </section>
 
         <section>
+            <h2>AspectRatio</h2>
+            <!-- no events: ratio is a number or a CSS ratio, the first child
+                 fills the frame. -->
+            <div class="row" style="align-items: flex-start">
+                <hmi-aspect-ratio ratio="1" style="width: 10rem">
+                    <div style="background: var(--primary-container); display: flex; align-items: center; justify-content: center">1</div>
+                </hmi-aspect-ratio>
+                <hmi-aspect-ratio ratio="4/3" style="width: 12rem">
+                    <div style="background: var(--secondary-container); display: flex; align-items: center; justify-content: center">4/3</div>
+                </hmi-aspect-ratio>
+                <hmi-aspect-ratio ratio="16/9" style="width: 16rem">
+                    <div style="background: var(--tertiary-container); display: flex; align-items: center; justify-content: center">16/9</div>
+                </hmi-aspect-ratio>
+            </div>
+        </section>
+
+        <section>
             <h2>Skeleton</h2>
             <!-- width/height/radius accept a CSS length string here; the
                  number form (40 → 40px) is only reachable from JS, since an

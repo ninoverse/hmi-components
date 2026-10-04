@@ -91,6 +91,76 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/aspect-ratio/aspect-ratio.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Locks its content to a width-to-height ratio and clips the first child to\nfill the frame, so images and embeds keep their proportions at any width.\n\n`ratio` is a number (`1.5`) or a CSS ratio string (`16/9`). It reaches the\ninner `base` element through the CSSOM, so an invalid value is ignored and\nnothing is written into the host's own `style`.",
+          "name": "HmiAspectRatio",
+          "cssParts": [
+            {
+              "description": "The frame that holds the ratio and clips its content.",
+              "name": "base"
+            }
+          ],
+          "slots": [
+            {
+              "description": "The content; its first child is stretched to fill the frame with `object-fit: cover`.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "ratio",
+              "type": {
+                "text": "number | string"
+              },
+              "default": "1",
+              "description": "Width over height: a number or a CSS ratio such as `16/9`.",
+              "attribute": "ratio"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "ratio",
+              "type": {
+                "text": "number | string"
+              },
+              "default": "1",
+              "description": "Width over height: a number or a CSS ratio such as `16/9`.",
+              "fieldName": "ratio"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-aspect-ratio",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiAspectRatio",
+          "declaration": {
+            "name": "HmiAspectRatio",
+            "module": "src/elements/aspect-ratio/aspect-ratio.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-aspect-ratio",
+          "declaration": {
+            "name": "HmiAspectRatio",
+            "module": "src/elements/aspect-ratio/aspect-ratio.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/avatar-stack/avatar-stack.ts",
       "declarations": [
         {

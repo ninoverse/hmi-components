@@ -13,6 +13,7 @@ export type AspectRatioProps = HTMLAttributes<HTMLDivElement> & {
  *
  * @example
  * <AspectRatio ratio={16 / 9}><img src="…" alt="" /></AspectRatio>
+ * @deprecated Use `AspectRatio` from `@ninoverse/hmi-components/react/aspect-ratio`. Removed in 6.0.0.
  */
 export function AspectRatio({
     ratio = 1,
