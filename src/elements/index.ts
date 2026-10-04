@@ -20,6 +20,7 @@ export * from './flex/flex.js';
 export * from './grid/grid.js';
 export * from './heading/heading.js';
 export * from './kbd/kbd.js';
+export * from './link/link.js';
 export * from './meter/meter.js';
 export * from './progress/progress.js';
 export * from './scroll-area/scroll-area.js';

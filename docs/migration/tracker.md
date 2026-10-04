@@ -69,7 +69,7 @@ There is no status for work under way: its open PR already shows that.
 | `hmi-flex` | `flex.tsx` | 3 | low | | `:host { display: flex }`; `direction`, `align`, `justify`, `gap`, `wrap` reflected. | Done | [#148](https://github.com/ninoverse/hmi-components/pull/148) |
 | `hmi-grid` | `grid.tsx` | 3 | low | | `columns` → `--_columns` on host. | Done | [#148](https://github.com/ninoverse/hmi-components/pull/148) |
 | `hmi-heading` | `heading.tsx` | 3 | low | | `level` picks the inner `h1`–`h6`. | Done | |
-| `hmi-link` | `link.tsx` | 3 | low | | Inner `<a part="base">`; `href`, `target`, `rel` mirrored. | Todo | |
+| `hmi-link` | `link.tsx` | 3 | low | | Inner `<a part="base">`; `href`, `target`, `rel` mirrored. | Done | |
 | `hmi-scroll-area` | `scrollArea.tsx` | 3 | low | | Scrollbar styles move into `styles`. | Done | [#149](https://github.com/ninoverse/hmi-components/pull/149) |
 | `hmi-spacer` | `spacer.tsx` | 3 | low | | | Done | [#148](https://github.com/ninoverse/hmi-components/pull/148) |
 | `hmi-text` | `text.tsx` | 3 | low | | `as` dropped; `variant`/`tone` reflected. | Done | |

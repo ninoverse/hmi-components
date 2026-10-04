@@ -57,6 +57,11 @@ export {
     type HeadingTone,
 } from '../elements/heading/heading.react.js';
 export { Kbd, type KbdSize } from '../elements/kbd/kbd.react.js';
+export {
+    Link,
+    type LinkTone,
+    type LinkUnderline,
+} from '../elements/link/link.react.js';
 export { Meter, type MeterLevel } from '../elements/meter/meter.react.js';
 export { Progress } from '../elements/progress/progress.react.js';
 export {
