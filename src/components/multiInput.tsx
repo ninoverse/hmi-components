@@ -52,6 +52,7 @@ const NON_WHITESPACE_PATTERN = /^\S$/;
  *
  * @example
  * <MultiInput length={6} groupSize={3} onComplete={verify} />
+ * @deprecated Use `MultiInput` from `@ninoverse/hmi-components/react/multi-input`. Removed in 6.0.0.
  */
 export function MultiInput({
     length = 6,
