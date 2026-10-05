@@ -157,3 +157,39 @@ maintainer): do not build `Rating`.** If the `rating` name is wanted publicly,
 alias/rename `ValueScaleSelector` rather than adding a second widget.
 
 ### `colorPicker` — genuinely new, still to build.
+
+---
+
+## Angular forms support: `ControlValueAccessor` and `ngModel` (after v6)
+
+**Status: not planned for the migration. Implement after v6 ships.**
+
+### The gap
+The Phase 4 form elements are form-associated custom elements: `name` plus
+`value` reach `FormData`, `form.reset()` and `<fieldset disabled>` work, and
+`hmi-input` / `hmi-change` carry `{ value }`. Angular's `ngModel`,
+`formControlName` and `FormControl` bind through a `ControlValueAccessor`, and
+Angular ships none for custom elements. Today an Angular consumer binds
+explicitly: `[value]="v" (hmi-input)="v = $event.detail.value"`, or reads
+`new FormData(form)` on submit. Reactive forms and template-driven `ngModel`
+do not work with the `hmi-*` form elements.
+
+### What to build
+An Angular adapter, outside the element packages (it must not become a runtime
+dependency of the library, which keeps Lit as its only one):
+- a directive per element family (text, numeric, file, …) providing
+  `NG_VALUE_ACCESSOR` and selecting on `hmi-input[ngModel]`,
+  `hmi-input[formControlName]` and the like;
+- `writeValue` → set the element's `value` property;
+- `registerOnChange` → `hmi-input` (or `hmi-change` for `updateOn: 'blur'`);
+- `registerOnTouched` → `focusout` on the host;
+- `setDisabledState` → the `disabled` property;
+- Angular validators → the element's `error` text, so the field shows the
+  message and is marked invalid.
+
+### Open questions
+- Where it ships: a secondary entry point of this package, or its own package.
+- Whether Angular's own validity state should also drive `error`, or only
+  messages the consumer sets.
+- Vue's `v-model` and Svelte's `bind:value` have the same gap and are outside
+  this note; decide them together with this one.
