@@ -56,6 +56,11 @@ export {
     type HeadingSize,
     type HeadingTone,
 } from '../elements/heading/heading.react.js';
+export {
+    Input,
+    type InputType,
+    type InputValueDetail,
+} from '../elements/input/input.react.js';
 export { Kbd, type KbdSize } from '../elements/kbd/kbd.react.js';
 export {
     Link,

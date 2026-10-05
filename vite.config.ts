@@ -142,6 +142,11 @@ export default defineConfig({
                     dirname,
                     'src/elements/heading/heading.react.ts',
                 ),
+                'wc/input': resolve(dirname, 'src/elements/input/input.ts'),
+                'react/input': resolve(
+                    dirname,
+                    'src/elements/input/input.react.ts',
+                ),
                 'wc/kbd': resolve(dirname, 'src/elements/kbd/kbd.ts'),
                 'react/kbd': resolve(dirname, 'src/elements/kbd/kbd.react.ts'),
                 'wc/link': resolve(dirname, 'src/elements/link/link.ts'),

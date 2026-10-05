@@ -342,6 +342,10 @@
             "types": "./dist/elements/heading/heading.react.d.ts",
             "import": "./dist/react/heading.js"
         },
+        "./react/input": {
+            "types": "./dist/elements/input/input.react.d.ts",
+            "import": "./dist/react/input.js"
+        },
         "./react/kbd": {
             "types": "./dist/elements/kbd/kbd.react.d.ts",
             "import": "./dist/react/kbd.js"
@@ -562,6 +566,10 @@
         "./wc/heading": {
             "types": "./dist/elements/heading/heading.d.ts",
             "import": "./dist/wc/heading.js"
+        },
+        "./wc/input": {
+            "types": "./dist/elements/input/input.d.ts",
+            "import": "./dist/wc/input.js"
         },
         "./wc/kbd": {
             "types": "./dist/elements/kbd/kbd.d.ts",

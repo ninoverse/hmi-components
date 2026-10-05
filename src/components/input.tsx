@@ -27,6 +27,7 @@ export type InputProps = Omit<
  *
  * @example
  * <Input value={q} onChange={setQ} leftIcon={<SearchIcon />} />
+ * @deprecated Use `Input` from `@ninoverse/hmi-components/react/input`. Removed in 6.0.0.
  */
 export function Input({
     leftIcon,
