@@ -730,6 +730,20 @@ export function Example() {
         </section>
 
         <section>
+            <h2>NumberInput</h2>
+            <!-- hmi-input fires on every edit and hmi-change on commit (clamped to
+                 min and max), both with { value } where value is a number or
+                 null: the first field logs them. -->
+            <div style="display: flex; flex-direction: column; gap: 1.5rem; width: 24rem; max-width: 100%">
+                <hmi-number-input id="number-live" label="Quantity" min="1" max="99" value="3"></hmi-number-input>
+                <hmi-number-input label="Age" min="0" max="120" value="120" hint="At the maximum: the increase button is off"></hmi-number-input>
+                <hmi-number-input label="Price" min="0" max="1" step="0.1" value="0.1" hint="Steps of 0.1, rounded"></hmi-number-input>
+                <hmi-number-input label="Empty" placeholder="Pick a number"></hmi-number-input>
+                <hmi-number-input label="Disabled" value="5" disabled></hmi-number-input>
+            </div>
+        </section>
+
+        <section>
             <h2>Skeleton</h2>
             <!-- width/height/radius accept a CSS length string here; the
                  number form (40 → 40px) is only reachable from JS, since an
@@ -857,6 +871,10 @@ export function Example() {
                 event.preventDefault();
                 console.log('hmi-close', event.detail);
             });
+
+            const qty = document.getElementById('number-live');
+            qty.addEventListener('hmi-input', (event) => console.log('number hmi-input', event.detail));
+            qty.addEventListener('hmi-change', (event) => console.log('number hmi-change', event.detail));
 
             const bio = document.getElementById('textarea-live');
             bio.addEventListener('hmi-input', (event) => console.log('textarea hmi-input', event.detail));

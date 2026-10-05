@@ -69,6 +69,10 @@ export {
     type LinkUnderline,
 } from '../elements/link/link.react.js';
 export { Meter, type MeterLevel } from '../elements/meter/meter.react.js';
+export {
+    NumberInput,
+    type NumberInputValueDetail,
+} from '../elements/number-input/number-input.react.js';
 export { Progress } from '../elements/progress/progress.react.js';
 export {
     ScrollArea,
