@@ -4420,6 +4420,1083 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/password-input/password-input.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "`hmi-input` preconfigured for passwords, with a built-in show/hide toggle. It\nextends `HmiInput`, so everything there applies: a native form control, the\n`label`, `hint` and `error` text, `hmi-input` per keystroke and `hmi-change`\non commit, and the `left-icon` slot.\n\nThe field is always `type=\"password\"` or, while revealed, `type=\"text\"`: the\ninherited `type` property is ignored. The eye toggle replaces the\n`right-icon` slot, is a button with `aria-pressed`, and is disabled while the\nfield is. Revealing does not change the value or what the form submits.",
+          "name": "HmiPasswordInput",
+          "cssParts": [
+            {
+              "description": "The bordered field box.",
+              "name": "base",
+              "inheritedFrom": {
+                "name": "HmiInput",
+                "module": "src/elements/input/input.ts"
+              }
+            },
+            {
+              "description": "The native input.",
+              "name": "control",
+              "inheritedFrom": {
+                "name": "HmiInput",
+                "module": "src/elements/input/input.ts"
+              }
+            },
+            {
+              "description": "The show/hide button.",
+              "name": "toggle"
+            },
+            {
+              "description": "The label.",
+              "name": "label",
+              "inheritedFrom": {
+                "name": "HmiInput",
+                "module": "src/elements/input/input.ts"
+              }
+            },
+            {
+              "description": "The icon slot.",
+              "name": "icon",
+              "inheritedFrom": {
+                "name": "HmiInput",
+                "module": "src/elements/input/input.ts"
+              }
+            },
+            {
+              "description": "The hint text.",
+              "name": "hint",
+              "inheritedFrom": {
+                "name": "HmiInput",
+                "module": "src/elements/input/input.ts"
+              }
+            },
+            {
+              "description": "The error message.",
+              "name": "error",
+              "inheritedFrom": {
+                "name": "HmiInput",
+                "module": "src/elements/input/input.ts"
+              }
+            }
+          ],
+          "slots": [
+            {
+              "description": "Icon before the text.",
+              "name": "left-icon",
+              "inheritedFrom": {
+                "name": "HmiInput",
+                "module": "src/elements/input/input.ts"
+              }
+            },
+            {
+              "description": "Icon after the text.",
+              "name": "right-icon",
+              "inheritedFrom": {
+                "name": "HmiInput",
+                "module": "src/elements/input/input.ts"
+              }
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "showLabel",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Show password'",
+              "description": "Accessible name of the toggle while the password is hidden.",
+              "attribute": "show-label"
+            },
+            {
+              "kind": "field",
+              "name": "hideLabel",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Hide password'",
+              "description": "Accessible name of the toggle while the password is shown.",
+              "attribute": "hide-label"
+            },
+            {
+              "kind": "field",
+              "name": "revealed",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "inputType",
+              "type": {
+                "text": "InputType"
+              },
+              "privacy": "protected",
+              "description": "The type of the native input; a subclass overrides it to fix or toggle it.",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiInput",
+                "module": "src/elements/input/input.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#toggle",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "renderTrailing",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "TemplateResult"
+                }
+              },
+              "description": "What sits after the text; a subclass overrides it.",
+              "inheritedFrom": {
+                "name": "HmiInput",
+                "module": "src/elements/input/input.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "formKind",
+              "type": {
+                "text": "FormKind"
+              },
+              "privacy": "protected",
+              "readonly": true,
+              "description": "How `formValue` is turned into the submitted string.",
+              "default": "'text'",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The current value. The attribute is the initial value.",
+              "attribute": "value",
+              "inheritedFrom": {
+                "name": "HmiInput",
+                "module": "src/elements/input/input.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "defaultValue",
+              "type": {
+                "text": "| string\n        | undefined"
+              },
+              "description": "Initial value, and what `form.reset()` restores. Defaults to the value at first render.",
+              "attribute": "default-value",
+              "inheritedFrom": {
+                "name": "HmiInput",
+                "module": "src/elements/input/input.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "type",
+              "type": {
+                "text": "InputType"
+              },
+              "default": "'text'",
+              "description": "Native input type.",
+              "attribute": "type",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "HmiInput",
+                "module": "src/elements/input/input.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "placeholder",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "Hint shown while the field is empty.",
+              "attribute": "placeholder",
+              "inheritedFrom": {
+                "name": "HmiInput",
+                "module": "src/elements/input/input.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "readonly",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "The value can be selected and copied but not edited.",
+              "attribute": "readonly",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "HmiInput",
+                "module": "src/elements/input/input.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "autocomplete",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "Browser autofill hint, such as `email` or `one-time-code`.",
+              "attribute": "autocomplete",
+              "inheritedFrom": {
+                "name": "HmiInput",
+                "module": "src/elements/input/input.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "minlength",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "Shortest valid value, in characters.",
+              "attribute": "minlength",
+              "inheritedFrom": {
+                "name": "HmiInput",
+                "module": "src/elements/input/input.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "maxlength",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "Longest value, in characters.",
+              "attribute": "maxlength",
+              "inheritedFrom": {
+                "name": "HmiInput",
+                "module": "src/elements/input/input.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "pattern",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "Regular expression the value must match.",
+              "attribute": "pattern",
+              "inheritedFrom": {
+                "name": "HmiInput",
+                "module": "src/elements/input/input.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "inputmode",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "Virtual keyboard hint, such as `numeric` or `email`.",
+              "attribute": "inputmode",
+              "inheritedFrom": {
+                "name": "HmiInput",
+                "module": "src/elements/input/input.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "field",
+              "type": {
+                "text": "HTMLInputElement | null"
+              },
+              "privacy": "private",
+              "inheritedFrom": {
+                "name": "HmiInput",
+                "module": "src/elements/input/input.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "#initialValue",
+              "privacy": "private",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "inheritedFrom": {
+                "name": "HmiInput",
+                "module": "src/elements/input/input.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "formValue",
+              "type": {
+                "text": "unknown"
+              },
+              "privacy": "protected",
+              "description": "The value to submit.",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "control",
+              "type": {
+                "text": "ValidatableControl | null"
+              },
+              "privacy": "protected",
+              "description": "The native control whose validity is mirrored, once rendered.",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "resetFormValue",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "description": "Puts the value back to its initial state (`form.reset()`).",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "restoreFormValue",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "state",
+                  "type": {
+                    "text": "string | File | FormData | null"
+                  }
+                }
+              ],
+              "description": "Restores a value the browser saved (history, autofill). Optional.",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#onInput",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "HmiInput",
+                "module": "src/elements/input/input.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#onChange",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "inheritedFrom": {
+                "name": "HmiInput",
+                "module": "src/elements/input/input.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "renderLeading",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "TemplateResult"
+                }
+              },
+              "description": "What sits before the text; a subclass overrides it.",
+              "inheritedFrom": {
+                "name": "HmiInput",
+                "module": "src/elements/input/input.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "formAssociated",
+              "type": {
+                "text": "boolean"
+              },
+              "static": true,
+              "default": "true",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "shadowRootOptions",
+              "type": {
+                "text": "object"
+              },
+              "static": true,
+              "default": "{ ...LitElement.shadowRootOptions, delegatesFocus: true, }",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Name under which the value is submitted with the form.",
+              "attribute": "name",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Disables the control.",
+              "attribute": "disabled",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "The control must have a value for the form to be valid.",
+              "attribute": "required",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Text shown above the control.",
+              "attribute": "label",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "hint",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Helper text shown below the control; hidden while `error` is set.",
+              "attribute": "hint",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "error",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Error message shown below the control. Setting it makes the control invalid.",
+              "attribute": "error",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "internals",
+              "privacy": "protected",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "#fieldsetDisabled",
+              "privacy": "private",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "formDisabledCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "disabled",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "formResetCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "formStateRestoreCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "state",
+                  "type": {
+                    "text": "string | File | FormData | null"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isDisabled",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "protected",
+              "description": "Whether the control is disabled, by `disabled` or an ancestor fieldset.",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "describedBy",
+              "type": {
+                "text": "string | undefined"
+              },
+              "privacy": "protected",
+              "description": "The `id` of the hint or error element to point `aria-describedby` at.",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "invalid",
+              "type": {
+                "text": "'true' | undefined"
+              },
+              "privacy": "protected",
+              "description": "`aria-invalid` for the control.",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "form",
+              "type": {
+                "text": "HTMLFormElement | null"
+              },
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "validity",
+              "type": {
+                "text": "ValidityState"
+              },
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "validationMessage",
+              "type": {
+                "text": "string"
+              },
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "willValidate",
+              "type": {
+                "text": "boolean"
+              },
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "labels",
+              "type": {
+                "text": "NodeList"
+              },
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "checkValidity",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              },
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "reportValidity",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              },
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "syncForm",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "description": "Reports the current value and validity to the form.",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "renderLabel",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "TemplateResult | typeof nothing"
+                }
+              },
+              "description": "The `<label>` tied to the control, with a required marker.",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "renderMessage",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "TemplateResult | typeof nothing"
+                }
+              },
+              "description": "The error (as an alert) or, without one, the hint.",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            }
+          ],
+          "events": [
+            {
+              "type": {
+                "text": "CustomEvent<InputValueDetail>"
+              },
+              "description": "The value changed (every keystroke).",
+              "name": "hmi-input",
+              "inheritedFrom": {
+                "name": "HmiInput",
+                "module": "src/elements/input/input.ts"
+              }
+            },
+            {
+              "type": {
+                "text": "CustomEvent<InputValueDetail>"
+              },
+              "description": "The value was committed.",
+              "name": "hmi-change",
+              "inheritedFrom": {
+                "name": "HmiInput",
+                "module": "src/elements/input/input.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "show-label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Show password'",
+              "description": "Accessible name of the toggle while the password is hidden.",
+              "fieldName": "showLabel"
+            },
+            {
+              "name": "hide-label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Hide password'",
+              "description": "Accessible name of the toggle while the password is shown.",
+              "fieldName": "hideLabel"
+            },
+            {
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The current value. The attribute is the initial value.",
+              "fieldName": "value",
+              "inheritedFrom": {
+                "name": "HmiInput",
+                "module": "src/elements/input/input.ts"
+              }
+            },
+            {
+              "name": "default-value",
+              "type": {
+                "text": "| string\n        | undefined"
+              },
+              "description": "Initial value, and what `form.reset()` restores. Defaults to the value at first render.",
+              "fieldName": "defaultValue",
+              "inheritedFrom": {
+                "name": "HmiInput",
+                "module": "src/elements/input/input.ts"
+              }
+            },
+            {
+              "name": "type",
+              "type": {
+                "text": "InputType"
+              },
+              "default": "'text'",
+              "description": "Native input type.",
+              "fieldName": "type",
+              "inheritedFrom": {
+                "name": "HmiInput",
+                "module": "src/elements/input/input.ts"
+              }
+            },
+            {
+              "name": "placeholder",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "Hint shown while the field is empty.",
+              "fieldName": "placeholder",
+              "inheritedFrom": {
+                "name": "HmiInput",
+                "module": "src/elements/input/input.ts"
+              }
+            },
+            {
+              "name": "readonly",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "The value can be selected and copied but not edited.",
+              "fieldName": "readonly",
+              "inheritedFrom": {
+                "name": "HmiInput",
+                "module": "src/elements/input/input.ts"
+              }
+            },
+            {
+              "name": "autocomplete",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "Browser autofill hint, such as `email` or `one-time-code`.",
+              "fieldName": "autocomplete",
+              "inheritedFrom": {
+                "name": "HmiInput",
+                "module": "src/elements/input/input.ts"
+              }
+            },
+            {
+              "name": "minlength",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "Shortest valid value, in characters.",
+              "fieldName": "minlength",
+              "inheritedFrom": {
+                "name": "HmiInput",
+                "module": "src/elements/input/input.ts"
+              }
+            },
+            {
+              "name": "maxlength",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "Longest value, in characters.",
+              "fieldName": "maxlength",
+              "inheritedFrom": {
+                "name": "HmiInput",
+                "module": "src/elements/input/input.ts"
+              }
+            },
+            {
+              "name": "pattern",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "Regular expression the value must match.",
+              "fieldName": "pattern",
+              "inheritedFrom": {
+                "name": "HmiInput",
+                "module": "src/elements/input/input.ts"
+              }
+            },
+            {
+              "name": "inputmode",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "Virtual keyboard hint, such as `numeric` or `email`.",
+              "fieldName": "inputmode",
+              "inheritedFrom": {
+                "name": "HmiInput",
+                "module": "src/elements/input/input.ts"
+              }
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Name under which the value is submitted with the form.",
+              "fieldName": "name",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Disables the control.",
+              "fieldName": "disabled",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "The control must have a value for the form to be valid.",
+              "fieldName": "required",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Text shown above the control.",
+              "fieldName": "label",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "name": "hint",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Helper text shown below the control; hidden while `error` is set.",
+              "fieldName": "hint",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "name": "error",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Error message shown below the control. Setting it makes the control invalid.",
+              "fieldName": "error",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "HmiInput",
+            "module": "/src/elements/input/input.js"
+          },
+          "tagName": "hmi-password-input",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiPasswordInput",
+          "declaration": {
+            "name": "HmiPasswordInput",
+            "module": "src/elements/password-input/password-input.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-password-input",
+          "declaration": {
+            "name": "HmiPasswordInput",
+            "module": "src/elements/password-input/password-input.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/progress/progress.ts",
       "declarations": [
         {

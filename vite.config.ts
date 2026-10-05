@@ -175,6 +175,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/number-input/number-input.react.ts',
                 ),
+                'wc/password-input': resolve(
+                    dirname,
+                    'src/elements/password-input/password-input.ts',
+                ),
+                'react/password-input': resolve(
+                    dirname,
+                    'src/elements/password-input/password-input.react.ts',
+                ),
                 'wc/progress': resolve(
                     dirname,
                     'src/elements/progress/progress.ts',

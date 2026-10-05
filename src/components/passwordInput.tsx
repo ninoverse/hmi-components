@@ -39,6 +39,7 @@ const EyeOffIcon = () => (
  *
  * @example
  * <PasswordInput value={pw} onChange={setPw} />
+ * @deprecated Use `PasswordInput` from `@ninoverse/hmi-components/react/password-input`. Removed in 6.0.0.
  */
 export function PasswordInput(props: PasswordInputProps) {
     const [show, setShow] = useState(false);

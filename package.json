@@ -366,6 +366,10 @@
             "types": "./dist/elements/number-input/number-input.react.d.ts",
             "import": "./dist/react/number-input.js"
         },
+        "./react/password-input": {
+            "types": "./dist/elements/password-input/password-input.react.d.ts",
+            "import": "./dist/react/password-input.js"
+        },
         "./react/progress": {
             "types": "./dist/elements/progress/progress.react.d.ts",
             "import": "./dist/react/progress.js"
@@ -602,6 +606,10 @@
         "./wc/number-input": {
             "types": "./dist/elements/number-input/number-input.d.ts",
             "import": "./dist/wc/number-input.js"
+        },
+        "./wc/password-input": {
+            "types": "./dist/elements/password-input/password-input.d.ts",
+            "import": "./dist/wc/password-input.js"
         },
         "./wc/progress": {
             "types": "./dist/elements/progress/progress.d.ts",

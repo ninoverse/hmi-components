@@ -73,6 +73,10 @@ export {
     NumberInput,
     type NumberInputValueDetail,
 } from '../elements/number-input/number-input.react.js';
+export {
+    PasswordInput,
+    type PasswordInputValueDetail,
+} from '../elements/password-input/password-input.react.js';
 export { Progress } from '../elements/progress/progress.react.js';
 export {
     ScrollArea,
