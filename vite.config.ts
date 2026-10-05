@@ -199,6 +199,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/scroll-area/scroll-area.react.ts',
                 ),
+                'wc/search-input': resolve(
+                    dirname,
+                    'src/elements/search-input/search-input.ts',
+                ),
+                'react/search-input': resolve(
+                    dirname,
+                    'src/elements/search-input/search-input.react.ts',
+                ),
                 'wc/skeleton': resolve(
                     dirname,
                     'src/elements/skeleton/skeleton.ts',

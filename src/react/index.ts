@@ -83,6 +83,10 @@ export {
     type ScrollAreaOrientation,
 } from '../elements/scroll-area/scroll-area.react.js';
 export {
+    SearchInput,
+    type SearchInputValueDetail,
+} from '../elements/search-input/search-input.react.js';
+export {
     Skeleton,
     type SkeletonVariant,
 } from '../elements/skeleton/skeleton.react.js';

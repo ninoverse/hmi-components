@@ -28,6 +28,7 @@ export * from './number-input/number-input.js';
 export * from './password-input/password-input.js';
 export * from './progress/progress.js';
 export * from './scroll-area/scroll-area.js';
+export * from './search-input/search-input.js';
 export * from './skeleton/skeleton.js';
 export * from './spacer/spacer.js';
 export * from './spinner/spinner.js';

@@ -24,6 +24,7 @@ const SearchIcon = () => (
  *
  * @example
  * <SearchInput value={q} onChange={setQ} />
+ * @deprecated Use `SearchInput` from `@ninoverse/hmi-components/react/search-input`. Removed in 6.0.0.
  */
 export function SearchInput({
     placeholder = 'Search…',

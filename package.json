@@ -378,6 +378,10 @@
             "types": "./dist/elements/scroll-area/scroll-area.react.d.ts",
             "import": "./dist/react/scroll-area.js"
         },
+        "./react/search-input": {
+            "types": "./dist/elements/search-input/search-input.react.d.ts",
+            "import": "./dist/react/search-input.js"
+        },
         "./react/skeleton": {
             "types": "./dist/elements/skeleton/skeleton.react.d.ts",
             "import": "./dist/react/skeleton.js"
@@ -618,6 +622,10 @@
         "./wc/scroll-area": {
             "types": "./dist/elements/scroll-area/scroll-area.d.ts",
             "import": "./dist/wc/scroll-area.js"
+        },
+        "./wc/search-input": {
+            "types": "./dist/elements/search-input/search-input.d.ts",
+            "import": "./dist/wc/search-input.js"
         },
         "./wc/skeleton": {
             "types": "./dist/elements/skeleton/skeleton.d.ts",

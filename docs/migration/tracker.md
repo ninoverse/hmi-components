@@ -80,7 +80,7 @@ There is no status for work under way: its open PR already shows that.
 | `hmi-textarea` | `textarea.tsx` | 4 | med | F E | `hmi-input` + `hmi-change`. | Done | [#156](https://github.com/ninoverse/hmi-components/pull/156) |
 | `hmi-number-input` | `numberInput.tsx` | 4 | med | F E | Numeric form kind; `hmi-input` + `hmi-change { value: number \| null }`. | Done | [#157](https://github.com/ninoverse/hmi-components/pull/157) |
 | `hmi-password-input` | `passwordInput.tsx` | 4 | med | F E | Composes `<hmi-input>`; toggle button; depended on global `button { font: inherit }`. Extends `HmiInput`, not nested. | Done | |
-| `hmi-search-input` | `searchInput.tsx` | 4 | low | F E | No own CSS today; composes `<hmi-input>`. Extends `HmiInput`, not nested. | Todo | |
+| `hmi-search-input` | `searchInput.tsx` | 4 | low | F E | No own CSS today; composes `<hmi-input>`. Extends `HmiInput`, not nested. | Done | |
 | `hmi-multi-input` | `multiInput.tsx` | 4 | med | F E | `hmi-input`, `hmi-change`, `hmi-complete`; `autofocus` prop. Submits the joined cells as one string; `hmi-complete` fires once every cell is filled. | Todo | |
 | `hmi-file-upload` | `fileUpload.tsx` | 4 | med | F E | `hmi-change { value: FileDescriptor[] }`; hidden native input inside the root. Exposes the selected `File`s as `el.files` so hosts without shadow-DOM access (Dioxus) can read them; submits real `File`s through `FormData`. Document the `web_sys` recipe. | Todo | |
 | `hmi-checkbox` | `checkbox.tsx` | 5 | med | S F E | Checkable form kind; slot `label`; `hmi-change { value: boolean }`. | Todo | |
