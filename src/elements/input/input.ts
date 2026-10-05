@@ -1,4 +1,4 @@
-import { html, type PropertyValues } from 'lit';
+import { html, type PropertyValues, type TemplateResult } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
@@ -130,6 +130,21 @@ export class HmiInput extends HmiFormField {
         emit<InputValueDetail>(this, 'hmi-change', { value: this.value });
     }
 
+    /** The type of the native input; a subclass overrides it to fix or toggle it. */
+    protected get inputType(): InputType {
+        return this.type;
+    }
+
+    /** What sits before the text; a subclass overrides it. */
+    protected renderLeading(): TemplateResult {
+        return html`<slot name="left-icon" part="icon"></slot>`;
+    }
+
+    /** What sits after the text; a subclass overrides it. */
+    protected renderTrailing(): TemplateResult {
+        return html`<slot name="right-icon" part="icon"></slot>`;
+    }
+
     override render() {
         return html`
             ${this.renderLabel()}
@@ -137,12 +152,12 @@ export class HmiInput extends HmiFormField {
                 part="base"
                 class=${this.error ? 'base invalid' : this.isDisabled ? 'base disabled' : 'base'}
             >
-                <slot name="left-icon" part="icon"></slot>
+                ${this.renderLeading()}
                 <input
                     id="control"
                     part="control"
                     class="control"
-                    type=${this.type}
+                    type=${this.inputType}
                     .value=${live(this.value)}
                     placeholder=${ifDefined(this.placeholder)}
                     autocomplete=${ifDefined(this.autocomplete)}
@@ -158,7 +173,7 @@ export class HmiInput extends HmiFormField {
                     @input=${this.#onInput}
                     @change=${this.#onChange}
                 />
-                <slot name="right-icon" part="icon"></slot>
+                ${this.renderTrailing()}
             </div>
             ${this.renderMessage()}
         `;

@@ -2473,6 +2473,38 @@
             },
             {
               "kind": "field",
+              "name": "inputType",
+              "type": {
+                "text": "InputType"
+              },
+              "privacy": "protected",
+              "description": "The type of the native input; a subclass overrides it to fix or toggle it.",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "renderLeading",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "TemplateResult"
+                }
+              },
+              "description": "What sits before the text; a subclass overrides it."
+            },
+            {
+              "kind": "method",
+              "name": "renderTrailing",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "TemplateResult"
+                }
+              },
+              "description": "What sits after the text; a subclass overrides it."
+            },
+            {
+              "kind": "field",
               "name": "formAssociated",
               "type": {
                 "text": "boolean"
