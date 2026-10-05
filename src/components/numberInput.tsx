@@ -28,6 +28,7 @@ export type NumberInputProps = Omit<
  *
  * @example
  * <NumberInput min={0} max={10} value={qty} onChange={setQty} />
+ * @deprecated Use `NumberInput` from `@ninoverse/hmi-components/react/number-input`. Removed in 6.0.0.
  */
 export function NumberInput({
     value,

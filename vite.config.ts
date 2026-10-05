@@ -167,6 +167,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/meter/meter.react.ts',
                 ),
+                'wc/number-input': resolve(
+                    dirname,
+                    'src/elements/number-input/number-input.ts',
+                ),
+                'react/number-input': resolve(
+                    dirname,
+                    'src/elements/number-input/number-input.react.ts',
+                ),
                 'wc/progress': resolve(
                     dirname,
                     'src/elements/progress/progress.ts',

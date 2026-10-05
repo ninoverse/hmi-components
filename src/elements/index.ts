@@ -24,6 +24,7 @@ export * from './input/input.js';
 export * from './kbd/kbd.js';
 export * from './link/link.js';
 export * from './meter/meter.js';
+export * from './number-input/number-input.js';
 export * from './progress/progress.js';
 export * from './scroll-area/scroll-area.js';
 export * from './skeleton/skeleton.js';

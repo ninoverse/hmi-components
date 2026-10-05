@@ -362,6 +362,10 @@
             "types": "./dist/elements/meter/meter.react.d.ts",
             "import": "./dist/react/meter.js"
         },
+        "./react/number-input": {
+            "types": "./dist/elements/number-input/number-input.react.d.ts",
+            "import": "./dist/react/number-input.js"
+        },
         "./react/progress": {
             "types": "./dist/elements/progress/progress.react.d.ts",
             "import": "./dist/react/progress.js"
@@ -594,6 +598,10 @@
         "./wc/meter": {
             "types": "./dist/elements/meter/meter.d.ts",
             "import": "./dist/wc/meter.js"
+        },
+        "./wc/number-input": {
+            "types": "./dist/elements/number-input/number-input.d.ts",
+            "import": "./dist/wc/number-input.js"
         },
         "./wc/progress": {
             "types": "./dist/elements/progress/progress.d.ts",
