@@ -49,6 +49,7 @@ export {
     type FlexGap,
     type FlexJustify,
 } from '../elements/flex/flex.react.js';
+export { FormControl } from '../elements/form-control/form-control.react.js';
 export { Grid, type GridGap } from '../elements/grid/grid.react.js';
 export {
     Heading,
@@ -94,4 +95,8 @@ export {
     type TextTone,
     type TextWeight,
 } from '../elements/text/text.react.js';
+export {
+    Textarea,
+    type TextareaValueDetail,
+} from '../elements/textarea/textarea.react.js';
 export { VisuallyHidden } from '../elements/visually-hidden/visually-hidden.react.js';

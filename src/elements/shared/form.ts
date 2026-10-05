@@ -69,7 +69,7 @@ export function syncValidity(
  * and renders `renderLabel()` and `renderMessage()` around its control. The
  * control needs `id="control"`; `describedBy` and `invalid` belong on it.
  */
-export abstract class HmiFormControl extends LitElement {
+export abstract class HmiFormField extends LitElement {
     static formAssociated = true;
     static override shadowRootOptions = {
         ...LitElement.shadowRootOptions,

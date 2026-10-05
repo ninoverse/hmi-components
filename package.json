@@ -334,6 +334,10 @@
             "types": "./dist/elements/flex/flex.react.d.ts",
             "import": "./dist/react/flex.js"
         },
+        "./react/form-control": {
+            "types": "./dist/elements/form-control/form-control.react.d.ts",
+            "import": "./dist/react/form-control.js"
+        },
         "./react/grid": {
             "types": "./dist/elements/grid/grid.react.d.ts",
             "import": "./dist/react/grid.js"
@@ -385,6 +389,10 @@
         "./react/text": {
             "types": "./dist/elements/text/text.react.d.ts",
             "import": "./dist/react/text.js"
+        },
+        "./react/textarea": {
+            "types": "./dist/elements/textarea/textarea.react.d.ts",
+            "import": "./dist/react/textarea.js"
         },
         "./react/visually-hidden": {
             "types": "./dist/elements/visually-hidden/visually-hidden.react.d.ts",
@@ -559,6 +567,10 @@
             "types": "./dist/elements/flex/flex.d.ts",
             "import": "./dist/wc/flex.js"
         },
+        "./wc/form-control": {
+            "types": "./dist/elements/form-control/form-control.d.ts",
+            "import": "./dist/wc/form-control.js"
+        },
         "./wc/grid": {
             "types": "./dist/elements/grid/grid.d.ts",
             "import": "./dist/wc/grid.js"
@@ -610,6 +622,10 @@
         "./wc/text": {
             "types": "./dist/elements/text/text.d.ts",
             "import": "./dist/wc/text.js"
+        },
+        "./wc/textarea": {
+            "types": "./dist/elements/textarea/textarea.d.ts",
+            "import": "./dist/wc/textarea.js"
         },
         "./wc/visually-hidden": {
             "types": "./dist/elements/visually-hidden/visually-hidden.d.ts",

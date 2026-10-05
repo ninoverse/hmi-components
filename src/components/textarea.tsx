@@ -22,6 +22,7 @@ export type TextareaProps = Omit<
  *
  * @example
  * <Textarea value={bio} onChange={setBio} rows={4} />
+ * @deprecated Use `Textarea` from `@ninoverse/hmi-components/react/textarea`. Removed in 6.0.0.
  */
 export function Textarea({
     error = false,

@@ -698,6 +698,38 @@ export function Example() {
         </section>
 
         <section>
+            <h2>Textarea</h2>
+            <!-- hmi-input fires on every keystroke and hmi-change on commit, both
+                 with { value }: the first field logs them. -->
+            <div style="display: flex; flex-direction: column; gap: 1.5rem; width: 32rem; max-width: 100%">
+                <hmi-textarea id="textarea-live" label="About you" hint="A short bio, 240 chars max" placeholder="Tell us a bit about yourself…"></hmi-textarea>
+                <hmi-textarea label="Feedback" error="Please describe the issue."></hmi-textarea>
+                <hmi-textarea label="Disabled" value="Already filled" disabled></hmi-textarea>
+            </div>
+        </section>
+
+        <section>
+            <h2>FormControl</h2>
+            <!-- deprecated: the form elements render their own label, hint and
+                 error. This wraps a control that does not, here an input. -->
+            <div style="display: flex; flex-direction: column; gap: 1.5rem; width: 32rem; max-width: 100%">
+                <hmi-form-control label="Full name" hint="As it appears on documents">
+                    <hmi-input placeholder="Alex Morgan"></hmi-input>
+                </hmi-form-control>
+                <hmi-form-control label="Email" error="Hmm, that doesn't look right.">
+                    <hmi-input type="email" placeholder="you@studio.co" value="not-an-email"></hmi-input>
+                </hmi-form-control>
+                <hmi-form-control label="Search">
+                    <hmi-input placeholder="Search…"></hmi-input>
+                </hmi-form-control>
+                <hmi-form-control>
+                    <span slot="label">Slotted label <em>(rich content)</em></span>
+                    <hmi-input placeholder="Read-only" value="Already filled" disabled></hmi-input>
+                </hmi-form-control>
+            </div>
+        </section>
+
+        <section>
             <h2>Skeleton</h2>
             <!-- width/height/radius accept a CSS length string here; the
                  number form (40 → 40px) is only reachable from JS, since an
@@ -825,6 +857,10 @@ export function Example() {
                 event.preventDefault();
                 console.log('hmi-close', event.detail);
             });
+
+            const bio = document.getElementById('textarea-live');
+            bio.addEventListener('hmi-input', (event) => console.log('textarea hmi-input', event.detail));
+            bio.addEventListener('hmi-change', (event) => console.log('textarea hmi-change', event.detail));
 
             const live = document.getElementById('input-live');
             live.addEventListener('hmi-input', (event) => console.log('hmi-input', event.detail));

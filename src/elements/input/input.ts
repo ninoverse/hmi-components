@@ -4,7 +4,7 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
 import { baseStyles } from '../shared/base.styles.js';
 import { emit } from '../shared/events.js';
-import { type FormKind, HmiFormControl } from '../shared/form.js';
+import { type FormKind, HmiFormField } from '../shared/form.js';
 import { formStyles } from '../shared/form.styles.js';
 import { styles } from './input.styles.js';
 
@@ -52,7 +52,7 @@ export interface InputValueDetail {
  * <hmi-input name="email" type="email" label="Email" required></hmi-input>
  */
 @customElement('hmi-input')
-export class HmiInput extends HmiFormControl {
+export class HmiInput extends HmiFormField {
     static override styles = [baseStyles, formStyles, styles];
 
     protected readonly formKind: FormKind = 'text';
