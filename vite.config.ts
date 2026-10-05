@@ -206,6 +206,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/text/text.react.ts',
                 ),
+                'wc/textarea': resolve(
+                    dirname,
+                    'src/elements/textarea/textarea.ts',
+                ),
+                'react/textarea': resolve(
+                    dirname,
+                    'src/elements/textarea/textarea.react.ts',
+                ),
                 'wc/visually-hidden': resolve(
                     dirname,
                     'src/elements/visually-hidden/visually-hidden.ts',

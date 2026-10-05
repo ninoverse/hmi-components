@@ -94,4 +94,8 @@ export {
     type TextTone,
     type TextWeight,
 } from '../elements/text/text.react.js';
+export {
+    Textarea,
+    type TextareaValueDetail,
+} from '../elements/textarea/textarea.react.js';
 export { VisuallyHidden } from '../elements/visually-hidden/visually-hidden.react.js';

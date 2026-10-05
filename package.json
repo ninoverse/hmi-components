@@ -386,6 +386,10 @@
             "types": "./dist/elements/text/text.react.d.ts",
             "import": "./dist/react/text.js"
         },
+        "./react/textarea": {
+            "types": "./dist/elements/textarea/textarea.react.d.ts",
+            "import": "./dist/react/textarea.js"
+        },
         "./react/visually-hidden": {
             "types": "./dist/elements/visually-hidden/visually-hidden.react.d.ts",
             "import": "./dist/react/visually-hidden.js"
@@ -610,6 +614,10 @@
         "./wc/text": {
             "types": "./dist/elements/text/text.d.ts",
             "import": "./dist/wc/text.js"
+        },
+        "./wc/textarea": {
+            "types": "./dist/elements/textarea/textarea.d.ts",
+            "import": "./dist/wc/textarea.js"
         },
         "./wc/visually-hidden": {
             "types": "./dist/elements/visually-hidden/visually-hidden.d.ts",
