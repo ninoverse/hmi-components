@@ -19,6 +19,7 @@ export * from './empty-state/empty-state.js';
 export * from './flex/flex.js';
 export * from './grid/grid.js';
 export * from './heading/heading.js';
+export * from './input/input.js';
 export * from './kbd/kbd.js';
 export * from './link/link.js';
 export * from './meter/meter.js';

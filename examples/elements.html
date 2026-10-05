@@ -674,6 +674,30 @@ export function Example() {
         </section>
 
         <section>
+            <h2>Input</h2>
+            <!-- hmi-input fires on every keystroke and hmi-change on commit, both
+                 with { value }: the form below logs them and the submitted
+                 FormData. -->
+            <div style="display: flex; flex-direction: column; gap: 1.25rem; width: 32rem; max-width: 100%">
+                <hmi-input label="Full name" hint="As it appears on documents" placeholder="Alex Morgan"></hmi-input>
+                <hmi-input type="email" label="Email" error="Hmm, that doesn't look right." placeholder="you@studio.co" value="not-an-email"></hmi-input>
+                <hmi-input label="Search" placeholder="Search…">
+                    <svg slot="left-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="7" cy="7" r="4.5" /><path d="M10.5 10.5L14 14" /></svg>
+                </hmi-input>
+                <hmi-input label="Disabled" value="Already filled" disabled></hmi-input>
+                <form id="input-form" style="display: flex; flex-direction: column; gap: 1rem; padding: 1rem; outline: 1px dashed var(--outline-variant)">
+                    <p style="margin: 0 0 0.25rem; font-size: 0.875rem"><code>&lt;form&gt;</code> type, then Submit (required blocks it) or Reset; see the console</p>
+                    <hmi-input id="input-live" name="name" label="Name" value="Ada" required></hmi-input>
+                    <hmi-input name="email" type="email" label="Email" hint="Checked by the browser" required></hmi-input>
+                    <div class="row">
+                        <hmi-button type="submit">Submit</hmi-button>
+                        <hmi-button type="reset" variant="secondary">Reset</hmi-button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <section>
             <h2>Skeleton</h2>
             <!-- width/height/radius accept a CSS length string here; the
                  number form (40 → 40px) is only reachable from JS, since an
@@ -800,6 +824,14 @@ export function Example() {
             pinned.addEventListener('hmi-close', (event) => {
                 event.preventDefault();
                 console.log('hmi-close', event.detail);
+            });
+
+            const live = document.getElementById('input-live');
+            live.addEventListener('hmi-input', (event) => console.log('hmi-input', event.detail));
+            live.addEventListener('hmi-change', (event) => console.log('hmi-change', event.detail));
+            document.getElementById('input-form').addEventListener('submit', (event) => {
+                event.preventDefault();
+                console.log('submit', Object.fromEntries(new FormData(event.target)));
             });
 
             const html = document.documentElement;

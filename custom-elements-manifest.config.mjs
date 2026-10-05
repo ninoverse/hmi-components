@@ -1,6 +1,9 @@
 /* @custom-elements-manifest/analyzer — `pnpm cem`. Reads the element classes
-   only; styles, wrappers, stories, tests and the shared helpers carry no
-   custom element declarations. Output: ./custom-elements.json (committed). */
+   and the form base class they inherit from (`shared/form.ts`), so the
+   inherited `name`, `disabled`, `required`, `label`, `hint` and `error` are
+   listed on each form element. Styles, wrappers, stories, tests and the other
+   shared helpers carry no custom element declarations. Output:
+   ./custom-elements.json (committed). */
 export default {
     globs: ['src/elements/**/*.ts'],
     exclude: [
@@ -8,7 +11,7 @@ export default {
         '**/*.react.ts',
         '**/*.stories.ts',
         '**/*.test.ts',
-        'src/elements/shared/**',
+        'src/elements/shared/!(form).ts',
         'src/elements/index.ts',
     ],
     outdir: '.',
