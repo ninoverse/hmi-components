@@ -179,6 +179,13 @@ Rules: one element per commit; batches of up to five leaves per PR in phases
 2, 3 and 8; every branch is cut from `main` after the previous PR merged
 (never stacked); no new React components during the migration.
 
+Phase 4 exception (agreed with the maintainer): the form elements are not
+leaves, but the small ones share a PR, which gives six PRs in this order:
+`input` alone (it lands `shared/form.ts`); `textarea` + `form-control`;
+`number-input`; `password-input` + `search-input` (both extend `HmiInput`
+instead of nesting it, so there is one `ElementInternals`); `multi-input`;
+`file-upload`. Each batch is still one commit per element.
+
 ## 7. Running one migration end to end
 
 The `migrate-component` skill (`.claude/skills/migrate-component/SKILL.md`)

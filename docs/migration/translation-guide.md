@@ -553,6 +553,39 @@ non-form children and is marked `@deprecated` in favour of the props above.
 `src/lib/controlledTextCaret.utility.ts` is not needed: the element owns the
 native input, so no async echo occurs.
 
+### Binding model
+
+The form elements are native form controls through `ElementInternals`, so they
+work in a plain `<form>` with no framework binding. Binding is **explicit** in
+every host: a property in, an event out. There is no `v-model`, `ngModel` or
+`bind:value` support (Angular and Svelte adapters are post-v6 TODOs in
+`TODO.md`).
+
+| What | How it works |
+|------|--------------|
+| Submit | `name` plus `value` reach `FormData` and the form's submit. Text is a string, a number its string, an object a JSON string, and files real `File` entries. |
+| Validation | `required` gives the native `valueMissing` message. A non-empty `error` string gives a `customError` with that text, sets `aria-invalid` and shows the message. `form.checkValidity()` and `reportValidity()` work. |
+| Reset | `form.reset()` restores `value` to what it was at the first render. The `value` attribute is the initial value. |
+| Disabled | `<fieldset disabled>` disables the control (`formDisabledCallback`). |
+| Events | `hmi-input` on every keystroke and `hmi-change` on commit, both `detail: { value }`, bubbling and composed. |
+| Ownership | The element owns the state. To veto a change, listen and set `value` back. |
+
+Per host:
+
+| Host | Value in | Value out |
+|------|----------|-----------|
+| Plain HTML | `el.value = …` or the `value` attribute | `addEventListener('hmi-input', e => e.detail.value)`, or `new FormData(form)` on submit |
+| React | `value`, `defaultValue` props | `onInput` (per keystroke, v5's `onChange`) and `onChange` (commit): both receive the event, so read `e.detail.value` |
+| Vue | `:value` | `@hmi-input="e => v = e.detail.value"` |
+| Angular | `[value]` | `(hmi-input)="v = $event.detail.value"`, or `FormData` on submit; `ngModel` and reactive forms need an adapter (post-v6) |
+| Dioxus | attributes from strings | the form's `values()` for strings; `web_sys` for events, objects and files |
+
+`hmi-file-upload` exposes the selected files as `el.files` (a `File[]`). Its
+`hmi-change` detail carries serialisable `FileDescriptor`s, but the submitted
+form holds the real `File`s. A host without access to the element's shadow DOM
+(Dioxus) reads them from `el.files` or from `FormData`, as in the README's
+`web_sys` pattern for events.
+
 ## 14. Charts
 
 The 14 charts are pure functions of props and port almost verbatim:
