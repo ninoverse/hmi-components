@@ -17,6 +17,7 @@ export * from './code/code.js';
 export * from './divider/divider.js';
 export * from './empty-state/empty-state.js';
 export * from './flex/flex.js';
+export * from './form-control/form-control.js';
 export * from './grid/grid.js';
 export * from './heading/heading.js';
 export * from './input/input.js';

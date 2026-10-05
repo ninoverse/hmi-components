@@ -709,6 +709,27 @@ export function Example() {
         </section>
 
         <section>
+            <h2>FormControl</h2>
+            <!-- deprecated: the form elements render their own label, hint and
+                 error. This wraps a control that does not, here an input. -->
+            <div style="display: flex; flex-direction: column; gap: 1.5rem; width: 32rem; max-width: 100%">
+                <hmi-form-control label="Full name" hint="As it appears on documents">
+                    <hmi-input placeholder="Alex Morgan"></hmi-input>
+                </hmi-form-control>
+                <hmi-form-control label="Email" error="Hmm, that doesn't look right.">
+                    <hmi-input type="email" placeholder="you@studio.co" value="not-an-email"></hmi-input>
+                </hmi-form-control>
+                <hmi-form-control label="Search">
+                    <hmi-input placeholder="Search…"></hmi-input>
+                </hmi-form-control>
+                <hmi-form-control>
+                    <span slot="label">Slotted label <em>(rich content)</em></span>
+                    <hmi-input placeholder="Read-only" value="Already filled" disabled></hmi-input>
+                </hmi-form-control>
+            </div>
+        </section>
+
+        <section>
             <h2>Skeleton</h2>
             <!-- width/height/radius accept a CSS length string here; the
                  number form (40 → 40px) is only reachable from JS, since an

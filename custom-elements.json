@@ -1814,6 +1814,180 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/form-control/form-control.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A vertical stack of a label, a control and a hint or error message, for\nchildren that do not render their own, such as a custom control.",
+          "name": "HmiFormControl",
+          "cssParts": [
+            {
+              "description": "The label.",
+              "name": "label"
+            },
+            {
+              "description": "The hint.",
+              "name": "hint"
+            },
+            {
+              "description": "The error message.",
+              "name": "error"
+            }
+          ],
+          "slots": [
+            {
+              "description": "The control.",
+              "name": ""
+            },
+            {
+              "description": "Replaces the `label` string.",
+              "name": "label"
+            },
+            {
+              "description": "Replaces the `hint` string.",
+              "name": "hint"
+            },
+            {
+              "description": "Replaces the `error` string.",
+              "name": "error"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Text above the control.",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "hint",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Helper text below the control; hidden while an error is set.",
+              "attribute": "hint"
+            },
+            {
+              "kind": "field",
+              "name": "error",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Error message below the control; takes precedence over the hint.",
+              "attribute": "error"
+            },
+            {
+              "kind": "field",
+              "name": "hasLabel",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "hasHint",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "hasError",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "method",
+              "name": "#onSlotChange",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Text above the control.",
+              "fieldName": "label"
+            },
+            {
+              "name": "hint",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Helper text below the control; hidden while an error is set.",
+              "fieldName": "hint"
+            },
+            {
+              "name": "error",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Error message below the control; takes precedence over the hint.",
+              "fieldName": "error"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "deprecated": "The form elements (`hmi-input`, `hmi-textarea`, …) render their own `label`, `hint` and `error`, tied to the control for assistive technology. Set those on the element instead of wrapping it. The wrapper does not associate its label with the control, and its error is not an alert. `label`, `hint` and `error` are strings, and the slots of the same names replace them with rich content. The error replaces the hint while it is set.",
+          "tagName": "hmi-form-control",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiFormControl",
+          "declaration": {
+            "name": "HmiFormControl",
+            "module": "src/elements/form-control/form-control.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-form-control",
+          "declaration": {
+            "name": "HmiFormControl",
+            "module": "src/elements/form-control/form-control.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/grid/grid.ts",
       "declarations": [
         {

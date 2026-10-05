@@ -129,6 +129,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/flex/flex.react.ts',
                 ),
+                'wc/form-control': resolve(
+                    dirname,
+                    'src/elements/form-control/form-control.ts',
+                ),
+                'react/form-control': resolve(
+                    dirname,
+                    'src/elements/form-control/form-control.react.ts',
+                ),
                 'wc/grid': resolve(dirname, 'src/elements/grid/grid.ts'),
                 'react/grid': resolve(
                     dirname,

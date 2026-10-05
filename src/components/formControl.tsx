@@ -16,6 +16,7 @@ export type FormControlProps = HTMLAttributes<HTMLDivElement> & {
  *
  * @example
  * <FormControl label="Email" error={err}><Input /></FormControl>
+ * @deprecated Use `FormControl` from `@ninoverse/hmi-components/react/form-control`. Removed in 6.0.0.
  */
 export function FormControl({
     label,
