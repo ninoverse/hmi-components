@@ -193,3 +193,80 @@ dependency of the library, which keeps Lit as its only one):
   messages the consumer sets.
 - Vue's `v-model` and Svelte's `bind:value` have the same gap and are outside
   this note; decide them together with this one.
+
+---
+
+## Svelte `bind:value` for the form elements (after v6)
+
+**Status: not planned for the migration. Investigate and decide after v6 ships.**
+
+### The gap
+The Phase 4 form elements bind explicitly in every host: `value` in,
+`hmi-input` / `hmi-change` out (`detail: { value }`). Svelte's `bind:value` is
+sugar that listens for a native event on the element and reads its `value`
+property. The elements emit `hmi-*` events, so two-way binding is not part of the
+documented contract. Today a Svelte consumer writes
+`<hmi-input {value} on:hmi-input={(e) => (value = e.detail.value)} />`.
+
+### To investigate
+Not verified yet, and should be before anything is promised:
+- The inner native `<input>` fires a composed `input` event that reaches a
+  listener on the host, with the host as the retargeted `target`. If the host's
+  `value` is already updated when that listener runs, `bind:value` may already
+  work for the text elements by accident. Check the order of events and how
+  Svelte 5 binds on custom elements.
+- `hmi-number-input`'s `value` is `number | null`, and the checkable controls
+  in Phase 5 use `checked`, so a generic binding does not cover them.
+- A native `change` event is not composed, so commit semantics do not cross the
+  shadow boundary either.
+
+### Options
+- Document the explicit `value` plus `on:hmi-input` pattern only (no code).
+- Ship a small Svelte action, such as `use:hmiModel={...}`, outside the element
+  packages so Lit stays the only runtime dependency.
+- Have the elements also dispatch native-looking `input` and `change` events, if
+  the investigation shows that is what makes `bind:value` work.
+
+### Open questions
+- Where an adapter ships, as for the Angular `ControlValueAccessor` TODO above.
+- Whether to decide this together with Vue's `v-model`.
+
+---
+
+## Dioxus: verify the form recipe in a real app (after v6)
+
+**Status: nothing below has been run in a Dioxus app yet. Verify, then correct
+the docs to match.**
+
+### What the docs currently say
+`docs/migration/translation-guide.md` §13 (Binding model) and `README.md` §8
+describe Dioxus as: attributes from strings; booleans through the property in
+`onmounted`; strings from the form's `values()`; and `web_sys` for events,
+objects and files. `hmi-file-upload` exposes the selected files as `el.files`,
+because Dioxus's own file API reads from a native `<input type="file">` and the
+real input is inside the element's shadow DOM. All of this comes from how the web
+platform and the README's `web_sys` pattern work, not from a Dioxus test.
+
+### To verify, in a small Dioxus project
+Cover web, fullstack and desktop where they differ:
+1. **Submit:** does `FormEvent::values()` include the `hmi-*` controls and their
+   string values? Do `required` and `error` block the submit as in a plain form?
+2. **Files:** does `web_sys::FormData::new_with_form(&form)` return the real
+   `File`s from `hmi-file-upload`, and does reading `el.files` work? Does
+   Dioxus's own `files()` fail as expected, and does desktop (webview) differ?
+3. **Events:** does adding `hmi-input` and `hmi-change` listeners through
+   `web_sys` from `onmounted` work, and can the `detail` object be deserialized
+   (for example with `serde_wasm_bindgen`)?
+4. **Booleans and properties:** setting `disabled`, `value` and `error` from
+   `onmounted`, and whether omitting the attribute behaves as documented.
+5. **Fullstack:** server-rendered markup (declarative shadow DOM) hydrates
+   without a flash or a mismatch, and the form value is intact after upgrade.
+6. **Reset:** `form.reset()` restores the initial `value`.
+
+### Deliverable
+A tiny example (or a snippet in the docs) that is known to compile and run, and
+the README / translation-guide Dioxus rows corrected wherever they were wrong.
+
+### Open question
+Whether a small Rust helper crate for the event and file glue is worth shipping,
+or whether the documented `web_sys` recipe is enough.
