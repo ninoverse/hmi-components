@@ -744,6 +744,34 @@ export function Example() {
         </section>
 
         <section>
+            <h2>PasswordInput</h2>
+            <!-- Extends hmi-input: hmi-input fires on every keystroke and hmi-change
+                 on commit, both with { value }. The eye toggle swaps the field
+                 between password and text; the third field is revealed on load. -->
+            <div style="display: flex; flex-direction: column; gap: 1.5rem; width: 32rem; max-width: 100%">
+                <hmi-password-input id="password-live" label="Password" hint="Click the eye to reveal." placeholder="••••••••" value="super-secret"></hmi-password-input>
+                <hmi-password-input label="Password (error)" error="Must include a number." value="letters-only"></hmi-password-input>
+                <hmi-password-input id="password-revealed" label="Password (revealed)" value="super-secret"></hmi-password-input>
+                <hmi-password-input label="Password (disabled)" value="super-secret" disabled></hmi-password-input>
+            </div>
+        </section>
+
+        <section>
+            <h2>SearchInput</h2>
+            <!-- Extends hmi-input: hmi-input fires on every keystroke and hmi-change
+                 on commit, both with { value }. The icon is the fallback of the
+                 left-icon slot. -->
+            <div style="display: flex; flex-direction: column; gap: 1.5rem; width: 32rem; max-width: 100%">
+                <hmi-search-input id="search-live" label="Search"></hmi-search-input>
+                <hmi-search-input label="Search (custom placeholder)" placeholder="Find a component…"></hmi-search-input>
+                <hmi-search-input label="Search (custom icon)">
+                    <svg slot="left-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 2h7l3 3v9H3z" /><path d="M10 2v3h3" /></svg>
+                </hmi-search-input>
+                <hmi-search-input label="Search (disabled)" disabled></hmi-search-input>
+            </div>
+        </section>
+
+        <section>
             <h2>Skeleton</h2>
             <!-- width/height/radius accept a CSS length string here; the
                  number form (40 → 40px) is only reachable from JS, since an
@@ -871,6 +899,16 @@ export function Example() {
                 event.preventDefault();
                 console.log('hmi-close', event.detail);
             });
+
+            const search = document.getElementById('search-live');
+            search.addEventListener('hmi-input', (event) => console.log('search hmi-input', event.detail));
+            search.addEventListener('hmi-change', (event) => console.log('search hmi-change', event.detail));
+
+            const password = document.getElementById('password-live');
+            password.addEventListener('hmi-input', (event) => console.log('password hmi-input', event.detail));
+            password.addEventListener('hmi-change', (event) => console.log('password hmi-change', event.detail));
+            const revealed = document.getElementById('password-revealed');
+            revealed.updateComplete.then(() => revealed.shadowRoot.querySelector('[part~="toggle"]').click());
 
             const qty = document.getElementById('number-live');
             qty.addEventListener('hmi-input', (event) => console.log('number hmi-input', event.detail));

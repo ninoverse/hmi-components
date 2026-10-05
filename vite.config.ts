@@ -175,6 +175,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/number-input/number-input.react.ts',
                 ),
+                'wc/password-input': resolve(
+                    dirname,
+                    'src/elements/password-input/password-input.ts',
+                ),
+                'react/password-input': resolve(
+                    dirname,
+                    'src/elements/password-input/password-input.react.ts',
+                ),
                 'wc/progress': resolve(
                     dirname,
                     'src/elements/progress/progress.ts',
@@ -190,6 +198,14 @@ export default defineConfig({
                 'react/scroll-area': resolve(
                     dirname,
                     'src/elements/scroll-area/scroll-area.react.ts',
+                ),
+                'wc/search-input': resolve(
+                    dirname,
+                    'src/elements/search-input/search-input.ts',
+                ),
+                'react/search-input': resolve(
+                    dirname,
+                    'src/elements/search-input/search-input.react.ts',
                 ),
                 'wc/skeleton': resolve(
                     dirname,

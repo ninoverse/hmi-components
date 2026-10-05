@@ -73,11 +73,19 @@ export {
     NumberInput,
     type NumberInputValueDetail,
 } from '../elements/number-input/number-input.react.js';
+export {
+    PasswordInput,
+    type PasswordInputValueDetail,
+} from '../elements/password-input/password-input.react.js';
 export { Progress } from '../elements/progress/progress.react.js';
 export {
     ScrollArea,
     type ScrollAreaOrientation,
 } from '../elements/scroll-area/scroll-area.react.js';
+export {
+    SearchInput,
+    type SearchInputValueDetail,
+} from '../elements/search-input/search-input.react.js';
 export {
     Skeleton,
     type SkeletonVariant,

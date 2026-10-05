@@ -366,6 +366,10 @@
             "types": "./dist/elements/number-input/number-input.react.d.ts",
             "import": "./dist/react/number-input.js"
         },
+        "./react/password-input": {
+            "types": "./dist/elements/password-input/password-input.react.d.ts",
+            "import": "./dist/react/password-input.js"
+        },
         "./react/progress": {
             "types": "./dist/elements/progress/progress.react.d.ts",
             "import": "./dist/react/progress.js"
@@ -373,6 +377,10 @@
         "./react/scroll-area": {
             "types": "./dist/elements/scroll-area/scroll-area.react.d.ts",
             "import": "./dist/react/scroll-area.js"
+        },
+        "./react/search-input": {
+            "types": "./dist/elements/search-input/search-input.react.d.ts",
+            "import": "./dist/react/search-input.js"
         },
         "./react/skeleton": {
             "types": "./dist/elements/skeleton/skeleton.react.d.ts",
@@ -603,6 +611,10 @@
             "types": "./dist/elements/number-input/number-input.d.ts",
             "import": "./dist/wc/number-input.js"
         },
+        "./wc/password-input": {
+            "types": "./dist/elements/password-input/password-input.d.ts",
+            "import": "./dist/wc/password-input.js"
+        },
         "./wc/progress": {
             "types": "./dist/elements/progress/progress.d.ts",
             "import": "./dist/wc/progress.js"
@@ -610,6 +622,10 @@
         "./wc/scroll-area": {
             "types": "./dist/elements/scroll-area/scroll-area.d.ts",
             "import": "./dist/wc/scroll-area.js"
+        },
+        "./wc/search-input": {
+            "types": "./dist/elements/search-input/search-input.d.ts",
+            "import": "./dist/wc/search-input.js"
         },
         "./wc/skeleton": {
             "types": "./dist/elements/skeleton/skeleton.d.ts",
