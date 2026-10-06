@@ -225,7 +225,7 @@ hmi-tabs { "options": OPTIONS_JSON,
 | image | `renderImage(props)` | — | default slot receives a custom `<img>`/`<picture>` | `renderImage` |
 | responsive-container | `children(size)` | `hmi-resize { width, height }` event + `--_w`/`--_h` on host; charts read `width`/`height` props | default slot | — |
 | combobox | `filterOption(option, query)` | `filter="includes" \| "startsWith" \| "none"` | — | `filter` may be a predicate (JS only) |
-| slider | `formatValue` | template string `'{value}%'` | — | `format` function |
+| slider | `formatValue` | template string `'{value}%'` | — | the same `formatValue`, set as a property |
 
 Table cell kinds:
 

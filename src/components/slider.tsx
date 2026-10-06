@@ -35,6 +35,7 @@ export type SliderProps = Omit<
  *
  * @example
  * <Slider min={0} max={100} value={vol} onChange={setVol} showValue />
+ * @deprecated Use `Slider` from `@ninoverse/hmi-components/react/slider`. Removed in 6.0.0.
  */
 export function Slider({
     value,
