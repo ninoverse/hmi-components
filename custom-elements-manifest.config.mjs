@@ -1,5 +1,5 @@
 /* @custom-elements-manifest/analyzer — `pnpm cem`. Reads the element classes
-   and the form base class they inherit from (`shared/form.ts`), so the
+   and the form base class they inherit from (`shared/form.ts`) and `shared/checkable.ts`, so the
    inherited `name`, `disabled`, `required`, `label`, `hint` and `error` are
    listed on each form element. Styles, wrappers, stories, tests and the other
    shared helpers carry no custom element declarations. Output:
@@ -11,7 +11,7 @@ export default {
         '**/*.react.ts',
         '**/*.stories.ts',
         '**/*.test.ts',
-        'src/elements/shared/!(form).ts',
+        'src/elements/shared/!(form|checkable).ts',
         'src/elements/index.ts',
     ],
     outdir: '.',

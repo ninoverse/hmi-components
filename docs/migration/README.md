@@ -186,6 +186,12 @@ leaves, but the small ones share a PR, which gives six PRs in this order:
 instead of nesting it, so there is one `ElementInternals`); `multi-input`;
 `file-upload`. Each batch is still one commit per element.
 
+Phase 5 exception (agreed with the maintainer): the selection controls share
+PRs the same way, which gives four PRs in this order: `checkbox` + `switch`
+(both extend `shared/checkable.ts`); `radio` + `radio-group`; `slider`;
+`segmented-control` + `value-scale-selector`. Each batch is still one commit
+per element.
+
 ## 7. Running one migration end to end
 
 The `migrate-component` skill (`.claude/skills/migrate-component/SKILL.md`)

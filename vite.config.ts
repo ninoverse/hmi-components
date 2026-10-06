@@ -98,6 +98,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/card/card.react.ts',
                 ),
+                'wc/checkbox': resolve(
+                    dirname,
+                    'src/elements/checkbox/checkbox.ts',
+                ),
+                'react/checkbox': resolve(
+                    dirname,
+                    'src/elements/checkbox/checkbox.react.ts',
+                ),
                 'wc/chip': resolve(dirname, 'src/elements/chip/chip.ts'),
                 'react/chip': resolve(
                     dirname,
@@ -248,6 +256,11 @@ export default defineConfig({
                 'react/stat': resolve(
                     dirname,
                     'src/elements/stat/stat.react.ts',
+                ),
+                'wc/switch': resolve(dirname, 'src/elements/switch/switch.ts'),
+                'react/switch': resolve(
+                    dirname,
+                    'src/elements/switch/switch.react.ts',
                 ),
                 'wc/text': resolve(dirname, 'src/elements/text/text.ts'),
                 'react/text': resolve(

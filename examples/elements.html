@@ -799,6 +799,40 @@ export function Example() {
         </section>
 
         <section>
+            <h2>Checkbox</h2>
+            <!-- hmi-change fires on every toggle with { checked }. A checked box
+                 submits name=value ('on' by default); the label is the label
+                 attribute or the default slot. -->
+            <div style="display: flex; gap: 3rem; flex-wrap: wrap; align-items: center">
+                <hmi-checkbox id="checkbox-live" label="Accept terms" checked></hmi-checkbox>
+                <hmi-checkbox label="Subscribe to updates"></hmi-checkbox>
+                <hmi-checkbox label="Disabled" disabled></hmi-checkbox>
+                <hmi-checkbox label="Disabled checked" disabled checked></hmi-checkbox>
+            </div>
+            <div style="display: flex; gap: 3rem; flex-wrap: wrap; align-items: flex-start; margin-top: 2rem">
+                <hmi-checkbox label="With a hint" hint="You can change this later."></hmi-checkbox>
+                <hmi-checkbox label="With an error" required error="You must accept the terms."></hmi-checkbox>
+                <hmi-checkbox>I agree to the <a href="#checkbox-live">terms</a> (rich label)</hmi-checkbox>
+            </div>
+        </section>
+
+        <section>
+            <h2>Switch</h2>
+            <!-- A checkbox underneath: same hmi-change { checked }, same form
+                 semantics. The thumb shadow is the --switch-thumb-shadow token. -->
+            <div style="display: flex; gap: 3rem; flex-wrap: wrap; align-items: center">
+                <hmi-switch id="switch-live" label="Notifications" checked></hmi-switch>
+                <hmi-switch label="Email digest"></hmi-switch>
+                <hmi-switch label="Beta features (disabled)" disabled></hmi-switch>
+                <hmi-switch label="Auto-save (disabled, on)" disabled checked></hmi-switch>
+            </div>
+            <div style="display: flex; gap: 3rem; flex-wrap: wrap; align-items: flex-start; margin-top: 2rem">
+                <hmi-switch label="With a hint" hint="Takes effect on reload."></hmi-switch>
+                <hmi-switch label="With an error" required error="This must be on."></hmi-switch>
+            </div>
+        </section>
+
+        <section>
             <h2>Skeleton</h2>
             <!-- width/height/radius accept a CSS length string here; the
                  number form (40 → 40px) is only reachable from JS, since an
@@ -943,6 +977,9 @@ export function Example() {
                 new File(['x'.repeat(2048)], 'logo.png', { type: 'image/png' }),
                 new File(['x'.repeat(1500000)], 'cover-photo-with-a-very-long-name.jpg', { type: 'image/jpeg' }),
             ];
+
+            for (const id of ['checkbox-live', 'switch-live'])
+                document.getElementById(id).addEventListener('hmi-change', (event) => console.log(id, event.detail));
 
             const password = document.getElementById('password-live');
             password.addEventListener('hmi-input', (event) => console.log('password hmi-input', event.detail));

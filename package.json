@@ -314,6 +314,10 @@
             "types": "./dist/elements/card/card.react.d.ts",
             "import": "./dist/react/card.js"
         },
+        "./react/checkbox": {
+            "types": "./dist/elements/checkbox/checkbox.react.d.ts",
+            "import": "./dist/react/checkbox.js"
+        },
         "./react/chip": {
             "types": "./dist/elements/chip/chip.react.d.ts",
             "import": "./dist/react/chip.js"
@@ -405,6 +409,10 @@
         "./react/stat": {
             "types": "./dist/elements/stat/stat.react.d.ts",
             "import": "./dist/react/stat.js"
+        },
+        "./react/switch": {
+            "types": "./dist/elements/switch/switch.react.d.ts",
+            "import": "./dist/react/switch.js"
         },
         "./react/text": {
             "types": "./dist/elements/text/text.react.d.ts",
@@ -567,6 +575,10 @@
             "types": "./dist/elements/card/card.d.ts",
             "import": "./dist/wc/card.js"
         },
+        "./wc/checkbox": {
+            "types": "./dist/elements/checkbox/checkbox.d.ts",
+            "import": "./dist/wc/checkbox.js"
+        },
         "./wc/chip": {
             "types": "./dist/elements/chip/chip.d.ts",
             "import": "./dist/wc/chip.js"
@@ -658,6 +670,10 @@
         "./wc/stat": {
             "types": "./dist/elements/stat/stat.d.ts",
             "import": "./dist/wc/stat.js"
+        },
+        "./wc/switch": {
+            "types": "./dist/elements/switch/switch.d.ts",
+            "import": "./dist/wc/switch.js"
         },
         "./wc/text": {
             "types": "./dist/elements/text/text.d.ts",

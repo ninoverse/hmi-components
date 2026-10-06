@@ -21,6 +21,7 @@ export type SwitchProps = Omit<
  *
  * @example
  * <Switch label="Notifications" checked={on} onChange={setOn} />
+ * @deprecated Use `Switch` from `@ninoverse/hmi-components/react/switch`. Removed in 6.0.0.
  */
 export function Switch({
     label,
