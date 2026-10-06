@@ -83,10 +83,10 @@ There is no status for work under way: its open PR already shows that.
 | `hmi-search-input` | `searchInput.tsx` | 4 | low | F E | No own CSS today; composes `<hmi-input>`. Extends `HmiInput`, not nested. | Done | [#158](https://github.com/ninoverse/hmi-components/pull/158) |
 | `hmi-multi-input` | `multiInput.tsx` | 4 | med | F E | `hmi-input`, `hmi-change`, `hmi-complete`; `autofocus` prop. Submits the joined cells as one string; `hmi-complete` fires once every cell is filled. | Done | [#159](https://github.com/ninoverse/hmi-components/pull/159) |
 | `hmi-file-upload` | `fileUpload.tsx` | 4 | med | F E | `hmi-change { value: FileDescriptor[] }`; hidden native input inside the root. Exposes the selected `File`s as `el.files` so hosts without shadow-DOM access (Dioxus) can read them; submits real `File`s through `FormData`. Document the `web_sys` recipe. | Done | [#161](https://github.com/ninoverse/hmi-components/pull/161) |
-| `hmi-checkbox` | `checkbox.tsx` | 5 | med | S F E | Checkable form kind; slot `label`; `hmi-change { checked: boolean }`. | Done | |
+| `hmi-checkbox` | `checkbox.tsx` | 5 | med | S F E | Checkable form kind; slot `label`; `hmi-change { checked: boolean }`. | Done | [#162](https://github.com/ninoverse/hmi-components/pull/162) |
 | `hmi-radio` | `radio.tsx` | 5 | med | S F E | Checkable; group behaviour via `name` inside `hmi-radio-group`. | Todo | |
 | `hmi-radio-group` | `radioGroup.tsx` | 5 | med | A F E | No own CSS today; `name` required; options strings + `label-<value>` slots. | Todo | |
-| `hmi-switch` | `switch.tsx` | 5 | med | S F E X | `[data-structure="journal"] .switch__thumb` → `--switch-thumb-shadow` token (defined). | Done | |
+| `hmi-switch` | `switch.tsx` | 5 | med | S F E X | `[data-structure="journal"] .switch__thumb` → `--switch-thumb-shadow` token (defined). | Done | [#162](https://github.com/ninoverse/hmi-components/pull/162) |
 | `hmi-slider` | `slider.tsx` | 5 | med | F E | Numeric; `--slider-pct` set on host; `hmi-input` while dragging, `hmi-change` on release; `formatValue` → template string + `format` JS-only. | Todo | |
 | `hmi-segmented-control` | `segmentedControl.tsx` | 5 | med | A F E | Roving tabindex; options strings + `label-<value>` slots. | Todo | |
 | `hmi-value-scale-selector` | `valueScaleSelector.tsx` | 5 | med | S F E | Numeric; slot `icon`; `applyTemplate` for labels. | Todo | |
