@@ -271,7 +271,7 @@ Wrapper prop = `on` + PascalCase of the event minus `hmi-`.
 | number-input | `onChange(number \| null)` | `hmi-input` + `hmi-change` | `{ value: number \| null }` |
 | slider | `onChange(number)` | `hmi-input` (drag) + `hmi-change` (release) | `{ value: number }` |
 | value-scale-selector | `onChange(number)` | `hmi-change` | `{ value: number }` |
-| checkbox, radio, switch | `onChange(boolean)` | `hmi-change` | `{ value: boolean }` |
+| checkbox, radio, switch | `onChange(boolean)` | `hmi-change` | `{ checked: boolean }` (`value` is the submitted string) |
 | radio-group, segmented-control, select, stepper, tabs | `onChange(T)` | `hmi-change` | `{ value: T }` |
 | combobox | `onChange(T \| null)` | `hmi-change`; `hmi-input` for the query text | `{ value: T \| null }` / `{ value: string }` |
 | date-picker | `onChange(date \| range \| null)` | `hmi-change` | `{ value: string \| DateRangeISO \| null }` |
