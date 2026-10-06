@@ -402,6 +402,10 @@
             "types": "./dist/elements/search-input/search-input.react.d.ts",
             "import": "./dist/react/search-input.js"
         },
+        "./react/segmented-control": {
+            "types": "./dist/elements/segmented-control/segmented-control.react.d.ts",
+            "import": "./dist/react/segmented-control.js"
+        },
         "./react/skeleton": {
             "types": "./dist/elements/skeleton/skeleton.react.d.ts",
             "import": "./dist/react/skeleton.js"
@@ -433,6 +437,10 @@
         "./react/textarea": {
             "types": "./dist/elements/textarea/textarea.react.d.ts",
             "import": "./dist/react/textarea.js"
+        },
+        "./react/value-scale-selector": {
+            "types": "./dist/elements/value-scale-selector/value-scale-selector.react.d.ts",
+            "import": "./dist/react/value-scale-selector.js"
         },
         "./react/visually-hidden": {
             "types": "./dist/elements/visually-hidden/visually-hidden.react.d.ts",
@@ -675,6 +683,10 @@
             "types": "./dist/elements/search-input/search-input.d.ts",
             "import": "./dist/wc/search-input.js"
         },
+        "./wc/segmented-control": {
+            "types": "./dist/elements/segmented-control/segmented-control.d.ts",
+            "import": "./dist/wc/segmented-control.js"
+        },
         "./wc/skeleton": {
             "types": "./dist/elements/skeleton/skeleton.d.ts",
             "import": "./dist/wc/skeleton.js"
@@ -706,6 +718,10 @@
         "./wc/textarea": {
             "types": "./dist/elements/textarea/textarea.d.ts",
             "import": "./dist/wc/textarea.js"
+        },
+        "./wc/value-scale-selector": {
+            "types": "./dist/elements/value-scale-selector/value-scale-selector.d.ts",
+            "import": "./dist/wc/value-scale-selector.js"
         },
         "./wc/visually-hidden": {
             "types": "./dist/elements/visually-hidden/visually-hidden.d.ts",

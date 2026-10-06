@@ -244,6 +244,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/search-input/search-input.react.ts',
                 ),
+                'wc/segmented-control': resolve(
+                    dirname,
+                    'src/elements/segmented-control/segmented-control.ts',
+                ),
+                'react/segmented-control': resolve(
+                    dirname,
+                    'src/elements/segmented-control/segmented-control.react.ts',
+                ),
                 'wc/skeleton': resolve(
                     dirname,
                     'src/elements/skeleton/skeleton.ts',
@@ -292,6 +300,14 @@ export default defineConfig({
                 'react/textarea': resolve(
                     dirname,
                     'src/elements/textarea/textarea.react.ts',
+                ),
+                'wc/value-scale-selector': resolve(
+                    dirname,
+                    'src/elements/value-scale-selector/value-scale-selector.ts',
+                ),
+                'react/value-scale-selector': resolve(
+                    dirname,
+                    'src/elements/value-scale-selector/value-scale-selector.react.ts',
                 ),
                 'wc/visually-hidden': resolve(
                     dirname,
