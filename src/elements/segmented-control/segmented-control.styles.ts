@@ -48,6 +48,18 @@ export const styles = css`
         flex: 1;
     }
 
+    /* The outer corners follow the container's, so a chosen first or last
+       segment fits its corner. */
+    .segment:first-child {
+        border-top-left-radius: var(--corner-tl);
+        border-bottom-left-radius: var(--corner-bl);
+    }
+
+    .segment:last-child {
+        border-top-right-radius: var(--corner-tr);
+        border-bottom-right-radius: var(--corner-br);
+    }
+
     .size-small .segment {
         height: calc(var(--_base) * 3.5);
         padding: 0 var(--space-5);

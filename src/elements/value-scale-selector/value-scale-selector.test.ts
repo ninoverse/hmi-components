@@ -16,6 +16,8 @@ async function fixture(template: ReturnType<typeof html>) {
     const el = host.querySelector(
         'hmi-value-scale-selector',
     ) as HmiValueScaleSelector;
+    // The theme tokens are not loaded in the test page.
+    el.style.setProperty('--space-1', '3px');
     await el.updateComplete;
     await el.updateComplete;
     return el;
@@ -93,18 +95,53 @@ describe('hmi-value-scale-selector', () => {
         ).toBe(32);
     });
 
-    it('clips the fill to the value, and previews a hovered position', async () => {
+    it('clips the fill to whole icons plus the share of the next one, and previews a hovered position', async () => {
         const el = await fixture(
             html`<hmi-value-scale-selector value="2.5" max="5" allow-half></hmi-value-scale-selector>`,
         );
         const fill = part(el, 'fill');
-        expect(fill.style.width).toBe('50%');
-        targets(el)[1]?.dispatchEvent(new MouseEvent('mouseenter'));
+        const items = Array.from(
+            el.shadowRoot?.querySelectorAll('.item') ?? [],
+        );
+        const [a, b] = items
+            .slice(0, 2)
+            .map((i) => i.getBoundingClientRect()) as [DOMRect, DOMRect];
+        const icon = a.width;
+        const gap = b.left - a.right;
+        expect(fill.getBoundingClientRect().width).toBeCloseTo(
+            2 * (icon + gap) + 0.5 * icon,
+            1,
+        );
+        // Half of the third icon is painted: the fill ends at its middle.
+        const third = items[2]?.getBoundingClientRect() as DOMRect;
+        expect(fill.getBoundingClientRect().right).toBeCloseTo(
+            third.left + icon / 2,
+            1,
+        );
+        targets(el)[0]?.dispatchEvent(new MouseEvent('mouseenter'));
         await el.updateComplete;
-        expect(fill.style.width).toBe('20%');
+        expect(fill.getBoundingClientRect().width).toBeCloseTo(0.5 * icon, 1);
         slider(el).dispatchEvent(new MouseEvent('mouseleave'));
         await el.updateComplete;
-        expect(fill.style.width).toBe('50%');
+        expect(fill.getBoundingClientRect().width).toBeCloseTo(
+            2 * (icon + gap) + 0.5 * icon,
+            1,
+        );
+    });
+
+    it('fills the whole row at max, and nothing at 0', async () => {
+        const full = await fixture(
+            html`<hmi-value-scale-selector value="5"></hmi-value-scale-selector>`,
+        );
+        const row = rows(full)[0] as HTMLElement;
+        expect(part(full, 'fill').getBoundingClientRect().width).toBeCloseTo(
+            row.getBoundingClientRect().width,
+            1,
+        );
+        const empty = await fixture(
+            html`<hmi-value-scale-selector value="0"></hmi-value-scale-selector>`,
+        );
+        expect(part(empty, 'fill').getBoundingClientRect().width).toBe(0);
     });
 
     it('has one target per position, or two halves with allow-half', async () => {

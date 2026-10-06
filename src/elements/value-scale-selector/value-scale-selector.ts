@@ -280,8 +280,11 @@ export class HmiValueScaleSelector extends HmiFormField {
         const max = Math.max(0, this.max);
         const positions = Array.from({ length: max }, (_, i) => i + 1);
         const display = this.hover ?? this.value;
-        const fill =
-            max === 0 ? 0 : Math.max(0, Math.min(1, display / max)) * 100;
+        // Whole icons and the fraction of the next one: a share of the row's
+        // width would cut the wrong part of an icon, as the gaps are not shared.
+        const shown = Math.max(0, Math.min(max, display));
+        const whole = Math.floor(shown);
+        const part = shown - whole;
         const interactive = this.#interactive;
         const classes = ['base', `size-${this.size}`];
         if (this.isDisabled) classes.push('disabled');
@@ -316,7 +319,7 @@ export class HmiValueScaleSelector extends HmiFormField {
                     part="fill"
                     class="row fill"
                     aria-hidden="true"
-                    style=${styleMap({ width: `${fill}%` })}
+                    style=${styleMap({ '--_whole': String(whole), '--_part': String(part) })}
                 >${this.#renderRow(max, positions)}</div>
                 ${interactive ? this.#renderOverlay(positions) : nothing}
             </div>

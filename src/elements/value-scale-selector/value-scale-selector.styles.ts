@@ -35,6 +35,13 @@ export const styles = css`
         position: absolute;
         top: 0;
         left: 0;
+        width: min(
+            100%,
+            calc(
+                var(--_whole) * (var(--_icon) + var(--space-1)) + var(--_part) *
+                    var(--_icon)
+            )
+        );
         color: var(--primary);
         overflow: hidden;
         pointer-events: none;
@@ -49,19 +56,21 @@ export const styles = css`
         fill: currentColor;
     }
 
-    .size-small .item > * {
-        width: calc(var(--_base) * 2);
-        height: calc(var(--_base) * 2);
+    .size-small {
+        --_icon: calc(var(--_base) * 2);
     }
 
-    .size-medium .item > * {
-        width: calc(var(--_base) * 3);
-        height: calc(var(--_base) * 3);
+    .size-medium {
+        --_icon: calc(var(--_base) * 3);
     }
 
-    .size-large .item > * {
-        width: calc(var(--_base) * 4);
-        height: calc(var(--_base) * 4);
+    .size-large {
+        --_icon: calc(var(--_base) * 4);
+    }
+
+    .item > * {
+        width: var(--_icon);
+        height: var(--_icon);
     }
 
     .overlay {

@@ -78,6 +78,31 @@ describe('hmi-segmented-control', () => {
         );
     });
 
+    it('rounds the outer corners of the first and last segment like the container', async () => {
+        const el = await fixture(
+            html`<hmi-segmented-control value="list" .options=${OPTIONS}></hmi-segmented-control>`,
+        );
+        // The theme tokens are not loaded in the test page.
+        for (const [name, value] of [
+            ['--corner-tl', '20px'],
+            ['--corner-tr', '8px'],
+            ['--corner-br', '20px'],
+            ['--corner-bl', '8px'],
+            ['--corner-extra-small', '4px'],
+        ] as const) {
+            el.style.setProperty(name, value);
+        }
+        const base = getComputedStyle(part(el, 'base'));
+        const first = getComputedStyle(segs(el)[0] as HTMLElement);
+        const last = getComputedStyle(segs(el)[3] as HTMLElement);
+        const middle = getComputedStyle(segs(el)[1] as HTMLElement);
+        expect(first.borderTopLeftRadius).toBe(base.borderTopLeftRadius);
+        expect(first.borderBottomLeftRadius).toBe(base.borderBottomLeftRadius);
+        expect(last.borderTopRightRadius).toBe(base.borderTopRightRadius);
+        expect(last.borderBottomRightRadius).toBe(base.borderBottomRightRadius);
+        expect(middle.borderTopLeftRadius).not.toBe(base.borderTopLeftRadius);
+    });
+
     it('sizes the segments', async () => {
         const small = await fixture(
             html`<hmi-segmented-control size="small" .options=${OPTIONS}></hmi-segmented-control>`,
