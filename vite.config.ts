@@ -124,6 +124,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/empty-state/empty-state.react.ts',
                 ),
+                'wc/file-upload': resolve(
+                    dirname,
+                    'src/elements/file-upload/file-upload.ts',
+                ),
+                'react/file-upload': resolve(
+                    dirname,
+                    'src/elements/file-upload/file-upload.react.ts',
+                ),
                 'wc/flex': resolve(dirname, 'src/elements/flex/flex.ts'),
                 'react/flex': resolve(
                     dirname,

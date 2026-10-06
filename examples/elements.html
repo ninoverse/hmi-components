@@ -786,6 +786,19 @@ export function Example() {
         </section>
 
         <section>
+            <h2>FileUpload</h2>
+            <!-- hmi-change fires when files are added or removed, with
+                 { value: FileDescriptor[] }; el.files holds the real Files and
+                 a form submits them. Drop files on a zone, or click it. -->
+            <div style="display: flex; flex-direction: column; gap: 1.5rem; max-width: 60rem">
+                <hmi-file-upload id="upload-live" multiple hint="PNG, JPG, or PDF up to 10 MB each" aria-label="Project attachments"></hmi-file-upload>
+                <hmi-file-upload id="upload-listed" multiple hint="Images only (drops are filtered too)" accept="image/*"></hmi-file-upload>
+                <hmi-file-upload label="Upload a resume" hint="PDF only" accept=".pdf" required error="A resume is required."></hmi-file-upload>
+                <hmi-file-upload disabled></hmi-file-upload>
+            </div>
+        </section>
+
+        <section>
             <h2>Skeleton</h2>
             <!-- width/height/radius accept a CSS length string here; the
                  number form (40 → 40px) is only reachable from JS, since an
@@ -921,6 +934,15 @@ export function Example() {
             const multi = document.getElementById('multi-live');
             for (const type of ['hmi-input', 'hmi-change', 'hmi-complete'])
                 multi.addEventListener(type, (event) => console.log('multi', type, event.detail));
+
+            const upload = document.getElementById('upload-live');
+            upload.addEventListener('hmi-change', (event) => console.log('upload hmi-change', event.detail, upload.files));
+            // Preload a selection so the file list can be seen without a picker.
+            const listed = document.getElementById('upload-listed');
+            listed.files = [
+                new File(['x'.repeat(2048)], 'logo.png', { type: 'image/png' }),
+                new File(['x'.repeat(1500000)], 'cover-photo-with-a-very-long-name.jpg', { type: 'image/jpeg' }),
+            ];
 
             const password = document.getElementById('password-live');
             password.addEventListener('hmi-input', (event) => console.log('password hmi-input', event.detail));

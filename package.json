@@ -330,6 +330,10 @@
             "types": "./dist/elements/empty-state/empty-state.react.d.ts",
             "import": "./dist/react/empty-state.js"
         },
+        "./react/file-upload": {
+            "types": "./dist/elements/file-upload/file-upload.react.d.ts",
+            "import": "./dist/react/file-upload.js"
+        },
         "./react/flex": {
             "types": "./dist/elements/flex/flex.react.d.ts",
             "import": "./dist/react/flex.js"
@@ -578,6 +582,10 @@
         "./wc/empty-state": {
             "types": "./dist/elements/empty-state/empty-state.d.ts",
             "import": "./dist/wc/empty-state.js"
+        },
+        "./wc/file-upload": {
+            "types": "./dist/elements/file-upload/file-upload.d.ts",
+            "import": "./dist/wc/file-upload.js"
         },
         "./wc/flex": {
             "types": "./dist/elements/flex/flex.d.ts",

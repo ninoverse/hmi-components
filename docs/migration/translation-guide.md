@@ -584,7 +584,29 @@ Per host:
 `hmi-change` detail carries serialisable `FileDescriptor`s, but the submitted
 form holds the real `File`s. A host without access to the element's shadow DOM
 (Dioxus) reads them from `el.files` or from `FormData`, as in the README's
-`web_sys` pattern for events.
+`web_sys` pattern for events:
+
+```rust
+// Unverified: written from the web platform, not run in a Dioxus app (see
+// TODO.md, "Dioxus: verify the form recipe").
+use wasm_bindgen::JsCast;
+use web_sys::{File, FormData, HtmlFormElement};
+
+// From `onmounted` on the form: the submitted form holds the real files.
+fn files_of(form: &HtmlFormElement, name: &str) -> Vec<File> {
+    let data = FormData::new_with_form(form).unwrap();
+    js_sys::Array::from(&data.get_all(name))
+        .iter()
+        .filter_map(|f| f.dyn_into::<File>().ok())
+        .collect()
+}
+
+// Or from the element itself, `el` being the `hmi-file-upload` element:
+// `js_sys::Reflect::get(&el, &"files".into())` is a JS array of `File`.
+```
+
+`hmi-change` carries `FileDescriptor`s only. Dioxus's own `files()` reads a
+native input and does not see into the element's shadow DOM.
 
 ## 14. Charts
 

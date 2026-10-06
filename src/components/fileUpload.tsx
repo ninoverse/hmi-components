@@ -51,6 +51,7 @@ const toDescriptor = (f: File): FileDescriptor => ({
  *
  * @example
  * <FileUpload multiple accept="image/*" onChange={setFiles} />
+ * @deprecated Use `FileUpload` from `@ninoverse/hmi-components/react/file-upload`. Removed in 6.0.0.
  */
 export function FileUpload({
     onChange,
