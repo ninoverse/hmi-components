@@ -4,6 +4,186 @@
   "modules": [
     {
       "kind": "javascript-module",
+      "path": "src/elements/accordion/accordion.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Vertically stacked, collapsible sections. Each trigger is a button with\n`aria-expanded`, and each panel is a region labelled by its trigger. The\npanel of a closed section is `inert`: its content cannot take focus and is\nskipped by assistive technology.\n\n`hmi-open-change` fires with `{ open }`, the sorted indices of the open\nsections, when the user toggles one. The event has its own name because a\ncontrol inside a panel fires `hmi-change`, which also bubbles through the\naccordion. The element owns `open`: to veto a toggle, set `open` back from a\nlistener. Without `multiple`, opening a section closes the others.\n\nA section's `title` and `body` are text. For richer content, slot an element\nnamed `title-<index>` or `body-<index>` (the item's position, from 0), which\nreplaces that text.",
+          "name": "HmiAccordion",
+          "cssParts": [
+            {
+              "description": "The stack of sections.",
+              "name": "base"
+            },
+            {
+              "description": "One section.",
+              "name": "item"
+            },
+            {
+              "description": "A section's header button.",
+              "name": "trigger"
+            },
+            {
+              "description": "A section's title.",
+              "name": "title"
+            },
+            {
+              "description": "A section's chevron.",
+              "name": "chevron"
+            },
+            {
+              "description": "A section's panel.",
+              "name": "panel"
+            },
+            {
+              "description": "A section's body.",
+              "name": "body"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Rich title for the section at that position.",
+              "name": "title-<index>"
+            },
+            {
+              "description": "Rich body for the section at that position.",
+              "name": "body-<index>"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "items",
+              "type": {
+                "text": "AccordionItem[]"
+              },
+              "default": "[]",
+              "description": "The sections. Set it as a property; a JSON attribute is accepted.",
+              "attribute": "items"
+            },
+            {
+              "kind": "field",
+              "name": "multiple",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Allow several sections to be open at once.",
+              "attribute": "multiple"
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "number[]"
+              },
+              "default": "[]",
+              "description": "The indices of the open sections. Seeded from `default-open` when empty at first render.",
+              "attribute": "open"
+            },
+            {
+              "kind": "field",
+              "name": "defaultOpen",
+              "type": {
+                "text": "| number[]\n        | undefined"
+              },
+              "description": "Indices open at first render, when `open` is not set.",
+              "attribute": "default-open"
+            },
+            {
+              "kind": "method",
+              "name": "#toggle",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "index",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            }
+          ],
+          "events": [
+            {
+              "type": {
+                "text": "CustomEvent<AccordionOpenChangeDetail>"
+              },
+              "description": "The user toggled a section.",
+              "name": "hmi-open-change"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "items",
+              "type": {
+                "text": "AccordionItem[]"
+              },
+              "default": "[]",
+              "description": "The sections. Set it as a property; a JSON attribute is accepted.",
+              "fieldName": "items"
+            },
+            {
+              "name": "multiple",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Allow several sections to be open at once.",
+              "fieldName": "multiple"
+            },
+            {
+              "name": "open",
+              "type": {
+                "text": "number[]"
+              },
+              "default": "[]",
+              "description": "The indices of the open sections. Seeded from `default-open` when empty at first render.",
+              "fieldName": "open"
+            },
+            {
+              "name": "default-open",
+              "type": {
+                "text": "| number[]\n        | undefined"
+              },
+              "description": "Indices open at first render, when `open` is not set.",
+              "fieldName": "defaultOpen"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-accordion",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiAccordion",
+          "declaration": {
+            "name": "HmiAccordion",
+            "module": "src/elements/accordion/accordion.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-accordion",
+          "declaration": {
+            "name": "HmiAccordion",
+            "module": "src/elements/accordion/accordion.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/alert/alert.ts",
       "declarations": [
         {
@@ -16294,6 +16474,136 @@
           "declaration": {
             "name": "HmiTextarea",
             "module": "src/elements/textarea/textarea.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/elements/timeline/timeline.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Vertical timeline of events, each with a colour-coded marker, a title and an\noptional time and description. An ordered list. `divider` adds a hairline\nbetween events.\n\nAn item's `title`, `description` and `time` are text. For richer content, slot\nan element named `title-<index>`, `description-<index>` or `time-<index>` (the\nitem's position, from 0), which replaces that text. An icon in the marker is\nan element slotted as `icon-<index>`; the marker is empty without one.",
+          "name": "HmiTimeline",
+          "cssParts": [
+            {
+              "description": "The list of events.",
+              "name": "base"
+            },
+            {
+              "description": "One event.",
+              "name": "item"
+            },
+            {
+              "description": "An event's marker.",
+              "name": "marker"
+            },
+            {
+              "description": "An event's icon.",
+              "name": "icon"
+            },
+            {
+              "description": "An event's title row and description.",
+              "name": "body"
+            },
+            {
+              "description": "An event's title.",
+              "name": "title"
+            },
+            {
+              "description": "An event's time.",
+              "name": "time"
+            },
+            {
+              "description": "An event's description.",
+              "name": "description"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Rich title for the event at that position.",
+              "name": "title-<index>"
+            },
+            {
+              "description": "Rich description for the event at that position.",
+              "name": "description-<index>"
+            },
+            {
+              "description": "Rich time for the event at that position.",
+              "name": "time-<index>"
+            },
+            {
+              "description": "Icon in the marker of the event at that position.",
+              "name": "icon-<index>"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "items",
+              "type": {
+                "text": "TimelineItem[]"
+              },
+              "default": "[]",
+              "description": "The events, in chronological order. Set it as a property; a JSON attribute is accepted.",
+              "attribute": "items"
+            },
+            {
+              "kind": "field",
+              "name": "divider",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Draw a hairline between events.",
+              "attribute": "divider",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "items",
+              "type": {
+                "text": "TimelineItem[]"
+              },
+              "default": "[]",
+              "description": "The events, in chronological order. Set it as a property; a JSON attribute is accepted.",
+              "fieldName": "items"
+            },
+            {
+              "name": "divider",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Draw a hairline between events.",
+              "fieldName": "divider"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-timeline",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiTimeline",
+          "declaration": {
+            "name": "HmiTimeline",
+            "module": "src/elements/timeline/timeline.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-timeline",
+          "declaration": {
+            "name": "HmiTimeline",
+            "module": "src/elements/timeline/timeline.ts"
           }
         }
       ]

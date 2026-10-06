@@ -274,6 +274,10 @@
             "types": "./dist/react/index.d.ts",
             "import": "./dist/react/index.js"
         },
+        "./react/accordion": {
+            "types": "./dist/elements/accordion/accordion.react.d.ts",
+            "import": "./dist/react/accordion.js"
+        },
         "./react/alert": {
             "types": "./dist/elements/alert/alert.react.d.ts",
             "import": "./dist/react/alert.js"
@@ -438,6 +442,10 @@
             "types": "./dist/elements/textarea/textarea.react.d.ts",
             "import": "./dist/react/textarea.js"
         },
+        "./react/timeline": {
+            "types": "./dist/elements/timeline/timeline.react.d.ts",
+            "import": "./dist/react/timeline.js"
+        },
         "./react/value-scale-selector": {
             "types": "./dist/elements/value-scale-selector/value-scale-selector.react.d.ts",
             "import": "./dist/react/value-scale-selector.js"
@@ -554,6 +562,10 @@
         "./wc": {
             "types": "./dist/elements/index.d.ts",
             "import": "./dist/wc/index.js"
+        },
+        "./wc/accordion": {
+            "types": "./dist/elements/accordion/accordion.d.ts",
+            "import": "./dist/wc/accordion.js"
         },
         "./wc/alert": {
             "types": "./dist/elements/alert/alert.d.ts",
@@ -718,6 +730,10 @@
         "./wc/textarea": {
             "types": "./dist/elements/textarea/textarea.d.ts",
             "import": "./dist/wc/textarea.js"
+        },
+        "./wc/timeline": {
+            "types": "./dist/elements/timeline/timeline.d.ts",
+            "import": "./dist/wc/timeline.js"
         },
         "./wc/value-scale-selector": {
             "types": "./dist/elements/value-scale-selector/value-scale-selector.d.ts",

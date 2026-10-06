@@ -42,6 +42,14 @@ export default defineConfig({
                 // Element PRs add 'wc/<kebab>' and 'react/<kebab>' here.
                 'wc/index': resolve(dirname, 'src/elements/index.ts'),
                 'react/index': resolve(dirname, 'src/react/index.ts'),
+                'wc/accordion': resolve(
+                    dirname,
+                    'src/elements/accordion/accordion.ts',
+                ),
+                'react/accordion': resolve(
+                    dirname,
+                    'src/elements/accordion/accordion.react.ts',
+                ),
                 'wc/alert': resolve(dirname, 'src/elements/alert/alert.ts'),
                 'react/alert': resolve(
                     dirname,
@@ -300,6 +308,14 @@ export default defineConfig({
                 'react/textarea': resolve(
                     dirname,
                     'src/elements/textarea/textarea.react.ts',
+                ),
+                'wc/timeline': resolve(
+                    dirname,
+                    'src/elements/timeline/timeline.ts',
+                ),
+                'react/timeline': resolve(
+                    dirname,
+                    'src/elements/timeline/timeline.react.ts',
                 ),
                 'wc/value-scale-selector': resolve(
                     dirname,

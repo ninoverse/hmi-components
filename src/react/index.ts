@@ -2,6 +2,11 @@
    `useTheme` once the theme module lands). Built to dist/react/index.js.
    Keep the list alphabetical. */
 
+export {
+    Accordion,
+    type AccordionItem,
+    type AccordionOpenChangeDetail,
+} from '../elements/accordion/accordion.react.js';
 export { Alert, type AlertVariant } from '../elements/alert/alert.react.js';
 export { AspectRatio } from '../elements/aspect-ratio/aspect-ratio.react.js';
 export {
@@ -148,6 +153,11 @@ export {
     Textarea,
     type TextareaValueDetail,
 } from '../elements/textarea/textarea.react.js';
+export {
+    Timeline,
+    type TimelineColor,
+    type TimelineItem,
+} from '../elements/timeline/timeline.react.js';
 export {
     ValueScaleSelector,
     type ValueScaleSelectorSize,

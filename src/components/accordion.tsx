@@ -47,6 +47,7 @@ const ChevronIcon = () => (
  *     multiple
  *     items={[{ title: 'Section', body: 'Details…' }]}
  * />
+ * @deprecated Use `Accordion` from `@ninoverse/hmi-components/react/accordion`. Removed in 6.0.0.
  */
 export function Accordion({
     items,
