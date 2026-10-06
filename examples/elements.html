@@ -872,6 +872,39 @@ export function Example() {
         </section>
 
         <section>
+            <h2>SegmentedControl</h2>
+            <!-- hmi-change fires with { value } when a different segment is chosen.
+                 Options are a property; a segment's icon and rich label are the
+                 icon-<value> and label-<value> slots. -->
+            <div style="display: flex; flex-direction: column; gap: 1rem">
+                <hmi-segmented-control id="view-live" label="View" value="list"></hmi-segmented-control>
+                <hmi-segmented-control id="density" label="Density (full width, small)" size="small" full-width value="cozy"></hmi-segmented-control>
+                <hmi-segmented-control id="with-icons" label="With icons (slots)" value="grid">
+                    <svg slot="icon-list" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M3 4h10M3 8h10M3 12h10" /></svg>
+                    <svg slot="icon-grid" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="4" height="4" /><rect x="9" y="3" width="4" height="4" /><rect x="3" y="9" width="4" height="4" /><rect x="9" y="9" width="4" height="4" /></svg>
+                </hmi-segmented-control>
+                <hmi-segmented-control id="seg-error" label="With an error" required error="Choose a view."></hmi-segmented-control>
+                <hmi-segmented-control id="seg-disabled" label="Disabled" disabled value="list"></hmi-segmented-control>
+            </div>
+        </section>
+
+        <section>
+            <h2>ValueScaleSelector</h2>
+            <!-- hmi-change fires with { value } when a different value is picked. The
+                 icon is one element in the icon slot, copied into every position;
+                 value-text is a {value} and {max} template, or a function property. -->
+            <div style="display: flex; flex-direction: column; gap: 1rem">
+                <hmi-value-scale-selector id="rating-live" label="Star scale (default icon)" value="3"></hmi-value-scale-selector>
+                <hmi-value-scale-selector label="Heart scale (custom icon, half-step)" allow-half size="large" value="2.5">
+                    <svg slot="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.35-9.3-9.3C1.1 8 3 4 7 4c2.1 0 3.5 1.1 5 3 1.5-1.9 2.9-3 5-3 4 0 5.9 4 4.3 7.7C19 16.65 12 21 12 21z" /></svg>
+                </hmi-value-scale-selector>
+                <hmi-value-scale-selector id="rating-readonly" label="Read-only star scale" value="4.5" allow-half readonly size="small"></hmi-value-scale-selector>
+                <hmi-value-scale-selector label="With an error" required error="Rate it first."></hmi-value-scale-selector>
+                <hmi-value-scale-selector label="Disabled" value="2" disabled></hmi-value-scale-selector>
+            </div>
+        </section>
+
+        <section>
             <h2>Skeleton</h2>
             <!-- width/height/radius accept a CSS length string here; the
                  number form (40 → 40px) is only reachable from JS, since an
@@ -1032,6 +1065,26 @@ export function Example() {
             const slider = document.getElementById('slider-live');
             slider.addEventListener('hmi-input', (event) => console.log('slider hmi-input', event.detail));
             slider.addEventListener('hmi-change', (event) => console.log('slider hmi-change', event.detail));
+
+            const views = [
+                { value: 'list', label: 'List' },
+                { value: 'grid', label: 'Grid' },
+                { value: 'board', label: 'Board' },
+                { value: 'calendar', label: 'Calendar' },
+            ];
+            const densities = [
+                { value: 'compact', label: 'Compact' },
+                { value: 'cozy', label: 'Cozy' },
+                { value: 'spacious', label: 'Spacious', disabled: true },
+            ];
+            document.getElementById('view-live').options = views.filter((o) => o.value !== 'grid');
+            document.getElementById('density').options = densities;
+            document.getElementById('with-icons').options = views.slice(0, 2);
+            document.getElementById('seg-error').options = views.slice(0, 3);
+            document.getElementById('seg-disabled').options = views.slice(0, 3);
+            document.getElementById('view-live').addEventListener('hmi-change', (event) => console.log('view', event.detail));
+            document.getElementById('rating-live').addEventListener('hmi-change', (event) => console.log('rating', event.detail));
+            document.getElementById('rating-readonly').valueText = (v, m) => `Rated ${v} out of ${m} stars`;
 
             const password = document.getElementById('password-live');
             password.addEventListener('hmi-input', (event) => console.log('password hmi-input', event.detail));

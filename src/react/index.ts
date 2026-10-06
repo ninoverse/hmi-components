@@ -110,6 +110,12 @@ export {
     type SearchInputValueDetail,
 } from '../elements/search-input/search-input.react.js';
 export {
+    SegmentedControl,
+    type SegmentedControlOption,
+    type SegmentedControlSize,
+    type SegmentedControlValueDetail,
+} from '../elements/segmented-control/segmented-control.react.js';
+export {
     Skeleton,
     type SkeletonVariant,
 } from '../elements/skeleton/skeleton.react.js';
@@ -142,4 +148,9 @@ export {
     Textarea,
     type TextareaValueDetail,
 } from '../elements/textarea/textarea.react.js';
+export {
+    ValueScaleSelector,
+    type ValueScaleSelectorSize,
+    type ValueScaleSelectorValueDetail,
+} from '../elements/value-scale-selector/value-scale-selector.react.js';
 export { VisuallyHidden } from '../elements/visually-hidden/visually-hidden.react.js';

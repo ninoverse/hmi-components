@@ -52,6 +52,7 @@ const DefaultIcon = () => (
  *
  * @example
  * <ValueScaleSelector max={5} allowHalf value={rating} onChange={setRating} />
+ * @deprecated Use `ValueScaleSelector` from `@ninoverse/hmi-components/react/value-scale-selector`. Removed in 6.0.0.
  */
 export function ValueScaleSelector({
     value,

@@ -48,6 +48,7 @@ export type SegmentedControlProps<T extends string = string> = Omit<
  *
  * @example
  * <SegmentedControl options={views} value={view} onChange={setView} />
+ * @deprecated Use `SegmentedControl` from `@ninoverse/hmi-components/react/segmented-control`. Removed in 6.0.0.
  */
 export function SegmentedControl<T extends string = string>({
     value,

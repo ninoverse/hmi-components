@@ -103,6 +103,7 @@ hmi-radio:not(:defined),
 hmi-radio-group:not(:defined),
 hmi-scroll-area:not(:defined),
 hmi-search-input:not(:defined),
+hmi-segmented-control:not(:defined),
 hmi-skeleton:not(:defined),
 hmi-slider:not(:defined),
 hmi-spacer:not(:defined),
@@ -111,6 +112,7 @@ hmi-stat:not(:defined),
 hmi-switch:not(:defined),
 hmi-text:not(:defined),
 hmi-textarea:not(:defined),
+hmi-value-scale-selector:not(:defined),
 hmi-visually-hidden:not(:defined) {
     visibility: hidden;
 }
