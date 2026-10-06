@@ -111,4 +111,9 @@ export const styles = css`
         opacity: var(--state-disabled-opacity);
         cursor: not-allowed;
     }
+
+    /* The whole control is already dimmed: do not dim each segment again. */
+    .disabled .segment:disabled {
+        opacity: 1;
+    }
 `;
