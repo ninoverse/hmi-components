@@ -31,6 +31,10 @@ export {
 } from '../elements/button/button.react.js';
 export { Card, type CardVariant } from '../elements/card/card.react.js';
 export {
+    Checkbox,
+    type CheckboxChangeDetail,
+} from '../elements/checkbox/checkbox.react.js';
+export {
     Chip,
     type ChipCloseDetail,
     type ChipSelectDetail,
@@ -110,6 +114,10 @@ export {
     type SpinnerSize,
 } from '../elements/spinner/spinner.react.js';
 export { Stat, type StatTrend } from '../elements/stat/stat.react.js';
+export {
+    Switch,
+    type SwitchChangeDetail,
+} from '../elements/switch/switch.react.js';
 export {
     Text,
     type TextAlign,

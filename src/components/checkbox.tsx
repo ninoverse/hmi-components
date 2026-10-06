@@ -21,6 +21,7 @@ export type CheckboxProps = Omit<
  *
  * @example
  * <Checkbox label="Subscribe" defaultChecked onChange={setOn} />
+ * @deprecated Use `Checkbox` from `@ninoverse/hmi-components/react/checkbox`. Removed in 6.0.0.
  */
 export function Checkbox({
     label,
