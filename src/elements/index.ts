@@ -2,6 +2,7 @@
    registration side effect and re-exported. Built to dist/wc/index.js and
    bundled as dist/hmi-elements.iife.js. Keep the list alphabetical. */
 
+export * from './accordion/accordion.js';
 export * from './alert/alert.js';
 export * from './aspect-ratio/aspect-ratio.js';
 export * from './avatar/avatar.js';
@@ -43,5 +44,6 @@ export * from './stat/stat.js';
 export * from './switch/switch.js';
 export * from './text/text.js';
 export * from './textarea/textarea.js';
+export * from './timeline/timeline.js';
 export * from './value-scale-selector/value-scale-selector.js';
 export * from './visually-hidden/visually-hidden.js';

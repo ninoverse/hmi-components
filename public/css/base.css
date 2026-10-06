@@ -71,6 +71,7 @@ body {
 /* Pre-upgrade rules — generated from custom-elements.json by
    scripts/gen-base-css.mjs (`pnpm cem`). Do not edit by hand. */
 /* @generated not-defined start */
+hmi-accordion:not(:defined),
 hmi-alert:not(:defined),
 hmi-aspect-ratio:not(:defined),
 hmi-avatar:not(:defined),
@@ -112,6 +113,7 @@ hmi-stat:not(:defined),
 hmi-switch:not(:defined),
 hmi-text:not(:defined),
 hmi-textarea:not(:defined),
+hmi-timeline:not(:defined),
 hmi-value-scale-selector:not(:defined),
 hmi-visually-hidden:not(:defined) {
     visibility: hidden;

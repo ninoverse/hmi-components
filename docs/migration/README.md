@@ -192,6 +192,11 @@ PRs the same way, which gives four PRs in this order: `checkbox` + `switch`
 `segmented-control` + `value-scale-selector`. Each batch is still one commit
 per element.
 
+Phase 6 exception (agreed with the maintainer): the data display elements share
+PRs the same way, which gives four PRs in this order: `accordion` + `timeline`;
+`image` + `carousel`; `list`; `table`. Each batch is still one commit per
+element.
+
 ## 7. Running one migration end to end
 
 The `migrate-component` skill (`.claude/skills/migrate-component/SKILL.md`)

@@ -905,6 +905,43 @@ export function Example() {
         </section>
 
         <section>
+            <h2>Accordion</h2>
+            <!-- hmi-open-change fires with { open: number[] } (sorted indices). Items
+                 are a property; title-<index> and body-<index> slots carry rich
+                 content. Closed panels are inert. -->
+            <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 25rem)); gap: 2rem">
+                <div>
+                    <p style="margin: 0 0 0.5rem; font-weight: 700">Single (default)</p>
+                    <hmi-accordion id="acc-single" default-open="[0]"></hmi-accordion>
+                </div>
+                <div>
+                    <p style="margin: 0 0 0.5rem; font-weight: 700">Multiple</p>
+                    <hmi-accordion id="acc-multi" multiple default-open="[0, 1]"></hmi-accordion>
+                </div>
+                <div>
+                    <p style="margin: 0 0 0.5rem; font-weight: 700">Rich content (slots)</p>
+                    <hmi-accordion id="acc-rich" default-open="[0]">
+                        <span slot="title-0">Install <code>pnpm add</code></span>
+                        <div slot="body-0">See the <a href="#acc-rich">install guide</a> for details.</div>
+                    </hmi-accordion>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Timeline</h2>
+            <!-- Items are a property; title, description, time and icon slots carry
+                 rich content. divider draws a hairline between events. -->
+            <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 28rem)); gap: 2rem">
+                <hmi-timeline id="timeline-plain"></hmi-timeline>
+                <hmi-timeline id="timeline-divider" divider>
+                    <svg slot="icon-0" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8.5l3 3 7-7" /></svg>
+                    <span slot="description-4">Waiting on <b>two</b> approvals.</span>
+                </hmi-timeline>
+            </div>
+        </section>
+
+        <section>
             <h2>Skeleton</h2>
             <!-- width/height/radius accept a CSS length string here; the
                  number form (40 → 40px) is only reachable from JS, since an
@@ -1085,6 +1122,33 @@ export function Example() {
             document.getElementById('view-live').addEventListener('hmi-change', (event) => console.log('view', event.detail));
             document.getElementById('rating-live').addEventListener('hmi-change', (event) => console.log('rating', event.detail));
             document.getElementById('rating-readonly').valueText = (v, m) => `Rated ${v} out of ${m} stars`;
+
+            const faq = [
+                { title: 'How do I install the library?', body: 'Run pnpm add @ninoverse/hmi-components, then import the components and the stylesheet.' },
+                { title: 'What about the theme?', body: 'Import the theme CSS (constants + a color + a structure file). Components read the tokens at runtime, so switching re-themes everything instantly.' },
+                { title: 'Can I disable a section?', body: 'Yes: set disabled: true on the item.', disabled: true },
+            ];
+            const notes = [
+                { title: 'Keyboard shortcuts', body: 'Tab moves between triggers; Enter or Space toggles a section.' },
+                { title: 'Animation', body: 'Panels use the grid-template-rows 0fr to 1fr trick, so content height is not measured.' },
+                { title: 'Reduced motion', body: 'Honors prefers-reduced-motion by zeroing the transition duration.' },
+            ];
+            document.getElementById('acc-single').items = faq;
+            document.getElementById('acc-multi').items = notes;
+            document.getElementById('acc-rich').items = [
+                { title: 'Install', body: 'Run pnpm add.' },
+                { title: 'Theme', body: 'Import the theme CSS.' },
+            ];
+            document.getElementById('acc-multi').addEventListener('hmi-open-change', (event) => console.log('accordion', event.detail));
+            const events = [
+                { title: 'Project created', time: '09:24', description: 'Repository scaffolded and first commit pushed.', color: 'primary' },
+                { title: 'CI pipeline green', time: '10:02', description: 'Lint, build, and tests all passing.', color: 'success' },
+                { title: 'Flaky test detected', time: '11:47', description: 'Intermittent failure in the carousel autoplay spec.', color: 'warning' },
+                { title: 'Deploy rolled back', time: '12:15', description: 'Production deploy reverted after error spike.', color: 'error' },
+                { title: 'Awaiting review', time: '13:30' },
+            ];
+            document.getElementById('timeline-plain').items = events;
+            document.getElementById('timeline-divider').items = events;
 
             const password = document.getElementById('password-live');
             password.addEventListener('hmi-input', (event) => console.log('password hmi-input', event.detail));

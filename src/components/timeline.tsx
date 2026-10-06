@@ -32,6 +32,7 @@ export type TimelineProps = HTMLAttributes<HTMLOListElement> & {
  *
  * @example
  * <Timeline items={[{ title: 'Deployed', time: '2m ago', color: 'success' }]} />
+ * @deprecated Use `Timeline` from `@ninoverse/hmi-components/react/timeline`. Removed in 6.0.0.
  */
 export function Timeline({ items, className, ...rest }: TimelineProps) {
     const tokens: string[] = ['timeline'];
