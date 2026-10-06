@@ -33,6 +33,7 @@ export type RadioGroupProps<T extends string = string> = Omit<
  *
  * @example
  * <RadioGroup name="plan" options={plans} value={plan} onChange={setPlan} />
+ * @deprecated Use `RadioGroup` from `@ninoverse/hmi-components/react/radio-group`. Removed in 6.0.0.
  */
 export function RadioGroup<T extends string = string>({
     name,

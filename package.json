@@ -386,6 +386,14 @@
             "types": "./dist/elements/progress/progress.react.d.ts",
             "import": "./dist/react/progress.js"
         },
+        "./react/radio": {
+            "types": "./dist/elements/radio/radio.react.d.ts",
+            "import": "./dist/react/radio.js"
+        },
+        "./react/radio-group": {
+            "types": "./dist/elements/radio-group/radio-group.react.d.ts",
+            "import": "./dist/react/radio-group.js"
+        },
         "./react/scroll-area": {
             "types": "./dist/elements/scroll-area/scroll-area.react.d.ts",
             "import": "./dist/react/scroll-area.js"
@@ -646,6 +654,14 @@
         "./wc/progress": {
             "types": "./dist/elements/progress/progress.d.ts",
             "import": "./dist/wc/progress.js"
+        },
+        "./wc/radio": {
+            "types": "./dist/elements/radio/radio.d.ts",
+            "import": "./dist/wc/radio.js"
+        },
+        "./wc/radio-group": {
+            "types": "./dist/elements/radio-group/radio-group.d.ts",
+            "import": "./dist/wc/radio-group.js"
         },
         "./wc/scroll-area": {
             "types": "./dist/elements/scroll-area/scroll-area.d.ts",

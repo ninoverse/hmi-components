@@ -44,7 +44,7 @@ export abstract class HmiCheckable extends HmiFormField {
 
     @state() private accessor hasSlottedLabel = false;
 
-    @query('input') private accessor input!: HTMLInputElement | null;
+    @query('input') protected accessor input!: HTMLInputElement | null;
 
     #initialChecked = false;
 
@@ -77,6 +77,33 @@ export abstract class HmiCheckable extends HmiFormField {
         super.willUpdate(changed);
     }
 
+    /* The native input is named so that, as a radio, it validates `required`: the
+       browser has no group for a nameless radio. It is in its own shadow root, so
+       it never groups with another input. */
+
+    /** The native input's type: a radio overrides it. */
+    protected get inputType(): 'checkbox' | 'radio' {
+        return 'checkbox';
+    }
+
+    /** Whether the native input is `required`. A radio asks its group. */
+    protected get inputRequired(): boolean {
+        return this.required;
+    }
+
+    /** The native input's `tabindex`, `undefined` for the default. A radio keeps one tab stop per group. */
+    protected get inputTabindex(): number | undefined {
+        return undefined;
+    }
+
+    /** Position in a set of alternatives, for `aria-posinset` and `aria-setsize`. A radio supplies it. */
+    protected get setInfo(): { position: number; size: number } | undefined {
+        return undefined;
+    }
+
+    /** Called for each `keydown` on the native input. A radio moves between its group's members. */
+    protected onInputKeydown(_event: KeyboardEvent): void {}
+
     /** The indicator drawn after the input: a box, a track. It must not take pointer events of its own. */
     protected abstract renderIndicator(): TemplateResult;
 
@@ -101,18 +128,24 @@ export abstract class HmiCheckable extends HmiFormField {
     }
 
     override render() {
+        const set = this.setInfo;
         return html`
             <label part="base" class=${this.isDisabled ? 'base disabled' : 'base'}>
                 <input
                     id="control"
+                    name="control"
                     class="input"
-                    type="checkbox"
+                    type=${this.inputType}
                     .checked=${live(this.checked)}
-                    ?required=${this.required}
+                    tabindex=${ifDefined(this.inputTabindex)}
+                    aria-posinset=${ifDefined(set?.position)}
+                    aria-setsize=${ifDefined(set?.size)}
+                    ?required=${this.inputRequired}
                     ?disabled=${this.isDisabled}
                     aria-invalid=${ifDefined(this.invalid)}
                     aria-describedby=${ifDefined(this.describedBy)}
                     @change=${this.#onChange}
+                    @keydown=${this.onInputKeydown}
                 />
                 ${this.renderIndicator()}
                 <span part="label" class="label" ?hidden=${!this.label && !this.hasSlottedLabel}
