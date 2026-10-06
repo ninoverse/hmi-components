@@ -114,6 +114,10 @@ export {
     type SkeletonVariant,
 } from '../elements/skeleton/skeleton.react.js';
 export {
+    Slider,
+    type SliderValueDetail,
+} from '../elements/slider/slider.react.js';
+export {
     Spacer,
     type SpacerAxis,
     type SpacerSize,

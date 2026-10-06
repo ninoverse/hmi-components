@@ -35,6 +35,7 @@ export * from './radio-group/radio-group.js';
 export * from './scroll-area/scroll-area.js';
 export * from './search-input/search-input.js';
 export * from './skeleton/skeleton.js';
+export * from './slider/slider.js';
 export * from './spacer/spacer.js';
 export * from './spinner/spinner.js';
 export * from './stat/stat.js';

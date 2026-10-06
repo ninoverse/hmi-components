@@ -252,6 +252,11 @@ export default defineConfig({
                     dirname,
                     'src/elements/skeleton/skeleton.react.ts',
                 ),
+                'wc/slider': resolve(dirname, 'src/elements/slider/slider.ts'),
+                'react/slider': resolve(
+                    dirname,
+                    'src/elements/slider/slider.react.ts',
+                ),
                 'wc/spacer': resolve(dirname, 'src/elements/spacer/spacer.ts'),
                 'react/spacer': resolve(
                     dirname,

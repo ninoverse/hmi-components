@@ -858,6 +858,20 @@ export function Example() {
         </section>
 
         <section>
+            <h2>Slider</h2>
+            <!-- hmi-input fires with { value } while the thumb moves and
+                 hmi-change on release. format-value is a {value} template;
+                 set as a property it also takes a function. -->
+            <div style="display: flex; flex-direction: column; gap: 1rem; max-width: 30rem">
+                <hmi-slider id="slider-live" label="Volume" value="40" show-value format-value="{value}%"></hmi-slider>
+                <hmi-slider label="Contrast" value="50" min="0" max="100" step="5"></hmi-slider>
+                <hmi-slider label="Disabled" value="30" disabled show-value></hmi-slider>
+                <hmi-slider label="With a hint" value="20" hint="Drag, or use the arrow keys."></hmi-slider>
+                <hmi-slider label="With an error" value="90" show-value error="Too loud for night mode."></hmi-slider>
+            </div>
+        </section>
+
+        <section>
             <h2>Skeleton</h2>
             <!-- width/height/radius accept a CSS length string here; the
                  number form (40 → 40px) is only reachable from JS, since an
@@ -1014,6 +1028,10 @@ export function Example() {
             for (const id of ['plan-live', 'plan-error', 'plan-rich']) document.getElementById(id).options = plans;
             document.getElementById('plan-live').addEventListener('hmi-change', (event) => console.log('plan', event.detail));
             document.getElementById('radio-live').addEventListener('hmi-change', (event) => console.log('radio', event.detail));
+
+            const slider = document.getElementById('slider-live');
+            slider.addEventListener('hmi-input', (event) => console.log('slider hmi-input', event.detail));
+            slider.addEventListener('hmi-change', (event) => console.log('slider hmi-change', event.detail));
 
             const password = document.getElementById('password-live');
             password.addEventListener('hmi-input', (event) => console.log('password hmi-input', event.detail));
