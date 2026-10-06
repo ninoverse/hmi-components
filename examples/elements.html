@@ -772,6 +772,20 @@ export function Example() {
         </section>
 
         <section>
+            <h2>MultiInput</h2>
+            <!-- hmi-input fires on every edit, hmi-change when focus leaves the
+                 group after a change, hmi-complete when every cell is filled,
+                 all with { value }. Try pasting a code into any cell. -->
+            <div style="display: flex; flex-direction: column; gap: 1.5rem">
+                <hmi-multi-input id="multi-live" label="6-digit verification code (numeric)" length="6" autocomplete="one-time-code" hint="Paste a code to fill the cells."></hmi-multi-input>
+                <hmi-multi-input label="License key (3 × 4 alphanumeric)" length="12" group-size="4" type="text" pattern="[A-Za-z0-9]" default-value="ABCD1234WXYZ"></hmi-multi-input>
+                <hmi-multi-input label="4-digit PIN (masked)" length="4" mask default-value="1234"></hmi-multi-input>
+                <hmi-multi-input label="Verification code (error)" length="6" value="123" error="That code has expired."></hmi-multi-input>
+                <hmi-multi-input label="Verification code (disabled)" length="6" value="123456" disabled></hmi-multi-input>
+            </div>
+        </section>
+
+        <section>
             <h2>Skeleton</h2>
             <!-- width/height/radius accept a CSS length string here; the
                  number form (40 → 40px) is only reachable from JS, since an
@@ -903,6 +917,10 @@ export function Example() {
             const search = document.getElementById('search-live');
             search.addEventListener('hmi-input', (event) => console.log('search hmi-input', event.detail));
             search.addEventListener('hmi-change', (event) => console.log('search hmi-change', event.detail));
+
+            const multi = document.getElementById('multi-live');
+            for (const type of ['hmi-input', 'hmi-change', 'hmi-complete'])
+                multi.addEventListener(type, (event) => console.log('multi', type, event.detail));
 
             const password = document.getElementById('password-live');
             password.addEventListener('hmi-input', (event) => console.log('password hmi-input', event.detail));

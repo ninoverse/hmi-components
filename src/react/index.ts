@@ -70,6 +70,11 @@ export {
 } from '../elements/link/link.react.js';
 export { Meter, type MeterLevel } from '../elements/meter/meter.react.js';
 export {
+    MultiInput,
+    type MultiInputType,
+    type MultiInputValueDetail,
+} from '../elements/multi-input/multi-input.react.js';
+export {
     NumberInput,
     type NumberInputValueDetail,
 } from '../elements/number-input/number-input.react.js';

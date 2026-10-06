@@ -3541,6 +3541,1080 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/multi-input/multi-input.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Segmented single-character input for codes, OTPs and PINs, with auto-advance,\npaste-to-fill, keyboard navigation and optional grouping. A native form\ncontrol: `name` plus the joined cells reach `FormData`, `form.reset()`\nrestores the initial value, and `required` makes an incomplete code invalid.\n\n`hmi-input` fires on every edit, `hmi-change` once when focus leaves the\ngroup after a change, and `hmi-complete` whenever every cell is filled, all\nwith `{ value }`. Typing advances to the next cell, Backspace on an empty cell\nclears and focuses the previous one, the arrow keys, Home and End move\nbetween cells, and a paste (or a one-time-code autofill) fills the cells from\nthe focused one, skipping characters the cell type rejects.\n\nThe group is named by `label`, else by the host's `aria-label`, else\n\"Segmented input\"; each cell is named by `segment-label`.",
+          "name": "HmiMultiInput",
+          "cssParts": [
+            {
+              "description": "The group of cells.",
+              "name": "base"
+            },
+            {
+              "description": "A single-character field.",
+              "name": "cell"
+            },
+            {
+              "description": "The separator between two groups of cells.",
+              "name": "separator"
+            },
+            {
+              "description": "The label.",
+              "name": "label"
+            },
+            {
+              "description": "The hint text.",
+              "name": "hint"
+            },
+            {
+              "description": "The error message.",
+              "name": "error"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "formKind",
+              "type": {
+                "text": "FormKind"
+              },
+              "privacy": "protected",
+              "readonly": true,
+              "description": "How `formValue` is turned into the submitted string.",
+              "default": "'text'",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "length",
+              "type": {
+                "text": "number"
+              },
+              "default": "6",
+              "description": "Number of single-character cells.",
+              "attribute": "length"
+            },
+            {
+              "kind": "field",
+              "name": "groupSize",
+              "type": {
+                "text": "| number\n        | undefined"
+              },
+              "description": "Insert a separator every N cells (`3` → `XXX–XXX`).",
+              "attribute": "group-size"
+            },
+            {
+              "kind": "field",
+              "name": "separator",
+              "type": {
+                "text": "string"
+              },
+              "default": "'–'",
+              "description": "Separator shown between groups.",
+              "attribute": "separator"
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The current value: the cells joined. The attribute is the initial value.",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "defaultValue",
+              "type": {
+                "text": "| string\n        | undefined"
+              },
+              "description": "Initial value, and what `form.reset()` restores. Defaults to the value at first render.",
+              "attribute": "default-value"
+            },
+            {
+              "kind": "field",
+              "name": "type",
+              "type": {
+                "text": "MultiInputType"
+              },
+              "default": "'numeric'",
+              "description": "Allowed characters and keyboard: digits, or any non-space character.",
+              "attribute": "type",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "pattern",
+              "type": {
+                "text": "string | RegExp | undefined"
+              },
+              "description": "Regular expression one character must match, overriding `type`. The\nattribute is the expression's source; the property also takes a `RegExp`.",
+              "attribute": "pattern"
+            },
+            {
+              "kind": "field",
+              "name": "mask",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Hide the entered characters, as a password field does.",
+              "attribute": "mask",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "readonly",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "The value can be selected and copied but not edited.",
+              "attribute": "readonly",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "autocomplete",
+              "type": {
+                "text": "string"
+              },
+              "default": "'off'",
+              "description": "Browser autofill hint for the first cell, such as `one-time-code`.",
+              "attribute": "autocomplete"
+            },
+            {
+              "kind": "field",
+              "name": "segmentLabel",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Segment {n} of {total}'",
+              "description": "Accessible name of each cell; `{n}` and `{total}` are replaced.",
+              "attribute": "segment-label"
+            },
+            {
+              "kind": "field",
+              "name": "group",
+              "type": {
+                "text": "HTMLElement | null"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "#initialValue",
+              "privacy": "private",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "kind": "field",
+              "name": "#focused",
+              "privacy": "private",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "#valueAtFocus",
+              "privacy": "private",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "kind": "field",
+              "name": "#cells",
+              "privacy": "private",
+              "type": {
+                "text": "string[]"
+              },
+              "description": "The cells' characters, one per cell, `''` for an empty cell.",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "#inputs",
+              "privacy": "private",
+              "type": {
+                "text": "HTMLInputElement[]"
+              },
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "formValue",
+              "type": {
+                "text": "unknown"
+              },
+              "privacy": "protected",
+              "description": "The value to submit.",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "control",
+              "type": {
+                "text": "ValidatableControl | null"
+              },
+              "privacy": "protected",
+              "description": "The first cell that fails validation, else the first, so `reportValidity()` focuses the gap.",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "resetFormValue",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "description": "Puts the value back to its initial state (`form.reset()`).",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "restoreFormValue",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "state",
+                  "type": {
+                    "text": "string | File | FormData | null"
+                  }
+                }
+              ],
+              "description": "Restores a value the browser saved (history, autofill). Optional.",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#accepts",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "ch",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#focusCell",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "index",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#setCells",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "cells",
+                  "type": {
+                    "text": "string[]"
+                  }
+                }
+              ],
+              "description": "Stores the edited cells, then reports the edit and, if every cell is full, the completion."
+            },
+            {
+              "kind": "method",
+              "name": "#fill",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "index",
+                  "type": {
+                    "text": "number"
+                  }
+                },
+                {
+                  "name": "text",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ],
+              "description": "Fills the cells from `index` with the accepted characters of `text`, then focuses on."
+            },
+            {
+              "kind": "method",
+              "name": "#onCellInput",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "index",
+                  "type": {
+                    "text": "number"
+                  }
+                },
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onCellKeydown",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "index",
+                  "type": {
+                    "text": "number"
+                  }
+                },
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "KeyboardEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onCellPaste",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "index",
+                  "type": {
+                    "text": "number"
+                  }
+                },
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "ClipboardEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onFocusin",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#onFocusout",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "FocusEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "renderLabel",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "TemplateResult | typeof nothing"
+                }
+              },
+              "description": "The `<label>` tied to the control, with a required marker.",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#segmentName",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "string"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "index",
+                  "type": {
+                    "text": "number"
+                  }
+                },
+                {
+                  "name": "total",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "formAssociated",
+              "type": {
+                "text": "boolean"
+              },
+              "static": true,
+              "default": "true",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "shadowRootOptions",
+              "type": {
+                "text": "object"
+              },
+              "static": true,
+              "default": "{ ...LitElement.shadowRootOptions, delegatesFocus: true, }",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Name under which the value is submitted with the form.",
+              "attribute": "name",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Disables the control.",
+              "attribute": "disabled",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "The control must have a value for the form to be valid.",
+              "attribute": "required",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Text shown above the control.",
+              "attribute": "label",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "hint",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Helper text shown below the control; hidden while `error` is set.",
+              "attribute": "hint",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "error",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Error message shown below the control. Setting it makes the control invalid.",
+              "attribute": "error",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "internals",
+              "privacy": "protected",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "#fieldsetDisabled",
+              "privacy": "private",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "formDisabledCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "disabled",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "formResetCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "formStateRestoreCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "state",
+                  "type": {
+                    "text": "string | File | FormData | null"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isDisabled",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "protected",
+              "description": "Whether the control is disabled, by `disabled` or an ancestor fieldset.",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "describedBy",
+              "type": {
+                "text": "string | undefined"
+              },
+              "privacy": "protected",
+              "description": "The `id` of the hint or error element to point `aria-describedby` at.",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "invalid",
+              "type": {
+                "text": "'true' | undefined"
+              },
+              "privacy": "protected",
+              "description": "`aria-invalid` for the control.",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "form",
+              "type": {
+                "text": "HTMLFormElement | null"
+              },
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "validity",
+              "type": {
+                "text": "ValidityState"
+              },
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "validationMessage",
+              "type": {
+                "text": "string"
+              },
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "willValidate",
+              "type": {
+                "text": "boolean"
+              },
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "labels",
+              "type": {
+                "text": "NodeList"
+              },
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "checkValidity",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              },
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "reportValidity",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              },
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "syncForm",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "description": "Reports the current value and validity to the form.",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "renderMessage",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "TemplateResult | typeof nothing"
+                }
+              },
+              "description": "The error (as an alert) or, without one, the hint.",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            }
+          ],
+          "events": [
+            {
+              "type": {
+                "text": "CustomEvent<MultiInputValueDetail>"
+              },
+              "description": "The value changed (every edit).",
+              "name": "hmi-input"
+            },
+            {
+              "type": {
+                "text": "CustomEvent<MultiInputValueDetail>"
+              },
+              "description": "Focus left the group after the value changed.",
+              "name": "hmi-change"
+            },
+            {
+              "type": {
+                "text": "CustomEvent<MultiInputValueDetail>"
+              },
+              "description": "Every cell is filled.",
+              "name": "hmi-complete"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "length",
+              "type": {
+                "text": "number"
+              },
+              "default": "6",
+              "description": "Number of single-character cells.",
+              "fieldName": "length"
+            },
+            {
+              "name": "group-size",
+              "type": {
+                "text": "| number\n        | undefined"
+              },
+              "description": "Insert a separator every N cells (`3` → `XXX–XXX`).",
+              "fieldName": "groupSize"
+            },
+            {
+              "name": "separator",
+              "type": {
+                "text": "string"
+              },
+              "default": "'–'",
+              "description": "Separator shown between groups.",
+              "fieldName": "separator"
+            },
+            {
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The current value: the cells joined. The attribute is the initial value.",
+              "fieldName": "value"
+            },
+            {
+              "name": "default-value",
+              "type": {
+                "text": "| string\n        | undefined"
+              },
+              "description": "Initial value, and what `form.reset()` restores. Defaults to the value at first render.",
+              "fieldName": "defaultValue"
+            },
+            {
+              "name": "type",
+              "type": {
+                "text": "MultiInputType"
+              },
+              "default": "'numeric'",
+              "description": "Allowed characters and keyboard: digits, or any non-space character.",
+              "fieldName": "type"
+            },
+            {
+              "name": "pattern",
+              "type": {
+                "text": "string | RegExp | undefined"
+              },
+              "description": "Regular expression one character must match, overriding `type`. The\nattribute is the expression's source; the property also takes a `RegExp`.",
+              "fieldName": "pattern"
+            },
+            {
+              "name": "mask",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Hide the entered characters, as a password field does.",
+              "fieldName": "mask"
+            },
+            {
+              "name": "readonly",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "The value can be selected and copied but not edited.",
+              "fieldName": "readonly"
+            },
+            {
+              "name": "autocomplete",
+              "type": {
+                "text": "string"
+              },
+              "default": "'off'",
+              "description": "Browser autofill hint for the first cell, such as `one-time-code`.",
+              "fieldName": "autocomplete"
+            },
+            {
+              "name": "segment-label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Segment {n} of {total}'",
+              "description": "Accessible name of each cell; `{n}` and `{total}` are replaced.",
+              "fieldName": "segmentLabel"
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Name under which the value is submitted with the form.",
+              "fieldName": "name",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Disables the control.",
+              "fieldName": "disabled",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "The control must have a value for the form to be valid.",
+              "fieldName": "required",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Text shown above the control.",
+              "fieldName": "label",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "name": "hint",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Helper text shown below the control; hidden while `error` is set.",
+              "fieldName": "hint",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "name": "error",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Error message shown below the control. Setting it makes the control invalid.",
+              "fieldName": "error",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "HmiFormField",
+            "module": "/src/elements/shared/form.js"
+          },
+          "tagName": "hmi-multi-input",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiMultiInput",
+          "declaration": {
+            "name": "HmiMultiInput",
+            "module": "src/elements/multi-input/multi-input.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-multi-input",
+          "declaration": {
+            "name": "HmiMultiInput",
+            "module": "src/elements/multi-input/multi-input.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/number-input/number-input.ts",
       "declarations": [
         {
