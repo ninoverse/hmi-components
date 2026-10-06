@@ -47,7 +47,12 @@ export function syncValidity(
             error,
             control ?? undefined,
         );
-    } else if (control) {
+    } else if (
+        control &&
+        !control.validity.valid &&
+        control.validationMessage
+    ) {
+        // A control that has left the document reports a flag but no message.
         internals.setValidity(
             control.validity,
             control.validationMessage,

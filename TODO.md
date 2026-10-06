@@ -270,3 +270,20 @@ the README / translation-guide Dioxus rows corrected wherever they were wrong.
 ### Open question
 Whether a small Rust helper crate for the event and file glue is worth shipping,
 or whether the documented `web_sys` recipe is enough.
+
+## `hmi-radio-group` with slotted `<hmi-radio>` children (after v6)
+
+`hmi-radio-group` builds its radios from the `options` array only, as v5's
+`RadioGroup` does. Accepting `<hmi-radio>` children as well would allow a hint
+or other markup per radio, but the group would have to coordinate radios that
+live outside its shadow root: they would also belong to the page's form, so the
+group's own `name=value` and each radio's would both be submitted, and the
+exclusion and tab stop would have to span the slot boundary. Until then, radios
+that need that freedom are standalone `hmi-radio` elements sharing a `name`,
+which group themselves and submit natively, without a group label, error or
+single value.
+
+To do: design the child contract (does the group take over each child's `name`,
+`required` and `disabled`?), decide how the group's value and the children's
+`checked` stay in step, and add the slotted form without changing the `options`
+form.

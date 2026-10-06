@@ -21,6 +21,7 @@ export type RadioProps = Omit<
  *
  * @example
  * <Radio name="plan" value="pro" label="Pro" onChange={onChange} />
+ * @deprecated Use `Radio` from `@ninoverse/hmi-components/react/radio`. Removed in 6.0.0.
  */
 export function Radio({
     label,

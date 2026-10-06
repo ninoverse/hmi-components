@@ -215,6 +215,19 @@ export default defineConfig({
                     dirname,
                     'src/elements/progress/progress.react.ts',
                 ),
+                'wc/radio': resolve(dirname, 'src/elements/radio/radio.ts'),
+                'react/radio': resolve(
+                    dirname,
+                    'src/elements/radio/radio.react.ts',
+                ),
+                'wc/radio-group': resolve(
+                    dirname,
+                    'src/elements/radio-group/radio-group.ts',
+                ),
+                'react/radio-group': resolve(
+                    dirname,
+                    'src/elements/radio-group/radio-group.react.ts',
+                ),
                 'wc/scroll-area': resolve(
                     dirname,
                     'src/elements/scroll-area/scroll-area.ts',

@@ -833,6 +833,31 @@ export function Example() {
         </section>
 
         <section>
+            <h2>Radio</h2>
+            <!-- Radios sharing a name (in one form and root) are one group: the
+                 element unchecks the others and moves with the arrow keys. A
+                 radio fires hmi-change { checked: true } when it becomes checked;
+                 a radio group fires hmi-change { value }. -->
+            <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 40rem)); gap: 3rem">
+                <hmi-form-control label="Single radios (shared name)" hint="The element groups them: one tab stop, arrow keys.">
+                    <div style="display: flex; flex-direction: column; gap: 1.25rem">
+                        <hmi-radio id="radio-live" name="size" value="sm" label="Small" checked></hmi-radio>
+                        <hmi-radio name="size" value="md" label="Medium"></hmi-radio>
+                        <hmi-radio name="size" value="lg" label="Large"></hmi-radio>
+                        <hmi-radio name="size" value="xl" label="Extra large (disabled)" disabled></hmi-radio>
+                    </div>
+                </hmi-form-control>
+                <hmi-radio-group id="plan-live" name="plan" label="RadioGroup" value="free" hint="Pick a plan."></hmi-radio-group>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 40rem)); gap: 3rem; margin-top: 3rem">
+                <hmi-radio-group id="plan-error" name="plan-error" label="With an error" required error="Choose a plan."></hmi-radio-group>
+                <hmi-radio-group id="plan-rich" name="plan-rich" label="Rich label" value="pro">
+                    <span slot="label-pro"><strong>Pro</strong> — most popular</span>
+                </hmi-radio-group>
+            </div>
+        </section>
+
+        <section>
             <h2>Skeleton</h2>
             <!-- width/height/radius accept a CSS length string here; the
                  number form (40 → 40px) is only reachable from JS, since an
@@ -980,6 +1005,15 @@ export function Example() {
 
             for (const id of ['checkbox-live', 'switch-live'])
                 document.getElementById(id).addEventListener('hmi-change', (event) => console.log(id, event.detail));
+
+            const plans = [
+                { value: 'free', label: 'Free' },
+                { value: 'pro', label: 'Pro' },
+                { value: 'team', label: 'Team (disabled)', disabled: true },
+            ];
+            for (const id of ['plan-live', 'plan-error', 'plan-rich']) document.getElementById(id).options = plans;
+            document.getElementById('plan-live').addEventListener('hmi-change', (event) => console.log('plan', event.detail));
+            document.getElementById('radio-live').addEventListener('hmi-change', (event) => console.log('radio', event.detail));
 
             const password = document.getElementById('password-live');
             password.addEventListener('hmi-input', (event) => console.log('password hmi-input', event.detail));
