@@ -16,6 +16,7 @@ export * from './chip/chip.js';
 export * from './code/code.js';
 export * from './divider/divider.js';
 export * from './empty-state/empty-state.js';
+export * from './file-upload/file-upload.js';
 export * from './flex/flex.js';
 export * from './form-control/form-control.js';
 export * from './grid/grid.js';

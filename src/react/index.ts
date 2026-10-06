@@ -43,6 +43,11 @@ export {
 } from '../elements/divider/divider.react.js';
 export { EmptyState } from '../elements/empty-state/empty-state.react.js';
 export {
+    type FileDescriptor,
+    FileUpload,
+    type FileUploadChangeDetail,
+} from '../elements/file-upload/file-upload.react.js';
+export {
     Flex,
     type FlexAlign,
     type FlexDirection,

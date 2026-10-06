@@ -1649,6 +1649,892 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/file-upload/file-upload.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Drag-and-drop or click file picker with a list of the selected files and a\nremove button for each. A native form control: `name` plus the real `File`s\nreach `FormData`, `form.reset()` clears the selection, and `required` makes an\nempty selection invalid.\n\n`hmi-change` fires when the user adds or removes files, with `{ value }`: the\nselection as serialisable descriptors (name, size, type). The real `File`s\nare the `files` property, which can also be set to replace the selection.\n\nHere `label` and `hint` are the text inside the drop zone, not a field label:\nname the field with `aria-label` on the host, or wrap it in `hmi-form-control`.\n`error` shows below the zone and makes the control invalid. Dropped files are\nfiltered by `accept`, as the picker is.",
+          "name": "HmiFileUpload",
+          "cssParts": [
+            {
+              "description": "The zone and the list.",
+              "name": "base"
+            },
+            {
+              "description": "The drop zone button.",
+              "name": "zone"
+            },
+            {
+              "description": "The upload icon.",
+              "name": "icon"
+            },
+            {
+              "description": "The prompt inside the zone.",
+              "name": "label"
+            },
+            {
+              "description": "The secondary text inside the zone.",
+              "name": "hint"
+            },
+            {
+              "description": "The list of selected files.",
+              "name": "list"
+            },
+            {
+              "description": "One selected file.",
+              "name": "item"
+            },
+            {
+              "description": "A file's name.",
+              "name": "file-name"
+            },
+            {
+              "description": "A file's size.",
+              "name": "size"
+            },
+            {
+              "description": "A file's remove button.",
+              "name": "remove"
+            },
+            {
+              "description": "The error message.",
+              "name": "error"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "formKind",
+              "type": {
+                "text": "FormKind"
+              },
+              "privacy": "protected",
+              "readonly": true,
+              "description": "How `formValue` is turned into the submitted string.",
+              "default": "'text'",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "files",
+              "type": {
+                "text": "File[]"
+              },
+              "default": "[]",
+              "description": "The selected files. Set it to replace the selection; it does not fire `hmi-change`."
+            },
+            {
+              "kind": "field",
+              "name": "accept",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "File types the picker offers and a drop accepts, such as `image/*` or `.pdf`.",
+              "attribute": "accept"
+            },
+            {
+              "kind": "field",
+              "name": "multiple",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Allow selecting more than one file.",
+              "attribute": "multiple",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "removeLabel",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Remove {name}'",
+              "description": "Accessible name of each remove button; `{name}` is replaced.",
+              "attribute": "remove-label"
+            },
+            {
+              "kind": "field",
+              "name": "dragOver",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "picker",
+              "type": {
+                "text": "HTMLInputElement | null"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "zone",
+              "type": {
+                "text": "HTMLButtonElement | null"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "formValue",
+              "type": {
+                "text": "unknown"
+              },
+              "privacy": "protected",
+              "description": "The value to submit.",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "control",
+              "type": {
+                "text": "ValidatableControl | null"
+              },
+              "privacy": "protected",
+              "description": "The native control whose validity is mirrored, once rendered.",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "resetFormValue",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "description": "Puts the value back to its initial state (`form.reset()`).",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "syncForm",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "description": "Submits each file under `name`, and reports validity against the zone, which can take focus.",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#accepts",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "file",
+                  "type": {
+                    "text": "File"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#setFiles",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "next",
+                  "type": {
+                    "text": "File[]"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#add",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "incoming",
+                  "type": {
+                    "text": "File[]"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#remove",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "key",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onPick",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onDragEnter",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "DragEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onDragOver",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "DragEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onDragLeave",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "DragEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onDrop",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "DragEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "renderLabel",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "typeof nothing"
+                }
+              },
+              "description": "The `<label>` tied to the control, with a required marker.",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "renderMessage",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "TemplateResult | typeof nothing"
+                }
+              },
+              "description": "Only the error: `hint` sits inside the zone.",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "describedBy",
+              "type": {
+                "text": "string | undefined"
+              },
+              "privacy": "protected",
+              "description": "The `id` of the hint or error element to point `aria-describedby` at.",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#renderItem",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "TemplateResult"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "file",
+                  "type": {
+                    "text": "File"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Drop files here or click to browse'",
+              "description": "Text shown above the control.",
+              "attribute": "label",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "formAssociated",
+              "type": {
+                "text": "boolean"
+              },
+              "static": true,
+              "default": "true",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "shadowRootOptions",
+              "type": {
+                "text": "object"
+              },
+              "static": true,
+              "default": "{ ...LitElement.shadowRootOptions, delegatesFocus: true, }",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Name under which the value is submitted with the form.",
+              "attribute": "name",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Disables the control.",
+              "attribute": "disabled",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "The control must have a value for the form to be valid.",
+              "attribute": "required",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "hint",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Helper text shown below the control; hidden while `error` is set.",
+              "attribute": "hint",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "error",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Error message shown below the control. Setting it makes the control invalid.",
+              "attribute": "error",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "internals",
+              "privacy": "protected",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "#fieldsetDisabled",
+              "privacy": "private",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "restoreFormValue",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "_state",
+                  "type": {
+                    "text": "string | File | FormData | null"
+                  }
+                }
+              ],
+              "description": "Restores a value the browser saved (history, autofill). Optional.",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "formDisabledCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "disabled",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "formResetCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "formStateRestoreCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "state",
+                  "type": {
+                    "text": "string | File | FormData | null"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isDisabled",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "protected",
+              "description": "Whether the control is disabled, by `disabled` or an ancestor fieldset.",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "invalid",
+              "type": {
+                "text": "'true' | undefined"
+              },
+              "privacy": "protected",
+              "description": "`aria-invalid` for the control.",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "form",
+              "type": {
+                "text": "HTMLFormElement | null"
+              },
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "validity",
+              "type": {
+                "text": "ValidityState"
+              },
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "validationMessage",
+              "type": {
+                "text": "string"
+              },
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "willValidate",
+              "type": {
+                "text": "boolean"
+              },
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "labels",
+              "type": {
+                "text": "NodeList"
+              },
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "checkValidity",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              },
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "reportValidity",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              },
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            }
+          ],
+          "events": [
+            {
+              "type": {
+                "text": "CustomEvent<FileUploadChangeDetail>"
+              },
+              "description": "The selection changed.",
+              "name": "hmi-change"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "accept",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "File types the picker offers and a drop accepts, such as `image/*` or `.pdf`.",
+              "fieldName": "accept"
+            },
+            {
+              "name": "multiple",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Allow selecting more than one file.",
+              "fieldName": "multiple"
+            },
+            {
+              "name": "remove-label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Remove {name}'",
+              "description": "Accessible name of each remove button; `{name}` is replaced.",
+              "fieldName": "removeLabel"
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Name under which the value is submitted with the form.",
+              "fieldName": "name",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Disables the control.",
+              "fieldName": "disabled",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "The control must have a value for the form to be valid.",
+              "fieldName": "required",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Text shown above the control.",
+              "fieldName": "label",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "name": "hint",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Helper text shown below the control; hidden while `error` is set.",
+              "fieldName": "hint",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "name": "error",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Error message shown below the control. Setting it makes the control invalid.",
+              "fieldName": "error",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "HmiFormField",
+            "module": "/src/elements/shared/form.js"
+          },
+          "tagName": "hmi-file-upload",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiFileUpload",
+          "declaration": {
+            "name": "HmiFileUpload",
+            "module": "src/elements/file-upload/file-upload.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-file-upload",
+          "declaration": {
+            "name": "HmiFileUpload",
+            "module": "src/elements/file-upload/file-upload.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/flex/flex.ts",
       "declarations": [
         {
