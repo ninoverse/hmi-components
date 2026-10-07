@@ -4,7 +4,7 @@ description: "Capture a rendered page, or one section of it, as a PNG"
 argument-hint: "<url> [section heading] [out.png]"
 ---
 
-<!-- concerns/browser-ui/tasks/take-screenshot.md · v1.0.0 -->
+<!-- concerns/browser-ui/tasks/take-screenshot.md · v1.2.0 -->
 # Taking a screenshot
 
 Captures what a page renders, as a PNG a reviewer can look at. *Visual check*

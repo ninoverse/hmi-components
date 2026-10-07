@@ -1,8 +1,8 @@
 <!-- agentcfg:start -->
-<!-- agentcfg:import · v1.0.0 -->
+<!-- agentcfg:import · v1.2.0 -->
 @AGENTS.md
 
-<!-- language/typescript/automation.md · v1.0.0 -->
+<!-- language/typescript/automation.md · v1.2.0 -->
 # Automation
 
 `.claude/settings.json` allowlists the commands in *Build and test commands* so

@@ -1,5 +1,5 @@
 <!-- agentcfg:start -->
-<!-- deployment/library/release.md · v1.0.0 -->
+<!-- deployment/library/release.md · v1.2.0 -->
 # Releases and API stability
 
 A merged PR is a release, not a publish. `bump-version.yml` tags every push to

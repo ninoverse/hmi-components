@@ -5,7 +5,7 @@ argument-hint: "[optional: --filter <package> to scope to one package]"
 allowed-tools: "Bash(pnpm run:*), Bash(pnpm lint:*), Bash(pnpm typecheck:*), Bash(pnpm test:*), Bash(pnpm build:*), Bash(pnpm install --frozen-lockfile)"
 ---
 
-<!-- language/typescript/tasks/gates.md · v1.0.0 -->
+<!-- language/typescript/tasks/gates.md · v1.2.0 -->
 # Merge gates
 
 Run the merge gates defined in *Testing instructions*:

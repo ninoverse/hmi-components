@@ -4,7 +4,7 @@ description: "Add a package to the workspace following the 9-step package workfl
 argument-hint: "<package-name> [one-line description of what it does]"
 ---
 
-<!-- language/typescript/tasks/new-unit.md · v1.0.0 -->
+<!-- language/typescript/tasks/new-unit.md · v1.2.0 -->
 # Adding a package
 
 The exact procedure for adding or modifying a single package in this pnpm

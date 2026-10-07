@@ -1,5 +1,5 @@
 <!-- agentcfg:start -->
-<!-- language/typescript/code-review.md · v1.0.0 -->
+<!-- language/typescript/code-review.md · v1.2.0 -->
 # TypeScript code review
 
 Read alongside *Code review*, which holds the checks every language shares.

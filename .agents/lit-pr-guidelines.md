@@ -1,5 +1,5 @@
 <!-- agentcfg:start -->
-<!-- framework/lit/pr-guidelines.md · v1.0.0 -->
+<!-- framework/lit/pr-guidelines.md · v1.2.0 -->
 # Element API table
 
 A PR that adds an element, or changes any of what *Elements* lists as public,

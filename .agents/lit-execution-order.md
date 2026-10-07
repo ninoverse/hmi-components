@@ -1,5 +1,5 @@
 <!-- agentcfg:start -->
-<!-- framework/lit/execution-order.md · v1.0.0 -->
+<!-- framework/lit/execution-order.md · v1.2.0 -->
 # Element sequencing
 
 Elements are the unit of work here: a package holds many, and each PR builds

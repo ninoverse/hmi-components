@@ -3,7 +3,7 @@ paths:
   - "src/elements/**/*.styles.ts"
 ---
 
-<!-- framework/lit/element-styles.md · v1.0.0 -->
+<!-- framework/lit/element-styles.md · v1.2.0 -->
 # Element styles
 
 - An element's CSS lives in `<name>.styles.ts`, as one `css` tagged template

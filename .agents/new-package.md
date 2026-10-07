@@ -1,5 +1,5 @@
 <!-- agentcfg:start -->
-<!-- language/typescript/tasks/new-unit.md · v1.0.0 -->
+<!-- language/typescript/tasks/new-unit.md · v1.2.0 -->
 # Adding a package
 
 The exact procedure for adding or modifying a single package in this pnpm

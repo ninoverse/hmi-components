@@ -4,7 +4,7 @@ description: "Add an element following the 6-step element workflow"
 argument-hint: "<element-name> [one-line description of what it does]"
 ---
 
-<!-- framework/lit/tasks/new-element.md · v1.0.0 -->
+<!-- framework/lit/tasks/new-element.md · v1.2.0 -->
 # Adding an element
 
 The exact procedure for adding or modifying a single element. Follow every step

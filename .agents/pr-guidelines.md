@@ -1,5 +1,5 @@
 <!-- agentcfg:start -->
-<!-- core/pr-guidelines.md · v1.0.0 -->
+<!-- core/pr-guidelines.md · v1.2.0 -->
 # PR instructions
 
 ## Title
