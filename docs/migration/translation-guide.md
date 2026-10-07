@@ -202,22 +202,32 @@ ${this.options.map(
 )}
 ```
 
+Arrays and objects are properties only: there is no JSON attribute. Set them
+from script; the slots work in markup.
+
 ```html
-<hmi-tabs options='[{"value":"overview","label":"Overview"},{"value":"alerts","label":"Alerts"}]'>
+<hmi-tabs id="tabs">
     <span slot="label-alerts"><svg>…</svg> Alerts <hmi-badge>3</hmi-badge></span>
 </hmi-tabs>
+<script>
+    document.getElementById('tabs').options = [
+        { value: 'overview', label: 'Overview' },
+        { value: 'alerts', label: 'Alerts' },
+    ];
+</script>
 ```
 
 ```rust
-// Dioxus
-hmi-tabs { "options": OPTIONS_JSON,
+// Dioxus: the slots are markup; the array is set from onmounted (unverified,
+// see TODO.md: web_sys Reflect::set with serde_wasm_bindgen)
+hmi-tabs { onmounted: move |el| set_options(el, &OPTIONS),
     span { slot: "label-alerts", hmi-badge { "3" } " Alerts" }
 }
 ```
 
 ## 5. Render functions → three tiers
 
-| Component | React prop | Tier 1 (JSON) | Tier 2 (slot) | Tier 3 (JS property) |
+| Component | React prop | Tier 1 (data) | Tier 2 (slot) | Tier 3 (JS property) |
 |-----------|------------|---------------|---------------|----------------------|
 | table | `columns[].render(row)` | `kind: 'text' \| 'format' \| 'badge' \| 'link' \| 'actions'` + `format: '{first} {last}'` | `slot="cell-<rowKey>-<columnKey>"`, `slot="header-<columnKey>"` | `columns[].render` returning `string \| TemplateResult \| Node` |
 | table | `getRowKey(row)` | `row-key="id"` attribute naming the key field | — | `rowKey` may also be a function (JS only) |
@@ -249,8 +259,9 @@ with the tier-1/tier-3 output as fallback), then `render`, then `kind`,
 then plain text.
 
 ```rust
-// Dioxus: a real button in a cell, no JS interop
-hmi-table { "columns": COLUMNS_JSON, "rows": ROWS_JSON, "row-key": "id",
+// Dioxus: a real button in a cell; columns and rows are properties, set from
+// onmounted (unverified, see TODO.md)
+hmi-table { onmounted: move |el| set_table_data(el, &COLUMNS, &ROWS), "row-key": "id",
     div { slot: "cell-42-actions",
         hmi-button { variant: "ghost", onclick: move |_| edit(42), "Edit" }
     }

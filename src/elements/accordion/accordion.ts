@@ -48,23 +48,25 @@ export interface AccordionOpenChangeDetail {
  * @csspart body - A section's body.
  *
  * @example
- * <hmi-accordion multiple default-open="[0]"></hmi-accordion>
+ * <hmi-accordion multiple></hmi-accordion>
+ * <!-- then, from script: accordion.items = [{ title, body }]; accordion.defaultOpen = [0]; -->
  */
 @customElement('hmi-accordion')
 export class HmiAccordion extends LitElement {
     static override styles = [baseStyles, styles];
 
-    /** The sections. Set it as a property; a JSON attribute is accepted. @default [] */
-    @property({ type: Array }) accessor items: AccordionItem[] = [];
+    /** The sections. A property only: there is no attribute. @default [] */
+    @property({ type: Array, attribute: false })
+    accessor items: AccordionItem[] = [];
 
     /** Allow several sections to be open at once. @default false */
     @property({ type: Boolean }) accessor multiple = false;
 
-    /** The indices of the open sections. Seeded from `default-open` when empty at first render. @default [] */
-    @property({ type: Array }) accessor open: number[] = [];
+    /** The indices of the open sections. Seeded from `defaultOpen` when empty at first render. A property only. @default [] */
+    @property({ type: Array, attribute: false }) accessor open: number[] = [];
 
-    /** Indices open at first render, when `open` is not set. */
-    @property({ type: Array, attribute: 'default-open' }) accessor defaultOpen:
+    /** Indices open at first render, when `open` is not set. A property only. */
+    @property({ type: Array, attribute: false }) accessor defaultOpen:
         | number[]
         | undefined;
 
