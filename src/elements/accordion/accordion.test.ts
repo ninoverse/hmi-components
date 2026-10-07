@@ -73,14 +73,14 @@ describe('hmi-accordion', () => {
         expect(el.shadowRoot?.getElementById(panel.id)).toBe(panel);
     });
 
-    it('opens the default-open sections, and open wins when set', async () => {
+    it('opens the defaultOpen sections, and open wins when set', async () => {
         const seeded = await fixture(
-            html`<hmi-accordion default-open="[1]" .items=${ITEMS}></hmi-accordion>`,
+            html`<hmi-accordion .defaultOpen=${[1]} .items=${ITEMS}></hmi-accordion>`,
         );
         expect(seeded.open).toEqual([1]);
         expect(expanded(seeded)).toEqual([false, true, false]);
         const explicit = await fixture(
-            html`<hmi-accordion .open=${[0]} default-open="[1]" .items=${ITEMS}></hmi-accordion>`,
+            html`<hmi-accordion .open=${[0]} .defaultOpen=${[1]} .items=${ITEMS}></hmi-accordion>`,
         );
         expect(explicit.open).toEqual([0]);
     });
@@ -181,10 +181,15 @@ describe('hmi-accordion', () => {
         expect(slot('body-1').assignedElements()).toHaveLength(1);
     });
 
-    it('accepts items as a JSON attribute', async () => {
+    it('takes items, open and defaultOpen as properties only: their attributes are ignored', async () => {
         const el = await fixture(
-            html`<hmi-accordion items='[{"title":"A","body":"a"}]'></hmi-accordion>`,
+            html`<hmi-accordion items='[{"title":"A","body":"a"}]' open="[0]" default-open="[0]"></hmi-accordion>`,
         );
+        expect(triggers(el)).toHaveLength(0);
+        expect(el.open).toEqual([]);
+        expect(el.defaultOpen).toBeUndefined();
+        el.items = [{ title: 'A', body: 'a' }];
+        await el.updateComplete;
         expect(triggers(el)).toHaveLength(1);
     });
 

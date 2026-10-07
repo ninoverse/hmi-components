@@ -58,8 +58,7 @@
                 "text": "AccordionItem[]"
               },
               "default": "[]",
-              "description": "The sections. Set it as a property; a JSON attribute is accepted.",
-              "attribute": "items"
+              "description": "The sections. A property only: there is no attribute."
             },
             {
               "kind": "field",
@@ -78,8 +77,7 @@
                 "text": "number[]"
               },
               "default": "[]",
-              "description": "The indices of the open sections. Seeded from `default-open` when empty at first render.",
-              "attribute": "open"
+              "description": "The indices of the open sections. Seeded from `defaultOpen` when empty at first render. A property only."
             },
             {
               "kind": "field",
@@ -87,8 +85,7 @@
               "type": {
                 "text": "| number[]\n        | undefined"
               },
-              "description": "Indices open at first render, when `open` is not set.",
-              "attribute": "default-open"
+              "description": "Indices open at first render, when `open` is not set. A property only."
             },
             {
               "kind": "method",
@@ -120,15 +117,6 @@
           ],
           "attributes": [
             {
-              "name": "items",
-              "type": {
-                "text": "AccordionItem[]"
-              },
-              "default": "[]",
-              "description": "The sections. Set it as a property; a JSON attribute is accepted.",
-              "fieldName": "items"
-            },
-            {
               "name": "multiple",
               "type": {
                 "text": "boolean"
@@ -136,23 +124,6 @@
               "default": "false",
               "description": "Allow several sections to be open at once.",
               "fieldName": "multiple"
-            },
-            {
-              "name": "open",
-              "type": {
-                "text": "number[]"
-              },
-              "default": "[]",
-              "description": "The indices of the open sections. Seeded from `default-open` when empty at first render.",
-              "fieldName": "open"
-            },
-            {
-              "name": "default-open",
-              "type": {
-                "text": "| number[]\n        | undefined"
-              },
-              "description": "Indices open at first render, when `open` is not set.",
-              "fieldName": "defaultOpen"
             }
           ],
           "superclass": {
@@ -9529,8 +9500,7 @@
                 "text": "RadioOption[]"
               },
               "default": "[]",
-              "description": "The choices. Set it as a property; a JSON attribute is accepted.",
-              "attribute": "options"
+              "description": "The choices. A property only: there is no attribute."
             },
             {
               "kind": "field",
@@ -10027,15 +9997,6 @@
             }
           ],
           "attributes": [
-            {
-              "name": "options",
-              "type": {
-                "text": "RadioOption[]"
-              },
-              "default": "[]",
-              "description": "The choices. Set it as a property; a JSON attribute is accepted.",
-              "fieldName": "options"
-            },
             {
               "name": "value",
               "type": {
@@ -12226,8 +12187,7 @@
                 "text": "SegmentedControlOption[]"
               },
               "default": "[]",
-              "description": "The segments. Set it as a property; a JSON attribute is accepted.",
-              "attribute": "options"
+              "description": "The segments. A property only: there is no attribute."
             },
             {
               "kind": "field",
@@ -12808,15 +12768,6 @@
             }
           ],
           "attributes": [
-            {
-              "name": "options",
-              "type": {
-                "text": "SegmentedControlOption[]"
-              },
-              "default": "[]",
-              "description": "The segments. Set it as a property; a JSON attribute is accepted.",
-              "fieldName": "options"
-            },
             {
               "name": "value",
               "type": {
@@ -17410,8 +17361,7 @@
                 "text": "TimelineItem[]"
               },
               "default": "[]",
-              "description": "The events, in chronological order. Set it as a property; a JSON attribute is accepted.",
-              "attribute": "items"
+              "description": "The events, in chronological order. A property only: there is no attribute."
             },
             {
               "kind": "field",
@@ -17426,15 +17376,6 @@
             }
           ],
           "attributes": [
-            {
-              "name": "items",
-              "type": {
-                "text": "TimelineItem[]"
-              },
-              "default": "[]",
-              "description": "The events, in chronological order. Set it as a property; a JSON attribute is accepted.",
-              "fieldName": "items"
-            },
             {
               "name": "divider",
               "type": {

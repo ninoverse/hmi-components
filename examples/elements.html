@@ -912,15 +912,15 @@ export function Example() {
             <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 25rem)); gap: 2rem">
                 <div>
                     <p style="margin: 0 0 0.5rem; font-weight: 700">Single (default)</p>
-                    <hmi-accordion id="acc-single" default-open="[0]"></hmi-accordion>
+                    <hmi-accordion id="acc-single"></hmi-accordion>
                 </div>
                 <div>
                     <p style="margin: 0 0 0.5rem; font-weight: 700">Multiple</p>
-                    <hmi-accordion id="acc-multi" multiple default-open="[0, 1]"></hmi-accordion>
+                    <hmi-accordion id="acc-multi" multiple></hmi-accordion>
                 </div>
                 <div>
                     <p style="margin: 0 0 0.5rem; font-weight: 700">Rich content (slots)</p>
-                    <hmi-accordion id="acc-rich" default-open="[0]">
+                    <hmi-accordion id="acc-rich">
                         <span slot="title-0">Install <code>pnpm add</code></span>
                         <div slot="body-0">See the <a href="#acc-rich">install guide</a> for details.</div>
                     </hmi-accordion>
@@ -1177,6 +1177,9 @@ export function Example() {
                 { title: 'Reduced motion', body: 'Honors prefers-reduced-motion by zeroing the transition duration.' },
             ];
             document.getElementById('acc-single').items = faq;
+            document.getElementById('acc-single').defaultOpen = [0];
+            document.getElementById('acc-multi').defaultOpen = [0, 1];
+            document.getElementById('acc-rich').defaultOpen = [0];
             document.getElementById('acc-multi').items = notes;
             document.getElementById('acc-rich').items = [
                 { title: 'Install', body: 'Run pnpm add.' },

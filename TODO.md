@@ -262,6 +262,10 @@ Cover web, fullstack and desktop where they differ:
 5. **Fullstack:** server-rendered markup (declarative shadow DOM) hydrates
    without a flash or a mismatch, and the form value is intact after upgrade.
 6. **Reset:** `form.reset()` restores the initial `value`.
+7. **Array and object properties:** arrays (`items`, `options`, `columns`,
+   `rows`, `open`) have no attribute, so from `onmounted` set them with
+   `js_sys::Reflect::set` and `serde_wasm_bindgen::to_value`. Does the element
+   update, and does it survive a hydrate?
 
 ### Deliverable
 A tiny example (or a snippet in the docs) that is known to compile and run, and

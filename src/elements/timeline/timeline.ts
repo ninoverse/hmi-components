@@ -60,8 +60,9 @@ const toggleEmpty = (event: Event, hasText: boolean) => {
 export class HmiTimeline extends LitElement {
     static override styles = [baseStyles, styles];
 
-    /** The events, in chronological order. Set it as a property; a JSON attribute is accepted. @default [] */
-    @property({ type: Array }) accessor items: TimelineItem[] = [];
+    /** The events, in chronological order. A property only: there is no attribute. @default [] */
+    @property({ type: Array, attribute: false })
+    accessor items: TimelineItem[] = [];
 
     /** Draw a hairline between events. @default false */
     @property({ type: Boolean, reflect: true }) accessor divider = false;
