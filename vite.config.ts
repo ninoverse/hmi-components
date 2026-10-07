@@ -106,6 +106,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/card/card.react.ts',
                 ),
+                'wc/carousel': resolve(
+                    dirname,
+                    'src/elements/carousel/carousel.ts',
+                ),
+                'react/carousel': resolve(
+                    dirname,
+                    'src/elements/carousel/carousel.react.ts',
+                ),
                 'wc/checkbox': resolve(
                     dirname,
                     'src/elements/checkbox/checkbox.ts',
@@ -173,6 +181,11 @@ export default defineConfig({
                 'react/heading': resolve(
                     dirname,
                     'src/elements/heading/heading.react.ts',
+                ),
+                'wc/image': resolve(dirname, 'src/elements/image/image.ts'),
+                'react/image': resolve(
+                    dirname,
+                    'src/elements/image/image.react.ts',
                 ),
                 'wc/input': resolve(dirname, 'src/elements/input/input.ts'),
                 'react/input': resolve(

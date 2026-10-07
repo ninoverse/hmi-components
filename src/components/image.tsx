@@ -68,6 +68,7 @@ export type ImageProps = ImageOwnProps &
  *
  * @example
  * <Image src="/cover.jpg" alt="Cover" ratio={16 / 9} radius="large" />
+ * @deprecated Use `Image` from `@ninoverse/hmi-components/react/image`. Removed in 6.0.0.
  */
 export function Image({
     src,

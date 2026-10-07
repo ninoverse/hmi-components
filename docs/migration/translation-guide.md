@@ -222,7 +222,7 @@ hmi-tabs { "options": OPTIONS_JSON,
 | table | `columns[].render(row)` | `kind: 'text' \| 'format' \| 'badge' \| 'link' \| 'actions'` + `format: '{first} {last}'` | `slot="cell-<rowKey>-<columnKey>"`, `slot="header-<columnKey>"` | `columns[].render` returning `string \| TemplateResult \| Node` |
 | table | `getRowKey(row)` | `row-key="id"` attribute naming the key field | — | `rowKey` may also be a function (JS only) |
 | list | `renderItem(item, i)` | item fields + `format` | `slot="item-<key>"` | `renderItem` |
-| image | `renderImage(props)` | — | default slot receives a custom `<img>`/`<picture>` | `renderImage` |
+| image | `renderImage(props)` | — | default slot receives a custom `<img>`/`<picture>`; the shell hears its `load` and `error` | — |
 | responsive-container | `children(size)` | `hmi-resize { width, height }` event + `--_w`/`--_h` on host; charts read `width`/`height` props | default slot | — |
 | combobox | `filterOption(option, query)` | `filter="includes" \| "startsWith" \| "none"` | — | `filter` may be a predicate (JS only) |
 | slider | `formatValue` | template string `'{value}%'` | — | the same `formatValue`, set as a property |
@@ -293,7 +293,7 @@ Wrapper prop = `on` + PascalCase of the event minus `hmi-`.
 | carousel | `onIndexChange(n)` | `hmi-index-change` | `{ index: number }` |
 | list | `onReorder(items)` | `hmi-reorder` | `{ items: ListItem[] }` |
 | table | (internal sort state) | `hmi-sort` | `{ key: string, dir: 'asc' \| 'desc' \| null }` |
-| image | `renderImage` `onLoad` / `onError` | `hmi-load` / `hmi-error` | `{}` |
+| image | `onLoad` / `onError` (and those a `renderImage` was handed) | `hmi-load` / `hmi-error` | `{ src: string }` |
 | responsive-container | `children(size)` | `hmi-resize` | `{ width: number, height: number }` |
 | charts (14) | none | none | — |
 
