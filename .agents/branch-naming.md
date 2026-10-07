@@ -1,5 +1,5 @@
 <!-- agentcfg:start -->
-<!-- core/branch-naming.md · v1.0.0 -->
+<!-- core/branch-naming.md · v1.2.0 -->
 # Branch naming
 
 ## Format

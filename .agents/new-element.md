@@ -1,5 +1,5 @@
 <!-- agentcfg:start -->
-<!-- framework/lit/tasks/new-element.md · v1.0.0 -->
+<!-- framework/lit/tasks/new-element.md · v1.2.0 -->
 # Adding an element
 
 The exact procedure for adding or modifying a single element. Follow every step

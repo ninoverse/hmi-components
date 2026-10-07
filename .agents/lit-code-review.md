@@ -1,5 +1,5 @@
 <!-- agentcfg:start -->
-<!-- framework/lit/code-review.md · v1.0.0 -->
+<!-- framework/lit/code-review.md · v1.2.0 -->
 # Element review
 
 For a PR that adds or changes an element, alongside *Code review*.

@@ -1,5 +1,5 @@
 <!-- agentcfg:start -->
-<!-- framework/lit/forms-and-overlays.md · v1.0.0 -->
+<!-- framework/lit/forms-and-overlays.md · v1.2.0 -->
 # Forms and overlays
 
 ## Form controls

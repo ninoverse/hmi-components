@@ -1,5 +1,5 @@
 <!-- agentcfg:start -->
-<!-- framework/lit/testing.md · v1.0.0 -->
+<!-- framework/lit/testing.md · v1.2.0 -->
 # Element tests
 
 Every element ships two test files beside it. They run with the rest of the

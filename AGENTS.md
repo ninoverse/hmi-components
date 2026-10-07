@@ -113,7 +113,7 @@ change to `.agentprofile.yml` without `pnpm agentcfg sync`, which rewrites the
 composed files.
 
 <!-- agentcfg:start -->
-<!-- language/typescript/tooling.md · v1.0.0 -->
+<!-- language/typescript/tooling.md · v1.2.0 -->
 # Build and test commands
 
 **Toolchain:** TypeScript on Node, with pnpm only — never `npm` or `yarn`, whose lockfiles and resolution differ. pnpm is pinned by `packageManager` in `package.json`, and Node by `.nvmrc`. Once per machine, install the Node `.nvmrc` names and run `corepack enable`, which then provides the pnpm `packageManager` names.
@@ -146,7 +146,7 @@ that needs another tool changes the script; the script names stay.
 
 **Node floor:** `engines.node` is the oldest Node the package supports, repeated as the `node-floor` input of the workflow that calls `node-ci.yml`, whose floor job fails a partial bump. Raising it means editing both together. Do not raise it incidentally. `.nvmrc` only pins development, and moves freely.
 
-<!-- core/behavior.md · v1.0.0 -->
+<!-- core/behavior.md · v1.2.0 -->
 # Behavioral guidelines
 
 **Maintain the Build:** Never leave the codebase in a state where build, lint,
@@ -186,7 +186,7 @@ your work before concluding a task.
 - Transform tasks into verifiable goals (e.g., "Add validation" → "Write tests for invalid inputs, then make them pass").
 - For multi-step tasks, state a brief plan and verify each step independently.
 
-<!-- agentcfg:index · v1.0.0 -->
+<!-- agentcfg:index · v1.2.0 -->
 # Extended rules
 
 Read these when they apply; they are not loaded by default.
