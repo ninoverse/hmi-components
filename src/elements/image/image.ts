@@ -9,8 +9,13 @@ import { styles } from './image.styles.js';
 export type ImageFit = 'cover' | 'contain' | 'fill' | 'none' | 'scale-down';
 export type ImageRadius = 'none' | 'small' | 'medium' | 'large' | 'full';
 
-/** Detail of `hmi-load` and `hmi-error`: the source of the image. */
+/** Detail of `hmi-load`: the source of the image that loaded. */
 export interface ImageLoadDetail {
+    src: string;
+}
+
+/** Detail of `hmi-error`: the source of the image that failed. */
+export interface ImageErrorDetail {
     src: string;
 }
 
@@ -42,7 +47,7 @@ const toLength = (value: number | string | undefined): string | undefined => {
  * @slot - Your own image element, instead of the built-in `<img>`.
  * @slot fallback - Content shown if the image fails to load; a broken-image icon by default.
  * @fires {CustomEvent<ImageLoadDetail>} hmi-load - The image loaded.
- * @fires {CustomEvent<ImageLoadDetail>} hmi-error - The image failed to load.
+ * @fires {CustomEvent<ImageErrorDetail>} hmi-error - The image failed to load.
  * @csspart base - The shell: the sized, rounded box.
  * @csspart media - The image area.
  * @csspart loader - The shimmer shown while loading.
@@ -152,11 +157,10 @@ export class HmiImage extends LitElement {
         // The completed-image check and the image's own event can both report.
         if (this.status === status) return;
         this.status = status;
-        emit<ImageLoadDetail>(
-            this,
-            status === 'loaded' ? 'hmi-load' : 'hmi-error',
-            { src: img?.currentSrc || this.src },
-        );
+        const detail = { src: img?.currentSrc || this.src };
+        if (status === 'loaded')
+            emit<ImageLoadDetail>(this, 'hmi-load', detail);
+        else emit<ImageErrorDetail>(this, 'hmi-error', detail);
     }
 
     /* `load` and `error` do not bubble: a capture listener on the media area hears

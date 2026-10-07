@@ -1,4 +1,4 @@
-import { html, LitElement, nothing, type PropertyValues } from 'lit';
+import { html, isServer, LitElement, nothing, type PropertyValues } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { baseStyles } from '../shared/base.styles.js';
 import { emit } from '../shared/events.js';
@@ -119,6 +119,7 @@ export class HmiCarousel extends LitElement {
 
     override connectedCallback(): void {
         super.connectedCallback();
+        if (isServer) return;
         this.#syncTimer();
     }
 

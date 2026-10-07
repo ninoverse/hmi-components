@@ -1,8 +1,17 @@
 import { createComponent, type EventName } from '@lit/react';
 import * as React from 'react';
-import { HmiImage, type ImageLoadDetail } from './image.js';
+import {
+    HmiImage,
+    type ImageErrorDetail,
+    type ImageLoadDetail,
+} from './image.js';
 
-export type { ImageFit, ImageLoadDetail, ImageRadius } from './image.js';
+export type {
+    ImageErrorDetail,
+    ImageFit,
+    ImageLoadDetail,
+    ImageRadius,
+} from './image.js';
 
 /**
  * React wrapper for `<hmi-image>`.
@@ -22,6 +31,6 @@ export const Image = createComponent({
     displayName: 'Image',
     events: {
         onLoad: 'hmi-load' as EventName<CustomEvent<ImageLoadDetail>>,
-        onError: 'hmi-error' as EventName<CustomEvent<ImageLoadDetail>>,
+        onError: 'hmi-error' as EventName<CustomEvent<ImageErrorDetail>>,
     },
 });
