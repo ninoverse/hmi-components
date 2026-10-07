@@ -1386,7 +1386,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "Sliding content carousel with arrows, dot pagination, looping, autoplay and\nkeyboard (left and right arrow) support. Every element child is a slide.\n\n`hmi-index-change` fires with `{ index }` whenever the shown slide changes\nthrough the arrows, the dots, the keyboard or autoplay. The element owns\n`index`: to veto a change, set `index` back from a listener. Autoplay pauses\nwhile the pointer is over the carousel or focus is inside it.\n\nIt gives each slide `role=\"group\"`, `aria-roledescription=\"slide\"` and a\nposition label, and makes the slides that are not shown `inert`, so their\ncontent cannot take focus. The carousel is named by `label`.",
+          "description": "Sliding content carousel with arrows, dot pagination, looping, autoplay and\nkeyboard (left and right arrow) support. Every element child is a slide.\n\n`hmi-index-change` fires with `{ index }` whenever the shown slide changes\nthrough the arrows, the dots, the keyboard or autoplay. The element owns\n`index`: to veto a change, set `index` back from a listener. Autoplay pauses\nwhile the pointer is over the carousel or focus is inside it.\n\nThe element never changes your slides. A slide that is not shown is\n`visibility: hidden` (through a style the element injects for its position),\nso its content takes no focus and is skipped by assistive technology. To\nannounce slides as \"slide 2 of 3\", put `role=\"group\"`,\n`aria-roledescription=\"slide\"` and an `aria-label` on your own slides. The\ncarousel region is named by `label`.",
           "name": "HmiCarousel",
           "cssParts": [
             {
@@ -1649,6 +1649,42 @@
                   "name": "event",
                   "type": {
                     "text": "KeyboardEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "#hiddenSheet",
+              "privacy": "private",
+              "type": {
+                "text": "CSSStyleSheet | undefined"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#syncHiddenSlides",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#hiddenSlidesStyle",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "string"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "current",
+                  "type": {
+                    "text": "number"
                   }
                 }
               ]

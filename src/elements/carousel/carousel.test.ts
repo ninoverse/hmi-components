@@ -62,26 +62,17 @@ describe('hmi-carousel', () => {
         expect(customElements.get('hmi-carousel')).toBeDefined();
     });
 
-    it('names the region, and gives each slide group semantics and a position label', async () => {
+    it('names the region, and leaves the slides as they are', async () => {
         const el = await fixture(
             html`<hmi-carousel label="Highlights">${slides}</hmi-carousel>`,
         );
         const region = part(el, 'base');
         expect(region.getAttribute('aria-roledescription')).toBe('carousel');
         expect(region.getAttribute('aria-label')).toBe('Highlights');
-        expect(slideEls(el).map((s) => s.getAttribute('role'))).toEqual([
-            'group',
-            'group',
-            'group',
-        ]);
-        expect(
-            slideEls(el).map((s) => s.getAttribute('aria-roledescription')),
-        ).toEqual(['slide', 'slide', 'slide']);
-        expect(slideEls(el).map((s) => s.getAttribute('aria-label'))).toEqual([
-            '1 of 3',
-            '2 of 3',
-            '3 of 3',
-        ]);
+        await el.updateComplete;
+        for (const slide of slideEls(el)) {
+            expect(slide.getAttributeNames()).toEqual(['id']);
+        }
     });
 
     it('has the default region name', async () => {
@@ -89,16 +80,29 @@ describe('hmi-carousel', () => {
         expect(part(el, 'base').getAttribute('aria-label')).toBe('Carousel');
     });
 
-    it('shows the first slide, and makes the others inert', async () => {
+    it('shows the first slide, and hides the others from focus and assistive technology', async () => {
         const el = await fixture(html`<hmi-carousel>${slides}</hmi-carousel>`);
         expect(transform(el)).toBe('translateX(0%)');
-        expect(slideEls(el).map((s) => s.hasAttribute('inert'))).toEqual([
-            false,
-            true,
-            true,
-        ]);
+        expect(slideEls(el).map((s) => getComputedStyle(s).visibility)).toEqual(
+            ['visible', 'hidden', 'hidden'],
+        );
         const first = slideEls(el)[0]?.getBoundingClientRect();
         expect(first?.width).toBe(400);
+    });
+
+    it('does not let focus into a slide that is not shown', async () => {
+        const el = await fixture(
+            html`<hmi-carousel><div><button id="one">One</button></div><div><button id="two">Two</button></div></hmi-carousel>`,
+        );
+        const two = el.querySelector('#two') as HTMLButtonElement;
+        two.focus();
+        expect(document.activeElement).not.toBe(two);
+        await click(el, part(el, 'next'));
+        two.focus();
+        expect(document.activeElement).toBe(two);
+        const one = el.querySelector('#one') as HTMLButtonElement;
+        one.focus();
+        expect(document.activeElement).not.toBe(one);
     });
 
     it('starts at default-index, and index wins when set', async () => {
@@ -135,11 +139,9 @@ describe('hmi-carousel', () => {
         await click(el, part(el, 'prev'));
         expect(seen).toEqual([1, 2, 0, 2]);
         expect(transform(el)).toBe('translateX(-200%)');
-        expect(slideEls(el).map((s) => s.hasAttribute('inert'))).toEqual([
-            true,
-            true,
-            false,
-        ]);
+        expect(slideEls(el).map((s) => getComputedStyle(s).visibility)).toEqual(
+            ['hidden', 'hidden', 'visible'],
+        );
     });
 
     it('stops at the ends with no-loop, and disables the arrow there', async () => {
@@ -251,7 +253,8 @@ describe('hmi-carousel', () => {
         await new Promise((r) => setTimeout(r, 30));
         await el.updateComplete;
         expect(dots(el)).toHaveLength(4);
-        expect(extra.getAttribute('aria-label')).toBe('4 of 4');
+        expect(getComputedStyle(extra).visibility).toBe('hidden');
+        expect(extra.getAttributeNames()).toEqual([]);
     });
 
     describe('autoplay', () => {

@@ -34,9 +34,12 @@ const isEditable = (target: EventTarget | undefined): boolean =>
  * `index`: to veto a change, set `index` back from a listener. Autoplay pauses
  * while the pointer is over the carousel or focus is inside it.
  *
- * It gives each slide `role="group"`, `aria-roledescription="slide"` and a
- * position label, and makes the slides that are not shown `inert`, so their
- * content cannot take focus. The carousel is named by `label`.
+ * The element never changes your slides. A slide that is not shown is
+ * `visibility: hidden` (through a style the element injects for its position),
+ * so its content takes no focus and is skipped by assistive technology. To
+ * announce slides as "slide 2 of 3", put `role="group"`,
+ * `aria-roledescription="slide"` and an `aria-label` on your own slides. The
+ * carousel region is named by `label`.
  *
  * @tag hmi-carousel
  * @slot - The slides: each element child is one.
@@ -180,15 +183,42 @@ export class HmiCarousel extends LitElement {
     }
 
     protected override updated(): void {
-        const count = this.#count;
-        const current = this.#current;
-        this.slides.forEach((slide, i) => {
-            slide.setAttribute('role', 'group');
-            slide.setAttribute('aria-roledescription', 'slide');
-            slide.setAttribute('aria-label', `${i + 1} of ${count}`);
-            slide.toggleAttribute('inert', i !== current);
-        });
         this.#syncTimer();
+        this.#syncHiddenSlides();
+    }
+
+    /* A sheet of its own, which the browser adopts alongside the element's styles:
+       a binding inside a `<style>` is not supported when rendering on the server. */
+    #hiddenSheet: CSSStyleSheet | undefined;
+
+    #syncHiddenSlides(): void {
+        if (isServer) return;
+        if (!this.#hiddenSheet) {
+            this.#hiddenSheet = new CSSStyleSheet();
+            const root = this.renderRoot as ShadowRoot;
+            root.adoptedStyleSheets = [
+                ...root.adoptedStyleSheets,
+                this.#hiddenSheet,
+            ];
+        }
+        this.#hiddenSheet.replaceSync(this.#hiddenSlidesStyle(this.#current));
+    }
+
+    /* The slides that are not shown are hidden by a style for their position
+       among the host's children, so that their markup stays untouched. The hide
+       waits out the slide transition, and the show does not. */
+    #hiddenSlidesStyle(current: number): string {
+        if (this.slides.length === 0) return '';
+        const children = Array.from(this.children);
+        const selectors = this.slides
+            .filter((_, i) => i !== current)
+            .map(
+                (slide) =>
+                    `::slotted(:nth-child(${children.indexOf(slide) + 1}))`,
+            );
+        if (selectors.length === 0) return '';
+        return `${selectors.join(',')} { visibility: hidden; transition: visibility 0s linear var(--duration-medium-2); }
+            @media (prefers-reduced-motion: reduce) { ${selectors.join(',')} { transition: none; } }`;
     }
 
     #arrow(direction: 'prev' | 'next') {

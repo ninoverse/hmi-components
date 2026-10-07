@@ -49,7 +49,7 @@ const meta = {
         docs: {
             description: {
                 component:
-                    'React: `import { Carousel } from \'@ninoverse/hmi-components/react/carousel\'` — `<Carousel label="Highlights" onIndexChange={(e) => setIndex(e.detail.index)}><Slide1 /><Slide2 /></Carousel>`. Every element child is a slide. `noLoop`, `hideArrows` and `hideDots` turn the defaults off.',
+                    'React: `import { Carousel } from \'@ninoverse/hmi-components/react/carousel\'` — `<Carousel label="Highlights" onIndexChange={(e) => setIndex(e.detail.index)}><Slide1 /><Slide2 /></Carousel>`. Every element child is a slide, and the element never changes it: add `role="group"`, `aria-roledescription="slide"` and an `aria-label` to your own slides to announce them. `noLoop`, `hideArrows` and `hideDots` turn the defaults off.',
             },
         },
     },
