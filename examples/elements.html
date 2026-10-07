@@ -942,6 +942,20 @@ export function Example() {
         </section>
 
         <section>
+            <h2>List</h2>
+            <!-- Items are a property. right-<id> takes rich content; reorderable adds
+                 drag and Alt+Arrow reordering, and the page sets items back from
+                 hmi-reorder. -->
+            <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 28rem)); gap: 2rem">
+                <hmi-list id="list-plain">
+                    <hmi-badge slot="right-1" dot>Live</hmi-badge>
+                    <hmi-badge slot="right-3">312</hmi-badge>
+                </hmi-list>
+                <hmi-list id="list-reorder" reorderable></hmi-list>
+            </div>
+        </section>
+
+        <section>
             <h2>Image</h2>
             <!-- The demo images are eager so a screenshot taken without scrolling shows them; the
                  default is loading="lazy". hmi-load and hmi-error fire with { src }. Put your own <img> in the
@@ -1192,6 +1206,23 @@ export function Example() {
             ];
             document.getElementById('timeline-plain').items = events;
             document.getElementById('timeline-divider').items = events;
+
+            document.getElementById('list-plain').items = [
+                { id: 1, title: 'Inbox', subtitle: '12 unread messages' },
+                { id: 2, title: 'Drafts', subtitle: '3 unsent' },
+                { id: 3, title: 'Archive', subtitle: 'Older than 30 days' },
+            ];
+            const reorder = document.getElementById('list-reorder');
+            reorder.items = [
+                { id: 'ada', avatar: 'Ada Lovelace', title: 'Ada Lovelace', subtitle: 'Computing pioneer' },
+                { id: 'alan', avatar: 'Alan Turing', title: 'Alan Turing', subtitle: 'Theoretical foundation' },
+                { id: 'grace', avatar: 'Grace Hopper', title: 'Grace Hopper', subtitle: 'Compiler genealogy' },
+                { id: 'linus', avatar: 'Linus Torvalds', title: 'Linus Torvalds', subtitle: 'Kernel maintainer' },
+            ];
+            reorder.addEventListener('hmi-reorder', (event) => {
+                console.log('list hmi-reorder', event.detail);
+                reorder.items = event.detail.items;
+            });
 
             document.getElementById('image-missing').addEventListener('hmi-error', (event) => console.log('image hmi-error', event.detail));
             document.getElementById('carousel-live').addEventListener('hmi-index-change', (event) => console.log('carousel', event.detail));

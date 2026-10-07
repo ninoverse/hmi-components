@@ -93,6 +93,11 @@ export {
     type LinkTone,
     type LinkUnderline,
 } from '../elements/link/link.react.js';
+export {
+    List,
+    type ListItem,
+    type ListReorderDetail,
+} from '../elements/list/list.react.js';
 export { Meter, type MeterLevel } from '../elements/meter/meter.react.js';
 export {
     MultiInput,
