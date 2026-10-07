@@ -87,15 +87,23 @@ describe('hmi-image', () => {
         expect(part(el, 'media').hidden).toBe(true);
     });
 
-    it('shows a slotted fallback on error', async () => {
+    it('shows a slotted fallback on error, centered and not stretched like a slotted image', async () => {
         const el = await fixture(
-            html`<hmi-image src=${BAD} alt=""><span slot="fallback">Gone</span></hmi-image>`,
+            html`<hmi-image src=${BAD} alt="" ratio="2" width="200"><span slot="fallback" id="gone">Gone</span></hmi-image>`,
         );
         await until(el, 'error');
         const slot = el.shadowRoot?.querySelector(
             'slot[name="fallback"]',
         ) as HTMLSlotElement;
         expect(slot.assignedElements()).toHaveLength(1);
+        const gone = el.querySelector('#gone') as HTMLElement;
+        const shell = part(el, 'base').getBoundingClientRect();
+        const box = gone.getBoundingClientRect();
+        expect(box.width).toBeLessThan(shell.width);
+        expect(box.top + box.height / 2).toBeCloseTo(
+            shell.top + shell.height / 2,
+            0,
+        );
     });
 
     it('starts loading again when src changes, after a failure too', async () => {
