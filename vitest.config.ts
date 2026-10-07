@@ -17,10 +17,13 @@ export default defineConfig({
                         'lit',
                         'lit/decorators.js',
                         'lit/directives/if-defined.js',
+                        'lit/directives/live.js',
                         'lit/directives/style-map.js',
                         '@lit/react',
                         'react',
+                        'react-dom',
                         'react-dom/client',
+                        'react/jsx-dev-runtime',
                     ],
                 },
                 test: {
