@@ -77,6 +77,7 @@ export {
 } from '../elements/heading/heading.react.js';
 export {
     Image,
+    type ImageErrorDetail,
     type ImageFit,
     type ImageLoadDetail,
     type ImageRadius,
