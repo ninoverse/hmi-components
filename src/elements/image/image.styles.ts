@@ -30,7 +30,7 @@ export const styles = css`
     }
 
     .img,
-    ::slotted(*) {
+    slot:not([name])::slotted(*) {
         position: relative;
         z-index: 1;
         display: block;

@@ -943,20 +943,21 @@ export function Example() {
 
         <section>
             <h2>Image</h2>
-            <!-- hmi-load and hmi-error fire with { src }. Put your own <img> in the
+            <!-- The demo images are eager so a screenshot taken without scrolling shows them; the
+                 default is loading="lazy". hmi-load and hmi-error fire with { src }. Put your own <img> in the
                  default slot (here, one with object-fit set inline) to render the
                  image yourself, as an image library would; slot="fallback" replaces
                  the broken-image icon. -->
             <div style="display: flex; gap: 1.5rem; flex-wrap: wrap; align-items: flex-start">
-                <hmi-image src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='480' height='360'%3E%3Crect width='480' height='360' fill='%23e87a5d'/%3E%3Ctext x='240' y='195' font-size='44' text-anchor='middle' fill='white' font-family='sans-serif'%3ENinoverse%3C/text%3E%3C/svg%3E" alt="Ninoverse cover" ratio="1.3333" width="280" radius="large"></hmi-image>
-                <hmi-image src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='420'%3E%3Crect width='300' height='420' fill='%231f5b58'/%3E%3Ctext x='150' y='220' font-size='40' text-anchor='middle' fill='white' font-family='sans-serif'%3EHMI%3C/text%3E%3C/svg%3E" alt="HMI poster, contained" ratio="1.3333" width="280" fit="contain" radius="medium"></hmi-image>
-                <hmi-image src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='480' height='360'%3E%3Crect width='480' height='360' fill='%23e87a5d'/%3E%3Ctext x='240' y='195' font-size='44' text-anchor='middle' fill='white' font-family='sans-serif'%3ENinoverse%3C/text%3E%3C/svg%3E" alt="Circular crop" width="180" height="180" radius="full"></hmi-image>
-                <hmi-image id="image-missing" src="/this-image-does-not-exist.png" alt="Missing image" ratio="1.3333" width="280" radius="large"></hmi-image>
-                <hmi-image src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='480' height='360'%3E%3Crect width='480' height='360' fill='%23e87a5d'/%3E%3Ctext x='240' y='195' font-size='44' text-anchor='middle' fill='white' font-family='sans-serif'%3ENinoverse%3C/text%3E%3C/svg%3E" alt="Top-aligned crop" ratio="1.3333" width="280" position="top" placeholder="#1f5b58" radius="large"></hmi-image>
+                <hmi-image loading="eager" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='480' height='360'%3E%3Crect width='480' height='360' fill='%23e87a5d'/%3E%3Ctext x='240' y='195' font-size='44' text-anchor='middle' fill='white' font-family='sans-serif'%3ENinoverse%3C/text%3E%3C/svg%3E" alt="Ninoverse cover" ratio="1.3333" width="280" radius="large"></hmi-image>
+                <hmi-image loading="eager" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='420'%3E%3Crect width='300' height='420' fill='%231f5b58'/%3E%3Ctext x='150' y='220' font-size='40' text-anchor='middle' fill='white' font-family='sans-serif'%3EHMI%3C/text%3E%3C/svg%3E" alt="HMI poster, contained" ratio="1.3333" width="280" fit="contain" radius="medium"></hmi-image>
+                <hmi-image loading="eager" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='480' height='360'%3E%3Crect width='480' height='360' fill='%23e87a5d'/%3E%3Ctext x='240' y='195' font-size='44' text-anchor='middle' fill='white' font-family='sans-serif'%3ENinoverse%3C/text%3E%3C/svg%3E" alt="Circular crop" width="180" height="180" radius="full"></hmi-image>
+                <hmi-image id="image-missing" loading="eager" src="/this-image-does-not-exist.png" alt="Missing image" ratio="1.3333" width="280" radius="large"></hmi-image>
+                <hmi-image loading="eager" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='480' height='360'%3E%3Crect width='480' height='360' fill='%23e87a5d'/%3E%3Ctext x='240' y='195' font-size='44' text-anchor='middle' fill='white' font-family='sans-serif'%3ENinoverse%3C/text%3E%3C/svg%3E" alt="Top-aligned crop" ratio="1.3333" width="280" position="top" placeholder="#1f5b58" radius="large"></hmi-image>
                 <hmi-image ratio="1.3333" width="280" radius="large">
                     <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='420'%3E%3Crect width='300' height='420' fill='%231f5b58'/%3E%3Ctext x='150' y='220' font-size='40' text-anchor='middle' fill='white' font-family='sans-serif'%3EHMI%3C/text%3E%3C/svg%3E" alt="Custom-rendered image" style="object-fit: cover" />
                 </hmi-image>
-                <hmi-image src="/this-image-does-not-exist.png" alt="Custom fallback" ratio="1.3333" width="280" radius="large">
+                <hmi-image loading="eager" src="/this-image-does-not-exist.png" alt="Custom fallback" ratio="1.3333" width="280" radius="large">
                     <span slot="fallback" style="padding: 1rem; text-align: center">Image unavailable</span>
                 </hmi-image>
             </div>
@@ -968,9 +969,9 @@ export function Example() {
                  no-loop, hide-arrows and hide-dots turn the defaults off. -->
             <div style="display: flex; flex-direction: column; gap: 2rem; max-width: 30rem">
                 <hmi-carousel id="carousel-live" label="Highlights">
-                    <hmi-image src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='480' height='360'%3E%3Crect width='480' height='360' fill='%23e87a5d'/%3E%3Ctext x='240' y='195' font-size='44' text-anchor='middle' fill='white' font-family='sans-serif'%3ENinoverse%3C/text%3E%3C/svg%3E" alt="Ninoverse cover" ratio="1.7778"></hmi-image>
+                    <hmi-image loading="eager" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='480' height='360'%3E%3Crect width='480' height='360' fill='%23e87a5d'/%3E%3Ctext x='240' y='195' font-size='44' text-anchor='middle' fill='white' font-family='sans-serif'%3ENinoverse%3C/text%3E%3C/svg%3E" alt="Ninoverse cover" ratio="1.7778"></hmi-image>
                     <div style="aspect-ratio: 16 / 9; display: flex; align-items: center; justify-content: center; background: var(--secondary-container); color: var(--on-secondary-container); font-size: 1.5rem; font-weight: 600">Rich slide content</div>
-                    <hmi-image src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='420'%3E%3Crect width='300' height='420' fill='%231f5b58'/%3E%3Ctext x='150' y='220' font-size='40' text-anchor='middle' fill='white' font-family='sans-serif'%3EHMI%3C/text%3E%3C/svg%3E" alt="HMI poster" ratio="1.7778" fit="contain"></hmi-image>
+                    <hmi-image loading="eager" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='420'%3E%3Crect width='300' height='420' fill='%231f5b58'/%3E%3Ctext x='150' y='220' font-size='40' text-anchor='middle' fill='white' font-family='sans-serif'%3EHMI%3C/text%3E%3C/svg%3E" alt="HMI poster" ratio="1.7778" fit="contain"></hmi-image>
                 </hmi-carousel>
                 <hmi-carousel label="No loop, no dots" no-loop hide-dots>
                     <div style="aspect-ratio: 16 / 9; display: flex; align-items: center; justify-content: center; background: var(--primary-container); color: var(--on-primary-container)">First</div>
