@@ -36,6 +36,10 @@ export {
 } from '../elements/button/button.react.js';
 export { Card, type CardVariant } from '../elements/card/card.react.js';
 export {
+    Carousel,
+    type CarouselIndexChangeDetail,
+} from '../elements/carousel/carousel.react.js';
+export {
     Checkbox,
     type CheckboxChangeDetail,
 } from '../elements/checkbox/checkbox.react.js';
@@ -71,6 +75,13 @@ export {
     type HeadingSize,
     type HeadingTone,
 } from '../elements/heading/heading.react.js';
+export {
+    Image,
+    type ImageErrorDetail,
+    type ImageFit,
+    type ImageLoadDetail,
+    type ImageRadius,
+} from '../elements/image/image.react.js';
 export {
     Input,
     type InputType,

@@ -318,6 +318,10 @@
             "types": "./dist/elements/card/card.react.d.ts",
             "import": "./dist/react/card.js"
         },
+        "./react/carousel": {
+            "types": "./dist/elements/carousel/carousel.react.d.ts",
+            "import": "./dist/react/carousel.js"
+        },
         "./react/checkbox": {
             "types": "./dist/elements/checkbox/checkbox.react.d.ts",
             "import": "./dist/react/checkbox.js"
@@ -357,6 +361,10 @@
         "./react/heading": {
             "types": "./dist/elements/heading/heading.react.d.ts",
             "import": "./dist/react/heading.js"
+        },
+        "./react/image": {
+            "types": "./dist/elements/image/image.react.d.ts",
+            "import": "./dist/react/image.js"
         },
         "./react/input": {
             "types": "./dist/elements/input/input.react.d.ts",
@@ -607,6 +615,10 @@
             "types": "./dist/elements/card/card.d.ts",
             "import": "./dist/wc/card.js"
         },
+        "./wc/carousel": {
+            "types": "./dist/elements/carousel/carousel.d.ts",
+            "import": "./dist/wc/carousel.js"
+        },
         "./wc/checkbox": {
             "types": "./dist/elements/checkbox/checkbox.d.ts",
             "import": "./dist/wc/checkbox.js"
@@ -646,6 +658,10 @@
         "./wc/heading": {
             "types": "./dist/elements/heading/heading.d.ts",
             "import": "./dist/wc/heading.js"
+        },
+        "./wc/image": {
+            "types": "./dist/elements/image/image.d.ts",
+            "import": "./dist/wc/image.js"
         },
         "./wc/input": {
             "types": "./dist/elements/input/input.d.ts",

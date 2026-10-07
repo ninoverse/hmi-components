@@ -50,6 +50,7 @@ const ArrowIcon = ({ dir }: { dir: 'prev' | 'next' }) => (
  *
  * @example
  * <Carousel slides={[<Slide1 />, <Slide2 />]} autoPlay={4000} />
+ * @deprecated Use `Carousel` from `@ninoverse/hmi-components/react/carousel`. Removed in 6.0.0.
  */
 export function Carousel({
     slides,

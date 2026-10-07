@@ -1382,6 +1382,455 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/carousel/carousel.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Sliding content carousel with arrows, dot pagination, looping, autoplay and\nkeyboard (left and right arrow) support. Every element child is a slide.\n\n`hmi-index-change` fires with `{ index }` whenever the shown slide changes\nthrough the arrows, the dots, the keyboard or autoplay. The element owns\n`index`: to veto a change, set `index` back from a listener. Autoplay pauses\nwhile the pointer is over the carousel or focus is inside it.\n\nThe element never changes your slides. A slide that is not shown is\n`visibility: hidden` (through a style the element injects for its position),\nso its content takes no focus and is skipped by assistive technology. To\nannounce slides as \"slide 2 of 3\", put `role=\"group\"`,\n`aria-roledescription=\"slide\"` and an `aria-label` on your own slides. The\ncarousel region is named by `label`.",
+          "name": "HmiCarousel",
+          "cssParts": [
+            {
+              "description": "The carousel region.",
+              "name": "base"
+            },
+            {
+              "description": "The clipped window onto the slides.",
+              "name": "viewport"
+            },
+            {
+              "description": "The row of slides that slides sideways.",
+              "name": "track"
+            },
+            {
+              "description": "A previous or next button.",
+              "name": "arrow"
+            },
+            {
+              "description": "The previous button.",
+              "name": "prev"
+            },
+            {
+              "description": "The next button.",
+              "name": "next"
+            },
+            {
+              "description": "The row of dots.",
+              "name": "dots"
+            },
+            {
+              "description": "One dot.",
+              "name": "dot"
+            }
+          ],
+          "slots": [
+            {
+              "description": "The slides: each element child is one.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "index",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "Index of the shown slide.",
+              "attribute": "index"
+            },
+            {
+              "kind": "field",
+              "name": "defaultIndex",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "Index shown at first render, when `index` is not set.",
+              "attribute": "default-index"
+            },
+            {
+              "kind": "field",
+              "name": "noLoop",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Stop at the first and last slide instead of wrapping around.",
+              "attribute": "no-loop"
+            },
+            {
+              "kind": "field",
+              "name": "autoPlay",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "Auto-advance interval in milliseconds; off when unset.",
+              "attribute": "auto-play"
+            },
+            {
+              "kind": "field",
+              "name": "hideArrows",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Hide the previous and next arrows.",
+              "attribute": "hide-arrows"
+            },
+            {
+              "kind": "field",
+              "name": "hideDots",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Hide the dot pagination.",
+              "attribute": "hide-dots"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Carousel'",
+              "description": "Accessible name of the carousel region.",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "prevLabel",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Previous slide'",
+              "description": "Accessible name of the previous button.",
+              "attribute": "prev-label"
+            },
+            {
+              "kind": "field",
+              "name": "nextLabel",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Next slide'",
+              "description": "Accessible name of the next button.",
+              "attribute": "next-label"
+            },
+            {
+              "kind": "field",
+              "name": "dotLabel",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Go to slide {n}'",
+              "description": "Accessible name of each dot; `{n}` is the slide number.",
+              "attribute": "dot-label"
+            },
+            {
+              "kind": "field",
+              "name": "slides",
+              "type": {
+                "text": "Element[]"
+              },
+              "privacy": "private",
+              "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "slot_",
+              "type": {
+                "text": "HTMLSlotElement | null"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "#paused",
+              "privacy": "private",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "#timer",
+              "privacy": "private",
+              "type": {
+                "text": "number | undefined"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "#count",
+              "privacy": "private",
+              "type": {
+                "text": "number"
+              },
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "#current",
+              "privacy": "private",
+              "type": {
+                "text": "number"
+              },
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "#goTo",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "next",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#syncTimer",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#pause",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "paused",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onSlot",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#onKeydown",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "KeyboardEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "#hiddenSheet",
+              "privacy": "private",
+              "type": {
+                "text": "CSSStyleSheet | undefined"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#syncHiddenSlides",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#hiddenSlidesStyle",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "string"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "current",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#arrow",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "direction",
+                  "type": {
+                    "text": "'prev' | 'next'"
+                  }
+                }
+              ]
+            }
+          ],
+          "events": [
+            {
+              "type": {
+                "text": "CustomEvent<CarouselIndexChangeDetail>"
+              },
+              "description": "The shown slide changed.",
+              "name": "hmi-index-change"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "index",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "Index of the shown slide.",
+              "fieldName": "index"
+            },
+            {
+              "name": "default-index",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "Index shown at first render, when `index` is not set.",
+              "fieldName": "defaultIndex"
+            },
+            {
+              "name": "no-loop",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Stop at the first and last slide instead of wrapping around.",
+              "fieldName": "noLoop"
+            },
+            {
+              "name": "auto-play",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "Auto-advance interval in milliseconds; off when unset.",
+              "fieldName": "autoPlay"
+            },
+            {
+              "name": "hide-arrows",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Hide the previous and next arrows.",
+              "fieldName": "hideArrows"
+            },
+            {
+              "name": "hide-dots",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Hide the dot pagination.",
+              "fieldName": "hideDots"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Carousel'",
+              "description": "Accessible name of the carousel region.",
+              "fieldName": "label"
+            },
+            {
+              "name": "prev-label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Previous slide'",
+              "description": "Accessible name of the previous button.",
+              "fieldName": "prevLabel"
+            },
+            {
+              "name": "next-label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Next slide'",
+              "description": "Accessible name of the next button.",
+              "fieldName": "nextLabel"
+            },
+            {
+              "name": "dot-label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Go to slide {n}'",
+              "description": "Accessible name of each dot; `{n}` is the slide number.",
+              "fieldName": "dotLabel"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-carousel",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiCarousel",
+          "declaration": {
+            "name": "HmiCarousel",
+            "module": "src/elements/carousel/carousel.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-carousel",
+          "declaration": {
+            "name": "HmiCarousel",
+            "module": "src/elements/carousel/carousel.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/checkbox/checkbox.ts",
       "declarations": [
         {
@@ -4137,6 +4586,421 @@
           "declaration": {
             "name": "HmiHeading",
             "module": "src/elements/heading/heading.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/elements/image/image.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Image with loading and error states, aspect-ratio reservation, `object-fit`\nand `object-position`, radius presets, a placeholder while it loads, and a\nfallback when the source fails. It lazy-loads by default.\n\n`hmi-load` and `hmi-error` fire with `{ src }` when the image loads or fails.\nA new `src` starts loading again.\n\nTo render the image yourself, for example with an image-optimization library,\nput your own `<img>`, `<picture>` or similar in the default slot. The shell\nstill reserves the space, rounds the corners and shows the placeholder, and it\nhears the element's `load` and `error` events to clear the placeholder or show\nthe fallback. `fit` and `position` reach a slotted `<img>` as defaults: its own\ninline styles win. With Next.js, slot `<NextImage fill … />`, or pass the\nprops of `getImageProps()` (`src`, `srcset`, `sizes`) to this element.",
+          "name": "HmiImage",
+          "cssParts": [
+            {
+              "description": "The shell: the sized, rounded box.",
+              "name": "base"
+            },
+            {
+              "description": "The image area.",
+              "name": "media"
+            },
+            {
+              "description": "The shimmer shown while loading.",
+              "name": "loader"
+            },
+            {
+              "description": "The fallback shown on error.",
+              "name": "fallback"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Your own image element, instead of the built-in `<img>`.",
+              "name": ""
+            },
+            {
+              "description": "Content shown if the image fails to load; a broken-image icon by default.",
+              "name": "fallback"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "src",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Image source URL.",
+              "attribute": "src"
+            },
+            {
+              "kind": "field",
+              "name": "alt",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Alternative text, required for accessibility.",
+              "attribute": "alt"
+            },
+            {
+              "kind": "field",
+              "name": "ratio",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "Aspect ratio to reserve while loading, such as `1.78` (16 / 9).",
+              "attribute": "ratio"
+            },
+            {
+              "kind": "field",
+              "name": "fit",
+              "type": {
+                "text": "ImageFit"
+              },
+              "default": "'cover'",
+              "description": "How the image fills its box: the `object-fit` of the built-in `<img>`.",
+              "attribute": "fit"
+            },
+            {
+              "kind": "field",
+              "name": "position",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "The `object-position` of the image, such as `top`.",
+              "attribute": "position"
+            },
+            {
+              "kind": "field",
+              "name": "radius",
+              "type": {
+                "text": "ImageRadius"
+              },
+              "default": "'medium'",
+              "description": "Corner radius preset.",
+              "attribute": "radius",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "placeholder",
+              "type": {
+                "text": "string"
+              },
+              "default": "'shimmer'",
+              "description": "What shows behind the image while it loads: `'shimmer'` animates, `'none'`\nshows nothing, and any other value is the shell's CSS `background`, such\nas a colour or a `url(...)`.",
+              "attribute": "placeholder"
+            },
+            {
+              "kind": "field",
+              "name": "width",
+              "type": {
+                "text": "number | string | undefined"
+              },
+              "description": "Width: a number or numeric string is pixels; any CSS length is accepted.",
+              "attribute": "width"
+            },
+            {
+              "kind": "field",
+              "name": "height",
+              "type": {
+                "text": "number | string | undefined"
+              },
+              "description": "Height: a number or numeric string is pixels; any CSS length is accepted.",
+              "attribute": "height"
+            },
+            {
+              "kind": "field",
+              "name": "loading",
+              "type": {
+                "text": "'lazy' | 'eager'"
+              },
+              "default": "'lazy'",
+              "description": "Native loading hint of the built-in `<img>`.",
+              "attribute": "loading"
+            },
+            {
+              "kind": "field",
+              "name": "srcset",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "`srcset` of the built-in `<img>`.",
+              "attribute": "srcset"
+            },
+            {
+              "kind": "field",
+              "name": "sizes",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "`sizes` of the built-in `<img>`.",
+              "attribute": "sizes"
+            },
+            {
+              "kind": "field",
+              "name": "crossorigin",
+              "type": {
+                "text": "| 'anonymous'\n        | 'use-credentials'\n        | undefined"
+              },
+              "description": "`crossorigin` of the built-in `<img>`.",
+              "attribute": "crossorigin"
+            },
+            {
+              "kind": "field",
+              "name": "referrerpolicy",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "`referrerpolicy` of the built-in `<img>`.",
+              "attribute": "referrerpolicy"
+            },
+            {
+              "kind": "field",
+              "name": "status",
+              "type": {
+                "text": "'loading' | 'loaded' | 'error'"
+              },
+              "privacy": "private",
+              "default": "'loading'"
+            },
+            {
+              "kind": "field",
+              "name": "media",
+              "type": {
+                "text": "HTMLElement | null"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "#hasSlotted",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#image",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "HTMLImageElement | null"
+                }
+              },
+              "description": "The image element in the media area: the built-in one, or the slotted one."
+            },
+            {
+              "kind": "method",
+              "name": "#resolve",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#settle",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "status",
+                  "type": {
+                    "text": "'loaded' | 'error'"
+                  }
+                },
+                {
+                  "name": "img",
+                  "type": {
+                    "text": "HTMLImageElement | null"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "#onMedia",
+              "privacy": "private",
+              "type": {
+                "text": "object"
+              },
+              "default": "{ capture: true, handleEvent: (event: Event) => { if (!(event.target instanceof HTMLImageElement)) return; // The built-in image stays in the tree, unrendered, behind a slotted one. if ( this.#hasSlotted() && event.target.parentElement instanceof HTMLSlotElement ) { return; } this.#settle( event.type === 'load' ? 'loaded' : 'error', event.target, ); }, }"
+            }
+          ],
+          "events": [
+            {
+              "type": {
+                "text": "CustomEvent<ImageLoadDetail>"
+              },
+              "description": "The image loaded.",
+              "name": "hmi-load"
+            },
+            {
+              "type": {
+                "text": "CustomEvent<ImageErrorDetail>"
+              },
+              "description": "The image failed to load.",
+              "name": "hmi-error"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "src",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Image source URL.",
+              "fieldName": "src"
+            },
+            {
+              "name": "alt",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Alternative text, required for accessibility.",
+              "fieldName": "alt"
+            },
+            {
+              "name": "ratio",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "Aspect ratio to reserve while loading, such as `1.78` (16 / 9).",
+              "fieldName": "ratio"
+            },
+            {
+              "name": "fit",
+              "type": {
+                "text": "ImageFit"
+              },
+              "default": "'cover'",
+              "description": "How the image fills its box: the `object-fit` of the built-in `<img>`.",
+              "fieldName": "fit"
+            },
+            {
+              "name": "position",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "The `object-position` of the image, such as `top`.",
+              "fieldName": "position"
+            },
+            {
+              "name": "radius",
+              "type": {
+                "text": "ImageRadius"
+              },
+              "default": "'medium'",
+              "description": "Corner radius preset.",
+              "fieldName": "radius"
+            },
+            {
+              "name": "placeholder",
+              "type": {
+                "text": "string"
+              },
+              "default": "'shimmer'",
+              "description": "What shows behind the image while it loads: `'shimmer'` animates, `'none'`\nshows nothing, and any other value is the shell's CSS `background`, such\nas a colour or a `url(...)`.",
+              "fieldName": "placeholder"
+            },
+            {
+              "name": "width",
+              "type": {
+                "text": "number | string | undefined"
+              },
+              "description": "Width: a number or numeric string is pixels; any CSS length is accepted.",
+              "fieldName": "width"
+            },
+            {
+              "name": "height",
+              "type": {
+                "text": "number | string | undefined"
+              },
+              "description": "Height: a number or numeric string is pixels; any CSS length is accepted.",
+              "fieldName": "height"
+            },
+            {
+              "name": "loading",
+              "type": {
+                "text": "'lazy' | 'eager'"
+              },
+              "default": "'lazy'",
+              "description": "Native loading hint of the built-in `<img>`.",
+              "fieldName": "loading"
+            },
+            {
+              "name": "srcset",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "`srcset` of the built-in `<img>`.",
+              "fieldName": "srcset"
+            },
+            {
+              "name": "sizes",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "`sizes` of the built-in `<img>`.",
+              "fieldName": "sizes"
+            },
+            {
+              "name": "crossorigin",
+              "type": {
+                "text": "| 'anonymous'\n        | 'use-credentials'\n        | undefined"
+              },
+              "description": "`crossorigin` of the built-in `<img>`.",
+              "fieldName": "crossorigin"
+            },
+            {
+              "name": "referrerpolicy",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "`referrerpolicy` of the built-in `<img>`.",
+              "fieldName": "referrerpolicy"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-image",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiImage",
+          "declaration": {
+            "name": "HmiImage",
+            "module": "src/elements/image/image.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-image",
+          "declaration": {
+            "name": "HmiImage",
+            "module": "src/elements/image/image.ts"
           }
         }
       ]
