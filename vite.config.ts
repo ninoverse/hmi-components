@@ -233,6 +233,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/number-input/number-input.react.ts',
                 ),
+                'wc/pagination': resolve(
+                    dirname,
+                    'src/elements/pagination/pagination.ts',
+                ),
+                'react/pagination': resolve(
+                    dirname,
+                    'src/elements/pagination/pagination.react.ts',
+                ),
                 'wc/password-input': resolve(
                     dirname,
                     'src/elements/password-input/password-input.ts',

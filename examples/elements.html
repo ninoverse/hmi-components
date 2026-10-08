@@ -957,6 +957,15 @@ export function Example() {
         </section>
 
         <section>
+            <h2>Pagination</h2>
+            <!-- Controlled: hmi-change fires with { value } and the page sets page back. -->
+            <div style="display: flex; flex-direction: column; gap: 2rem">
+                <hmi-pagination id="pager-short" total="5" page="3"></hmi-pagination>
+                <hmi-pagination id="pager-long" total="20" page="8"></hmi-pagination>
+            </div>
+        </section>
+
+        <section>
             <h2>List</h2>
             <!-- Items are a property. right-<id> takes rich content; reorderable adds
                  drag and Alt+Arrow reordering, and the page sets items back from
@@ -1244,6 +1253,13 @@ export function Example() {
                 { label: 'Library', href: '#' },
                 { label: 'Settings' },
             ];
+            for (const pager of document.querySelectorAll('hmi-pagination')) {
+                pager.addEventListener('hmi-change', (event) => {
+                    console.log('pagination hmi-change', event.detail);
+                    pager.page = event.detail.value;
+                });
+            }
+
             document.getElementById('list-plain').items = [
                 { id: 1, title: 'Inbox', subtitle: '12 unread messages' },
                 { id: 2, title: 'Drafts', subtitle: '3 unsent' },

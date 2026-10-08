@@ -33,6 +33,7 @@ export * from './list/list.js';
 export * from './meter/meter.js';
 export * from './multi-input/multi-input.js';
 export * from './number-input/number-input.js';
+export * from './pagination/pagination.js';
 export * from './password-input/password-input.js';
 export * from './progress/progress.js';
 export * from './radio/radio.js';

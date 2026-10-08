@@ -8777,6 +8777,200 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/pagination/pagination.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Page navigation with previous and next buttons and a window of page numbers,\nwith ellipses for long ranges. The current page is marked\n`aria-current=\"page\"`.\n\nIt is controlled: choosing a page fires `hmi-change` and the consumer sets\n`page` in response. Until it does, the element keeps showing the old page.",
+          "name": "HmiPagination",
+          "cssParts": [
+            {
+              "description": "The `<nav>`.",
+              "name": "base"
+            },
+            {
+              "description": "A page button. The current one has `data-active`.",
+              "name": "button"
+            },
+            {
+              "description": "The previous-page button.",
+              "name": "prev"
+            },
+            {
+              "description": "The next-page button.",
+              "name": "next"
+            },
+            {
+              "description": "A gap in the window.",
+              "name": "ellipsis"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "page",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "description": "The current page, from 1.",
+              "attribute": "page"
+            },
+            {
+              "kind": "field",
+              "name": "total",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "The number of pages.",
+              "attribute": "total"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Pagination'",
+              "description": "The name of the navigation landmark.",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "prevLabel",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Previous page'",
+              "description": "The name of the previous-page button.",
+              "attribute": "prev-label"
+            },
+            {
+              "kind": "field",
+              "name": "nextLabel",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Next page'",
+              "description": "The name of the next-page button.",
+              "attribute": "next-label"
+            },
+            {
+              "kind": "field",
+              "name": "pageLabel",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Page {page}'",
+              "description": "The name of a page button, with `{page}` for its number.",
+              "attribute": "page-label"
+            },
+            {
+              "kind": "method",
+              "name": "#go",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "value",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            }
+          ],
+          "events": [
+            {
+              "description": "A page was chosen. `detail` is `{ value }`, the 1-based page.",
+              "name": "hmi-change"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "page",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "description": "The current page, from 1.",
+              "fieldName": "page"
+            },
+            {
+              "name": "total",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "The number of pages.",
+              "fieldName": "total"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Pagination'",
+              "description": "The name of the navigation landmark.",
+              "fieldName": "label"
+            },
+            {
+              "name": "prev-label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Previous page'",
+              "description": "The name of the previous-page button.",
+              "fieldName": "prevLabel"
+            },
+            {
+              "name": "next-label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Next page'",
+              "description": "The name of the next-page button.",
+              "fieldName": "nextLabel"
+            },
+            {
+              "name": "page-label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Page {page}'",
+              "description": "The name of a page button, with `{page}` for its number.",
+              "fieldName": "pageLabel"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-pagination",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiPagination",
+          "declaration": {
+            "name": "HmiPagination",
+            "module": "src/elements/pagination/pagination.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-pagination",
+          "declaration": {
+            "name": "HmiPagination",
+            "module": "src/elements/pagination/pagination.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/password-input/password-input.ts",
       "declarations": [
         {

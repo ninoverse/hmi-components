@@ -398,6 +398,10 @@
             "types": "./dist/elements/number-input/number-input.react.d.ts",
             "import": "./dist/react/number-input.js"
         },
+        "./react/pagination": {
+            "types": "./dist/elements/pagination/pagination.react.d.ts",
+            "import": "./dist/react/pagination.js"
+        },
         "./react/password-input": {
             "types": "./dist/elements/password-input/password-input.react.d.ts",
             "import": "./dist/react/password-input.js"
@@ -702,6 +706,10 @@
         "./wc/number-input": {
             "types": "./dist/elements/number-input/number-input.d.ts",
             "import": "./dist/wc/number-input.js"
+        },
+        "./wc/pagination": {
+            "types": "./dist/elements/pagination/pagination.d.ts",
+            "import": "./dist/wc/pagination.js"
         },
         "./wc/password-input": {
             "types": "./dist/elements/password-input/password-input.d.ts",

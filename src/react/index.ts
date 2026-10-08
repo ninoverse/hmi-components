@@ -114,6 +114,10 @@ export {
     type NumberInputValueDetail,
 } from '../elements/number-input/number-input.react.js';
 export {
+    Pagination,
+    type PaginationChangeDetail,
+} from '../elements/pagination/pagination.react.js';
+export {
     PasswordInput,
     type PasswordInputValueDetail,
 } from '../elements/password-input/password-input.react.js';
