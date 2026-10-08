@@ -199,6 +199,11 @@ export default defineConfig({
                     dirname,
                     'src/elements/link/link.react.ts',
                 ),
+                'wc/list': resolve(dirname, 'src/elements/list/list.ts'),
+                'react/list': resolve(
+                    dirname,
+                    'src/elements/list/list.react.ts',
+                ),
                 'wc/meter': resolve(dirname, 'src/elements/meter/meter.ts'),
                 'react/meter': resolve(
                     dirname,

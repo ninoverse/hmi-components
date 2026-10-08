@@ -378,6 +378,10 @@
             "types": "./dist/elements/link/link.react.d.ts",
             "import": "./dist/react/link.js"
         },
+        "./react/list": {
+            "types": "./dist/elements/list/list.react.d.ts",
+            "import": "./dist/react/list.js"
+        },
         "./react/meter": {
             "types": "./dist/elements/meter/meter.react.d.ts",
             "import": "./dist/react/meter.js"
@@ -674,6 +678,10 @@
         "./wc/link": {
             "types": "./dist/elements/link/link.d.ts",
             "import": "./dist/wc/link.js"
+        },
+        "./wc/list": {
+            "types": "./dist/elements/list/list.d.ts",
+            "import": "./dist/wc/list.js"
         },
         "./wc/meter": {
             "types": "./dist/elements/meter/meter.d.ts",

@@ -49,6 +49,7 @@ const DragIcon = () => (
  *
  * @example
  * <List items={items} draggable onReorder={setItems} />
+ * @deprecated Use `List` from `@ninoverse/hmi-components/react/list`. Removed in 6.0.0.
  */
 export function List({
     items,

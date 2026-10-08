@@ -18,6 +18,7 @@ export default defineConfig({
                         'lit/decorators.js',
                         'lit/directives/if-defined.js',
                         'lit/directives/live.js',
+                        'lit/directives/repeat.js',
                         'lit/directives/style-map.js',
                         '@lit/react',
                         'react',

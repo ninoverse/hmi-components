@@ -6131,6 +6131,291 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/list/list.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Vertical list of rows in one card: an optional avatar, a title and subtitle,\nand trailing content. With `reorderable`, rows drag to a new place, and a\nhandle moves them with Alt+ArrowUp and Alt+ArrowDown.\n\nA row's `title`, `subtitle` and `right` are text. For richer content, slot an\nelement named `title-<id>`, `subtitle-<id>` or `right-<id>` (the item's `id`),\nwhich replaces that text. A slot named `item-<id>` replaces the whole row.\n\nThe list never reorders itself: it fires `hmi-reorder` with the new order, and\nthe consumer sets `items` back.",
+          "name": "HmiList",
+          "cssParts": [
+            {
+              "description": "The list.",
+              "name": "base"
+            },
+            {
+              "description": "One row.",
+              "name": "item"
+            },
+            {
+              "description": "A row's reorder handle, present only when `reorderable`.",
+              "name": "handle"
+            },
+            {
+              "description": "A row's `<hmi-avatar>`.",
+              "name": "avatar"
+            },
+            {
+              "description": "A row's title and subtitle.",
+              "name": "main"
+            },
+            {
+              "description": "A row's title.",
+              "name": "title"
+            },
+            {
+              "description": "A row's subtitle.",
+              "name": "subtitle"
+            },
+            {
+              "description": "A row's trailing content.",
+              "name": "right"
+            },
+            {
+              "description": "The live region that announces a keyboard move.",
+              "name": "status"
+            }
+          ],
+          "slots": [
+            {
+              "description": "The whole row for the item with that id, replacing the avatar, text and trailing content.",
+              "name": "item-<id>"
+            },
+            {
+              "description": "Rich title for the item with that id.",
+              "name": "title-<id>"
+            },
+            {
+              "description": "Rich subtitle for the item with that id.",
+              "name": "subtitle-<id>"
+            },
+            {
+              "description": "Rich trailing content for the item with that id.",
+              "name": "right-<id>"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "items",
+              "type": {
+                "text": "ListItem[]"
+              },
+              "default": "[]",
+              "description": "The rows. A property only: there is no attribute."
+            },
+            {
+              "kind": "field",
+              "name": "reorderable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Let rows be reordered by dragging or with the keyboard.",
+              "attribute": "reorderable",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "dragIndex",
+              "type": {
+                "text": "number | null"
+              },
+              "privacy": "private",
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "overIndex",
+              "type": {
+                "text": "number | null"
+              },
+              "privacy": "private",
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "announcement",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "private",
+              "default": "''"
+            },
+            {
+              "kind": "field",
+              "name": "#focusId",
+              "privacy": "private",
+              "type": {
+                "text": "ListItem['id'] | null"
+              },
+              "default": "null"
+            },
+            {
+              "kind": "method",
+              "name": "#reorder",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "from",
+                  "type": {
+                    "text": "number"
+                  }
+                },
+                {
+                  "name": "to",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onDragStart",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "DragEvent"
+                  }
+                },
+                {
+                  "name": "index",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onDragOver",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "DragEvent"
+                  }
+                },
+                {
+                  "name": "index",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onDrop",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "DragEvent"
+                  }
+                },
+                {
+                  "name": "index",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onDragEnd",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "#onHandleKeydown",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "KeyboardEvent"
+                  }
+                },
+                {
+                  "name": "index",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#renderItem",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "item",
+                  "type": {
+                    "text": "ListItem"
+                  }
+                },
+                {
+                  "name": "index",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            }
+          ],
+          "events": [
+            {
+              "description": "A row was dropped, or moved with the keyboard, to a new place. `detail.items` is the new order.",
+              "name": "hmi-reorder"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "reorderable",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Let rows be reordered by dragging or with the keyboard.",
+              "fieldName": "reorderable"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-list",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiList",
+          "declaration": {
+            "name": "HmiList",
+            "module": "src/elements/list/list.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-list",
+          "declaration": {
+            "name": "HmiList",
+            "module": "src/elements/list/list.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/meter/meter.ts",
       "declarations": [
         {
