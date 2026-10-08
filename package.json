@@ -394,6 +394,10 @@
             "types": "./dist/elements/multi-input/multi-input.react.d.ts",
             "import": "./dist/react/multi-input.js"
         },
+        "./react/navbar": {
+            "types": "./dist/elements/navbar/navbar.react.d.ts",
+            "import": "./dist/react/navbar.js"
+        },
         "./react/number-input": {
             "types": "./dist/elements/number-input/number-input.react.d.ts",
             "import": "./dist/react/number-input.js"
@@ -429,6 +433,10 @@
         "./react/segmented-control": {
             "types": "./dist/elements/segmented-control/segmented-control.react.d.ts",
             "import": "./dist/react/segmented-control.js"
+        },
+        "./react/sidebar": {
+            "types": "./dist/elements/sidebar/sidebar.react.d.ts",
+            "import": "./dist/react/sidebar.js"
         },
         "./react/skeleton": {
             "types": "./dist/elements/skeleton/skeleton.react.d.ts",
@@ -703,6 +711,10 @@
             "types": "./dist/elements/multi-input/multi-input.d.ts",
             "import": "./dist/wc/multi-input.js"
         },
+        "./wc/navbar": {
+            "types": "./dist/elements/navbar/navbar.d.ts",
+            "import": "./dist/wc/navbar.js"
+        },
         "./wc/number-input": {
             "types": "./dist/elements/number-input/number-input.d.ts",
             "import": "./dist/wc/number-input.js"
@@ -738,6 +750,10 @@
         "./wc/segmented-control": {
             "types": "./dist/elements/segmented-control/segmented-control.d.ts",
             "import": "./dist/wc/segmented-control.js"
+        },
+        "./wc/sidebar": {
+            "types": "./dist/elements/sidebar/sidebar.d.ts",
+            "import": "./dist/wc/sidebar.js"
         },
         "./wc/skeleton": {
             "types": "./dist/elements/skeleton/skeleton.d.ts",

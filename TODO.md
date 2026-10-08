@@ -287,3 +287,14 @@ To do: design the child contract (does the group take over each child's `name`,
 `required` and `disabled`?), decide how the group's value and the children's
 `checked` stay in step, and add the slotted form without changing the `options`
 form.
+
+---
+
+## `'use client'` banner on the React wrapper builds
+
+The `@lit/react` wrappers use React hooks, so in the Next.js App Router they only
+work when imported from a Client Component. A `'use client'` banner on
+`dist/react/*.js` (and the `./react` barrel) would let a Server Component import
+them, with props that are not functions. Check that Vite keeps the directive in
+the build, and that the barrel can carry it without making the whole bundle a
+client one. Noted in `docs/migration/translation-guide.md` ("Links and routers").

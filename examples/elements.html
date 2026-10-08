@@ -966,6 +966,48 @@ export function Example() {
         </section>
 
         <section>
+            <h2>Navbar</h2>
+            <!-- Links are a property; current is controlled. hmi-nav fires with
+                 { value, href } and can be cancelled. Below 40em the links and the
+                 right slot collapse behind a menu button. The second bar slots a
+                 router-style link, a button and a rich badge. -->
+            <div style="display: flex; flex-direction: column; gap: 2rem">
+                <hmi-navbar id="navbar-live" brand="Ninoverse" current="reports">
+                    <hmi-button slot="right" size="small" variant="primary">Get started</hmi-button>
+                </hmi-navbar>
+                <hmi-navbar id="navbar-slots" current="overview">
+                    <strong slot="brand">★ Custom brand</strong>
+                    <a slot="item-overview" href="#" aria-current="page">Overview (a router link)</a>
+                    <span slot="badge-reports">🔥 12</span>
+                    <hmi-button slot="item-settings" size="small" variant="ghost">Settings (a button)</hmi-button>
+                </hmi-navbar>
+            </div>
+            <p id="navbar-active" style="color: var(--on-surface-variant)"></p>
+        </section>
+
+        <section>
+            <h2>Sidebar</h2>
+            <!-- Groups are a property; current is controlled. hmi-nav fires with
+                 { value, href } and can be cancelled. Icons are icon-<value> slots;
+                 the second sidebar slots a router-style link and a rich badge. -->
+            <div style="display: flex; gap: 3rem; align-items: flex-start; flex-wrap: wrap">
+                <hmi-sidebar id="sidebar-live" current="inbox">
+                    <svg slot="icon-inbox" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9l1.5-5.5A1 1 0 014.5 3h7a1 1 0 011 .5L14 9v3.5a.5.5 0 01-.5.5h-11a.5.5 0 01-.5-.5V9z" /><path d="M2 9h3l1 2h4l1-2h3" /></svg>
+                    <svg slot="icon-starred" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.8 4.2 13.8l.7-4.3-3.1-3 4.3-.6L8 2z" /></svg>
+                    <svg slot="icon-sent" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2L7 9M14 2L9.5 14 7 9 2 6.5 14 2z" /></svg>
+                    <svg slot="icon-team" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="5.5" r="2.5" /><path d="M3 13.5c0-2.5 2.2-4.5 5-4.5s5 2 5 4.5" /></svg>
+                    <svg slot="icon-settings" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="2" /><path d="M13 8c0-.4 0-.7-.1-1l1.2-.9-1-1.7L11.7 5c-.5-.5-1.1-.8-1.7-1l-.2-1.5h-2L7.6 4c-.6.2-1.2.5-1.7 1l-1.4-.6-1 1.7 1.2.9c0 .3-.1.6-.1 1s0 .7.1 1l-1.2.9 1 1.7L5.9 11c.5.5 1.1.8 1.7 1l.2 1.5h2l.2-1.5c.6-.2 1.2-.5 1.7-1l1.4.6 1-1.7-1.2-.9c.1-.3.1-.6.1-1z" /></svg>
+                    <svg slot="icon-logout" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3.5H4a1 1 0 00-1 1v7a1 1 0 001 1h5" /><path d="M11 5l3 3-3 3M14 8H7" /></svg>
+                </hmi-sidebar>
+                <hmi-sidebar id="sidebar-slots" current="team">
+                    <a slot="item-settings" href="#" aria-current="page">Settings (a router link)</a>
+                    <span slot="badge-team">🔥 3</span>
+                </hmi-sidebar>
+            </div>
+            <p id="sidebar-active" style="color: var(--on-surface-variant)"></p>
+        </section>
+
+        <section>
             <h2>List</h2>
             <!-- Items are a property. right-<id> takes rich content; reorderable adds
                  drag and Alt+Arrow reordering, and the page sets items back from
@@ -1253,6 +1295,61 @@ export function Example() {
                 { label: 'Library', href: '#' },
                 { label: 'Settings' },
             ];
+            const navbar = document.getElementById('navbar-live');
+            navbar.links = [
+                { value: 'overview', label: 'Overview' },
+                { value: 'reports', label: 'Reports', badge: '12', badgeVariant: 'primary' },
+                { value: 'people', label: 'People' },
+                { value: 'settings', label: 'Settings' },
+            ];
+            const activeLabel = document.getElementById('navbar-active');
+            activeLabel.textContent = 'Active: reports';
+            navbar.addEventListener('hmi-nav', (event) => {
+                console.log('navbar hmi-nav', event.detail);
+                navbar.current = event.detail.value;
+                activeLabel.textContent = `Active: ${event.detail.value}`;
+            });
+            document.getElementById('navbar-slots').links = [
+                { value: 'overview', label: 'Overview' },
+                { value: 'reports', label: 'Reports', badge: '' },
+                { value: 'settings', label: 'Settings' },
+            ];
+
+            const sidebar = document.getElementById('sidebar-live');
+            sidebar.groups = [
+                {
+                    label: 'Mail',
+                    items: [
+                        { value: 'inbox', label: 'Inbox', badge: '12', badgeVariant: 'primary' },
+                        { value: 'starred', label: 'Starred' },
+                        { value: 'sent', label: 'Sent' },
+                    ],
+                },
+                {
+                    label: 'Workspace',
+                    items: [
+                        { value: 'team', label: 'Team', badge: 'New', badgeVariant: 'success' },
+                        { value: 'settings', label: 'Settings' },
+                        { value: 'logout', label: 'Log out' },
+                    ],
+                },
+            ];
+            const sidebarActive = document.getElementById('sidebar-active');
+            sidebarActive.textContent = 'Active: inbox';
+            sidebar.addEventListener('hmi-nav', (event) => {
+                console.log('sidebar hmi-nav', event.detail);
+                sidebar.current = event.detail.value;
+                sidebarActive.textContent = `Active: ${event.detail.value}`;
+            });
+            document.getElementById('sidebar-slots').groups = [
+                {
+                    items: [
+                        { value: 'team', label: 'Team' },
+                        { value: 'settings', label: 'Settings' },
+                    ],
+                },
+            ];
+
             for (const pager of document.querySelectorAll('hmi-pagination')) {
                 pager.addEventListener('hmi-change', (event) => {
                     console.log('pagination hmi-change', event.detail);

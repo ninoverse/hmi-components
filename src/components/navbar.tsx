@@ -58,6 +58,7 @@ const CloseIcon = () => (
  *
  * @example
  * <Navbar brand="Ninoverse" links={links} current={tab} onNav={setTab} />
+ * @deprecated Use `Navbar` from `@ninoverse/hmi-components/react/navbar`. Removed in 6.0.0.
  */
 export function Navbar<T extends string = string>({
     brand,

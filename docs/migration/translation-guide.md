@@ -288,8 +288,8 @@ Wrapper prop = `on` + PascalCase of the event minus `hmi-`.
 | toast | `onDismiss()` | `hmi-dismiss` (cancelable) | `{ id: string }` |
 | tree | `onSelect(T)` / `onExpandedChange(T[])` | `hmi-select` / `hmi-expanded-change` | `{ value: T }` / `{ expanded: T[] }` |
 | command-palette command | `commands[].onSelect()` | `hmi-select` | `{ value: string }` |
-| navbar, sidebar | `onNav(T)` | `hmi-nav` | `{ value: T }` |
-| breadcrumbs | `items[].onClick()` | `hmi-nav` | `{ value: string, index: number }` |
+| navbar, sidebar | `onNav(T)` | `hmi-nav` (cancelable) | `{ value: T, href: string \| undefined }` |
+| breadcrumbs | `items[].onClick()` | `hmi-nav` (cancelable) | `{ value: string, index: number, href: string \| undefined }` |
 | carousel | `onIndexChange(n)` | `hmi-index-change` | `{ index: number }` |
 | list | `onReorder(items)` | `hmi-reorder` | `{ items: ListItem[] }` |
 | table | (internal sort state) | `hmi-sort` | `{ key: string, dir: 'asc' \| 'desc' \| null }` |
@@ -310,6 +310,14 @@ export function emit<T>(host: HTMLElement, type: `hmi-${string}`, detail: T, ini
     if (emit<ModalCloseDetail>(this, 'hmi-close', { reason }, { cancelable: true })) this.open = false;
 }
 ```
+
+### Links and routers
+
+`hmi-breadcrumbs`, `hmi-navbar` and `hmi-sidebar` render real `<a href>`s and
+fire the cancelable `hmi-nav`, which carries the `href`; navbar and sidebar take
+`item-<value>` slots for a router's own link. The Next.js and other router
+recipes, the styling and active-state rules for slotted links, and the
+`'use client'` note are in [`docs/routers.md`](../routers.md).
 
 ## 7. State and lifecycle
 

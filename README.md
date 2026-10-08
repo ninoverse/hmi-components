@@ -185,6 +185,7 @@ rsx! {
 ## Documentation
 
 - **[Theming guide](./docs/theming.md)** — the three theme axes, `ThemeProvider` / `useTheme`, the full design-token reference, and how to author custom themes.
+- **[Links and routers](./docs/routers.md)** — using `hmi-breadcrumbs`, `hmi-navbar` and `hmi-sidebar` with Next.js, React Router, Vue Router and Angular: `hmi-nav`, slotted router links, and how a slotted link is styled and marked active.
 - **[Component API reference](./docs/api/)** — generated per-component prop tables and examples (run `pnpm docs` to regenerate from source).
 - **[Lit migration](./docs/migration/README.md)** — playbook, [translation guide](./docs/migration/translation-guide.md), [decision record](./docs/migration/adr-0001-lit-web-components.md) and [tracker](./docs/migration/tracker.md).
 

@@ -110,6 +110,11 @@ export {
     type MultiInputValueDetail,
 } from '../elements/multi-input/multi-input.react.js';
 export {
+    Navbar,
+    type NavbarLink,
+    type NavbarNavDetail,
+} from '../elements/navbar/navbar.react.js';
+export {
     NumberInput,
     type NumberInputValueDetail,
 } from '../elements/number-input/number-input.react.js';
@@ -145,6 +150,12 @@ export {
     type SegmentedControlSize,
     type SegmentedControlValueDetail,
 } from '../elements/segmented-control/segmented-control.react.js';
+export {
+    Sidebar,
+    type SidebarGroup,
+    type SidebarItem,
+    type SidebarNavDetail,
+} from '../elements/sidebar/sidebar.react.js';
 export {
     Skeleton,
     type SkeletonVariant,

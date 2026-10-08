@@ -225,6 +225,11 @@ export default defineConfig({
                     dirname,
                     'src/elements/multi-input/multi-input.react.ts',
                 ),
+                'wc/navbar': resolve(dirname, 'src/elements/navbar/navbar.ts'),
+                'react/navbar': resolve(
+                    dirname,
+                    'src/elements/navbar/navbar.react.ts',
+                ),
                 'wc/number-input': resolve(
                     dirname,
                     'src/elements/number-input/number-input.ts',
@@ -293,6 +298,14 @@ export default defineConfig({
                 'react/segmented-control': resolve(
                     dirname,
                     'src/elements/segmented-control/segmented-control.react.ts',
+                ),
+                'wc/sidebar': resolve(
+                    dirname,
+                    'src/elements/sidebar/sidebar.ts',
+                ),
+                'react/sidebar': resolve(
+                    dirname,
+                    'src/elements/sidebar/sidebar.react.ts',
                 ),
                 'wc/skeleton': resolve(
                     dirname,
