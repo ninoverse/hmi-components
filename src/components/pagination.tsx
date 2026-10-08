@@ -67,6 +67,7 @@ const ChevRightIcon = () => (
  *
  * @example
  * <Pagination page={page} total={20} onChange={setPage} />
+ * @deprecated Use `Pagination` from `@ninoverse/hmi-components/react/pagination`. Removed in 6.0.0.
  */
 export function Pagination({
     page,

@@ -198,6 +198,11 @@ PRs the same way, which gives three PRs in this order: `accordion` + `timeline`;
 `actions` cells need the `DialogAction` helper that `modal` lands. Each batch is
 still one commit per element.
 
+Phase 7 exception (agreed with the maintainer): the navigation elements share
+PRs the same way, which gives four PRs in this order: `breadcrumbs` +
+`pagination`; `navbar` + `sidebar`; `tabs` + `stepper`; `tree`. Each batch is
+still one commit per element.
+
 ## 7. Running one migration end to end
 
 The `migrate-component` skill (`.claude/skills/migrate-component/SKILL.md`)

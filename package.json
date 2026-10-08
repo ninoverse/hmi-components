@@ -310,6 +310,10 @@
             "types": "./dist/elements/box/box.react.d.ts",
             "import": "./dist/react/box.js"
         },
+        "./react/breadcrumbs": {
+            "types": "./dist/elements/breadcrumbs/breadcrumbs.react.d.ts",
+            "import": "./dist/react/breadcrumbs.js"
+        },
         "./react/button": {
             "types": "./dist/elements/button/button.react.d.ts",
             "import": "./dist/react/button.js"
@@ -393,6 +397,10 @@
         "./react/number-input": {
             "types": "./dist/elements/number-input/number-input.react.d.ts",
             "import": "./dist/react/number-input.js"
+        },
+        "./react/pagination": {
+            "types": "./dist/elements/pagination/pagination.react.d.ts",
+            "import": "./dist/react/pagination.js"
         },
         "./react/password-input": {
             "types": "./dist/elements/password-input/password-input.react.d.ts",
@@ -611,6 +619,10 @@
             "types": "./dist/elements/box/box.d.ts",
             "import": "./dist/wc/box.js"
         },
+        "./wc/breadcrumbs": {
+            "types": "./dist/elements/breadcrumbs/breadcrumbs.d.ts",
+            "import": "./dist/wc/breadcrumbs.js"
+        },
         "./wc/button": {
             "types": "./dist/elements/button/button.d.ts",
             "import": "./dist/wc/button.js"
@@ -694,6 +706,10 @@
         "./wc/number-input": {
             "types": "./dist/elements/number-input/number-input.d.ts",
             "import": "./dist/wc/number-input.js"
+        },
+        "./wc/pagination": {
+            "types": "./dist/elements/pagination/pagination.d.ts",
+            "import": "./dist/wc/pagination.js"
         },
         "./wc/password-input": {
             "types": "./dist/elements/password-input/password-input.d.ts",

@@ -29,6 +29,11 @@ export {
     type BoxRadius,
 } from '../elements/box/box.react.js';
 export {
+    type BreadcrumbItem,
+    Breadcrumbs,
+    type BreadcrumbsNavDetail,
+} from '../elements/breadcrumbs/breadcrumbs.react.js';
+export {
     Button,
     type ButtonSize,
     type ButtonType,
@@ -108,6 +113,10 @@ export {
     NumberInput,
     type NumberInputValueDetail,
 } from '../elements/number-input/number-input.react.js';
+export {
+    Pagination,
+    type PaginationChangeDetail,
+} from '../elements/pagination/pagination.react.js';
 export {
     PasswordInput,
     type PasswordInputValueDetail,
