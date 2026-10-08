@@ -299,6 +299,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/segmented-control/segmented-control.react.ts',
                 ),
+                'wc/sidebar': resolve(
+                    dirname,
+                    'src/elements/sidebar/sidebar.ts',
+                ),
+                'react/sidebar': resolve(
+                    dirname,
+                    'src/elements/sidebar/sidebar.react.ts',
+                ),
                 'wc/skeleton': resolve(
                     dirname,
                     'src/elements/skeleton/skeleton.ts',

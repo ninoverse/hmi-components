@@ -15170,6 +15170,188 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/sidebar/sidebar.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Vertical side navigation, in groups: each has an optional uppercase heading\nand a stack of links with an optional icon, a label and a badge. The current\nlink takes the primary tonal pair.\n\nA group's `label` and a link's `label` are text. For richer content, slot an\nelement named `group-<index>` (the group's position, from 0) or\n`label-<value>`. An icon is an element slotted as `icon-<value>`. A badge is\n`badge` text, or content slotted as `badge-<value>` inside the pill, or an\nelement slotted as `end-<value>` in its place. A link can be replaced whole by\nan element slotted as `item-<value>`: a router's own link, a button. A\nslotted `<a>` is styled like the other links, and `aria-current=\"page\"` on it\nis its active state.\n\nIt is controlled: the element never changes `current`. A click on a link\nfires the cancelable `hmi-nav`, which carries the `href` for a router; cancel\nit to keep the browser from following the link. A link without `href` never\nnavigates, and a modified click (ctrl, cmd, shift, alt or a non-primary\nbutton) fires nothing, so the browser can open it in a new tab.",
+          "name": "HmiSidebar",
+          "cssParts": [
+            {
+              "description": "The `<aside>`.",
+              "name": "base"
+            },
+            {
+              "description": "The `<aside>`, under its panel-group name.",
+              "name": "panel"
+            },
+            {
+              "description": "One group.",
+              "name": "group"
+            },
+            {
+              "description": "A group's heading.",
+              "name": "group-label"
+            },
+            {
+              "description": "A link. The current one has `data-active`.",
+              "name": "link"
+            },
+            {
+              "description": "A link's icon.",
+              "name": "icon"
+            },
+            {
+              "description": "A link's label.",
+              "name": "text"
+            },
+            {
+              "description": "A link's `<hmi-badge>`.",
+              "name": "badge"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Rich heading for the group at that position.",
+              "name": "group-<index>"
+            },
+            {
+              "description": "A whole link, replacing the built-in one.",
+              "name": "item-<value>"
+            },
+            {
+              "description": "Rich label for the link with that value.",
+              "name": "label-<value>"
+            },
+            {
+              "description": "Icon for the link with that value.",
+              "name": "icon-<value>"
+            },
+            {
+              "description": "Rich content inside the badge of the link with that value.",
+              "name": "badge-<value>"
+            },
+            {
+              "description": "Replaces the badge of the link with that value.",
+              "name": "end-<value>"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "groups",
+              "type": {
+                "text": "SidebarGroup[]"
+              },
+              "default": "[]",
+              "description": "The groups of links. A property only: there is no attribute."
+            },
+            {
+              "kind": "field",
+              "name": "current",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "The `value` of the current link, marked `aria-current=\"page\"`. The element never changes it.",
+              "attribute": "current"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Sidebar'",
+              "description": "The name of the landmark.",
+              "attribute": "label"
+            },
+            {
+              "kind": "method",
+              "name": "#onLinkClick",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "MouseEvent"
+                  }
+                },
+                {
+                  "name": "item",
+                  "type": {
+                    "text": "SidebarItem"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#renderItem",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "item",
+                  "type": {
+                    "text": "SidebarItem"
+                  }
+                }
+              ]
+            }
+          ],
+          "events": [
+            {
+              "description": "A link was activated. Cancelable. `detail` is `{ value, href }`.",
+              "name": "hmi-nav"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "current",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "The `value` of the current link, marked `aria-current=\"page\"`. The element never changes it.",
+              "fieldName": "current"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Sidebar'",
+              "description": "The name of the landmark.",
+              "fieldName": "label"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-sidebar",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiSidebar",
+          "declaration": {
+            "name": "HmiSidebar",
+            "module": "src/elements/sidebar/sidebar.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-sidebar",
+          "declaration": {
+            "name": "HmiSidebar",
+            "module": "src/elements/sidebar/sidebar.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/skeleton/skeleton.ts",
       "declarations": [
         {

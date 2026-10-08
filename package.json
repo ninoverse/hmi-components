@@ -434,6 +434,10 @@
             "types": "./dist/elements/segmented-control/segmented-control.react.d.ts",
             "import": "./dist/react/segmented-control.js"
         },
+        "./react/sidebar": {
+            "types": "./dist/elements/sidebar/sidebar.react.d.ts",
+            "import": "./dist/react/sidebar.js"
+        },
         "./react/skeleton": {
             "types": "./dist/elements/skeleton/skeleton.react.d.ts",
             "import": "./dist/react/skeleton.js"
@@ -746,6 +750,10 @@
         "./wc/segmented-control": {
             "types": "./dist/elements/segmented-control/segmented-control.d.ts",
             "import": "./dist/wc/segmented-control.js"
+        },
+        "./wc/sidebar": {
+            "types": "./dist/elements/sidebar/sidebar.d.ts",
+            "import": "./dist/wc/sidebar.js"
         },
         "./wc/skeleton": {
             "types": "./dist/elements/skeleton/skeleton.d.ts",

@@ -40,6 +40,7 @@ export type SidebarProps<T extends string = string> =
  *
  * @example
  * <Sidebar groups={groups} current={page} onNav={setPage} />
+ * @deprecated Use `Sidebar` from `@ninoverse/hmi-components/react/sidebar`. Removed in 6.0.0.
  */
 export function Sidebar<T extends string = string>({
     groups,

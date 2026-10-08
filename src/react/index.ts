@@ -151,6 +151,12 @@ export {
     type SegmentedControlValueDetail,
 } from '../elements/segmented-control/segmented-control.react.js';
 export {
+    Sidebar,
+    type SidebarGroup,
+    type SidebarItem,
+    type SidebarNavDetail,
+} from '../elements/sidebar/sidebar.react.js';
+export {
     Skeleton,
     type SkeletonVariant,
 } from '../elements/skeleton/skeleton.react.js';

@@ -986,6 +986,24 @@ export function Example() {
         </section>
 
         <section>
+            <h2>Sidebar</h2>
+            <!-- Groups are a property; current is controlled. hmi-nav fires with
+                 { value, href } and can be cancelled. Icons are icon-<value> slots;
+                 the second sidebar slots a router-style link and a rich badge. -->
+            <div style="display: flex; gap: 3rem; align-items: flex-start; flex-wrap: wrap">
+                <hmi-sidebar id="sidebar-live" current="inbox">
+                    <svg slot="icon-inbox" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9l1.5-5.5A1 1 0 014.5 3h7a1 1 0 011 .5L14 9v3.5a.5.5 0 01-.5.5h-11a.5.5 0 01-.5-.5V9z" /><path d="M2 9h3l1 2h4l1-2h3" /></svg>
+                    <svg slot="icon-starred" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M8 2l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.8 4.2 13.8l.7-4.3-3.1-3 4.3-.6L8 2z" /></svg>
+                </hmi-sidebar>
+                <hmi-sidebar id="sidebar-slots" current="team">
+                    <a slot="item-settings" href="#" aria-current="page">Settings (a router link)</a>
+                    <span slot="badge-team">🔥 3</span>
+                </hmi-sidebar>
+            </div>
+            <p id="sidebar-active" style="color: var(--on-surface-variant)"></p>
+        </section>
+
+        <section>
             <h2>List</h2>
             <!-- Items are a property. right-<id> takes rich content; reorderable adds
                  drag and Alt+Arrow reordering, and the page sets items back from
@@ -1291,6 +1309,40 @@ export function Example() {
                 { value: 'overview', label: 'Overview' },
                 { value: 'reports', label: 'Reports', badge: '' },
                 { value: 'settings', label: 'Settings' },
+            ];
+
+            const sidebar = document.getElementById('sidebar-live');
+            sidebar.groups = [
+                {
+                    label: 'Mail',
+                    items: [
+                        { value: 'inbox', label: 'Inbox', badge: '12', badgeVariant: 'primary' },
+                        { value: 'starred', label: 'Starred' },
+                        { value: 'sent', label: 'Sent' },
+                    ],
+                },
+                {
+                    label: 'Workspace',
+                    items: [
+                        { value: 'team', label: 'Team', badge: 'New', badgeVariant: 'success' },
+                        { value: 'settings', label: 'Settings' },
+                    ],
+                },
+            ];
+            const sidebarActive = document.getElementById('sidebar-active');
+            sidebarActive.textContent = 'Active: inbox';
+            sidebar.addEventListener('hmi-nav', (event) => {
+                console.log('sidebar hmi-nav', event.detail);
+                sidebar.current = event.detail.value;
+                sidebarActive.textContent = `Active: ${event.detail.value}`;
+            });
+            document.getElementById('sidebar-slots').groups = [
+                {
+                    items: [
+                        { value: 'team', label: 'Team' },
+                        { value: 'settings', label: 'Settings' },
+                    ],
+                },
             ];
 
             for (const pager of document.querySelectorAll('hmi-pagination')) {
