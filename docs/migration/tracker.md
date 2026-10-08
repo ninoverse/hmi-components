@@ -96,9 +96,9 @@ There is no status for work under way: its open PR already shows that.
 | `hmi-list` | `list.tsx` | 6 | med | A R E X | `renderItem` → three tiers; `hmi-reorder { items }`; `[data-structure="journal"] .list__item` → `--list-divider-style` token (defined). | Done | [#169](https://github.com/ninoverse/hmi-components/pull/169) |
 | `hmi-timeline` | `timeline.tsx` | 6 | low | A | Items strings + `title-<index>`/`description-<index>`/`time-<index>`/`icon-<index>` slots; optional `divider` between events. | Done | [#166](https://github.com/ninoverse/hmi-components/pull/166) |
 | `hmi-breadcrumbs` | `breadcrumbs.tsx` | 7 | low | A E | `items[].onClick` → `hmi-nav { value, index }`; `separator` slot. | Done | [#171](https://github.com/ninoverse/hmi-components/pull/171) |
-| `hmi-navbar` | `navbar.tsx` | 7 | med | S A E D P | Slots `brand`, `right`; links strings + `label-<value>` slots; `hmi-nav`; panel part. | Todo | |
+| `hmi-navbar` | `navbar.tsx` | 7 | med | S A E D P | Slots `brand`, `right`; links strings + `label-<value>` slots; `hmi-nav`; panel part. | Done | [#172](https://github.com/ninoverse/hmi-components/pull/172) |
 | `hmi-pagination` | `pagination.tsx` | 7 | low | E | `hmi-change { value: page }`. | Done | [#171](https://github.com/ninoverse/hmi-components/pull/171) |
-| `hmi-sidebar` | `sidebar.tsx` | 7 | med | A E P | Items/groups strings + `label-<value>` slots; badge as string; `hmi-nav`. | Todo | |
+| `hmi-sidebar` | `sidebar.tsx` | 7 | med | A E P | Items/groups strings + `label-<value>` slots; badge as string; `hmi-nav`. | Done | [#172](https://github.com/ninoverse/hmi-components/pull/172) |
 | `hmi-stepper` | `stepper.tsx` | 7 | med | A E | `--stepper-item-gap` set on host; `hmi-change { value }`. | Todo | |
 | `hmi-tabs` | `tabs.tsx` | 7 | med | A E D | Indicator measured in `updated()`; resize listener; `hmi-change`. | Todo | |
 | `hmi-tree` | `tree.tsx` | 7 | high | A E | Roving tabindex; `hmi-select { value }`, `hmi-expanded-change { expanded }`. | Todo | |
