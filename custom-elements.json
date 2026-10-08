@@ -998,6 +998,204 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/breadcrumbs/breadcrumbs.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Navigation breadcrumb trail. The last item is the current page, marked\n`aria-current=\"page\"`; every other item is a link.\n\nA crumb's `label` is text. For richer content, such as an icon beside the\ntext, slot an element named `label-<index>` (the item's position, from 0),\nwhich replaces that text. The separator is a string, or one element in the\n`separator` slot, which is copied into every gap.\n\nClicking a link fires the cancelable `hmi-nav`. Cancel it to keep the\nbrowser from following `href`, as a router does. A link without `href` never\nnavigates.",
+          "name": "HmiBreadcrumbs",
+          "cssParts": [
+            {
+              "description": "The `<nav>`.",
+              "name": "base"
+            },
+            {
+              "description": "The list of crumbs.",
+              "name": "list"
+            },
+            {
+              "description": "One crumb with its separator.",
+              "name": "item"
+            },
+            {
+              "description": "A crumb that links.",
+              "name": "link"
+            },
+            {
+              "description": "The last crumb.",
+              "name": "current"
+            },
+            {
+              "description": "A separator.",
+              "name": "separator"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Rich label for the crumb at that position.",
+              "name": "label-<index>"
+            },
+            {
+              "description": "One element, copied between the crumbs. Copies carry no event listeners or `id`s.",
+              "name": "separator"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "items",
+              "type": {
+                "text": "BreadcrumbItem[]"
+              },
+              "default": "[]",
+              "description": "The trail. A property only: there is no attribute."
+            },
+            {
+              "kind": "field",
+              "name": "separator",
+              "type": {
+                "text": "string"
+              },
+              "default": "'/'",
+              "description": "Text between crumbs, unless a `separator` slot has an element.",
+              "attribute": "separator"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Breadcrumb'",
+              "description": "The name of the navigation landmark.",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "separatorSource",
+              "type": {
+                "text": "Element | null"
+              },
+              "privacy": "private",
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "#copies",
+              "privacy": "private",
+              "type": {
+                "text": "{ source: Element | null; nodes: Element[] }"
+              },
+              "default": "{ source: null, nodes: [], }"
+            },
+            {
+              "kind": "method",
+              "name": "#onSeparatorSlot",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#separator",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "index",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ],
+              "description": "The separator after crumb `index`: a copy of the slotted element, else the text."
+            },
+            {
+              "kind": "method",
+              "name": "#onClick",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "MouseEvent"
+                  }
+                },
+                {
+                  "name": "item",
+                  "type": {
+                    "text": "BreadcrumbItem"
+                  }
+                },
+                {
+                  "name": "index",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            }
+          ],
+          "events": [
+            {
+              "description": "A link was activated. Cancelable. `detail` is `{ value, index }`.",
+              "name": "hmi-nav"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "separator",
+              "type": {
+                "text": "string"
+              },
+              "default": "'/'",
+              "description": "Text between crumbs, unless a `separator` slot has an element.",
+              "fieldName": "separator"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Breadcrumb'",
+              "description": "The name of the navigation landmark.",
+              "fieldName": "label"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-breadcrumbs",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiBreadcrumbs",
+          "declaration": {
+            "name": "HmiBreadcrumbs",
+            "module": "src/elements/breadcrumbs/breadcrumbs.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-breadcrumbs",
+          "declaration": {
+            "name": "HmiBreadcrumbs",
+            "module": "src/elements/breadcrumbs/breadcrumbs.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/button/button.ts",
       "declarations": [
         {

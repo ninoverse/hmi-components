@@ -942,6 +942,21 @@ export function Example() {
         </section>
 
         <section>
+            <h2>Breadcrumbs</h2>
+            <!-- Items are a property. hmi-nav fires on a link, with { value, index }, and
+                 can be cancelled; a crumb without href never navigates. The third
+                 trail has a slotted separator and a rich label. -->
+            <div style="display: flex; flex-direction: column; gap: 1.5rem">
+                <hmi-breadcrumbs id="crumbs-live"></hmi-breadcrumbs>
+                <hmi-breadcrumbs id="crumbs-arrow" separator="›"></hmi-breadcrumbs>
+                <hmi-breadcrumbs id="crumbs-rich">
+                    <span slot="label-0">🏠 Home</span>
+                    <svg slot="separator" width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4l4 4-4 4" /></svg>
+                </hmi-breadcrumbs>
+            </div>
+        </section>
+
+        <section>
             <h2>List</h2>
             <!-- Items are a property. right-<id> takes rich content; reorderable adds
                  drag and Alt+Arrow reordering, and the page sets items back from
@@ -1207,6 +1222,28 @@ export function Example() {
             document.getElementById('timeline-plain').items = events;
             document.getElementById('timeline-divider').items = events;
 
+            const crumbs = document.getElementById('crumbs-live');
+            const trail = (current) => [
+                { label: 'Home', value: 'home' },
+                { label: 'Library', value: 'library' },
+                { label: 'Components', value: 'components' },
+                { label: current },
+            ];
+            crumbs.items = trail('Components');
+            crumbs.addEventListener('hmi-nav', (event) => {
+                console.log('breadcrumbs hmi-nav', event.detail);
+                crumbs.items = trail(event.detail.value);
+            });
+            document.getElementById('crumbs-arrow').items = [
+                { label: 'Docs', href: '#' },
+                { label: 'Guides', href: '#' },
+                { label: 'Getting started' },
+            ];
+            document.getElementById('crumbs-rich').items = [
+                { label: 'Home', href: '#' },
+                { label: 'Library', href: '#' },
+                { label: 'Settings' },
+            ];
             document.getElementById('list-plain').items = [
                 { id: 1, title: 'Inbox', subtitle: '12 unread messages' },
                 { id: 2, title: 'Drafts', subtitle: '3 unsent' },

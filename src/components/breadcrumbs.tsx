@@ -22,6 +22,7 @@ export type BreadcrumbsProps = HTMLAttributes<HTMLElement> & {
  *
  * @example
  * <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Settings' }]} />
+ * @deprecated Use `Breadcrumbs` from `@ninoverse/hmi-components/react/breadcrumbs`. Removed in 6.0.0.
  */
 export function Breadcrumbs({
     items,

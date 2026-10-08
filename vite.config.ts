@@ -96,6 +96,14 @@ export default defineConfig({
                 ),
                 'wc/box': resolve(dirname, 'src/elements/box/box.ts'),
                 'react/box': resolve(dirname, 'src/elements/box/box.react.ts'),
+                'wc/breadcrumbs': resolve(
+                    dirname,
+                    'src/elements/breadcrumbs/breadcrumbs.ts',
+                ),
+                'react/breadcrumbs': resolve(
+                    dirname,
+                    'src/elements/breadcrumbs/breadcrumbs.react.ts',
+                ),
                 'wc/button': resolve(dirname, 'src/elements/button/button.ts'),
                 'react/button': resolve(
                     dirname,

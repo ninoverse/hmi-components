@@ -29,6 +29,11 @@ export {
     type BoxRadius,
 } from '../elements/box/box.react.js';
 export {
+    type BreadcrumbItem,
+    Breadcrumbs,
+    type BreadcrumbsNavDetail,
+} from '../elements/breadcrumbs/breadcrumbs.react.js';
+export {
     Button,
     type ButtonSize,
     type ButtonType,
