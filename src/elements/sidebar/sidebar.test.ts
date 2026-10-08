@@ -195,6 +195,17 @@ describe('hmi-sidebar', () => {
         expect(style.fontWeight).toBe('600');
     });
 
+    it('gives a slotted non-anchor the active weight but no link padding', async () => {
+        const el = await fixture(
+            html`<hmi-sidebar .groups=${GROUPS}
+                ><span slot="item-settings" aria-current="page">Mine</span></hmi-sidebar
+            >`,
+        );
+        const style = getComputedStyle(el.querySelector('span') as HTMLElement);
+        expect(style.fontWeight).toBe('600');
+        expect(style.paddingLeft).toBe('0px');
+    });
+
     it('draws a badge with its variant, hiding it without text', async () => {
         const el = await fixture(
             html`<hmi-sidebar .groups=${GROUPS}></hmi-sidebar>`,

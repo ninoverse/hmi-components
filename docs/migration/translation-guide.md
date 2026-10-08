@@ -313,47 +313,11 @@ export function emit<T>(host: HTMLElement, type: `hmi-${string}`, detail: T, ini
 
 ### Links and routers
 
-`hmi-breadcrumbs`, `hmi-navbar` and `hmi-sidebar` render real `<a href>`s, so a
-plain click is a normal page load. Two ways to hand navigation to a router:
-
-1. **Listen to `hmi-nav`.** It is cancelable and its detail carries the `href`.
-   A modified click (ctrl, cmd, shift, alt, a non-primary button) fires nothing,
-   so "open in a new tab" keeps working. A link without `href` never navigates.
-
-   ```tsx
-   // Next.js, in a Client Component
-   'use client';
-   const router = useRouter();
-   const pathname = usePathname();
-   <Navbar
-       links={links}
-       current={pathname}
-       onNav={(e) => {
-           e.preventDefault();
-           if (e.detail.href) router.push(e.detail.href);
-       }}
-   />
-   ```
-
-2. **Slot the router's own link.** `navbar` and `sidebar` take `item-<value>`:
-   the slotted element replaces the built-in link, and a slotted `<a>` is styled
-   like one, with `aria-current="page"` as its active state. Framework links
-   (`next/link`, `react-router`'s `NavLink`, `RouterLink`, `routerLink`,
-   SvelteKit's `<a>`) render an `<a>`, so they keep their own routing and
-   prefetching, and, being light DOM, they are in the server HTML.
-
-   ```tsx
-   <Navbar links={links} current={pathname}>
-       <Link slot="item-docs" href="/docs" aria-current={pathname === '/docs' ? 'page' : undefined}>Docs</Link>
-   </Navbar>
-   ```
-
-Notes:
-
-- `links` and `groups` are properties, so on the server the element renders
-  empty: only slotted links are visible in the server HTML.
-- The `@lit/react` wrappers use React hooks. In the App Router, import them from
-  a Client Component (`'use client'`).
+`hmi-breadcrumbs`, `hmi-navbar` and `hmi-sidebar` render real `<a href>`s and
+fire the cancelable `hmi-nav`, which carries the `href`; navbar and sidebar take
+`item-<value>` slots for a router's own link. The Next.js and other router
+recipes, the styling and active-state rules for slotted links, and the
+`'use client'` note are in [`docs/routers.md`](../routers.md).
 
 ## 7. State and lifecycle
 

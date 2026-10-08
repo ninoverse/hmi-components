@@ -50,7 +50,8 @@ export interface SidebarNavDetail {
  * element slotted as `end-<value>` in its place. A link can be replaced whole by
  * an element slotted as `item-<value>`: a router's own link, a button. A
  * slotted `<a>` is styled like the other links, and `aria-current="page"` on it
- * is its active state.
+ * is its active state. `current` does not apply to a slotted item, and an element
+ * that is not an `<a>` is not styled as a link; see `docs/routers.md`.
  *
  * It is controlled: the element never changes `current`. A click on a link
  * fires the cancelable `hmi-nav`, which carries the `href` for a router; cancel

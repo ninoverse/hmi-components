@@ -204,6 +204,17 @@ describe('hmi-navbar', () => {
         expect(style.fontWeight).toBe('600');
     });
 
+    it('gives a slotted non-anchor the active weight but no link padding', async () => {
+        const el = await fixture(
+            html`<hmi-navbar .links=${LINKS}
+                ><span slot="item-people" aria-current="page">Mine</span></hmi-navbar
+            >`,
+        );
+        const style = getComputedStyle(el.querySelector('span') as HTMLElement);
+        expect(style.fontWeight).toBe('600');
+        expect(style.paddingLeft).toBe('0px');
+    });
+
     it('draws a badge with its variant, and hides it without text', async () => {
         const el = await fixture(
             html`<hmi-navbar .links=${LINKS}></hmi-navbar>`,

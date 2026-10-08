@@ -105,3 +105,18 @@ export const BrandSlot: Story = {
             <strong slot="brand">★ Custom brand</strong>
         </hmi-navbar>`,
 };
+
+/** Only a slotted `<a>` is styled as a link. Another element styles itself, and `aria-current="page"` on it gives the active tint. */
+export const SlottedCustomElement: Story = {
+    render: (args) =>
+        html`<hmi-navbar brand=${args.brand} .links=${args.links}>
+            <span
+                slot="item-settings"
+                role="link"
+                tabindex="0"
+                aria-current="page"
+                style="padding: var(--space-4) var(--space-7); border-radius: var(--corner-extra-small); cursor: pointer"
+                >Settings (a custom element)</span
+            >
+        </hmi-navbar>`,
+};
