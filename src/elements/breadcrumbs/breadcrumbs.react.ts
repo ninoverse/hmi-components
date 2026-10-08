@@ -8,7 +8,7 @@ export type { BreadcrumbItem, BreadcrumbsNavDetail } from './breadcrumbs.js';
  * React wrapper for `<hmi-breadcrumbs>`.
  *
  * `items` is a property. `onNav` receives the event, whose `detail` is
- * `{ value, index }`: call `event.preventDefault()` to keep the browser from
+ * `{ value, index, href }`: call `event.preventDefault()` to keep the browser from
  * following `href`. Rich labels are children with `slot="label-<index>"`, and
  * one child with `slot="separator"` is copied between the crumbs. `label` is
  * the landmark's name.

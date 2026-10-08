@@ -1,7 +1,7 @@
 import { html, LitElement, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { baseStyles } from '../shared/base.styles.js';
-import { emit } from '../shared/events.js';
+import { handleNavClick } from '../shared/nav.js';
 import { styles } from './breadcrumbs.styles.js';
 
 /** One crumb of a trail. */
@@ -20,6 +20,8 @@ export interface BreadcrumbsNavDetail {
     value: string;
     /** The crumb's position, from 0. */
     index: number;
+    /** The crumb's `href`, or undefined without one. For a router that navigates itself. */
+    href: string | undefined;
 }
 
 /**
@@ -33,7 +35,8 @@ export interface BreadcrumbsNavDetail {
  *
  * Clicking a link fires the cancelable `hmi-nav`. Cancel it to keep the
  * browser from following `href`, as a router does. A link without `href` never
- * navigates.
+ * navigates, and a modified click (ctrl, cmd, shift, alt or a non-primary
+ * button) fires nothing, so the browser can open it in a new tab.
  *
  * @tag hmi-breadcrumbs
  * @slot label-<index> - Rich label for the crumb at that position.
@@ -44,7 +47,7 @@ export interface BreadcrumbsNavDetail {
  * @csspart link - A crumb that links.
  * @csspart current - The last crumb.
  * @csspart separator - A separator.
- * @fires hmi-nav - A link was activated. Cancelable. `detail` is `{ value, index }`.
+ * @fires hmi-nav - A link was activated. Cancelable. `detail` is `{ value, index, href }`.
  *
  * @example
  * const crumbs = document.querySelector('hmi-breadcrumbs');
@@ -100,13 +103,11 @@ export class HmiBreadcrumbs extends LitElement {
     }
 
     #onClick(event: MouseEvent, item: BreadcrumbItem, index: number) {
-        const proceed = emit<BreadcrumbsNavDetail>(
-            this,
-            'hmi-nav',
-            { value: item.value ?? item.label, index },
-            { cancelable: true },
-        );
-        if (!proceed || !item.href) event.preventDefault();
+        handleNavClick<BreadcrumbsNavDetail>(this, event, {
+            value: item.value ?? item.label,
+            index,
+            href: item.href,
+        });
     }
 
     override render() {

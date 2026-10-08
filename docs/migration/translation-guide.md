@@ -288,8 +288,8 @@ Wrapper prop = `on` + PascalCase of the event minus `hmi-`.
 | toast | `onDismiss()` | `hmi-dismiss` (cancelable) | `{ id: string }` |
 | tree | `onSelect(T)` / `onExpandedChange(T[])` | `hmi-select` / `hmi-expanded-change` | `{ value: T }` / `{ expanded: T[] }` |
 | command-palette command | `commands[].onSelect()` | `hmi-select` | `{ value: string }` |
-| navbar, sidebar | `onNav(T)` | `hmi-nav` | `{ value: T }` |
-| breadcrumbs | `items[].onClick()` | `hmi-nav` | `{ value: string, index: number }` |
+| navbar, sidebar | `onNav(T)` | `hmi-nav` (cancelable) | `{ value: T, href: string \| undefined }` |
+| breadcrumbs | `items[].onClick()` | `hmi-nav` (cancelable) | `{ value: string, index: number, href: string \| undefined }` |
 | carousel | `onIndexChange(n)` | `hmi-index-change` | `{ index: number }` |
 | list | `onReorder(items)` | `hmi-reorder` | `{ items: ListItem[] }` |
 | table | (internal sort state) | `hmi-sort` | `{ key: string, dir: 'asc' \| 'desc' \| null }` |
@@ -310,6 +310,50 @@ export function emit<T>(host: HTMLElement, type: `hmi-${string}`, detail: T, ini
     if (emit<ModalCloseDetail>(this, 'hmi-close', { reason }, { cancelable: true })) this.open = false;
 }
 ```
+
+### Links and routers
+
+`hmi-breadcrumbs`, `hmi-navbar` and `hmi-sidebar` render real `<a href>`s, so a
+plain click is a normal page load. Two ways to hand navigation to a router:
+
+1. **Listen to `hmi-nav`.** It is cancelable and its detail carries the `href`.
+   A modified click (ctrl, cmd, shift, alt, a non-primary button) fires nothing,
+   so "open in a new tab" keeps working. A link without `href` never navigates.
+
+   ```tsx
+   // Next.js, in a Client Component
+   'use client';
+   const router = useRouter();
+   const pathname = usePathname();
+   <Navbar
+       links={links}
+       current={pathname}
+       onNav={(e) => {
+           e.preventDefault();
+           if (e.detail.href) router.push(e.detail.href);
+       }}
+   />
+   ```
+
+2. **Slot the router's own link.** `navbar` and `sidebar` take `item-<value>`:
+   the slotted element replaces the built-in link, and a slotted `<a>` is styled
+   like one, with `aria-current="page"` as its active state. Framework links
+   (`next/link`, `react-router`'s `NavLink`, `RouterLink`, `routerLink`,
+   SvelteKit's `<a>`) render an `<a>`, so they keep their own routing and
+   prefetching, and, being light DOM, they are in the server HTML.
+
+   ```tsx
+   <Navbar links={links} current={pathname}>
+       <Link slot="item-docs" href="/docs" aria-current={pathname === '/docs' ? 'page' : undefined}>Docs</Link>
+   </Navbar>
+   ```
+
+Notes:
+
+- `links` and `groups` are properties, so on the server the element renders
+  empty: only slotted links are visible in the server HTML.
+- The `@lit/react` wrappers use React hooks. In the App Router, import them from
+  a Client Component (`'use client'`).
 
 ## 7. State and lifecycle
 

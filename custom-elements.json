@@ -1002,7 +1002,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "Navigation breadcrumb trail. The last item is the current page, marked\n`aria-current=\"page\"`; every other item is a link.\n\nA crumb's `label` is text. For richer content, such as an icon beside the\ntext, slot an element named `label-<index>` (the item's position, from 0),\nwhich replaces that text. The separator is a string, or one element in the\n`separator` slot, which is copied into every gap.\n\nClicking a link fires the cancelable `hmi-nav`. Cancel it to keep the\nbrowser from following `href`, as a router does. A link without `href` never\nnavigates.",
+          "description": "Navigation breadcrumb trail. The last item is the current page, marked\n`aria-current=\"page\"`; every other item is a link.\n\nA crumb's `label` is text. For richer content, such as an icon beside the\ntext, slot an element named `label-<index>` (the item's position, from 0),\nwhich replaces that text. The separator is a string, or one element in the\n`separator` slot, which is copied into every gap.\n\nClicking a link fires the cancelable `hmi-nav`. Cancel it to keep the\nbrowser from following `href`, as a router does. A link without `href` never\nnavigates, and a modified click (ctrl, cmd, shift, alt or a non-primary\nbutton) fires nothing, so the browser can open it in a new tab.",
           "name": "HmiBreadcrumbs",
           "cssParts": [
             {
@@ -1143,7 +1143,7 @@
           ],
           "events": [
             {
-              "description": "A link was activated. Cancelable. `detail` is `{ value, index }`.",
+              "description": "A link was activated. Cancelable. `detail` is `{ value, index, href }`.",
               "name": "hmi-nav"
             }
           ],

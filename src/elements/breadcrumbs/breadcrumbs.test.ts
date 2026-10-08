@@ -182,8 +182,8 @@ describe('hmi-breadcrumbs navigation', () => {
         click(home as HTMLElement);
         click(library as HTMLElement);
         expect(seen).toEqual([
-            { value: 'Home', index: 0 },
-            { value: 'lib', index: 1 },
+            { value: 'Home', index: 0, href: '#home' },
+            { value: 'lib', index: 1, href: undefined },
         ]);
     });
 
@@ -209,6 +209,22 @@ describe('hmi-breadcrumbs navigation', () => {
         const seen = onNav(el);
         expect(click(all(el, 'link')[1] as HTMLElement)).toBe(false);
         expect(seen).toHaveLength(1);
+    });
+
+    it('leaves a modified click to the browser', async () => {
+        const el = await fixture(
+            html`<hmi-breadcrumbs .items=${ITEMS}></hmi-breadcrumbs>`,
+        );
+        const seen = onNav(el, true);
+        const event = new MouseEvent('click', {
+            bubbles: true,
+            cancelable: true,
+            composed: true,
+            ctrlKey: true,
+        });
+        (all(el, 'link')[0] as HTMLElement).dispatchEvent(event);
+        expect(seen).toHaveLength(0);
+        expect(event.defaultPrevented).toBe(false);
     });
 
     it('does not fire for the current page', async () => {
@@ -241,7 +257,7 @@ describe('Breadcrumbs (React wrapper)', () => {
         expect(all(el, 'item')).toHaveLength(3);
         expect(all(el, 'separator')[0]?.textContent?.trim()).toBe('›');
         click(all(el, 'link')[1] as HTMLElement);
-        expect(seen).toEqual([{ value: 'lib', index: 1 }]);
+        expect(seen).toEqual([{ value: 'lib', index: 1, href: undefined }]);
         await act(async () => root.unmount());
     });
 });
