@@ -32,6 +32,7 @@ export * from './link/link.js';
 export * from './list/list.js';
 export * from './meter/meter.js';
 export * from './multi-input/multi-input.js';
+export * from './navbar/navbar.js';
 export * from './number-input/number-input.js';
 export * from './pagination/pagination.js';
 export * from './password-input/password-input.js';

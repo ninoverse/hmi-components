@@ -7898,6 +7898,257 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/navbar/navbar.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Responsive top navigation bar: a brand, links with an active state, and a\ntrailing slot. Below 40em the links and the trailing content collapse behind\na menu button.\n\n`brand` is text, drawn with a monogram of its first letter; for anything else,\nslot an element into `brand`. A link's `label` is text; for richer content,\nslot an element named `label-<value>`. A badge is `badge` text, or content\nslotted as `badge-<value>` inside the pill, or an element slotted as\n`end-<value>` in its place. A link can be replaced whole by an element slotted\nas `item-<value>`: a router's own link, a button or a menu. A slotted `<a>`\nis styled like the other links, and `aria-current=\"page\"` on it is its active\nstate.\n\nIt is controlled: the element never changes `current`. A click on a link\nfires the cancelable `hmi-nav`, which carries the `href` for a router; cancel\nit to keep the browser from following the link. A link without `href` never\nnavigates, and a modified click (ctrl, cmd, shift, alt or a non-primary\nbutton) fires nothing, so the browser can open it in a new tab.",
+          "name": "HmiNavbar",
+          "cssParts": [
+            {
+              "description": "The `<nav>`.",
+              "name": "base"
+            },
+            {
+              "description": "The `<nav>`, under its panel-group name.",
+              "name": "panel"
+            },
+            {
+              "description": "The brand block.",
+              "name": "brand"
+            },
+            {
+              "description": "The monogram drawn for a text `brand`.",
+              "name": "brand-mark"
+            },
+            {
+              "description": "The row of links.",
+              "name": "links"
+            },
+            {
+              "description": "A link. The current one has `data-active`.",
+              "name": "link"
+            },
+            {
+              "description": "A link's `<hmi-badge>`.",
+              "name": "badge"
+            },
+            {
+              "description": "The trailing content.",
+              "name": "cta"
+            },
+            {
+              "description": "The menu button, shown below 40em.",
+              "name": "toggle"
+            }
+          ],
+          "slots": [
+            {
+              "description": "The brand, replacing the monogram and `brand` text.",
+              "name": "brand"
+            },
+            {
+              "description": "Trailing content, such as a button or an account menu.",
+              "name": "right"
+            },
+            {
+              "description": "A whole link, replacing the built-in one.",
+              "name": "item-<value>"
+            },
+            {
+              "description": "Rich label for the link with that value.",
+              "name": "label-<value>"
+            },
+            {
+              "description": "Rich content inside the badge of the link with that value.",
+              "name": "badge-<value>"
+            },
+            {
+              "description": "Replaces the badge of the link with that value.",
+              "name": "end-<value>"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "brand",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The brand text, drawn with a monogram. For anything else, slot an element into `brand`.",
+              "attribute": "brand"
+            },
+            {
+              "kind": "field",
+              "name": "links",
+              "type": {
+                "text": "NavbarLink[]"
+              },
+              "default": "[]",
+              "description": "The links. A property only: there is no attribute."
+            },
+            {
+              "kind": "field",
+              "name": "current",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "The `value` of the current link, marked `aria-current=\"page\"`. The element never changes it.",
+              "attribute": "current"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Main'",
+              "description": "The name of the navigation landmark.",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "toggleLabel",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Toggle navigation menu'",
+              "description": "The name of the menu button.",
+              "attribute": "toggle-label"
+            },
+            {
+              "kind": "field",
+              "name": "menuOpen",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "hasBrandSlot",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "hasRightSlot",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "method",
+              "name": "#onLinkClick",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "MouseEvent"
+                  }
+                },
+                {
+                  "name": "link",
+                  "type": {
+                    "text": "NavbarLink"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#renderLink",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "link",
+                  "type": {
+                    "text": "NavbarLink"
+                  }
+                }
+              ]
+            }
+          ],
+          "events": [
+            {
+              "description": "A link was activated. Cancelable. `detail` is `{ value, href }`.",
+              "name": "hmi-nav"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "brand",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The brand text, drawn with a monogram. For anything else, slot an element into `brand`.",
+              "fieldName": "brand"
+            },
+            {
+              "name": "current",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "The `value` of the current link, marked `aria-current=\"page\"`. The element never changes it.",
+              "fieldName": "current"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Main'",
+              "description": "The name of the navigation landmark.",
+              "fieldName": "label"
+            },
+            {
+              "name": "toggle-label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Toggle navigation menu'",
+              "description": "The name of the menu button.",
+              "fieldName": "toggleLabel"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-navbar",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiNavbar",
+          "declaration": {
+            "name": "HmiNavbar",
+            "module": "src/elements/navbar/navbar.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-navbar",
+          "declaration": {
+            "name": "HmiNavbar",
+            "module": "src/elements/navbar/navbar.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/number-input/number-input.ts",
       "declarations": [
         {

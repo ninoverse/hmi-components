@@ -110,6 +110,11 @@ export {
     type MultiInputValueDetail,
 } from '../elements/multi-input/multi-input.react.js';
 export {
+    Navbar,
+    type NavbarLink,
+    type NavbarNavDetail,
+} from '../elements/navbar/navbar.react.js';
+export {
     NumberInput,
     type NumberInputValueDetail,
 } from '../elements/number-input/number-input.react.js';

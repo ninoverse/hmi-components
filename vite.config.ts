@@ -225,6 +225,11 @@ export default defineConfig({
                     dirname,
                     'src/elements/multi-input/multi-input.react.ts',
                 ),
+                'wc/navbar': resolve(dirname, 'src/elements/navbar/navbar.ts'),
+                'react/navbar': resolve(
+                    dirname,
+                    'src/elements/navbar/navbar.react.ts',
+                ),
                 'wc/number-input': resolve(
                     dirname,
                     'src/elements/number-input/number-input.ts',

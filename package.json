@@ -394,6 +394,10 @@
             "types": "./dist/elements/multi-input/multi-input.react.d.ts",
             "import": "./dist/react/multi-input.js"
         },
+        "./react/navbar": {
+            "types": "./dist/elements/navbar/navbar.react.d.ts",
+            "import": "./dist/react/navbar.js"
+        },
         "./react/number-input": {
             "types": "./dist/elements/number-input/number-input.react.d.ts",
             "import": "./dist/react/number-input.js"
@@ -702,6 +706,10 @@
         "./wc/multi-input": {
             "types": "./dist/elements/multi-input/multi-input.d.ts",
             "import": "./dist/wc/multi-input.js"
+        },
+        "./wc/navbar": {
+            "types": "./dist/elements/navbar/navbar.d.ts",
+            "import": "./dist/wc/navbar.js"
         },
         "./wc/number-input": {
             "types": "./dist/elements/number-input/number-input.d.ts",

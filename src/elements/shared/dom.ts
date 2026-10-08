@@ -18,3 +18,13 @@ export function supportsPopover(): boolean {
         typeof HTMLElement !== 'undefined' && 'popover' in HTMLElement.prototype
     );
 }
+
+/**
+ * Hides the parent of a `slotchange` slot that has no content and no text
+ * fallback, and shows it again once something is slotted.
+ */
+export function toggleEmpty(event: Event, hasText: boolean): void {
+    const slot = event.target as HTMLSlotElement;
+    (slot.parentElement as HTMLElement).hidden =
+        slot.assignedNodes().length === 0 && !hasText;
+}

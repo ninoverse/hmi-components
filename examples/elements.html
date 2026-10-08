@@ -966,6 +966,26 @@ export function Example() {
         </section>
 
         <section>
+            <h2>Navbar</h2>
+            <!-- Links are a property; current is controlled. hmi-nav fires with
+                 { value, href } and can be cancelled. Below 40em the links and the
+                 right slot collapse behind a menu button. The second bar slots a
+                 router-style link, a button and a rich badge. -->
+            <div style="display: flex; flex-direction: column; gap: 2rem">
+                <hmi-navbar id="navbar-live" brand="Ninoverse" current="reports">
+                    <hmi-button slot="right" size="small" variant="primary">Get started</hmi-button>
+                </hmi-navbar>
+                <hmi-navbar id="navbar-slots" current="overview">
+                    <strong slot="brand">★ Custom brand</strong>
+                    <a slot="item-overview" href="#" aria-current="page">Overview (a router link)</a>
+                    <span slot="badge-reports">🔥 12</span>
+                    <hmi-button slot="item-settings" size="small" variant="ghost">Settings (a button)</hmi-button>
+                </hmi-navbar>
+            </div>
+            <p id="navbar-active" style="color: var(--on-surface-variant)"></p>
+        </section>
+
+        <section>
             <h2>List</h2>
             <!-- Items are a property. right-<id> takes rich content; reorderable adds
                  drag and Alt+Arrow reordering, and the page sets items back from
@@ -1253,6 +1273,26 @@ export function Example() {
                 { label: 'Library', href: '#' },
                 { label: 'Settings' },
             ];
+            const navbar = document.getElementById('navbar-live');
+            navbar.links = [
+                { value: 'overview', label: 'Overview' },
+                { value: 'reports', label: 'Reports', badge: '12', badgeVariant: 'primary' },
+                { value: 'people', label: 'People' },
+                { value: 'settings', label: 'Settings' },
+            ];
+            const activeLabel = document.getElementById('navbar-active');
+            activeLabel.textContent = 'Active: reports';
+            navbar.addEventListener('hmi-nav', (event) => {
+                console.log('navbar hmi-nav', event.detail);
+                navbar.current = event.detail.value;
+                activeLabel.textContent = `Active: ${event.detail.value}`;
+            });
+            document.getElementById('navbar-slots').links = [
+                { value: 'overview', label: 'Overview' },
+                { value: 'reports', label: 'Reports', badge: '' },
+                { value: 'settings', label: 'Settings' },
+            ];
+
             for (const pager of document.querySelectorAll('hmi-pagination')) {
                 pager.addEventListener('hmi-change', (event) => {
                     console.log('pagination hmi-change', event.detail);
