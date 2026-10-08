@@ -94,7 +94,6 @@ There is no status for work under way: its open PR already shows that.
 | `hmi-carousel` | `carousel.tsx` | 6 | med | S E D | Slides = the element children (default slot); `hmi-index-change { index }`; default-true flags are inverted (`no-loop`, `hide-arrows`, `hide-dots`); slides stay untouched (hidden ones are `visibility: hidden` through an adopted style); no resize listener needed. | Done | [#167](https://github.com/ninoverse/hmi-components/pull/167) |
 | `hmi-image` | `image.tsx` | 6 | med | S R E | `renderImage` → default slot (your own `<img>`/`<picture>`, e.g. `next/image` with `fill`; the shell hears `load`/`error`); `fallback` slot; `hmi-load`/`hmi-error` with `{ src }`; `srcset`/`sizes`/`crossorigin`/`referrerpolicy` passthrough; a new `src` restarts loading. | Done | [#167](https://github.com/ninoverse/hmi-components/pull/167) |
 | `hmi-list` | `list.tsx` | 6 | med | A R E X | `renderItem` → three tiers; `hmi-reorder { items }`; `[data-structure="journal"] .list__item` → `--list-divider-style` token (defined). | Done | [#169](https://github.com/ninoverse/hmi-components/pull/169) |
-| `hmi-table` | `table.tsx` | 6 | high | A R E | Cell kinds `text`/`format`/`badge`/`link`/`actions`; `cell-<rowKey>-<columnKey>` slots; `render` JS-only; `getRowKey` → `row-key`; `hmi-sort`, `hmi-action { value, row }`. | Todo | |
 | `hmi-timeline` | `timeline.tsx` | 6 | low | A | Items strings + `title-<index>`/`description-<index>`/`time-<index>`/`icon-<index>` slots; optional `divider` between events. | Done | [#166](https://github.com/ninoverse/hmi-components/pull/166) |
 | `hmi-breadcrumbs` | `breadcrumbs.tsx` | 7 | low | A E | `items[].onClick` → `hmi-nav { value, index }`; `separator` slot. | Todo | |
 | `hmi-navbar` | `navbar.tsx` | 7 | med | S A E D P | Slots `brand`, `right`; links strings + `label-<value>` slots; `hmi-nav`; panel part. | Todo | |
@@ -118,7 +117,7 @@ There is no status for work under way: its open PR already shows that.
 | `hmi-radar-chart` | `radarChart.tsx` | 8 | low | | | Todo | |
 | `hmi-scatter-plot` | `scatterPlot.tsx` | 8 | low | | | Todo | |
 | `hmi-sparkline` | `sparkline.tsx` | 8 | low | | | Todo | |
-| `hmi-modal` | `modal.tsx` | 9 | high | S O E D P | `<dialog>.showModal()`; slots `title`, `description`, `actions`; `DialogAction[]` kept; `hmi-close { reason }` (cancelable), `hmi-action`. Lands `shared/positioning.ts` for the group. | Todo | |
+| `hmi-modal` | `modal.tsx` | 9 | high | S O E D P | `<dialog>.showModal()`; slots `title`, `description`, `actions`; `DialogAction[]` kept; `hmi-close { reason }` (cancelable), `hmi-action`. Lands `shared/positioning.ts` for the group, and `shared/dialog-actions.ts` (`DialogAction`, the buttons it renders) for drawer and table. | Todo | |
 | `hmi-confirm-dialog` | `confirmDialog.tsx` | 9 | med | S O E | Composes `<hmi-modal>`; `hmi-cancel` (cancelable), `hmi-confirm`. | Todo | |
 | `hmi-drawer` | `drawer.tsx` | 9 | high | S O E D P | `<dialog>`; `side` reflected; slide keyframes per side. | Todo | |
 | `hmi-popover` | `popover.tsx` | 9 | high | S O E D P | `popover="auto"`; `trigger` slot; `PositionController`; `hmi-open-change`. | Todo | |
@@ -126,6 +125,7 @@ There is no status for work under way: its open PR already shows that.
 | `hmi-hover-card` | `hoverCard.tsx` | 9 | med | S O E D P | Hover/focus timers; `hmi-open-change`. | Todo | |
 | `hmi-context-menu` | `contextMenu.tsx` | 9 | high | S O E D P | Pointer-position anchor; `menu` slot. | Todo | |
 | `hmi-menu` | `menu.tsx` | 9 | med | P | `hmi-menu`, `hmi-menu-item`, `hmi-menu-separator`, `hmi-menu-label` as sibling elements in one folder. | Todo | |
+| `hmi-table` | `table.tsx` | 9 | high | A R E | Cell kinds `text`/`format`/`badge`/`link`/`actions`; `cell-<rowKey>-<columnKey>` slots; `render` JS-only; `getRowKey` → `row-key`; `hmi-sort`, `hmi-action { value, row }`. Moved from phase 6: the `actions` kind needs the `DialogAction` helper that `hmi-modal` lands. | Todo | |
 | `hmi-select` | `select.tsx` | 10 | high | A F O E P | Composes popover + menu; options strings + `label-<value>` slots; no native `<select>`. | Todo | |
 | `hmi-combobox` | `combobox.tsx` | 10 | high | A F O E D R | `filterOption` → `filter` JS-only + default includes; query state must re-sync from `value` (existing hazard); `hmi-input` for query text. | Todo | |
 | `hmi-date-picker` | `datePicker.tsx` | 10 | high | F O E | Range value object; ARIA grid. | Todo | |

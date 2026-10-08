@@ -168,10 +168,10 @@ v5 PascalCase export (`AreaChart`).
 | 3 | layout + typography: aspect-ratio, box, divider, flex, grid, heading, link, scroll-area, spacer, text, visually-hidden | phase 2 merged |
 | 4 | button + text inputs (introduces `shared/form.ts`): button, form-control, input, textarea, number-input, password-input, search-input, multi-input, file-upload | phase 3 merged |
 | 5 | selection controls: checkbox, radio, radio-group, switch, slider, segmented-control, value-scale-selector | phase 4 merged |
-| 6 | data display: accordion, carousel, image, list, table, timeline | phase 5 merged |
+| 6 | data display: accordion, carousel, image, list, timeline | phase 5 merged |
 | 7 | navigation: breadcrumbs, navbar, pagination, sidebar, stepper, tabs, tree | phase 6 merged |
 | 8 | charts: cartesian-grid, chart-tooltip, legend, responsive-container first; then the ten chart elements | phase 7 merged |
-| 9 | overlay infrastructure (`shared/positioning.ts`) + modal, confirm-dialog, drawer, popover, tooltip, hover-card, context-menu, menu | phase 8 merged |
+| 9 | overlay infrastructure (`shared/positioning.ts`) + modal (with `shared/dialog-actions.ts`), confirm-dialog, drawer, popover, tooltip, hover-card, context-menu, menu, then table | phase 8 merged |
 | 10 | select, combobox, date-picker, color-picker, command-palette | phase 9 merged |
 | 11 | toast, theme module + `useTheme`, the v6 flip | phase 10 merged |
 
@@ -193,9 +193,10 @@ PRs the same way, which gives four PRs in this order: `checkbox` + `switch`
 per element.
 
 Phase 6 exception (agreed with the maintainer): the data display elements share
-PRs the same way, which gives four PRs in this order: `accordion` + `timeline`;
-`image` + `carousel`; `list`; `table`. Each batch is still one commit per
-element.
+PRs the same way, which gives three PRs in this order: `accordion` + `timeline`;
+`image` + `carousel`; `list`. `table` moved to phase 9, after `modal`: its
+`actions` cells need the `DialogAction` helper that `modal` lands. Each batch is
+still one commit per element.
 
 ## 7. Running one migration end to end
 
