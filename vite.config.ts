@@ -377,6 +377,11 @@ export default defineConfig({
                     dirname,
                     'src/elements/timeline/timeline.react.ts',
                 ),
+                'wc/tree': resolve(dirname, 'src/elements/tree/tree.ts'),
+                'react/tree': resolve(
+                    dirname,
+                    'src/elements/tree/tree.react.ts',
+                ),
                 'wc/value-scale-selector': resolve(
                     dirname,
                     'src/elements/value-scale-selector/value-scale-selector.ts',

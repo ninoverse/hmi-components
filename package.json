@@ -482,6 +482,10 @@
             "types": "./dist/elements/timeline/timeline.react.d.ts",
             "import": "./dist/react/timeline.js"
         },
+        "./react/tree": {
+            "types": "./dist/elements/tree/tree.react.d.ts",
+            "import": "./dist/react/tree.js"
+        },
         "./react/value-scale-selector": {
             "types": "./dist/elements/value-scale-selector/value-scale-selector.react.d.ts",
             "import": "./dist/react/value-scale-selector.js"
@@ -806,6 +810,10 @@
         "./wc/timeline": {
             "types": "./dist/elements/timeline/timeline.d.ts",
             "import": "./dist/wc/timeline.js"
+        },
+        "./wc/tree": {
+            "types": "./dist/elements/tree/tree.d.ts",
+            "import": "./dist/wc/tree.js"
         },
         "./wc/value-scale-selector": {
             "types": "./dist/elements/value-scale-selector/value-scale-selector.d.ts",

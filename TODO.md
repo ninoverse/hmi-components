@@ -301,6 +301,21 @@ client one. Noted in `docs/migration/translation-guide.md` ("Links and routers")
 
 ---
 
+## `hmi-tree` typeahead
+
+`hmi-tree` follows v5's keyboard: arrows, Home, End, Enter and Space. The WAI-ARIA
+tree pattern also suggests typeahead: typing a character moves focus to the next
+enabled node whose label starts with it, and typing a few in a row builds a prefix
+that resets after a short pause. Worth adding for long trees.
+
+To do: match against the node's `label` string, since a slotted rich label has no
+text the element may read (it never reads the consumer's DOM). Decide the pause
+(about 500 ms), whether the search wraps, and how it reads in the screen readers
+that already announce the focused node. Optionally also `*`, which expands every
+sibling of the focused node.
+
+---
+
 ## Controlled or element-owned state, before v6
 
 **Do this last, before the v6 flip.** `.claude/rules/lit-elements.md` says an
