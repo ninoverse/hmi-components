@@ -458,6 +458,10 @@
             "types": "./dist/elements/stat/stat.react.d.ts",
             "import": "./dist/react/stat.js"
         },
+        "./react/stepper": {
+            "types": "./dist/elements/stepper/stepper.react.d.ts",
+            "import": "./dist/react/stepper.js"
+        },
         "./react/switch": {
             "types": "./dist/elements/switch/switch.react.d.ts",
             "import": "./dist/react/switch.js"
@@ -778,6 +782,10 @@
         "./wc/stat": {
             "types": "./dist/elements/stat/stat.d.ts",
             "import": "./dist/wc/stat.js"
+        },
+        "./wc/stepper": {
+            "types": "./dist/elements/stepper/stepper.d.ts",
+            "import": "./dist/wc/stepper.js"
         },
         "./wc/switch": {
             "types": "./dist/elements/switch/switch.d.ts",

@@ -16632,6 +16632,242 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/stepper/stepper.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Step progress indicator: an ordered list in which the steps before `current`\nare completed, the current step is active and the rest are upcoming, joined by\nconnector lines. A completed step is a button that fires `hmi-change`, so a\nwizard can go back to it.\n\nA step's `label` and `description` are text. For richer content, slot an\nelement named `label-<value>` or `description-<value>`.\n\nIt is controlled: choosing a completed step fires `hmi-change` and the element\nkeeps showing the old step until you set `current`. `readonly` makes the steps\nplain text, for a wizard that cannot go back. Below 40em a horizontal stepper\nfalls back to the vertical layout.",
+          "name": "HmiStepper",
+          "cssProperties": [
+            {
+              "description": "The space between steps in the vertical layout. Set it on the host or an ancestor, or with `spacing`.",
+              "name": "--stepper-item-gap"
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "The ordered list.",
+              "name": "base"
+            },
+            {
+              "description": "One step. `data-status` is `completed`, `active` or `upcoming`.",
+              "name": "step"
+            },
+            {
+              "description": "A step's content: a `<button>` for a completed step, else a `<span>`.",
+              "name": "button"
+            },
+            {
+              "description": "The circle with the number or the check.",
+              "name": "indicator"
+            },
+            {
+              "description": "A step's title.",
+              "name": "label"
+            },
+            {
+              "description": "A step's secondary line.",
+              "name": "description"
+            },
+            {
+              "description": "The line to the next step.",
+              "name": "connector"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Rich label for the step with that value.",
+              "name": "label-<value>"
+            },
+            {
+              "description": "Rich description for the step with that value.",
+              "name": "description-<value>"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "steps",
+              "type": {
+                "text": "StepperStep[]"
+              },
+              "default": "[]",
+              "description": "The ordered steps. A property only: there is no attribute."
+            },
+            {
+              "kind": "field",
+              "name": "current",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "The `value` of the active step. The element never changes it. With none, every step is upcoming.",
+              "attribute": "current"
+            },
+            {
+              "kind": "field",
+              "name": "orientation",
+              "type": {
+                "text": "StepperOrientation"
+              },
+              "default": "'horizontal'",
+              "description": "Layout direction.",
+              "attribute": "orientation",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "spacing",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "The space between steps in the vertical layout, as a CSS length such as `3rem`. Sets `--stepper-item-gap`.",
+              "attribute": "spacing"
+            },
+            {
+              "kind": "field",
+              "name": "readonly",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Make completed steps plain text instead of buttons.",
+              "attribute": "readonly",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Progress steps'",
+              "description": "The name of the list.",
+              "attribute": "label"
+            },
+            {
+              "kind": "method",
+              "name": "#choose",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "value",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#renderStep",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "step",
+                  "type": {
+                    "text": "StepperStep"
+                  }
+                },
+                {
+                  "name": "index",
+                  "type": {
+                    "text": "number"
+                  }
+                },
+                {
+                  "name": "currentIndex",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            }
+          ],
+          "events": [
+            {
+              "description": "A completed step was chosen. `detail` is `{ value }`.",
+              "name": "hmi-change"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "current",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "The `value` of the active step. The element never changes it. With none, every step is upcoming.",
+              "fieldName": "current"
+            },
+            {
+              "name": "orientation",
+              "type": {
+                "text": "StepperOrientation"
+              },
+              "default": "'horizontal'",
+              "description": "Layout direction.",
+              "fieldName": "orientation"
+            },
+            {
+              "name": "spacing",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "The space between steps in the vertical layout, as a CSS length such as `3rem`. Sets `--stepper-item-gap`.",
+              "fieldName": "spacing"
+            },
+            {
+              "name": "readonly",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Make completed steps plain text instead of buttons.",
+              "fieldName": "readonly"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Progress steps'",
+              "description": "The name of the list.",
+              "fieldName": "label"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-stepper",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiStepper",
+          "declaration": {
+            "name": "HmiStepper",
+            "module": "src/elements/stepper/stepper.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-stepper",
+          "declaration": {
+            "name": "HmiStepper",
+            "module": "src/elements/stepper/stepper.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/switch/switch.ts",
       "declarations": [
         {

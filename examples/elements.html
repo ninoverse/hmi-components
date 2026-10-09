@@ -1030,6 +1030,18 @@ export function Example() {
         </section>
 
         <section>
+            <h2>Stepper</h2>
+            <!-- Steps are a property; current is controlled. A completed step is a
+                 button and fires hmi-change with { value }; readonly would make it text.
+                 The third stepper sets spacing. -->
+            <div style="display: flex; flex-direction: column; gap: 3rem">
+                <hmi-stepper id="stepper-h" label="Checkout progress"></hmi-stepper>
+                <hmi-stepper id="stepper-v" orientation="vertical" label="Checkout progress vertical"></hmi-stepper>
+                <hmi-stepper id="stepper-vs" orientation="vertical" spacing="4rem" label="Checkout progress vertical spacing"></hmi-stepper>
+            </div>
+        </section>
+
+        <section>
             <h2>List</h2>
             <!-- Items are a property. right-<id> takes rich content; reorderable adds
                  drag and Alt+Arrow reordering, and the page sets items back from
@@ -1394,6 +1406,21 @@ export function Example() {
                     console.log(`${id} hmi-change`, event.detail);
                     tabs.value = event.detail.value;
                     if (active) active.textContent = `Active: ${event.detail.value}`;
+                });
+            }
+
+            const checkoutSteps = [
+                { value: 'cart', label: 'Cart', description: '3 items' },
+                { value: 'address', label: 'Address', description: 'Delivery details' },
+                { value: 'payment', label: 'Payment', description: 'Choose method' },
+                { value: 'review', label: 'Review' },
+            ];
+            for (const stepper of document.querySelectorAll('hmi-stepper')) {
+                stepper.steps = checkoutSteps;
+                stepper.current = 'payment';
+                stepper.addEventListener('hmi-change', (event) => {
+                    console.log('stepper hmi-change', event.detail);
+                    stepper.current = event.detail.value;
                 });
             }
 

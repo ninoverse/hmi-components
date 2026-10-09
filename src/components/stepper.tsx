@@ -52,6 +52,7 @@ const CheckIcon = () => (
  *
  * @example
  * <Stepper steps={steps} current={step} onChange={setStep} />
+ * @deprecated Use `Stepper` from `@ninoverse/hmi-components/react/stepper`. Removed in 6.0.0.
  */
 export function Stepper<T extends string = string>({
     steps,
