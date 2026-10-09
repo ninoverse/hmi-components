@@ -89,7 +89,25 @@ export const styles = css`
         transition:
             transform var(--duration-medium-1) var(--easing-spring),
             width var(--duration-medium-1) var(--easing-spring),
-            opacity var(--duration-short-3) var(--easing-standard);
+            opacity var(--duration-short-3) var(--easing-standard),
+            border-radius var(--duration-short-3) var(--easing-standard);
+    }
+
+    /* The outer corners follow the strip's, so the indicator on the first or
+       last tab fits its corner. A middle tab keeps the small radius. */
+    :host(:not([variant='underline'])) .indicator[data-edge='start'] {
+        border-top-left-radius: var(--corner-tl);
+        border-bottom-left-radius: var(--corner-bl);
+    }
+
+    :host(:not([variant='underline'])) .indicator[data-edge='end'] {
+        border-top-right-radius: var(--corner-tr);
+        border-bottom-right-radius: var(--corner-br);
+    }
+
+    :host(:not([variant='underline'])) .indicator[data-edge='both'] {
+        border-radius: var(--corner-tl) var(--corner-tr) var(--corner-br)
+            var(--corner-bl);
     }
 
     :host([variant='underline']) .tabs {

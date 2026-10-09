@@ -48,7 +48,7 @@ export interface TabsChangeDetail {
  * @slot badge-<value> - Rich content inside the badge of the tab with that value.
  * @slot end-<value> - Replaces the badge of the tab with that value.
  * @csspart base - The `role="tablist"` row.
- * @csspart indicator - The sliding marker behind (pill) or under (underline) the active tab.
+ * @csspart indicator - The sliding marker behind (pill) or under (underline) the active tab. Its outer corners follow the strip's when it sits on the first or last tab.
  * @csspart tab - A tab. The active one has `data-active`.
  * @csspart icon - A tab's icon.
  * @csspart label - A tab's label.
@@ -121,6 +121,13 @@ export class HmiTabs extends LitElement {
         }
         const wr = base.getBoundingClientRect();
         const ar = active.getBoundingClientRect();
+        // The first and last tab take the strip's own corners, so the indicator
+        // fits them when it sits there.
+        const index = this.options.findIndex((o) => o.value === this.value);
+        const first = index === 0;
+        const last = index === this.options.length - 1;
+        marker.dataset.edge =
+            first && last ? 'both' : first ? 'start' : last ? 'end' : '';
         marker.style.transform = `translateX(${ar.left - wr.left}px)`;
         marker.style.width = `${ar.width}px`;
         marker.style.opacity = '1';

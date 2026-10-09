@@ -17754,7 +17754,7 @@
               "name": "base"
             },
             {
-              "description": "The sliding marker behind (pill) or under (underline) the active tab.",
+              "description": "The sliding marker behind (pill) or under (underline) the active tab. Its outer corners follow the strip's when it sits on the first or last tab.",
               "name": "indicator"
             },
             {

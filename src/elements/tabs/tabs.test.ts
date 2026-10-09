@@ -318,6 +318,49 @@ describe('hmi-tabs indicator', () => {
         expect(x(el)).toBeCloseTo(offset(el, 2), 1);
     });
 
+    it("takes the strip's corners on the first and last tab, and the small radius between", async () => {
+        const el = await fixture(
+            html`<hmi-tabs
+                style="--corner-tl: 20px; --corner-tr: 4px; --corner-br: 6px; --corner-bl: 8px; --corner-extra-small: 3px"
+                value="inbox"
+                .options=${OPTIONS}
+            ></hmi-tabs>`,
+        );
+        const radii = () => {
+            const style = getComputedStyle(marker(el));
+            return [
+                style.borderTopLeftRadius,
+                style.borderTopRightRadius,
+                style.borderBottomRightRadius,
+                style.borderBottomLeftRadius,
+            ];
+        };
+        const settleRadius = () => new Promise((r) => setTimeout(r, 300));
+        await settleRadius();
+        expect(radii()).toEqual(['20px', '3px', '3px', '8px']);
+        el.value = 'sent';
+        await el.updateComplete;
+        await settleRadius();
+        expect(radii()).toEqual(['3px', '3px', '3px', '3px']);
+        el.value = 'archive';
+        await el.updateComplete;
+        await settleRadius();
+        expect(radii()).toEqual(['3px', '4px', '6px', '3px']);
+    });
+
+    it('keeps the underline indicator square', async () => {
+        const el = await fixture(
+            html`<hmi-tabs
+                variant="underline"
+                style="--corner-tl: 20px; --corner-bl: 8px"
+                value="inbox"
+                .options=${OPTIONS}
+            ></hmi-tabs>`,
+        );
+        await new Promise((r) => setTimeout(r, 300));
+        expect(getComputedStyle(marker(el)).borderTopLeftRadius).toBe('0px');
+    });
+
     it('is hidden when no tab is active', async () => {
         const el = await fixture(
             html`<hmi-tabs .options=${OPTIONS}></hmi-tabs>`,
