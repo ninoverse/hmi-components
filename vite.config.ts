@@ -338,10 +338,23 @@ export default defineConfig({
                     dirname,
                     'src/elements/stat/stat.react.ts',
                 ),
+                'wc/stepper': resolve(
+                    dirname,
+                    'src/elements/stepper/stepper.ts',
+                ),
+                'react/stepper': resolve(
+                    dirname,
+                    'src/elements/stepper/stepper.react.ts',
+                ),
                 'wc/switch': resolve(dirname, 'src/elements/switch/switch.ts'),
                 'react/switch': resolve(
                     dirname,
                     'src/elements/switch/switch.react.ts',
+                ),
+                'wc/tabs': resolve(dirname, 'src/elements/tabs/tabs.ts'),
+                'react/tabs': resolve(
+                    dirname,
+                    'src/elements/tabs/tabs.react.ts',
                 ),
                 'wc/text': resolve(dirname, 'src/elements/text/text.ts'),
                 'react/text': resolve(

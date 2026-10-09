@@ -175,9 +175,21 @@ export {
 } from '../elements/spinner/spinner.react.js';
 export { Stat, type StatTrend } from '../elements/stat/stat.react.js';
 export {
+    Stepper,
+    type StepperChangeDetail,
+    type StepperOrientation,
+    type StepperStep,
+} from '../elements/stepper/stepper.react.js';
+export {
     Switch,
     type SwitchChangeDetail,
 } from '../elements/switch/switch.react.js';
+export {
+    type TabOption,
+    Tabs,
+    type TabsChangeDetail,
+    type TabsVariant,
+} from '../elements/tabs/tabs.react.js';
 export {
     Text,
     type TextAlign,
