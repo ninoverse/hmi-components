@@ -99,8 +99,8 @@ There is no status for work under way: its open PR already shows that.
 | `hmi-navbar` | `navbar.tsx` | 7 | med | S A E D P | Slots `brand`, `right`; links strings + `label-<value>` slots; `hmi-nav`; panel part. | Done | [#172](https://github.com/ninoverse/hmi-components/pull/172) |
 | `hmi-pagination` | `pagination.tsx` | 7 | low | E | `hmi-change { value: page }`. | Done | [#171](https://github.com/ninoverse/hmi-components/pull/171) |
 | `hmi-sidebar` | `sidebar.tsx` | 7 | med | A E P | Items/groups strings + `label-<value>` slots; badge as string; `hmi-nav`. | Done | [#172](https://github.com/ninoverse/hmi-components/pull/172) |
-| `hmi-stepper` | `stepper.tsx` | 7 | med | A E | `--stepper-item-gap` set on host; `hmi-change { value }`. | Todo | |
-| `hmi-tabs` | `tabs.tsx` | 7 | med | A E D | Indicator measured in `updated()`; resize listener; `hmi-change`. | Todo | |
+| `hmi-stepper` | `stepper.tsx` | 7 | med | A E | `--stepper-item-gap` set on host; `hmi-change { value }`. | Done | [#173](https://github.com/ninoverse/hmi-components/pull/173) |
+| `hmi-tabs` | `tabs.tsx` | 7 | med | A E D | Indicator measured in `updated()`; resize listener; `hmi-change`. | Done | [#173](https://github.com/ninoverse/hmi-components/pull/173) |
 | `hmi-tree` | `tree.tsx` | 7 | high | A E | Roving tabindex; `hmi-select { value }`, `hmi-expanded-change { expanded }`. | Todo | |
 | `hmi-cartesian-grid` | `cartesianGrid.tsx` | 8 | low | | Kept as an element AND as `renderCartesianGrid()` in `shared/chart.ts` for the charts that embed it. | Todo | |
 | `hmi-chart-tooltip` | `chartTooltip.tsx` | 8 | low | A P | HTML panel; items strings + slots. | Todo | |
