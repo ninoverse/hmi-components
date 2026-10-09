@@ -1034,7 +1034,7 @@ export function Example() {
             <!-- Steps are a property; current is controlled. A completed step is a
                  button and fires hmi-change with { value }; readonly would make it text.
                  The third stepper sets spacing. -->
-            <div style="display: flex; flex-direction: column; gap: 3rem">
+            <div style="display: flex; flex-direction: column; gap: 3rem; width: 80rem; max-width: 100%">
                 <hmi-stepper id="stepper-h" label="Checkout progress"></hmi-stepper>
                 <hmi-stepper id="stepper-v" orientation="vertical" label="Checkout progress vertical"></hmi-stepper>
                 <hmi-stepper id="stepper-vs" orientation="vertical" spacing="4rem" label="Checkout progress vertical spacing"></hmi-stepper>
