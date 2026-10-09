@@ -19049,6 +19049,374 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/tree/tree.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Accessible tree view (the WAI-ARIA tree pattern): expand and collapse, single\nselection and keyboard navigation. Only expanded levels are rendered.\n\nA node's `label` is text. For richer content, slot an element named\n`label-<value>`; an icon is an element slotted as `icon-<value>`. A badge is\n`badge` text, or content slotted as `badge-<value>` inside the pill, or an\nelement slotted as `end-<value>` in its place.\n\nIt is one tab stop. Arrow Down and Up move through the visible nodes, Home and\nEnd jump to the first and last, Arrow Right opens a closed node or moves to its\nfirst child, Arrow Left closes an open node or moves to its parent, and Enter\nor Space activates. Activating a node selects it, and toggles it when it has\nchildren. Disabled nodes are skipped.\n\nThe element owns `expanded` and `selected`: a click or a key updates them, then\nfires `hmi-expanded-change` or `hmi-select`. Set a property back from the\nhandler to veto the change.",
+          "name": "HmiTree",
+          "cssParts": [
+            {
+              "description": "The `role=\"tree\"` root.",
+              "name": "base"
+            },
+            {
+              "description": "One node: the `role=\"treeitem\"`, holding its row and its children.",
+              "name": "item"
+            },
+            {
+              "description": "A node's own row. `data-selected` marks the selected one.",
+              "name": "row"
+            },
+            {
+              "description": "The expand arrow of a node with children.",
+              "name": "chevron"
+            },
+            {
+              "description": "A node's icon.",
+              "name": "icon"
+            },
+            {
+              "description": "A node's label.",
+              "name": "label"
+            },
+            {
+              "description": "A node's `<hmi-badge>`.",
+              "name": "badge"
+            },
+            {
+              "description": "The `role=\"group\"` holding an expanded node's children.",
+              "name": "group"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Rich label for the node with that value.",
+              "name": "label-<value>"
+            },
+            {
+              "description": "Icon for the node with that value.",
+              "name": "icon-<value>"
+            },
+            {
+              "description": "Rich content inside the badge of the node with that value.",
+              "name": "badge-<value>"
+            },
+            {
+              "description": "Replaces the badge of the node with that value.",
+              "name": "end-<value>"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "nodes",
+              "type": {
+                "text": "TreeNode[]"
+              },
+              "default": "[]",
+              "description": "The root nodes. A property only: there is no attribute."
+            },
+            {
+              "kind": "field",
+              "name": "expanded",
+              "type": {
+                "text": "string[]"
+              },
+              "default": "[]",
+              "description": "The `value`s of the expanded nodes. A property only: there is no attribute."
+            },
+            {
+              "kind": "field",
+              "name": "selected",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "The `value` of the selected node.",
+              "attribute": "selected"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Tree'",
+              "description": "The name of the tree.",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "active",
+              "type": {
+                "text": "string | undefined"
+              },
+              "privacy": "private",
+              "description": "The node that holds the tab stop."
+            },
+            {
+              "kind": "method",
+              "name": "#items",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "HTMLElement[]"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#itemOf",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "HTMLElement | undefined"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ],
+              "description": "The tree item an event came from: the innermost one on its path."
+            },
+            {
+              "kind": "method",
+              "name": "#toggle",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "value",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#select",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "value",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#focus",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "value",
+                  "type": {
+                    "text": "string | undefined"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#step",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "string | undefined"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "flat",
+                  "type": {
+                    "text": "FlatNode[]"
+                  }
+                },
+                {
+                  "name": "from",
+                  "type": {
+                    "text": "number"
+                  }
+                },
+                {
+                  "name": "dir",
+                  "type": {
+                    "text": "1 | -1"
+                  }
+                }
+              ],
+              "description": "The next enabled node from `from` in direction `dir`, in visible order."
+            },
+            {
+              "kind": "method",
+              "name": "#onClick",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "MouseEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onFocusIn",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "FocusEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onKeydown",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "KeyboardEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#renderLevel",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "TemplateResult[]"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "nodes",
+                  "type": {
+                    "text": "readonly TreeNode[]"
+                  }
+                },
+                {
+                  "name": "depth",
+                  "type": {
+                    "text": "number"
+                  }
+                },
+                {
+                  "name": "expanded",
+                  "type": {
+                    "text": "ReadonlySet<string>"
+                  }
+                },
+                {
+                  "name": "tabbable",
+                  "type": {
+                    "text": "string | undefined"
+                  }
+                }
+              ]
+            }
+          ],
+          "events": [
+            {
+              "description": "A node was activated. `detail` is `{ value }`.",
+              "name": "hmi-select"
+            },
+            {
+              "description": "A node was expanded or collapsed. `detail` is `{ expanded }`.",
+              "name": "hmi-expanded-change"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "selected",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "The `value` of the selected node.",
+              "fieldName": "selected"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Tree'",
+              "description": "The name of the tree.",
+              "fieldName": "label"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-tree",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiTree",
+          "declaration": {
+            "name": "HmiTree",
+            "module": "src/elements/tree/tree.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-tree",
+          "declaration": {
+            "name": "HmiTree",
+            "module": "src/elements/tree/tree.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/value-scale-selector/value-scale-selector.ts",
       "declarations": [
         {

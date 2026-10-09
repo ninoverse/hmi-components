@@ -207,6 +207,12 @@ export {
     type TimelineItem,
 } from '../elements/timeline/timeline.react.js';
 export {
+    Tree,
+    type TreeExpandedChangeDetail,
+    type TreeNode,
+    type TreeSelectDetail,
+} from '../elements/tree/tree.react.js';
+export {
     ValueScaleSelector,
     type ValueScaleSelectorSize,
     type ValueScaleSelectorValueDetail,

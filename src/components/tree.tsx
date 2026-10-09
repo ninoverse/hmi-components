@@ -92,6 +92,7 @@ function flatten<T extends string>(
  *
  * @example
  * <Tree nodes={nodes} defaultExpanded={['root']} onSelect={setSelected} />
+ * @deprecated Use `Tree` from `@ninoverse/hmi-components/react/tree`. Removed in 6.0.0.
  */
 export function Tree<T extends string = string>({
     nodes,

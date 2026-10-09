@@ -1042,6 +1042,18 @@ export function Example() {
         </section>
 
         <section>
+            <h2>Tree</h2>
+            <!-- Nodes and expanded are properties; the element owns expanded and selected
+                 and fires hmi-expanded-change { expanded } and hmi-select { value }.
+                 Arrow keys, Home, End, Enter and Space work; disabled nodes are skipped.
+                 badge is the pill's text, badge-<value> and end-<value> take rich content. -->
+            <div style="display: flex; gap: 4rem; align-items: flex-start">
+                <hmi-tree id="tree-live" label="Project files" selected="button.tsx" style="width: 44rem"></hmi-tree>
+                <span id="tree-selected" style="color: var(--on-surface-variant)"></span>
+            </div>
+        </section>
+
+        <section>
             <h2>List</h2>
             <!-- Items are a property. right-<id> takes rich content; reorderable adds
                  drag and Alt+Arrow reordering, and the page sets items back from
@@ -1423,6 +1435,51 @@ export function Example() {
                     stepper.current = event.detail.value;
                 });
             }
+
+            const tree = document.getElementById('tree-live');
+            tree.nodes = [
+                {
+                    value: 'src',
+                    label: 'src',
+                    children: [
+                        {
+                            value: 'src/components',
+                            label: 'components',
+                            children: [
+                                { value: 'button.tsx', label: 'button.tsx', badge: 'M', badgeVariant: 'warning' },
+                                { value: 'tree.tsx', label: 'tree.tsx' },
+                            ],
+                        },
+                        { value: 'src/index.ts', label: 'index.ts' },
+                    ],
+                },
+                {
+                    value: 'public',
+                    label: 'public',
+                    children: [
+                        {
+                            value: 'public/themes',
+                            label: 'themes',
+                            children: [{ value: 'default.css', label: 'default.css' }],
+                        },
+                    ],
+                },
+                { value: 'package.json', label: 'package.json' },
+                {
+                    value: 'node_modules',
+                    label: 'node_modules',
+                    disabled: true,
+                    children: [{ value: 'nm/react', label: 'react' }],
+                },
+            ];
+            tree.expanded = ['src', 'src/components'];
+            const treeSelected = document.getElementById('tree-selected');
+            treeSelected.textContent = 'Selected: button.tsx';
+            tree.addEventListener('hmi-select', (event) => {
+                console.log('tree hmi-select', event.detail);
+                treeSelected.textContent = `Selected: ${event.detail.value}`;
+            });
+            tree.addEventListener('hmi-expanded-change', (event) => console.log('tree hmi-expanded-change', event.detail));
 
             for (const pager of document.querySelectorAll('hmi-pagination')) {
                 pager.addEventListener('hmi-change', (event) => {

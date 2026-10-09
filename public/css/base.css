@@ -123,6 +123,7 @@ hmi-tabs:not(:defined),
 hmi-text:not(:defined),
 hmi-textarea:not(:defined),
 hmi-timeline:not(:defined),
+hmi-tree:not(:defined),
 hmi-value-scale-selector:not(:defined),
 hmi-visually-hidden:not(:defined) {
     visibility: hidden;
