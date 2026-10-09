@@ -17506,6 +17506,235 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/tabs/tabs.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Tab switcher with an animated active indicator. It is the tab strip only:\nswitching the panels is up to you, keyed on `value`.\n\nA tab's `label` is text. For richer content, slot an element named\n`label-<value>`; an icon is an element slotted as `icon-<value>`. A badge is\n`badge` text, or content slotted as `badge-<value>` inside the pill, or an\nelement slotted as `end-<value>` in its place. The badge is `primary` on the\nactive tab and `default` on the others, unless `badgeVariant` says otherwise.\n\nIt is controlled: choosing a tab fires `hmi-change` and the element keeps\nshowing the old one until you set `value`. The tabs are one tab stop; Arrow\nLeft and Right, Home and End move focus and choose. An id cannot point across\nthe shadow boundary, so wire your panels to `value` yourself.",
+          "name": "HmiTabs",
+          "cssParts": [
+            {
+              "description": "The `role=\"tablist\"` row.",
+              "name": "base"
+            },
+            {
+              "description": "The sliding marker behind (pill) or under (underline) the active tab.",
+              "name": "indicator"
+            },
+            {
+              "description": "A tab. The active one has `data-active`.",
+              "name": "tab"
+            },
+            {
+              "description": "A tab's icon.",
+              "name": "icon"
+            },
+            {
+              "description": "A tab's label.",
+              "name": "label"
+            },
+            {
+              "description": "A tab's `<hmi-badge>`.",
+              "name": "badge"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Rich label for the tab with that value.",
+              "name": "label-<value>"
+            },
+            {
+              "description": "Icon for the tab with that value.",
+              "name": "icon-<value>"
+            },
+            {
+              "description": "Rich content inside the badge of the tab with that value.",
+              "name": "badge-<value>"
+            },
+            {
+              "description": "Replaces the badge of the tab with that value.",
+              "name": "end-<value>"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "options",
+              "type": {
+                "text": "TabOption[]"
+              },
+              "default": "[]",
+              "description": "The tabs. A property only: there is no attribute."
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "The `value` of the active tab. The element never changes it. With none, no tab is active.",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "TabsVariant"
+              },
+              "default": "'pill'",
+              "description": "Visual style.",
+              "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "The name of the tab list.",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "base",
+              "type": {
+                "text": "HTMLElement | null"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "marker",
+              "type": {
+                "text": "HTMLElement | null"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "#observer",
+              "privacy": "private",
+              "type": {
+                "text": "ResizeObserver | undefined"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#measure",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "description": "Move the indicator under the active tab. It sets the indicator's own style\ndirectly: a reactive property would schedule a second render after every\nupdate, only to say where a box is."
+            },
+            {
+              "kind": "method",
+              "name": "#choose",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "value",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onKeydown",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "KeyboardEvent"
+                  }
+                },
+                {
+                  "name": "index",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            }
+          ],
+          "events": [
+            {
+              "description": "A tab was chosen. `detail` is `{ value }`.",
+              "name": "hmi-change"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "The `value` of the active tab. The element never changes it. With none, no tab is active.",
+              "fieldName": "value"
+            },
+            {
+              "name": "variant",
+              "type": {
+                "text": "TabsVariant"
+              },
+              "default": "'pill'",
+              "description": "Visual style.",
+              "fieldName": "variant"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "The name of the tab list.",
+              "fieldName": "label"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-tabs",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiTabs",
+          "declaration": {
+            "name": "HmiTabs",
+            "module": "src/elements/tabs/tabs.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-tabs",
+          "declaration": {
+            "name": "HmiTabs",
+            "module": "src/elements/tabs/tabs.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/text/text.ts",
       "declarations": [
         {

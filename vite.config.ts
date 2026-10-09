@@ -343,6 +343,11 @@ export default defineConfig({
                     dirname,
                     'src/elements/switch/switch.react.ts',
                 ),
+                'wc/tabs': resolve(dirname, 'src/elements/tabs/tabs.ts'),
+                'react/tabs': resolve(
+                    dirname,
+                    'src/elements/tabs/tabs.react.ts',
+                ),
                 'wc/text': resolve(dirname, 'src/elements/text/text.ts'),
                 'react/text': resolve(
                     dirname,

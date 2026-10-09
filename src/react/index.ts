@@ -179,6 +179,12 @@ export {
     type SwitchChangeDetail,
 } from '../elements/switch/switch.react.js';
 export {
+    type TabOption,
+    Tabs,
+    type TabsChangeDetail,
+    type TabsVariant,
+} from '../elements/tabs/tabs.react.js';
+export {
     Text,
     type TextAlign,
     type TextSize,

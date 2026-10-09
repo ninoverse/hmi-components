@@ -46,6 +46,7 @@ type Indicator = { left: number; width: number; opacity: number };
  *
  * @example
  * <Tabs options={tabs} value={tab} onChange={setTab} variant="underline" />
+ * @deprecated Use `Tabs` from `@ninoverse/hmi-components/react/tabs`. Removed in 6.0.0.
  */
 export function Tabs<T extends string = string>({
     value,

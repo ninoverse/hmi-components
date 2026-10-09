@@ -1008,6 +1008,28 @@ export function Example() {
         </section>
 
         <section>
+            <h2>Tabs</h2>
+            <!-- Options are a property; value is controlled. hmi-change fires with
+                 { value }. badge is the pill's text (primary on the active tab);
+                 badge-<value> and end-<value> take rich content, icon-<value> an icon. -->
+            <div style="display: flex; flex-direction: column; gap: 3rem">
+                <div>
+                    <hmi-tabs id="tabs-pill" label="Folders" value="inbox"></hmi-tabs>
+                    <p id="tabs-pill-active" style="color: var(--on-surface-variant)"></p>
+                </div>
+                <div>
+                    <hmi-tabs id="tabs-underline" variant="underline" label="Sections" value="overview"></hmi-tabs>
+                    <p id="tabs-underline-active" style="color: var(--on-surface-variant)"></p>
+                </div>
+                <hmi-tabs id="tabs-slots" value="inbox">
+                    <svg slot="icon-inbox" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9l1.5-5.5A1 1 0 014.5 3h7a1 1 0 011 .5L14 9v3.5a.5.5 0 01-.5.5h-11a.5.5 0 01-.5-.5V9z" /></svg>
+                    <span slot="badge-inbox">🔥 12</span>
+                    <span slot="end-archive" style="color: var(--success)">●</span>
+                </hmi-tabs>
+            </div>
+        </section>
+
+        <section>
             <h2>List</h2>
             <!-- Items are a property. right-<id> takes rich content; reorderable adds
                  drag and Alt+Arrow reordering, and the page sets items back from
@@ -1349,6 +1371,31 @@ export function Example() {
                     ],
                 },
             ];
+
+            const folderTabs = [
+                { value: 'inbox', label: 'Inbox', badge: '12' },
+                { value: 'sent', label: 'Sent' },
+                { value: 'archive', label: 'Archive', badge: '3' },
+            ];
+            for (const [id, options] of [
+                ['tabs-pill', folderTabs],
+                ['tabs-underline', [
+                    { value: 'overview', label: 'Overview' },
+                    { value: 'usage', label: 'Usage', badge: '24' },
+                    { value: 'billing', label: 'Billing' },
+                ]],
+                ['tabs-slots', folderTabs],
+            ]) {
+                const tabs = document.getElementById(id);
+                tabs.options = options;
+                const active = document.getElementById(`${id}-active`);
+                if (active) active.textContent = `Active: ${tabs.value}`;
+                tabs.addEventListener('hmi-change', (event) => {
+                    console.log(`${id} hmi-change`, event.detail);
+                    tabs.value = event.detail.value;
+                    if (active) active.textContent = `Active: ${event.detail.value}`;
+                });
+            }
 
             for (const pager of document.querySelectorAll('hmi-pagination')) {
                 pager.addEventListener('hmi-change', (event) => {
