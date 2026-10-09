@@ -59,7 +59,7 @@ const meta = {
     },
     render: (args) =>
         html`<hmi-tree
-            style="width: 44rem"
+            style="width: 22rem"
             .nodes=${args.nodes}
             .expanded=${args.expanded}
             selected=${args.selected ?? ''}
@@ -119,7 +119,7 @@ export const WithBadges: Story = {
 export const Slots: Story = {
     render: (args) =>
         html`<hmi-tree
-            style="width: 44rem"
+            style="width: 22rem"
             .nodes=${args.nodes}
             .expanded=${args.expanded}
             selected=${args.selected ?? ''}
@@ -134,7 +134,7 @@ export const Slots: Story = {
 export const Events: Story = {
     render: (args) =>
         html`<hmi-tree
-            style="width: 44rem"
+            style="width: 22rem"
             .nodes=${args.nodes}
             .expanded=${args.expanded}
             @hmi-select=${(e: CustomEvent) => console.log('hmi-select', e.detail)}
