@@ -102,10 +102,10 @@ There is no status for work under way: its open PR already shows that.
 | `hmi-stepper` | `stepper.tsx` | 7 | med | A E | `--stepper-item-gap` set on host; `hmi-change { value }`. | Done | [#173](https://github.com/ninoverse/hmi-components/pull/173) |
 | `hmi-tabs` | `tabs.tsx` | 7 | med | A E D | Indicator measured in `updated()`; resize listener; `hmi-change`. | Done | [#173](https://github.com/ninoverse/hmi-components/pull/173) |
 | `hmi-tree` | `tree.tsx` | 7 | high | A E | Roving tabindex; `hmi-select { value }`, `hmi-expanded-change { expanded }`. | Done | [#174](https://github.com/ninoverse/hmi-components/pull/174) |
-| `hmi-cartesian-grid` | `cartesianGrid.tsx` | 8 | low | | Kept as an element AND as `renderCartesianGrid()` in `shared/chart.ts` for the charts that embed it. | Todo | |
+| `hmi-cartesian-grid` | `cartesianGrid.tsx` | 8 | low | | Kept as an element (its own `<svg>`) AND as `renderCartesianGrid()` in `shared/chart.ts` for the charts that embed it. | Todo | |
 | `hmi-chart-tooltip` | `chartTooltip.tsx` | 8 | low | A P | HTML panel; items strings + slots. | Todo | |
 | `hmi-legend` | `legend.tsx` | 8 | low | A | | Todo | |
-| `hmi-responsive-container` | `responsiveContainer.tsx` | 8 | med | R E | Function child → `hmi-resize { width, height }` + `--_w`/`--_h`; charts read `width`/`height`. | Todo | |
+| `hmi-responsive-container` | `responsiveContainer.tsx` | 8 | med | R E | Function child → `hmi-resize { width, height }` + `--container-width`/`--container-height`; it measures only, and the consumer passes `width`/`height` to a chart. | Todo | |
 | `hmi-area-chart` | `areaChart.tsx` | 8 | low | | Pure SVG; `series`/`labels` JS properties; colors via `var(--primary)` in style attrs. | Todo | |
 | `hmi-bar-chart` | `barChart.tsx` | 8 | low | | | Todo | |
 | `hmi-bullet-chart` | `bulletChart.tsx` | 8 | low | | | Todo | |
