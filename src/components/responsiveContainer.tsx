@@ -17,7 +17,9 @@ export type ResponsiveContainerProps = {
 
 /** Measures its own width (via ResizeObserver) and hands a concrete pixel
  *  size to its render-prop child — the foundation chart primitives build on,
- *  since SVG coordinate math needs real numbers, not percentages. */
+ *  since SVG coordinate math needs real numbers, not percentages.
+ * @deprecated Use `ResponsiveContainer` from `@ninoverse/hmi-components/react/responsive-container`. Removed in 6.0.0.
+ */
 export function ResponsiveContainer({
     height = 300,
     aspect,

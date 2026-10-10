@@ -1066,6 +1066,13 @@ export function Example() {
                 <div>
                     <hmi-chart-tooltip id="tooltip-live" heading="Jan 2026"></hmi-chart-tooltip>
                 </div>
+                <div>
+                    <!-- It measures and fires hmi-resize { width, height }; the page sizes the grid from it. -->
+                    <hmi-responsive-container id="container-live" height="160">
+                        <hmi-cartesian-grid id="container-grid" rows="4" cols="6" padding="16" style="background: var(--surface-container-high); border-radius: 0.75rem"></hmi-cartesian-grid>
+                    </hmi-responsive-container>
+                    <p id="container-size" style="color: var(--on-surface-variant)"></p>
+                </div>
                 <!-- chart-primitives:end -->
             </div>
         </section>
@@ -1508,6 +1515,14 @@ export function Example() {
                 { label: 'Revenue', value: '$48.2k', color: 'var(--primary)' },
                 { label: 'Costs', value: '$31.7k', color: 'var(--tertiary)' },
             ];
+            const container = document.getElementById('container-live');
+            const containerGrid = document.getElementById('container-grid');
+            container.addEventListener('hmi-resize', (event) => {
+                containerGrid.width = event.detail.width;
+                containerGrid.height = event.detail.height;
+                document.getElementById('container-size').textContent =
+                    `${Math.round(event.detail.width)} × ${Math.round(event.detail.height)} px`;
+            });
             for (const pager of document.querySelectorAll('hmi-pagination')) {
                 pager.addEventListener('hmi-change', (event) => {
                     console.log('pagination hmi-change', event.detail);

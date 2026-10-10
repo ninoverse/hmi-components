@@ -296,6 +296,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/radio-group/radio-group.react.ts',
                 ),
+                'wc/responsive-container': resolve(
+                    dirname,
+                    'src/elements/responsive-container/responsive-container.ts',
+                ),
+                'react/responsive-container': resolve(
+                    dirname,
+                    'src/elements/responsive-container/responsive-container.react.ts',
+                ),
                 'wc/scroll-area': resolve(
                     dirname,
                     'src/elements/scroll-area/scroll-area.ts',

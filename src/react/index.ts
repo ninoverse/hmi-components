@@ -147,6 +147,10 @@ export {
     type RadioOption,
 } from '../elements/radio-group/radio-group.react.js';
 export {
+    ResponsiveContainer,
+    type ResponsiveContainerResizeDetail,
+} from '../elements/responsive-container/responsive-container.react.js';
+export {
     ScrollArea,
     type ScrollAreaOrientation,
 } from '../elements/scroll-area/scroll-area.react.js';

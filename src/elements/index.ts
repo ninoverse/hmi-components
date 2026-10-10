@@ -42,6 +42,7 @@ export * from './password-input/password-input.js';
 export * from './progress/progress.js';
 export * from './radio/radio.js';
 export * from './radio-group/radio-group.js';
+export * from './responsive-container/responsive-container.js';
 export * from './scroll-area/scroll-area.js';
 export * from './search-input/search-input.js';
 export * from './segmented-control/segmented-control.js';

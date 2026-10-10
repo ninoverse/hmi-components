@@ -12367,6 +12367,154 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/responsive-container/responsive-container.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A full-width block that measures itself and reports its size, the foundation\nthe charts build on, since SVG coordinates need real numbers, not percentages.\n\nIt measures its own width with a `ResizeObserver`. Its height is `height`, or\n`width / aspect` when `aspect` is set. It fires `hmi-resize` with the size on\nthe first measurement and whenever it changes, and exposes the same size as\nthe `--container-width` and `--container-height` custom properties, which\ninherit into what is slotted. It never touches its children: pass the size to\na chart's `width` and `height` yourself, from the event.",
+          "name": "HmiResponsiveContainer",
+          "cssProperties": [
+            {
+              "description": "Output: the measured width, in px. Set once the width is known.",
+              "name": "--container-width"
+            },
+            {
+              "description": "Output: the resolved height, in px.",
+              "name": "--container-height"
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "The block that is measured.",
+              "name": "base"
+            }
+          ],
+          "slots": [
+            {
+              "description": "The content to size.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "height",
+              "type": {
+                "text": "number"
+              },
+              "default": "300",
+              "description": "Height in px. Ignored when `aspect` is set.",
+              "attribute": "height"
+            },
+            {
+              "kind": "field",
+              "name": "aspect",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "Width / height ratio: the height is derived from the measured width.",
+              "attribute": "aspect"
+            },
+            {
+              "kind": "field",
+              "name": "base",
+              "type": {
+                "text": "HTMLElement | null"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "width",
+              "type": {
+                "text": "number"
+              },
+              "privacy": "private",
+              "default": "0",
+              "description": "The measured width in px, 0 until it is known."
+            },
+            {
+              "kind": "field",
+              "name": "#observer",
+              "privacy": "private",
+              "type": {
+                "text": "ResizeObserver | undefined"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "#reported",
+              "privacy": "private",
+              "type": {
+                "text": "object"
+              },
+              "default": "{ width: 0, height: 0 }"
+            },
+            {
+              "kind": "method",
+              "name": "#resolvedHeight",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "number"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "description": "The size was measured or changed. `detail` is `{ width, height }`.",
+              "name": "hmi-resize"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "height",
+              "type": {
+                "text": "number"
+              },
+              "default": "300",
+              "description": "Height in px. Ignored when `aspect` is set.",
+              "fieldName": "height"
+            },
+            {
+              "name": "aspect",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "Width / height ratio: the height is derived from the measured width.",
+              "fieldName": "aspect"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-responsive-container",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiResponsiveContainer",
+          "declaration": {
+            "name": "HmiResponsiveContainer",
+            "module": "src/elements/responsive-container/responsive-container.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-responsive-container",
+          "declaration": {
+            "name": "HmiResponsiveContainer",
+            "module": "src/elements/responsive-container/responsive-container.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/scroll-area/scroll-area.ts",
       "declarations": [
         {
