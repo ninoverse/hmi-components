@@ -170,7 +170,7 @@ v5 PascalCase export (`AreaChart`).
 | 5 | selection controls: checkbox, radio, radio-group, switch, slider, segmented-control, value-scale-selector | phase 4 merged |
 | 6 | data display: accordion, carousel, image, list, timeline | phase 5 merged |
 | 7 | navigation: breadcrumbs, navbar, pagination, sidebar, stepper, tabs, tree | phase 6 merged |
-| 8 | charts: cartesian-grid, chart-tooltip, legend, responsive-container first; then the ten chart elements | phase 7 merged |
+| 8 | charts: cartesian-grid, chart-tooltip, legend, responsive-container first; then the eleven chart elements | phase 7 merged |
 | 9 | overlay infrastructure (`shared/positioning.ts`) + modal (with `shared/dialog-actions.ts`), confirm-dialog, drawer, popover, tooltip, hover-card, context-menu, menu, then table | phase 8 merged |
 | 10 | select, combobox, date-picker, color-picker, command-palette | phase 9 merged |
 | 11 | toast, theme module + `useTheme`, then the controlled-or-element-owned state decision for `pagination`, `navbar`, `sidebar`, `tabs` and `stepper` (`TODO.md`), and the v6 flip last | phase 10 merged |

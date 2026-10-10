@@ -1054,6 +1054,35 @@ export function Example() {
         </section>
 
         <section>
+            <h2>Chart primitives</h2>
+            <div style="max-width: 70rem; display: flex; flex-direction: column; gap: 2rem">
+                <div>
+                    <!-- Draws its own <svg>: layer it over or under other content. -->
+                    <hmi-cartesian-grid width="560" height="160" rows="4" cols="6" padding="16" style="background: var(--surface-container-high); border-radius: 0.75rem"></hmi-cartesian-grid>
+                </div>
+                <div>
+                    <hmi-legend id="legend-live" align="start"></hmi-legend>
+                </div>
+                <div>
+                    <hmi-chart-tooltip id="tooltip-live" heading="Jan 2026"></hmi-chart-tooltip>
+                </div>
+                <div>
+                    <!-- It measures and fires hmi-resize { width, height }; the page sizes the grid from it. -->
+                    <hmi-responsive-container id="container-live" height="160">
+                        <hmi-cartesian-grid id="container-grid" rows="4" cols="6" padding="16" style="background: var(--surface-container-high); border-radius: 0.75rem"></hmi-cartesian-grid>
+                    </hmi-responsive-container>
+                    <p id="container-size" style="color: var(--on-surface-variant)"></p>
+                </div>
+                <div style="display: flex; gap: 2rem; align-items: center; flex-wrap: wrap">
+                    <hmi-sparkline id="spark-up" label="Upward trend"></hmi-sparkline>
+                    <hmi-sparkline id="spark-down" color="var(--error)" area show-dot label="Downward trend with area"></hmi-sparkline>
+                    <hmi-sparkline id="spark-flat" width="200" height="48" color="var(--tertiary)" stroke-width="3" area label="Flat trend, larger"></hmi-sparkline>
+                </div>
+                <!-- chart-primitives:end -->
+            </div>
+        </section>
+
+        <section>
             <h2>List</h2>
             <!-- Items are a property. right-<id> takes rich content; reorderable adds
                  drag and Alt+Arrow reordering, and the page sets items back from
@@ -1481,6 +1510,30 @@ export function Example() {
             });
             tree.addEventListener('hmi-expanded-change', (event) => console.log('tree hmi-expanded-change', event.detail));
 
+
+            document.getElementById('legend-live').items = [
+                { label: 'Revenue', color: 'var(--primary)' },
+                { label: 'Costs', color: 'var(--tertiary)' },
+                { label: 'Forecast', color: 'var(--secondary)', inactive: true },
+            ];
+            document.getElementById('tooltip-live').items = [
+                { label: 'Revenue', value: '$48.2k', color: 'var(--primary)' },
+                { label: 'Costs', value: '$31.7k', color: 'var(--tertiary)' },
+            ];
+            const container = document.getElementById('container-live');
+            const containerGrid = document.getElementById('container-grid');
+            const fitGrid = ({ width, height }) => {
+                containerGrid.width = width;
+                containerGrid.height = height;
+                document.getElementById('container-size').textContent =
+                    `${Math.round(width)} × ${Math.round(height)} px`;
+            };
+            // The first hmi-resize can fire before this script runs: read size too.
+            if (container.size) fitGrid(container.size);
+            container.addEventListener('hmi-resize', (event) => fitGrid(event.detail));
+            document.getElementById('spark-up').data = [4, 8, 5, 10, 7, 12, 9, 14];
+            document.getElementById('spark-down').data = [14, 9, 11, 6, 8, 4, 5, 2];
+            document.getElementById('spark-flat').data = [6, 6, 7, 6, 8, 6, 7, 6];
             for (const pager of document.querySelectorAll('hmi-pagination')) {
                 pager.addEventListener('hmi-change', (event) => {
                     console.log('pagination hmi-change', event.detail);

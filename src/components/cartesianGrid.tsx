@@ -18,7 +18,9 @@ export type CartesianGridProps = {
 };
 
 /** SVG grid for a Cartesian chart area. Renders a `<g>` of evenly spaced
- *  lines and is meant to be placed inside a chart's own `<svg>`. */
+ *  lines and is meant to be placed inside a chart's own `<svg>`.
+ * @deprecated Use `CartesianGrid` from `@ninoverse/hmi-components/react/cartesian-grid`. Removed in 6.0.0.
+ */
 export function CartesianGrid({
     width,
     height,

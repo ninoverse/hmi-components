@@ -20,7 +20,9 @@ export type LegendProps = HTMLAttributes<HTMLUListElement> & {
 };
 
 /** Chart legend: a horizontal row of colour swatches with series labels.
- *  Swatch colours come from consumer data; surrounding chrome is tokenised. */
+ *  Swatch colours come from consumer data; surrounding chrome is tokenised.
+ * @deprecated Use `Legend` from `@ninoverse/hmi-components/react/legend`. Removed in 6.0.0.
+ */
 export function Legend({
     items,
     align = 'center',

@@ -2029,6 +2029,301 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/cartesian-grid/cartesian-grid.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Evenly spaced grid lines for a chart's plot area, in an SVG of its own. Layer\nit over or under other content; the charts draw the same grid inside their own\nSVG, so they do not need it. It draws nothing until `width` and `height` are\nset.\n\nIt is decorative: the SVG is hidden from assistive technology.",
+          "name": "HmiCartesianGrid",
+          "cssParts": [
+            {
+              "description": "The `<svg>`.",
+              "name": "base"
+            },
+            {
+              "description": "One grid line.",
+              "name": "grid-line"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "width",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "Grid area width in px.",
+              "attribute": "width"
+            },
+            {
+              "kind": "field",
+              "name": "height",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "Grid area height in px.",
+              "attribute": "height"
+            },
+            {
+              "kind": "field",
+              "name": "rows",
+              "type": {
+                "text": "number"
+              },
+              "default": "4",
+              "description": "The number of bands between horizontal lines.",
+              "attribute": "rows"
+            },
+            {
+              "kind": "field",
+              "name": "cols",
+              "type": {
+                "text": "number"
+              },
+              "default": "4",
+              "description": "The number of bands between vertical lines.",
+              "attribute": "cols"
+            },
+            {
+              "kind": "field",
+              "name": "padding",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "Inset from each edge, in px.",
+              "attribute": "padding"
+            },
+            {
+              "kind": "field",
+              "name": "hideHorizontal",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Leave out the horizontal lines.",
+              "attribute": "hide-horizontal"
+            },
+            {
+              "kind": "field",
+              "name": "hideVertical",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Leave out the vertical lines.",
+              "attribute": "hide-vertical"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "width",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "Grid area width in px.",
+              "fieldName": "width"
+            },
+            {
+              "name": "height",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "Grid area height in px.",
+              "fieldName": "height"
+            },
+            {
+              "name": "rows",
+              "type": {
+                "text": "number"
+              },
+              "default": "4",
+              "description": "The number of bands between horizontal lines.",
+              "fieldName": "rows"
+            },
+            {
+              "name": "cols",
+              "type": {
+                "text": "number"
+              },
+              "default": "4",
+              "description": "The number of bands between vertical lines.",
+              "fieldName": "cols"
+            },
+            {
+              "name": "padding",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "Inset from each edge, in px.",
+              "fieldName": "padding"
+            },
+            {
+              "name": "hide-horizontal",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Leave out the horizontal lines.",
+              "fieldName": "hideHorizontal"
+            },
+            {
+              "name": "hide-vertical",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Leave out the vertical lines.",
+              "fieldName": "hideVertical"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-cartesian-grid",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiCartesianGrid",
+          "declaration": {
+            "name": "HmiCartesianGrid",
+            "module": "src/elements/cartesian-grid/cartesian-grid.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-cartesian-grid",
+          "declaration": {
+            "name": "HmiCartesianGrid",
+            "module": "src/elements/cartesian-grid/cartesian-grid.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/elements/chart-tooltip/chart-tooltip.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Presentational tooltip card for charts: a heading and one row per series, each\nwith a colour swatch, a label and a right-aligned value. A panel-like element.\n\nIt only renders the content. Positioning it on hover is the consumer's job: it\nignores the pointer, so it never gets in the way of what it points at.\n\nA `heading`, a row's `label` and a row's `value` are text. For richer content,\nslot an element named `heading`, `label-<index>` or `value-<index>` (the row's\nposition, from 0), which replaces that text.",
+          "name": "HmiChartTooltip",
+          "cssParts": [
+            {
+              "description": "The card.",
+              "name": "base"
+            },
+            {
+              "description": "The card, under its panel-group name.",
+              "name": "panel"
+            },
+            {
+              "description": "The heading.",
+              "name": "heading"
+            },
+            {
+              "description": "The list of rows.",
+              "name": "list"
+            },
+            {
+              "description": "One row.",
+              "name": "row"
+            },
+            {
+              "description": "A row's colour swatch.",
+              "name": "swatch"
+            },
+            {
+              "description": "A row's label.",
+              "name": "label"
+            },
+            {
+              "description": "A row's value.",
+              "name": "value"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Rich heading, replacing the `heading` text.",
+              "name": "heading"
+            },
+            {
+              "description": "Rich label for the row at that position.",
+              "name": "label-<index>"
+            },
+            {
+              "description": "Rich value for the row at that position.",
+              "name": "value-<index>"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "heading",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "The heading, such as the hovered category: plain text, or the fallback of the `heading` slot.",
+              "attribute": "heading"
+            },
+            {
+              "kind": "field",
+              "name": "items",
+              "type": {
+                "text": "ChartTooltipItem[]"
+              },
+              "default": "[]",
+              "description": "The rows, one per series at the hovered point. A property only: there is no attribute."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "heading",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "The heading, such as the hovered category: plain text, or the fallback of the `heading` slot.",
+              "fieldName": "heading"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-chart-tooltip",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiChartTooltip",
+          "declaration": {
+            "name": "HmiChartTooltip",
+            "module": "src/elements/chart-tooltip/chart-tooltip.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-chart-tooltip",
+          "declaration": {
+            "name": "HmiChartTooltip",
+            "module": "src/elements/chart-tooltip/chart-tooltip.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/checkbox/checkbox.ts",
       "declarations": [
         {
@@ -6138,6 +6433,98 @@
           "declaration": {
             "name": "HmiKbd",
             "module": "src/elements/kbd/kbd.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/elements/legend/legend.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Chart legend: a row of colour swatches with series names. The swatch colours\nare consumer data; everything else is themed.\n\nA `label` is text. For richer content, slot an element named `label-<index>`\n(the entry's position, from 0), which replaces that text.",
+          "name": "HmiLegend",
+          "cssParts": [
+            {
+              "description": "The list.",
+              "name": "base"
+            },
+            {
+              "description": "One entry.",
+              "name": "item"
+            },
+            {
+              "description": "An entry's colour swatch. `data-inactive` marks a hollow one.",
+              "name": "swatch"
+            },
+            {
+              "description": "An entry's name.",
+              "name": "label"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Rich label for the entry at that position.",
+              "name": "label-<index>"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "items",
+              "type": {
+                "text": "LegendItem[]"
+              },
+              "default": "[]",
+              "description": "The entries. A property only: there is no attribute."
+            },
+            {
+              "kind": "field",
+              "name": "align",
+              "type": {
+                "text": "LegendAlign"
+              },
+              "default": "'center'",
+              "description": "Horizontal alignment of the row.",
+              "attribute": "align",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "align",
+              "type": {
+                "text": "LegendAlign"
+              },
+              "default": "'center'",
+              "description": "Horizontal alignment of the row.",
+              "fieldName": "align"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-legend",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiLegend",
+          "declaration": {
+            "name": "HmiLegend",
+            "module": "src/elements/legend/legend.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-legend",
+          "declaration": {
+            "name": "HmiLegend",
+            "module": "src/elements/legend/legend.ts"
           }
         }
       ]
@@ -11980,6 +12367,163 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/responsive-container/responsive-container.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "A full-width block that measures itself and reports its size, the foundation\nthe charts build on, since SVG coordinates need real numbers, not percentages.\n\nIt measures its own width with a `ResizeObserver`. Its height is `height`, or\n`width / aspect` when `aspect` is set. It fires `hmi-resize` with the size on\nthe first measurement and whenever it changes, and exposes the same size as\nthe `--container-width` and `--container-height` custom properties, which\ninherit into what is slotted. It never touches its children: pass the size to\na chart's `width` and `height` yourself, from the event. A listener attached\nlate can miss the first event: read `size` for the last one.",
+          "name": "HmiResponsiveContainer",
+          "cssProperties": [
+            {
+              "description": "Output: the measured width, in px. Set once the width is known.",
+              "name": "--container-width"
+            },
+            {
+              "description": "Output: the resolved height, in px.",
+              "name": "--container-height"
+            }
+          ],
+          "cssParts": [
+            {
+              "description": "The block that is measured.",
+              "name": "base"
+            }
+          ],
+          "slots": [
+            {
+              "description": "The content to size.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "height",
+              "type": {
+                "text": "number"
+              },
+              "default": "300",
+              "description": "Height in px. Ignored when `aspect` is set.",
+              "attribute": "height"
+            },
+            {
+              "kind": "field",
+              "name": "aspect",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "Width / height ratio: the height is derived from the measured width.",
+              "attribute": "aspect"
+            },
+            {
+              "kind": "field",
+              "name": "base",
+              "type": {
+                "text": "HTMLElement | null"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "width",
+              "type": {
+                "text": "number"
+              },
+              "privacy": "private",
+              "default": "0",
+              "description": "The measured width in px, 0 until it is known."
+            },
+            {
+              "kind": "field",
+              "name": "#observer",
+              "privacy": "private",
+              "type": {
+                "text": "ResizeObserver | undefined"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "#reported",
+              "privacy": "private",
+              "type": {
+                "text": "object"
+              },
+              "default": "{ width: 0, height: 0 }"
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "ResponsiveContainerResizeDetail | undefined"
+              },
+              "description": "The last size it reported, or undefined before it has been measured. Read it\nwhen attaching a listener late: the first `hmi-resize` can fire before.",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "#resolvedHeight",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "number"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "description": "The size was measured or changed. `detail` is `{ width, height }`.",
+              "name": "hmi-resize"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "height",
+              "type": {
+                "text": "number"
+              },
+              "default": "300",
+              "description": "Height in px. Ignored when `aspect` is set.",
+              "fieldName": "height"
+            },
+            {
+              "name": "aspect",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "Width / height ratio: the height is derived from the measured width.",
+              "fieldName": "aspect"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-responsive-container",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiResponsiveContainer",
+          "declaration": {
+            "name": "HmiResponsiveContainer",
+            "module": "src/elements/responsive-container/responsive-container.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-responsive-container",
+          "declaration": {
+            "name": "HmiResponsiveContainer",
+            "module": "src/elements/responsive-container/responsive-container.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/scroll-area/scroll-area.ts",
       "declarations": [
         {
@@ -16389,6 +16933,237 @@
           "declaration": {
             "name": "HmiSpacer",
             "module": "src/elements/spacer/spacer.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/elements/sparkline/sparkline.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Compact, axis-less trend line for inline contexts: a table cell, a card. Pure\nSVG path math, the same approach the larger Cartesian charts take.\n\n`color` is any CSS colour, including a token such as `var(--primary)`. It sets\nthe `color` of the SVG, and the line, the area and the dot all use\n`currentColor`, because an SVG presentation attribute cannot resolve a CSS\ncustom property. With no `data`, nothing is rendered. The chart is an image\nwith no accessible name of its own: set `label` to give it one.",
+          "name": "HmiSparkline",
+          "cssParts": [
+            {
+              "description": "The `<svg>`.",
+              "name": "base"
+            },
+            {
+              "description": "The trend line.",
+              "name": "line"
+            },
+            {
+              "description": "The tint under the line, present with `area`.",
+              "name": "area"
+            },
+            {
+              "description": "The dot at the last point, present with `show-dot`.",
+              "name": "dot"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "data",
+              "type": {
+                "text": "number[]"
+              },
+              "default": "[]",
+              "description": "The values to plot, in order. A property only: there is no attribute."
+            },
+            {
+              "kind": "field",
+              "name": "width",
+              "type": {
+                "text": "number"
+              },
+              "default": "120",
+              "description": "SVG width in px.",
+              "attribute": "width"
+            },
+            {
+              "kind": "field",
+              "name": "height",
+              "type": {
+                "text": "number"
+              },
+              "default": "32",
+              "description": "SVG height in px.",
+              "attribute": "height"
+            },
+            {
+              "kind": "field",
+              "name": "color",
+              "type": {
+                "text": "string"
+              },
+              "default": "'var(--primary)'",
+              "description": "Line and area colour: any CSS colour.",
+              "attribute": "color"
+            },
+            {
+              "kind": "field",
+              "name": "strokeWidth",
+              "type": {
+                "text": "number"
+              },
+              "default": "2",
+              "description": "Line stroke width in px.",
+              "attribute": "stroke-width"
+            },
+            {
+              "kind": "field",
+              "name": "area",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Fill the area under the line.",
+              "attribute": "area"
+            },
+            {
+              "kind": "field",
+              "name": "showDot",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Show a dot at the last point.",
+              "attribute": "show-dot"
+            },
+            {
+              "kind": "field",
+              "name": "min",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "The lower bound of the value range. Defaults to the data's minimum.",
+              "attribute": "min"
+            },
+            {
+              "kind": "field",
+              "name": "max",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "The upper bound of the value range. Defaults to the data's maximum.",
+              "attribute": "max"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "The accessible name of the chart.",
+              "attribute": "label"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "width",
+              "type": {
+                "text": "number"
+              },
+              "default": "120",
+              "description": "SVG width in px.",
+              "fieldName": "width"
+            },
+            {
+              "name": "height",
+              "type": {
+                "text": "number"
+              },
+              "default": "32",
+              "description": "SVG height in px.",
+              "fieldName": "height"
+            },
+            {
+              "name": "color",
+              "type": {
+                "text": "string"
+              },
+              "default": "'var(--primary)'",
+              "description": "Line and area colour: any CSS colour.",
+              "fieldName": "color"
+            },
+            {
+              "name": "stroke-width",
+              "type": {
+                "text": "number"
+              },
+              "default": "2",
+              "description": "Line stroke width in px.",
+              "fieldName": "strokeWidth"
+            },
+            {
+              "name": "area",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Fill the area under the line.",
+              "fieldName": "area"
+            },
+            {
+              "name": "show-dot",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Show a dot at the last point.",
+              "fieldName": "showDot"
+            },
+            {
+              "name": "min",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "The lower bound of the value range. Defaults to the data's minimum.",
+              "fieldName": "min"
+            },
+            {
+              "name": "max",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "The upper bound of the value range. Defaults to the data's maximum.",
+              "fieldName": "max"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "The accessible name of the chart.",
+              "fieldName": "label"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-sparkline",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiSparkline",
+          "declaration": {
+            "name": "HmiSparkline",
+            "module": "src/elements/sparkline/sparkline.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-sparkline",
+          "declaration": {
+            "name": "HmiSparkline",
+            "module": "src/elements/sparkline/sparkline.ts"
           }
         }
       ]

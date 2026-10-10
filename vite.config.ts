@@ -122,6 +122,22 @@ export default defineConfig({
                     dirname,
                     'src/elements/carousel/carousel.react.ts',
                 ),
+                'wc/cartesian-grid': resolve(
+                    dirname,
+                    'src/elements/cartesian-grid/cartesian-grid.ts',
+                ),
+                'react/cartesian-grid': resolve(
+                    dirname,
+                    'src/elements/cartesian-grid/cartesian-grid.react.ts',
+                ),
+                'wc/chart-tooltip': resolve(
+                    dirname,
+                    'src/elements/chart-tooltip/chart-tooltip.ts',
+                ),
+                'react/chart-tooltip': resolve(
+                    dirname,
+                    'src/elements/chart-tooltip/chart-tooltip.react.ts',
+                ),
                 'wc/checkbox': resolve(
                     dirname,
                     'src/elements/checkbox/checkbox.ts',
@@ -202,6 +218,11 @@ export default defineConfig({
                 ),
                 'wc/kbd': resolve(dirname, 'src/elements/kbd/kbd.ts'),
                 'react/kbd': resolve(dirname, 'src/elements/kbd/kbd.react.ts'),
+                'wc/legend': resolve(dirname, 'src/elements/legend/legend.ts'),
+                'react/legend': resolve(
+                    dirname,
+                    'src/elements/legend/legend.react.ts',
+                ),
                 'wc/link': resolve(dirname, 'src/elements/link/link.ts'),
                 'react/link': resolve(
                     dirname,
@@ -275,6 +296,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/radio-group/radio-group.react.ts',
                 ),
+                'wc/responsive-container': resolve(
+                    dirname,
+                    'src/elements/responsive-container/responsive-container.ts',
+                ),
+                'react/responsive-container': resolve(
+                    dirname,
+                    'src/elements/responsive-container/responsive-container.react.ts',
+                ),
                 'wc/scroll-area': resolve(
                     dirname,
                     'src/elements/scroll-area/scroll-area.ts',
@@ -324,6 +353,14 @@ export default defineConfig({
                 'react/spacer': resolve(
                     dirname,
                     'src/elements/spacer/spacer.react.ts',
+                ),
+                'wc/sparkline': resolve(
+                    dirname,
+                    'src/elements/sparkline/sparkline.ts',
+                ),
+                'react/sparkline': resolve(
+                    dirname,
+                    'src/elements/sparkline/sparkline.react.ts',
                 ),
                 'wc/spinner': resolve(
                     dirname,

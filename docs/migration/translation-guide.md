@@ -223,7 +223,7 @@ hmi-tabs { "options": OPTIONS_JSON,
 | table | `getRowKey(row)` | `row-key="id"` attribute naming the key field | — | `rowKey` may also be a function (JS only) |
 | list | `renderItem(item, i)` | item fields + `format` | `slot="item-<key>"` | `renderItem` |
 | image | `renderImage(props)` | — | default slot receives a custom `<img>`/`<picture>`; the shell hears its `load` and `error` | — |
-| responsive-container | `children(size)` | `hmi-resize { width, height }` event + `--_w`/`--_h` on host; charts read `width`/`height` props | default slot | — |
+| responsive-container | `children(size)` | `hmi-resize { width, height }` event + the `--container-width`/`--container-height` custom properties on its inner block; you pass `width`/`height` to a chart | default slot | — |
 | combobox | `filterOption(option, query)` | `filter="includes" \| "startsWith" \| "none"` | — | `filter` may be a predicate (JS only) |
 | slider | `formatValue` | template string `'{value}%'` | — | the same `formatValue`, set as a property |
 
@@ -618,22 +618,27 @@ native input and does not see into the element's shadow DOM.
 
 ## 14. Charts
 
-The 14 charts are pure functions of props and port almost verbatim:
+The charts are pure functions of props and port almost verbatim:
 
 - `<svg class="line-chart">` → `<svg part="base">` inside the root; `series`,
   `labels`, `data` are `type: Array, attribute: false` properties.
 - Colour props default to `'var(--primary)'` strings written into `style`
   attributes (`style=${styleMap({ stroke: color })}`) so tokens resolve;
   structural strokes (grid lines) live in `styles`.
-- `CartesianGrid` is exported both as `hmi-cartesian-grid` (standalone) and as
-  `renderCartesianGrid(scale)` in `src/elements/shared/chart.ts`, which area,
-  bar, line and scatter call inside their own SVG. The duplicated
-  `AXIS`/`xAt`/`yAt` scale math moves into the same module.
+- `CartesianGrid` is exported both as `hmi-cartesian-grid` (standalone: a custom
+  element cannot live inside an `<svg>`, so it draws an `<svg>` of its own) and as
+  `renderCartesianGrid(options)` in `src/elements/shared/chart.ts`, which area,
+  bar, line and scatter call inside their own SVG, with `cartesianGridStyles` for
+  the line stroke. The duplicated `AXIS`/`xAt`/`yAt` scale math moves into the
+  same module with the first chart that uses it.
 - `ResponsiveContainer` becomes `hmi-responsive-container`: a `ResizeObserver`
-  on the host sets `--_w`/`--_h` and emits `hmi-resize`; charts in its default
-  slot read `width`/`height` properties that the container sets on
-  `assignedElements()` (or consumers bind from the event).
-- `Legend` and `ChartTooltip` stay standalone; tooltip is a panel-like element.
+  on its inner block measures the width, and it fires `hmi-resize { width,
+  height }` and sets `--container-width`/`--container-height`. It never touches
+  what is slotted: the consumer passes `width` and `height` to a chart from the
+  event. A React `children(size)` render prop becomes `onResize` plus state.
+- `Legend` and `ChartTooltip` stay standalone; the tooltip is a panel-like element
+  (`--panel-ink-bg`), and its `title` is `heading`, since a `title` property would
+  collide with the native `title` attribute.
 
 ## 15. Theme module
 

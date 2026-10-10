@@ -44,6 +44,11 @@ export {
     Carousel,
     type CarouselIndexChangeDetail,
 } from '../elements/carousel/carousel.react.js';
+export { CartesianGrid } from '../elements/cartesian-grid/cartesian-grid.react.js';
+export {
+    ChartTooltip,
+    type ChartTooltipItem,
+} from '../elements/chart-tooltip/chart-tooltip.react.js';
 export {
     Checkbox,
     type CheckboxChangeDetail,
@@ -94,6 +99,11 @@ export {
 } from '../elements/input/input.react.js';
 export { Kbd, type KbdSize } from '../elements/kbd/kbd.react.js';
 export {
+    Legend,
+    type LegendAlign,
+    type LegendItem,
+} from '../elements/legend/legend.react.js';
+export {
     Link,
     type LinkTone,
     type LinkUnderline,
@@ -137,6 +147,10 @@ export {
     type RadioOption,
 } from '../elements/radio-group/radio-group.react.js';
 export {
+    ResponsiveContainer,
+    type ResponsiveContainerResizeDetail,
+} from '../elements/responsive-container/responsive-container.react.js';
+export {
     ScrollArea,
     type ScrollAreaOrientation,
 } from '../elements/scroll-area/scroll-area.react.js';
@@ -169,6 +183,7 @@ export {
     type SpacerAxis,
     type SpacerSize,
 } from '../elements/spacer/spacer.react.js';
+export { Sparkline } from '../elements/sparkline/sparkline.react.js';
 export {
     Spinner,
     type SpinnerSize,
