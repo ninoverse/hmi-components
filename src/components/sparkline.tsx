@@ -24,7 +24,9 @@ export type SparklineProps = {
 };
 
 /** Compact, axis-less trend line for inline contexts (table cells, cards).
- *  Pure SVG path math; the larger Cartesian charts reuse the same approach. */
+ *  Pure SVG path math; the larger Cartesian charts reuse the same approach.
+ * @deprecated Use `Sparkline` from `@ninoverse/hmi-components/react/sparkline`. Removed in 6.0.0.
+ */
 export function Sparkline({
     data,
     width = 120,

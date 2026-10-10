@@ -466,6 +466,10 @@
             "types": "./dist/elements/spacer/spacer.react.d.ts",
             "import": "./dist/react/spacer.js"
         },
+        "./react/sparkline": {
+            "types": "./dist/elements/sparkline/sparkline.react.d.ts",
+            "import": "./dist/react/sparkline.js"
+        },
         "./react/spinner": {
             "types": "./dist/elements/spinner/spinner.react.d.ts",
             "import": "./dist/react/spinner.js"
@@ -810,6 +814,10 @@
         "./wc/spacer": {
             "types": "./dist/elements/spacer/spacer.d.ts",
             "import": "./dist/wc/spacer.js"
+        },
+        "./wc/sparkline": {
+            "types": "./dist/elements/sparkline/sparkline.d.ts",
+            "import": "./dist/wc/sparkline.js"
         },
         "./wc/spinner": {
             "types": "./dist/elements/spinner/spinner.d.ts",

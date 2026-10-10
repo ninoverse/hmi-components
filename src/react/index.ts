@@ -183,6 +183,7 @@ export {
     type SpacerAxis,
     type SpacerSize,
 } from '../elements/spacer/spacer.react.js';
+export { Sparkline } from '../elements/sparkline/sparkline.react.js';
 export {
     Spinner,
     type SpinnerSize,

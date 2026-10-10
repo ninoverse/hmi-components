@@ -1073,6 +1073,11 @@ export function Example() {
                     </hmi-responsive-container>
                     <p id="container-size" style="color: var(--on-surface-variant)"></p>
                 </div>
+                <div style="display: flex; gap: 2rem; align-items: center; flex-wrap: wrap">
+                    <hmi-sparkline id="spark-up" label="Upward trend"></hmi-sparkline>
+                    <hmi-sparkline id="spark-down" color="var(--error)" area show-dot label="Downward trend with area"></hmi-sparkline>
+                    <hmi-sparkline id="spark-flat" width="200" height="48" color="var(--tertiary)" stroke-width="3" area label="Flat trend, larger"></hmi-sparkline>
+                </div>
                 <!-- chart-primitives:end -->
             </div>
         </section>
@@ -1523,6 +1528,9 @@ export function Example() {
                 document.getElementById('container-size').textContent =
                     `${Math.round(event.detail.width)} × ${Math.round(event.detail.height)} px`;
             });
+            document.getElementById('spark-up').data = [4, 8, 5, 10, 7, 12, 9, 14];
+            document.getElementById('spark-down').data = [14, 9, 11, 6, 8, 4, 5, 2];
+            document.getElementById('spark-flat').data = [6, 6, 7, 6, 8, 6, 7, 6];
             for (const pager of document.querySelectorAll('hmi-pagination')) {
                 pager.addEventListener('hmi-change', (event) => {
                     console.log('pagination hmi-change', event.detail);

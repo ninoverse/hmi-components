@@ -354,6 +354,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/spacer/spacer.react.ts',
                 ),
+                'wc/sparkline': resolve(
+                    dirname,
+                    'src/elements/sparkline/sparkline.ts',
+                ),
+                'react/sparkline': resolve(
+                    dirname,
+                    'src/elements/sparkline/sparkline.react.ts',
+                ),
                 'wc/spinner': resolve(
                     dirname,
                     'src/elements/spinner/spinner.ts',

@@ -50,6 +50,7 @@ export * from './sidebar/sidebar.js';
 export * from './skeleton/skeleton.js';
 export * from './slider/slider.js';
 export * from './spacer/spacer.js';
+export * from './sparkline/sparkline.js';
 export * from './spinner/spinner.js';
 export * from './stat/stat.js';
 export * from './stepper/stepper.js';
