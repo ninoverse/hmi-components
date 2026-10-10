@@ -2029,6 +2029,188 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/cartesian-grid/cartesian-grid.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Evenly spaced grid lines for a chart's plot area, in an SVG of its own. Layer\nit over or under other content; the charts draw the same grid inside their own\nSVG, so they do not need it. It draws nothing until `width` and `height` are\nset.\n\nIt is decorative: the SVG is hidden from assistive technology.",
+          "name": "HmiCartesianGrid",
+          "cssParts": [
+            {
+              "description": "The `<svg>`.",
+              "name": "base"
+            },
+            {
+              "description": "One grid line.",
+              "name": "grid-line"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "width",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "Grid area width in px.",
+              "attribute": "width"
+            },
+            {
+              "kind": "field",
+              "name": "height",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "Grid area height in px.",
+              "attribute": "height"
+            },
+            {
+              "kind": "field",
+              "name": "rows",
+              "type": {
+                "text": "number"
+              },
+              "default": "4",
+              "description": "The number of bands between horizontal lines.",
+              "attribute": "rows"
+            },
+            {
+              "kind": "field",
+              "name": "cols",
+              "type": {
+                "text": "number"
+              },
+              "default": "4",
+              "description": "The number of bands between vertical lines.",
+              "attribute": "cols"
+            },
+            {
+              "kind": "field",
+              "name": "padding",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "Inset from each edge, in px.",
+              "attribute": "padding"
+            },
+            {
+              "kind": "field",
+              "name": "hideHorizontal",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Leave out the horizontal lines.",
+              "attribute": "hide-horizontal"
+            },
+            {
+              "kind": "field",
+              "name": "hideVertical",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Leave out the vertical lines.",
+              "attribute": "hide-vertical"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "width",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "Grid area width in px.",
+              "fieldName": "width"
+            },
+            {
+              "name": "height",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "Grid area height in px.",
+              "fieldName": "height"
+            },
+            {
+              "name": "rows",
+              "type": {
+                "text": "number"
+              },
+              "default": "4",
+              "description": "The number of bands between horizontal lines.",
+              "fieldName": "rows"
+            },
+            {
+              "name": "cols",
+              "type": {
+                "text": "number"
+              },
+              "default": "4",
+              "description": "The number of bands between vertical lines.",
+              "fieldName": "cols"
+            },
+            {
+              "name": "padding",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "Inset from each edge, in px.",
+              "fieldName": "padding"
+            },
+            {
+              "name": "hide-horizontal",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Leave out the horizontal lines.",
+              "fieldName": "hideHorizontal"
+            },
+            {
+              "name": "hide-vertical",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Leave out the vertical lines.",
+              "fieldName": "hideVertical"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-cartesian-grid",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiCartesianGrid",
+          "declaration": {
+            "name": "HmiCartesianGrid",
+            "module": "src/elements/cartesian-grid/cartesian-grid.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-cartesian-grid",
+          "declaration": {
+            "name": "HmiCartesianGrid",
+            "module": "src/elements/cartesian-grid/cartesian-grid.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/checkbox/checkbox.ts",
       "declarations": [
         {

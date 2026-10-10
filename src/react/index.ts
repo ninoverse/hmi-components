@@ -44,6 +44,7 @@ export {
     Carousel,
     type CarouselIndexChangeDetail,
 } from '../elements/carousel/carousel.react.js';
+export { CartesianGrid } from '../elements/cartesian-grid/cartesian-grid.react.js';
 export {
     Checkbox,
     type CheckboxChangeDetail,

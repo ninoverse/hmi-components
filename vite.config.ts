@@ -122,6 +122,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/carousel/carousel.react.ts',
                 ),
+                'wc/cartesian-grid': resolve(
+                    dirname,
+                    'src/elements/cartesian-grid/cartesian-grid.ts',
+                ),
+                'react/cartesian-grid': resolve(
+                    dirname,
+                    'src/elements/cartesian-grid/cartesian-grid.react.ts',
+                ),
                 'wc/checkbox': resolve(
                     dirname,
                     'src/elements/checkbox/checkbox.ts',

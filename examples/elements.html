@@ -1054,6 +1054,17 @@ export function Example() {
         </section>
 
         <section>
+            <h2>Chart primitives</h2>
+            <div style="max-width: 70rem; display: flex; flex-direction: column; gap: 2rem">
+                <div>
+                    <!-- Draws its own <svg>: layer it over or under other content. -->
+                    <hmi-cartesian-grid width="560" height="160" rows="4" cols="6" padding="16" style="background: var(--surface-container-high); border-radius: 0.75rem"></hmi-cartesian-grid>
+                </div>
+                <!-- chart-primitives:end -->
+            </div>
+        </section>
+
+        <section>
             <h2>List</h2>
             <!-- Items are a property. right-<id> takes rich content; reorderable adds
                  drag and Alt+Arrow reordering, and the page sets items back from
@@ -1480,6 +1491,7 @@ export function Example() {
                 treeSelected.textContent = `Selected: ${event.detail.value}`;
             });
             tree.addEventListener('hmi-expanded-change', (event) => console.log('tree hmi-expanded-change', event.detail));
+
 
             for (const pager of document.querySelectorAll('hmi-pagination')) {
                 pager.addEventListener('hmi-change', (event) => {
