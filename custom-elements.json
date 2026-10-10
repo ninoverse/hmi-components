@@ -6326,6 +6326,98 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/legend/legend.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Chart legend: a row of colour swatches with series names. The swatch colours\nare consumer data; everything else is themed.\n\nA `label` is text. For richer content, slot an element named `label-<index>`\n(the entry's position, from 0), which replaces that text.",
+          "name": "HmiLegend",
+          "cssParts": [
+            {
+              "description": "The list.",
+              "name": "base"
+            },
+            {
+              "description": "One entry.",
+              "name": "item"
+            },
+            {
+              "description": "An entry's colour swatch. `data-inactive` marks a hollow one.",
+              "name": "swatch"
+            },
+            {
+              "description": "An entry's name.",
+              "name": "label"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Rich label for the entry at that position.",
+              "name": "label-<index>"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "items",
+              "type": {
+                "text": "LegendItem[]"
+              },
+              "default": "[]",
+              "description": "The entries. A property only: there is no attribute."
+            },
+            {
+              "kind": "field",
+              "name": "align",
+              "type": {
+                "text": "LegendAlign"
+              },
+              "default": "'center'",
+              "description": "Horizontal alignment of the row.",
+              "attribute": "align",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "align",
+              "type": {
+                "text": "LegendAlign"
+              },
+              "default": "'center'",
+              "description": "Horizontal alignment of the row.",
+              "fieldName": "align"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-legend",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiLegend",
+          "declaration": {
+            "name": "HmiLegend",
+            "module": "src/elements/legend/legend.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-legend",
+          "declaration": {
+            "name": "HmiLegend",
+            "module": "src/elements/legend/legend.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/link/link.ts",
       "declarations": [
         {

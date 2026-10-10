@@ -382,6 +382,10 @@
             "types": "./dist/elements/kbd/kbd.react.d.ts",
             "import": "./dist/react/kbd.js"
         },
+        "./react/legend": {
+            "types": "./dist/elements/legend/legend.react.d.ts",
+            "import": "./dist/react/legend.js"
+        },
         "./react/link": {
             "types": "./dist/elements/link/link.react.d.ts",
             "import": "./dist/react/link.js"
@@ -714,6 +718,10 @@
         "./wc/kbd": {
             "types": "./dist/elements/kbd/kbd.d.ts",
             "import": "./dist/wc/kbd.js"
+        },
+        "./wc/legend": {
+            "types": "./dist/elements/legend/legend.d.ts",
+            "import": "./dist/wc/legend.js"
         },
         "./wc/link": {
             "types": "./dist/elements/link/link.d.ts",

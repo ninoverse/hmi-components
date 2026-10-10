@@ -210,6 +210,11 @@ export default defineConfig({
                 ),
                 'wc/kbd': resolve(dirname, 'src/elements/kbd/kbd.ts'),
                 'react/kbd': resolve(dirname, 'src/elements/kbd/kbd.react.ts'),
+                'wc/legend': resolve(dirname, 'src/elements/legend/legend.ts'),
+                'react/legend': resolve(
+                    dirname,
+                    'src/elements/legend/legend.react.ts',
+                ),
                 'wc/link': resolve(dirname, 'src/elements/link/link.ts'),
                 'react/link': resolve(
                     dirname,

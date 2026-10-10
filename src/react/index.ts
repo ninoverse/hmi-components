@@ -95,6 +95,11 @@ export {
 } from '../elements/input/input.react.js';
 export { Kbd, type KbdSize } from '../elements/kbd/kbd.react.js';
 export {
+    Legend,
+    type LegendAlign,
+    type LegendItem,
+} from '../elements/legend/legend.react.js';
+export {
     Link,
     type LinkTone,
     type LinkUnderline,
