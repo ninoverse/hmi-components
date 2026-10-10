@@ -22,7 +22,7 @@ it('renders declarative shadow DOM with the trend line on the server', async () 
     expect(out).toContain('aria-label="Upward trend"');
     expect(out).toContain('<path');
     expect(out).toContain('<circle');
-    expect(out).toContain('color: var(--primary)');
+    expect(out).toContain('color:var(--primary)');
 });
 
 it('renders no svg without data', async () => {

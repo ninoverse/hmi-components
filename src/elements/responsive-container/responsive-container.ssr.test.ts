@@ -13,8 +13,8 @@ it('renders declarative shadow DOM with the slot and the fixed height on the ser
     );
     expect(out).toContain('<template shadowroot');
     expect(out).toContain('<slot');
-    expect(out).toContain('height: 160px');
-    expect(out).toContain('--container-height: 160px');
+    expect(out).toContain('height:160px');
+    expect(out).toContain('--container-height:160px');
     expect(out).not.toContain('--container-width');
     expect(out).toContain('chart');
 });

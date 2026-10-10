@@ -25,7 +25,7 @@ it('renders declarative shadow DOM with the entries on the server', async () => 
     expect(out).toContain('<ul');
     expect(out).toContain('Revenue');
     expect(out).toContain('Forecast');
-    expect(out).toContain('color: var(--primary)');
+    expect(out).toContain('color:var(--primary)');
     expect(out).toContain('data-inactive');
     expect(out).toContain('name="label-1"');
 });

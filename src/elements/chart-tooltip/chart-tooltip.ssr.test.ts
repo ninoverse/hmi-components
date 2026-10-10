@@ -25,6 +25,6 @@ it('renders declarative shadow DOM with the rows on the server', async () => {
     expect(out).toContain('role="tooltip"');
     expect(out).toContain('Jan 2026');
     expect(out).toContain('$48.2k');
-    expect(out).toContain('color: var(--primary)');
+    expect(out).toContain('color:var(--primary)');
     expect(out).toContain('name="value-1"');
 });
