@@ -102,10 +102,10 @@ There is no status for work under way: its open PR already shows that.
 | `hmi-stepper` | `stepper.tsx` | 7 | med | A E | `--stepper-item-gap` set on host; `hmi-change { value }`. | Done | [#173](https://github.com/ninoverse/hmi-components/pull/173) |
 | `hmi-tabs` | `tabs.tsx` | 7 | med | A E D | Indicator measured in `updated()`; resize listener; `hmi-change`. | Done | [#173](https://github.com/ninoverse/hmi-components/pull/173) |
 | `hmi-tree` | `tree.tsx` | 7 | high | A E | Roving tabindex; `hmi-select { value }`, `hmi-expanded-change { expanded }`. | Done | [#174](https://github.com/ninoverse/hmi-components/pull/174) |
-| `hmi-cartesian-grid` | `cartesianGrid.tsx` | 8 | low | | Kept as an element (its own `<svg>`) AND as `renderCartesianGrid()` in `shared/chart.ts` for the charts that embed it. | Todo | |
-| `hmi-chart-tooltip` | `chartTooltip.tsx` | 8 | low | A P | HTML panel; items strings + slots. | Todo | |
-| `hmi-legend` | `legend.tsx` | 8 | low | A | | Todo | |
-| `hmi-responsive-container` | `responsiveContainer.tsx` | 8 | med | R E | Function child → `hmi-resize { width, height }` + `--container-width`/`--container-height`; it measures only, and the consumer passes `width`/`height` to a chart. | Todo | |
+| `hmi-cartesian-grid` | `cartesianGrid.tsx` | 8 | low | | Kept as an element (its own `<svg>`) AND as `renderCartesianGrid()` in `shared/chart.ts` for the charts that embed it. | Done | [#175](https://github.com/ninoverse/hmi-components/pull/175) |
+| `hmi-chart-tooltip` | `chartTooltip.tsx` | 8 | low | A P | HTML panel; items strings + slots. | Done | [#175](https://github.com/ninoverse/hmi-components/pull/175) |
+| `hmi-legend` | `legend.tsx` | 8 | low | A | | Done | [#175](https://github.com/ninoverse/hmi-components/pull/175) |
+| `hmi-responsive-container` | `responsiveContainer.tsx` | 8 | med | R E | Function child → `hmi-resize { width, height }` + `--container-width`/`--container-height`; it measures only, and the consumer passes `width`/`height` to a chart. | Done | [#175](https://github.com/ninoverse/hmi-components/pull/175) |
 | `hmi-area-chart` | `areaChart.tsx` | 8 | low | | Pure SVG; `series`/`labels` JS properties; colors via `var(--primary)` in style attrs. | Todo | |
 | `hmi-bar-chart` | `barChart.tsx` | 8 | low | | | Todo | |
 | `hmi-bullet-chart` | `bulletChart.tsx` | 8 | low | | | Todo | |
@@ -116,7 +116,7 @@ There is no status for work under way: its open PR already shows that.
 | `hmi-line-chart` | `lineChart.tsx` | 8 | low | | | Todo | |
 | `hmi-radar-chart` | `radarChart.tsx` | 8 | low | | | Todo | |
 | `hmi-scatter-plot` | `scatterPlot.tsx` | 8 | low | | | Todo | |
-| `hmi-sparkline` | `sparkline.tsx` | 8 | low | | | Todo | |
+| `hmi-sparkline` | `sparkline.tsx` | 8 | low | | | Done | [#175](https://github.com/ninoverse/hmi-components/pull/175) |
 | `hmi-modal` | `modal.tsx` | 9 | high | S O E D P | `<dialog>.showModal()`; slots `title`, `description`, `actions`; `DialogAction[]` kept; `hmi-close { reason }` (cancelable), `hmi-action`. Lands `shared/positioning.ts` for the group, and `shared/dialog-actions.ts` (`DialogAction`, the buttons it renders) for drawer and table. | Todo | |
 | `hmi-confirm-dialog` | `confirmDialog.tsx` | 9 | med | S O E | Composes `<hmi-modal>`; `hmi-cancel` (cancelable), `hmi-confirm`. | Todo | |
 | `hmi-drawer` | `drawer.tsx` | 9 | high | S O E D P | `<dialog>`; `side` reflected; slide keyframes per side. | Todo | |
