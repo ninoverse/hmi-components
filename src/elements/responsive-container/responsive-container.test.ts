@@ -69,6 +69,18 @@ describe('hmi-responsive-container', () => {
         expect(base(el).getBoundingClientRect().height).toBe(300);
     });
 
+    it('exposes the last reported size, for a listener attached late', async () => {
+        const { el } = await fixture(
+            html`<hmi-responsive-container height="160"></hmi-responsive-container>`,
+        );
+        await frames();
+        expect(el.size).toEqual({ width: 400, height: 160 });
+        const unmeasured = document.createElement(
+            'hmi-responsive-container',
+        ) as HmiResponsiveContainer;
+        expect(unmeasured.size).toBeUndefined();
+    });
+
     it('derives the height from aspect and the measured width', async () => {
         const { el, sizes } = await fixture(
             html`<hmi-responsive-container height="160" aspect="2"></hmi-responsive-container>`,

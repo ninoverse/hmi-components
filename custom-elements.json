@@ -12371,7 +12371,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "A full-width block that measures itself and reports its size, the foundation\nthe charts build on, since SVG coordinates need real numbers, not percentages.\n\nIt measures its own width with a `ResizeObserver`. Its height is `height`, or\n`width / aspect` when `aspect` is set. It fires `hmi-resize` with the size on\nthe first measurement and whenever it changes, and exposes the same size as\nthe `--container-width` and `--container-height` custom properties, which\ninherit into what is slotted. It never touches its children: pass the size to\na chart's `width` and `height` yourself, from the event.",
+          "description": "A full-width block that measures itself and reports its size, the foundation\nthe charts build on, since SVG coordinates need real numbers, not percentages.\n\nIt measures its own width with a `ResizeObserver`. Its height is `height`, or\n`width / aspect` when `aspect` is set. It fires `hmi-resize` with the size on\nthe first measurement and whenever it changes, and exposes the same size as\nthe `--container-width` and `--container-height` custom properties, which\ninherit into what is slotted. It never touches its children: pass the size to\na chart's `width` and `height` yourself, from the event. A listener attached\nlate can miss the first event: read `size` for the last one.",
           "name": "HmiResponsiveContainer",
           "cssProperties": [
             {
@@ -12449,6 +12449,15 @@
                 "text": "object"
               },
               "default": "{ width: 0, height: 0 }"
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "ResponsiveContainerResizeDetail | undefined"
+              },
+              "description": "The last size it reported, or undefined before it has been measured. Read it\nwhen attaching a listener late: the first `hmi-resize` can fire before.",
+              "readonly": true
             },
             {
               "kind": "method",

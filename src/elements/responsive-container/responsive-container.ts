@@ -22,7 +22,8 @@ export interface ResponsiveContainerResizeDetail {
  * the first measurement and whenever it changes, and exposes the same size as
  * the `--container-width` and `--container-height` custom properties, which
  * inherit into what is slotted. It never touches its children: pass the size to
- * a chart's `width` and `height` yourself, from the event.
+ * a chart's `width` and `height` yourself, from the event. A listener attached
+ * late can miss the first event: read `size` for the last one.
  *
  * @tag hmi-responsive-container
  * @slot - The content to size.
@@ -53,6 +54,14 @@ export class HmiResponsiveContainer extends LitElement {
 
     #observer: ResizeObserver | undefined;
     #reported = { width: 0, height: 0 };
+
+    /**
+     * The last size it reported, or undefined before it has been measured. Read it
+     * when attaching a listener late: the first `hmi-resize` can fire before.
+     */
+    get size(): ResponsiveContainerResizeDetail | undefined {
+        return this.#reported.width > 0 ? { ...this.#reported } : undefined;
+    }
 
     override connectedCallback(): void {
         super.connectedCallback();
