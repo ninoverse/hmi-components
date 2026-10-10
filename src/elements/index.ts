@@ -16,6 +16,7 @@ export * from './button/button.js';
 export * from './card/card.js';
 export * from './carousel/carousel.js';
 export * from './cartesian-grid/cartesian-grid.js';
+export * from './chart-tooltip/chart-tooltip.js';
 export * from './checkbox/checkbox.js';
 export * from './chip/chip.js';
 export * from './code/code.js';

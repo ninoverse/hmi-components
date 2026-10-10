@@ -19,7 +19,9 @@ export type ChartTooltipProps = HTMLAttributes<HTMLDivElement> & {
 
 /** Presentational tooltip card for charts: a title and one colour-swatched
  *  row per series. Charts position it (absolute/fixed) on hover; this
- *  component only renders the content. */
+ *  component only renders the content.
+ * @deprecated Use `ChartTooltip` from `@ninoverse/hmi-components/react/chart-tooltip`. Removed in 6.0.0.
+ */
 export function ChartTooltip({
     title,
     items,

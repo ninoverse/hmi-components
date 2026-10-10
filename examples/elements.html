@@ -1063,6 +1063,9 @@ export function Example() {
                 <div>
                     <hmi-legend id="legend-live" align="start"></hmi-legend>
                 </div>
+                <div>
+                    <hmi-chart-tooltip id="tooltip-live" heading="Jan 2026"></hmi-chart-tooltip>
+                </div>
                 <!-- chart-primitives:end -->
             </div>
         </section>
@@ -1500,6 +1503,10 @@ export function Example() {
                 { label: 'Revenue', color: 'var(--primary)' },
                 { label: 'Costs', color: 'var(--tertiary)' },
                 { label: 'Forecast', color: 'var(--secondary)', inactive: true },
+            ];
+            document.getElementById('tooltip-live').items = [
+                { label: 'Revenue', value: '$48.2k', color: 'var(--primary)' },
+                { label: 'Costs', value: '$31.7k', color: 'var(--tertiary)' },
             ];
             for (const pager of document.querySelectorAll('hmi-pagination')) {
                 pager.addEventListener('hmi-change', (event) => {

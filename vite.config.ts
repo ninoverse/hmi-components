@@ -130,6 +130,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/cartesian-grid/cartesian-grid.react.ts',
                 ),
+                'wc/chart-tooltip': resolve(
+                    dirname,
+                    'src/elements/chart-tooltip/chart-tooltip.ts',
+                ),
+                'react/chart-tooltip': resolve(
+                    dirname,
+                    'src/elements/chart-tooltip/chart-tooltip.react.ts',
+                ),
                 'wc/checkbox': resolve(
                     dirname,
                     'src/elements/checkbox/checkbox.ts',

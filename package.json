@@ -330,6 +330,10 @@
             "types": "./dist/elements/cartesian-grid/cartesian-grid.react.d.ts",
             "import": "./dist/react/cartesian-grid.js"
         },
+        "./react/chart-tooltip": {
+            "types": "./dist/elements/chart-tooltip/chart-tooltip.react.d.ts",
+            "import": "./dist/react/chart-tooltip.js"
+        },
         "./react/checkbox": {
             "types": "./dist/elements/checkbox/checkbox.react.d.ts",
             "import": "./dist/react/checkbox.js"
@@ -666,6 +670,10 @@
         "./wc/cartesian-grid": {
             "types": "./dist/elements/cartesian-grid/cartesian-grid.d.ts",
             "import": "./dist/wc/cartesian-grid.js"
+        },
+        "./wc/chart-tooltip": {
+            "types": "./dist/elements/chart-tooltip/chart-tooltip.d.ts",
+            "import": "./dist/wc/chart-tooltip.js"
         },
         "./wc/checkbox": {
             "types": "./dist/elements/checkbox/checkbox.d.ts",

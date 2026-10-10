@@ -46,6 +46,10 @@ export {
 } from '../elements/carousel/carousel.react.js';
 export { CartesianGrid } from '../elements/cartesian-grid/cartesian-grid.react.js';
 export {
+    ChartTooltip,
+    type ChartTooltipItem,
+} from '../elements/chart-tooltip/chart-tooltip.react.js';
+export {
     Checkbox,
     type CheckboxChangeDetail,
 } from '../elements/checkbox/checkbox.react.js';

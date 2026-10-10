@@ -2211,6 +2211,119 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/chart-tooltip/chart-tooltip.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Presentational tooltip card for charts: a heading and one row per series, each\nwith a colour swatch, a label and a right-aligned value. A panel-like element.\n\nIt only renders the content. Positioning it on hover is the consumer's job: it\nignores the pointer, so it never gets in the way of what it points at.\n\nA `heading`, a row's `label` and a row's `value` are text. For richer content,\nslot an element named `heading`, `label-<index>` or `value-<index>` (the row's\nposition, from 0), which replaces that text.",
+          "name": "HmiChartTooltip",
+          "cssParts": [
+            {
+              "description": "The card.",
+              "name": "base"
+            },
+            {
+              "description": "The card, under its panel-group name.",
+              "name": "panel"
+            },
+            {
+              "description": "The heading.",
+              "name": "heading"
+            },
+            {
+              "description": "The list of rows.",
+              "name": "list"
+            },
+            {
+              "description": "One row.",
+              "name": "row"
+            },
+            {
+              "description": "A row's colour swatch.",
+              "name": "swatch"
+            },
+            {
+              "description": "A row's label.",
+              "name": "label"
+            },
+            {
+              "description": "A row's value.",
+              "name": "value"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Rich heading, replacing the `heading` text.",
+              "name": "heading"
+            },
+            {
+              "description": "Rich label for the row at that position.",
+              "name": "label-<index>"
+            },
+            {
+              "description": "Rich value for the row at that position.",
+              "name": "value-<index>"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "heading",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "The heading, such as the hovered category: plain text, or the fallback of the `heading` slot.",
+              "attribute": "heading"
+            },
+            {
+              "kind": "field",
+              "name": "items",
+              "type": {
+                "text": "ChartTooltipItem[]"
+              },
+              "default": "[]",
+              "description": "The rows, one per series at the hovered point. A property only: there is no attribute."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "heading",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "The heading, such as the hovered category: plain text, or the fallback of the `heading` slot.",
+              "fieldName": "heading"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-chart-tooltip",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiChartTooltip",
+          "declaration": {
+            "name": "HmiChartTooltip",
+            "module": "src/elements/chart-tooltip/chart-tooltip.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-chart-tooltip",
+          "declaration": {
+            "name": "HmiChartTooltip",
+            "module": "src/elements/chart-tooltip/chart-tooltip.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/checkbox/checkbox.ts",
       "declarations": [
         {
