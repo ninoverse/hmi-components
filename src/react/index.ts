@@ -8,6 +8,10 @@ export {
     type AccordionOpenChangeDetail,
 } from '../elements/accordion/accordion.react.js';
 export { Alert, type AlertVariant } from '../elements/alert/alert.react.js';
+export {
+    AreaChart,
+    type AreaChartSeries,
+} from '../elements/area-chart/area-chart.react.js';
 export { AspectRatio } from '../elements/aspect-ratio/aspect-ratio.react.js';
 export {
     Avatar,

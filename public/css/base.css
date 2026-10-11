@@ -73,6 +73,7 @@ body {
 /* @generated not-defined start */
 hmi-accordion:not(:defined),
 hmi-alert:not(:defined),
+hmi-area-chart:not(:defined),
 hmi-aspect-ratio:not(:defined),
 hmi-avatar:not(:defined),
 hmi-avatar-stack:not(:defined),

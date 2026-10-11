@@ -1091,6 +1091,14 @@ export function Example() {
         </section>
 
         <section>
+            <h2>AreaChart</h2>
+            <div style="padding-bottom: 2rem">
+                <hmi-area-chart id="area-live" label="Monthly active users by tier" width="560" height="280"></hmi-area-chart>
+                <hmi-legend id="area-legend" align="start" style="margin-top: 1rem"></hmi-legend>
+            </div>
+        </section>
+
+        <section>
             <h2>List</h2>
             <!-- Items are a property. right-<id> takes rich content; reorderable adds
                  drag and Alt+Arrow reordering, and the page sets items back from
@@ -1552,6 +1560,16 @@ export function Example() {
             document.getElementById('line-legend').items = [
                 { label: 'Revenue', color: 'var(--primary)' },
                 { label: 'Costs', color: 'var(--tertiary)' },
+            ];
+            const areaChart = document.getElementById('area-live');
+            areaChart.labels = monthly;
+            areaChart.series = [
+                { name: 'Pro', data: [20, 28, 26, 35, 40, 52], color: 'var(--primary)' },
+                { name: 'Free', data: [12, 15, 18, 16, 22, 25], color: 'var(--tertiary)' },
+            ];
+            document.getElementById('area-legend').items = [
+                { label: 'Pro', color: 'var(--primary)' },
+                { label: 'Free', color: 'var(--tertiary)' },
             ];
             for (const pager of document.querySelectorAll('hmi-pagination')) {
                 pager.addEventListener('hmi-change', (event) => {

@@ -4,6 +4,7 @@
 
 export * from './accordion/accordion.js';
 export * from './alert/alert.js';
+export * from './area-chart/area-chart.js';
 export * from './aspect-ratio/aspect-ratio.js';
 export * from './avatar/avatar.js';
 export * from './avatar-stack/avatar-stack.js';

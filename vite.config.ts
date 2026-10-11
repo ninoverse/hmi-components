@@ -55,6 +55,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/alert/alert.react.ts',
                 ),
+                'wc/area-chart': resolve(
+                    dirname,
+                    'src/elements/area-chart/area-chart.ts',
+                ),
+                'react/area-chart': resolve(
+                    dirname,
+                    'src/elements/area-chart/area-chart.react.ts',
+                ),
                 'wc/aspect-ratio': resolve(
                     dirname,
                     'src/elements/aspect-ratio/aspect-ratio.ts',

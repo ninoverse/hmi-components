@@ -282,6 +282,10 @@
             "types": "./dist/elements/alert/alert.react.d.ts",
             "import": "./dist/react/alert.js"
         },
+        "./react/area-chart": {
+            "types": "./dist/elements/area-chart/area-chart.react.d.ts",
+            "import": "./dist/react/area-chart.js"
+        },
         "./react/aspect-ratio": {
             "types": "./dist/elements/aspect-ratio/aspect-ratio.react.d.ts",
             "import": "./dist/react/aspect-ratio.js"
@@ -634,6 +638,10 @@
         "./wc/alert": {
             "types": "./dist/elements/alert/alert.d.ts",
             "import": "./dist/wc/alert.js"
+        },
+        "./wc/area-chart": {
+            "types": "./dist/elements/area-chart/area-chart.d.ts",
+            "import": "./dist/wc/area-chart.js"
         },
         "./wc/aspect-ratio": {
             "types": "./dist/elements/aspect-ratio/aspect-ratio.d.ts",
