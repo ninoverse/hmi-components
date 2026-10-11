@@ -41,6 +41,7 @@ export {
     Breadcrumbs,
     type BreadcrumbsNavDetail,
 } from '../elements/breadcrumbs/breadcrumbs.react.js';
+export { BulletChart } from '../elements/bullet-chart/bullet-chart.react.js';
 export {
     Button,
     type ButtonSize,

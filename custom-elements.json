@@ -1570,6 +1570,243 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/bullet-chart/bullet-chart.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Bullet chart (bullet graph): a compact horizontal KPI gauge. Qualitative\nrange bands sit behind a measure bar, with a target tick for comparison. A\npure SVG, with no dependencies.\n\n`ranges` are the ascending thresholds between the bands: `[40, 75]` makes\nthree bands, from `min` to 40, 40 to 75 and 75 to `max`, shaded from light to\ndark; a threshold outside `min` to `max` is ignored. `max` defaults to the\nlargest of `value`, `target`, `ranges` and 1. The measure bar and the target\ntick stop at the ends of the scale. `caption` is visible text to the left of\nthe track; `label` is the accessible name, and falls back to `caption`. The\nsize is the `width` and `height` in px.",
+          "name": "HmiBulletChart",
+          "cssParts": [
+            {
+              "description": "The `<svg>`.",
+              "name": "base"
+            },
+            {
+              "description": "The text left of the track, present with `caption`.",
+              "name": "caption"
+            },
+            {
+              "description": "One qualitative range band.",
+              "name": "band"
+            },
+            {
+              "description": "The bar for `value`.",
+              "name": "measure"
+            },
+            {
+              "description": "The tick for `target`, present with `target`.",
+              "name": "target"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "The measured value, drawn as the bar.",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "target",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "The target or comparison value, drawn as a tick. Absent without it.",
+              "attribute": "target"
+            },
+            {
+              "kind": "field",
+              "name": "min",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "The lower end of the scale.",
+              "attribute": "min"
+            },
+            {
+              "kind": "field",
+              "name": "max",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "The upper end of the scale. Defaults to the largest of `value`, `target`, `ranges` and 1.",
+              "attribute": "max"
+            },
+            {
+              "kind": "field",
+              "name": "ranges",
+              "type": {
+                "text": "number[]"
+              },
+              "default": "[]",
+              "description": "The ascending thresholds between the qualitative bands. A property only: there is no attribute."
+            },
+            {
+              "kind": "field",
+              "name": "color",
+              "type": {
+                "text": "string"
+              },
+              "default": "'var(--primary)'",
+              "description": "The measure bar's colour: any CSS colour, including a token.",
+              "attribute": "color"
+            },
+            {
+              "kind": "field",
+              "name": "caption",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Visible text to the left of the track, such as the metric's name.",
+              "attribute": "caption"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The accessible name of the chart. Falls back to `caption`, then 'Bullet chart'.",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "width",
+              "type": {
+                "text": "number"
+              },
+              "default": "360",
+              "description": "SVG width in px.",
+              "attribute": "width"
+            },
+            {
+              "kind": "field",
+              "name": "height",
+              "type": {
+                "text": "number"
+              },
+              "default": "48",
+              "description": "SVG height in px.",
+              "attribute": "height"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "The measured value, drawn as the bar.",
+              "fieldName": "value"
+            },
+            {
+              "name": "target",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "The target or comparison value, drawn as a tick. Absent without it.",
+              "fieldName": "target"
+            },
+            {
+              "name": "min",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "The lower end of the scale.",
+              "fieldName": "min"
+            },
+            {
+              "name": "max",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "The upper end of the scale. Defaults to the largest of `value`, `target`, `ranges` and 1.",
+              "fieldName": "max"
+            },
+            {
+              "name": "color",
+              "type": {
+                "text": "string"
+              },
+              "default": "'var(--primary)'",
+              "description": "The measure bar's colour: any CSS colour, including a token.",
+              "fieldName": "color"
+            },
+            {
+              "name": "caption",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Visible text to the left of the track, such as the metric's name.",
+              "fieldName": "caption"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The accessible name of the chart. Falls back to `caption`, then 'Bullet chart'.",
+              "fieldName": "label"
+            },
+            {
+              "name": "width",
+              "type": {
+                "text": "number"
+              },
+              "default": "360",
+              "description": "SVG width in px.",
+              "fieldName": "width"
+            },
+            {
+              "name": "height",
+              "type": {
+                "text": "number"
+              },
+              "default": "48",
+              "description": "SVG height in px.",
+              "fieldName": "height"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-bullet-chart",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiBulletChart",
+          "declaration": {
+            "name": "HmiBulletChart",
+            "module": "src/elements/bullet-chart/bullet-chart.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-bullet-chart",
+          "declaration": {
+            "name": "HmiBulletChart",
+            "module": "src/elements/bullet-chart/bullet-chart.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/button/button.ts",
       "declarations": [
         {
@@ -13100,6 +13337,254 @@
           "declaration": {
             "name": "HmiResponsiveContainer",
             "module": "src/elements/responsive-container/responsive-container.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/elements/scatter-plot/scatter-plot.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Scatter plot: each series is a set of `{ x, y }` points drawn as markers over\na shared grid, with numeric ticks on both axes. A pure SVG, with no\ndependencies. With no `series`, or only empty ones, nothing is rendered.\n\nThe x range is the data's extent; the y range runs from 0, or the smallest y\nif lower, to the largest y. `x-min`, `x-max`, `y-min` and `y-max` override any\nend. Series colours are any CSS colour, including tokens such as\n`var(--primary)`; every series defaults to the primary colour, so set one per\nseries. The size is the `width` and `height` in px: to fit a container, pass\nthe size from `hmi-responsive-container`.",
+          "name": "HmiScatterPlot",
+          "cssParts": [
+            {
+              "description": "The `<svg>`.",
+              "name": "base"
+            },
+            {
+              "description": "A horizontal or vertical grid line.",
+              "name": "grid-line"
+            },
+            {
+              "description": "A y-axis or x-axis tick label.",
+              "name": "axis-label"
+            },
+            {
+              "description": "One marker.",
+              "name": "point"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "series",
+              "type": {
+                "text": "ScatterPlotSeries[]"
+              },
+              "default": "[]",
+              "description": "The series to plot. A property only: there is no attribute."
+            },
+            {
+              "kind": "field",
+              "name": "width",
+              "type": {
+                "text": "number"
+              },
+              "default": "520",
+              "description": "SVG width in px.",
+              "attribute": "width"
+            },
+            {
+              "kind": "field",
+              "name": "height",
+              "type": {
+                "text": "number"
+              },
+              "default": "260",
+              "description": "SVG height in px.",
+              "attribute": "height"
+            },
+            {
+              "kind": "field",
+              "name": "xMin",
+              "type": {
+                "text": "| number\n        | undefined"
+              },
+              "description": "The lower end of the x range. Defaults to the smallest x.",
+              "attribute": "x-min"
+            },
+            {
+              "kind": "field",
+              "name": "xMax",
+              "type": {
+                "text": "| number\n        | undefined"
+              },
+              "description": "The upper end of the x range. Defaults to the largest x.",
+              "attribute": "x-max"
+            },
+            {
+              "kind": "field",
+              "name": "yMin",
+              "type": {
+                "text": "| number\n        | undefined"
+              },
+              "description": "The lower end of the y range. Defaults to 0, or the smallest y if lower.",
+              "attribute": "y-min"
+            },
+            {
+              "kind": "field",
+              "name": "yMax",
+              "type": {
+                "text": "| number\n        | undefined"
+              },
+              "description": "The upper end of the y range. Defaults to the largest y.",
+              "attribute": "y-max"
+            },
+            {
+              "kind": "field",
+              "name": "xTicks",
+              "type": {
+                "text": "number"
+              },
+              "default": "5",
+              "description": "The number of vertical grid lines, and x-axis ticks, less one.",
+              "attribute": "x-ticks"
+            },
+            {
+              "kind": "field",
+              "name": "yTicks",
+              "type": {
+                "text": "number"
+              },
+              "default": "4",
+              "description": "The number of horizontal grid lines, and y-axis ticks, less one.",
+              "attribute": "y-ticks"
+            },
+            {
+              "kind": "field",
+              "name": "radius",
+              "type": {
+                "text": "number"
+              },
+              "default": "4",
+              "description": "The marker radius in px.",
+              "attribute": "radius"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Scatter plot'",
+              "description": "The accessible name of the plot.",
+              "attribute": "label"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "width",
+              "type": {
+                "text": "number"
+              },
+              "default": "520",
+              "description": "SVG width in px.",
+              "fieldName": "width"
+            },
+            {
+              "name": "height",
+              "type": {
+                "text": "number"
+              },
+              "default": "260",
+              "description": "SVG height in px.",
+              "fieldName": "height"
+            },
+            {
+              "name": "x-min",
+              "type": {
+                "text": "| number\n        | undefined"
+              },
+              "description": "The lower end of the x range. Defaults to the smallest x.",
+              "fieldName": "xMin"
+            },
+            {
+              "name": "x-max",
+              "type": {
+                "text": "| number\n        | undefined"
+              },
+              "description": "The upper end of the x range. Defaults to the largest x.",
+              "fieldName": "xMax"
+            },
+            {
+              "name": "y-min",
+              "type": {
+                "text": "| number\n        | undefined"
+              },
+              "description": "The lower end of the y range. Defaults to 0, or the smallest y if lower.",
+              "fieldName": "yMin"
+            },
+            {
+              "name": "y-max",
+              "type": {
+                "text": "| number\n        | undefined"
+              },
+              "description": "The upper end of the y range. Defaults to the largest y.",
+              "fieldName": "yMax"
+            },
+            {
+              "name": "x-ticks",
+              "type": {
+                "text": "number"
+              },
+              "default": "5",
+              "description": "The number of vertical grid lines, and x-axis ticks, less one.",
+              "fieldName": "xTicks"
+            },
+            {
+              "name": "y-ticks",
+              "type": {
+                "text": "number"
+              },
+              "default": "4",
+              "description": "The number of horizontal grid lines, and y-axis ticks, less one.",
+              "fieldName": "yTicks"
+            },
+            {
+              "name": "radius",
+              "type": {
+                "text": "number"
+              },
+              "default": "4",
+              "description": "The marker radius in px.",
+              "fieldName": "radius"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Scatter plot'",
+              "description": "The accessible name of the plot.",
+              "fieldName": "label"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-scatter-plot",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiScatterPlot",
+          "declaration": {
+            "name": "HmiScatterPlot",
+            "module": "src/elements/scatter-plot/scatter-plot.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-scatter-plot",
+          "declaration": {
+            "name": "HmiScatterPlot",
+            "module": "src/elements/scatter-plot/scatter-plot.ts"
           }
         }
       ]

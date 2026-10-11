@@ -120,6 +120,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/breadcrumbs/breadcrumbs.react.ts',
                 ),
+                'wc/bullet-chart': resolve(
+                    dirname,
+                    'src/elements/bullet-chart/bullet-chart.ts',
+                ),
+                'react/bullet-chart': resolve(
+                    dirname,
+                    'src/elements/bullet-chart/bullet-chart.react.ts',
+                ),
                 'wc/button': resolve(dirname, 'src/elements/button/button.ts'),
                 'react/button': resolve(
                     dirname,

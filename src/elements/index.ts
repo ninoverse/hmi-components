@@ -14,6 +14,7 @@ export * from './bar-chart/bar-chart.js';
 export * from './blockquote/blockquote.js';
 export * from './box/box.js';
 export * from './breadcrumbs/breadcrumbs.js';
+export * from './bullet-chart/bullet-chart.js';
 export * from './button/button.js';
 export * from './card/card.js';
 export * from './carousel/carousel.js';

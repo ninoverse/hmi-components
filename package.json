@@ -322,6 +322,10 @@
             "types": "./dist/elements/breadcrumbs/breadcrumbs.react.d.ts",
             "import": "./dist/react/breadcrumbs.js"
         },
+        "./react/bullet-chart": {
+            "types": "./dist/elements/bullet-chart/bullet-chart.react.d.ts",
+            "import": "./dist/react/bullet-chart.js"
+        },
         "./react/button": {
             "types": "./dist/elements/button/button.react.d.ts",
             "import": "./dist/react/button.js"
@@ -686,6 +690,10 @@
         "./wc/breadcrumbs": {
             "types": "./dist/elements/breadcrumbs/breadcrumbs.d.ts",
             "import": "./dist/wc/breadcrumbs.js"
+        },
+        "./wc/bullet-chart": {
+            "types": "./dist/elements/bullet-chart/bullet-chart.d.ts",
+            "import": "./dist/wc/bullet-chart.js"
         },
         "./wc/button": {
             "types": "./dist/elements/button/button.d.ts",

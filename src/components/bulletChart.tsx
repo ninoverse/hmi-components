@@ -32,7 +32,9 @@ const BAND_SHADES = [
 
 /** Bullet chart (bullet graph): a compact horizontal KPI gauge. Qualitative
  *  range bands sit behind a measure bar, with a target tick for comparison.
- *  Pure SVG, zero deps, tokens-driven. */
+ *  Pure SVG, zero deps, tokens-driven.
+ * @deprecated Use `BulletChart` from `@ninoverse/hmi-components/react/bullet-chart`. Removed in 6.0.0.
+ */
 export function BulletChart({
     value,
     target,

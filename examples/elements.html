@@ -1115,6 +1115,15 @@ export function Example() {
         </section>
 
         <section>
+            <h2>BulletChart</h2>
+            <div style="display: flex; flex-direction: column; gap: 1.5rem; max-width: 46rem; padding-bottom: 2rem">
+                <hmi-bullet-chart id="bullet-revenue" caption="Revenue" value="78" target="85" max="100"></hmi-bullet-chart>
+                <hmi-bullet-chart id="bullet-profit" caption="Profit" value="62" target="55" max="100" color="var(--success)"></hmi-bullet-chart>
+                <hmi-bullet-chart id="bullet-cost" caption="Cost" value="92" target="70" max="100" color="var(--error)"></hmi-bullet-chart>
+            </div>
+        </section>
+
+        <section>
             <h2>List</h2>
             <!-- Items are a property. right-<id> takes rich content; reorderable adds
                  drag and Alt+Arrow reordering, and the page sets items back from
@@ -1619,6 +1628,9 @@ export function Example() {
                 { label: 'Group A', color: 'var(--primary)' },
                 { label: 'Group B', color: 'var(--tertiary)' },
             ];
+            document.getElementById('bullet-revenue').ranges = [50, 75];
+            document.getElementById('bullet-profit').ranges = [40, 70];
+            document.getElementById('bullet-cost').ranges = [60, 80];
             for (const pager of document.querySelectorAll('hmi-pagination')) {
                 pager.addEventListener('hmi-change', (event) => {
                     console.log('pagination hmi-change', event.detail);
