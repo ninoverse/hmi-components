@@ -106,16 +106,16 @@ There is no status for work under way: its open PR already shows that.
 | `hmi-chart-tooltip` | `chartTooltip.tsx` | 8 | low | A P | HTML panel; items strings + slots. | Done | [#175](https://github.com/ninoverse/hmi-components/pull/175) |
 | `hmi-legend` | `legend.tsx` | 8 | low | A | | Done | [#175](https://github.com/ninoverse/hmi-components/pull/175) |
 | `hmi-responsive-container` | `responsiveContainer.tsx` | 8 | med | R E | Function child → `hmi-resize { width, height }` + `--container-width`/`--container-height`; it measures only, and the consumer passes `width`/`height` to a chart. | Done | [#175](https://github.com/ninoverse/hmi-components/pull/175) |
-| `hmi-area-chart` | `areaChart.tsx` | 8 | low | | Pure SVG; `series`/`labels` JS properties; colors via `var(--primary)` in style attrs; `label` names the image. | Done | |
-| `hmi-bar-chart` | `barChart.tsx` | 8 | low | | `series`/`labels` JS properties; `aria-label` is `label`. | Done | |
-| `hmi-bullet-chart` | `bulletChart.tsx` | 8 | low | | `ranges` JS property; the visible leading text is `caption`, `label` is the accessible name (a change from v5, where `label` was the text). | Done | |
+| `hmi-area-chart` | `areaChart.tsx` | 8 | low | | Pure SVG; `series`/`labels` JS properties; colors via `var(--primary)` in style attrs; `label` names the image. | Done | [#176](https://github.com/ninoverse/hmi-components/pull/176) |
+| `hmi-bar-chart` | `barChart.tsx` | 8 | low | | `series`/`labels` JS properties; `aria-label` is `label`. | Done | [#176](https://github.com/ninoverse/hmi-components/pull/176) |
+| `hmi-bullet-chart` | `bulletChart.tsx` | 8 | low | | `ranges` JS property; the visible leading text is `caption`, `label` is the accessible name (a change from v5, where `label` was the text). | Done | [#176](https://github.com/ninoverse/hmi-components/pull/176) |
 | `hmi-donut-chart` | `donutChart.tsx` | 8 | low | S | Slot `center-label`. | Todo | |
 | `hmi-funnel-chart` | `funnelChart.tsx` | 8 | low | | | Todo | |
 | `hmi-gauge` | `gauge.tsx` | 8 | low | S | Slot `caption` for the visible text; `label` is the accessible name, as on the other charts. | Todo | |
 | `hmi-heatmap` | `heatmap.tsx` | 8 | low | | `data` nested arrays as JS property. | Todo | |
-| `hmi-line-chart` | `lineChart.tsx` | 8 | low | | `series`/`labels` JS properties; `aria-label` is `label`; `show-dots`. | Done | |
+| `hmi-line-chart` | `lineChart.tsx` | 8 | low | | `series`/`labels` JS properties; `aria-label` is `label`; `show-dots`. | Done | [#176](https://github.com/ninoverse/hmi-components/pull/176) |
 | `hmi-radar-chart` | `radarChart.tsx` | 8 | low | | | Todo | |
-| `hmi-scatter-plot` | `scatterPlot.tsx` | 8 | low | | `series` of `{ x, y }` points as a JS property; `aria-label` is `label`. | Done | |
+| `hmi-scatter-plot` | `scatterPlot.tsx` | 8 | low | | `series` of `{ x, y }` points as a JS property; `aria-label` is `label`. | Done | [#176](https://github.com/ninoverse/hmi-components/pull/176) |
 | `hmi-sparkline` | `sparkline.tsx` | 8 | low | | | Done | [#175](https://github.com/ninoverse/hmi-components/pull/175) |
 | `hmi-modal` | `modal.tsx` | 9 | high | S O E D P | `<dialog>.showModal()`; slots `title`, `description`, `actions`; `DialogAction[]` kept; `hmi-close { reason }` (cancelable), `hmi-action`. Lands `shared/positioning.ts` for the group, and `shared/dialog-actions.ts` (`DialogAction`, the buttons it renders) for drawer and table. | Todo | |
 | `hmi-confirm-dialog` | `confirmDialog.tsx` | 9 | med | S O E | Composes `<hmi-modal>`; `hmi-cancel` (cancelable), `hmi-confirm`. | Todo | |
