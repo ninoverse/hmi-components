@@ -328,6 +328,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/responsive-container/responsive-container.react.ts',
                 ),
+                'wc/scatter-plot': resolve(
+                    dirname,
+                    'src/elements/scatter-plot/scatter-plot.ts',
+                ),
+                'react/scatter-plot': resolve(
+                    dirname,
+                    'src/elements/scatter-plot/scatter-plot.react.ts',
+                ),
                 'wc/scroll-area': resolve(
                     dirname,
                     'src/elements/scroll-area/scroll-area.ts',

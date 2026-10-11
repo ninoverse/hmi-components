@@ -450,6 +450,10 @@
             "types": "./dist/elements/responsive-container/responsive-container.react.d.ts",
             "import": "./dist/react/responsive-container.js"
         },
+        "./react/scatter-plot": {
+            "types": "./dist/elements/scatter-plot/scatter-plot.react.d.ts",
+            "import": "./dist/react/scatter-plot.js"
+        },
         "./react/scroll-area": {
             "types": "./dist/elements/scroll-area/scroll-area.react.d.ts",
             "import": "./dist/react/scroll-area.js"
@@ -810,6 +814,10 @@
         "./wc/responsive-container": {
             "types": "./dist/elements/responsive-container/responsive-container.d.ts",
             "import": "./dist/wc/responsive-container.js"
+        },
+        "./wc/scatter-plot": {
+            "types": "./dist/elements/scatter-plot/scatter-plot.d.ts",
+            "import": "./dist/wc/scatter-plot.js"
         },
         "./wc/scroll-area": {
             "types": "./dist/elements/scroll-area/scroll-area.d.ts",

@@ -163,6 +163,11 @@ export {
     type ResponsiveContainerResizeDetail,
 } from '../elements/responsive-container/responsive-container.react.js';
 export {
+    ScatterPlot,
+    type ScatterPlotPoint,
+    type ScatterPlotSeries,
+} from '../elements/scatter-plot/scatter-plot.react.js';
+export {
     ScrollArea,
     type ScrollAreaOrientation,
 } from '../elements/scroll-area/scroll-area.react.js';

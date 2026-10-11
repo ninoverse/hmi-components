@@ -1107,6 +1107,14 @@ export function Example() {
         </section>
 
         <section>
+            <h2>ScatterPlot</h2>
+            <div style="padding-bottom: 2rem">
+                <hmi-scatter-plot id="scatter-live" label="Height versus weight by group" width="560" height="280"></hmi-scatter-plot>
+                <hmi-legend id="scatter-legend" align="start" style="margin-top: 1rem"></hmi-legend>
+            </div>
+        </section>
+
+        <section>
             <h2>List</h2>
             <!-- Items are a property. right-<id> takes rich content; reorderable adds
                  drag and Alt+Arrow reordering, and the page sets items back from
@@ -1588,6 +1596,28 @@ export function Example() {
             document.getElementById('bar-legend').items = [
                 { label: 'Product A', color: 'var(--primary)' },
                 { label: 'Product B', color: 'var(--tertiary)' },
+            ];
+            document.getElementById('scatter-live').series = [
+                {
+                    name: 'Group A',
+                    color: 'var(--primary)',
+                    data: [
+                        { x: 12, y: 22 }, { x: 20, y: 35 }, { x: 28, y: 30 },
+                        { x: 35, y: 48 }, { x: 42, y: 44 }, { x: 50, y: 60 },
+                    ],
+                },
+                {
+                    name: 'Group B',
+                    color: 'var(--tertiary)',
+                    data: [
+                        { x: 15, y: 12 }, { x: 24, y: 18 }, { x: 30, y: 16 },
+                        { x: 38, y: 26 }, { x: 46, y: 22 }, { x: 55, y: 33 },
+                    ],
+                },
+            ];
+            document.getElementById('scatter-legend').items = [
+                { label: 'Group A', color: 'var(--primary)' },
+                { label: 'Group B', color: 'var(--tertiary)' },
             ];
             for (const pager of document.querySelectorAll('hmi-pagination')) {
                 pager.addEventListener('hmi-change', (event) => {
