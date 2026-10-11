@@ -390,6 +390,10 @@
             "types": "./dist/elements/legend/legend.react.d.ts",
             "import": "./dist/react/legend.js"
         },
+        "./react/line-chart": {
+            "types": "./dist/elements/line-chart/line-chart.react.d.ts",
+            "import": "./dist/react/line-chart.js"
+        },
         "./react/link": {
             "types": "./dist/elements/link/link.react.d.ts",
             "import": "./dist/react/link.js"
@@ -738,6 +742,10 @@
         "./wc/legend": {
             "types": "./dist/elements/legend/legend.d.ts",
             "import": "./dist/wc/legend.js"
+        },
+        "./wc/line-chart": {
+            "types": "./dist/elements/line-chart/line-chart.d.ts",
+            "import": "./dist/wc/line-chart.js"
         },
         "./wc/link": {
             "types": "./dist/elements/link/link.d.ts",

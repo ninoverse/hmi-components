@@ -35,7 +35,9 @@ const AXIS = { left: 44, bottom: 28, top: 12, right: 12 };
 
 /** Multi-series Cartesian line chart. Self-contained SVG: plots each series
  *  as a polyline over a shared grid (CartesianGrid) with y-axis value ticks
- *  and x-axis category labels. Pure SVG, zero deps. */
+ *  and x-axis category labels. Pure SVG, zero deps.
+ * @deprecated Use `LineChart` from `@ninoverse/hmi-components/react/line-chart`. Removed in 6.0.0.
+ */
 export function LineChart({
     series,
     labels,

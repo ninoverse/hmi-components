@@ -104,6 +104,10 @@ export {
     type LegendItem,
 } from '../elements/legend/legend.react.js';
 export {
+    LineChart,
+    type LineChartSeries,
+} from '../elements/line-chart/line-chart.react.js';
+export {
     Link,
     type LinkTone,
     type LinkUnderline,

@@ -1083,6 +1083,14 @@ export function Example() {
         </section>
 
         <section>
+            <h2>LineChart</h2>
+            <div style="padding-bottom: 2rem">
+                <hmi-line-chart id="line-live" label="Monthly revenue and costs" width="560" height="280" show-dots></hmi-line-chart>
+                <hmi-legend id="line-legend" align="start" style="margin-top: 1rem"></hmi-legend>
+            </div>
+        </section>
+
+        <section>
             <h2>List</h2>
             <!-- Items are a property. right-<id> takes rich content; reorderable adds
                  drag and Alt+Arrow reordering, and the page sets items back from
@@ -1534,6 +1542,17 @@ export function Example() {
             document.getElementById('spark-up').data = [4, 8, 5, 10, 7, 12, 9, 14];
             document.getElementById('spark-down').data = [14, 9, 11, 6, 8, 4, 5, 2];
             document.getElementById('spark-flat').data = [6, 6, 7, 6, 8, 6, 7, 6];
+            const monthly = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
+            const lineChart = document.getElementById('line-live');
+            lineChart.labels = monthly;
+            lineChart.series = [
+                { name: 'Revenue', data: [32, 40, 38, 50, 47, 60], color: 'var(--primary)' },
+                { name: 'Costs', data: [28, 30, 33, 31, 36, 38], color: 'var(--tertiary)' },
+            ];
+            document.getElementById('line-legend').items = [
+                { label: 'Revenue', color: 'var(--primary)' },
+                { label: 'Costs', color: 'var(--tertiary)' },
+            ];
             for (const pager of document.querySelectorAll('hmi-pagination')) {
                 pager.addEventListener('hmi-change', (event) => {
                     console.log('pagination hmi-change', event.detail);

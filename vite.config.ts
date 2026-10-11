@@ -223,6 +223,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/legend/legend.react.ts',
                 ),
+                'wc/line-chart': resolve(
+                    dirname,
+                    'src/elements/line-chart/line-chart.ts',
+                ),
+                'react/line-chart': resolve(
+                    dirname,
+                    'src/elements/line-chart/line-chart.react.ts',
+                ),
                 'wc/link': resolve(dirname, 'src/elements/link/link.ts'),
                 'react/link': resolve(
                     dirname,

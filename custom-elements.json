@@ -6531,6 +6531,214 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/line-chart/line-chart.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Multi-series Cartesian line chart: each series is a polyline over a shared\nhorizontal grid, with y-axis value ticks and x-axis category labels. A pure\nSVG, with no dependencies. With no `series`, or only empty ones, nothing is\nrendered.\n\nThe value range is 0 to the largest value, unless `min` and `max` say\notherwise. Series colours are any CSS colour, including tokens such as\n`var(--primary)`; every series defaults to the primary colour, so set one per\nseries. The size is the `width` and `height` in px: to fit a container, pass\nthe size from `hmi-responsive-container`.",
+          "name": "HmiLineChart",
+          "cssParts": [
+            {
+              "description": "The `<svg>`.",
+              "name": "base"
+            },
+            {
+              "description": "A horizontal grid line.",
+              "name": "grid-line"
+            },
+            {
+              "description": "A y-axis or x-axis label.",
+              "name": "axis-label"
+            },
+            {
+              "description": "A series' polyline.",
+              "name": "line"
+            },
+            {
+              "description": "A data point, present with `show-dots`.",
+              "name": "dot"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "series",
+              "type": {
+                "text": "LineChartSeries[]"
+              },
+              "default": "[]",
+              "description": "The series to plot. A property only: there is no attribute."
+            },
+            {
+              "kind": "field",
+              "name": "labels",
+              "type": {
+                "text": "string[]"
+              },
+              "default": "[]",
+              "description": "The x-axis category labels. A property only: there is no attribute. Their number should match the data's."
+            },
+            {
+              "kind": "field",
+              "name": "width",
+              "type": {
+                "text": "number"
+              },
+              "default": "520",
+              "description": "SVG width in px.",
+              "attribute": "width"
+            },
+            {
+              "kind": "field",
+              "name": "height",
+              "type": {
+                "text": "number"
+              },
+              "default": "260",
+              "description": "SVG height in px.",
+              "attribute": "height"
+            },
+            {
+              "kind": "field",
+              "name": "min",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "The lower end of the value range. Defaults to 0, or the smallest value if lower.",
+              "attribute": "min"
+            },
+            {
+              "kind": "field",
+              "name": "max",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "The upper end of the value range. Defaults to the largest value.",
+              "attribute": "max"
+            },
+            {
+              "kind": "field",
+              "name": "yTicks",
+              "type": {
+                "text": "number"
+              },
+              "default": "4",
+              "description": "The number of horizontal grid lines, and y-axis ticks, less one.",
+              "attribute": "y-ticks"
+            },
+            {
+              "kind": "field",
+              "name": "showDots",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Draw a dot at each data point.",
+              "attribute": "show-dots"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Line chart'",
+              "description": "The accessible name of the chart.",
+              "attribute": "label"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "width",
+              "type": {
+                "text": "number"
+              },
+              "default": "520",
+              "description": "SVG width in px.",
+              "fieldName": "width"
+            },
+            {
+              "name": "height",
+              "type": {
+                "text": "number"
+              },
+              "default": "260",
+              "description": "SVG height in px.",
+              "fieldName": "height"
+            },
+            {
+              "name": "min",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "The lower end of the value range. Defaults to 0, or the smallest value if lower.",
+              "fieldName": "min"
+            },
+            {
+              "name": "max",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "The upper end of the value range. Defaults to the largest value.",
+              "fieldName": "max"
+            },
+            {
+              "name": "y-ticks",
+              "type": {
+                "text": "number"
+              },
+              "default": "4",
+              "description": "The number of horizontal grid lines, and y-axis ticks, less one.",
+              "fieldName": "yTicks"
+            },
+            {
+              "name": "show-dots",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Draw a dot at each data point.",
+              "fieldName": "showDots"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Line chart'",
+              "description": "The accessible name of the chart.",
+              "fieldName": "label"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-line-chart",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiLineChart",
+          "declaration": {
+            "name": "HmiLineChart",
+            "module": "src/elements/line-chart/line-chart.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-line-chart",
+          "declaration": {
+            "name": "HmiLineChart",
+            "module": "src/elements/line-chart/line-chart.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/link/link.ts",
       "declarations": [
         {
