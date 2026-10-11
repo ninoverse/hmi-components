@@ -1006,6 +1006,191 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/bar-chart/bar-chart.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Multi-series grouped bar chart: a group of bars per category, over a shared\nhorizontal grid, with y-axis value ticks and x-axis category labels. A pure\nSVG, with no dependencies. With no `series`, or only empty ones, nothing is\nrendered.\n\nEach category has an equal slot, which its bars share, with a gap around the\ngroup and a smaller one between the series' bars. The value range is 0 to the\nlargest value, unless `min` and `max` say otherwise, and a negative value's bar\nhangs below zero. A missing value is drawn as zero. Series colours are any CSS\ncolour, including tokens such as `var(--primary)`; every series defaults to the\nprimary colour, so set one per series. The size is the `width` and `height` in\npx: to fit a container, pass the size from `hmi-responsive-container`.",
+          "name": "HmiBarChart",
+          "cssParts": [
+            {
+              "description": "The `<svg>`.",
+              "name": "base"
+            },
+            {
+              "description": "A horizontal grid line.",
+              "name": "grid-line"
+            },
+            {
+              "description": "A y-axis or x-axis label.",
+              "name": "axis-label"
+            },
+            {
+              "description": "One bar.",
+              "name": "bar"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "series",
+              "type": {
+                "text": "BarChartSeries[]"
+              },
+              "default": "[]",
+              "description": "The series to plot. A property only: there is no attribute."
+            },
+            {
+              "kind": "field",
+              "name": "labels",
+              "type": {
+                "text": "string[]"
+              },
+              "default": "[]",
+              "description": "The x-axis category labels. A property only: there is no attribute. Their number should match the data's."
+            },
+            {
+              "kind": "field",
+              "name": "width",
+              "type": {
+                "text": "number"
+              },
+              "default": "520",
+              "description": "SVG width in px.",
+              "attribute": "width"
+            },
+            {
+              "kind": "field",
+              "name": "height",
+              "type": {
+                "text": "number"
+              },
+              "default": "260",
+              "description": "SVG height in px.",
+              "attribute": "height"
+            },
+            {
+              "kind": "field",
+              "name": "min",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "The lower end of the value range. Defaults to 0, or the smallest value if lower.",
+              "attribute": "min"
+            },
+            {
+              "kind": "field",
+              "name": "max",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "The upper end of the value range. Defaults to the largest value.",
+              "attribute": "max"
+            },
+            {
+              "kind": "field",
+              "name": "yTicks",
+              "type": {
+                "text": "number"
+              },
+              "default": "4",
+              "description": "The number of horizontal grid lines, and y-axis ticks, less one.",
+              "attribute": "y-ticks"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Bar chart'",
+              "description": "The accessible name of the chart.",
+              "attribute": "label"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "width",
+              "type": {
+                "text": "number"
+              },
+              "default": "520",
+              "description": "SVG width in px.",
+              "fieldName": "width"
+            },
+            {
+              "name": "height",
+              "type": {
+                "text": "number"
+              },
+              "default": "260",
+              "description": "SVG height in px.",
+              "fieldName": "height"
+            },
+            {
+              "name": "min",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "The lower end of the value range. Defaults to 0, or the smallest value if lower.",
+              "fieldName": "min"
+            },
+            {
+              "name": "max",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "The upper end of the value range. Defaults to the largest value.",
+              "fieldName": "max"
+            },
+            {
+              "name": "y-ticks",
+              "type": {
+                "text": "number"
+              },
+              "default": "4",
+              "description": "The number of horizontal grid lines, and y-axis ticks, less one.",
+              "fieldName": "yTicks"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Bar chart'",
+              "description": "The accessible name of the chart.",
+              "fieldName": "label"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-bar-chart",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiBarChart",
+          "declaration": {
+            "name": "HmiBarChart",
+            "module": "src/elements/bar-chart/bar-chart.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-bar-chart",
+          "declaration": {
+            "name": "HmiBarChart",
+            "module": "src/elements/bar-chart/bar-chart.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/blockquote/blockquote.ts",
       "declarations": [
         {

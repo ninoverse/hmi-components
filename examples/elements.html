@@ -1099,6 +1099,14 @@ export function Example() {
         </section>
 
         <section>
+            <h2>BarChart</h2>
+            <div style="padding-bottom: 2rem">
+                <hmi-bar-chart id="bar-live" label="Quarterly units by product" width="560" height="280"></hmi-bar-chart>
+                <hmi-legend id="bar-legend" align="start" style="margin-top: 1rem"></hmi-legend>
+            </div>
+        </section>
+
+        <section>
             <h2>List</h2>
             <!-- Items are a property. right-<id> takes rich content; reorderable adds
                  drag and Alt+Arrow reordering, and the page sets items back from
@@ -1570,6 +1578,16 @@ export function Example() {
             document.getElementById('area-legend').items = [
                 { label: 'Pro', color: 'var(--primary)' },
                 { label: 'Free', color: 'var(--tertiary)' },
+            ];
+            const barChart = document.getElementById('bar-live');
+            barChart.labels = ['Q1', 'Q2', 'Q3', 'Q4'];
+            barChart.series = [
+                { name: 'Product A', data: [42, 55, 48, 63], color: 'var(--primary)' },
+                { name: 'Product B', data: [30, 38, 44, 40], color: 'var(--tertiary)' },
+            ];
+            document.getElementById('bar-legend').items = [
+                { label: 'Product A', color: 'var(--primary)' },
+                { label: 'Product B', color: 'var(--tertiary)' },
             ];
             for (const pager of document.querySelectorAll('hmi-pagination')) {
                 pager.addEventListener('hmi-change', (event) => {

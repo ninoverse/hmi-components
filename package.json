@@ -306,6 +306,10 @@
             "types": "./dist/elements/banner/banner.react.d.ts",
             "import": "./dist/react/banner.js"
         },
+        "./react/bar-chart": {
+            "types": "./dist/elements/bar-chart/bar-chart.react.d.ts",
+            "import": "./dist/react/bar-chart.js"
+        },
         "./react/blockquote": {
             "types": "./dist/elements/blockquote/blockquote.react.d.ts",
             "import": "./dist/react/blockquote.js"
@@ -662,6 +666,10 @@
         "./wc/banner": {
             "types": "./dist/elements/banner/banner.d.ts",
             "import": "./dist/wc/banner.js"
+        },
+        "./wc/bar-chart": {
+            "types": "./dist/elements/bar-chart/bar-chart.d.ts",
+            "import": "./dist/wc/bar-chart.js"
         },
         "./wc/blockquote": {
             "types": "./dist/elements/blockquote/blockquote.d.ts",

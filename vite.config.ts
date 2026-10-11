@@ -94,6 +94,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/banner/banner.react.ts',
                 ),
+                'wc/bar-chart': resolve(
+                    dirname,
+                    'src/elements/bar-chart/bar-chart.ts',
+                ),
+                'react/bar-chart': resolve(
+                    dirname,
+                    'src/elements/bar-chart/bar-chart.react.ts',
+                ),
                 'wc/blockquote': resolve(
                     dirname,
                     'src/elements/blockquote/blockquote.ts',

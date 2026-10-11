@@ -33,7 +33,9 @@ const AXIS = { left: 44, bottom: 28, top: 12, right: 12 };
 
 /** Multi-series grouped bar chart. Self-contained SVG: groups of bars per
  *  category over a shared horizontal grid (CartesianGrid), with y-axis value
- *  ticks and x-axis category labels. Pure SVG, zero deps. */
+ *  ticks and x-axis category labels. Pure SVG, zero deps.
+ * @deprecated Use `BarChart` from `@ninoverse/hmi-components/react/bar-chart`. Removed in 6.0.0.
+ */
 export function BarChart({
     series,
     labels,

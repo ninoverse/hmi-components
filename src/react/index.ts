@@ -25,6 +25,10 @@ export {
     type BannerDismissDetail,
     type BannerVariant,
 } from '../elements/banner/banner.react.js';
+export {
+    BarChart,
+    type BarChartSeries,
+} from '../elements/bar-chart/bar-chart.react.js';
 export { Blockquote } from '../elements/blockquote/blockquote.react.js';
 export {
     Box,

@@ -10,6 +10,7 @@ export * from './avatar/avatar.js';
 export * from './avatar-stack/avatar-stack.js';
 export * from './badge/badge.js';
 export * from './banner/banner.js';
+export * from './bar-chart/bar-chart.js';
 export * from './blockquote/blockquote.js';
 export * from './box/box.js';
 export * from './breadcrumbs/breadcrumbs.js';
