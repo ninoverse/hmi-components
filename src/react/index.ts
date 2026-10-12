@@ -102,6 +102,7 @@ export {
     type HeadingSize,
     type HeadingTone,
 } from '../elements/heading/heading.react.js';
+export { Heatmap } from '../elements/heatmap/heatmap.react.js';
 export {
     Image,
     type ImageErrorDetail,

@@ -246,6 +246,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/heading/heading.react.ts',
                 ),
+                'wc/heatmap': resolve(
+                    dirname,
+                    'src/elements/heatmap/heatmap.ts',
+                ),
+                'react/heatmap': resolve(
+                    dirname,
+                    'src/elements/heatmap/heatmap.react.ts',
+                ),
                 'wc/image': resolve(dirname, 'src/elements/image/image.ts'),
                 'react/image': resolve(
                     dirname,

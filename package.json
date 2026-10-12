@@ -394,6 +394,10 @@
             "types": "./dist/elements/heading/heading.react.d.ts",
             "import": "./dist/react/heading.js"
         },
+        "./react/heatmap": {
+            "types": "./dist/elements/heatmap/heatmap.react.d.ts",
+            "import": "./dist/react/heatmap.js"
+        },
         "./react/image": {
             "types": "./dist/elements/image/image.react.d.ts",
             "import": "./dist/react/image.js"
@@ -774,6 +778,10 @@
         "./wc/heading": {
             "types": "./dist/elements/heading/heading.d.ts",
             "import": "./dist/wc/heading.js"
+        },
+        "./wc/heatmap": {
+            "types": "./dist/elements/heatmap/heatmap.d.ts",
+            "import": "./dist/wc/heatmap.js"
         },
         "./wc/image": {
             "types": "./dist/elements/image/image.d.ts",

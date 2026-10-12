@@ -1149,6 +1149,13 @@ export function Example() {
         </section>
 
         <section>
+            <h2>Heatmap</h2>
+            <div style="padding-bottom: 2rem">
+                <hmi-heatmap id="heatmap-live" label="Weekly activity by hour" show-values></hmi-heatmap>
+            </div>
+        </section>
+
+        <section>
             <h2>List</h2>
             <!-- Items are a property. right-<id> takes rich content; reorderable adds
                  drag and Alt+Arrow reordering, and the page sets items back from
@@ -1683,6 +1690,14 @@ export function Example() {
                 { label: 'Signed up', value: 820 },
                 { label: 'Activated', value: 540 },
                 { label: 'Subscribed', value: 210 },
+            ];
+            const heatmap = document.getElementById('heatmap-live');
+            heatmap.xLabels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
+            heatmap.yLabels = ['Morning', 'Midday', 'Evening'];
+            heatmap.data = [
+                [4, 8, 6, 12, 9],
+                [14, 18, 22, 20, 16],
+                [7, 11, 9, 15, 24],
             ];
             for (const pager of document.querySelectorAll('hmi-pagination')) {
                 pager.addEventListener('hmi-change', (event) => {

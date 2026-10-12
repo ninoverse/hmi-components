@@ -6016,6 +6016,219 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/heatmap/heatmap.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Matrix heatmap: a grid of cells whose intensity maps to each value, with\noptional row and column labels. A pure SVG, with no dependencies. With an\nempty `data`, nothing is rendered.\n\nThe intensity is the cell colour's opacity, from faint at the lowest value to\nsolid at the highest; `min` and `max` fix the ends of that scale, which is\notherwise the data's extent. `color` is any CSS colour, including a token such\nas `var(--primary)`. The size follows from `cell-size`, `gap`, the number of\nrows and columns and whether there are labels, so it has no width or height of\nits own.",
+          "name": "HmiHeatmap",
+          "cssParts": [
+            {
+              "description": "The `<svg>`.",
+              "name": "base"
+            },
+            {
+              "description": "A row or column label.",
+              "name": "axis-label"
+            },
+            {
+              "description": "One cell.",
+              "name": "cell"
+            },
+            {
+              "description": "One cell's value, present with `show-values`.",
+              "name": "value"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "data",
+              "type": {
+                "text": "number[][]"
+              },
+              "default": "[]",
+              "description": "The values, row by row: each inner array is one row. A property only: there is no attribute."
+            },
+            {
+              "kind": "field",
+              "name": "xLabels",
+              "type": {
+                "text": "string[]"
+              },
+              "default": "[]",
+              "description": "The column labels, one per column. A property only: there is no attribute."
+            },
+            {
+              "kind": "field",
+              "name": "yLabels",
+              "type": {
+                "text": "string[]"
+              },
+              "default": "[]",
+              "description": "The row labels, one per row. A property only: there is no attribute."
+            },
+            {
+              "kind": "field",
+              "name": "color",
+              "type": {
+                "text": "string"
+              },
+              "default": "'var(--primary)'",
+              "description": "The cell colour: any CSS colour, including a token. Its opacity carries the intensity.",
+              "attribute": "color"
+            },
+            {
+              "kind": "field",
+              "name": "min",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "The value at the faintest cell. Defaults to the smallest value.",
+              "attribute": "min"
+            },
+            {
+              "kind": "field",
+              "name": "max",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "The value at the solid cell. Defaults to the largest value.",
+              "attribute": "max"
+            },
+            {
+              "kind": "field",
+              "name": "cellSize",
+              "type": {
+                "text": "number"
+              },
+              "default": "40",
+              "description": "The edge of a cell in px.",
+              "attribute": "cell-size"
+            },
+            {
+              "kind": "field",
+              "name": "gap",
+              "type": {
+                "text": "number"
+              },
+              "default": "4",
+              "description": "The gap between cells in px.",
+              "attribute": "gap"
+            },
+            {
+              "kind": "field",
+              "name": "showValues",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Prints each cell's value at its centre.",
+              "attribute": "show-values"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Heatmap'",
+              "description": "The accessible name of the chart.",
+              "attribute": "label"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "color",
+              "type": {
+                "text": "string"
+              },
+              "default": "'var(--primary)'",
+              "description": "The cell colour: any CSS colour, including a token. Its opacity carries the intensity.",
+              "fieldName": "color"
+            },
+            {
+              "name": "min",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "The value at the faintest cell. Defaults to the smallest value.",
+              "fieldName": "min"
+            },
+            {
+              "name": "max",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "The value at the solid cell. Defaults to the largest value.",
+              "fieldName": "max"
+            },
+            {
+              "name": "cell-size",
+              "type": {
+                "text": "number"
+              },
+              "default": "40",
+              "description": "The edge of a cell in px.",
+              "fieldName": "cellSize"
+            },
+            {
+              "name": "gap",
+              "type": {
+                "text": "number"
+              },
+              "default": "4",
+              "description": "The gap between cells in px.",
+              "fieldName": "gap"
+            },
+            {
+              "name": "show-values",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Prints each cell's value at its centre.",
+              "fieldName": "showValues"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Heatmap'",
+              "description": "The accessible name of the chart.",
+              "fieldName": "label"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-heatmap",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiHeatmap",
+          "declaration": {
+            "name": "HmiHeatmap",
+            "module": "src/elements/heatmap/heatmap.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-heatmap",
+          "declaration": {
+            "name": "HmiHeatmap",
+            "module": "src/elements/heatmap/heatmap.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/image/image.ts",
       "declarations": [
         {

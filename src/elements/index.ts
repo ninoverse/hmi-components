@@ -32,6 +32,7 @@ export * from './form-control/form-control.js';
 export * from './funnel-chart/funnel-chart.js';
 export * from './grid/grid.js';
 export * from './heading/heading.js';
+export * from './heatmap/heatmap.js';
 export * from './image/image.js';
 export * from './input/input.js';
 export * from './kbd/kbd.js';
