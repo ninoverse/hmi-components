@@ -11750,6 +11750,176 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/radar-chart/radar-chart.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Radar (spider) chart: each series is a closed polygon over a polar grid of\nconcentric rings and radial spokes, one spoke per axis. A pure SVG, with no\ndependencies. With fewer than three `axes`, or no values, nothing is rendered.\n\nThe value range is 0, or the smallest value if lower, to the largest value,\nunless `min` and `max` say otherwise. Series with no `color` take the default\npalette, the primary, tertiary, secondary, success, warning and error tokens\nin turn, so a legend beside the chart has to list the same colours. The size\nis `size` in px, the width and the height both.",
+          "name": "HmiRadarChart",
+          "cssParts": [
+            {
+              "description": "The `<svg>`.",
+              "name": "base"
+            },
+            {
+              "description": "One concentric grid ring.",
+              "name": "ring"
+            },
+            {
+              "description": "One radial spoke.",
+              "name": "spoke"
+            },
+            {
+              "description": "One axis label.",
+              "name": "axis-label"
+            },
+            {
+              "description": "One series polygon.",
+              "name": "area"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "axes",
+              "type": {
+                "text": "string[]"
+              },
+              "default": "[]",
+              "description": "The axis labels, one per spoke. A property only: there is no attribute."
+            },
+            {
+              "kind": "field",
+              "name": "series",
+              "type": {
+                "text": "RadarChartSeries[]"
+              },
+              "default": "[]",
+              "description": "The series to plot. A property only: there is no attribute."
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "number"
+              },
+              "default": "300",
+              "description": "The width and height in px.",
+              "attribute": "size"
+            },
+            {
+              "kind": "field",
+              "name": "min",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "The value at the centre. Defaults to 0, or the smallest value if lower.",
+              "attribute": "min"
+            },
+            {
+              "kind": "field",
+              "name": "max",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "The value at the outer ring. Defaults to the largest value.",
+              "attribute": "max"
+            },
+            {
+              "kind": "field",
+              "name": "rings",
+              "type": {
+                "text": "number"
+              },
+              "default": "4",
+              "description": "The number of concentric grid rings.",
+              "attribute": "rings"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Radar chart'",
+              "description": "The accessible name of the chart.",
+              "attribute": "label"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "size",
+              "type": {
+                "text": "number"
+              },
+              "default": "300",
+              "description": "The width and height in px.",
+              "fieldName": "size"
+            },
+            {
+              "name": "min",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "The value at the centre. Defaults to 0, or the smallest value if lower.",
+              "fieldName": "min"
+            },
+            {
+              "name": "max",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "The value at the outer ring. Defaults to the largest value.",
+              "fieldName": "max"
+            },
+            {
+              "name": "rings",
+              "type": {
+                "text": "number"
+              },
+              "default": "4",
+              "description": "The number of concentric grid rings.",
+              "fieldName": "rings"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Radar chart'",
+              "description": "The accessible name of the chart.",
+              "fieldName": "label"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-radar-chart",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiRadarChart",
+          "declaration": {
+            "name": "HmiRadarChart",
+            "module": "src/elements/radar-chart/radar-chart.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-radar-chart",
+          "declaration": {
+            "name": "HmiRadarChart",
+            "module": "src/elements/radar-chart/radar-chart.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/radio-group/radio-group.ts",
       "declarations": [
         {

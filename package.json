@@ -446,6 +446,10 @@
             "types": "./dist/elements/progress/progress.react.d.ts",
             "import": "./dist/react/progress.js"
         },
+        "./react/radar-chart": {
+            "types": "./dist/elements/radar-chart/radar-chart.react.d.ts",
+            "import": "./dist/react/radar-chart.js"
+        },
         "./react/radio": {
             "types": "./dist/elements/radio/radio.react.d.ts",
             "import": "./dist/react/radio.js"
@@ -818,6 +822,10 @@
         "./wc/progress": {
             "types": "./dist/elements/progress/progress.d.ts",
             "import": "./dist/wc/progress.js"
+        },
+        "./wc/radar-chart": {
+            "types": "./dist/elements/radar-chart/radar-chart.d.ts",
+            "import": "./dist/wc/radar-chart.js"
         },
         "./wc/radio": {
             "types": "./dist/elements/radio/radio.d.ts",

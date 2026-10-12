@@ -1134,6 +1134,14 @@ export function Example() {
         </section>
 
         <section>
+            <h2>RadarChart</h2>
+            <div style="padding-bottom: 2rem">
+                <hmi-radar-chart id="radar-live" label="Skill assessment by candidate" size="340"></hmi-radar-chart>
+                <hmi-legend id="radar-legend" align="start" style="margin-top: 1rem"></hmi-legend>
+            </div>
+        </section>
+
+        <section>
             <h2>List</h2>
             <!-- Items are a property. right-<id> takes rich content; reorderable adds
                  drag and Alt+Arrow reordering, and the page sets items back from
@@ -1652,6 +1660,16 @@ export function Example() {
                 { label: 'Search', color: 'var(--tertiary)' },
                 { label: 'Social', color: 'var(--secondary)' },
                 { label: 'Referral', color: 'var(--success)' },
+            ];
+            const radar = document.getElementById('radar-live');
+            radar.axes = ['Speed', 'Power', 'Range', 'Defense', 'Control', 'Stamina'];
+            radar.series = [
+                { name: 'Alpha', data: [80, 65, 70, 55, 90, 60], color: 'var(--primary)' },
+                { name: 'Beta', data: [55, 80, 45, 75, 60, 85], color: 'var(--tertiary)' },
+            ];
+            document.getElementById('radar-legend').items = [
+                { label: 'Alpha', color: 'var(--primary)' },
+                { label: 'Beta', color: 'var(--tertiary)' },
             ];
             for (const pager of document.querySelectorAll('hmi-pagination')) {
                 pager.addEventListener('hmi-change', (event) => {

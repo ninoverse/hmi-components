@@ -155,6 +155,10 @@ export {
 } from '../elements/password-input/password-input.react.js';
 export { Progress } from '../elements/progress/progress.react.js';
 export {
+    RadarChart,
+    type RadarChartSeries,
+} from '../elements/radar-chart/radar-chart.react.js';
+export {
     Radio,
     type RadioChangeDetail,
 } from '../elements/radio/radio.react.js';

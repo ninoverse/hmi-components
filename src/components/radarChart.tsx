@@ -42,7 +42,9 @@ const polar = (cx: number, cy: number, r: number, i: number, n: number) => {
 };
 
 /** Radar (spider) chart. Plots each series as a closed polygon over a polar
- *  grid of concentric rings and radial spokes. Pure SVG, zero deps. */
+ *  grid of concentric rings and radial spokes. Pure SVG, zero deps.
+ * @deprecated Use `RadarChart` from `@ninoverse/hmi-components/react/radar-chart`. Removed in 6.0.0.
+ */
 export function RadarChart({
     axes,
     series,

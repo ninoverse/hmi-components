@@ -323,6 +323,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/progress/progress.react.ts',
                 ),
+                'wc/radar-chart': resolve(
+                    dirname,
+                    'src/elements/radar-chart/radar-chart.ts',
+                ),
+                'react/radar-chart': resolve(
+                    dirname,
+                    'src/elements/radar-chart/radar-chart.react.ts',
+                ),
                 'wc/radio': resolve(dirname, 'src/elements/radio/radio.ts'),
                 'react/radio': resolve(
                     dirname,
