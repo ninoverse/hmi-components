@@ -5797,6 +5797,249 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/gauge/gauge.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Semicircular gauge: a value arc fills a 180° track from left to right, with\na caption under the dial. A pure SVG, with no dependencies.\n\n`value` is clamped to `min` and `max`. The caption is the `caption` slot, and\nwith nothing slotted it is the value itself; `hide-value` removes that default,\nso the gauge is just the dial. The caption is real text, set in the display\nfont under the dial. The size is `size` in px, the width: the height follows\nfrom it, and grows by the caption's room when there is one.",
+          "name": "HmiGauge",
+          "cssParts": [
+            {
+              "description": "The wrapper around the dial and its caption.",
+              "name": "base"
+            },
+            {
+              "description": "The unfilled arc.",
+              "name": "track"
+            },
+            {
+              "description": "The filled arc, present once the value is above `min`.",
+              "name": "value"
+            },
+            {
+              "description": "The box under the dial, present with a caption.",
+              "name": "caption"
+            }
+          ],
+          "slots": [
+            {
+              "description": "The text under the dial. Defaults to the value.",
+              "name": "caption"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "The current value, clamped to `min` and `max`.",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "min",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "The lower end of the scale.",
+              "attribute": "min"
+            },
+            {
+              "kind": "field",
+              "name": "max",
+              "type": {
+                "text": "number"
+              },
+              "default": "100",
+              "description": "The upper end of the scale.",
+              "attribute": "max"
+            },
+            {
+              "kind": "field",
+              "name": "color",
+              "type": {
+                "text": "string"
+              },
+              "default": "'var(--primary)'",
+              "description": "The value arc's colour: any CSS colour, including a token.",
+              "attribute": "color"
+            },
+            {
+              "kind": "field",
+              "name": "trackColor",
+              "type": {
+                "text": "string"
+              },
+              "default": "'var(--surface-container-highest)'",
+              "description": "The track's colour: any CSS colour, including a token.",
+              "attribute": "track-color"
+            },
+            {
+              "kind": "field",
+              "name": "thickness",
+              "type": {
+                "text": "number"
+              },
+              "default": "0.22",
+              "description": "The arc's thickness, as a fraction of the radius (0 to 1).",
+              "attribute": "thickness"
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "number"
+              },
+              "default": "200",
+              "description": "The width in px; the height follows from it.",
+              "attribute": "size"
+            },
+            {
+              "kind": "field",
+              "name": "hideValue",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Removes the value as the default caption: with no slotted caption, the gauge is just the dial.",
+              "attribute": "hide-value"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The accessible name of the gauge. Defaults to `Gauge: {value} of {max}`.",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "hasCaption",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "The current value, clamped to `min` and `max`.",
+              "fieldName": "value"
+            },
+            {
+              "name": "min",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "The lower end of the scale.",
+              "fieldName": "min"
+            },
+            {
+              "name": "max",
+              "type": {
+                "text": "number"
+              },
+              "default": "100",
+              "description": "The upper end of the scale.",
+              "fieldName": "max"
+            },
+            {
+              "name": "color",
+              "type": {
+                "text": "string"
+              },
+              "default": "'var(--primary)'",
+              "description": "The value arc's colour: any CSS colour, including a token.",
+              "fieldName": "color"
+            },
+            {
+              "name": "track-color",
+              "type": {
+                "text": "string"
+              },
+              "default": "'var(--surface-container-highest)'",
+              "description": "The track's colour: any CSS colour, including a token.",
+              "fieldName": "trackColor"
+            },
+            {
+              "name": "thickness",
+              "type": {
+                "text": "number"
+              },
+              "default": "0.22",
+              "description": "The arc's thickness, as a fraction of the radius (0 to 1).",
+              "fieldName": "thickness"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "number"
+              },
+              "default": "200",
+              "description": "The width in px; the height follows from it.",
+              "fieldName": "size"
+            },
+            {
+              "name": "hide-value",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Removes the value as the default caption: with no slotted caption, the gauge is just the dial.",
+              "fieldName": "hideValue"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The accessible name of the gauge. Defaults to `Gauge: {value} of {max}`.",
+              "fieldName": "label"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-gauge",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiGauge",
+          "declaration": {
+            "name": "HmiGauge",
+            "module": "src/elements/gauge/gauge.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-gauge",
+          "declaration": {
+            "name": "HmiGauge",
+            "module": "src/elements/gauge/gauge.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/grid/grid.ts",
       "declarations": [
         {

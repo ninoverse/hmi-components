@@ -386,6 +386,10 @@
             "types": "./dist/elements/funnel-chart/funnel-chart.react.d.ts",
             "import": "./dist/react/funnel-chart.js"
         },
+        "./react/gauge": {
+            "types": "./dist/elements/gauge/gauge.react.d.ts",
+            "import": "./dist/react/gauge.js"
+        },
         "./react/grid": {
             "types": "./dist/elements/grid/grid.react.d.ts",
             "import": "./dist/react/grid.js"
@@ -770,6 +774,10 @@
         "./wc/funnel-chart": {
             "types": "./dist/elements/funnel-chart/funnel-chart.d.ts",
             "import": "./dist/wc/funnel-chart.js"
+        },
+        "./wc/gauge": {
+            "types": "./dist/elements/gauge/gauge.d.ts",
+            "import": "./dist/wc/gauge.js"
         },
         "./wc/grid": {
             "types": "./dist/elements/grid/grid.d.ts",

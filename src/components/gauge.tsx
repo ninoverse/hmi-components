@@ -45,7 +45,9 @@ const arcPath = (
 };
 
 /** Semicircular gauge dial. A value arc fills a 180° track from left to right;
- *  an optional label sits beneath. Pure SVG arc math, zero deps. */
+ *  an optional label sits beneath. Pure SVG arc math, zero deps.
+ * @deprecated Use `Gauge` from `@ninoverse/hmi-components/react/gauge`. Removed in 6.0.0.
+ */
 export function Gauge({
     value,
     min = 0,

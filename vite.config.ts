@@ -233,6 +233,11 @@ export default defineConfig({
                     dirname,
                     'src/elements/funnel-chart/funnel-chart.react.ts',
                 ),
+                'wc/gauge': resolve(dirname, 'src/elements/gauge/gauge.ts'),
+                'react/gauge': resolve(
+                    dirname,
+                    'src/elements/gauge/gauge.react.ts',
+                ),
                 'wc/grid': resolve(dirname, 'src/elements/grid/grid.ts'),
                 'react/grid': resolve(
                     dirname,

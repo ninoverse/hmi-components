@@ -30,6 +30,7 @@ export * from './file-upload/file-upload.js';
 export * from './flex/flex.js';
 export * from './form-control/form-control.js';
 export * from './funnel-chart/funnel-chart.js';
+export * from './gauge/gauge.js';
 export * from './grid/grid.js';
 export * from './heading/heading.js';
 export * from './heatmap/heatmap.js';
