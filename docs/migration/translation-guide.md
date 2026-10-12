@@ -125,11 +125,12 @@ this applies to (from the v5 sources):
 | blockquote | `cite` | `cite` |
 | button | `leftIcon`, `rightIcon` | `left-icon`, `right-icon` |
 | card | `header`, `footer` | `header`, `footer` |
-| checkbox, radio, switch, meter, gauge, tooltip | `label` | `label` |
+| checkbox, radio, switch, meter, tooltip | `label` | `label` |
 | chip, value-scale-selector | `icon` | `icon` |
 | combobox, command-palette | `emptyMessage` | `empty` |
 | context-menu | `menu` | `menu` |
 | donut-chart | `centerLabel` | `center-label` |
+| gauge | `label` | `caption` |
 | drawer, modal | `title`, `description`, `actions` | `title`, `description`, `actions` |
 | confirm-dialog | `title`, `description`, `confirmLabel`, `cancelLabel` | `title`, `description`, `confirm-label`, `cancel-label` |
 | empty-state | `icon`, `title`, `description`, `action` | `icon`, `title`, `description`, `action` |
@@ -639,6 +640,15 @@ The charts are pure functions of props and port almost verbatim:
 - `Legend` and `ChartTooltip` stay standalone; the tooltip is a panel-like element
   (`--panel-ink-bg`), and its `title` is `heading`, since a `title` property would
   collide with the native `title` attribute.
+- On every chart `aria-label` becomes `label`, the accessible name. Where v5's
+  `label` was visible text, it is renamed `caption`: a string attribute on
+  `hmi-bullet-chart`, a slot on `hmi-gauge`, whose default caption is the value
+  (`hide-value` removes it).
+- `foreignObject` content (the donut's `centerLabel`, v5) becomes an HTML box over
+  the SVG holding the slot, so it is real text for assistive technology. Such an
+  element's `base` part is the wrapper `<div>`, and the `<svg>` has no part.
+- Charts that colour per item (donut, radar, funnel) default to the six palette
+  tokens in turn: `paletteColor(index)` in `src/elements/shared/chart.ts`.
 
 ## 15. Theme module
 
