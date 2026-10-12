@@ -73,6 +73,10 @@ export {
     type DividerAlign,
     type DividerOrientation,
 } from '../elements/divider/divider.react.js';
+export {
+    DonutChart,
+    type DonutChartSegment,
+} from '../elements/donut-chart/donut-chart.react.js';
 export { EmptyState } from '../elements/empty-state/empty-state.react.js';
 export {
     type FileDescriptor,
@@ -87,6 +91,11 @@ export {
     type FlexJustify,
 } from '../elements/flex/flex.react.js';
 export { FormControl } from '../elements/form-control/form-control.react.js';
+export {
+    FunnelChart,
+    type FunnelChartStage,
+} from '../elements/funnel-chart/funnel-chart.react.js';
+export { Gauge } from '../elements/gauge/gauge.react.js';
 export { Grid, type GridGap } from '../elements/grid/grid.react.js';
 export {
     Heading,
@@ -94,6 +103,7 @@ export {
     type HeadingSize,
     type HeadingTone,
 } from '../elements/heading/heading.react.js';
+export { Heatmap } from '../elements/heatmap/heatmap.react.js';
 export {
     Image,
     type ImageErrorDetail,
@@ -150,6 +160,10 @@ export {
     type PasswordInputValueDetail,
 } from '../elements/password-input/password-input.react.js';
 export { Progress } from '../elements/progress/progress.react.js';
+export {
+    RadarChart,
+    type RadarChartSeries,
+} from '../elements/radar-chart/radar-chart.react.js';
 export {
     Radio,
     type RadioChangeDetail,

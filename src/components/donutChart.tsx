@@ -42,7 +42,9 @@ const polar = (cx: number, cy: number, r: number, deg: number) => {
 
 /** Donut (ring) chart. Each segment is an SVG arc sized by its share of the
  *  total, with a hole in the centre for an optional summary label. Pure SVG
- *  arc math, zero deps, tokens-driven palette. */
+ *  arc math, zero deps, tokens-driven palette.
+ * @deprecated Use `DonutChart` from `@ninoverse/hmi-components/react/donut-chart`. Removed in 6.0.0.
+ */
 export function DonutChart({
     segments,
     size = 220,

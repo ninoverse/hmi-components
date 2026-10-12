@@ -38,7 +38,9 @@ const PALETTE = [
 /** Funnel chart. Stacks centred trapezoid bands that narrow from stage to
  *  stage, so each band's width maps to its value. Stage labels sit in a
  *  right-hand column so they stay legible whatever the band width.
- *  Pure SVG, zero deps. */
+ *  Pure SVG, zero deps.
+ * @deprecated Use `FunnelChart` from `@ninoverse/hmi-components/react/funnel-chart`. Removed in 6.0.0.
+ */
 export function FunnelChart({
     stages,
     width = 500,

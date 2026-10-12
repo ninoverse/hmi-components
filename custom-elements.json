@@ -4188,6 +4188,150 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/donut-chart/donut-chart.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Donut (ring) chart: each segment is an arc sized by its share of the total,\nwith a hole in the middle for a summary. A pure SVG, with no dependencies.\nWith no `segments`, or a total of zero, nothing is rendered.\n\nSegments with no `color` take the default palette, the primary, tertiary,\nsecondary, success, warning and error tokens in turn, so a legend beside the\nchart has to list the same colours. The slotted `center-label` fills the hole,\ntypically a total, and is real text: unlike v5, it is read by assistive\ntechnology. The size is `size` in px, the width and the height both.",
+          "name": "HmiDonutChart",
+          "cssParts": [
+            {
+              "description": "The wrapper around the chart and its centre.",
+              "name": "base"
+            },
+            {
+              "description": "One arc.",
+              "name": "segment"
+            },
+            {
+              "description": "The box over the hole, present with a `center-label`.",
+              "name": "center"
+            }
+          ],
+          "slots": [
+            {
+              "description": "The content of the hole.",
+              "name": "center-label"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "segments",
+              "type": {
+                "text": "DonutChartSegment[]"
+              },
+              "default": "[]",
+              "description": "The segments around the ring. A property only: there is no attribute."
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "number"
+              },
+              "default": "220",
+              "description": "The width and height in px.",
+              "attribute": "size"
+            },
+            {
+              "kind": "field",
+              "name": "thickness",
+              "type": {
+                "text": "number"
+              },
+              "default": "0.32",
+              "description": "The ring's thickness, as a fraction of the radius (0 to 1).",
+              "attribute": "thickness"
+            },
+            {
+              "kind": "field",
+              "name": "gap",
+              "type": {
+                "text": "number"
+              },
+              "default": "2",
+              "description": "The gap between segments, in degrees.",
+              "attribute": "gap"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Donut chart'",
+              "description": "The accessible name of the chart.",
+              "attribute": "label"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "size",
+              "type": {
+                "text": "number"
+              },
+              "default": "220",
+              "description": "The width and height in px.",
+              "fieldName": "size"
+            },
+            {
+              "name": "thickness",
+              "type": {
+                "text": "number"
+              },
+              "default": "0.32",
+              "description": "The ring's thickness, as a fraction of the radius (0 to 1).",
+              "fieldName": "thickness"
+            },
+            {
+              "name": "gap",
+              "type": {
+                "text": "number"
+              },
+              "default": "2",
+              "description": "The gap between segments, in degrees.",
+              "fieldName": "gap"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Donut chart'",
+              "description": "The accessible name of the chart.",
+              "fieldName": "label"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-donut-chart",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiDonutChart",
+          "declaration": {
+            "name": "HmiDonutChart",
+            "module": "src/elements/donut-chart/donut-chart.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-donut-chart",
+          "declaration": {
+            "name": "HmiDonutChart",
+            "module": "src/elements/donut-chart/donut-chart.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/empty-state/empty-state.ts",
       "declarations": [
         {
@@ -5477,6 +5621,425 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/funnel-chart/funnel-chart.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Funnel chart: centred trapezoid bands stacked from the widest stage down,\neach narrowing towards the next, so a band's width maps to its value. The\nstage labels sit in a column on the right, so they stay legible whatever the\nband's width. A pure SVG, with no dependencies. With no `stages`, nothing is\nrendered.\n\n`show-values` adds each stage's value and its share of the largest stage to\nits label. Stages with no `color` take the default palette, the primary,\ntertiary, secondary, success, warning and error tokens in turn. The size is\nthe `width` and `height` in px, the label column included.",
+          "name": "HmiFunnelChart",
+          "cssParts": [
+            {
+              "description": "The `<svg>`.",
+              "name": "base"
+            },
+            {
+              "description": "One stage's trapezoid.",
+              "name": "band"
+            },
+            {
+              "description": "One stage's label.",
+              "name": "stage-label"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "stages",
+              "type": {
+                "text": "FunnelChartStage[]"
+              },
+              "default": "[]",
+              "description": "The stages, from the widest at the top down. A property only: there is no attribute."
+            },
+            {
+              "kind": "field",
+              "name": "width",
+              "type": {
+                "text": "number"
+              },
+              "default": "500",
+              "description": "SVG width in px.",
+              "attribute": "width"
+            },
+            {
+              "kind": "field",
+              "name": "height",
+              "type": {
+                "text": "number"
+              },
+              "default": "280",
+              "description": "SVG height in px.",
+              "attribute": "height"
+            },
+            {
+              "kind": "field",
+              "name": "gap",
+              "type": {
+                "text": "number"
+              },
+              "default": "4",
+              "description": "The vertical gap between the bands in px.",
+              "attribute": "gap"
+            },
+            {
+              "kind": "field",
+              "name": "labelWidth",
+              "type": {
+                "text": "number"
+              },
+              "default": "180",
+              "description": "The width reserved for the label column on the right, in px.",
+              "attribute": "label-width"
+            },
+            {
+              "kind": "field",
+              "name": "showValues",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Appends each stage's value and its share of the largest stage to its label.",
+              "attribute": "show-values"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Funnel chart'",
+              "description": "The accessible name of the chart.",
+              "attribute": "label"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "width",
+              "type": {
+                "text": "number"
+              },
+              "default": "500",
+              "description": "SVG width in px.",
+              "fieldName": "width"
+            },
+            {
+              "name": "height",
+              "type": {
+                "text": "number"
+              },
+              "default": "280",
+              "description": "SVG height in px.",
+              "fieldName": "height"
+            },
+            {
+              "name": "gap",
+              "type": {
+                "text": "number"
+              },
+              "default": "4",
+              "description": "The vertical gap between the bands in px.",
+              "fieldName": "gap"
+            },
+            {
+              "name": "label-width",
+              "type": {
+                "text": "number"
+              },
+              "default": "180",
+              "description": "The width reserved for the label column on the right, in px.",
+              "fieldName": "labelWidth"
+            },
+            {
+              "name": "show-values",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Appends each stage's value and its share of the largest stage to its label.",
+              "fieldName": "showValues"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Funnel chart'",
+              "description": "The accessible name of the chart.",
+              "fieldName": "label"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-funnel-chart",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiFunnelChart",
+          "declaration": {
+            "name": "HmiFunnelChart",
+            "module": "src/elements/funnel-chart/funnel-chart.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-funnel-chart",
+          "declaration": {
+            "name": "HmiFunnelChart",
+            "module": "src/elements/funnel-chart/funnel-chart.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/elements/gauge/gauge.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Semicircular gauge: a value arc fills a 180° track from left to right, with\na caption under the dial. A pure SVG, with no dependencies.\n\n`value` is clamped to `min` and `max`. The caption is the `caption` slot, and\nwith nothing slotted it is the value itself; `hide-value` removes that default,\nso the gauge is just the dial. The caption is real text, set in the display\nfont under the dial. The size is `size` in px, the width: the height follows\nfrom it, and grows by the caption's room when there is one.",
+          "name": "HmiGauge",
+          "cssParts": [
+            {
+              "description": "The wrapper around the dial and its caption.",
+              "name": "base"
+            },
+            {
+              "description": "The unfilled arc.",
+              "name": "track"
+            },
+            {
+              "description": "The filled arc, present once the value is above `min`.",
+              "name": "value"
+            },
+            {
+              "description": "The box under the dial, present with a caption.",
+              "name": "caption"
+            }
+          ],
+          "slots": [
+            {
+              "description": "The text under the dial. Defaults to the value.",
+              "name": "caption"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "The current value, clamped to `min` and `max`.",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "min",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "The lower end of the scale.",
+              "attribute": "min"
+            },
+            {
+              "kind": "field",
+              "name": "max",
+              "type": {
+                "text": "number"
+              },
+              "default": "100",
+              "description": "The upper end of the scale.",
+              "attribute": "max"
+            },
+            {
+              "kind": "field",
+              "name": "color",
+              "type": {
+                "text": "string"
+              },
+              "default": "'var(--primary)'",
+              "description": "The value arc's colour: any CSS colour, including a token.",
+              "attribute": "color"
+            },
+            {
+              "kind": "field",
+              "name": "trackColor",
+              "type": {
+                "text": "string"
+              },
+              "default": "'var(--surface-container-highest)'",
+              "description": "The track's colour: any CSS colour, including a token.",
+              "attribute": "track-color"
+            },
+            {
+              "kind": "field",
+              "name": "thickness",
+              "type": {
+                "text": "number"
+              },
+              "default": "0.22",
+              "description": "The arc's thickness, as a fraction of the radius (0 to 1).",
+              "attribute": "thickness"
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "number"
+              },
+              "default": "200",
+              "description": "The width in px; the height follows from it.",
+              "attribute": "size"
+            },
+            {
+              "kind": "field",
+              "name": "hideValue",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Removes the value as the default caption: with no slotted caption, the gauge is just the dial.",
+              "attribute": "hide-value"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The accessible name of the gauge. Defaults to `Gauge: {value} of {max}`.",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "hasCaption",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "The current value, clamped to `min` and `max`.",
+              "fieldName": "value"
+            },
+            {
+              "name": "min",
+              "type": {
+                "text": "number"
+              },
+              "default": "0",
+              "description": "The lower end of the scale.",
+              "fieldName": "min"
+            },
+            {
+              "name": "max",
+              "type": {
+                "text": "number"
+              },
+              "default": "100",
+              "description": "The upper end of the scale.",
+              "fieldName": "max"
+            },
+            {
+              "name": "color",
+              "type": {
+                "text": "string"
+              },
+              "default": "'var(--primary)'",
+              "description": "The value arc's colour: any CSS colour, including a token.",
+              "fieldName": "color"
+            },
+            {
+              "name": "track-color",
+              "type": {
+                "text": "string"
+              },
+              "default": "'var(--surface-container-highest)'",
+              "description": "The track's colour: any CSS colour, including a token.",
+              "fieldName": "trackColor"
+            },
+            {
+              "name": "thickness",
+              "type": {
+                "text": "number"
+              },
+              "default": "0.22",
+              "description": "The arc's thickness, as a fraction of the radius (0 to 1).",
+              "fieldName": "thickness"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "number"
+              },
+              "default": "200",
+              "description": "The width in px; the height follows from it.",
+              "fieldName": "size"
+            },
+            {
+              "name": "hide-value",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Removes the value as the default caption: with no slotted caption, the gauge is just the dial.",
+              "fieldName": "hideValue"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The accessible name of the gauge. Defaults to `Gauge: {value} of {max}`.",
+              "fieldName": "label"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-gauge",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiGauge",
+          "declaration": {
+            "name": "HmiGauge",
+            "module": "src/elements/gauge/gauge.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-gauge",
+          "declaration": {
+            "name": "HmiGauge",
+            "module": "src/elements/gauge/gauge.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/grid/grid.ts",
       "declarations": [
         {
@@ -5690,6 +6253,219 @@
           "declaration": {
             "name": "HmiHeading",
             "module": "src/elements/heading/heading.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/elements/heatmap/heatmap.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Matrix heatmap: a grid of cells whose intensity maps to each value, with\noptional row and column labels. A pure SVG, with no dependencies. With an\nempty `data`, nothing is rendered.\n\nThe intensity is the cell colour's opacity, from faint at the lowest value to\nsolid at the highest; `min` and `max` fix the ends of that scale, which is\notherwise the data's extent. `color` is any CSS colour, including a token such\nas `var(--primary)`. The size follows from `cell-size`, `gap`, the number of\nrows and columns and whether there are labels, so it has no width or height of\nits own.",
+          "name": "HmiHeatmap",
+          "cssParts": [
+            {
+              "description": "The `<svg>`.",
+              "name": "base"
+            },
+            {
+              "description": "A row or column label.",
+              "name": "axis-label"
+            },
+            {
+              "description": "One cell.",
+              "name": "cell"
+            },
+            {
+              "description": "One cell's value, present with `show-values`.",
+              "name": "value"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "data",
+              "type": {
+                "text": "number[][]"
+              },
+              "default": "[]",
+              "description": "The values, row by row: each inner array is one row. A property only: there is no attribute."
+            },
+            {
+              "kind": "field",
+              "name": "xLabels",
+              "type": {
+                "text": "string[]"
+              },
+              "default": "[]",
+              "description": "The column labels, one per column. A property only: there is no attribute."
+            },
+            {
+              "kind": "field",
+              "name": "yLabels",
+              "type": {
+                "text": "string[]"
+              },
+              "default": "[]",
+              "description": "The row labels, one per row. A property only: there is no attribute."
+            },
+            {
+              "kind": "field",
+              "name": "color",
+              "type": {
+                "text": "string"
+              },
+              "default": "'var(--primary)'",
+              "description": "The cell colour: any CSS colour, including a token. Its opacity carries the intensity.",
+              "attribute": "color"
+            },
+            {
+              "kind": "field",
+              "name": "min",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "The value at the faintest cell. Defaults to the smallest value.",
+              "attribute": "min"
+            },
+            {
+              "kind": "field",
+              "name": "max",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "The value at the solid cell. Defaults to the largest value.",
+              "attribute": "max"
+            },
+            {
+              "kind": "field",
+              "name": "cellSize",
+              "type": {
+                "text": "number"
+              },
+              "default": "40",
+              "description": "The edge of a cell in px.",
+              "attribute": "cell-size"
+            },
+            {
+              "kind": "field",
+              "name": "gap",
+              "type": {
+                "text": "number"
+              },
+              "default": "4",
+              "description": "The gap between cells in px.",
+              "attribute": "gap"
+            },
+            {
+              "kind": "field",
+              "name": "showValues",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Prints each cell's value at its centre.",
+              "attribute": "show-values"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Heatmap'",
+              "description": "The accessible name of the chart.",
+              "attribute": "label"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "color",
+              "type": {
+                "text": "string"
+              },
+              "default": "'var(--primary)'",
+              "description": "The cell colour: any CSS colour, including a token. Its opacity carries the intensity.",
+              "fieldName": "color"
+            },
+            {
+              "name": "min",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "The value at the faintest cell. Defaults to the smallest value.",
+              "fieldName": "min"
+            },
+            {
+              "name": "max",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "The value at the solid cell. Defaults to the largest value.",
+              "fieldName": "max"
+            },
+            {
+              "name": "cell-size",
+              "type": {
+                "text": "number"
+              },
+              "default": "40",
+              "description": "The edge of a cell in px.",
+              "fieldName": "cellSize"
+            },
+            {
+              "name": "gap",
+              "type": {
+                "text": "number"
+              },
+              "default": "4",
+              "description": "The gap between cells in px.",
+              "fieldName": "gap"
+            },
+            {
+              "name": "show-values",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Prints each cell's value at its centre.",
+              "fieldName": "showValues"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Heatmap'",
+              "description": "The accessible name of the chart.",
+              "fieldName": "label"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-heatmap",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiHeatmap",
+          "declaration": {
+            "name": "HmiHeatmap",
+            "module": "src/elements/heatmap/heatmap.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-heatmap",
+          "declaration": {
+            "name": "HmiHeatmap",
+            "module": "src/elements/heatmap/heatmap.ts"
           }
         }
       ]
@@ -11600,6 +12376,176 @@
           "declaration": {
             "name": "HmiProgress",
             "module": "src/elements/progress/progress.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/elements/radar-chart/radar-chart.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Radar (spider) chart: each series is a closed polygon over a polar grid of\nconcentric rings and radial spokes, one spoke per axis. A pure SVG, with no\ndependencies. With fewer than three `axes`, or no values, nothing is rendered.\n\nThe value range is 0, or the smallest value if lower, to the largest value,\nunless `min` and `max` say otherwise. Series with no `color` take the default\npalette, the primary, tertiary, secondary, success, warning and error tokens\nin turn, so a legend beside the chart has to list the same colours. The size\nis `size` in px, the width and the height both.",
+          "name": "HmiRadarChart",
+          "cssParts": [
+            {
+              "description": "The `<svg>`.",
+              "name": "base"
+            },
+            {
+              "description": "One concentric grid ring.",
+              "name": "ring"
+            },
+            {
+              "description": "One radial spoke.",
+              "name": "spoke"
+            },
+            {
+              "description": "One axis label.",
+              "name": "axis-label"
+            },
+            {
+              "description": "One series polygon.",
+              "name": "area"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "axes",
+              "type": {
+                "text": "string[]"
+              },
+              "default": "[]",
+              "description": "The axis labels, one per spoke. A property only: there is no attribute."
+            },
+            {
+              "kind": "field",
+              "name": "series",
+              "type": {
+                "text": "RadarChartSeries[]"
+              },
+              "default": "[]",
+              "description": "The series to plot. A property only: there is no attribute."
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "number"
+              },
+              "default": "300",
+              "description": "The width and height in px.",
+              "attribute": "size"
+            },
+            {
+              "kind": "field",
+              "name": "min",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "The value at the centre. Defaults to 0, or the smallest value if lower.",
+              "attribute": "min"
+            },
+            {
+              "kind": "field",
+              "name": "max",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "The value at the outer ring. Defaults to the largest value.",
+              "attribute": "max"
+            },
+            {
+              "kind": "field",
+              "name": "rings",
+              "type": {
+                "text": "number"
+              },
+              "default": "4",
+              "description": "The number of concentric grid rings.",
+              "attribute": "rings"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Radar chart'",
+              "description": "The accessible name of the chart.",
+              "attribute": "label"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "size",
+              "type": {
+                "text": "number"
+              },
+              "default": "300",
+              "description": "The width and height in px.",
+              "fieldName": "size"
+            },
+            {
+              "name": "min",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "The value at the centre. Defaults to 0, or the smallest value if lower.",
+              "fieldName": "min"
+            },
+            {
+              "name": "max",
+              "type": {
+                "text": "number | undefined"
+              },
+              "description": "The value at the outer ring. Defaults to the largest value.",
+              "fieldName": "max"
+            },
+            {
+              "name": "rings",
+              "type": {
+                "text": "number"
+              },
+              "default": "4",
+              "description": "The number of concentric grid rings.",
+              "fieldName": "rings"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Radar chart'",
+              "description": "The accessible name of the chart.",
+              "fieldName": "label"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-radar-chart",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiRadarChart",
+          "declaration": {
+            "name": "HmiRadarChart",
+            "module": "src/elements/radar-chart/radar-chart.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-radar-chart",
+          "declaration": {
+            "name": "HmiRadarChart",
+            "module": "src/elements/radar-chart/radar-chart.ts"
           }
         }
       ]

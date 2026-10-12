@@ -109,12 +109,12 @@ There is no status for work under way: its open PR already shows that.
 | `hmi-area-chart` | `areaChart.tsx` | 8 | low | | Pure SVG; `series`/`labels` JS properties; colors via `var(--primary)` in style attrs; `label` names the image. | Done | [#176](https://github.com/ninoverse/hmi-components/pull/176) |
 | `hmi-bar-chart` | `barChart.tsx` | 8 | low | | `series`/`labels` JS properties; `aria-label` is `label`. | Done | [#176](https://github.com/ninoverse/hmi-components/pull/176) |
 | `hmi-bullet-chart` | `bulletChart.tsx` | 8 | low | | `ranges` JS property; the visible leading text is `caption`, `label` is the accessible name (a change from v5, where `label` was the text). | Done | [#176](https://github.com/ninoverse/hmi-components/pull/176) |
-| `hmi-donut-chart` | `donutChart.tsx` | 8 | low | S | Slot `center-label`. | Todo | |
-| `hmi-funnel-chart` | `funnelChart.tsx` | 8 | low | | | Todo | |
-| `hmi-gauge` | `gauge.tsx` | 8 | low | S | Slot `caption` for the visible text; `label` is the accessible name, as on the other charts. | Todo | |
-| `hmi-heatmap` | `heatmap.tsx` | 8 | low | | `data` nested arrays as JS property. | Todo | |
+| `hmi-donut-chart` | `donutChart.tsx` | 8 | low | S | Slot `center-label`, an HTML box over the hole (not a `foreignObject`); `base` is its wrapper. | Done | [#177](https://github.com/ninoverse/hmi-components/pull/177) |
+| `hmi-funnel-chart` | `funnelChart.tsx` | 8 | low | | `stages` JS property; `show-values`; `label-width`. | Done | [#177](https://github.com/ninoverse/hmi-components/pull/177) |
+| `hmi-gauge` | `gauge.tsx` | 8 | low | S | Slot `caption` for the visible text, defaulting to the value (`hide-value` removes it); `label` is the accessible name, as on the other charts. | Done | [#177](https://github.com/ninoverse/hmi-components/pull/177) |
+| `hmi-heatmap` | `heatmap.tsx` | 8 | low | | `data` nested arrays, `xLabels` and `yLabels` as JS properties; `show-values`; `cell-size`. | Done | [#177](https://github.com/ninoverse/hmi-components/pull/177) |
 | `hmi-line-chart` | `lineChart.tsx` | 8 | low | | `series`/`labels` JS properties; `aria-label` is `label`; `show-dots`. | Done | [#176](https://github.com/ninoverse/hmi-components/pull/176) |
-| `hmi-radar-chart` | `radarChart.tsx` | 8 | low | | | Todo | |
+| `hmi-radar-chart` | `radarChart.tsx` | 8 | low | | `axes` and `series` JS properties; renders nothing under three axes. | Done | [#177](https://github.com/ninoverse/hmi-components/pull/177) |
 | `hmi-scatter-plot` | `scatterPlot.tsx` | 8 | low | | `series` of `{ x, y }` points as a JS property; `aria-label` is `label`. | Done | [#176](https://github.com/ninoverse/hmi-components/pull/176) |
 | `hmi-sparkline` | `sparkline.tsx` | 8 | low | | | Done | [#175](https://github.com/ninoverse/hmi-components/pull/175) |
 | `hmi-modal` | `modal.tsx` | 9 | high | S O E D P | `<dialog>.showModal()`; slots `title`, `description`, `actions`; `DialogAction[]` kept; `hmi-close { reason }` (cancelable), `hmi-action`. Lands `shared/positioning.ts` for the group, and `shared/dialog-actions.ts` (`DialogAction`, the buttons it renders) for drawer and table. | Todo | |

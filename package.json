@@ -362,6 +362,10 @@
             "types": "./dist/elements/divider/divider.react.d.ts",
             "import": "./dist/react/divider.js"
         },
+        "./react/donut-chart": {
+            "types": "./dist/elements/donut-chart/donut-chart.react.d.ts",
+            "import": "./dist/react/donut-chart.js"
+        },
         "./react/empty-state": {
             "types": "./dist/elements/empty-state/empty-state.react.d.ts",
             "import": "./dist/react/empty-state.js"
@@ -378,6 +382,14 @@
             "types": "./dist/elements/form-control/form-control.react.d.ts",
             "import": "./dist/react/form-control.js"
         },
+        "./react/funnel-chart": {
+            "types": "./dist/elements/funnel-chart/funnel-chart.react.d.ts",
+            "import": "./dist/react/funnel-chart.js"
+        },
+        "./react/gauge": {
+            "types": "./dist/elements/gauge/gauge.react.d.ts",
+            "import": "./dist/react/gauge.js"
+        },
         "./react/grid": {
             "types": "./dist/elements/grid/grid.react.d.ts",
             "import": "./dist/react/grid.js"
@@ -385,6 +397,10 @@
         "./react/heading": {
             "types": "./dist/elements/heading/heading.react.d.ts",
             "import": "./dist/react/heading.js"
+        },
+        "./react/heatmap": {
+            "types": "./dist/elements/heatmap/heatmap.react.d.ts",
+            "import": "./dist/react/heatmap.js"
         },
         "./react/image": {
             "types": "./dist/elements/image/image.react.d.ts",
@@ -441,6 +457,10 @@
         "./react/progress": {
             "types": "./dist/elements/progress/progress.react.d.ts",
             "import": "./dist/react/progress.js"
+        },
+        "./react/radar-chart": {
+            "types": "./dist/elements/radar-chart/radar-chart.react.d.ts",
+            "import": "./dist/react/radar-chart.js"
         },
         "./react/radio": {
             "types": "./dist/elements/radio/radio.react.d.ts",
@@ -731,6 +751,10 @@
             "types": "./dist/elements/divider/divider.d.ts",
             "import": "./dist/wc/divider.js"
         },
+        "./wc/donut-chart": {
+            "types": "./dist/elements/donut-chart/donut-chart.d.ts",
+            "import": "./dist/wc/donut-chart.js"
+        },
         "./wc/empty-state": {
             "types": "./dist/elements/empty-state/empty-state.d.ts",
             "import": "./dist/wc/empty-state.js"
@@ -747,6 +771,14 @@
             "types": "./dist/elements/form-control/form-control.d.ts",
             "import": "./dist/wc/form-control.js"
         },
+        "./wc/funnel-chart": {
+            "types": "./dist/elements/funnel-chart/funnel-chart.d.ts",
+            "import": "./dist/wc/funnel-chart.js"
+        },
+        "./wc/gauge": {
+            "types": "./dist/elements/gauge/gauge.d.ts",
+            "import": "./dist/wc/gauge.js"
+        },
         "./wc/grid": {
             "types": "./dist/elements/grid/grid.d.ts",
             "import": "./dist/wc/grid.js"
@@ -754,6 +786,10 @@
         "./wc/heading": {
             "types": "./dist/elements/heading/heading.d.ts",
             "import": "./dist/wc/heading.js"
+        },
+        "./wc/heatmap": {
+            "types": "./dist/elements/heatmap/heatmap.d.ts",
+            "import": "./dist/wc/heatmap.js"
         },
         "./wc/image": {
             "types": "./dist/elements/image/image.d.ts",
@@ -810,6 +846,10 @@
         "./wc/progress": {
             "types": "./dist/elements/progress/progress.d.ts",
             "import": "./dist/wc/progress.js"
+        },
+        "./wc/radar-chart": {
+            "types": "./dist/elements/radar-chart/radar-chart.d.ts",
+            "import": "./dist/wc/radar-chart.js"
         },
         "./wc/radio": {
             "types": "./dist/elements/radio/radio.d.ts",

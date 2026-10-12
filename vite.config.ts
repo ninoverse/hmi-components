@@ -188,6 +188,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/divider/divider.react.ts',
                 ),
+                'wc/donut-chart': resolve(
+                    dirname,
+                    'src/elements/donut-chart/donut-chart.ts',
+                ),
+                'react/donut-chart': resolve(
+                    dirname,
+                    'src/elements/donut-chart/donut-chart.react.ts',
+                ),
                 'wc/empty-state': resolve(
                     dirname,
                     'src/elements/empty-state/empty-state.ts',
@@ -217,6 +225,19 @@ export default defineConfig({
                     dirname,
                     'src/elements/form-control/form-control.react.ts',
                 ),
+                'wc/funnel-chart': resolve(
+                    dirname,
+                    'src/elements/funnel-chart/funnel-chart.ts',
+                ),
+                'react/funnel-chart': resolve(
+                    dirname,
+                    'src/elements/funnel-chart/funnel-chart.react.ts',
+                ),
+                'wc/gauge': resolve(dirname, 'src/elements/gauge/gauge.ts'),
+                'react/gauge': resolve(
+                    dirname,
+                    'src/elements/gauge/gauge.react.ts',
+                ),
                 'wc/grid': resolve(dirname, 'src/elements/grid/grid.ts'),
                 'react/grid': resolve(
                     dirname,
@@ -229,6 +250,14 @@ export default defineConfig({
                 'react/heading': resolve(
                     dirname,
                     'src/elements/heading/heading.react.ts',
+                ),
+                'wc/heatmap': resolve(
+                    dirname,
+                    'src/elements/heatmap/heatmap.ts',
+                ),
+                'react/heatmap': resolve(
+                    dirname,
+                    'src/elements/heatmap/heatmap.react.ts',
                 ),
                 'wc/image': resolve(dirname, 'src/elements/image/image.ts'),
                 'react/image': resolve(
@@ -314,6 +343,14 @@ export default defineConfig({
                 'react/progress': resolve(
                     dirname,
                     'src/elements/progress/progress.react.ts',
+                ),
+                'wc/radar-chart': resolve(
+                    dirname,
+                    'src/elements/radar-chart/radar-chart.ts',
+                ),
+                'react/radar-chart': resolve(
+                    dirname,
+                    'src/elements/radar-chart/radar-chart.react.ts',
                 ),
                 'wc/radio': resolve(dirname, 'src/elements/radio/radio.ts'),
                 'react/radio': resolve(

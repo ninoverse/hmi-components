@@ -27,7 +27,9 @@ const Y_AXIS = 64;
 const X_AXIS = 24;
 
 /** Matrix heatmap. Renders a grid of cells whose colour intensity (opacity)
- *  maps to each value, with optional row/column labels. Pure SVG, zero deps. */
+ *  maps to each value, with optional row/column labels. Pure SVG, zero deps.
+ * @deprecated Use `Heatmap` from `@ninoverse/hmi-components/react/heatmap`. Removed in 6.0.0.
+ */
 export function Heatmap({
     data,
     xLabels,
