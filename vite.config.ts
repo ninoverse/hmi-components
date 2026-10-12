@@ -188,6 +188,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/divider/divider.react.ts',
                 ),
+                'wc/donut-chart': resolve(
+                    dirname,
+                    'src/elements/donut-chart/donut-chart.ts',
+                ),
+                'react/donut-chart': resolve(
+                    dirname,
+                    'src/elements/donut-chart/donut-chart.react.ts',
+                ),
                 'wc/empty-state': resolve(
                     dirname,
                     'src/elements/empty-state/empty-state.ts',

@@ -362,6 +362,10 @@
             "types": "./dist/elements/divider/divider.react.d.ts",
             "import": "./dist/react/divider.js"
         },
+        "./react/donut-chart": {
+            "types": "./dist/elements/donut-chart/donut-chart.react.d.ts",
+            "import": "./dist/react/donut-chart.js"
+        },
         "./react/empty-state": {
             "types": "./dist/elements/empty-state/empty-state.react.d.ts",
             "import": "./dist/react/empty-state.js"
@@ -730,6 +734,10 @@
         "./wc/divider": {
             "types": "./dist/elements/divider/divider.d.ts",
             "import": "./dist/wc/divider.js"
+        },
+        "./wc/donut-chart": {
+            "types": "./dist/elements/donut-chart/donut-chart.d.ts",
+            "import": "./dist/wc/donut-chart.js"
         },
         "./wc/empty-state": {
             "types": "./dist/elements/empty-state/empty-state.d.ts",

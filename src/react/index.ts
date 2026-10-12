@@ -73,6 +73,10 @@ export {
     type DividerAlign,
     type DividerOrientation,
 } from '../elements/divider/divider.react.js';
+export {
+    DonutChart,
+    type DonutChartSegment,
+} from '../elements/donut-chart/donut-chart.react.js';
 export { EmptyState } from '../elements/empty-state/empty-state.react.js';
 export {
     type FileDescriptor,

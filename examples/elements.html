@@ -1124,6 +1124,16 @@ export function Example() {
         </section>
 
         <section>
+            <h2>DonutChart</h2>
+            <div style="display: flex; gap: 4rem; align-items: center; flex-wrap: wrap; padding-bottom: 2rem">
+                <hmi-donut-chart id="donut-live" label="Traffic by source">
+                    <span slot="center-label">1.2k<br>visits</span>
+                </hmi-donut-chart>
+                <hmi-legend id="donut-legend" align="start"></hmi-legend>
+            </div>
+        </section>
+
+        <section>
             <h2>List</h2>
             <!-- Items are a property. right-<id> takes rich content; reorderable adds
                  drag and Alt+Arrow reordering, and the page sets items back from
@@ -1631,6 +1641,18 @@ export function Example() {
             document.getElementById('bullet-revenue').ranges = [50, 75];
             document.getElementById('bullet-profit').ranges = [40, 70];
             document.getElementById('bullet-cost').ranges = [60, 80];
+            document.getElementById('donut-live').segments = [
+                { label: 'Direct', value: 45 },
+                { label: 'Search', value: 30 },
+                { label: 'Social', value: 15 },
+                { label: 'Referral', value: 10 },
+            ];
+            document.getElementById('donut-legend').items = [
+                { label: 'Direct', color: 'var(--primary)' },
+                { label: 'Search', color: 'var(--tertiary)' },
+                { label: 'Social', color: 'var(--secondary)' },
+                { label: 'Referral', color: 'var(--success)' },
+            ];
             for (const pager of document.querySelectorAll('hmi-pagination')) {
                 pager.addEventListener('hmi-change', (event) => {
                     console.log('pagination hmi-change', event.detail);

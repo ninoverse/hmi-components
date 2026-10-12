@@ -66,6 +66,21 @@ export const cartesianGridStyles = css`
     }
 `;
 
+/** The default colours of the charts that colour per item, cycled by index. */
+const PALETTE = [
+    'var(--primary)',
+    'var(--tertiary)',
+    'var(--secondary)',
+    'var(--success)',
+    'var(--warning)',
+    'var(--error)',
+] as const;
+
+/** The default colour of the item at `index`: the palette repeats past six. */
+export function paletteColor(index: number): string {
+    return PALETTE[index % PALETTE.length] ?? 'var(--primary)';
+}
+
 /** Space the Cartesian charts leave around the plot area, in px. */
 export const AXIS = { left: 44, bottom: 28, top: 12, right: 12 } as const;
 

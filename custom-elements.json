@@ -4188,6 +4188,150 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/donut-chart/donut-chart.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Donut (ring) chart: each segment is an arc sized by its share of the total,\nwith a hole in the middle for a summary. A pure SVG, with no dependencies.\nWith no `segments`, or a total of zero, nothing is rendered.\n\nSegments with no `color` take the default palette, the primary, tertiary,\nsecondary, success, warning and error tokens in turn, so a legend beside the\nchart has to list the same colours. The slotted `center-label` fills the hole,\ntypically a total, and is real text: unlike v5, it is read by assistive\ntechnology. The size is `size` in px, the width and the height both.",
+          "name": "HmiDonutChart",
+          "cssParts": [
+            {
+              "description": "The wrapper around the chart and its centre.",
+              "name": "base"
+            },
+            {
+              "description": "One arc.",
+              "name": "segment"
+            },
+            {
+              "description": "The box over the hole, present with a `center-label`.",
+              "name": "center"
+            }
+          ],
+          "slots": [
+            {
+              "description": "The content of the hole.",
+              "name": "center-label"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "segments",
+              "type": {
+                "text": "DonutChartSegment[]"
+              },
+              "default": "[]",
+              "description": "The segments around the ring. A property only: there is no attribute."
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "number"
+              },
+              "default": "220",
+              "description": "The width and height in px.",
+              "attribute": "size"
+            },
+            {
+              "kind": "field",
+              "name": "thickness",
+              "type": {
+                "text": "number"
+              },
+              "default": "0.32",
+              "description": "The ring's thickness, as a fraction of the radius (0 to 1).",
+              "attribute": "thickness"
+            },
+            {
+              "kind": "field",
+              "name": "gap",
+              "type": {
+                "text": "number"
+              },
+              "default": "2",
+              "description": "The gap between segments, in degrees.",
+              "attribute": "gap"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Donut chart'",
+              "description": "The accessible name of the chart.",
+              "attribute": "label"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "size",
+              "type": {
+                "text": "number"
+              },
+              "default": "220",
+              "description": "The width and height in px.",
+              "fieldName": "size"
+            },
+            {
+              "name": "thickness",
+              "type": {
+                "text": "number"
+              },
+              "default": "0.32",
+              "description": "The ring's thickness, as a fraction of the radius (0 to 1).",
+              "fieldName": "thickness"
+            },
+            {
+              "name": "gap",
+              "type": {
+                "text": "number"
+              },
+              "default": "2",
+              "description": "The gap between segments, in degrees.",
+              "fieldName": "gap"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Donut chart'",
+              "description": "The accessible name of the chart.",
+              "fieldName": "label"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-donut-chart",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiDonutChart",
+          "declaration": {
+            "name": "HmiDonutChart",
+            "module": "src/elements/donut-chart/donut-chart.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-donut-chart",
+          "declaration": {
+            "name": "HmiDonutChart",
+            "module": "src/elements/donut-chart/donut-chart.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/empty-state/empty-state.ts",
       "declarations": [
         {
