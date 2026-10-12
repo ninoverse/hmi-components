@@ -91,6 +91,10 @@ export {
     type FlexJustify,
 } from '../elements/flex/flex.react.js';
 export { FormControl } from '../elements/form-control/form-control.react.js';
+export {
+    FunnelChart,
+    type FunnelChartStage,
+} from '../elements/funnel-chart/funnel-chart.react.js';
 export { Grid, type GridGap } from '../elements/grid/grid.react.js';
 export {
     Heading,

@@ -5621,6 +5621,182 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/funnel-chart/funnel-chart.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Funnel chart: centred trapezoid bands stacked from the widest stage down,\neach narrowing towards the next, so a band's width maps to its value. The\nstage labels sit in a column on the right, so they stay legible whatever the\nband's width. A pure SVG, with no dependencies. With no `stages`, nothing is\nrendered.\n\n`show-values` adds each stage's value and its share of the largest stage to\nits label. Stages with no `color` take the default palette, the primary,\ntertiary, secondary, success, warning and error tokens in turn. The size is\nthe `width` and `height` in px, the label column included.",
+          "name": "HmiFunnelChart",
+          "cssParts": [
+            {
+              "description": "The `<svg>`.",
+              "name": "base"
+            },
+            {
+              "description": "One stage's trapezoid.",
+              "name": "band"
+            },
+            {
+              "description": "One stage's label.",
+              "name": "stage-label"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "stages",
+              "type": {
+                "text": "FunnelChartStage[]"
+              },
+              "default": "[]",
+              "description": "The stages, from the widest at the top down. A property only: there is no attribute."
+            },
+            {
+              "kind": "field",
+              "name": "width",
+              "type": {
+                "text": "number"
+              },
+              "default": "500",
+              "description": "SVG width in px.",
+              "attribute": "width"
+            },
+            {
+              "kind": "field",
+              "name": "height",
+              "type": {
+                "text": "number"
+              },
+              "default": "280",
+              "description": "SVG height in px.",
+              "attribute": "height"
+            },
+            {
+              "kind": "field",
+              "name": "gap",
+              "type": {
+                "text": "number"
+              },
+              "default": "4",
+              "description": "The vertical gap between the bands in px.",
+              "attribute": "gap"
+            },
+            {
+              "kind": "field",
+              "name": "labelWidth",
+              "type": {
+                "text": "number"
+              },
+              "default": "180",
+              "description": "The width reserved for the label column on the right, in px.",
+              "attribute": "label-width"
+            },
+            {
+              "kind": "field",
+              "name": "showValues",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Appends each stage's value and its share of the largest stage to its label.",
+              "attribute": "show-values"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Funnel chart'",
+              "description": "The accessible name of the chart.",
+              "attribute": "label"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "width",
+              "type": {
+                "text": "number"
+              },
+              "default": "500",
+              "description": "SVG width in px.",
+              "fieldName": "width"
+            },
+            {
+              "name": "height",
+              "type": {
+                "text": "number"
+              },
+              "default": "280",
+              "description": "SVG height in px.",
+              "fieldName": "height"
+            },
+            {
+              "name": "gap",
+              "type": {
+                "text": "number"
+              },
+              "default": "4",
+              "description": "The vertical gap between the bands in px.",
+              "fieldName": "gap"
+            },
+            {
+              "name": "label-width",
+              "type": {
+                "text": "number"
+              },
+              "default": "180",
+              "description": "The width reserved for the label column on the right, in px.",
+              "fieldName": "labelWidth"
+            },
+            {
+              "name": "show-values",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Appends each stage's value and its share of the largest stage to its label.",
+              "fieldName": "showValues"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Funnel chart'",
+              "description": "The accessible name of the chart.",
+              "fieldName": "label"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-funnel-chart",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiFunnelChart",
+          "declaration": {
+            "name": "HmiFunnelChart",
+            "module": "src/elements/funnel-chart/funnel-chart.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-funnel-chart",
+          "declaration": {
+            "name": "HmiFunnelChart",
+            "module": "src/elements/funnel-chart/funnel-chart.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/grid/grid.ts",
       "declarations": [
         {

@@ -1142,6 +1142,13 @@ export function Example() {
         </section>
 
         <section>
+            <h2>FunnelChart</h2>
+            <div style="padding-bottom: 2rem">
+                <hmi-funnel-chart id="funnel-live" label="Signup conversion funnel" show-values></hmi-funnel-chart>
+            </div>
+        </section>
+
+        <section>
             <h2>List</h2>
             <!-- Items are a property. right-<id> takes rich content; reorderable adds
                  drag and Alt+Arrow reordering, and the page sets items back from
@@ -1670,6 +1677,12 @@ export function Example() {
             document.getElementById('radar-legend').items = [
                 { label: 'Alpha', color: 'var(--primary)' },
                 { label: 'Beta', color: 'var(--tertiary)' },
+            ];
+            document.getElementById('funnel-live').stages = [
+                { label: 'Visited', value: 1200 },
+                { label: 'Signed up', value: 820 },
+                { label: 'Activated', value: 540 },
+                { label: 'Subscribed', value: 210 },
             ];
             for (const pager of document.querySelectorAll('hmi-pagination')) {
                 pager.addEventListener('hmi-change', (event) => {

@@ -225,6 +225,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/form-control/form-control.react.ts',
                 ),
+                'wc/funnel-chart': resolve(
+                    dirname,
+                    'src/elements/funnel-chart/funnel-chart.ts',
+                ),
+                'react/funnel-chart': resolve(
+                    dirname,
+                    'src/elements/funnel-chart/funnel-chart.react.ts',
+                ),
                 'wc/grid': resolve(dirname, 'src/elements/grid/grid.ts'),
                 'react/grid': resolve(
                     dirname,

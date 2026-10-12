@@ -382,6 +382,10 @@
             "types": "./dist/elements/form-control/form-control.react.d.ts",
             "import": "./dist/react/form-control.js"
         },
+        "./react/funnel-chart": {
+            "types": "./dist/elements/funnel-chart/funnel-chart.react.d.ts",
+            "import": "./dist/react/funnel-chart.js"
+        },
         "./react/grid": {
             "types": "./dist/elements/grid/grid.react.d.ts",
             "import": "./dist/react/grid.js"
@@ -758,6 +762,10 @@
         "./wc/form-control": {
             "types": "./dist/elements/form-control/form-control.d.ts",
             "import": "./dist/wc/form-control.js"
+        },
+        "./wc/funnel-chart": {
+            "types": "./dist/elements/funnel-chart/funnel-chart.d.ts",
+            "import": "./dist/wc/funnel-chart.js"
         },
         "./wc/grid": {
             "types": "./dist/elements/grid/grid.d.ts",
