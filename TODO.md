@@ -316,6 +316,24 @@ sibling of the focused node.
 
 ---
 
+## Chart hover tooltips (after v6)
+
+The charts are static images, as in v5: nothing in `hmi-line-chart`,
+`hmi-area-chart`, `hmi-bar-chart`, `hmi-scatter-plot` or the later ones reacts to
+the pointer. `hmi-chart-tooltip` exists, but a consumer would have to find the
+data point under the pointer and place the tooltip by hand. Hooking the two up
+would make the charts self-explanatory.
+
+To do: decide the contract. A chart could fire an `hmi-point-hover { series, index,
+value }` event (and a matching leave) that a consumer wires to a tooltip, or it
+could take a `tooltip` slot and position `hmi-chart-tooltip` itself. Either way,
+the hit-testing (the nearest point or bar to the pointer, with a touch-friendly
+radius) belongs in `shared/chart.ts`, once, and keyboard users need the same
+information: points that take focus, or a data table alternative. Keep it
+additive, so the static chart stays what it is without the new attribute.
+
+---
+
 ## Controlled or element-owned state, before v6
 
 **Do this last, before the v6 flip.** `.claude/rules/lit-elements.md` says an

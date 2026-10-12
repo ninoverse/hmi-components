@@ -1083,6 +1083,47 @@ export function Example() {
         </section>
 
         <section>
+            <h2>LineChart</h2>
+            <div style="padding-bottom: 2rem">
+                <hmi-line-chart id="line-live" label="Monthly revenue and costs" width="560" height="280" show-dots></hmi-line-chart>
+                <hmi-legend id="line-legend" align="start" style="margin-top: 1rem"></hmi-legend>
+            </div>
+        </section>
+
+        <section>
+            <h2>AreaChart</h2>
+            <div style="padding-bottom: 2rem">
+                <hmi-area-chart id="area-live" label="Monthly active users by tier" width="560" height="280"></hmi-area-chart>
+                <hmi-legend id="area-legend" align="start" style="margin-top: 1rem"></hmi-legend>
+            </div>
+        </section>
+
+        <section>
+            <h2>BarChart</h2>
+            <div style="padding-bottom: 2rem">
+                <hmi-bar-chart id="bar-live" label="Quarterly units by product" width="560" height="280"></hmi-bar-chart>
+                <hmi-legend id="bar-legend" align="start" style="margin-top: 1rem"></hmi-legend>
+            </div>
+        </section>
+
+        <section>
+            <h2>ScatterPlot</h2>
+            <div style="padding-bottom: 2rem">
+                <hmi-scatter-plot id="scatter-live" label="Height versus weight by group" width="560" height="280"></hmi-scatter-plot>
+                <hmi-legend id="scatter-legend" align="start" style="margin-top: 1rem"></hmi-legend>
+            </div>
+        </section>
+
+        <section>
+            <h2>BulletChart</h2>
+            <div style="display: flex; flex-direction: column; gap: 1.5rem; max-width: 46rem; padding-bottom: 2rem">
+                <hmi-bullet-chart id="bullet-revenue" caption="Revenue" value="78" target="85" max="100"></hmi-bullet-chart>
+                <hmi-bullet-chart id="bullet-profit" caption="Profit" value="62" target="55" max="100" color="var(--success)"></hmi-bullet-chart>
+                <hmi-bullet-chart id="bullet-cost" caption="Cost" value="92" target="70" max="100" color="var(--error)"></hmi-bullet-chart>
+            </div>
+        </section>
+
+        <section>
             <h2>List</h2>
             <!-- Items are a property. right-<id> takes rich content; reorderable adds
                  drag and Alt+Arrow reordering, and the page sets items back from
@@ -1534,6 +1575,62 @@ export function Example() {
             document.getElementById('spark-up').data = [4, 8, 5, 10, 7, 12, 9, 14];
             document.getElementById('spark-down').data = [14, 9, 11, 6, 8, 4, 5, 2];
             document.getElementById('spark-flat').data = [6, 6, 7, 6, 8, 6, 7, 6];
+            const monthly = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
+            const lineChart = document.getElementById('line-live');
+            lineChart.labels = monthly;
+            lineChart.series = [
+                { name: 'Revenue', data: [32, 40, 38, 50, 47, 60], color: 'var(--primary)' },
+                { name: 'Costs', data: [28, 30, 33, 31, 36, 38], color: 'var(--tertiary)' },
+            ];
+            document.getElementById('line-legend').items = [
+                { label: 'Revenue', color: 'var(--primary)' },
+                { label: 'Costs', color: 'var(--tertiary)' },
+            ];
+            const areaChart = document.getElementById('area-live');
+            areaChart.labels = monthly;
+            areaChart.series = [
+                { name: 'Pro', data: [20, 28, 26, 35, 40, 52], color: 'var(--primary)' },
+                { name: 'Free', data: [12, 15, 18, 16, 22, 25], color: 'var(--tertiary)' },
+            ];
+            document.getElementById('area-legend').items = [
+                { label: 'Pro', color: 'var(--primary)' },
+                { label: 'Free', color: 'var(--tertiary)' },
+            ];
+            const barChart = document.getElementById('bar-live');
+            barChart.labels = ['Q1', 'Q2', 'Q3', 'Q4'];
+            barChart.series = [
+                { name: 'Product A', data: [42, 55, 48, 63], color: 'var(--primary)' },
+                { name: 'Product B', data: [30, 38, 44, 40], color: 'var(--tertiary)' },
+            ];
+            document.getElementById('bar-legend').items = [
+                { label: 'Product A', color: 'var(--primary)' },
+                { label: 'Product B', color: 'var(--tertiary)' },
+            ];
+            document.getElementById('scatter-live').series = [
+                {
+                    name: 'Group A',
+                    color: 'var(--primary)',
+                    data: [
+                        { x: 12, y: 22 }, { x: 20, y: 35 }, { x: 28, y: 30 },
+                        { x: 35, y: 48 }, { x: 42, y: 44 }, { x: 50, y: 60 },
+                    ],
+                },
+                {
+                    name: 'Group B',
+                    color: 'var(--tertiary)',
+                    data: [
+                        { x: 15, y: 12 }, { x: 24, y: 18 }, { x: 30, y: 16 },
+                        { x: 38, y: 26 }, { x: 46, y: 22 }, { x: 55, y: 33 },
+                    ],
+                },
+            ];
+            document.getElementById('scatter-legend').items = [
+                { label: 'Group A', color: 'var(--primary)' },
+                { label: 'Group B', color: 'var(--tertiary)' },
+            ];
+            document.getElementById('bullet-revenue').ranges = [50, 75];
+            document.getElementById('bullet-profit').ranges = [40, 70];
+            document.getElementById('bullet-cost').ranges = [60, 80];
             for (const pager of document.querySelectorAll('hmi-pagination')) {
                 pager.addEventListener('hmi-change', (event) => {
                     console.log('pagination hmi-change', event.detail);

@@ -8,6 +8,10 @@ export {
     type AccordionOpenChangeDetail,
 } from '../elements/accordion/accordion.react.js';
 export { Alert, type AlertVariant } from '../elements/alert/alert.react.js';
+export {
+    AreaChart,
+    type AreaChartSeries,
+} from '../elements/area-chart/area-chart.react.js';
 export { AspectRatio } from '../elements/aspect-ratio/aspect-ratio.react.js';
 export {
     Avatar,
@@ -21,6 +25,10 @@ export {
     type BannerDismissDetail,
     type BannerVariant,
 } from '../elements/banner/banner.react.js';
+export {
+    BarChart,
+    type BarChartSeries,
+} from '../elements/bar-chart/bar-chart.react.js';
 export { Blockquote } from '../elements/blockquote/blockquote.react.js';
 export {
     Box,
@@ -33,6 +41,7 @@ export {
     Breadcrumbs,
     type BreadcrumbsNavDetail,
 } from '../elements/breadcrumbs/breadcrumbs.react.js';
+export { BulletChart } from '../elements/bullet-chart/bullet-chart.react.js';
 export {
     Button,
     type ButtonSize,
@@ -104,6 +113,10 @@ export {
     type LegendItem,
 } from '../elements/legend/legend.react.js';
 export {
+    LineChart,
+    type LineChartSeries,
+} from '../elements/line-chart/line-chart.react.js';
+export {
     Link,
     type LinkTone,
     type LinkUnderline,
@@ -150,6 +163,11 @@ export {
     ResponsiveContainer,
     type ResponsiveContainerResizeDetail,
 } from '../elements/responsive-container/responsive-container.react.js';
+export {
+    ScatterPlot,
+    type ScatterPlotPoint,
+    type ScatterPlotSeries,
+} from '../elements/scatter-plot/scatter-plot.react.js';
 export {
     ScrollArea,
     type ScrollAreaOrientation,

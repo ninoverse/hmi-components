@@ -33,7 +33,9 @@ const AXIS = { left: 44, bottom: 28, top: 12, right: 12 };
 
 /** Multi-series area chart. Self-contained SVG: each series is a line with a
  *  tinted fill down to the baseline, over a shared horizontal grid
- *  (CartesianGrid), with y-axis value ticks and x-axis labels. Zero deps. */
+ *  (CartesianGrid), with y-axis value ticks and x-axis labels. Zero deps.
+ * @deprecated Use `AreaChart` from `@ninoverse/hmi-components/react/area-chart`. Removed in 6.0.0.
+ */
 export function AreaChart({
     series,
     labels,

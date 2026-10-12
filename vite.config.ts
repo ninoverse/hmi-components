@@ -55,6 +55,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/alert/alert.react.ts',
                 ),
+                'wc/area-chart': resolve(
+                    dirname,
+                    'src/elements/area-chart/area-chart.ts',
+                ),
+                'react/area-chart': resolve(
+                    dirname,
+                    'src/elements/area-chart/area-chart.react.ts',
+                ),
                 'wc/aspect-ratio': resolve(
                     dirname,
                     'src/elements/aspect-ratio/aspect-ratio.ts',
@@ -86,6 +94,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/banner/banner.react.ts',
                 ),
+                'wc/bar-chart': resolve(
+                    dirname,
+                    'src/elements/bar-chart/bar-chart.ts',
+                ),
+                'react/bar-chart': resolve(
+                    dirname,
+                    'src/elements/bar-chart/bar-chart.react.ts',
+                ),
                 'wc/blockquote': resolve(
                     dirname,
                     'src/elements/blockquote/blockquote.ts',
@@ -103,6 +119,14 @@ export default defineConfig({
                 'react/breadcrumbs': resolve(
                     dirname,
                     'src/elements/breadcrumbs/breadcrumbs.react.ts',
+                ),
+                'wc/bullet-chart': resolve(
+                    dirname,
+                    'src/elements/bullet-chart/bullet-chart.ts',
+                ),
+                'react/bullet-chart': resolve(
+                    dirname,
+                    'src/elements/bullet-chart/bullet-chart.react.ts',
                 ),
                 'wc/button': resolve(dirname, 'src/elements/button/button.ts'),
                 'react/button': resolve(
@@ -223,6 +247,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/legend/legend.react.ts',
                 ),
+                'wc/line-chart': resolve(
+                    dirname,
+                    'src/elements/line-chart/line-chart.ts',
+                ),
+                'react/line-chart': resolve(
+                    dirname,
+                    'src/elements/line-chart/line-chart.react.ts',
+                ),
                 'wc/link': resolve(dirname, 'src/elements/link/link.ts'),
                 'react/link': resolve(
                     dirname,
@@ -303,6 +335,14 @@ export default defineConfig({
                 'react/responsive-container': resolve(
                     dirname,
                     'src/elements/responsive-container/responsive-container.react.ts',
+                ),
+                'wc/scatter-plot': resolve(
+                    dirname,
+                    'src/elements/scatter-plot/scatter-plot.ts',
+                ),
+                'react/scatter-plot': resolve(
+                    dirname,
+                    'src/elements/scatter-plot/scatter-plot.react.ts',
                 ),
                 'wc/scroll-area': resolve(
                     dirname,

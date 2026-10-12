@@ -42,7 +42,9 @@ const AXIS = { left: 44, bottom: 28, top: 12, right: 12 };
 
 /** Cartesian scatter plot. Both axes are numeric: each series renders its
  *  {x, y} points as markers over a shared grid (CartesianGrid). Pure SVG,
- *  zero deps. */
+ *  zero deps.
+ * @deprecated Use `ScatterPlot` from `@ninoverse/hmi-components/react/scatter-plot`. Removed in 6.0.0.
+ */
 export function ScatterPlot({
     series,
     width = 520,

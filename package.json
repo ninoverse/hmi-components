@@ -282,6 +282,10 @@
             "types": "./dist/elements/alert/alert.react.d.ts",
             "import": "./dist/react/alert.js"
         },
+        "./react/area-chart": {
+            "types": "./dist/elements/area-chart/area-chart.react.d.ts",
+            "import": "./dist/react/area-chart.js"
+        },
         "./react/aspect-ratio": {
             "types": "./dist/elements/aspect-ratio/aspect-ratio.react.d.ts",
             "import": "./dist/react/aspect-ratio.js"
@@ -302,6 +306,10 @@
             "types": "./dist/elements/banner/banner.react.d.ts",
             "import": "./dist/react/banner.js"
         },
+        "./react/bar-chart": {
+            "types": "./dist/elements/bar-chart/bar-chart.react.d.ts",
+            "import": "./dist/react/bar-chart.js"
+        },
         "./react/blockquote": {
             "types": "./dist/elements/blockquote/blockquote.react.d.ts",
             "import": "./dist/react/blockquote.js"
@@ -313,6 +321,10 @@
         "./react/breadcrumbs": {
             "types": "./dist/elements/breadcrumbs/breadcrumbs.react.d.ts",
             "import": "./dist/react/breadcrumbs.js"
+        },
+        "./react/bullet-chart": {
+            "types": "./dist/elements/bullet-chart/bullet-chart.react.d.ts",
+            "import": "./dist/react/bullet-chart.js"
         },
         "./react/button": {
             "types": "./dist/elements/button/button.react.d.ts",
@@ -390,6 +402,10 @@
             "types": "./dist/elements/legend/legend.react.d.ts",
             "import": "./dist/react/legend.js"
         },
+        "./react/line-chart": {
+            "types": "./dist/elements/line-chart/line-chart.react.d.ts",
+            "import": "./dist/react/line-chart.js"
+        },
         "./react/link": {
             "types": "./dist/elements/link/link.react.d.ts",
             "import": "./dist/react/link.js"
@@ -437,6 +453,10 @@
         "./react/responsive-container": {
             "types": "./dist/elements/responsive-container/responsive-container.react.d.ts",
             "import": "./dist/react/responsive-container.js"
+        },
+        "./react/scatter-plot": {
+            "types": "./dist/elements/scatter-plot/scatter-plot.react.d.ts",
+            "import": "./dist/react/scatter-plot.js"
         },
         "./react/scroll-area": {
             "types": "./dist/elements/scroll-area/scroll-area.react.d.ts",
@@ -631,6 +651,10 @@
             "types": "./dist/elements/alert/alert.d.ts",
             "import": "./dist/wc/alert.js"
         },
+        "./wc/area-chart": {
+            "types": "./dist/elements/area-chart/area-chart.d.ts",
+            "import": "./dist/wc/area-chart.js"
+        },
         "./wc/aspect-ratio": {
             "types": "./dist/elements/aspect-ratio/aspect-ratio.d.ts",
             "import": "./dist/wc/aspect-ratio.js"
@@ -651,6 +675,10 @@
             "types": "./dist/elements/banner/banner.d.ts",
             "import": "./dist/wc/banner.js"
         },
+        "./wc/bar-chart": {
+            "types": "./dist/elements/bar-chart/bar-chart.d.ts",
+            "import": "./dist/wc/bar-chart.js"
+        },
         "./wc/blockquote": {
             "types": "./dist/elements/blockquote/blockquote.d.ts",
             "import": "./dist/wc/blockquote.js"
@@ -662,6 +690,10 @@
         "./wc/breadcrumbs": {
             "types": "./dist/elements/breadcrumbs/breadcrumbs.d.ts",
             "import": "./dist/wc/breadcrumbs.js"
+        },
+        "./wc/bullet-chart": {
+            "types": "./dist/elements/bullet-chart/bullet-chart.d.ts",
+            "import": "./dist/wc/bullet-chart.js"
         },
         "./wc/button": {
             "types": "./dist/elements/button/button.d.ts",
@@ -739,6 +771,10 @@
             "types": "./dist/elements/legend/legend.d.ts",
             "import": "./dist/wc/legend.js"
         },
+        "./wc/line-chart": {
+            "types": "./dist/elements/line-chart/line-chart.d.ts",
+            "import": "./dist/wc/line-chart.js"
+        },
         "./wc/link": {
             "types": "./dist/elements/link/link.d.ts",
             "import": "./dist/wc/link.js"
@@ -786,6 +822,10 @@
         "./wc/responsive-container": {
             "types": "./dist/elements/responsive-container/responsive-container.d.ts",
             "import": "./dist/wc/responsive-container.js"
+        },
+        "./wc/scatter-plot": {
+            "types": "./dist/elements/scatter-plot/scatter-plot.d.ts",
+            "import": "./dist/wc/scatter-plot.js"
         },
         "./wc/scroll-area": {
             "types": "./dist/elements/scroll-area/scroll-area.d.ts",
