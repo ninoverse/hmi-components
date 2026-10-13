@@ -1,5 +1,5 @@
 <!-- agentcfg:start -->
-<!-- language/typescript/file-naming.md · v1.0.0 -->
+<!-- language/typescript/file-naming.md · v1.2.1 -->
 # Directories and file naming
 
 ## Repository layout

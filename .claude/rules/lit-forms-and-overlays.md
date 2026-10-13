@@ -3,7 +3,7 @@ paths:
   - "src/elements/**"
 ---
 
-<!-- framework/lit/forms-and-overlays.md · v1.0.0 -->
+<!-- framework/lit/forms-and-overlays.md · v1.2.1 -->
 # Forms and overlays
 
 ## Form controls

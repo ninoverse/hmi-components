@@ -1,5 +1,5 @@
 <!-- agentcfg:start -->
-<!-- language/typescript/testing.md · v1.0.0 -->
+<!-- language/typescript/testing.md · v1.2.1 -->
 # Testing instructions
 
 ## Before merging any change

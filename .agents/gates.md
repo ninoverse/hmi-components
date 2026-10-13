@@ -1,5 +1,5 @@
 <!-- agentcfg:start -->
-<!-- language/typescript/tasks/gates.md · v1.0.0 -->
+<!-- language/typescript/tasks/gates.md · v1.2.1 -->
 # Merge gates
 
 Run the merge gates defined in *Testing instructions*:
