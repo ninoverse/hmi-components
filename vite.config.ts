@@ -180,6 +180,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/code/code.react.ts',
                 ),
+                'wc/confirm-dialog': resolve(
+                    dirname,
+                    'src/elements/confirm-dialog/confirm-dialog.ts',
+                ),
+                'react/confirm-dialog': resolve(
+                    dirname,
+                    'src/elements/confirm-dialog/confirm-dialog.react.ts',
+                ),
                 'wc/divider': resolve(
                     dirname,
                     'src/elements/divider/divider.ts',
@@ -298,6 +306,11 @@ export default defineConfig({
                 'react/meter': resolve(
                     dirname,
                     'src/elements/meter/meter.react.ts',
+                ),
+                'wc/modal': resolve(dirname, 'src/elements/modal/modal.ts'),
+                'react/modal': resolve(
+                    dirname,
+                    'src/elements/modal/modal.react.ts',
                 ),
                 'wc/multi-input': resolve(
                     dirname,

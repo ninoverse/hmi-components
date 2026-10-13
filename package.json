@@ -358,6 +358,10 @@
             "types": "./dist/elements/code/code.react.d.ts",
             "import": "./dist/react/code.js"
         },
+        "./react/confirm-dialog": {
+            "types": "./dist/elements/confirm-dialog/confirm-dialog.react.d.ts",
+            "import": "./dist/react/confirm-dialog.js"
+        },
         "./react/divider": {
             "types": "./dist/elements/divider/divider.react.d.ts",
             "import": "./dist/react/divider.js"
@@ -433,6 +437,10 @@
         "./react/meter": {
             "types": "./dist/elements/meter/meter.react.d.ts",
             "import": "./dist/react/meter.js"
+        },
+        "./react/modal": {
+            "types": "./dist/elements/modal/modal.react.d.ts",
+            "import": "./dist/react/modal.js"
         },
         "./react/multi-input": {
             "types": "./dist/elements/multi-input/multi-input.react.d.ts",
@@ -747,6 +755,10 @@
             "types": "./dist/elements/code/code.d.ts",
             "import": "./dist/wc/code.js"
         },
+        "./wc/confirm-dialog": {
+            "types": "./dist/elements/confirm-dialog/confirm-dialog.d.ts",
+            "import": "./dist/wc/confirm-dialog.js"
+        },
         "./wc/divider": {
             "types": "./dist/elements/divider/divider.d.ts",
             "import": "./dist/wc/divider.js"
@@ -822,6 +834,10 @@
         "./wc/meter": {
             "types": "./dist/elements/meter/meter.d.ts",
             "import": "./dist/wc/meter.js"
+        },
+        "./wc/modal": {
+            "types": "./dist/elements/modal/modal.d.ts",
+            "import": "./dist/wc/modal.js"
         },
         "./wc/multi-input": {
             "types": "./dist/elements/multi-input/multi-input.d.ts",

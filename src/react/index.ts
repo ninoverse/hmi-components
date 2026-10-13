@@ -69,6 +69,12 @@ export {
 } from '../elements/chip/chip.react.js';
 export { Code } from '../elements/code/code.react.js';
 export {
+    ConfirmDialog,
+    type ConfirmDialogCancelDetail,
+    type ConfirmDialogConfirmDetail,
+    type ConfirmDialogVariant,
+} from '../elements/confirm-dialog/confirm-dialog.react.js';
+export {
     Divider,
     type DividerAlign,
     type DividerOrientation,
@@ -137,6 +143,14 @@ export {
     type ListReorderDetail,
 } from '../elements/list/list.react.js';
 export { Meter, type MeterLevel } from '../elements/meter/meter.react.js';
+export {
+    type DialogAction,
+    Modal,
+    type ModalActionDetail,
+    type ModalCloseDetail,
+    type ModalCloseReason,
+    type ModalSize,
+} from '../elements/modal/modal.react.js';
 export {
     MultiInput,
     type MultiInputType,

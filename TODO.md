@@ -339,7 +339,7 @@ additive, so the static chart stays what it is without the new attribute.
 **Do this last, before the v6 flip.** `.claude/rules/lit-elements.md` says an
 element owns its state: `value`, `checked` or `open` is the current state,
 setting it from outside replaces it, and user interaction updates it and fires
-the event. Five elements were built the other way, on the maintainer's choice: they
+the event. These elements were built the other way, on the maintainer's choice: they
 only fire their event, keep showing the old state, and wait for the consumer to
 set the property, as the v5 React components were when controlled.
 
@@ -350,12 +350,18 @@ set the property, as the v5 React components were when controlled.
 | `hmi-sidebar` | `current` | `hmi-nav` |
 | `hmi-tabs` | `value` | `hmi-change` |
 | `hmi-stepper` | `current` | `hmi-change` |
+| `hmi-modal` | `open` | `hmi-close` |
+| `hmi-confirm-dialog` | `open` | `hmi-cancel` |
 
-To do: decide, once, for these five, whether they stay controlled or become
+The rest of the overlays (drawer, popover, hover-card and the like) join this table
+as they are built, each on the choice made for it.
+
+To do: decide, once, for these elements, whether they stay controlled or become
 element-owned. Element-owned is a two-line change per element (set the property,
 then emit) and plain HTML then needs no wiring, while a consumer can still veto by
-setting the property back. For `navbar` and `sidebar`, `current` normally follows
+setting the property back. For the dialogs, element-owned is also what a native
+`<dialog>` does: Escape closes it, and `hmi-close` only lets a listener veto. For `navbar` and `sidebar`, `current` normally follows
 the route, so controlled may be the right answer there; the rule can then say so.
-Whichever way it goes, make the rule, the translation guide (§9) and the five
-elements agree, and say so in the v6 release notes.
+Whichever way it goes, make the rule, the translation guide (§9) and the elements
+agree, and say so in the v6 release notes.
 

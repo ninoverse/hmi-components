@@ -203,6 +203,13 @@ PRs the same way, which gives four PRs in this order: `breadcrumbs` +
 `pagination`; `navbar` + `sidebar`; `tabs` + `stepper`; `tree`. Each batch is
 still one commit per element.
 
+Phase 9 exception (agreed with the maintainer): the overlays share PRs where one
+renders the other or they share their mechanics, which gives six PRs in this
+order: `modal` + `confirm-dialog` (lands `shared/dialog-actions.ts` and
+`shared/scroll-lock.ts`); `drawer`; `popover` (lands `shared/positioning.ts`, as
+the first element that needs it); `tooltip` + `hover-card`; `menu` +
+`context-menu`; `table`. Each batch is still one commit per element.
+
 ## 7. Running one migration end to end
 
 The `migrate-component` skill (`.claude/skills/migrate-component/SKILL.md`)

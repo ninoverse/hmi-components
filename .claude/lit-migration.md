@@ -84,7 +84,7 @@ stem (`AreaChart`), the tag is `hmi-<kebab>`, the class is `Hmi<Pascal>`,
 | effect cleanup | `disconnectedCallback()` |
 | `createPortal` | never — `<dialog>` or `popover` inside the element's own shadow root (R8) |
 | `ResizeObserver` | observe `this` in `connectedCallback`, disconnect in `disconnectedCallback` |
-| `document.body.style.overflow` lock | none — `<dialog>.showModal()` provides it |
+| `document.body.style.overflow` lock | `lockScroll()` from `src/elements/shared/scroll-lock.ts`, while a dialog is open: `<dialog>.showModal()` makes the page inert but does not stop it scrolling |
 
 - The element with focus is `activeElementDeep(this.getRootNode())` from
   `src/elements/shared/dom.ts`, never `document.activeElement`.
