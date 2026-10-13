@@ -34,6 +34,7 @@ export type ConfirmDialogProps = {
  * @example
  * <ConfirmDialog open={open} title="Delete?" variant="danger"
  *     onCancel={close} onConfirm={remove} />
+ * @deprecated Use `ConfirmDialog` from `@ninoverse/hmi-components/react/confirm-dialog`. Removed in 6.0.0.
  */
 export function ConfirmDialog({
     open,

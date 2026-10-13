@@ -69,6 +69,12 @@ export {
 } from '../elements/chip/chip.react.js';
 export { Code } from '../elements/code/code.react.js';
 export {
+    ConfirmDialog,
+    type ConfirmDialogCancelDetail,
+    type ConfirmDialogConfirmDetail,
+    type ConfirmDialogVariant,
+} from '../elements/confirm-dialog/confirm-dialog.react.js';
+export {
     Divider,
     type DividerAlign,
     type DividerOrientation,

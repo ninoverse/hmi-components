@@ -50,8 +50,8 @@ export interface ModalActionDetail {
  * @slot title - The heading, in an `<h2>`. Defaults to `heading`.
  * @slot description - Supporting text under the title. Defaults to `description`.
  * @slot actions - The footer buttons. Defaults to the `actions` array.
- * @fires hmi-close - Escape or a press on the backdrop. Cancelable. `detail` is `{ reason }`.
- * @fires hmi-action - A footer action was activated. `detail` is `{ value }`.
+ * @fires {CustomEvent<ModalCloseDetail>} hmi-close - Escape or a press on the backdrop. Cancelable, but the dialog does not close itself either way: set `open` to `false`.
+ * @fires {CustomEvent<ModalActionDetail>} hmi-action - A button rendered from the `actions` array was activated.
  * @csspart base - The `<dialog>`.
  * @csspart panel - The `<dialog>`, under its panel-group name.
  * @csspart title - The `<h2>` around the title.

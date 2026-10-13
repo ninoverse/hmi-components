@@ -4066,6 +4066,340 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/confirm-dialog/confirm-dialog.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Confirmation dialog: a modal with a cancel and a confirm button, for a\ndestructive or irreversible action. It is an `<hmi-modal>` inside its own\nroot, so it has the modal's panel, scrim, focus trap and scroll lock, and\nforwards its `panel`, `title`, `description` and `actions` parts.\n\nThe dialog is controlled, as the v5 component was: it never closes itself.\nThe cancel button, Escape and a press on the backdrop fire `hmi-cancel`, and\nthe confirm button and Enter fire `hmi-confirm`; set `open` to `false` from\neither listener to close it, or keep it open while the work runs, with\n`loading`.\n\nEnter confirms from anywhere except a focused button, link or select, which\nkeep their own action: a Tab to Cancel, then Enter, cancels. `confirm-on-button`\nmakes Enter confirm from there too, as in v5. Where focus starts on open is the\nbrowser's: Chromium puts it on the dialog, so Enter confirms at once.\n\n`heading` and `description` are plain-text defaults of the `title` and\n`description` slots; `confirm-label` and `cancel-label` are those of the\n`confirm-label` and `cancel-label` slots. There is no `title` property:\n`title` is the native tooltip attribute on every element.",
+          "name": "HmiConfirmDialog",
+          "cssParts": [
+            {
+              "description": "The `<dialog>`, from the modal.",
+              "name": "base"
+            },
+            {
+              "description": "The `<dialog>`, under its panel-group name.",
+              "name": "panel"
+            },
+            {
+              "description": "The `<h2>` around the title.",
+              "name": "title"
+            },
+            {
+              "description": "The paragraph around the description.",
+              "name": "description"
+            },
+            {
+              "description": "The footer around the two buttons.",
+              "name": "actions"
+            },
+            {
+              "description": "The cancel button.",
+              "name": "cancel"
+            },
+            {
+              "description": "The confirm button.",
+              "name": "confirm"
+            }
+          ],
+          "slots": [
+            {
+              "description": "The heading. Defaults to `heading`.",
+              "name": "title"
+            },
+            {
+              "description": "Supporting text under the title. Defaults to `description`.",
+              "name": "description"
+            },
+            {
+              "description": "The confirm button's text. Defaults to `confirm-label`.",
+              "name": "confirm-label"
+            },
+            {
+              "description": "The cancel button's text. Defaults to `cancel-label`.",
+              "name": "cancel-label"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the dialog is open. Set it from the `hmi-cancel` and `hmi-confirm` listeners.",
+              "attribute": "open",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "heading",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The title, as plain text: the default of the `title` slot.",
+              "attribute": "heading"
+            },
+            {
+              "kind": "field",
+              "name": "description",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Supporting text under the title: the default of the `description` slot.",
+              "attribute": "description"
+            },
+            {
+              "kind": "field",
+              "name": "confirmLabel",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Confirm'",
+              "description": "The confirm button's text: the default of the `confirm-label` slot.",
+              "attribute": "confirm-label"
+            },
+            {
+              "kind": "field",
+              "name": "cancelLabel",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Cancel'",
+              "description": "The cancel button's text: the default of the `cancel-label` slot.",
+              "attribute": "cancel-label"
+            },
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "ConfirmDialogVariant"
+              },
+              "default": "'default'",
+              "description": "`danger` styles the confirm button as destructive.",
+              "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "loading",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Disables both buttons, and Enter, while an action is in flight.",
+              "attribute": "loading",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "confirmDisabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Disables the confirm button, and Enter, for example while validation fails.",
+              "attribute": "confirm-disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "confirmOnButton",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Enter confirms even when focus is on a button, link or select, as in v5. By default those keep their own action.",
+              "attribute": "confirm-on-button"
+            },
+            {
+              "kind": "method",
+              "name": "#cancel",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#confirm",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#onModalClose",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onKeydown",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "KeyboardEvent"
+                  }
+                }
+              ]
+            }
+          ],
+          "events": [
+            {
+              "type": {
+                "text": "CustomEvent<ConfirmDialogCancelDetail>"
+              },
+              "description": "The cancel button, Escape or a press on the backdrop. Cancelable, but the dialog does not close itself either way: set `open` to `false`.",
+              "name": "hmi-cancel"
+            },
+            {
+              "type": {
+                "text": "CustomEvent<ConfirmDialogConfirmDetail>"
+              },
+              "description": "The confirm button, or Enter.",
+              "name": "hmi-confirm"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the dialog is open. Set it from the `hmi-cancel` and `hmi-confirm` listeners.",
+              "fieldName": "open"
+            },
+            {
+              "name": "heading",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The title, as plain text: the default of the `title` slot.",
+              "fieldName": "heading"
+            },
+            {
+              "name": "description",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Supporting text under the title: the default of the `description` slot.",
+              "fieldName": "description"
+            },
+            {
+              "name": "confirm-label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Confirm'",
+              "description": "The confirm button's text: the default of the `confirm-label` slot.",
+              "fieldName": "confirmLabel"
+            },
+            {
+              "name": "cancel-label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Cancel'",
+              "description": "The cancel button's text: the default of the `cancel-label` slot.",
+              "fieldName": "cancelLabel"
+            },
+            {
+              "name": "variant",
+              "type": {
+                "text": "ConfirmDialogVariant"
+              },
+              "default": "'default'",
+              "description": "`danger` styles the confirm button as destructive.",
+              "fieldName": "variant"
+            },
+            {
+              "name": "loading",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Disables both buttons, and Enter, while an action is in flight.",
+              "fieldName": "loading"
+            },
+            {
+              "name": "confirm-disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Disables the confirm button, and Enter, for example while validation fails.",
+              "fieldName": "confirmDisabled"
+            },
+            {
+              "name": "confirm-on-button",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Enter confirms even when focus is on a button, link or select, as in v5. By default those keep their own action.",
+              "fieldName": "confirmOnButton"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-confirm-dialog",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiConfirmDialog",
+          "declaration": {
+            "name": "HmiConfirmDialog",
+            "module": "src/elements/confirm-dialog/confirm-dialog.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-confirm-dialog",
+          "declaration": {
+            "name": "HmiConfirmDialog",
+            "module": "src/elements/confirm-dialog/confirm-dialog.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/divider/divider.ts",
       "declarations": [
         {
@@ -9081,11 +9415,17 @@
           ],
           "events": [
             {
-              "description": "Escape or a press on the backdrop. Cancelable. `detail` is `{ reason }`.",
+              "type": {
+                "text": "CustomEvent<ModalCloseDetail>"
+              },
+              "description": "Escape or a press on the backdrop. Cancelable, but the dialog does not close itself either way: set `open` to `false`.",
               "name": "hmi-close"
             },
             {
-              "description": "A footer action was activated. `detail` is `{ value }`.",
+              "type": {
+                "text": "CustomEvent<ModalActionDetail>"
+              },
+              "description": "A button rendered from the `actions` array was activated.",
               "name": "hmi-action"
             }
           ],

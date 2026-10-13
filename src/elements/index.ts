@@ -23,6 +23,7 @@ export * from './chart-tooltip/chart-tooltip.js';
 export * from './checkbox/checkbox.js';
 export * from './chip/chip.js';
 export * from './code/code.js';
+export * from './confirm-dialog/confirm-dialog.js';
 export * from './divider/divider.js';
 export * from './donut-chart/donut-chart.js';
 export * from './empty-state/empty-state.js';

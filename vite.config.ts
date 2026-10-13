@@ -180,6 +180,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/code/code.react.ts',
                 ),
+                'wc/confirm-dialog': resolve(
+                    dirname,
+                    'src/elements/confirm-dialog/confirm-dialog.ts',
+                ),
+                'react/confirm-dialog': resolve(
+                    dirname,
+                    'src/elements/confirm-dialog/confirm-dialog.react.ts',
+                ),
                 'wc/divider': resolve(
                     dirname,
                     'src/elements/divider/divider.ts',

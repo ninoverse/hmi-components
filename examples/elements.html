@@ -1180,6 +1180,17 @@ export function Example() {
         </section>
 
         <section>
+            <h2>ConfirmDialog</h2>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; padding-bottom: 2rem">
+                <hmi-button id="confirm-delete-open" variant="danger">Delete project</hmi-button>
+                <hmi-button id="confirm-leave-open" variant="secondary">Leave without saving</hmi-button>
+                <p style="margin: 0; color: var(--on-surface-variant)">Last result: <strong id="confirm-result">none</strong></p>
+            </div>
+            <hmi-confirm-dialog id="confirm-delete" variant="danger" heading="Delete project?" description="This will permanently remove the project, its files, and 14 collaborator invitations. This action cannot be undone." confirm-label="Delete project"></hmi-confirm-dialog>
+            <hmi-confirm-dialog id="confirm-leave" heading="Leave without saving?" description="You have unsaved changes that will be lost." confirm-label="Leave" cancel-label="Keep editing"></hmi-confirm-dialog>
+        </section>
+
+        <section>
             <h2>List</h2>
             <!-- Items are a property. right-<id> takes rich content; reorderable adds
                  drag and Alt+Arrow reordering, and the page sets items back from
@@ -1737,6 +1748,25 @@ export function Example() {
             document.getElementById('modal-open-medium').addEventListener('click', () => { modalMedium.open = true; });
             document.getElementById('modal-open-large').addEventListener('click', () => { modalLarge.open = true; });
             document.getElementById('modal-large-close').addEventListener('click', () => { modalLarge.open = false; });
+            const confirmResult = document.getElementById('confirm-result');
+            const confirmDelete = document.getElementById('confirm-delete');
+            const confirmLeave = document.getElementById('confirm-leave');
+            // The dialogs are controlled: they close when `open` is set to false.
+            document.getElementById('confirm-delete-open').addEventListener('click', () => { confirmDelete.open = true; });
+            document.getElementById('confirm-leave-open').addEventListener('click', () => { confirmLeave.open = true; });
+            confirmDelete.addEventListener('hmi-cancel', () => { confirmDelete.open = false; confirmResult.textContent = 'Delete cancelled'; });
+            confirmDelete.addEventListener('hmi-confirm', () => {
+                confirmDelete.loading = true;
+                confirmDelete.confirmLabel = 'Deleting…';
+                setTimeout(() => {
+                    confirmDelete.loading = false;
+                    confirmDelete.confirmLabel = 'Delete project';
+                    confirmDelete.open = false;
+                    confirmResult.textContent = 'Project deleted';
+                }, 900);
+            });
+            confirmLeave.addEventListener('hmi-cancel', () => { confirmLeave.open = false; confirmResult.textContent = 'Kept editing'; });
+            confirmLeave.addEventListener('hmi-confirm', () => { confirmLeave.open = false; confirmResult.textContent = 'Left without saving'; });
             for (const pager of document.querySelectorAll('hmi-pagination')) {
                 pager.addEventListener('hmi-change', (event) => {
                     console.log('pagination hmi-change', event.detail);
