@@ -1172,6 +1172,8 @@ export function Example() {
             </div>
             <hmi-modal id="modal-medium" heading="Confirm publish" description="This will make the post visible to anyone with the link.">
                 <p style="margin: 0; color: var(--on-surface-variant)">You can change visibility back to private at any time from the post's settings menu.</p>
+                <hmi-button slot="actions" variant="ghost" id="modal-medium-cancel">Cancel</hmi-button>
+                <hmi-button slot="actions" variant="primary" id="modal-medium-publish">Publish</hmi-button>
             </hmi-modal>
             <hmi-modal id="modal-large" size="large" heading="Terms of service">
                 <p style="margin: 0">Large modals have room for longer content, such as terms, a form or a preview.</p>
@@ -1736,17 +1738,15 @@ export function Example() {
             ];
             const modalMedium = document.getElementById('modal-medium');
             const modalLarge = document.getElementById('modal-large');
-            modalMedium.actions = [
-                { label: 'Cancel', value: 'cancel', variant: 'secondary' },
-                { label: 'Publish', value: 'publish', variant: 'primary' },
-            ];
             for (const modal of [modalMedium, modalLarge]) {
                 // The modal is controlled: it closes when `open` is set to false.
                 modal.addEventListener('hmi-close', () => { modal.open = false; });
-                modal.addEventListener('hmi-action', () => { modal.open = false; });
             }
             document.getElementById('modal-open-medium').addEventListener('click', () => { modalMedium.open = true; });
             document.getElementById('modal-open-large').addEventListener('click', () => { modalLarge.open = true; });
+            for (const id of ['modal-medium-cancel', 'modal-medium-publish']) {
+                document.getElementById(id).addEventListener('click', () => { modalMedium.open = false; });
+            }
             document.getElementById('modal-large-close').addEventListener('click', () => { modalLarge.open = false; });
             const confirmResult = document.getElementById('confirm-result');
             const confirmDelete = document.getElementById('confirm-delete');
