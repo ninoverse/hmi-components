@@ -352,6 +352,7 @@ set the property, as the v5 React components were when controlled.
 | `hmi-stepper` | `current` | `hmi-change` |
 | `hmi-modal` | `open` | `hmi-close` |
 | `hmi-confirm-dialog` | `open` | `hmi-cancel` |
+| `hmi-drawer` | `open` | `hmi-close` |
 
 The rest of the overlays (drawer, popover, hover-card and the like) join this table
 as they are built, each on the choice made for it.

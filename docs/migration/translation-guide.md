@@ -496,7 +496,7 @@ override render() {
 }
 ```
 
-A dialog built this way is controlled for now (`TODO.md`, "Controlled or
+The modal's machinery is the `HmiDialog` base class in `src/elements/shared/dialog.ts`; the dialog group (modal, drawer, later command-palette) extends it with its own tag, styles and body. A dialog built this way is controlled for now (`TODO.md`, "Controlled or
 element-owned state"): `#requestClose` only emits, so `open` stays `true` until
 the consumer sets it, and `#onClose` shows the `<dialog>` again when the browser
 closed it by itself (a second Escape with no other interaction in between cannot
