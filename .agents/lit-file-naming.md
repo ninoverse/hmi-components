@@ -1,5 +1,5 @@
 <!-- agentcfg:start -->
-<!-- framework/lit/file-naming.md · v1.0.0 -->
+<!-- framework/lit/file-naming.md · v1.2.1 -->
 # Element files
 
 ## Layout

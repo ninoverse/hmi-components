@@ -1,5 +1,5 @@
 <!-- agentcfg:start -->
-<!-- concerns/browser-ui/visual-check.md · v1.0.0 -->
+<!-- concerns/browser-ui/visual-check.md · v1.2.1 -->
 # Visual check
 
 A PR that changes what a page renders carries a visual-check record. An agent

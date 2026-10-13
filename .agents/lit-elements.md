@@ -1,5 +1,5 @@
 <!-- agentcfg:start -->
-<!-- framework/lit/elements.md · v1.0.0 -->
+<!-- framework/lit/elements.md · v1.2.1 -->
 # Elements
 
 ## Shape
