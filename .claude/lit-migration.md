@@ -112,7 +112,9 @@ stem (`AreaChart`), the tag is `hmi-<kebab>`, the class is `Hmi<Pascal>`,
   that needs a per-element hook adds a token, `--<element>-<prop>`, to the theme
   file. The hooks defined so far, with defaults in `constants.css` and overrides
   in `structure/journal.css`: `--list-divider-style`, `--progress-track-border`,
-  `--switch-thumb-shadow`.
+  `--switch-thumb-shadow`. The drawer's surface, `--drawer-bg`, is a hook of a
+  different kind: its default in `constants.css` is the lowest surface v5 painted,
+  and `glass` and `liquid` override it with their strong surface.
 - **Panel-like elements** (card, navbar, sidebar, popover, hover-card,
   context-menu, toast, modal, drawer, command-palette, combobox listbox, menu,
   chart-tooltip) expose `part="panel"` and paint from `--panel-bg` (or

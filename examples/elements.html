@@ -1193,6 +1193,26 @@ export function Example() {
         </section>
 
         <section>
+            <h2>Drawer</h2>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap; padding-bottom: 2rem">
+                <hmi-button id="drawer-open-right">Open right</hmi-button>
+                <hmi-button id="drawer-open-left" variant="secondary">Open left</hmi-button>
+                <hmi-button id="drawer-open-bottom" variant="soft">Open bottom</hmi-button>
+            </div>
+            <hmi-drawer id="drawer-right" side="right" heading="Filters" description="Tune the result set on the fly.">
+                <p style="margin: 0; font-size: 13px; color: var(--on-surface-variant)">Right-side drawer — Escape or scrim click closes it.</p>
+                <hmi-button slot="actions" variant="ghost" id="drawer-right-cancel">Cancel</hmi-button>
+                <hmi-button slot="actions" id="drawer-right-apply">Apply</hmi-button>
+            </hmi-drawer>
+            <hmi-drawer id="drawer-left" side="left" heading="Workspace" description="Sample left drawer for navigation context.">
+                <p style="margin: 0; font-size: 13px; color: var(--on-surface-variant)">Left-side drawer.</p>
+            </hmi-drawer>
+            <hmi-drawer id="drawer-bottom" side="bottom" heading="Quick actions">
+                <p style="margin: 0; font-size: 13px; color: var(--on-surface-variant)">Bottom-anchored drawer — common on mobile.</p>
+            </hmi-drawer>
+        </section>
+
+        <section>
             <h2>List</h2>
             <!-- Items are a property. right-<id> takes rich content; reorderable adds
                  drag and Alt+Arrow reordering, and the page sets items back from
@@ -1767,6 +1787,15 @@ export function Example() {
             });
             confirmLeave.addEventListener('hmi-cancel', () => { confirmLeave.open = false; confirmResult.textContent = 'Kept editing'; });
             confirmLeave.addEventListener('hmi-confirm', () => { confirmLeave.open = false; confirmResult.textContent = 'Left without saving'; });
+            // The drawers are controlled: they close when `open` is set to false.
+            for (const side of ['right', 'left', 'bottom']) {
+                const drawer = document.getElementById(`drawer-${side}`);
+                document.getElementById(`drawer-open-${side}`).addEventListener('click', () => { drawer.open = true; });
+                drawer.addEventListener('hmi-close', () => { drawer.open = false; });
+            }
+            for (const id of ['drawer-right-cancel', 'drawer-right-apply']) {
+                document.getElementById(id).addEventListener('click', () => { document.getElementById('drawer-right').open = false; });
+            }
             for (const pager of document.querySelectorAll('hmi-pagination')) {
                 pager.addEventListener('hmi-change', (event) => {
                     console.log('pagination hmi-change', event.detail);

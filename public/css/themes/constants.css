@@ -75,6 +75,11 @@
     --panel-border: var(--outline-variant);
     --panel-filter: none;
 
+    /* The drawer's surface: v5 painted it with the lowest surface, not the
+       strong panel one. The materials override it with their strong surface, so
+       glass and liquid still reach the drawer. */
+    --drawer-bg: var(--surface-container-lowest);
+
     /* Per-element hooks a structure may override (the journal structure does) */
     --list-divider-style: solid;
     --progress-track-border: none;

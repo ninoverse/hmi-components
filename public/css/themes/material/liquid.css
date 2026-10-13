@@ -60,6 +60,7 @@
     /* Panel tokens consumed by the elements (see constants.css) */
     --panel-bg: var(--liquid-sheen), var(--liquid-surface);
     --panel-bg-strong: var(--liquid-sheen), var(--liquid-surface-strong);
+    --drawer-bg: var(--liquid-sheen), var(--liquid-surface-strong);
     --panel-ink-bg: var(--liquid-sheen),
         color-mix(in srgb, var(--inverse-surface) 55%, transparent);
     --panel-accent-bg: var(--liquid-sheen),

@@ -132,7 +132,9 @@ do **not** cross the boundary, which changes how themes may be written:
 - **Per-element hooks** replace the journal-specific rules that v5 keeps inside
   component CSS: `--list-divider-style`, `--progress-track-border`,
   `--switch-thumb-shadow` (defaults in `constants.css`, overridden by
-  `structure/journal.css`).
+  `structure/journal.css`). `--drawer-bg` is the drawer's surface: the lowest
+  surface under the solid material, as in v5, and the strong panel surface under
+  `glass` and `liquid`.
 - **Sizing base.** The elements never use `rem`. They size from `--hmi-base`
   (`8px` by default, set in `base.css`), so a host app keeps its own root font
   size. Scale the whole library with `:root { --hmi-base: 10px; }`. Every theme

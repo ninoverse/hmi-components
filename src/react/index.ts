@@ -83,6 +83,13 @@ export {
     DonutChart,
     type DonutChartSegment,
 } from '../elements/donut-chart/donut-chart.react.js';
+export {
+    Drawer,
+    type DrawerActionDetail,
+    type DrawerCloseDetail,
+    type DrawerCloseReason,
+    type DrawerSide,
+} from '../elements/drawer/drawer.react.js';
 export { EmptyState } from '../elements/empty-state/empty-state.react.js';
 export {
     type FileDescriptor,
