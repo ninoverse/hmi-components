@@ -281,7 +281,7 @@ Wrapper prop = `on` + PascalCase of the event minus `hmi-`.
 | multi-input | `onComplete(string)` | `hmi-complete` | `{ value: string }` |
 | accordion | `onOpenChange(number[])` | `hmi-open-change` | `{ open: number[] }` |
 | popover, hover-card, tooltip, command-palette | `onOpenChange(boolean)` | `hmi-open-change` | `{ open: boolean }` |
-| modal, drawer | `onClose()` | `hmi-close` (cancelable) | `{ reason: 'escape' \| 'backdrop' \| 'action' \| 'programmatic' }` |
+| modal, drawer | `onClose()` | `hmi-close` (cancelable) | `{ reason: 'escape' \| 'backdrop' }` |
 | chip | `onClose()` / `onSelect()` | `hmi-close` (cancelable) / `hmi-select` (cancelable) | `{}` / `{ selected: boolean }` |
 | modal, drawer, command-palette, table (`actions` cells) | `onAction(string)` | `hmi-action` | `{ value: string, row?: Row }` |
 | confirm-dialog | `onCancel()` / `onConfirm()` | `hmi-cancel` (cancelable) / `hmi-confirm` | `{}` |
@@ -367,7 +367,7 @@ html`<button id="trigger" aria-controls="panel">…</button><div id="panel" aria
 |---------|---------------|-------------|
 | `document.addEventListener('mousedown', e => { if (!ref.current.contains(e.target)) close(); })` (`popover.tsx:89-94`, `combobox.tsx:126-131`, `contextMenu.tsx:46-50`) | `e.target` is retargeted to the host, so clicks inside the popover look outside | `if (!e.composedPath().includes(this)) close();` — or rely on `popover="auto"` light dismiss (R8) |
 | `previouslyFocused.current = document.activeElement` (`modal.tsx:104`, `drawer.tsx:67`, `commandPalette.tsx:117`) | returns the host, not the inner focused node | `activeElementDeep(document)` from `shared/dom.ts` (recurse through `shadowRoot.activeElement`) |
-| `document.body.style.overflow = 'hidden'` | body mutation, fights other overlays | `<dialog>.showModal()` |
+| `document.body.style.overflow = 'hidden'` | body mutation, fights other overlays | `lockScroll()` from `shared/scroll-lock.ts`, counted so stacked dialogs share it (`showModal()` alone does not stop the page scrolling) |
 | `createPortal(node, document.body)` | shadow styles do not reach a body portal | `<dialog>` / `popover` inside the root (R8) |
 | `document.documentElement.scrollWidth` (`popover.tsx:72`) | fine, but only inside `PositionController` | keep inside the controller |
 | `wrap.querySelector('[data-active="true"]')` (`tabs.tsx:75`) | fine (scoped to own ref) | `this.renderRoot.querySelector(...)` |
