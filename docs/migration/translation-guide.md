@@ -281,7 +281,7 @@ Wrapper prop = `on` + PascalCase of the event minus `hmi-`.
 | multi-input | `onComplete(string)` | `hmi-complete` | `{ value: string }` |
 | accordion | `onOpenChange(number[])` | `hmi-open-change` | `{ open: number[] }` |
 | popover, hover-card, tooltip, command-palette | `onOpenChange(boolean)` | `hmi-open-change` | `{ open: boolean }` |
-| modal, drawer | `onClose()` | `hmi-close` (cancelable) | `{ reason: 'escape' \| 'backdrop' }` |
+| modal, drawer | `onClose()` | `hmi-close` (cancelable; the dialog is controlled and stays open until `open` is set to false) | `{ reason: 'escape' \| 'backdrop' }` |
 | chip | `onClose()` / `onSelect()` | `hmi-close` (cancelable) / `hmi-select` (cancelable) | `{}` / `{ selected: boolean }` |
 | modal, drawer, command-palette, table (`actions` cells) | `onAction(string)` | `hmi-action` | `{ value: string, row?: Row }` |
 | confirm-dialog | `onCancel()` / `onConfirm()` | `hmi-cancel` (cancelable) / `hmi-confirm` | `{}` |
@@ -306,9 +306,14 @@ export function emit<T>(host: HTMLElement, type: `hmi-${string}`, detail: T, ini
     return host.dispatchEvent(new CustomEvent<T>(type, { detail, bubbles: true, composed: true, ...init }));
 }
 
-// in an element
+// in an element that owns its state (the rule)
 #requestClose(reason: ModalCloseDetail['reason']): void {
     if (emit<ModalCloseDetail>(this, 'hmi-close', { reason }, { cancelable: true })) this.open = false;
+}
+
+// in a controlled element (the dialogs, until the v6 decision in TODO.md): it only asks
+#requestClose(reason: ModalCloseDetail['reason']): void {
+    emit<ModalCloseDetail>(this, 'hmi-close', { reason }, { cancelable: true });
 }
 ```
 
@@ -490,6 +495,20 @@ override render() {
     `;
 }
 ```
+
+A dialog built this way is controlled for now (`TODO.md`, "Controlled or
+element-owned state"): `#requestClose` only emits, so `open` stays `true` until
+the consumer sets it, and `#onClose` shows the `<dialog>` again when the browser
+closed it by itself (a second Escape with no other interaction in between cannot
+be cancelled). The page's scroll lock is `lockScroll()` from
+`src/elements/shared/scroll-lock.ts`, taken while the dialog is open, because
+`showModal()` makes the page inert but does not stop it scrolling; the footer's
+`DialogAction[]` is `renderDialogActions()` from
+`src/elements/shared/dialog-actions.ts`. A press on the backdrop reaches the
+`<dialog>` itself, so it is told from a press on the panel's padding by comparing
+the pointer with the dialog's rectangle. An element that renders a `<hmi-modal>`
+(confirm-dialog) forwards `exportparts` and its own slots into the modal's, and
+stops the modal's `hmi-close` so only its own event leaves it.
 
 `PositionController` (phase 9, `src/elements/shared/positioning.ts`): a
 `ReactiveController` that on `hostConnected` observes the anchor with
