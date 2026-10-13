@@ -334,6 +334,25 @@ additive, so the static chart stays what it is without the new attribute.
 
 ---
 
+## CSS anchor positioning for the popover group (after v6)
+
+`PositionController` places a floating panel with rect maths: it measures the
+anchor and writes `position: fixed` insets on every scroll, resize and size
+change. CSS anchor positioning (`anchor-name` on the trigger, `position-anchor`
+and `position-area` on the panel) does the same in the browser's layout, with no
+listeners and no frame of lag, and `position-try-fallbacks` flips a panel that
+would leave the screen. Chrome and Safari have it; Firefox does not yet, so the
+rect maths stays as the fallback.
+
+To do: when it is in all three, use it where `CSS.supports('anchor-name: --a')`
+is true. The anchor is a slotted element in the consumer's tree and the panel is
+in the shadow root, so check that a name set through `::slotted()` is found by the
+panel (names are tree-scoped), or give the trigger wrapper a box. Then decide
+whether the popover group flips and clamps to the screen, which v5 never did (a
+panel near an edge can leave it).
+
+---
+
 ## Controlled or element-owned state, before v6
 
 **Do this last, before the v6 flip.** `.claude/rules/lit-elements.md` says an
@@ -354,8 +373,11 @@ set the property, as the v5 React components were when controlled.
 | `hmi-confirm-dialog` | `open` | `hmi-cancel` |
 | `hmi-drawer` | `open` | `hmi-close` |
 
-The rest of the overlays (drawer, popover, hover-card and the like) join this table
-as they are built, each on the choice made for it.
+The other overlays join this table as they are built, each on the choice made for
+it. `hmi-popover` is not in it: it is a `popover="auto"`, which the browser closes on
+an outside click and Escape and cannot be stopped from, so it owns its `open` and
+`hmi-open-change` reports the change. If the dialogs become element-owned, the
+whole overlay family then works one way.
 
 To do: decide, once, for these elements, whether they stay controlled or become
 element-owned. Element-owned is a two-line change per element (set the property,

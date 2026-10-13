@@ -181,11 +181,23 @@ stem (`AreaChart`), the tag is `hmi-<kebab>`, the class is `Hmi<Pascal>`,
   and a hover-triggered tooltip use `popover="manual"`, and `hint` where
   `HTMLElement.prototype.popover` accepts it.
 - **Positioning** uses `PositionController` from
-  `src/elements/shared/positioning.ts` (phase 9): rect math with
-  `position: fixed` insets, `ResizeObserver` plus scroll and resize listeners,
-  and CSS anchor positioning when `CSS.supports('anchor-name: --a')`.
+  `src/elements/shared/positioning.ts`: rect math with `position: fixed` insets,
+  `ResizeObserver` plus scroll and resize listeners, running only while the panel
+  is open. CSS anchor positioning, where `CSS.supports('anchor-name: --a')`, is not
+  used yet: see `TODO.md`.
 - The trigger slot sits inside a `display: contents` wrapper. There is no
-  `cloneElement` equivalent and none is needed.
+  `cloneElement` equivalent and none is needed. The element gives the first
+  element slotted `aria-expanded`, and `aria-haspopup` unless it has its own: the
+  one change it makes to the consumer's nodes, since a trigger cannot point at a
+  panel inside a shadow root.
+- **A `popover="auto"` element owns its `open`.** The browser closes it on an
+  outside click, on Escape and when another popover opens, and that cannot be
+  cancelled, so `<prefix>-open-change` reports a change that has happened. It
+  fires for what the user did, never for `open` set from code. A dialog can stop
+  its own closing, so the dialogs are controlled instead (`TODO.md`).
+- **Without the Popover API** the same panel is a fixed-position element the
+  element shows and hides, closing it on an outside press or Escape itself;
+  `@supports not selector(:popover-open)` carries its CSS.
 - Focus is captured with `activeElementDeep(document)` before opening, and
   `supportsPopover()` in `src/elements/shared/dom.ts` is the one popover check.
 

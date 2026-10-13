@@ -484,16 +484,20 @@ override render() {
 ```ts
 // popover.ts (sketch)
 #position = new PositionController(this, {
-    anchor: () => this.trigger.assignedElements()[0] ?? this,
-    placement: () => this.side,
-    offset: 8,
+    anchor: () => this.triggerSlot.assignedElements()[0] ?? null,
+    panel: () => this.panel,
+    align: () => this.align,
+    offset: 6,
+    matchWidth: true,
 });
 override render() {
     return html`
-        <span class="trigger" style="display: contents"><slot name="trigger" @click=${this.toggle}></slot></span>
-        <div part="panel" class="panel" popover="auto" @toggle=${this.#onToggle}>${renderLiquidFilter()}<slot></slot></div>
+        <span part="trigger" class="trigger" @click=${this.#onTriggerClick}><slot name="trigger"></slot></span>
+        <div part="base panel" class="panel" popover="auto" @toggle=${this.#onToggle}>${renderLiquidFilter()}<slot></slot></div>
     `;
 }
+// `#sync()` calls `showPopover()` / `hidePopover()` and `#position.start()` / `.stop()`;
+// `#onToggle` turns a close by the browser into `open = false` and `hmi-open-change`.
 ```
 
 The modal's machinery is the `HmiDialog` base class in `src/elements/shared/dialog.ts`; the dialog group (modal, drawer, later command-palette) extends it with its own tag, styles and body. A dialog built this way is controlled for now (`TODO.md`, "Controlled or
@@ -510,12 +514,14 @@ the pointer with the dialog's rectangle. An element that renders a `<hmi-modal>`
 (confirm-dialog) forwards `exportparts` and its own slots into the modal's, and
 stops the modal's `hmi-close` so only its own event leaves it.
 
-`PositionController` (phase 9, `src/elements/shared/positioning.ts`): a
-`ReactiveController` that on `hostConnected` observes the anchor with
-`ResizeObserver`, listens to scroll (capture) and resize with an
-`AbortController`, and writes `top/left` (`position: fixed`) to the panel; when
-`CSS.supports('anchor-name: --a')` it sets `anchor-name` on the trigger wrapper
-and `position-anchor` + `inset-area` on the panel instead.
+`PositionController` (`src/elements/shared/positioning.ts`): a `ReactiveController`
+whose `start()` places the panel, then again on every scroll (captured), resize
+and size change of the anchor or the panel, observed with a `ResizeObserver` and
+an `AbortController`, until `stop()`. The pure `placement()` it uses turns an
+anchor's box, a side (`top`, `bottom`, `left`, `right`), an alignment (`start`,
+`center`, `end`) and a gap into `position: fixed` insets, and a `translate` for a
+centred panel (not a `transform`, which an entry animation would replace). CSS
+anchor positioning (`anchor-name`, `position-anchor`) is not used yet: `TODO.md`.
 
 ## 13. Forms
 
