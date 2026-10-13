@@ -79,6 +79,7 @@ export type ModalProps = Omit<HTMLAttributes<HTMLDivElement>, 'title'> & {
  *
  * @example
  * <Modal open={open} onClose={close} title="Edit" actions={[{ label: 'Save', value: 'save', variant: 'primary' }]} onAction={onAction}>…</Modal>
+ * @deprecated Use `Modal` from `@ninoverse/hmi-components/react/modal`. Removed in 6.0.0.
  */
 export function Modal({
     open,

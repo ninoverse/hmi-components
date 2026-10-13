@@ -138,6 +138,14 @@ export {
 } from '../elements/list/list.react.js';
 export { Meter, type MeterLevel } from '../elements/meter/meter.react.js';
 export {
+    type DialogAction,
+    Modal,
+    type ModalActionDetail,
+    type ModalCloseDetail,
+    type ModalCloseReason,
+    type ModalSize,
+} from '../elements/modal/modal.react.js';
+export {
     MultiInput,
     type MultiInputType,
     type MultiInputValueDetail,

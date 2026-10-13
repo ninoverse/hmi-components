@@ -299,6 +299,11 @@ export default defineConfig({
                     dirname,
                     'src/elements/meter/meter.react.ts',
                 ),
+                'wc/modal': resolve(dirname, 'src/elements/modal/modal.ts'),
+                'react/modal': resolve(
+                    dirname,
+                    'src/elements/modal/modal.react.ts',
+                ),
                 'wc/multi-input': resolve(
                     dirname,
                     'src/elements/multi-input/multi-input.ts',

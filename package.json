@@ -434,6 +434,10 @@
             "types": "./dist/elements/meter/meter.react.d.ts",
             "import": "./dist/react/meter.js"
         },
+        "./react/modal": {
+            "types": "./dist/elements/modal/modal.react.d.ts",
+            "import": "./dist/react/modal.js"
+        },
         "./react/multi-input": {
             "types": "./dist/elements/multi-input/multi-input.react.d.ts",
             "import": "./dist/react/multi-input.js"
@@ -822,6 +826,10 @@
         "./wc/meter": {
             "types": "./dist/elements/meter/meter.d.ts",
             "import": "./dist/wc/meter.js"
+        },
+        "./wc/modal": {
+            "types": "./dist/elements/modal/modal.d.ts",
+            "import": "./dist/wc/modal.js"
         },
         "./wc/multi-input": {
             "types": "./dist/elements/multi-input/multi-input.d.ts",

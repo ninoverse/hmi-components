@@ -8806,6 +8806,373 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/modal/modal.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Modal dialog: a panel over a scrim, with a title, a description, a body and\nfooter actions. It is a native `<dialog>` opened with `showModal()`, so the\npage behind it is inert and focus is trapped inside; the page also stops\nscrolling while it is open.\n\nThe dialog is controlled, as the v5 component was: it never closes itself.\nEscape and a press on the backdrop fire the cancelable `hmi-close` with the\n`reason`; set `open` to `false` from the listener to close it. Footer actions\ngiven as an `actions` array, or as slotted content, fire `hmi-action` with the\naction's `value` and do not close it either.\n\n`heading` and `description` are plain-text defaults of the `title` and\n`description` slots. There is no `title` property: `title` is the native\ntooltip attribute on every element. The dialog is named by its title; with no\ntitle, set `label`.",
+          "name": "HmiModal",
+          "cssParts": [
+            {
+              "description": "The `<dialog>`.",
+              "name": "base"
+            },
+            {
+              "description": "The `<dialog>`, under its panel-group name.",
+              "name": "panel"
+            },
+            {
+              "description": "The `<h2>` around the title.",
+              "name": "title"
+            },
+            {
+              "description": "The paragraph around the description.",
+              "name": "description"
+            },
+            {
+              "description": "The footer around the actions.",
+              "name": "actions"
+            },
+            {
+              "description": "A button rendered from the `actions` array.",
+              "name": "action"
+            }
+          ],
+          "slots": [
+            {
+              "description": "The body.",
+              "name": ""
+            },
+            {
+              "description": "The heading, in an `<h2>`. Defaults to `heading`.",
+              "name": "title"
+            },
+            {
+              "description": "Supporting text under the title. Defaults to `description`.",
+              "name": "description"
+            },
+            {
+              "description": "The footer buttons. Defaults to the `actions` array.",
+              "name": "actions"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the dialog is open. Set it from the `hmi-close` listener to close it.",
+              "attribute": "open",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "ModalSize"
+              },
+              "default": "'medium'",
+              "description": "The width preset.",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "heading",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The title, as plain text: the default of the `title` slot.",
+              "attribute": "heading"
+            },
+            {
+              "kind": "field",
+              "name": "description",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Supporting text under the title: the default of the `description` slot.",
+              "attribute": "description"
+            },
+            {
+              "kind": "field",
+              "name": "actions",
+              "type": {
+                "text": "DialogAction[]"
+              },
+              "default": "[]",
+              "description": "The footer actions, rendered as buttons: the default of the `actions` slot. A property only: there is no attribute."
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The accessible name of the dialog when it has no title.",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "dialog",
+              "type": {
+                "text": "HTMLDialogElement"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "titleSlotted",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "descriptionSlotted",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "actionsSlotted",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "#restoreFocusTo",
+              "privacy": "private",
+              "type": {
+                "text": "HTMLElement | null"
+              },
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "#unlockScroll",
+              "privacy": "private",
+              "type": {
+                "text": "(() => void) | undefined"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#sync",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#release",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#requestClose",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "reason",
+                  "type": {
+                    "text": "ModalCloseReason"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onCancel",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onClose",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#onPointerDown",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "MouseEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onSlotChange",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "Event"
+                  }
+                },
+                {
+                  "name": "set",
+                  "type": {
+                    "text": "(hasContent: boolean) => void"
+                  }
+                }
+              ]
+            }
+          ],
+          "events": [
+            {
+              "description": "Escape or a press on the backdrop. Cancelable. `detail` is `{ reason }`.",
+              "name": "hmi-close"
+            },
+            {
+              "description": "A footer action was activated. `detail` is `{ value }`.",
+              "name": "hmi-action"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the dialog is open. Set it from the `hmi-close` listener to close it.",
+              "fieldName": "open"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "ModalSize"
+              },
+              "default": "'medium'",
+              "description": "The width preset.",
+              "fieldName": "size"
+            },
+            {
+              "name": "heading",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The title, as plain text: the default of the `title` slot.",
+              "fieldName": "heading"
+            },
+            {
+              "name": "description",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Supporting text under the title: the default of the `description` slot.",
+              "fieldName": "description"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The accessible name of the dialog when it has no title.",
+              "fieldName": "label"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-modal",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "DialogAction",
+          "declaration": {
+            "name": "DialogAction",
+            "module": "../shared/dialog-actions.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "HmiModal",
+          "declaration": {
+            "name": "HmiModal",
+            "module": "src/elements/modal/modal.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-modal",
+          "declaration": {
+            "name": "HmiModal",
+            "module": "src/elements/modal/modal.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/multi-input/multi-input.ts",
       "declarations": [
         {

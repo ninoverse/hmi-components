@@ -1165,6 +1165,21 @@ export function Example() {
         </section>
 
         <section>
+            <h2>Modal</h2>
+            <div style="display: flex; gap: 2rem; padding-bottom: 2rem">
+                <hmi-button id="modal-open-medium">Open medium modal</hmi-button>
+                <hmi-button id="modal-open-large" variant="secondary">Open large modal</hmi-button>
+            </div>
+            <hmi-modal id="modal-medium" heading="Confirm publish" description="This will make the post visible to anyone with the link.">
+                <p style="margin: 0; color: var(--on-surface-variant)">You can change visibility back to private at any time from the post's settings menu.</p>
+            </hmi-modal>
+            <hmi-modal id="modal-large" size="large" heading="Terms of service">
+                <p style="margin: 0">Large modals have room for longer content, such as terms, a form or a preview.</p>
+                <hmi-button slot="actions" id="modal-large-close">Close</hmi-button>
+            </hmi-modal>
+        </section>
+
+        <section>
             <h2>List</h2>
             <!-- Items are a property. right-<id> takes rich content; reorderable adds
                  drag and Alt+Arrow reordering, and the page sets items back from
@@ -1708,6 +1723,20 @@ export function Example() {
                 [14, 18, 22, 20, 16],
                 [7, 11, 9, 15, 24],
             ];
+            const modalMedium = document.getElementById('modal-medium');
+            const modalLarge = document.getElementById('modal-large');
+            modalMedium.actions = [
+                { label: 'Cancel', value: 'cancel', variant: 'secondary' },
+                { label: 'Publish', value: 'publish', variant: 'primary' },
+            ];
+            for (const modal of [modalMedium, modalLarge]) {
+                // The modal is controlled: it closes when `open` is set to false.
+                modal.addEventListener('hmi-close', () => { modal.open = false; });
+                modal.addEventListener('hmi-action', () => { modal.open = false; });
+            }
+            document.getElementById('modal-open-medium').addEventListener('click', () => { modalMedium.open = true; });
+            document.getElementById('modal-open-large').addEventListener('click', () => { modalLarge.open = true; });
+            document.getElementById('modal-large-close').addEventListener('click', () => { modalLarge.open = false; });
             for (const pager of document.querySelectorAll('hmi-pagination')) {
                 pager.addEventListener('hmi-change', (event) => {
                     console.log('pagination hmi-change', event.detail);
