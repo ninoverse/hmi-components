@@ -140,6 +140,20 @@ describe('hmi-popover', () => {
         expect(getComputedStyle(panel(attr)).minWidth).toBe('250px');
     });
 
+    it('does not let align="end" right-align the text: a browser maps align to text-align', async () => {
+        const el = await fixture(
+            html`<hmi-popover align="end" open>
+                <button slot="trigger">Open</button>
+                <p id="c">Content</p>
+            </hmi-popover>`,
+        );
+        expect(getComputedStyle(panel(el)).textAlign).toBe('start');
+        expect(
+            getComputedStyle(el.querySelector('#c') as Element).textAlign,
+        ).toBe('start');
+        expect(getComputedStyle(trigger(el)).textAlign).not.toBe('end');
+    });
+
     it('follows the trigger when the page scrolls', async () => {
         const el = await fixture(BASIC);
         el.open = true;

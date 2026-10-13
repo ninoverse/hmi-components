@@ -13,8 +13,12 @@ export const styles = css`
         display: contents;
     }
 
+    /* A browser maps an \`align\` attribute on any element to \`text-align\`, and
+       \`align="end"\` is ours: it would right-align the trigger and the panel's
+       text through inheritance. */
     .trigger {
         display: contents;
+        text-align: start;
     }
 
     .panel {
@@ -33,6 +37,7 @@ export const styles = css`
         box-shadow: var(--elevation-3);
         -webkit-backdrop-filter: var(--panel-filter);
         backdrop-filter: var(--panel-filter);
+        text-align: start;
         transform-origin: top;
     }
 
