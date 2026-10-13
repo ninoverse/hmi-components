@@ -4666,6 +4666,495 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/drawer/drawer.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Drawer: a panel that slides in from an edge of the screen, over a scrim, with\na title, a description, a body and footer actions. It is a native `<dialog>`\nopened with `showModal()`, so the page behind it is inert and focus is trapped\ninside; the page also stops scrolling while it is open.\n\nThe drawer is controlled, as the v5 component was: it never closes itself.\nEscape and a press on the scrim fire the cancelable `hmi-close` with the\n`reason`; set `open` to `false` from the listener to close it. Footer actions\ngiven as an `actions` array, or as slotted content, fire `hmi-action` with the\naction's `value` and do not close it either.\n\n`side` is the edge it comes from. `size` is its width for `left` and `right`\nand its height for `top` and `bottom`: a number of px, or any CSS length. The\ndefault is 40 base units wide, or 36 high, and never more than 90% of the\nscreen. `heading` and `description` are plain-text defaults of the `title` and\n`description` slots. There is no `title` property: `title` is the native\ntooltip attribute on every element. The drawer is named by its title; with no\ntitle, set `label`.",
+          "name": "HmiDrawer",
+          "cssParts": [
+            {
+              "description": "The `<dialog>`.",
+              "name": "base"
+            },
+            {
+              "description": "The `<dialog>`, under its panel-group name.",
+              "name": "panel"
+            },
+            {
+              "description": "The `<h2>` around the title.",
+              "name": "title"
+            },
+            {
+              "description": "The paragraph around the description.",
+              "name": "description"
+            },
+            {
+              "description": "The area around the default slot.",
+              "name": "body"
+            },
+            {
+              "description": "The footer around the actions.",
+              "name": "actions"
+            },
+            {
+              "description": "A button rendered from the `actions` array.",
+              "name": "action"
+            }
+          ],
+          "slots": [
+            {
+              "description": "The body, in a scrolling area between the description and the footer.",
+              "name": ""
+            },
+            {
+              "description": "The heading, in an `<h2>`. Defaults to `heading`.",
+              "name": "title"
+            },
+            {
+              "description": "Supporting text under the title. Defaults to `description`.",
+              "name": "description"
+            },
+            {
+              "description": "The footer buttons. Defaults to the `actions` array.",
+              "name": "actions"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "side",
+              "type": {
+                "text": "DrawerSide"
+              },
+              "default": "'right'",
+              "description": "The edge the panel slides in from.",
+              "attribute": "side",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "string | number | undefined"
+              },
+              "description": "The panel's width for `left` and `right`, its height for `top` and `bottom`: a number of px, or any CSS length. Defaults to 40 base units wide, 36 high; never more than 90% of the screen.",
+              "attribute": "size"
+            },
+            {
+              "kind": "method",
+              "name": "renderBody",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "TemplateResult"
+                }
+              },
+              "description": "What sits between the description and the footer. The default is the body slot.",
+              "inheritedFrom": {
+                "name": "HmiDialog",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the dialog is open. Set it from the `hmi-close` listener to close it.",
+              "attribute": "open",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "HmiDialog",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "heading",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The title, as plain text: the default of the `title` slot.",
+              "attribute": "heading",
+              "inheritedFrom": {
+                "name": "HmiDialog",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "description",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Supporting text under the title: the default of the `description` slot.",
+              "attribute": "description",
+              "inheritedFrom": {
+                "name": "HmiDialog",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "actions",
+              "type": {
+                "text": "DialogAction[]"
+              },
+              "default": "[]",
+              "description": "The footer actions, rendered as buttons: the default of the `actions` slot. A property only: there is no attribute.",
+              "inheritedFrom": {
+                "name": "HmiDialog",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The accessible name of the dialog when it has no title.",
+              "attribute": "label",
+              "inheritedFrom": {
+                "name": "HmiDialog",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "dialog",
+              "type": {
+                "text": "HTMLDialogElement"
+              },
+              "privacy": "private",
+              "inheritedFrom": {
+                "name": "HmiDialog",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "titleSlotted",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false",
+              "inheritedFrom": {
+                "name": "HmiDialog",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "descriptionSlotted",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false",
+              "inheritedFrom": {
+                "name": "HmiDialog",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "actionsSlotted",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false",
+              "inheritedFrom": {
+                "name": "HmiDialog",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "#restoreFocusTo",
+              "privacy": "private",
+              "type": {
+                "text": "HTMLElement | null"
+              },
+              "default": "null",
+              "inheritedFrom": {
+                "name": "HmiDialog",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "#unlockScroll",
+              "privacy": "private",
+              "type": {
+                "text": "(() => void) | undefined"
+              },
+              "inheritedFrom": {
+                "name": "HmiDialog",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#sync",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "inheritedFrom": {
+                "name": "HmiDialog",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#release",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "inheritedFrom": {
+                "name": "HmiDialog",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#requestClose",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "reason",
+                  "type": {
+                    "text": "DialogCloseReason"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "HmiDialog",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#onCancel",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "HmiDialog",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#onClose",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "inheritedFrom": {
+                "name": "HmiDialog",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#onPointerDown",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "MouseEvent"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "HmiDialog",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#onSlotChange",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "Event"
+                  }
+                },
+                {
+                  "name": "set",
+                  "type": {
+                    "text": "(hasContent: boolean) => void"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "HmiDialog",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            }
+          ],
+          "events": [
+            {
+              "type": {
+                "text": "CustomEvent<DrawerCloseDetail>"
+              },
+              "description": "Escape or a press on the scrim. Cancelable, but the drawer does not close itself either way: set `open` to `false`.",
+              "name": "hmi-close"
+            },
+            {
+              "type": {
+                "text": "CustomEvent<DrawerActionDetail>"
+              },
+              "description": "A button rendered from the `actions` array was activated.",
+              "name": "hmi-action"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "side",
+              "type": {
+                "text": "DrawerSide"
+              },
+              "default": "'right'",
+              "description": "The edge the panel slides in from.",
+              "fieldName": "side"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "string | number | undefined"
+              },
+              "description": "The panel's width for `left` and `right`, its height for `top` and `bottom`: a number of px, or any CSS length. Defaults to 40 base units wide, 36 high; never more than 90% of the screen.",
+              "fieldName": "size"
+            },
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the dialog is open. Set it from the `hmi-close` listener to close it.",
+              "fieldName": "open",
+              "inheritedFrom": {
+                "name": "HmiDialog",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "name": "heading",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The title, as plain text: the default of the `title` slot.",
+              "fieldName": "heading",
+              "inheritedFrom": {
+                "name": "HmiDialog",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "name": "description",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Supporting text under the title: the default of the `description` slot.",
+              "fieldName": "description",
+              "inheritedFrom": {
+                "name": "HmiDialog",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The accessible name of the dialog when it has no title.",
+              "fieldName": "label",
+              "inheritedFrom": {
+                "name": "HmiDialog",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "HmiDialog",
+            "module": "/src/elements/shared/dialog.js"
+          },
+          "tagName": "hmi-drawer",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiDrawer",
+          "declaration": {
+            "name": "HmiDrawer",
+            "module": "src/elements/drawer/drawer.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-drawer",
+          "declaration": {
+            "name": "HmiDrawer",
+            "module": "src/elements/drawer/drawer.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/empty-state/empty-state.ts",
       "declarations": [
         {

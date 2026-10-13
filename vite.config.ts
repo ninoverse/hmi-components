@@ -204,6 +204,11 @@ export default defineConfig({
                     dirname,
                     'src/elements/donut-chart/donut-chart.react.ts',
                 ),
+                'wc/drawer': resolve(dirname, 'src/elements/drawer/drawer.ts'),
+                'react/drawer': resolve(
+                    dirname,
+                    'src/elements/drawer/drawer.react.ts',
+                ),
                 'wc/empty-state': resolve(
                     dirname,
                     'src/elements/empty-state/empty-state.ts',

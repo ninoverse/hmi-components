@@ -40,6 +40,7 @@ const toCss = (v: string | number) => (typeof v === 'number' ? `${v}px` : v);
  *
  * @example
  * <Drawer open={open} onClose={close} side="right" title="Filters">…</Drawer>
+ * @deprecated Use `Drawer` from `@ninoverse/hmi-components/react/drawer`. Removed in 6.0.0.
  */
 export function Drawer({
     open,

@@ -35,6 +35,7 @@
     /* Panel tokens consumed by the elements (see constants.css) */
     --panel-bg: var(--glass-surface);
     --panel-bg-strong: var(--glass-surface-strong);
+    --drawer-bg: var(--glass-surface-strong);
     --panel-ink-bg: color-mix(in srgb, var(--inverse-surface) 72%, transparent);
     --panel-accent-bg: color-mix(in srgb, var(--primary-container) 72%, transparent);
     --panel-border: var(--glass-stroke);
