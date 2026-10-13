@@ -1,5 +1,10 @@
 import { afterEach, describe, expect, it } from 'vitest';
-import { activeElementDeep, supportsPopover, toggleEmpty } from './dom.js';
+import {
+    activeElementDeep,
+    supportsPopover,
+    toCssLength,
+    toggleEmpty,
+} from './dom.js';
 
 afterEach(() => {
     document.body.replaceChildren();
@@ -58,5 +63,19 @@ describe('toggleEmpty', () => {
         host.append(document.createElement('b'));
         change(slot, false);
         expect(wrapper.hidden).toBe(false);
+    });
+});
+
+describe('toCssLength', () => {
+    it('reads a number, or a string of digits, as px', () => {
+        expect(toCssLength(320)).toBe('320px');
+        expect(toCssLength('320')).toBe('320px');
+        expect(toCssLength('12.5')).toBe('12.5px');
+    });
+
+    it('passes any other string through as authored', () => {
+        expect(toCssLength('30rem')).toBe('30rem');
+        expect(toCssLength('50%')).toBe('50%');
+        expect(toCssLength('calc(100% - 2em)')).toBe('calc(100% - 2em)');
     });
 });

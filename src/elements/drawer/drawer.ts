@@ -7,6 +7,7 @@ import {
     type DialogCloseReason,
     HmiDialog,
 } from '../shared/dialog.js';
+import { toCssLength } from '../shared/dom.js';
 import { styles } from './drawer.styles.js';
 
 export type DrawerSide = 'left' | 'right' | 'top' | 'bottom';
@@ -17,13 +18,6 @@ export type DrawerCloseReason = DialogCloseReason;
 export type DrawerCloseDetail = DialogCloseDetail;
 
 export type DrawerActionDetail = DialogActionDetail;
-
-// A number, or a string of only digits, is px; any other string is a CSS length
-// as authored.
-const toCssSize = (value: string | number) =>
-    typeof value === 'number' || /^\d+(\.\d+)?$/.test(value)
-        ? `${value}px`
-        : value;
 
 /**
  * Drawer: a panel that slides in from an edge of the screen, over a scrim, with
@@ -81,7 +75,7 @@ export class HmiDrawer extends HmiDialog {
         if (this.size === undefined || this.size === '') {
             this.style.removeProperty('--_size');
         } else {
-            this.style.setProperty('--_size', toCssSize(this.size));
+            this.style.setProperty('--_size', toCssLength(this.size));
         }
     }
 

@@ -20,6 +20,17 @@ export function supportsPopover(): boolean {
 }
 
 /**
+ * A CSS length from a size property: a number, or a string of only digits, is
+ * px; any other string is a CSS length as authored. An attribute is always a
+ * string, so `size="480"` and `.size = 480` mean the same.
+ */
+export function toCssLength(value: string | number): string {
+    return typeof value === 'number' || /^\d+(\.\d+)?$/.test(value)
+        ? `${value}px`
+        : value;
+}
+
+/**
  * Hides the parent of a `slotchange` slot that has no content and no text
  * fallback, and shows it again once something is slotted.
  */
