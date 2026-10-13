@@ -466,6 +466,10 @@
             "types": "./dist/elements/password-input/password-input.react.d.ts",
             "import": "./dist/react/password-input.js"
         },
+        "./react/popover": {
+            "types": "./dist/elements/popover/popover.react.d.ts",
+            "import": "./dist/react/popover.js"
+        },
         "./react/progress": {
             "types": "./dist/elements/progress/progress.react.d.ts",
             "import": "./dist/react/progress.js"
@@ -866,6 +870,10 @@
         "./wc/password-input": {
             "types": "./dist/elements/password-input/password-input.d.ts",
             "import": "./dist/wc/password-input.js"
+        },
+        "./wc/popover": {
+            "types": "./dist/elements/popover/popover.d.ts",
+            "import": "./dist/wc/popover.js"
         },
         "./wc/progress": {
             "types": "./dist/elements/progress/progress.d.ts",

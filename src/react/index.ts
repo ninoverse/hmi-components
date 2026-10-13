@@ -180,6 +180,11 @@ export {
     PasswordInput,
     type PasswordInputValueDetail,
 } from '../elements/password-input/password-input.react.js';
+export {
+    Popover,
+    type PopoverAlign,
+    type PopoverOpenChangeDetail,
+} from '../elements/popover/popover.react.js';
 export { Progress } from '../elements/progress/progress.react.js';
 export {
     RadarChart,

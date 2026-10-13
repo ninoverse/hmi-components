@@ -354,6 +354,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/password-input/password-input.react.ts',
                 ),
+                'wc/popover': resolve(
+                    dirname,
+                    'src/elements/popover/popover.ts',
+                ),
+                'react/popover': resolve(
+                    dirname,
+                    'src/elements/popover/popover.react.ts',
+                ),
                 'wc/progress': resolve(
                     dirname,
                     'src/elements/progress/progress.ts',

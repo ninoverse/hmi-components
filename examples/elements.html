@@ -1213,6 +1213,26 @@ export function Example() {
         </section>
 
         <section>
+            <h2>Popover</h2>
+            <div style="display: flex; gap: 3rem; flex-wrap: wrap; align-items: center; justify-content: space-between; padding: 2rem 0 12rem">
+                <hmi-popover>
+                    <hmi-button slot="trigger" variant="secondary">Open (start)</hmi-button>
+                    <div style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 14px">
+                        <strong>Start aligned</strong>
+                        <span style="color: var(--on-surface-variant)">Anchored to the trigger's left edge. Click outside or press Escape to dismiss.</span>
+                    </div>
+                </hmi-popover>
+                <hmi-popover align="end" width="320">
+                    <hmi-button slot="trigger" variant="secondary">Open (end)</hmi-button>
+                    <div style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 14px">
+                        <strong>End aligned</strong>
+                        <span style="color: var(--on-surface-variant)">Anchored to the trigger's right edge, with a fixed width.</span>
+                    </div>
+                </hmi-popover>
+            </div>
+        </section>
+
+        <section>
             <h2>List</h2>
             <!-- Items are a property. right-<id> takes rich content; reorderable adds
                  drag and Alt+Arrow reordering, and the page sets items back from

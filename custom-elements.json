@@ -13580,6 +13580,300 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/popover/popover.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Popover: a floating panel anchored under a trigger. The panel is a\n`popover=\"auto\"` element in the top layer, so it is never clipped by an\noverflowing ancestor, and the browser closes it on an outside click or Escape\nand when another popover opens.\n\nThe element owns `open`: it follows the browser. A press on the trigger, an\noutside click and Escape change it and fire `hmi-open-change` with the new\nstate; setting `open` yourself opens or closes it and fires nothing. The\ntrigger is the `trigger` slot, and it gets `aria-expanded`, and `aria-haspopup`\nunless it has its own. The panel opens under the trigger, from its left edge\n(`align=\"start\"`) or ending at its right edge (`end`), as wide as the trigger\nat least, and follows it as the page scrolls or resizes.\n\nWhere the browser has no Popover API, the same panel is a fixed-position\nelement that the element shows and hides, and the element closes it on an\noutside press or Escape itself.",
+          "name": "HmiPopover",
+          "cssParts": [
+            {
+              "description": "The wrapper around the trigger slot.",
+              "name": "trigger"
+            },
+            {
+              "description": "The floating panel.",
+              "name": "base"
+            },
+            {
+              "description": "The floating panel, under its panel-group name.",
+              "name": "panel"
+            }
+          ],
+          "slots": [
+            {
+              "description": "The panel's content.",
+              "name": ""
+            },
+            {
+              "description": "The element that opens and closes the popover: the first element slotted is the anchor.",
+              "name": "trigger"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the popover is open.",
+              "attribute": "open",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "align",
+              "type": {
+                "text": "PopoverAlign"
+              },
+              "default": "'start'",
+              "description": "Which edge of the trigger the panel lines up with: its left edge, or its right edge.",
+              "attribute": "align",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "width",
+              "type": {
+                "text": "string | number | undefined"
+              },
+              "description": "The panel's minimum width: a number of px, or any CSS length (a plain number in an attribute is px). Defaults to the trigger's width.",
+              "attribute": "width"
+            },
+            {
+              "kind": "field",
+              "name": "panel",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "triggerSlot",
+              "type": {
+                "text": "HTMLSlotElement"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "#position",
+              "privacy": "private",
+              "readonly": true,
+              "default": "new PositionController(this, { anchor: () => this.#trigger(), panel: () => this.panel, align: () => (this.align === 'end' ? 'end' : 'start'), offset: 6, matchWidth: true, })"
+            },
+            {
+              "kind": "field",
+              "name": "#openAtPress",
+              "privacy": "private",
+              "type": {
+                "text": "boolean | undefined"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "#fallback",
+              "privacy": "private",
+              "type": {
+                "text": "AbortController | undefined"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#trigger",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "Element | null"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#applyWidth",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#syncAria",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#sync",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#listenForDismissal",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#setOpen",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "open",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onToggle",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "ToggleEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onPointerDown",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#onKeyDown",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#onTriggerClick",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#onTriggerChange",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "events": [
+            {
+              "type": {
+                "text": "CustomEvent<PopoverOpenChangeDetail>"
+              },
+              "description": "The user opened or closed the popover: a press on the trigger, an outside click or Escape. Not cancelable, and not fired when `open` is set from code.",
+              "name": "hmi-open-change"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the popover is open.",
+              "fieldName": "open"
+            },
+            {
+              "name": "align",
+              "type": {
+                "text": "PopoverAlign"
+              },
+              "default": "'start'",
+              "description": "Which edge of the trigger the panel lines up with: its left edge, or its right edge.",
+              "fieldName": "align"
+            },
+            {
+              "name": "width",
+              "type": {
+                "text": "string | number | undefined"
+              },
+              "description": "The panel's minimum width: a number of px, or any CSS length (a plain number in an attribute is px). Defaults to the trigger's width.",
+              "fieldName": "width"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-popover",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiPopover",
+          "declaration": {
+            "name": "HmiPopover",
+            "module": "src/elements/popover/popover.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-popover",
+          "declaration": {
+            "name": "HmiPopover",
+            "module": "src/elements/popover/popover.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/progress/progress.ts",
       "declarations": [
         {

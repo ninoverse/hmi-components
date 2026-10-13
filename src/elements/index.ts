@@ -50,6 +50,7 @@ export * from './navbar/navbar.js';
 export * from './number-input/number-input.js';
 export * from './pagination/pagination.js';
 export * from './password-input/password-input.js';
+export * from './popover/popover.js';
 export * from './progress/progress.js';
 export * from './radar-chart/radar-chart.js';
 export * from './radio/radio.js';
