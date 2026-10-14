@@ -41,6 +41,7 @@ type AnchorPosition = {
  *
  * @example
  * <Popover open={open} onOpenChange={setOpen} trigger={<Button>Menu</Button>}>…</Popover>
+ * @deprecated Use `Popover` from `@ninoverse/hmi-components/react/popover`. Removed in 6.0.0.
  */
 export function Popover({
     open,
