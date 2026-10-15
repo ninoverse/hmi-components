@@ -92,11 +92,12 @@ describe('placement', () => {
 @customElement('x-position-host')
 class PositionHost extends LitElement {
     align: PlacementAlign = 'start';
+    gap = 4;
     readonly position = new PositionController(this, {
         anchor: () => this.renderRoot.querySelector('.anchor'),
         panel: () => this.renderRoot.querySelector<HTMLElement>('.panel'),
         align: () => this.align,
-        offset: 4,
+        offset: () => this.gap,
         matchWidth: true,
     });
 
@@ -175,6 +176,19 @@ describe('PositionController', () => {
         el.position.update();
         const a = anchor(el).getBoundingClientRect();
         expect(panel(el).getBoundingClientRect().right).toBeCloseTo(a.right, 1);
+        el.position.stop();
+    });
+
+    it('reads the offset again on every update when it is a function', async () => {
+        const el = await fixture();
+        el.position.start();
+        el.gap = 10;
+        el.position.update();
+        const a = anchor(el).getBoundingClientRect();
+        expect(panel(el).getBoundingClientRect().top).toBeCloseTo(
+            a.bottom + 10,
+            1,
+        );
         el.position.stop();
     });
 

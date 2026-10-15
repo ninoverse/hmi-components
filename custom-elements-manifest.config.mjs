@@ -1,9 +1,11 @@
 /* @custom-elements-manifest/analyzer — `pnpm cem`. Reads the element classes
-   and the base classes they inherit from (`shared/form.ts`, `shared/checkable.ts`
-   and `shared/dialog.ts`), so the inherited `name`, `disabled`, `required`,
-   `label`, `hint` and `error` are listed on each form element, and the dialog
-   group's `open`, `heading`, `description`, `actions` and `label` on each dialog. Styles, wrappers, stories, tests and the other
-   shared helpers carry no custom element declarations. Output:
+   and the base classes they inherit from (`shared/form.ts`, `shared/checkable.ts`,
+   `shared/dialog.ts` and `shared/hover-panel.ts`), so the inherited `name`,
+   `disabled`, `required`, `label`, `hint` and `error` are listed on each form
+   element, the dialog group's `open`, `heading`, `description`, `actions` and
+   `label` on each dialog, and the hover panels' `open` on the tooltip and the
+   hover card. Styles, wrappers, stories, tests and the other shared helpers
+   carry no custom element declarations. Output:
    ./custom-elements.json (committed). */
 export default {
     globs: ['src/elements/**/*.ts'],
@@ -12,7 +14,7 @@ export default {
         '**/*.react.ts',
         '**/*.stories.ts',
         '**/*.test.ts',
-        'src/elements/shared/!(form|checkable|dialog).ts',
+        'src/elements/shared/!(form|checkable|dialog|hover-panel).ts',
         'src/elements/index.ts',
     ],
     outdir: '.',

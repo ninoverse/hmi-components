@@ -19655,6 +19655,344 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/shared/hover-panel.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "What the hover panels (tooltip, hover-card) share: a floating panel that opens\nwhen the pointer enters or focus reaches its trigger, after a delay, and closes\nwhen they leave. The panel is a `popover=\"hint\"` element in the top layer, and\n`PositionController` keeps it against the trigger while it is open. Where the\nbrowser has no `hint` the value reads as `manual`, and where it has no Popover\nAPI the panel is a fixed-position element the element shows and hides.\n\nThe element owns `open`. The pointer, focus, Escape and the browser (another\nhint opening, an outside press) change it and fire `hmi-open-change` with the\nnew state; setting `open` yourself opens or closes it at once and fires nothing.\n\nA subclass is the element: it brings its `@customElement` tag, its styles, its\nown properties, the delays and the placement through the protected methods, and\nwhat the panel holds in `renderPanelContent()`.",
+          "name": "HmiHoverPanel",
+          "members": [
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the panel is open.",
+              "attribute": "open",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "panel",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "privacy": "protected"
+            },
+            {
+              "kind": "field",
+              "name": "triggerSlot",
+              "type": {
+                "text": "HTMLSlotElement"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "#position",
+              "privacy": "private",
+              "readonly": true,
+              "default": "new PositionController(this, { anchor: () => this.anchor, panel: () => this.panel, side: () => this.placementSide(), align: () => this.alignment(), offset: () => this.gap(), })"
+            },
+            {
+              "kind": "field",
+              "name": "#timer",
+              "privacy": "private",
+              "type": {
+                "text": "ReturnType<typeof setTimeout> | undefined"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "#escape",
+              "privacy": "private",
+              "type": {
+                "text": "AbortController | undefined"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "anchor",
+              "type": {
+                "text": "Element | null"
+              },
+              "privacy": "protected",
+              "description": "The element the panel is placed against: the first element in the `trigger` slot.",
+              "readonly": true
+            },
+            {
+              "kind": "method",
+              "name": "openDelayMs",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "number"
+                }
+              },
+              "description": "How long the pointer or focus must stay on the trigger before the panel opens, in ms."
+            },
+            {
+              "kind": "method",
+              "name": "closeDelayMs",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "number"
+                }
+              },
+              "description": "How long after the pointer or focus leaves before the panel closes, in ms."
+            },
+            {
+              "kind": "method",
+              "name": "placementSide",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "PlacementSide"
+                }
+              },
+              "description": "The side of the trigger the panel sits on."
+            },
+            {
+              "kind": "method",
+              "name": "alignment",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "PlacementAlign"
+                }
+              },
+              "description": "How the panel lines up with the trigger along its side."
+            },
+            {
+              "kind": "method",
+              "name": "gap",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "number"
+                }
+              },
+              "description": "The gap between the trigger and the panel, in px."
+            },
+            {
+              "kind": "method",
+              "name": "panelPart",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "string"
+                }
+              },
+              "description": "The panel's `part`."
+            },
+            {
+              "kind": "method",
+              "name": "panelRole",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "string | undefined"
+                }
+              },
+              "description": "The panel's `role`, if it has one."
+            },
+            {
+              "kind": "method",
+              "name": "renderPanelContent",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "TemplateResult"
+                }
+              },
+              "description": "What the panel holds."
+            },
+            {
+              "kind": "method",
+              "name": "syncTrigger",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "_trigger",
+                  "type": {
+                    "text": "Element | null"
+                  }
+                }
+              ],
+              "description": "Called with the trigger as it is now, when the trigger or the element's properties change."
+            },
+            {
+              "kind": "method",
+              "name": "#sync",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#listenForEscape",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#cancel",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#schedule",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "open",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#setOpen",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "open",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onToggle",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "ToggleEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onEnter",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#onLeave",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#onFocusOut",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "FocusEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onTriggerChange",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the panel is open.",
+              "fieldName": "open"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiHoverPanel",
+          "declaration": {
+            "name": "HmiHoverPanel",
+            "module": "src/elements/shared/hover-panel.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/sidebar/sidebar.ts",
       "declarations": [
         {
