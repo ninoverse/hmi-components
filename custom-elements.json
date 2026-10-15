@@ -4400,6 +4400,307 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/context-menu/context-menu.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Context menu: a card of menu items that opens at the pointer when the trigger\nis right-clicked, kept inside the screen. The card is a `popover=\"auto\"` element\nin the top layer, so no overflowing ancestor clips it, and the browser closes it\non an outside click, on Escape and when another popover opens. It also closes on\nscroll and resize, since it does not follow the trigger, and when an item is\nactivated; a click on its padding or a label leaves it open.\n\nThe trigger is the `trigger` slot, and the card's content is the `menu` slot:\nan `hmi-menu` of `hmi-menu-item`, `hmi-menu-label` and `hmi-menu-separator`.\nThe native context menu is prevented on the trigger. A right-click on the trigger\nwhile the menu is open moves it to the new point.\n\nThe element owns `open`: it follows the browser. A right-click, an outside\nclick, Escape and an activated item change it and fire `hmi-open-change` with the\nnew state; setting `open` yourself opens or closes it and fires nothing. Opened\nfrom code it sits at the trigger's top-left corner.\n\n`focus-on-open` decides when the first enabled item takes focus as the menu\nopens, so the arrow keys work at once: `keyboard` (the default) when the\n`contextmenu` event is not a right-button press, such as the Menu key and\nShift+F10; `always`; or `never`, as the React menu did, when Tab from the trigger\nstill reaches the card. As the menu closes, focus goes back to where it was if\nit was in the menu or lost; the browser does not do that for slotted content.\n\nWhere the browser has no Popover API, the same card is a fixed-position element\nthat the element shows and hides, closing it on an outside press or Escape itself.",
+          "name": "HmiContextMenu",
+          "cssParts": [
+            {
+              "description": "The wrapper around the trigger slot.",
+              "name": "trigger"
+            },
+            {
+              "description": "The floating card.",
+              "name": "base"
+            },
+            {
+              "description": "The floating card, under its panel-group name.",
+              "name": "panel"
+            }
+          ],
+          "slots": [
+            {
+              "description": "The element that opens the menu when right-clicked: anything inside it counts.",
+              "name": "trigger"
+            },
+            {
+              "description": "The card's content: an `hmi-menu`.",
+              "name": "menu"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the context menu is open.",
+              "attribute": "open",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "focusOnOpen",
+              "type": {
+                "text": "ContextMenuFocusOnOpen"
+              },
+              "default": "'keyboard'",
+              "description": "When the first enabled item takes focus as the menu opens: for a `contextmenu` that is not a right-button press, always, or never.",
+              "attribute": "focus-on-open"
+            },
+            {
+              "kind": "field",
+              "name": "panel",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "triggerSlot",
+              "type": {
+                "text": "HTMLSlotElement"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "#point",
+              "privacy": "private",
+              "type": {
+                "text": "{ x: number; y: number } | undefined"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "#keyboard",
+              "privacy": "private",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "#listeners",
+              "privacy": "private",
+              "type": {
+                "text": "AbortController | undefined"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "#restoreFocusTo",
+              "privacy": "private",
+              "type": {
+                "text": "HTMLElement | null"
+              },
+              "default": "null"
+            },
+            {
+              "kind": "method",
+              "name": "#sync",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#restoreFocus",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#listen",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "native",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#place",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#triggerCorner",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "{ x: number; y: number }"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#focusFirstItem",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#setOpen",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "open",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onContextMenu",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "MouseEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onToggle",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "ToggleEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onClick",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "MouseEvent"
+                  }
+                }
+              ]
+            }
+          ],
+          "events": [
+            {
+              "type": {
+                "text": "CustomEvent<ContextMenuOpenChangeDetail>"
+              },
+              "description": "The user opened or closed the menu: a right-click, an outside click, Escape or an activated item. Not cancelable, and not fired when `open` is set from code.",
+              "name": "hmi-open-change"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the context menu is open.",
+              "fieldName": "open"
+            },
+            {
+              "name": "focus-on-open",
+              "type": {
+                "text": "ContextMenuFocusOnOpen"
+              },
+              "default": "'keyboard'",
+              "description": "When the first enabled item takes focus as the menu opens: for a `contextmenu` that is not a right-button press, always, or never.",
+              "fieldName": "focusOnOpen"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-context-menu",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiContextMenu",
+          "declaration": {
+            "name": "HmiContextMenu",
+            "module": "src/elements/context-menu/context-menu.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-context-menu",
+          "declaration": {
+            "name": "HmiContextMenu",
+            "module": "src/elements/context-menu/context-menu.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/divider/divider.ts",
       "declarations": [
         {

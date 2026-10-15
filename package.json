@@ -362,6 +362,10 @@
             "types": "./dist/elements/confirm-dialog/confirm-dialog.react.d.ts",
             "import": "./dist/react/confirm-dialog.js"
         },
+        "./react/context-menu": {
+            "types": "./dist/elements/context-menu/context-menu.react.d.ts",
+            "import": "./dist/react/context-menu.js"
+        },
         "./react/divider": {
             "types": "./dist/elements/divider/divider.react.d.ts",
             "import": "./dist/react/divider.js"
@@ -790,6 +794,10 @@
         "./wc/confirm-dialog": {
             "types": "./dist/elements/confirm-dialog/confirm-dialog.d.ts",
             "import": "./dist/wc/confirm-dialog.js"
+        },
+        "./wc/context-menu": {
+            "types": "./dist/elements/context-menu/context-menu.d.ts",
+            "import": "./dist/wc/context-menu.js"
         },
         "./wc/divider": {
             "types": "./dist/elements/divider/divider.d.ts",

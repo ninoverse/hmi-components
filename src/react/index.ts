@@ -75,6 +75,11 @@ export {
     type ConfirmDialogVariant,
 } from '../elements/confirm-dialog/confirm-dialog.react.js';
 export {
+    ContextMenu,
+    type ContextMenuFocusOnOpen,
+    type ContextMenuOpenChangeDetail,
+} from '../elements/context-menu/context-menu.react.js';
+export {
     Divider,
     type DividerAlign,
     type DividerOrientation,

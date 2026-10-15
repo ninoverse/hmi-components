@@ -188,6 +188,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/confirm-dialog/confirm-dialog.react.ts',
                 ),
+                'wc/context-menu': resolve(
+                    dirname,
+                    'src/elements/context-menu/context-menu.ts',
+                ),
+                'react/context-menu': resolve(
+                    dirname,
+                    'src/elements/context-menu/context-menu.react.ts',
+                ),
                 'wc/divider': resolve(
                     dirname,
                     'src/elements/divider/divider.ts',
