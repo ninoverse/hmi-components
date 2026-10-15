@@ -24103,6 +24103,556 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/tooltip/tooltip.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Tooltip: a small bubble that names or describes its trigger, shown when the\npointer rests on the trigger or focus reaches it, and hidden when they leave\nor on Escape. The bubble is a `popover=\"hint\"` element in the top layer, so no\noverflowing ancestor clips it, and it follows the trigger as the page scrolls\nor resizes. It does not take the pointer, so the pointer cannot move onto it.\n\nThe trigger is the `trigger` slot, and the text is `label`, or the `label` slot\nfor rich content. A trigger cannot point at a bubble inside a shadow root, so\nwhen `label` is set the element gives the trigger an `aria-description` with\nthe same text, unless it has its own; the bubble is `role=\"tooltip\"`. A `label`\nslot gets no description of its own: point the trigger's `aria-describedby` at\nyour slotted node.\n\nThe element owns `open`: it follows the pointer and focus. Setting `open`\nyourself shows or hides the bubble at once and fires nothing.",
+          "name": "HmiTooltip",
+          "cssParts": [
+            {
+              "description": "The wrapper around the trigger slot.",
+              "name": "trigger"
+            },
+            {
+              "description": "The bubble.",
+              "name": "base"
+            }
+          ],
+          "slots": [
+            {
+              "description": "The element the tooltip describes: the first element slotted is the anchor.",
+              "name": "trigger"
+            },
+            {
+              "description": "The bubble's content. Defaults to `label`.",
+              "name": "label"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "side",
+              "type": {
+                "text": "TooltipSide"
+              },
+              "default": "'top'",
+              "description": "The side of the trigger the bubble sits on.",
+              "attribute": "side",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The bubble's text: the default of the `label` slot, and the trigger's `aria-description`.",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "delay",
+              "type": {
+                "text": "number"
+              },
+              "default": "200",
+              "description": "How long the pointer or focus must stay on the trigger before the bubble shows, in ms.",
+              "attribute": "delay"
+            },
+            {
+              "kind": "field",
+              "name": "#described",
+              "privacy": "private",
+              "type": {
+                "text": "{ trigger: Element; text: string } | undefined"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "placementSide",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "PlacementSide"
+                }
+              },
+              "description": "The side of the trigger the panel sits on.",
+              "inheritedFrom": {
+                "name": "HmiHoverPanel",
+                "module": "src/elements/shared/hover-panel.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "openDelayMs",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "number"
+                }
+              },
+              "description": "How long the pointer or focus must stay on the trigger before the panel opens, in ms.",
+              "inheritedFrom": {
+                "name": "HmiHoverPanel",
+                "module": "src/elements/shared/hover-panel.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "gap",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "number"
+                }
+              },
+              "description": "The gap between the trigger and the panel, in px.",
+              "inheritedFrom": {
+                "name": "HmiHoverPanel",
+                "module": "src/elements/shared/hover-panel.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "panelRole",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "string"
+                }
+              },
+              "description": "The panel's `role`, if it has one.",
+              "inheritedFrom": {
+                "name": "HmiHoverPanel",
+                "module": "src/elements/shared/hover-panel.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "syncTrigger",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "trigger",
+                  "type": {
+                    "text": "Element | null"
+                  }
+                }
+              ],
+              "description": "Called with the trigger as it is now, when the trigger or the element's properties change.",
+              "inheritedFrom": {
+                "name": "HmiHoverPanel",
+                "module": "src/elements/shared/hover-panel.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "renderPanelContent",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "TemplateResult"
+                }
+              },
+              "description": "What the panel holds.",
+              "inheritedFrom": {
+                "name": "HmiHoverPanel",
+                "module": "src/elements/shared/hover-panel.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the panel is open.",
+              "attribute": "open",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "HmiHoverPanel",
+                "module": "src/elements/shared/hover-panel.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "panel",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "privacy": "protected",
+              "inheritedFrom": {
+                "name": "HmiHoverPanel",
+                "module": "src/elements/shared/hover-panel.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "triggerSlot",
+              "type": {
+                "text": "HTMLSlotElement"
+              },
+              "privacy": "private",
+              "inheritedFrom": {
+                "name": "HmiHoverPanel",
+                "module": "src/elements/shared/hover-panel.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "#position",
+              "privacy": "private",
+              "readonly": true,
+              "default": "new PositionController(this, { anchor: () => this.anchor, panel: () => this.panel, side: () => this.placementSide(), align: () => this.alignment(), offset: () => this.gap(), })",
+              "inheritedFrom": {
+                "name": "HmiHoverPanel",
+                "module": "src/elements/shared/hover-panel.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "#timer",
+              "privacy": "private",
+              "type": {
+                "text": "ReturnType<typeof setTimeout> | undefined"
+              },
+              "inheritedFrom": {
+                "name": "HmiHoverPanel",
+                "module": "src/elements/shared/hover-panel.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "#escape",
+              "privacy": "private",
+              "type": {
+                "text": "AbortController | undefined"
+              },
+              "inheritedFrom": {
+                "name": "HmiHoverPanel",
+                "module": "src/elements/shared/hover-panel.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "anchor",
+              "type": {
+                "text": "Element | null"
+              },
+              "privacy": "protected",
+              "description": "The element the panel is placed against: the first element in the `trigger` slot.",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiHoverPanel",
+                "module": "src/elements/shared/hover-panel.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "closeDelayMs",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "number"
+                }
+              },
+              "description": "How long after the pointer or focus leaves before the panel closes, in ms.",
+              "inheritedFrom": {
+                "name": "HmiHoverPanel",
+                "module": "src/elements/shared/hover-panel.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "alignment",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "PlacementAlign"
+                }
+              },
+              "description": "How the panel lines up with the trigger along its side.",
+              "inheritedFrom": {
+                "name": "HmiHoverPanel",
+                "module": "src/elements/shared/hover-panel.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "panelPart",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "string"
+                }
+              },
+              "description": "The panel's `part`.",
+              "inheritedFrom": {
+                "name": "HmiHoverPanel",
+                "module": "src/elements/shared/hover-panel.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#sync",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "inheritedFrom": {
+                "name": "HmiHoverPanel",
+                "module": "src/elements/shared/hover-panel.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#listenForEscape",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "inheritedFrom": {
+                "name": "HmiHoverPanel",
+                "module": "src/elements/shared/hover-panel.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#cancel",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "inheritedFrom": {
+                "name": "HmiHoverPanel",
+                "module": "src/elements/shared/hover-panel.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#schedule",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "open",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "HmiHoverPanel",
+                "module": "src/elements/shared/hover-panel.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#setOpen",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "open",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "HmiHoverPanel",
+                "module": "src/elements/shared/hover-panel.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#onToggle",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "ToggleEvent"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "HmiHoverPanel",
+                "module": "src/elements/shared/hover-panel.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#onEnter",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "inheritedFrom": {
+                "name": "HmiHoverPanel",
+                "module": "src/elements/shared/hover-panel.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#onLeave",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "inheritedFrom": {
+                "name": "HmiHoverPanel",
+                "module": "src/elements/shared/hover-panel.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#onFocusOut",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "FocusEvent"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "HmiHoverPanel",
+                "module": "src/elements/shared/hover-panel.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#onTriggerChange",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "inheritedFrom": {
+                "name": "HmiHoverPanel",
+                "module": "src/elements/shared/hover-panel.ts"
+              }
+            }
+          ],
+          "events": [
+            {
+              "type": {
+                "text": "CustomEvent<TooltipOpenChangeDetail>"
+              },
+              "description": "The bubble opened or closed because the pointer, focus, Escape or the browser said so. Not cancelable, and not fired when `open` is set from code.",
+              "name": "hmi-open-change"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "side",
+              "type": {
+                "text": "TooltipSide"
+              },
+              "default": "'top'",
+              "description": "The side of the trigger the bubble sits on.",
+              "fieldName": "side"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The bubble's text: the default of the `label` slot, and the trigger's `aria-description`.",
+              "fieldName": "label"
+            },
+            {
+              "name": "delay",
+              "type": {
+                "text": "number"
+              },
+              "default": "200",
+              "description": "How long the pointer or focus must stay on the trigger before the bubble shows, in ms.",
+              "fieldName": "delay"
+            },
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the panel is open.",
+              "fieldName": "open",
+              "inheritedFrom": {
+                "name": "HmiHoverPanel",
+                "module": "src/elements/shared/hover-panel.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "HmiHoverPanel",
+            "module": "/src/elements/shared/hover-panel.js"
+          },
+          "tagName": "hmi-tooltip",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiTooltip",
+          "declaration": {
+            "name": "HmiTooltip",
+            "module": "src/elements/tooltip/tooltip.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-tooltip",
+          "declaration": {
+            "name": "HmiTooltip",
+            "module": "src/elements/tooltip/tooltip.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/tree/tree.ts",
       "declarations": [
         {

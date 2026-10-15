@@ -280,6 +280,11 @@ export {
     type TimelineItem,
 } from '../elements/timeline/timeline.react.js';
 export {
+    Tooltip,
+    type TooltipOpenChangeDetail,
+    type TooltipSide,
+} from '../elements/tooltip/tooltip.react.js';
+export {
     Tree,
     type TreeExpandedChangeDetail,
     type TreeNode,

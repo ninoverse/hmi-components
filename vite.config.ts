@@ -517,6 +517,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/timeline/timeline.react.ts',
                 ),
+                'wc/tooltip': resolve(
+                    dirname,
+                    'src/elements/tooltip/tooltip.ts',
+                ),
+                'react/tooltip': resolve(
+                    dirname,
+                    'src/elements/tooltip/tooltip.react.ts',
+                ),
                 'wc/tree': resolve(dirname, 'src/elements/tree/tree.ts'),
                 'react/tree': resolve(
                     dirname,

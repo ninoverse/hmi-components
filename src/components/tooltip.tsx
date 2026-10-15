@@ -31,6 +31,7 @@ type Position = { x: number; y: number; transform: string };
  *
  * @example
  * <Tooltip label="Copy"><Button asIcon><CopyIcon /></Button></Tooltip>
+ * @deprecated Use `Tooltip` from `@ninoverse/hmi-components/react/tooltip`. Removed in 6.0.0.
  */
 export function Tooltip({
     label,

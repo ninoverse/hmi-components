@@ -558,6 +558,10 @@
             "types": "./dist/elements/timeline/timeline.react.d.ts",
             "import": "./dist/react/timeline.js"
         },
+        "./react/tooltip": {
+            "types": "./dist/elements/tooltip/tooltip.react.d.ts",
+            "import": "./dist/react/tooltip.js"
+        },
         "./react/tree": {
             "types": "./dist/elements/tree/tree.react.d.ts",
             "import": "./dist/react/tree.js"
@@ -962,6 +966,10 @@
         "./wc/timeline": {
             "types": "./dist/elements/timeline/timeline.d.ts",
             "import": "./dist/wc/timeline.js"
+        },
+        "./wc/tooltip": {
+            "types": "./dist/elements/tooltip/tooltip.d.ts",
+            "import": "./dist/wc/tooltip.js"
         },
         "./wc/tree": {
             "types": "./dist/elements/tree/tree.d.ts",

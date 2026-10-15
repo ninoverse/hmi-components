@@ -1233,6 +1233,30 @@ export function Example() {
         </section>
 
         <section>
+            <h2>Tooltip</h2>
+            <!-- The trigger is the trigger slot; label is the text, or the label slot
+                 for rich content. hmi-open-change reports what the pointer, focus or
+                 Escape did, never what the page set: its detail is logged to the console. -->
+            <div style="display: flex; gap: 3rem; flex-wrap: wrap; align-items: center; justify-content: center; width: 100%; padding: 6rem 3rem">
+                <hmi-tooltip label="On top" side="top">
+                    <hmi-button slot="trigger" variant="secondary">Top</hmi-button>
+                </hmi-tooltip>
+                <hmi-tooltip label="Below" side="bottom">
+                    <hmi-button slot="trigger" variant="secondary">Bottom</hmi-button>
+                </hmi-tooltip>
+                <hmi-tooltip label="To the left" side="left">
+                    <hmi-button slot="trigger" variant="secondary">Left</hmi-button>
+                </hmi-tooltip>
+                <hmi-tooltip label="To the right" side="right">
+                    <hmi-button slot="trigger" variant="secondary">Right</hmi-button>
+                </hmi-tooltip>
+                <hmi-tooltip label="Snappy (0ms delay)" delay="0">
+                    <hmi-button slot="trigger">Instant</hmi-button>
+                </hmi-tooltip>
+            </div>
+        </section>
+
+        <section>
             <h2>List</h2>
             <!-- Items are a property. right-<id> takes rich content; reorderable adds
                  drag and Alt+Arrow reordering, and the page sets items back from
@@ -1815,6 +1839,9 @@ export function Example() {
             }
             for (const id of ['drawer-right-cancel', 'drawer-right-apply']) {
                 document.getElementById(id).addEventListener('click', () => { document.getElementById('drawer-right').open = false; });
+            }
+            for (const tip of document.querySelectorAll('hmi-tooltip')) {
+                tip.addEventListener('hmi-open-change', (event) => console.log('tooltip hmi-open-change', event.detail));
             }
             for (const pager of document.querySelectorAll('hmi-pagination')) {
                 pager.addEventListener('hmi-change', (event) => {
