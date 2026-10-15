@@ -36,6 +36,7 @@ export * from './gauge/gauge.js';
 export * from './grid/grid.js';
 export * from './heading/heading.js';
 export * from './heatmap/heatmap.js';
+export * from './hover-card/hover-card.js';
 export * from './image/image.js';
 export * from './input/input.js';
 export * from './kbd/kbd.js';

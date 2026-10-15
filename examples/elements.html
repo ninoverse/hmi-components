@@ -1257,6 +1257,37 @@ export function Example() {
         </section>
 
         <section>
+            <h2>HoverCard</h2>
+            <!-- The trigger is the trigger slot. The card stays open while the pointer
+                 is over it or focus is inside it; hmi-open-change reports what the
+                 pointer, focus or Escape did, and its detail is logged to the console. -->
+            <div style="display: flex; gap: 4rem; flex-wrap: wrap; align-items: center; justify-content: space-between; width: 100%; padding: 8rem 0 16rem">
+                <hmi-hover-card align="start">
+                    <hmi-link slot="trigger" href="#hovercard">@nino (bottom)</hmi-link>
+                    <div style="display: flex; gap: 12px; align-items: center">
+                        <hmi-avatar name="Nino Verse" size="large"></hmi-avatar>
+                        <div style="display: flex; flex-direction: column; gap: 4px">
+                            <strong style="font-size: 15px">Nino Verse</strong>
+                            <span style="font-size: 13px; color: var(--on-surface-variant)">Building the HMI component library. Hover and move in — this card stays open so you can click inside.</span>
+                        </div>
+                    </div>
+                </hmi-hover-card>
+                <hmi-hover-card side="top" align="start">
+                    <hmi-button slot="trigger" variant="ghost">Top / start</hmi-button>
+                    <span style="font-size: 14px">Anchored above the trigger, aligned to its left edge.</span>
+                </hmi-hover-card>
+                <hmi-hover-card side="right" align="center" width="280">
+                    <hmi-button slot="trigger" variant="ghost">Right / fixed width</hmi-button>
+                    <span style="font-size: 14px">Opens to the right, centred on the trigger, with a fixed 280px width.</span>
+                </hmi-hover-card>
+                <hmi-hover-card side="left" align="end" open-delay="0" close-delay="0">
+                    <hmi-button slot="trigger" variant="ghost">Left / snappy</hmi-button>
+                    <span style="font-size: 14px">Zero open/close delay, to the left, end-aligned.</span>
+                </hmi-hover-card>
+            </div>
+        </section>
+
+        <section>
             <h2>List</h2>
             <!-- Items are a property. right-<id> takes rich content; reorderable adds
                  drag and Alt+Arrow reordering, and the page sets items back from
@@ -1842,6 +1873,9 @@ export function Example() {
             }
             for (const tip of document.querySelectorAll('hmi-tooltip')) {
                 tip.addEventListener('hmi-open-change', (event) => console.log('tooltip hmi-open-change', event.detail));
+            }
+            for (const card of document.querySelectorAll('hmi-hover-card')) {
+                card.addEventListener('hmi-open-change', (event) => console.log('hover-card hmi-open-change', event.detail));
             }
             for (const pager of document.querySelectorAll('hmi-pagination')) {
                 pager.addEventListener('hmi-change', (event) => {

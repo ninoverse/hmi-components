@@ -410,6 +410,10 @@
             "types": "./dist/elements/heatmap/heatmap.react.d.ts",
             "import": "./dist/react/heatmap.js"
         },
+        "./react/hover-card": {
+            "types": "./dist/elements/hover-card/hover-card.react.d.ts",
+            "import": "./dist/react/hover-card.js"
+        },
         "./react/image": {
             "types": "./dist/elements/image/image.react.d.ts",
             "import": "./dist/react/image.js"
@@ -818,6 +822,10 @@
         "./wc/heatmap": {
             "types": "./dist/elements/heatmap/heatmap.d.ts",
             "import": "./dist/wc/heatmap.js"
+        },
+        "./wc/hover-card": {
+            "types": "./dist/elements/hover-card/hover-card.d.ts",
+            "import": "./dist/wc/hover-card.js"
         },
         "./wc/image": {
             "types": "./dist/elements/image/image.d.ts",

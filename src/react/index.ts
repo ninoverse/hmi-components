@@ -118,6 +118,12 @@ export {
 } from '../elements/heading/heading.react.js';
 export { Heatmap } from '../elements/heatmap/heatmap.react.js';
 export {
+    HoverCard,
+    type HoverCardAlign,
+    type HoverCardOpenChangeDetail,
+    type HoverCardSide,
+} from '../elements/hover-card/hover-card.react.js';
+export {
     Image,
     type ImageErrorDetail,
     type ImageFit,

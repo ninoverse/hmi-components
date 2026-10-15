@@ -272,6 +272,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/heatmap/heatmap.react.ts',
                 ),
+                'wc/hover-card': resolve(
+                    dirname,
+                    'src/elements/hover-card/hover-card.ts',
+                ),
+                'react/hover-card': resolve(
+                    dirname,
+                    'src/elements/hover-card/hover-card.react.ts',
+                ),
                 'wc/image': resolve(dirname, 'src/elements/image/image.ts'),
                 'react/image': resolve(
                     dirname,
