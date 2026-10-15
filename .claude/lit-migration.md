@@ -178,8 +178,11 @@ stem (`AreaChart`), the tag is `hmi-<kebab>`, the class is `Hmi<Pascal>`,
 - **The dialog group** is modal, drawer, confirm-dialog and command-palette.
 - **The popover group** is popover, tooltip, hover-card, context-menu, menu,
   the select and combobox listbox, date-picker, color-picker and toast. Toast
-  and a hover-triggered tooltip use `popover="manual"`, and `hint` where
-  `HTMLElement.prototype.popover` accepts it.
+  uses `popover="manual"`. The tooltip and hover-card are `popover="hint"`: a
+  browser without `hint` reads an unknown value as `manual`, so the attribute is
+  written as it is and nothing is detected. Both extend `HmiHoverPanel`
+  (`src/elements/shared/hover-panel.ts`), which owns the hover and focus timers,
+  Escape and `hmi-open-change`.
 - **Positioning** uses `PositionController` from
   `src/elements/shared/positioning.ts`: rect math with `position: fixed` insets,
   `ResizeObserver` plus scroll and resize listeners, running only while the panel
@@ -187,9 +190,10 @@ stem (`AreaChart`), the tag is `hmi-<kebab>`, the class is `Hmi<Pascal>`,
   used yet: see `TODO.md`.
 - The trigger slot sits inside a `display: contents` wrapper. There is no
   `cloneElement` equivalent and none is needed. The element gives the first
-  element slotted `aria-expanded`, and `aria-haspopup` unless it has its own: the
-  one change it makes to the consumer's nodes, since a trigger cannot point at a
-  panel inside a shadow root.
+  element slotted `aria-expanded`, and `aria-haspopup` unless it has its own, since
+  a trigger cannot point at a panel inside a shadow root. These are the only
+  changes the popover makes to the consumer's nodes. The tooltip makes one: an
+  `aria-description` from `label`, unless the trigger has its own.
 - **A `popover="auto"` element owns its `open`.** The browser closes it on an
   outside click, on Escape and when another popover opens, and that cannot be
   cancelled, so `<prefix>-open-change` reports a change that has happened. It

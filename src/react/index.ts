@@ -118,6 +118,12 @@ export {
 } from '../elements/heading/heading.react.js';
 export { Heatmap } from '../elements/heatmap/heatmap.react.js';
 export {
+    HoverCard,
+    type HoverCardAlign,
+    type HoverCardOpenChangeDetail,
+    type HoverCardSide,
+} from '../elements/hover-card/hover-card.react.js';
+export {
     Image,
     type ImageErrorDetail,
     type ImageFit,
@@ -279,6 +285,11 @@ export {
     type TimelineColor,
     type TimelineItem,
 } from '../elements/timeline/timeline.react.js';
+export {
+    Tooltip,
+    type TooltipOpenChangeDetail,
+    type TooltipSide,
+} from '../elements/tooltip/tooltip.react.js';
 export {
     Tree,
     type TreeExpandedChangeDetail,

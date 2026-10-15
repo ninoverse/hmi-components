@@ -45,6 +45,7 @@ const ALIGN_SHIFT: Record<HoverCardAlign, string> = {
  *
  * @example
  * <HoverCard trigger={<a>@ada</a>}><Profile /></HoverCard>
+ * @deprecated Use `HoverCard` from `@ninoverse/hmi-components/react/hover-card`. Removed in 6.0.0.
  */
 export function HoverCard({
     trigger,

@@ -500,6 +500,42 @@ override render() {
 // `#onToggle` turns a close by the browser into `open = false` and `hmi-open-change`.
 ```
 
+```ts
+// hover-panel.ts (sketch): tooltip and hover-card extend it
+#position = new PositionController(this, {
+    anchor: () => this.anchor,                  // the first element in the trigger slot
+    panel: () => this.panel,
+    side: () => this.placementSide(),           // the subclass's `side`
+    align: () => this.alignment(),              // the hover-card's `align`; centre for the tooltip
+    offset: () => this.gap(),                   // 8 for the tooltip, 6 for the hover-card
+});
+override render() {
+    return html`
+        <span part="trigger" class="trigger" @mouseenter=${this.#onEnter} @mouseleave=${this.#onLeave}
+              @focusin=${this.#onEnter} @focusout=${this.#onFocusOut}><slot name="trigger"></slot></span>
+        <div part=${this.panelPart()} class="panel" popover="hint" role=${ifDefined(this.panelRole())}
+             @toggle=${this.#onToggle} @mouseenter=${this.#onEnter} @mouseleave=${this.#onLeave}
+             @focusin=${this.#onEnter} @focusout=${this.#onFocusOut}>${this.renderPanelContent()}</div>
+    `;
+}
+// `#schedule(open)` waits `openDelayMs()` or `closeDelayMs()`, and an enter or a
+// leave takes the pending one back; entering the panel cancels the close, which
+// is what keeps a hover card open under the pointer. `#onFocusOut` ignores focus
+// that stays inside the element (trigger to card, or within the card).
+```
+
+The hover panels (tooltip, hover-card) extend `HmiHoverPanel` in
+`src/elements/shared/hover-panel.ts`, as modal and drawer extend `HmiDialog`: the
+subclass brings its tag, styles, `side` (and the hover-card's `align`, delays and
+`width`), the delays and gap through the protected methods, and what the panel holds
+in `renderPanelContent()`. The panel is `popover="hint"`: where the browser has no
+`hint`, an unknown value reads as `manual`, so there is nothing to detect. A tooltip's
+trigger cannot be pointed at from a `role="tooltip"` inside the shadow root, so
+`label` also becomes the trigger's `aria-description` (never over one it already has;
+a `label` slot gets none, since the element never reads your DOM). The tooltip's
+trigger is the `trigger` slot, as the hover-card's is, and its content is `label` or
+the `label` slot.
+
 The modal's machinery is the `HmiDialog` base class in `src/elements/shared/dialog.ts`; the dialog group (modal, drawer, later command-palette) extends it with its own tag, styles and body. A dialog built this way is controlled for now (`TODO.md`, "Controlled or
 element-owned state"): `#requestClose` only emits, so `open` stays `true` until
 the consumer sets it, and `#onClose` shows the `<dialog>` again when the browser

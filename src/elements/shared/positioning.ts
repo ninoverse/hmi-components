@@ -89,8 +89,8 @@ export interface PositionOptions {
     side?: () => PlacementSide;
     /** How it lines up along that side. @default 'start' */
     align?: () => PlacementAlign;
-    /** The gap between the anchor and the panel, in px. @default 0 */
-    offset?: number;
+    /** The gap between the anchor and the panel, in px: a number, or a function for a base class whose subclasses differ. @default 0 */
+    offset?: number | (() => number);
     /** Writes the anchor's width on the panel as `--_anchor-width`, for a `min-width`. @default false */
     matchWidth?: boolean;
 }
@@ -160,6 +160,7 @@ export class PositionController implements ReactiveController {
         const panel = this.#options.panel();
         if (!anchor || !panel) return;
         const box = anchor.getBoundingClientRect();
+        const offset = this.#options.offset ?? 0;
         const style = placement({
             anchor: box,
             viewport: {
@@ -168,7 +169,7 @@ export class PositionController implements ReactiveController {
             },
             side: this.#options.side?.() ?? 'bottom',
             align: this.#options.align?.() ?? 'start',
-            offset: this.#options.offset ?? 0,
+            offset: typeof offset === 'function' ? offset() : offset,
         });
         for (const [name, value] of Object.entries(style)) {
             panel.style.setProperty(name, value);

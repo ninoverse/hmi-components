@@ -410,6 +410,10 @@
             "types": "./dist/elements/heatmap/heatmap.react.d.ts",
             "import": "./dist/react/heatmap.js"
         },
+        "./react/hover-card": {
+            "types": "./dist/elements/hover-card/hover-card.react.d.ts",
+            "import": "./dist/react/hover-card.js"
+        },
         "./react/image": {
             "types": "./dist/elements/image/image.react.d.ts",
             "import": "./dist/react/image.js"
@@ -557,6 +561,10 @@
         "./react/timeline": {
             "types": "./dist/elements/timeline/timeline.react.d.ts",
             "import": "./dist/react/timeline.js"
+        },
+        "./react/tooltip": {
+            "types": "./dist/elements/tooltip/tooltip.react.d.ts",
+            "import": "./dist/react/tooltip.js"
         },
         "./react/tree": {
             "types": "./dist/elements/tree/tree.react.d.ts",
@@ -815,6 +823,10 @@
             "types": "./dist/elements/heatmap/heatmap.d.ts",
             "import": "./dist/wc/heatmap.js"
         },
+        "./wc/hover-card": {
+            "types": "./dist/elements/hover-card/hover-card.d.ts",
+            "import": "./dist/wc/hover-card.js"
+        },
         "./wc/image": {
             "types": "./dist/elements/image/image.d.ts",
             "import": "./dist/wc/image.js"
@@ -962,6 +974,10 @@
         "./wc/timeline": {
             "types": "./dist/elements/timeline/timeline.d.ts",
             "import": "./dist/wc/timeline.js"
+        },
+        "./wc/tooltip": {
+            "types": "./dist/elements/tooltip/tooltip.d.ts",
+            "import": "./dist/wc/tooltip.js"
         },
         "./wc/tree": {
             "types": "./dist/elements/tree/tree.d.ts",
