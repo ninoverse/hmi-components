@@ -199,6 +199,18 @@ describe('hmi-menu-item', () => {
         });
     });
 
+    it('inherits its line height, as the React button did, rather than using the button’s own', async () => {
+        const el = await fixture(
+            html`<hmi-menu-item shortcut="⌘S" style="line-height: 1.5; font-size: 16px">Save</hmi-menu-item>`,
+        );
+        const style = getComputedStyle(base(el));
+        expect(style.fontSize).not.toBe('16px');
+        expect(Number.parseFloat(style.lineHeight)).toBeCloseTo(
+            Number.parseFloat(style.fontSize) * 1.5,
+            1,
+        );
+    });
+
     it('takes the menu’s corner radii from the --_radius-* properties', async () => {
         const el = await fixture(
             html`<hmi-menu-item style="--_radius-tl: 7px; --_radius-br: 9px">Save</hmi-menu-item>`,

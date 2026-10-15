@@ -3,7 +3,9 @@ import { css } from 'lit';
 /* Menu item — a row of a menu. Ported from .menu__item in
    src/components/styled/menu.styled.css: a flex button that highlights on hover
    and focus, with the danger colours. The first and last item of a menu take the
-   menu's corner radii through --_radius-*, which hmi-menu sets on them. The icon
+   menu's corner radii through --_radius-*, which hmi-menu sets on them. The line
+   height is inherited, as the React tree's global `button { font: inherit }` made
+   it: a native button's own `normal` would make the row a pixel shorter. The icon
    and shortcut wrappers have no box (display: contents), so an empty one adds
    neither width nor gap; the label's flex: 1 pushes the shortcut to the end. */
 export const styles = css`
@@ -25,6 +27,7 @@ export const styles = css`
         border-bottom-left-radius: var(--_radius-bl, var(--corner-extra-small));
         font-family: var(--font-default);
         font-size: calc(var(--_base) * 1.625);
+        line-height: inherit;
         color: var(--on-background);
         text-align: start;
         cursor: default;
