@@ -30,7 +30,9 @@ export type MenuItemProps = ComponentPropsWithRef<'button'> & {
     danger?: boolean;
 };
 
-/** Activatable menu row. Forwards native `<button>` props. */
+/** Activatable menu row. Forwards native `<button>` props.
+ * @deprecated Use `MenuItem` from `@ninoverse/hmi-components/react/menu-item`. Removed in 6.0.0.
+ */
 export function MenuItem({
     icon,
     shortcut,

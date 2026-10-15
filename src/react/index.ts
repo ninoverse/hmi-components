@@ -155,6 +155,7 @@ export {
     type ListItem,
     type ListReorderDetail,
 } from '../elements/list/list.react.js';
+export { MenuItem } from '../elements/menu-item/menu-item.react.js';
 export { Meter, type MeterLevel } from '../elements/meter/meter.react.js';
 export {
     type DialogAction,

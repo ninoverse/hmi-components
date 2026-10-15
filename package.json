@@ -442,6 +442,10 @@
             "types": "./dist/elements/list/list.react.d.ts",
             "import": "./dist/react/list.js"
         },
+        "./react/menu-item": {
+            "types": "./dist/elements/menu-item/menu-item.react.d.ts",
+            "import": "./dist/react/menu-item.js"
+        },
         "./react/meter": {
             "types": "./dist/elements/meter/meter.react.d.ts",
             "import": "./dist/react/meter.js"
@@ -854,6 +858,10 @@
         "./wc/list": {
             "types": "./dist/elements/list/list.d.ts",
             "import": "./dist/wc/list.js"
+        },
+        "./wc/menu-item": {
+            "types": "./dist/elements/menu-item/menu-item.d.ts",
+            "import": "./dist/wc/menu-item.js"
         },
         "./wc/meter": {
             "types": "./dist/elements/meter/meter.d.ts",

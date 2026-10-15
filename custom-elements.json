@@ -10012,6 +10012,145 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/menu-item/menu-item.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Menu item: an activatable row of a menu, with a label, an optional leading\nicon and an optional trailing hint such as a keyboard shortcut. The row is a\nnative `<button>`, so Enter and Space activate it and a disabled item takes no\nfocus or click. Activation is the native `click`, which crosses the shadow\nroot: listen for `click` on the item.\n\nUse it inside `hmi-menu`, `hmi-popover` or `hmi-context-menu`. An item inside a\ncontext menu closes it; one inside a popover leaves that to the page, which\nsets the popover's `open` to `false`.\n\n`shortcut` is a plain-text default of the `shortcut` slot, and an\n`<svg slot=\"icon\">` is sized to the row's text. `aria-label` and other\nattributes set on the host do not reach the inner `<button>`; its name is the\nlabel.",
+          "name": "HmiMenuItem",
+          "cssParts": [
+            {
+              "description": "The inner `<button>`.",
+              "name": "base"
+            },
+            {
+              "description": "The wrapper around the icon slot. It has no box, so it takes colour and font only.",
+              "name": "icon"
+            },
+            {
+              "description": "The wrapper around the label.",
+              "name": "label"
+            },
+            {
+              "description": "The wrapper around the shortcut slot. It has no box, so it takes colour and font only.",
+              "name": "shortcut"
+            }
+          ],
+          "slots": [
+            {
+              "description": "The label.",
+              "name": ""
+            },
+            {
+              "description": "Rendered before the label. An `<svg>` is sized to the text.",
+              "name": "icon"
+            },
+            {
+              "description": "Rendered after the label. Defaults to `shortcut`.",
+              "name": "shortcut"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "shadowRootOptions",
+              "type": {
+                "text": "object"
+              },
+              "static": true,
+              "default": "{ ...LitElement.shadowRootOptions, delegatesFocus: true, }"
+            },
+            {
+              "kind": "field",
+              "name": "danger",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Styles the item as a destructive action.",
+              "attribute": "danger",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Disables the item: it takes no focus and no click.",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "shortcut",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "A trailing hint, such as a keyboard shortcut: the default of the `shortcut` slot.",
+              "attribute": "shortcut"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "danger",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Styles the item as a destructive action.",
+              "fieldName": "danger"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Disables the item: it takes no focus and no click.",
+              "fieldName": "disabled"
+            },
+            {
+              "name": "shortcut",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "A trailing hint, such as a keyboard shortcut: the default of the `shortcut` slot.",
+              "fieldName": "shortcut"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-menu-item",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiMenuItem",
+          "declaration": {
+            "name": "HmiMenuItem",
+            "module": "src/elements/menu-item/menu-item.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-menu-item",
+          "declaration": {
+            "name": "HmiMenuItem",
+            "module": "src/elements/menu-item/menu-item.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/meter/meter.ts",
       "declarations": [
         {

@@ -44,6 +44,7 @@ export * from './legend/legend.js';
 export * from './line-chart/line-chart.js';
 export * from './link/link.js';
 export * from './list/list.js';
+export * from './menu-item/menu-item.js';
 export * from './meter/meter.js';
 export * from './modal/modal.js';
 export * from './multi-input/multi-input.js';
