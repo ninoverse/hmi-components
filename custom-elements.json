@@ -4404,7 +4404,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "Context menu: a card of menu items that opens at the pointer when the trigger\nis right-clicked, kept inside the screen. The card is a `popover=\"auto\"` element\nin the top layer, so no overflowing ancestor clips it, and the browser closes it\non an outside click, on Escape and when another popover opens. It also closes on\nscroll and resize, since it does not follow the trigger, and when an item is\nactivated; a click on its padding or a label leaves it open.\n\nThe trigger is the `trigger` slot, and the card's content is the `menu` slot:\nan `hmi-menu` of `hmi-menu-item`, `hmi-menu-label` and `hmi-menu-separator`.\nThe native context menu is prevented on the trigger. A right-click on the trigger\nwhile the menu is open moves it to the new point.\n\nThe element owns `open`: it follows the browser. A right-click, an outside\nclick, Escape and an activated item change it and fire `hmi-open-change` with the\nnew state; setting `open` yourself opens or closes it and fires nothing. Opened\nfrom code it sits at the trigger's top-left corner.\n\n`focus-on-open` decides when the first enabled item takes focus as the menu\nopens, so the arrow keys work at once: `keyboard` (the default) when the\n`contextmenu` event is not a right-button press, such as the Menu key and\nShift+F10; `always`; or `never`, as the React menu did, when Tab from the trigger\nstill reaches the card. As the menu closes, focus goes back to where it was if\nit was in the menu or lost; the browser does not do that for slotted content.\n\nWhere the browser has no Popover API, the same card is a fixed-position element\nthat the element shows and hides, closing it on an outside press or Escape itself.",
+          "description": "Context menu: a card of menu items that opens at the pointer when the trigger\nis right-clicked, kept inside the screen. The card is a `popover=\"manual\"`\nelement in the top layer, so no overflowing ancestor clips it. The element closes\nit itself on an outside press, on Escape, on scroll and resize (it does not\nfollow the trigger) and when an item is activated; a click on its padding or a\nlabel leaves it open. It is not `popover=\"auto\"`: macOS and Linux fire\n`contextmenu` when the button goes down, and the light dismiss of an auto popover\nwould close the card as that same press is released.\n\nThe trigger is the `trigger` slot, and the card's content is the `menu` slot:\nan `hmi-menu` of `hmi-menu-item`, `hmi-menu-label` and `hmi-menu-separator`.\nThe native context menu is prevented on the trigger.\n\nThe element owns `open`. A right-click, an outside press, Escape, a scroll and an\nactivated item change it and fire `hmi-open-change` with the new state; setting\n`open` yourself opens or closes it and fires nothing. Opened from code it sits at\nthe trigger's top-left corner. A right-click on the trigger while it is open moves\nit to the new point; a press anywhere else outside the card closes it.\n\n`focus-on-open` decides when the first enabled item takes focus as the menu\nopens, so the arrow keys work at once: `keyboard` (the default) when the\n`contextmenu` event is not a right-button press, such as the Menu key and\nShift+F10; `always`; or `never`, as the React menu did, when Tab from the trigger\nstill reaches the card. As the menu closes, focus goes back to where it was if\nit was in the menu or lost; the browser does not do that for slotted content.\n\nWhere the browser has no Popover API, the same card is a fixed-position element\nthat the element shows and hides.",
           "name": "HmiContextMenu",
           "cssParts": [
             {
@@ -4455,6 +4455,14 @@
             {
               "kind": "field",
               "name": "panel",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "trigger",
               "type": {
                 "text": "HTMLElement"
               },
@@ -4530,15 +4538,7 @@
                 "type": {
                   "text": "void"
                 }
-              },
-              "parameters": [
-                {
-                  "name": "native",
-                  "type": {
-                    "text": "boolean"
-                  }
-                }
-              ]
+              }
             },
             {
               "kind": "method",
@@ -4608,24 +4608,6 @@
             },
             {
               "kind": "method",
-              "name": "#onToggle",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "ToggleEvent"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
               "name": "#onClick",
               "privacy": "private",
               "return": {
@@ -4648,7 +4630,7 @@
               "type": {
                 "text": "CustomEvent<ContextMenuOpenChangeDetail>"
               },
-              "description": "The user opened or closed the menu: a right-click, an outside click, Escape or an activated item. Not cancelable, and not fired when `open` is set from code.",
+              "description": "The user opened or closed the menu: a right-click, an outside press, Escape, a scroll or an activated item. Not cancelable, and not fired when `open` is set from code.",
               "name": "hmi-open-change"
             }
           ],

@@ -19,7 +19,7 @@ it('renders declarative shadow DOM with the trigger and menu slots and the close
     expect(out).toMatch(/<slot\s+name="menu"/);
     expect(out).toContain('part="trigger"');
     expect(out).toContain('part="base panel"');
-    expect(out).toContain('popover="auto"');
+    expect(out).toContain('popover="manual"');
     expect(out).toContain('Right-click');
 });
 
@@ -31,5 +31,5 @@ it('renders an open context menu without throwing: it is shown in the browser, n
             >`,
         ),
     );
-    expect(out).toContain('popover="auto"');
+    expect(out).toContain('popover="manual"');
 });

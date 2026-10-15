@@ -548,7 +548,11 @@ host, so a consumer's `onClick` still works). The menu is a `role="menu"` named 
 `label`, with ArrowUp, ArrowDown, Home and End moving focus between the enabled
 items it finds in its light DOM; the items stay in the Tab order.
 
-`hmi-context-menu` is `popover="auto"` and places itself at the pointer: a point has
+`hmi-context-menu` is `popover="manual"`: macOS and Linux fire `contextmenu` when the
+button goes down, so the light dismiss of an auto popover would close it as that
+press is released, and the element closes it on an outside press (not a right-click
+on the trigger, which moves it), Escape, scroll and an activated item. It places
+itself at the pointer: a point has
 no box for `PositionController` to measure, so the element sets `left` and `top`
 from the `contextmenu` event's `clientX` and `clientY`, clamped to the screen by the
 card's layout size (not its bounding box: the entry animation scales that). The

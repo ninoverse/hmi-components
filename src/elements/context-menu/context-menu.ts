@@ -19,21 +19,23 @@ const MARGIN = 1;
 
 /**
  * Context menu: a card of menu items that opens at the pointer when the trigger
- * is right-clicked, kept inside the screen. The card is a `popover="auto"` element
- * in the top layer, so no overflowing ancestor clips it, and the browser closes it
- * on an outside click, on Escape and when another popover opens. It also closes on
- * scroll and resize, since it does not follow the trigger, and when an item is
- * activated; a click on its padding or a label leaves it open.
+ * is right-clicked, kept inside the screen. The card is a `popover="manual"`
+ * element in the top layer, so no overflowing ancestor clips it. The element closes
+ * it itself on an outside press, on Escape, on scroll and resize (it does not
+ * follow the trigger) and when an item is activated; a click on its padding or a
+ * label leaves it open. It is not `popover="auto"`: macOS and Linux fire
+ * `contextmenu` when the button goes down, and the light dismiss of an auto popover
+ * would close the card as that same press is released.
  *
  * The trigger is the `trigger` slot, and the card's content is the `menu` slot:
  * an `hmi-menu` of `hmi-menu-item`, `hmi-menu-label` and `hmi-menu-separator`.
- * The native context menu is prevented on the trigger. A right-click on the trigger
- * while the menu is open moves it to the new point.
+ * The native context menu is prevented on the trigger.
  *
- * The element owns `open`: it follows the browser. A right-click, an outside
- * click, Escape and an activated item change it and fire `hmi-open-change` with the
- * new state; setting `open` yourself opens or closes it and fires nothing. Opened
- * from code it sits at the trigger's top-left corner.
+ * The element owns `open`. A right-click, an outside press, Escape, a scroll and an
+ * activated item change it and fire `hmi-open-change` with the new state; setting
+ * `open` yourself opens or closes it and fires nothing. Opened from code it sits at
+ * the trigger's top-left corner. A right-click on the trigger while it is open moves
+ * it to the new point; a press anywhere else outside the card closes it.
  *
  * `focus-on-open` decides when the first enabled item takes focus as the menu
  * opens, so the arrow keys work at once: `keyboard` (the default) when the
@@ -43,12 +45,12 @@ const MARGIN = 1;
  * it was in the menu or lost; the browser does not do that for slotted content.
  *
  * Where the browser has no Popover API, the same card is a fixed-position element
- * that the element shows and hides, closing it on an outside press or Escape itself.
+ * that the element shows and hides.
  *
  * @tag hmi-context-menu
  * @slot trigger - The element that opens the menu when right-clicked: anything inside it counts.
  * @slot menu - The card's content: an `hmi-menu`.
- * @fires {CustomEvent<ContextMenuOpenChangeDetail>} hmi-open-change - The user opened or closed the menu: a right-click, an outside click, Escape or an activated item. Not cancelable, and not fired when `open` is set from code.
+ * @fires {CustomEvent<ContextMenuOpenChangeDetail>} hmi-open-change - The user opened or closed the menu: a right-click, an outside press, Escape, a scroll or an activated item. Not cancelable, and not fired when `open` is set from code.
  * @csspart trigger - The wrapper around the trigger slot.
  * @csspart base - The floating card.
  * @csspart panel - The floating card, under its panel-group name.
@@ -74,6 +76,7 @@ export class HmiContextMenu extends LitElement {
     accessor focusOnOpen: ContextMenuFocusOnOpen = 'keyboard';
 
     @query('.panel') private accessor panel!: HTMLElement;
+    @query('.trigger') private accessor trigger!: HTMLElement;
     @query('slot[name="trigger"]')
     private accessor triggerSlot!: HTMLSlotElement;
 
@@ -81,8 +84,8 @@ export class HmiContextMenu extends LitElement {
     #point: { x: number; y: number } | undefined;
     // Whether the `contextmenu` that opened it was not a right-button press.
     #keyboard = false;
-    // The listeners that close the menu on scroll and resize, and, where there is
-    // no Popover API, on an outside press and Escape; they live while it is open.
+    // The listeners that close the menu on an outside press, Escape, scroll and
+    // resize; they live while it is open.
     #listeners: AbortController | undefined;
     // What had focus as the menu opened, to give it back as the menu closes.
     #restoreFocusTo: HTMLElement | null = null;
@@ -115,7 +118,7 @@ export class HmiContextMenu extends LitElement {
                 document,
             ) as HTMLElement | null;
             if (native && !panel.matches(':popover-open')) panel.showPopover();
-            this.#listen(native);
+            this.#listen();
             this.#place();
             this.#focusFirstItem();
         } else {
@@ -144,7 +147,7 @@ export class HmiContextMenu extends LitElement {
         }
     }
 
-    #listen(native: boolean): void {
+    #listen(): void {
         this.#listeners?.abort();
         this.#listeners = new AbortController();
         const { signal } = this.#listeners;
@@ -155,11 +158,15 @@ export class HmiContextMenu extends LitElement {
             signal,
         });
         window.addEventListener('resize', close, { signal });
-        if (native) return;
         document.addEventListener(
             'pointerdown',
             (event) => {
-                if (!event.composedPath().includes(this.panel)) close();
+                const path = event.composedPath();
+                if (path.includes(this.panel)) return;
+                // A right-click on the trigger moves the menu: its `contextmenu`
+                // follows this press.
+                if (event.button === 2 && path.includes(this.trigger)) return;
+                close();
             },
             { capture: true, signal },
         );
@@ -236,12 +243,6 @@ export class HmiContextMenu extends LitElement {
         }
     }
 
-    // The browser closed the card by itself: an outside click, Escape, or another
-    // popover opening. When the element closed it, `open` is already false.
-    #onToggle(event: ToggleEvent): void {
-        if (event.newState === 'closed') this.#setOpen(false);
-    }
-
     // An activated button closes the menu, after the handlers on the item and
     // above it have run; a click on the padding or a label does not.
     #onClick(event: MouseEvent): void {
@@ -264,8 +265,7 @@ export class HmiContextMenu extends LitElement {
             <div
                 part="base panel"
                 class="panel"
-                popover="auto"
-                @toggle=${this.#onToggle}
+                popover="manual"
                 @click=${this.#onClick}
             >
                 ${renderLiquidFilter()}

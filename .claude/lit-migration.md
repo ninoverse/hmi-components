@@ -183,9 +183,12 @@ stem (`AreaChart`), the tag is `hmi-<kebab>`, the class is `Hmi<Pascal>`,
   browser without `hint` reads an unknown value as `manual`, so the attribute is
   written as it is and nothing is detected. Both extend `HmiHoverPanel`
   (`src/elements/shared/hover-panel.ts`), which owns the hover and focus timers,
-  Escape and `hmi-open-change`. The context menu is `popover="auto"` and is placed
-  at the pointer by the element itself, which clamps a point to the screen: a point
-  has no box to measure, so it does not use `PositionController`.
+  Escape and `hmi-open-change`. The context menu is `popover="manual"`: macOS and
+  Linux fire `contextmenu` when the button goes down, so the light dismiss of an
+  auto popover would close it as that press is released, and the element handles
+  the outside press and Escape itself. It is placed at the pointer by the element,
+  which clamps a point to the screen: a point has no box to measure, so it does not
+  use `PositionController`.
 - **Positioning** uses `PositionController` from
   `src/elements/shared/positioning.ts`: rect math with `position: fixed` insets,
   `ResizeObserver` plus scroll and resize listeners, running only while the panel

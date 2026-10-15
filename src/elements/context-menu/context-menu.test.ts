@@ -110,7 +110,8 @@ describe('hmi-context-menu', () => {
         await el.updateComplete;
         expect(el.hasAttribute('open')).toBe(true);
         expect(isShown(el)).toBe(true);
-        expect(panel(el).getAttribute('popover')).toBe('auto');
+        // Not auto: its light dismiss would close the menu as the right-click that opened it is released.
+        expect(panel(el).getAttribute('popover')).toBe('manual');
         el.open = false;
         await el.updateComplete;
         expect(isShown(el)).toBe(false);
@@ -182,7 +183,10 @@ describe('hmi-context-menu', () => {
                 position: { x: 40, y: 30 },
             });
             await el.updateComplete;
+            // The press that opened it ends after it opened: that must not close it.
+            await wait(150);
             expect(el.open).toBe(true);
+            expect(isShown(el)).toBe(true);
             const trigger = area(el).getBoundingClientRect();
             const box = panel(el).getBoundingClientRect();
             expect(box.left).toBeCloseTo(trigger.left + 40, 0);
@@ -220,16 +224,41 @@ describe('hmi-context-menu', () => {
             expect(corner.top).toBeCloseTo(8, 0);
         });
 
-        it('moves to the new point on a second right-click while open', async () => {
+        it('moves to the new point on a second right-click on the trigger, without closing', async () => {
             const el = await fixture();
             contextMenu(area(el), 320, 260);
             await el.updateComplete;
+            const events = listen(el);
+            // A right-click is a press, then the contextmenu.
+            area(el).dispatchEvent(
+                new PointerEvent('pointerdown', {
+                    bubbles: true,
+                    composed: true,
+                    button: 2,
+                }),
+            );
             contextMenu(area(el), 400, 300);
             await el.updateComplete;
             expect(el.open).toBe(true);
+            expect(events).toHaveLength(0);
             const box = panel(el).getBoundingClientRect();
             expect(box.left).toBeCloseTo(400, 0);
             expect(box.top).toBeCloseTo(300, 0);
+        });
+
+        it('closes on a left-button press on the trigger', async () => {
+            const el = await fixture();
+            contextMenu(area(el), 320, 260);
+            await el.updateComplete;
+            area(el).dispatchEvent(
+                new PointerEvent('pointerdown', {
+                    bubbles: true,
+                    composed: true,
+                    button: 0,
+                }),
+            );
+            await el.updateComplete;
+            expect(el.open).toBe(false);
         });
 
         it('opens at the trigger’s top-left corner when open is set from code', async () => {
@@ -377,22 +406,6 @@ describe('hmi-context-menu', () => {
             window.dispatchEvent(new Event('resize'));
             await frame();
             expect(events).toHaveLength(0);
-        });
-
-        it('closes when another popover opens, and tells the consumer', async () => {
-            const el = await fixture();
-            const other = document.createElement('div');
-            other.setAttribute('popover', 'auto');
-            other.textContent = 'other';
-            document.body.append(other);
-            contextMenu(area(el), 320, 260);
-            await el.updateComplete;
-            await wait(20);
-            const events = listen(el);
-            other.showPopover();
-            await wait(20);
-            expect(el.open).toBe(false);
-            expect(events.map((e) => e.detail)).toEqual([{ open: false }]);
         });
 
         it('shows its card again when taken out of the document and put back while open', async () => {
