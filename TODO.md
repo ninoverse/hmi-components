@@ -376,9 +376,9 @@ set the property, as the v5 React components were when controlled.
 The other overlays join this table as they are built, each on the choice made for
 it. `hmi-popover` is not in it: it is a `popover="auto"`, which the browser closes on
 an outside click and Escape and cannot be stopped from, so it owns its `open` and
-`hmi-open-change` reports the change. Nor are `hmi-tooltip` and `hmi-hover-card`:
-the pointer and focus open them, and a hint closes on Escape, an outside press and
-another hint opening, so they own their `open` too. If the dialogs become element-owned, the
+`hmi-open-change` reports the change. Nor are `hmi-tooltip`, `hmi-hover-card` and `hmi-context-menu`:
+the pointer, focus or a right-click open them, and the browser closes them on
+Escape, an outside press and another popover opening, so they own their `open` too. If the dialogs become element-owned, the
 whole overlay family then works one way.
 
 To do: decide, once, for these elements, whether they stay controlled or become

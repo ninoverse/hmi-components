@@ -116,7 +116,7 @@ stem (`AreaChart`), the tag is `hmi-<kebab>`, the class is `Hmi<Pascal>`,
   different kind: its default in `constants.css` is the lowest surface v5 painted,
   and `glass` and `liquid` override it with their strong surface.
 - **Panel-like elements** (card, navbar, sidebar, popover, hover-card,
-  context-menu, toast, modal, drawer, command-palette, combobox listbox, menu,
+  context-menu, toast, modal, drawer, command-palette, combobox listbox,
   chart-tooltip) expose `part="panel"` and paint from `--panel-bg` (or
   `--panel-bg-strong` for dialogs, drawers and listboxes), `--panel-border`,
   `--panel-filter` (a `backdrop-filter` value), `--panel-ink-bg` and
@@ -176,13 +176,16 @@ stem (`AreaChart`), the tag is `hmi-<kebab>`, the class is `Hmi<Pascal>`,
 ## R8 — Overlays
 
 - **The dialog group** is modal, drawer, confirm-dialog and command-palette.
-- **The popover group** is popover, tooltip, hover-card, context-menu, menu,
-  the select and combobox listbox, date-picker, color-picker and toast. Toast
-  uses `popover="manual"`. The tooltip and hover-card are `popover="hint"`: a
+- **The popover group** is popover, tooltip, hover-card, context-menu, the select
+  and combobox listbox, date-picker, color-picker and toast. `hmi-menu` is not in
+  it: it paints nothing and is the content of a popover, a context menu or a
+  select. Toast uses `popover="manual"`. The tooltip and hover-card are `popover="hint"`: a
   browser without `hint` reads an unknown value as `manual`, so the attribute is
   written as it is and nothing is detected. Both extend `HmiHoverPanel`
   (`src/elements/shared/hover-panel.ts`), which owns the hover and focus timers,
-  Escape and `hmi-open-change`.
+  Escape and `hmi-open-change`. The context menu is `popover="auto"` and is placed
+  at the pointer by the element itself, which clamps a point to the screen: a point
+  has no box to measure, so it does not use `PositionController`.
 - **Positioning** uses `PositionController` from
   `src/elements/shared/positioning.ts`: rect math with `position: fixed` insets,
   `ResizeObserver` plus scroll and resize listeners, running only while the panel
@@ -204,6 +207,9 @@ stem (`AreaChart`), the tag is `hmi-<kebab>`, the class is `Hmi<Pascal>`,
   `@supports not selector(:popover-open)` carries its CSS.
 - Focus is captured with `activeElementDeep(document)` before opening, and
   `supportsPopover()` in `src/elements/shared/dom.ts` is the one popover check.
+  The browser gives focus back on close only to what had it when that was inside
+  the popover in the node tree, which slotted content (a context menu's items) is
+  not: an element that moves focus into slotted content gives it back itself.
 
 ## R9 — Layout primitives
 
