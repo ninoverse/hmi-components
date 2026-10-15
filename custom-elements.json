@@ -10241,6 +10241,104 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/menu/menu.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Menu: a vertical list of `hmi-menu-item` rows, with `hmi-menu-label` headings\nand `hmi-menu-separator` dividers between them. It paints nothing of its own:\nthe surface comes from the `hmi-popover` or `hmi-context-menu` around it, as\nwith the React menu, so it can sit in either. On its own it is a transparent\ncolumn.\n\nThe list is a `role=\"menu\"`, named by `label`. ArrowDown and ArrowUp move focus\nto the next and previous enabled item, wrapping at the ends, and Home and End\nto the first and last. The items stay in the Tab order, as the React buttons\nwere. Activating an item is the item's own `click`.",
+          "name": "HmiMenu",
+          "cssParts": [
+            {
+              "description": "The column that holds them, with `role=\"menu\"`.",
+              "name": "base"
+            }
+          ],
+          "slots": [
+            {
+              "description": "The `hmi-menu-item`, `hmi-menu-label` and `hmi-menu-separator` elements.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The accessible name of the menu.",
+              "attribute": "label"
+            },
+            {
+              "kind": "method",
+              "name": "#items",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "MenuItemElement[]"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#onKeyDown",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "KeyboardEvent"
+                  }
+                }
+              ]
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The accessible name of the menu.",
+              "fieldName": "label"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-menu",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiMenu",
+          "declaration": {
+            "name": "HmiMenu",
+            "module": "src/elements/menu/menu.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-menu",
+          "declaration": {
+            "name": "HmiMenu",
+            "module": "src/elements/menu/menu.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/meter/meter.ts",
       "declarations": [
         {

@@ -10,6 +10,7 @@ export type MenuProps = HTMLAttributes<HTMLDivElement>;
  *
  * @example
  * <Menu><MenuItem>Edit</MenuItem><MenuSeparator /><MenuItem danger>Delete</MenuItem></Menu>
+ * @deprecated Use `Menu` from `@ninoverse/hmi-components/react/menu`. Removed in 6.0.0.
  */
 export function Menu({ className, children, ...rest }: MenuProps) {
     const tokens: string[] = ['menu'];
