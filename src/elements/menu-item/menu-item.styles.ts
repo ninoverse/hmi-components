@@ -6,8 +6,9 @@ import { css } from 'lit';
    menu's corner radii through --_radius-*, which hmi-menu sets on them. The line
    height is inherited, as the React tree's global `button { font: inherit }` made
    it: a native button's own `normal` would make the row a pixel shorter. The icon
-   and shortcut wrappers have no box (display: contents), so an empty one adds
-   neither width nor gap; the label's flex: 1 pushes the shortcut to the end. */
+   and shortcut wrappers are real boxes, as the React spans were, and are hidden
+   while empty so that they add no gap; the label's flex: 1 pushes the shortcut to
+   the end. */
 export const styles = css`
     :host {
         display: block;
@@ -60,18 +61,15 @@ export const styles = css`
         background: var(--error-container);
     }
 
-    .icon,
-    .shortcut {
-        display: contents;
-    }
-
     .icon {
+        display: inline-flex;
+        flex: none;
         color: var(--on-surface-variant);
     }
 
-    ::slotted([slot='icon']) {
-        display: inline-flex;
-        flex: none;
+    .icon[hidden],
+    .shortcut[hidden] {
+        display: none;
     }
 
     ::slotted(svg[slot='icon']) {
@@ -89,6 +87,7 @@ export const styles = css`
     }
 
     .shortcut {
+        margin-left: auto;
         font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace;
         font-size: calc(var(--_base) * 1.375);
         color: var(--on-surface-variant);

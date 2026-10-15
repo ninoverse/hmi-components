@@ -109,18 +109,58 @@ describe('hmi-menu-item', () => {
     });
 
     describe('empty icon and shortcut', () => {
-        it('add no box and no gap: the label starts at the row’s padding', async () => {
+        it('are hidden, so they add no box and no gap: the label starts at the row’s padding', async () => {
             const el = await fixture(
                 html`<hmi-menu-item style="${TOKENS}">Save</hmi-menu-item>`,
             );
             const row = base(el).getBoundingClientRect();
             const label = part(el, 'label').getBoundingClientRect();
-            expect(getComputedStyle(part(el, 'icon')).display).toBe('contents');
-            expect(getComputedStyle(part(el, 'shortcut')).display).toBe(
-                'contents',
-            );
+            expect(part(el, 'icon').hidden).toBe(true);
+            expect(part(el, 'shortcut').hidden).toBe(true);
+            expect(getComputedStyle(part(el, 'icon')).display).toBe('none');
+            expect(getComputedStyle(part(el, 'shortcut')).display).toBe('none');
             expect(label.left).toBeCloseTo(row.left + 10, 1);
             expect(label.right).toBeCloseTo(row.right - 10, 1);
+        });
+
+        it('show once something is slotted, or a shortcut is set', async () => {
+            const el = await fixture(
+                html`<hmi-menu-item style="${TOKENS}">
+                    <svg slot="icon" viewBox="0 0 10 10"></svg>
+                    Save
+                </hmi-menu-item>`,
+            );
+            // slotchange is delivered a tick after the render.
+            await new Promise((resolve) => setTimeout(resolve, 0));
+            expect(part(el, 'icon').hidden).toBe(false);
+            expect(getComputedStyle(part(el, 'icon')).display).toBe('flex');
+            expect(part(el, 'shortcut').hidden).toBe(true);
+            el.shortcut = '⌘S';
+            await el.updateComplete;
+            expect(part(el, 'shortcut').hidden).toBe(false);
+            el.shortcut = '';
+            await el.updateComplete;
+            expect(part(el, 'shortcut').hidden).toBe(true);
+        });
+    });
+
+    describe('row height', () => {
+        it('follows the inherited line height, as the React row did: the taller of the label and the shortcut', async () => {
+            const withShortcut = await fixture(
+                html`<hmi-menu-item shortcut="⌘S" style="${TOKENS}; line-height: 1.5">Save</hmi-menu-item>`,
+            );
+            // 8px of padding above and below the shortcut's 11px × 1.5.
+            expect(
+                base(withShortcut).getBoundingClientRect().height,
+            ).toBeCloseTo(16 + 16.5, 1);
+            const plain = await fixture(
+                html`<hmi-menu-item style="${TOKENS}; line-height: 1.5">Save</hmi-menu-item>`,
+            );
+            // The label's own line height is 1.2 × 13.
+            expect(base(plain).getBoundingClientRect().height).toBeCloseTo(
+                16 + 15.6,
+                1,
+            );
         });
     });
 

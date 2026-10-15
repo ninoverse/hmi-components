@@ -1,6 +1,7 @@
 import { html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { baseStyles } from '../shared/base.styles.js';
+import { toggleEmpty } from '../shared/dom.js';
 import { styles } from './menu-item.styles.js';
 
 /**
@@ -24,9 +25,9 @@ import { styles } from './menu-item.styles.js';
  * @slot icon - Rendered before the label. An `<svg>` is sized to the text.
  * @slot shortcut - Rendered after the label. Defaults to `shortcut`.
  * @csspart base - The inner `<button>`.
- * @csspart icon - The wrapper around the icon slot. It has no box, so it takes colour and font only.
+ * @csspart icon - The wrapper around the icon slot. It is hidden while the slot is empty.
  * @csspart label - The wrapper around the label.
- * @csspart shortcut - The wrapper around the shortcut slot. It has no box, so it takes colour and font only.
+ * @csspart shortcut - The wrapper around the shortcut slot. It is hidden while there is no shortcut.
  *
  * @example
  * <hmi-menu-item shortcut="⌘S">Save</hmi-menu-item>
@@ -56,10 +57,19 @@ export class HmiMenuItem extends LitElement {
             role="menuitem"
             ?disabled=${this.disabled}
         >
-            <span part="icon" class="icon"><slot name="icon"></slot></span>
+            <span part="icon" class="icon" hidden
+                ><slot
+                    name="icon"
+                    @slotchange=${(e: Event) => toggleEmpty(e, false)}
+                ></slot
+            ></span>
             <span part="label" class="label"><slot></slot></span>
-            <span part="shortcut" class="shortcut"
-                ><slot name="shortcut">${this.shortcut}</slot></span
+            <span part="shortcut" class="shortcut" ?hidden=${!this.shortcut}
+                ><slot
+                    name="shortcut"
+                    @slotchange=${(e: Event) => toggleEmpty(e, !!this.shortcut)}
+                    >${this.shortcut}</slot
+                ></span
             >
         </button>`;
     }

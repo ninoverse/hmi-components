@@ -10307,7 +10307,7 @@
               "name": "base"
             },
             {
-              "description": "The wrapper around the icon slot. It has no box, so it takes colour and font only.",
+              "description": "The wrapper around the icon slot. It is hidden while the slot is empty.",
               "name": "icon"
             },
             {
@@ -10315,7 +10315,7 @@
               "name": "label"
             },
             {
-              "description": "The wrapper around the shortcut slot. It has no box, so it takes colour and font only.",
+              "description": "The wrapper around the shortcut slot. It is hidden while there is no shortcut.",
               "name": "shortcut"
             }
           ],
