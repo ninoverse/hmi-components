@@ -157,6 +157,7 @@ export {
 } from '../elements/list/list.react.js';
 export { MenuItem } from '../elements/menu-item/menu-item.react.js';
 export { MenuLabel } from '../elements/menu-label/menu-label.react.js';
+export { MenuSeparator } from '../elements/menu-separator/menu-separator.react.js';
 export { Meter, type MeterLevel } from '../elements/meter/meter.react.js';
 export {
     type DialogAction,

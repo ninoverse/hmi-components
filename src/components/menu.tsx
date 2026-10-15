@@ -59,7 +59,9 @@ export function MenuItem({
 
 export type MenuSeparatorProps = HTMLAttributes<HTMLHRElement>;
 
-/** Horizontal divider between groups of menu items. */
+/** Horizontal divider between groups of menu items.
+ * @deprecated Use `MenuSeparator` from `@ninoverse/hmi-components/react/menu-separator`. Removed in 6.0.0.
+ */
 export function MenuSeparator({ className, ...rest }: MenuSeparatorProps) {
     const tokens: string[] = ['menu__sep'];
     if (className) tokens.push(className);

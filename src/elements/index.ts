@@ -46,6 +46,7 @@ export * from './link/link.js';
 export * from './list/list.js';
 export * from './menu-item/menu-item.js';
 export * from './menu-label/menu-label.js';
+export * from './menu-separator/menu-separator.js';
 export * from './meter/meter.js';
 export * from './modal/modal.js';
 export * from './multi-input/multi-input.js';

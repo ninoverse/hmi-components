@@ -10199,6 +10199,48 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/menu-separator/menu-separator.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Menu separator: a horizontal divider between groups of menu items. It spans the\nfull width of the menu's surface, past the padding around the items.",
+          "name": "HmiMenuSeparator",
+          "cssParts": [
+            {
+              "description": "The line.",
+              "name": "base"
+            }
+          ],
+          "members": [],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-menu-separator",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiMenuSeparator",
+          "declaration": {
+            "name": "HmiMenuSeparator",
+            "module": "src/elements/menu-separator/menu-separator.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-menu-separator",
+          "declaration": {
+            "name": "HmiMenuSeparator",
+            "module": "src/elements/menu-separator/menu-separator.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/meter/meter.ts",
       "declarations": [
         {
