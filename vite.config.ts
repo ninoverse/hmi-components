@@ -323,6 +323,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/menu-item/menu-item.react.ts',
                 ),
+                'wc/menu-label': resolve(
+                    dirname,
+                    'src/elements/menu-label/menu-label.ts',
+                ),
+                'react/menu-label': resolve(
+                    dirname,
+                    'src/elements/menu-label/menu-label.react.ts',
+                ),
                 'wc/meter': resolve(dirname, 'src/elements/meter/meter.ts'),
                 'react/meter': resolve(
                     dirname,

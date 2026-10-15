@@ -68,7 +68,9 @@ export function MenuSeparator({ className, ...rest }: MenuSeparatorProps) {
 
 export type MenuLabelProps = HTMLAttributes<HTMLDivElement>;
 
-/** Non-interactive group heading within a menu. */
+/** Non-interactive group heading within a menu.
+ * @deprecated Use `MenuLabel` from `@ninoverse/hmi-components/react/menu-label`. Removed in 6.0.0.
+ */
 export function MenuLabel({ className, children, ...rest }: MenuLabelProps) {
     const tokens: string[] = ['menu__label'];
     if (className) tokens.push(className);

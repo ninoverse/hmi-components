@@ -10151,6 +10151,54 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/menu-label/menu-label.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Menu label: a non-interactive group heading inside a menu, in small capitals.",
+          "name": "HmiMenuLabel",
+          "cssParts": [
+            {
+              "description": "The wrapper around the heading.",
+              "name": "base"
+            }
+          ],
+          "slots": [
+            {
+              "description": "The heading.",
+              "name": ""
+            }
+          ],
+          "members": [],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-menu-label",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiMenuLabel",
+          "declaration": {
+            "name": "HmiMenuLabel",
+            "module": "src/elements/menu-label/menu-label.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-menu-label",
+          "declaration": {
+            "name": "HmiMenuLabel",
+            "module": "src/elements/menu-label/menu-label.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/meter/meter.ts",
       "declarations": [
         {
