@@ -134,7 +134,7 @@ this applies to (from the v5 sources):
 | drawer, modal | `title`, `description`, `actions` | `title`, `description`, `actions` |
 | confirm-dialog | `title`, `description`, `confirmLabel`, `cancelLabel` | `title`, `description`, `confirm-label`, `cancel-label` |
 | empty-state | `icon`, `title`, `description`, `action` | `icon`, `title`, `description`, `action` |
-| hover-card, popover | `trigger` | `trigger` |
+| hover-card, popover, tooltip, context-menu | `trigger` | `trigger` |
 | image | `fallback` | `fallback` |
 | input | `leftIcon`, `rightIcon` | `left-icon`, `right-icon` |
 | navbar | `brand`, `right` | `brand`, `right` |
@@ -280,7 +280,7 @@ Wrapper prop = `on` + PascalCase of the event minus `hmi-`.
 | pagination | `onChange(page)` | `hmi-change` | `{ value: number }` |
 | multi-input | `onComplete(string)` | `hmi-complete` | `{ value: string }` |
 | accordion | `onOpenChange(number[])` | `hmi-open-change` | `{ open: number[] }` |
-| popover, hover-card, tooltip, command-palette | `onOpenChange(boolean)` | `hmi-open-change` | `{ open: boolean }` |
+| popover, hover-card, tooltip, context-menu, command-palette | `onOpenChange(boolean)` | `hmi-open-change` | `{ open: boolean }` |
 | modal, drawer | `onClose()` | `hmi-close` (cancelable; the dialog is controlled and stays open until `open` is set to false) | `{ reason: 'escape' \| 'backdrop' }` |
 | chip | `onClose()` / `onSelect()` | `hmi-close` (cancelable) / `hmi-select` (cancelable) | `{}` / `{ selected: boolean }` |
 | modal, drawer, command-palette, table (`actions` cells) | `onAction(string)` | `hmi-action` | `{ value: string, row?: Row }` |
@@ -535,6 +535,33 @@ trigger cannot be pointed at from a `role="tooltip"` inside the shadow root, so
 a `label` slot gets none, since the element never reads your DOM). The tooltip's
 trigger is the `trigger` slot, as the hover-card's is, and its content is `label` or
 the `label` slot.
+
+The menu is four elements, one folder each, from the four components of `menu.tsx`:
+`hmi-menu`, `hmi-menu-item`, `hmi-menu-label` and `hmi-menu-separator`. `hmi-menu`
+paints nothing, as `Menu` did: the popover, the context menu or the select's list
+around it is the surface, and the first and last item take that surface's corner
+radii through `--_radius-*` custom properties that the menu sets on them with
+`::slotted(hmi-menu-item:first-child)`, since a parent cannot reach the button
+inside an item's shadow root. The item is a native `<button role="menuitem">` with
+`delegatesFocus`, and its activation is the native `click` (retargeted to the
+host, so a consumer's `onClick` still works). The menu is a `role="menu"` named by
+`label`, with ArrowUp, ArrowDown, Home and End moving focus between the enabled
+items it finds in its light DOM; the items stay in the Tab order.
+
+`hmi-context-menu` is `popover="manual"`: macOS and Linux fire `contextmenu` when the
+button goes down, so the light dismiss of an auto popover would close it as that
+press is released, and the element closes it on an outside press (not a right-click
+on the trigger, which moves it), Escape, scroll and an activated item. It places
+itself at the pointer: a point has
+no box for `PositionController` to measure, so the element sets `left` and `top`
+from the `contextmenu` event's `clientX` and `clientY`, clamped to the screen by the
+card's layout size (not its bounding box: the entry animation scales that). The
+trigger slot's wrapper listens for `contextmenu`, which bubbles from anything in the
+trigger. A `contextmenu` whose `button` is not 2 came from the keyboard (the Menu
+key and Shift+F10 report -1 in Chromium), which `focus-on-open="keyboard"` uses to
+move focus to the first enabled item. The browser gives focus back on close only
+to what had it when that was inside the popover in the node tree, and the menu is
+slotted, so the element restores it.
 
 The modal's machinery is the `HmiDialog` base class in `src/elements/shared/dialog.ts`; the dialog group (modal, drawer, later command-palette) extends it with its own tag, styles and body. A dialog built this way is controlled for now (`TODO.md`, "Controlled or
 element-owned state"): `#requestClose` only emits, so `open` stays `true` until

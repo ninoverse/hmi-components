@@ -188,6 +188,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/confirm-dialog/confirm-dialog.react.ts',
                 ),
+                'wc/context-menu': resolve(
+                    dirname,
+                    'src/elements/context-menu/context-menu.ts',
+                ),
+                'react/context-menu': resolve(
+                    dirname,
+                    'src/elements/context-menu/context-menu.react.ts',
+                ),
                 'wc/divider': resolve(
                     dirname,
                     'src/elements/divider/divider.ts',
@@ -314,6 +322,35 @@ export default defineConfig({
                 'react/list': resolve(
                     dirname,
                     'src/elements/list/list.react.ts',
+                ),
+                'wc/menu': resolve(dirname, 'src/elements/menu/menu.ts'),
+                'react/menu': resolve(
+                    dirname,
+                    'src/elements/menu/menu.react.ts',
+                ),
+                'wc/menu-item': resolve(
+                    dirname,
+                    'src/elements/menu-item/menu-item.ts',
+                ),
+                'react/menu-item': resolve(
+                    dirname,
+                    'src/elements/menu-item/menu-item.react.ts',
+                ),
+                'wc/menu-label': resolve(
+                    dirname,
+                    'src/elements/menu-label/menu-label.ts',
+                ),
+                'react/menu-label': resolve(
+                    dirname,
+                    'src/elements/menu-label/menu-label.react.ts',
+                ),
+                'wc/menu-separator': resolve(
+                    dirname,
+                    'src/elements/menu-separator/menu-separator.ts',
+                ),
+                'react/menu-separator': resolve(
+                    dirname,
+                    'src/elements/menu-separator/menu-separator.react.ts',
                 ),
                 'wc/meter': resolve(dirname, 'src/elements/meter/meter.ts'),
                 'react/meter': resolve(

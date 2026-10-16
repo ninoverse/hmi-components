@@ -75,6 +75,11 @@ export {
     type ConfirmDialogVariant,
 } from '../elements/confirm-dialog/confirm-dialog.react.js';
 export {
+    ContextMenu,
+    type ContextMenuFocusOnOpen,
+    type ContextMenuOpenChangeDetail,
+} from '../elements/context-menu/context-menu.react.js';
+export {
     Divider,
     type DividerAlign,
     type DividerOrientation,
@@ -155,6 +160,10 @@ export {
     type ListItem,
     type ListReorderDetail,
 } from '../elements/list/list.react.js';
+export { Menu } from '../elements/menu/menu.react.js';
+export { MenuItem } from '../elements/menu-item/menu-item.react.js';
+export { MenuLabel } from '../elements/menu-label/menu-label.react.js';
+export { MenuSeparator } from '../elements/menu-separator/menu-separator.react.js';
 export { Meter, type MeterLevel } from '../elements/meter/meter.react.js';
 export {
     type DialogAction,

@@ -26,6 +26,7 @@ type Coords = { x: number; y: number };
  *
  * @example
  * <ContextMenu menu={<Menu items={items} />}><div>Right-click me</div></ContextMenu>
+ * @deprecated Use `ContextMenu` from `@ninoverse/hmi-components/react/context-menu`. Removed in 6.0.0.
  */
 export function ContextMenu({ children, menu }: ContextMenuProps) {
     const portalTarget = usePortalTarget();

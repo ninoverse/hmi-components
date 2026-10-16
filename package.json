@@ -362,6 +362,10 @@
             "types": "./dist/elements/confirm-dialog/confirm-dialog.react.d.ts",
             "import": "./dist/react/confirm-dialog.js"
         },
+        "./react/context-menu": {
+            "types": "./dist/elements/context-menu/context-menu.react.d.ts",
+            "import": "./dist/react/context-menu.js"
+        },
         "./react/divider": {
             "types": "./dist/elements/divider/divider.react.d.ts",
             "import": "./dist/react/divider.js"
@@ -441,6 +445,22 @@
         "./react/list": {
             "types": "./dist/elements/list/list.react.d.ts",
             "import": "./dist/react/list.js"
+        },
+        "./react/menu": {
+            "types": "./dist/elements/menu/menu.react.d.ts",
+            "import": "./dist/react/menu.js"
+        },
+        "./react/menu-item": {
+            "types": "./dist/elements/menu-item/menu-item.react.d.ts",
+            "import": "./dist/react/menu-item.js"
+        },
+        "./react/menu-label": {
+            "types": "./dist/elements/menu-label/menu-label.react.d.ts",
+            "import": "./dist/react/menu-label.js"
+        },
+        "./react/menu-separator": {
+            "types": "./dist/elements/menu-separator/menu-separator.react.d.ts",
+            "import": "./dist/react/menu-separator.js"
         },
         "./react/meter": {
             "types": "./dist/elements/meter/meter.react.d.ts",
@@ -775,6 +795,10 @@
             "types": "./dist/elements/confirm-dialog/confirm-dialog.d.ts",
             "import": "./dist/wc/confirm-dialog.js"
         },
+        "./wc/context-menu": {
+            "types": "./dist/elements/context-menu/context-menu.d.ts",
+            "import": "./dist/wc/context-menu.js"
+        },
         "./wc/divider": {
             "types": "./dist/elements/divider/divider.d.ts",
             "import": "./dist/wc/divider.js"
@@ -854,6 +878,22 @@
         "./wc/list": {
             "types": "./dist/elements/list/list.d.ts",
             "import": "./dist/wc/list.js"
+        },
+        "./wc/menu": {
+            "types": "./dist/elements/menu/menu.d.ts",
+            "import": "./dist/wc/menu.js"
+        },
+        "./wc/menu-item": {
+            "types": "./dist/elements/menu-item/menu-item.d.ts",
+            "import": "./dist/wc/menu-item.js"
+        },
+        "./wc/menu-label": {
+            "types": "./dist/elements/menu-label/menu-label.d.ts",
+            "import": "./dist/wc/menu-label.js"
+        },
+        "./wc/menu-separator": {
+            "types": "./dist/elements/menu-separator/menu-separator.d.ts",
+            "import": "./dist/wc/menu-separator.js"
         },
         "./wc/meter": {
             "types": "./dist/elements/meter/meter.d.ts",

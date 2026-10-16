@@ -1288,6 +1288,51 @@ export function Example() {
         </section>
 
         <section>
+            <h2>Menu</h2>
+            <!-- hmi-menu paints no surface: the popover around it supplies it. Each
+                 item's native click sets the last action and closes the popover, which
+                 owns its open; the arrow keys, Home and End move between the items. -->
+            <div style="display: flex; gap: 3rem; align-items: center; width: 100%; padding: 2rem 0 14rem">
+                <hmi-popover id="menu-popover" width="260">
+                    <hmi-button slot="trigger" variant="secondary">Actions ▾</hmi-button>
+                    <hmi-menu id="menu-demo" label="Actions">
+                        <hmi-menu-label>Workspace</hmi-menu-label>
+                        <hmi-menu-item data-action="new-file" shortcut="⌘N">New file</hmi-menu-item>
+                        <hmi-menu-item data-action="open" shortcut="⌘O">Open…</hmi-menu-item>
+                        <hmi-menu-item data-action="save" shortcut="⌘S">Save</hmi-menu-item>
+                        <hmi-menu-separator></hmi-menu-separator>
+                        <hmi-menu-label>Danger zone</hmi-menu-label>
+                        <hmi-menu-item data-action="delete" danger shortcut="⌫">Delete file</hmi-menu-item>
+                    </hmi-menu>
+                </hmi-popover>
+                <span style="font-size: 14px; color: var(--on-surface-variant)">Last action: <strong id="menu-last">none</strong></span>
+            </div>
+        </section>
+
+        <section>
+            <h2>ContextMenu</h2>
+            <!-- The trigger is the trigger slot and the card's content the menu slot.
+                 A right-click opens the menu at the pointer; Escape, an outside click,
+                 scroll and an activated item close it. hmi-open-change reports what the
+                 user did, and its detail is logged to the console. Try the Menu key or
+                 Shift+F10 on the focused area: focus then goes to the first item. -->
+            <div style="display: flex; gap: 3rem; align-items: center; width: 100%; padding-bottom: 14rem">
+                <hmi-context-menu id="ctx-demo">
+                    <div slot="trigger" tabindex="0" style="display: flex; align-items: center; justify-content: center; width: 384px; height: 160px; border: 2px dashed var(--outline-variant); border-radius: var(--corner-large); background: var(--surface-container-low); color: var(--on-surface-variant); font-size: 15px; user-select: none">Right-click anywhere in this area</div>
+                    <hmi-menu slot="menu" label="Edit">
+                        <hmi-menu-label>Edit</hmi-menu-label>
+                        <hmi-menu-item data-action="copy" shortcut="⌘C">Copy</hmi-menu-item>
+                        <hmi-menu-item data-action="paste" shortcut="⌘V">Paste</hmi-menu-item>
+                        <hmi-menu-item data-action="duplicate" shortcut="⌘D">Duplicate</hmi-menu-item>
+                        <hmi-menu-separator></hmi-menu-separator>
+                        <hmi-menu-item data-action="delete" danger shortcut="⌫">Delete</hmi-menu-item>
+                    </hmi-menu>
+                </hmi-context-menu>
+                <span style="font-size: 14px; color: var(--on-surface-variant)">Last action: <strong id="ctx-last">none</strong></span>
+            </div>
+        </section>
+
+        <section>
             <h2>List</h2>
             <!-- Items are a property. right-<id> takes rich content; reorderable adds
                  drag and Alt+Arrow reordering, and the page sets items back from
@@ -1877,6 +1922,21 @@ export function Example() {
             for (const card of document.querySelectorAll('hmi-hover-card')) {
                 card.addEventListener('hmi-open-change', (event) => console.log('hover-card hmi-open-change', event.detail));
             }
+            // The popover owns its open: an item closes it by setting it to false.
+            document.getElementById('menu-demo').addEventListener('click', (event) => {
+                const item = event.target.closest('hmi-menu-item');
+                if (!item) return;
+                console.log('hmi-menu-item click', item.dataset.action);
+                document.getElementById('menu-last').textContent = item.dataset.action;
+                document.getElementById('menu-popover').open = false;
+            });
+            // An activated item closes the context menu by itself.
+            const ctxDemo = document.getElementById('ctx-demo');
+            ctxDemo.addEventListener('hmi-open-change', (event) => console.log('context-menu hmi-open-change', event.detail));
+            ctxDemo.addEventListener('click', (event) => {
+                const item = event.target.closest('hmi-menu-item');
+                if (item) document.getElementById('ctx-last').textContent = item.dataset.action;
+            });
             for (const pager of document.querySelectorAll('hmi-pagination')) {
                 pager.addEventListener('hmi-change', (event) => {
                     console.log('pagination hmi-change', event.detail);

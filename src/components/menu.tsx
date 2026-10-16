@@ -10,6 +10,7 @@ export type MenuProps = HTMLAttributes<HTMLDivElement>;
  *
  * @example
  * <Menu><MenuItem>Edit</MenuItem><MenuSeparator /><MenuItem danger>Delete</MenuItem></Menu>
+ * @deprecated Use `Menu` from `@ninoverse/hmi-components/react/menu`. Removed in 6.0.0.
  */
 export function Menu({ className, children, ...rest }: MenuProps) {
     const tokens: string[] = ['menu'];
@@ -30,7 +31,9 @@ export type MenuItemProps = ComponentPropsWithRef<'button'> & {
     danger?: boolean;
 };
 
-/** Activatable menu row. Forwards native `<button>` props. */
+/** Activatable menu row. Forwards native `<button>` props.
+ * @deprecated Use `MenuItem` from `@ninoverse/hmi-components/react/menu-item`. Removed in 6.0.0.
+ */
 export function MenuItem({
     icon,
     shortcut,
@@ -57,7 +60,9 @@ export function MenuItem({
 
 export type MenuSeparatorProps = HTMLAttributes<HTMLHRElement>;
 
-/** Horizontal divider between groups of menu items. */
+/** Horizontal divider between groups of menu items.
+ * @deprecated Use `MenuSeparator` from `@ninoverse/hmi-components/react/menu-separator`. Removed in 6.0.0.
+ */
 export function MenuSeparator({ className, ...rest }: MenuSeparatorProps) {
     const tokens: string[] = ['menu__sep'];
     if (className) tokens.push(className);
@@ -66,7 +71,9 @@ export function MenuSeparator({ className, ...rest }: MenuSeparatorProps) {
 
 export type MenuLabelProps = HTMLAttributes<HTMLDivElement>;
 
-/** Non-interactive group heading within a menu. */
+/** Non-interactive group heading within a menu.
+ * @deprecated Use `MenuLabel` from `@ninoverse/hmi-components/react/menu-label`. Removed in 6.0.0.
+ */
 export function MenuLabel({ className, children, ...rest }: MenuLabelProps) {
     const tokens: string[] = ['menu__label'];
     if (className) tokens.push(className);

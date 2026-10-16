@@ -4400,6 +4400,289 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/context-menu/context-menu.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Context menu: a card of menu items that opens at the pointer when the trigger\nis right-clicked, kept inside the screen. The card is a `popover=\"manual\"`\nelement in the top layer, so no overflowing ancestor clips it. The element closes\nit itself on an outside press, on Escape, on scroll and resize (it does not\nfollow the trigger) and when an item is activated; a click on its padding or a\nlabel leaves it open. It is not `popover=\"auto\"`: macOS and Linux fire\n`contextmenu` when the button goes down, and the light dismiss of an auto popover\nwould close the card as that same press is released.\n\nThe trigger is the `trigger` slot, and the card's content is the `menu` slot:\nan `hmi-menu` of `hmi-menu-item`, `hmi-menu-label` and `hmi-menu-separator`.\nThe native context menu is prevented on the trigger.\n\nThe element owns `open`. A right-click, an outside press, Escape, a scroll and an\nactivated item change it and fire `hmi-open-change` with the new state; setting\n`open` yourself opens or closes it and fires nothing. Opened from code it sits at\nthe trigger's top-left corner. A right-click on the trigger while it is open moves\nit to the new point; a press anywhere else outside the card closes it.\n\n`focus-on-open` decides when the first enabled item takes focus as the menu\nopens, so the arrow keys work at once: `keyboard` (the default) when the\n`contextmenu` event is not a right-button press, such as the Menu key and\nShift+F10; `always`; or `never`, as the React menu did, when Tab from the trigger\nstill reaches the card. As the menu closes, focus goes back to where it was if\nit was in the menu or lost; the browser does not do that for slotted content.\n\nWhere the browser has no Popover API, the same card is a fixed-position element\nthat the element shows and hides.",
+          "name": "HmiContextMenu",
+          "cssParts": [
+            {
+              "description": "The wrapper around the trigger slot.",
+              "name": "trigger"
+            },
+            {
+              "description": "The floating card.",
+              "name": "base"
+            },
+            {
+              "description": "The floating card, under its panel-group name.",
+              "name": "panel"
+            }
+          ],
+          "slots": [
+            {
+              "description": "The element that opens the menu when right-clicked: anything inside it counts.",
+              "name": "trigger"
+            },
+            {
+              "description": "The card's content: an `hmi-menu`.",
+              "name": "menu"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the context menu is open.",
+              "attribute": "open",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "focusOnOpen",
+              "type": {
+                "text": "ContextMenuFocusOnOpen"
+              },
+              "default": "'keyboard'",
+              "description": "When the first enabled item takes focus as the menu opens: for a `contextmenu` that is not a right-button press, always, or never.",
+              "attribute": "focus-on-open"
+            },
+            {
+              "kind": "field",
+              "name": "panel",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "trigger",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "triggerSlot",
+              "type": {
+                "text": "HTMLSlotElement"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "#point",
+              "privacy": "private",
+              "type": {
+                "text": "{ x: number; y: number } | undefined"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "#keyboard",
+              "privacy": "private",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "#listeners",
+              "privacy": "private",
+              "type": {
+                "text": "AbortController | undefined"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "#restoreFocusTo",
+              "privacy": "private",
+              "type": {
+                "text": "HTMLElement | null"
+              },
+              "default": "null"
+            },
+            {
+              "kind": "method",
+              "name": "#sync",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#restoreFocus",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#listen",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#place",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#triggerCorner",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "{ x: number; y: number }"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#focusFirstItem",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#setOpen",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "open",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onContextMenu",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "MouseEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onClick",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "MouseEvent"
+                  }
+                }
+              ]
+            }
+          ],
+          "events": [
+            {
+              "type": {
+                "text": "CustomEvent<ContextMenuOpenChangeDetail>"
+              },
+              "description": "The user opened or closed the menu: a right-click, an outside press, Escape, a scroll or an activated item. Not cancelable, and not fired when `open` is set from code.",
+              "name": "hmi-open-change"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the context menu is open.",
+              "fieldName": "open"
+            },
+            {
+              "name": "focus-on-open",
+              "type": {
+                "text": "ContextMenuFocusOnOpen"
+              },
+              "default": "'keyboard'",
+              "description": "When the first enabled item takes focus as the menu opens: for a `contextmenu` that is not a right-button press, always, or never.",
+              "fieldName": "focusOnOpen"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-context-menu",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiContextMenu",
+          "declaration": {
+            "name": "HmiContextMenu",
+            "module": "src/elements/context-menu/context-menu.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-context-menu",
+          "declaration": {
+            "name": "HmiContextMenu",
+            "module": "src/elements/context-menu/context-menu.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/divider/divider.ts",
       "declarations": [
         {
@@ -10006,6 +10289,333 @@
           "declaration": {
             "name": "HmiList",
             "module": "src/elements/list/list.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/elements/menu-item/menu-item.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Menu item: an activatable row of a menu, with a label, an optional leading\nicon and an optional trailing hint such as a keyboard shortcut. The row is a\nnative `<button>`, so Enter and Space activate it and a disabled item takes no\nfocus or click. Activation is the native `click`, which crosses the shadow\nroot: listen for `click` on the item.\n\nUse it inside `hmi-menu`, `hmi-popover` or `hmi-context-menu`. An item inside a\ncontext menu closes it; one inside a popover leaves that to the page, which\nsets the popover's `open` to `false`.\n\n`shortcut` is a plain-text default of the `shortcut` slot, and an\n`<svg slot=\"icon\">` is sized to the row's text. `aria-label` and other\nattributes set on the host do not reach the inner `<button>`; its name is the\nlabel.",
+          "name": "HmiMenuItem",
+          "cssParts": [
+            {
+              "description": "The inner `<button>`.",
+              "name": "base"
+            },
+            {
+              "description": "The wrapper around the icon slot. It is hidden while the slot is empty.",
+              "name": "icon"
+            },
+            {
+              "description": "The wrapper around the label.",
+              "name": "label"
+            },
+            {
+              "description": "The wrapper around the shortcut slot. It is hidden while there is no shortcut.",
+              "name": "shortcut"
+            }
+          ],
+          "slots": [
+            {
+              "description": "The label.",
+              "name": ""
+            },
+            {
+              "description": "Rendered before the label. An `<svg>` is sized to the text.",
+              "name": "icon"
+            },
+            {
+              "description": "Rendered after the label. Defaults to `shortcut`.",
+              "name": "shortcut"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "shadowRootOptions",
+              "type": {
+                "text": "object"
+              },
+              "static": true,
+              "default": "{ ...LitElement.shadowRootOptions, delegatesFocus: true, }"
+            },
+            {
+              "kind": "field",
+              "name": "danger",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Styles the item as a destructive action.",
+              "attribute": "danger",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Disables the item: it takes no focus and no click.",
+              "attribute": "disabled",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "shortcut",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "A trailing hint, such as a keyboard shortcut: the default of the `shortcut` slot.",
+              "attribute": "shortcut"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "danger",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Styles the item as a destructive action.",
+              "fieldName": "danger"
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Disables the item: it takes no focus and no click.",
+              "fieldName": "disabled"
+            },
+            {
+              "name": "shortcut",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "A trailing hint, such as a keyboard shortcut: the default of the `shortcut` slot.",
+              "fieldName": "shortcut"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-menu-item",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiMenuItem",
+          "declaration": {
+            "name": "HmiMenuItem",
+            "module": "src/elements/menu-item/menu-item.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-menu-item",
+          "declaration": {
+            "name": "HmiMenuItem",
+            "module": "src/elements/menu-item/menu-item.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/elements/menu-label/menu-label.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Menu label: a non-interactive group heading inside a menu, in small capitals.",
+          "name": "HmiMenuLabel",
+          "cssParts": [
+            {
+              "description": "The wrapper around the heading.",
+              "name": "base"
+            }
+          ],
+          "slots": [
+            {
+              "description": "The heading.",
+              "name": ""
+            }
+          ],
+          "members": [],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-menu-label",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiMenuLabel",
+          "declaration": {
+            "name": "HmiMenuLabel",
+            "module": "src/elements/menu-label/menu-label.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-menu-label",
+          "declaration": {
+            "name": "HmiMenuLabel",
+            "module": "src/elements/menu-label/menu-label.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/elements/menu-separator/menu-separator.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Menu separator: a horizontal divider between groups of menu items. It spans the\nfull width of the menu's surface, past the padding around the items.",
+          "name": "HmiMenuSeparator",
+          "cssParts": [
+            {
+              "description": "The line.",
+              "name": "base"
+            }
+          ],
+          "members": [],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-menu-separator",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiMenuSeparator",
+          "declaration": {
+            "name": "HmiMenuSeparator",
+            "module": "src/elements/menu-separator/menu-separator.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-menu-separator",
+          "declaration": {
+            "name": "HmiMenuSeparator",
+            "module": "src/elements/menu-separator/menu-separator.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/elements/menu/menu.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Menu: a vertical list of `hmi-menu-item` rows, with `hmi-menu-label` headings\nand `hmi-menu-separator` dividers between them. It paints nothing of its own:\nthe surface comes from the `hmi-popover` or `hmi-context-menu` around it, as\nwith the React menu, so it can sit in either. On its own it is a transparent\ncolumn.\n\nThe list is a `role=\"menu\"`, named by `label`. ArrowDown and ArrowUp move focus\nto the next and previous enabled item, wrapping at the ends, and Home and End\nto the first and last. The items stay in the Tab order, as the React buttons\nwere. Activating an item is the item's own `click`.",
+          "name": "HmiMenu",
+          "cssParts": [
+            {
+              "description": "The column that holds them, with `role=\"menu\"`.",
+              "name": "base"
+            }
+          ],
+          "slots": [
+            {
+              "description": "The `hmi-menu-item`, `hmi-menu-label` and `hmi-menu-separator` elements.",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The accessible name of the menu.",
+              "attribute": "label"
+            },
+            {
+              "kind": "method",
+              "name": "#items",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "MenuItemElement[]"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#onKeyDown",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "KeyboardEvent"
+                  }
+                }
+              ]
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The accessible name of the menu.",
+              "fieldName": "label"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-menu",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiMenu",
+          "declaration": {
+            "name": "HmiMenu",
+            "module": "src/elements/menu/menu.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-menu",
+          "declaration": {
+            "name": "HmiMenu",
+            "module": "src/elements/menu/menu.ts"
           }
         }
       ]
