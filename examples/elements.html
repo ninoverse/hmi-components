@@ -1333,6 +1333,22 @@ export function Example() {
         </section>
 
         <section>
+            <h2>Table</h2>
+            <!-- columns and rows are properties. The first table is the one the React
+                 demo shows: sorting, a right-aligned column and a badge column. The second
+                 shows the cell kinds, a slotted cell and header, and the events: hmi-sort
+                 and hmi-action are logged to the console, and hmi-action also below. -->
+            <div style="display: flex; flex-direction: column; gap: 2rem; width: 100%">
+                <hmi-table id="table-demo" row-key="id"></hmi-table>
+                <hmi-table id="table-kinds" row-key="id" sort-key="commits" sort-dir="desc">
+                    <b slot="header-name">Who</b>
+                    <em slot="cell-grace-role">Grace's own role</em>
+                </hmi-table>
+                <span style="font-size: 14px; color: var(--on-surface-variant)">Last action: <strong id="table-last">none</strong></span>
+            </div>
+        </section>
+
+        <section>
             <h2>List</h2>
             <!-- Items are a property. right-<id> takes rich content; reorderable adds
                  drag and Alt+Arrow reordering, and the page sets items back from
@@ -1936,6 +1952,36 @@ export function Example() {
             ctxDemo.addEventListener('click', (event) => {
                 const item = event.target.closest('hmi-menu-item');
                 if (item) document.getElementById('ctx-last').textContent = item.dataset.action;
+            });
+            const tablePeople = [
+                { id: 'ada', name: 'Ada Lovelace', role: 'Analyst', commits: 142, status: 'active' },
+                { id: 'alan', name: 'Alan Turing', role: 'Theoretician', commits: 87, status: 'pending' },
+                { id: 'grace', name: 'Grace Hopper', role: 'Compiler engineer', commits: 254, status: 'active' },
+                { id: 'linus', name: 'Linus Torvalds', role: 'Maintainer', commits: 1024, status: 'archived' },
+            ];
+            const tableStatus = { key: 'status', label: 'Status', sortable: false, kind: 'badge', badgeDot: true, badgeVariant: { active: 'success', pending: 'warning' } };
+            const tableDemo = document.getElementById('table-demo');
+            tableDemo.columns = [
+                { key: 'name', label: 'Name' },
+                { key: 'role', label: 'Role' },
+                { key: 'commits', label: 'Commits', style: { textAlign: 'right' } },
+                tableStatus,
+            ];
+            tableDemo.rows = tablePeople;
+            tableDemo.addEventListener('hmi-sort', (event) => console.log('table hmi-sort', event.detail));
+            const tableKinds = document.getElementById('table-kinds');
+            tableKinds.columns = [
+                { key: 'name', label: 'Name', kind: 'link', href: '/people/{id}' },
+                { key: 'role', label: 'Role' },
+                { key: 'commits', label: 'Commits', format: '{value} commits', style: { textAlign: 'right' } },
+                tableStatus,
+                { key: 'id', label: 'Actions', sortable: false, kind: 'actions', actions: [{ label: 'Edit', value: 'edit' }, { label: 'Delete', value: 'delete', variant: 'danger' }] },
+            ];
+            tableKinds.rows = tablePeople;
+            tableKinds.addEventListener('hmi-sort', (event) => console.log('table hmi-sort', event.detail));
+            tableKinds.addEventListener('hmi-action', (event) => {
+                console.log('table hmi-action', event.detail);
+                document.getElementById('table-last').textContent = `${event.detail.value} ${event.detail.row.name}`;
             });
             for (const pager of document.querySelectorAll('hmi-pagination')) {
                 pager.addEventListener('hmi-change', (event) => {

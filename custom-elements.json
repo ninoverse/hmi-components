@@ -20026,9 +20026,16 @@
               "type": {
                 "text": "(value: string) => void"
               }
+            },
+            {
+              "name": "size",
+              "optional": true,
+              "type": {
+                "text": "ButtonSize"
+              }
             }
           ],
-          "description": "The buttons of a dialog's `actions` array, in order. The dialog group (modal,\ndrawer) renders them in the footer, as the fallback of its `actions` slot, and\na table's `actions` cells reuse them. `onAction` receives the activated\naction's `value`: the element turns it into `hmi-action`."
+          "description": "The buttons of a dialog's `actions` array, in order. The dialog group (modal,\ndrawer) renders them in the footer, as the fallback of its `actions` slot, and\na table's `actions` cells reuse them. `onAction` receives the activated\naction's `value`: the element turns it into `hmi-action`. `size` sets every\nbutton's size; the default is the button's own."
         }
       ],
       "exports": [
@@ -23993,6 +24000,319 @@
           "declaration": {
             "name": "HmiSwitch",
             "module": "src/elements/switch/switch.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/elements/table/table.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Data table with click-to-sort headers. `columns` and `rows` are properties.\nA cell shows `row[column.key]` as text, and can show it as a `format`ted\ntemplate, a `badge`, a `link` or a row of `actions` buttons with the column's\n`kind`. For anything else there are two ways, in this order of precedence:\na slotted element named `cell-<rowKey>-<columnKey>`, and the column's `render`\nfunction, which returns a string, a Lit template or a DOM node. A header's\nlabel can likewise be replaced by an element slotted as `header-<columnKey>`.\n\n`row-key` names the row property that identifies a row (or, as a property, a\nfunction of the row), and is the `<rowKey>` of the slot names, so give it a\nunique field when you slot cells: the slot then stays with its row when the\ntable is sorted. Without it a row is named by its position in `rows`.\n\nSorting is the table's own: a click sorts by the column, ascending first and\nthen flipping, and fires `hmi-sort`. `sort-key` and `sort-dir` set it from\noutside. `rows` is never reordered, only shown sorted. `no-sort` turns\nsorting off for every column.",
+          "name": "HmiTable",
+          "cssParts": [
+            {
+              "description": "The scrolling frame around the table.",
+              "name": "base"
+            },
+            {
+              "description": "The `<table>`.",
+              "name": "table"
+            },
+            {
+              "description": "A column header cell.",
+              "name": "header"
+            },
+            {
+              "description": "The sort button in a sortable header.",
+              "name": "sort"
+            },
+            {
+              "description": "The arrow in the sort button.",
+              "name": "sort-icon"
+            },
+            {
+              "description": "A body row.",
+              "name": "row"
+            },
+            {
+              "description": "A body cell.",
+              "name": "cell"
+            },
+            {
+              "description": "A button of an `actions` cell.",
+              "name": "action"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Rich header content for that column, replacing its `label`.",
+              "name": "header-<columnKey>"
+            },
+            {
+              "description": "The cell of that row and column, replacing what its column renders.",
+              "name": "cell-<rowKey>-<columnKey>"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "columns",
+              "type": {
+                "text": "readonly TableColumn[]"
+              },
+              "default": "[]",
+              "description": "The columns, left to right. Set it as a property."
+            },
+            {
+              "kind": "field",
+              "name": "rows",
+              "type": {
+                "text": "readonly TableRow[]"
+              },
+              "default": "[]",
+              "description": "The rows. Set it as a property."
+            },
+            {
+              "kind": "field",
+              "name": "rowKey",
+              "type": {
+                "text": "string | TableRowKeyFn | undefined"
+              },
+              "description": "The row property that names a row in the slot names, or, set as a property, a function of the row and its position. Defaults to the row's position in `rows`.",
+              "attribute": "row-key"
+            },
+            {
+              "kind": "field",
+              "name": "noSort",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Turn sorting off for every column.",
+              "attribute": "no-sort"
+            },
+            {
+              "kind": "field",
+              "name": "sortKey",
+              "type": {
+                "text": "string | null"
+              },
+              "default": "null",
+              "description": "The key of the column the rows are sorted by; `null` for the order of `rows`. Updated when the user sorts.",
+              "attribute": "sort-key"
+            },
+            {
+              "kind": "field",
+              "name": "sortDir",
+              "type": {
+                "text": "TableSortDir"
+              },
+              "default": "'asc'",
+              "description": "The direction of the sort. Updated when the user sorts.",
+              "attribute": "sort-dir"
+            },
+            {
+              "kind": "method",
+              "name": "#rowName",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "string"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "row",
+                  "type": {
+                    "text": "TableRow"
+                  }
+                },
+                {
+                  "name": "index",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#sortedRows",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "{ row: TableRow; index: number }[]"
+                }
+              },
+              "description": "The rows paired with their position in `rows`, sorted when a sort is set."
+            },
+            {
+              "kind": "method",
+              "name": "#sortBy",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "column",
+                  "type": {
+                    "text": "TableColumn"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#text",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "string"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "column",
+                  "type": {
+                    "text": "TableColumn"
+                  }
+                },
+                {
+                  "name": "row",
+                  "type": {
+                    "text": "TableRow"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#badgeVariant",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "BadgeVariant"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "column",
+                  "type": {
+                    "text": "TableColumn"
+                  }
+                },
+                {
+                  "name": "row",
+                  "type": {
+                    "text": "TableRow"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#cell",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "column",
+                  "type": {
+                    "text": "TableColumn"
+                  }
+                },
+                {
+                  "name": "row",
+                  "type": {
+                    "text": "TableRow"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#header",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "column",
+                  "type": {
+                    "text": "TableColumn"
+                  }
+                }
+              ]
+            }
+          ],
+          "events": [
+            {
+              "description": "The user sorted a column. `detail` is `{ key, dir }`. Not fired when `sort-key` or `sort-dir` is set from code.",
+              "name": "hmi-sort"
+            },
+            {
+              "description": "The user activated an `actions` button. `detail` is `{ value, row }`.",
+              "name": "hmi-action"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "row-key",
+              "type": {
+                "text": "string | TableRowKeyFn | undefined"
+              },
+              "description": "The row property that names a row in the slot names, or, set as a property, a function of the row and its position. Defaults to the row's position in `rows`.",
+              "fieldName": "rowKey"
+            },
+            {
+              "name": "no-sort",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Turn sorting off for every column.",
+              "fieldName": "noSort"
+            },
+            {
+              "name": "sort-key",
+              "type": {
+                "text": "string | null"
+              },
+              "default": "null",
+              "description": "The key of the column the rows are sorted by; `null` for the order of `rows`. Updated when the user sorts.",
+              "fieldName": "sortKey"
+            },
+            {
+              "name": "sort-dir",
+              "type": {
+                "text": "TableSortDir"
+              },
+              "default": "'asc'",
+              "description": "The direction of the sort. Updated when the user sorts.",
+              "fieldName": "sortDir"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "tagName": "hmi-table",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiTable",
+          "declaration": {
+            "name": "HmiTable",
+            "module": "src/elements/table/table.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-table",
+          "declaration": {
+            "name": "HmiTable",
+            "module": "src/elements/table/table.ts"
           }
         }
       ]

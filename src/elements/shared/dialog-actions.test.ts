@@ -1,11 +1,16 @@
 import { html, render } from 'lit';
 import { afterEach, describe, expect, it } from 'vitest';
+import type { ButtonSize } from '../button/button.js';
 import { type DialogAction, renderDialogActions } from './dialog-actions.js';
 
-function mount(actions: DialogAction[], onAction: (value: string) => void) {
+function mount(
+    actions: DialogAction[],
+    onAction: (value: string) => void,
+    size?: ButtonSize,
+) {
     const host = document.createElement('div');
     document.body.append(host);
-    render(html`${renderDialogActions(actions, onAction)}`, host);
+    render(html`${renderDialogActions(actions, onAction, size)}`, host);
     return Array.from(host.querySelectorAll('hmi-button'));
 }
 
@@ -51,6 +56,21 @@ describe('renderDialogActions', () => {
         );
         save?.click();
         expect(values).toEqual(['save']);
+    });
+
+    it('sets the size of every button only when one is given', () => {
+        const actions = [
+            { label: 'A', value: 'a' },
+            { label: 'B', value: 'b' },
+        ];
+        expect(
+            mount(actions, () => {}).map((b) => b.hasAttribute('size')),
+        ).toEqual([false, false]);
+        expect(
+            mount(actions, () => {}, 'small').map((b) =>
+                b.getAttribute('size'),
+            ),
+        ).toEqual(['small', 'small']);
     });
 
     it('renders nothing for no actions', () => {
