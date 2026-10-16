@@ -10299,7 +10299,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "Menu item: an activatable row of a menu, with a label, an optional leading\nicon and an optional trailing hint such as a keyboard shortcut. The row is a\nnative `<button>`, so Enter and Space activate it and a disabled item takes no\nfocus or click. Activation is the native `click`, which crosses the shadow\nroot: listen for `click` on the item.\n\nUse it inside `hmi-menu`, `hmi-popover` or `hmi-context-menu`. An item inside a\ncontext menu closes it; one inside a popover leaves that to the page, which\nsets the popover's `open` to `false`.\n\n`shortcut` is a plain-text default of the `shortcut` slot, and an\n`<svg slot=\"icon\">` is sized to the row's text. `aria-label` and other\nattributes set on the host do not reach the inner `<button>`; its name is the\nlabel.",
+          "description": "Menu item: an activatable row of a menu, with a label, an optional leading\nicon and an optional trailing hint such as a keyboard shortcut. The row is a\nnative `<button>`, so Enter and Space activate it and a disabled item takes no\nfocus or click. Activation is the native `click`, which crosses the shadow\nroot: listen for `click` on the item.\n\nUse it inside `hmi-menu`, `hmi-popover` or `hmi-context-menu`. An item inside a\ncontext menu closes it; one inside a popover leaves that to the page, which\nsets the popover's `open` to `false`.\n\n`checked` marks the item as the chosen one of a group, as in a select's list:\nthe row becomes a `menuitemradio` with `aria-checked=\"true\"`, which is how\nassistive technology learns which one is chosen. It paints nothing, so show the\nmark yourself, in the `shortcut` slot.\n\n`shortcut` is a plain-text default of the `shortcut` slot, and an\n`<svg slot=\"icon\">` is sized to the row's text. `aria-label` and other\nattributes set on the host do not reach the inner `<button>`; its name is the\nlabel.",
           "name": "HmiMenuItem",
           "cssParts": [
             {
@@ -10367,6 +10367,17 @@
             },
             {
               "kind": "field",
+              "name": "checked",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Marks the item as the chosen one: a `menuitemradio` with `aria-checked`. It paints no mark.",
+              "attribute": "checked",
+              "reflects": true
+            },
+            {
+              "kind": "field",
               "name": "shortcut",
               "type": {
                 "text": "string"
@@ -10394,6 +10405,15 @@
               "default": "false",
               "description": "Disables the item: it takes no focus and no click.",
               "fieldName": "disabled"
+            },
+            {
+              "name": "checked",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Marks the item as the chosen one: a `menuitemradio` with `aria-checked`. It paints no mark.",
+              "fieldName": "checked"
             },
             {
               "name": "shortcut",

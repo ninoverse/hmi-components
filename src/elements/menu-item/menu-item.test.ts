@@ -68,6 +68,23 @@ describe('hmi-menu-item', () => {
         expect(base(el).disabled).toBe(false);
     });
 
+    it('reflects checked, and a checked item is a menuitemradio with aria-checked', async () => {
+        const el = await fixture(html`<hmi-menu-item>Save</hmi-menu-item>`);
+        expect(el.checked).toBe(false);
+        expect(base(el).getAttribute('role')).toBe('menuitem');
+        expect(base(el).hasAttribute('aria-checked')).toBe(false);
+        el.checked = true;
+        await el.updateComplete;
+        expect(el.hasAttribute('checked')).toBe(true);
+        expect(base(el).getAttribute('role')).toBe('menuitemradio');
+        expect(base(el).getAttribute('aria-checked')).toBe('true');
+        el.removeAttribute('checked');
+        await el.updateComplete;
+        expect(el.checked).toBe(false);
+        expect(base(el).getAttribute('role')).toBe('menuitem');
+        expect(base(el).hasAttribute('aria-checked')).toBe(false);
+    });
+
     it('exposes base, icon, label and shortcut as parts', async () => {
         const el = await fixture(html`<hmi-menu-item>Save</hmi-menu-item>`);
         for (const name of ['base', 'icon', 'label', 'shortcut']) {
@@ -315,6 +332,7 @@ describe('MenuItem (React wrapper)', () => {
                 createElement(
                     MenuItem,
                     {
+                        checked: true,
                         danger: true,
                         shortcut: '⌫',
                         onClick: () => clicks++,
@@ -325,6 +343,8 @@ describe('MenuItem (React wrapper)', () => {
         });
         const el = host.querySelector('hmi-menu-item') as HmiMenuItem;
         await el.updateComplete;
+        expect(el.checked).toBe(true);
+        expect(base(el).getAttribute('role')).toBe('menuitemradio');
         expect(el.danger).toBe(true);
         expect(el.shortcut).toBe('⌫');
         await userEvent.click(base(el));
