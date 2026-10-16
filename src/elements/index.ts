@@ -66,6 +66,7 @@ export * from './scatter-plot/scatter-plot.js';
 export * from './scroll-area/scroll-area.js';
 export * from './search-input/search-input.js';
 export * from './segmented-control/segmented-control.js';
+export * from './select/select.js';
 export * from './sidebar/sidebar.js';
 export * from './skeleton/skeleton.js';
 export * from './slider/slider.js';

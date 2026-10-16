@@ -476,6 +476,11 @@ export default defineConfig({
                     dirname,
                     'src/elements/segmented-control/segmented-control.react.ts',
                 ),
+                'wc/select': resolve(dirname, 'src/elements/select/select.ts'),
+                'react/select': resolve(
+                    dirname,
+                    'src/elements/select/select.react.ts',
+                ),
                 'wc/sidebar': resolve(
                     dirname,
                     'src/elements/sidebar/sidebar.ts',
