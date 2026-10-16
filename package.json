@@ -566,6 +566,10 @@
             "types": "./dist/elements/switch/switch.react.d.ts",
             "import": "./dist/react/switch.js"
         },
+        "./react/table": {
+            "types": "./dist/elements/table/table.react.d.ts",
+            "import": "./dist/react/table.js"
+        },
         "./react/tabs": {
             "types": "./dist/elements/tabs/tabs.react.d.ts",
             "import": "./dist/react/tabs.js"
@@ -998,6 +1002,10 @@
         "./wc/switch": {
             "types": "./dist/elements/switch/switch.d.ts",
             "import": "./dist/wc/switch.js"
+        },
+        "./wc/table": {
+            "types": "./dist/elements/table/table.d.ts",
+            "import": "./dist/wc/table.js"
         },
         "./wc/tabs": {
             "types": "./dist/elements/tabs/tabs.d.ts",

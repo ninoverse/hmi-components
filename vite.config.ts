@@ -536,6 +536,11 @@ export default defineConfig({
                     dirname,
                     'src/elements/switch/switch.react.ts',
                 ),
+                'wc/table': resolve(dirname, 'src/elements/table/table.ts'),
+                'react/table': resolve(
+                    dirname,
+                    'src/elements/table/table.react.ts',
+                ),
                 'wc/tabs': resolve(dirname, 'src/elements/tabs/tabs.ts'),
                 'react/tabs': resolve(
                     dirname,

@@ -75,6 +75,7 @@ export * from './spinner/spinner.js';
 export * from './stat/stat.js';
 export * from './stepper/stepper.js';
 export * from './switch/switch.js';
+export * from './table/table.js';
 export * from './tabs/tabs.js';
 export * from './text/text.js';
 export * from './textarea/textarea.js';

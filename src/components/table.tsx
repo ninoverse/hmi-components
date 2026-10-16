@@ -72,6 +72,7 @@ function compare(a: unknown, b: unknown): number {
  *
  * @example
  * <Table columns={columns} rows={rows} getRowKey={(r) => r.id} />
+ * @deprecated Use `Table` from `@ninoverse/hmi-components/react/table`. Removed in 6.0.0.
  */
 export function Table<T extends Record<string, unknown>>({
     columns,

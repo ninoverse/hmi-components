@@ -273,6 +273,18 @@ export {
     type SwitchChangeDetail,
 } from '../elements/switch/switch.react.js';
 export {
+    Table,
+    type TableActionDetail,
+    type TableBadgeVariant,
+    type TableCellContent,
+    type TableCellKind,
+    type TableColumn,
+    type TableRow,
+    type TableRowKeyFn,
+    type TableSortDetail,
+    type TableSortDir,
+} from '../elements/table/table.react.js';
+export {
     type TabOption,
     Tabs,
     type TabsChangeDetail,
