@@ -125,8 +125,10 @@ stem (`AreaChart`), the tag is `hmi-<kebab>`, the class is `Hmi<Pascal>`,
   liquid filter template (`renderLiquidFilter()` from
   `src/elements/shared/panel.ts`) so the liquid material's
   `--panel-filter: url('#liquid-glass') …` resolves inside the root.
-- Part names come from this list: `base`, `label`, `icon`, `panel`, `control`,
-  `input`, `list`, `item`, `header`, `body`, `footer`.
+- Part names are the role of the node. Reach for these first: `base`, `label`,
+  `icon`, `panel`, `control`, `input`, `list`, `item`, `header`, `body`, `footer`.
+  Where none fits, name the part for its role (`trigger`, `title`, `description`,
+  `actions`, `shortcut`, `caption` are in use) and list it with `@csspart`.
 
 ## R5 — Events
 

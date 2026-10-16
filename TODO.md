@@ -353,6 +353,25 @@ panel near an edge can leave it).
 
 ---
 
+## `align` as an attribute leaks into `text-align`
+
+A browser maps an `align` attribute of `start`, `center`, `end`, `left` or `right`
+to `text-align` on any element, custom elements included (checked in Chromium), and
+`text-align` inherits. `hmi-flex`, `hmi-legend` and `hmi-divider` reflect `align`, so
+`<hmi-flex align="center">` sets `text-align: center` on the host, and every child's
+text follows. (`hmi-text` reflects it too, where it is `text-align` on purpose.)
+`hmi-popover` and `hmi-hover-card` met it in the visual check and reset
+`text-align: start` on their inner nodes, with a test. The other three were not
+touched, and how far each one shows it is not measured.
+
+To do: reset it on the host of the elements that do not mean it (`:host { text-align:
+start }` beats the presentational hint, and the host is the box in flex, legend and
+divider), with a test per element that `getComputedStyle(child).textAlign` stays
+`start` under `align="center"`, or reflect the value under another attribute name. A
+new element that reflects `align` needs the same reset.
+
+---
+
 ## Controlled or element-owned state, before v6
 
 **Do this last, before the v6 flip.** `.claude/rules/lit-elements.md` says an
