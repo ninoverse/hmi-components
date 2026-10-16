@@ -397,7 +397,7 @@ it. `hmi-popover` is not in it: it is a `popover="auto"`, which the browser clos
 an outside click and Escape and cannot be stopped from, so it owns its `open` and
 `hmi-open-change` reports the change. Nor are `hmi-tooltip`, `hmi-hover-card` and `hmi-context-menu`:
 the pointer, focus or a right-click open them, and they close on Escape or an
-outside press, so they own their `open` too. If the dialogs become element-owned, the
+outside press, so they own their `open` too. Nor is `hmi-table`: v5 owned its sort state, and so does the element. If the dialogs become element-owned, the
 whole overlay family then works one way.
 
 To do: decide, once, for these elements, whether they stay controlled or become

@@ -228,26 +228,30 @@ hmi-tabs { "options": OPTIONS_JSON,
 | combobox | `filterOption(option, query)` | `filter="includes" \| "startsWith" \| "none"` | — | `filter` may be a predicate (JS only) |
 | slider | `formatValue` | template string `'{value}%'` | — | the same `formatValue`, set as a property |
 
-Table cell kinds:
+Table cell kinds, as `hmi-table` ships them (`TableColumn` in
+`src/elements/table/table.ts`):
 
 ```ts
-export type TableColumn<Row> = {
-    key: keyof Row & string;
-    label: string;
-    kind?: 'text' | 'format' | 'badge' | 'link' | 'actions';
-    format?: string;                                   // '{first} {last}' — applyTemplate()
-    badgeVariant?: (value: unknown) => BadgeVariant;  // JS only
-    href?: string;                                     // '{id}' template for kind: 'link'
-    actions?: readonly DialogAction[];                 // kind: 'actions' → <hmi-button>s → hmi-action { value, row }
-    render?: (row: Row) => string | TemplateResult | Node; // tier 3
-    sortable?: boolean;
-    align?: 'start' | 'center' | 'end';
-};
+export interface TableColumn {
+    key: string;                                       // the row property; what the column sorts by
+    label: string;                                     // or the `header-<key>` slot
+    sortable?: boolean;                                // false opts one column out
+    kind?: 'text' | 'format' | 'badge' | 'link' | 'actions'; // 'format' when `format` is set, else 'text'
+    format?: string;                                   // '{first} {last}', {value} = this column's value; the text of format, badge and link cells
+    badgeVariant?: BadgeVariant | Record<string, BadgeVariant> | ((value, row) => BadgeVariant); // a function is JS only
+    badgeDot?: boolean;
+    href?: string;                                     // '/people/{id}' for kind: 'link'; only http(s), mailto, tel and relative destinations link
+    actions?: readonly DialogAction[];                 // kind: 'actions' → small <hmi-button>s → hmi-action { value, row }
+    render?: (row: TableRow) => string | TemplateResult | Node; // tier 3, wins over `kind`
+    style?: Record<string, string>;                    // header and cells: { textAlign: 'right', width: '12rem' }
+}
 ```
 
 Rendering order per cell: a slotted override wins (`<slot name="cell-42-actions">`
 with the tier-1/tier-3 output as fallback), then `render`, then `kind`,
-then plain text.
+then plain text. There is no registry of custom kinds: a cell kind of your own is
+a `render` function defined once and set on every column that needs it, or a
+cell slot.
 
 ```rust
 // Dioxus: a real button in a cell, no JS interop
@@ -293,7 +297,7 @@ Wrapper prop = `on` + PascalCase of the event minus `hmi-`.
 | breadcrumbs | `items[].onClick()` | `hmi-nav` (cancelable) | `{ value: string, index: number, href: string \| undefined }` |
 | carousel | `onIndexChange(n)` | `hmi-index-change` | `{ index: number }` |
 | list | `onReorder(items)` | `hmi-reorder` | `{ items: ListItem[] }` |
-| table | (internal sort state) | `hmi-sort` | `{ key: string, dir: 'asc' \| 'desc' \| null }` |
+| table | (internal sort state) | `hmi-sort` | `{ key: string, dir: 'asc' \| 'desc' }` |
 | image | `onLoad` / `onError` (and those a `renderImage` was handed) | `hmi-load` / `hmi-error` | `{ src: string }` |
 | responsive-container | `children(size)` | `hmi-resize` | `{ width: number, height: number }` |
 | charts (14) | none | none | — |
