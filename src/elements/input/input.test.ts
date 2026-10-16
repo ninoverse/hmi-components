@@ -231,6 +231,23 @@ describe('hmi-input', () => {
         expect(field(el).disabled).toBe(false);
     });
 
+    it('enables again when disabled is set to false from code, from an attribute or not', async () => {
+        const el = await fixture(html`<hmi-input disabled></hmi-input>`);
+        expect(field(el).disabled).toBe(true);
+        el.disabled = false;
+        await el.updateComplete;
+        await new Promise((resolve) => setTimeout(resolve, 0));
+        expect(el.hasAttribute('disabled')).toBe(false);
+        expect(field(el).disabled).toBe(false);
+        el.disabled = true;
+        await el.updateComplete;
+        expect(field(el).disabled).toBe(true);
+        el.disabled = false;
+        await el.updateComplete;
+        await new Promise((resolve) => setTimeout(resolve, 0));
+        expect(field(el).disabled).toBe(false);
+    });
+
     it('is excluded from the form while disabled', async () => {
         const host = document.createElement('div');
         document.body.append(host);
