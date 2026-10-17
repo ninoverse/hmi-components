@@ -1401,6 +1401,23 @@ export function Example() {
         </section>
 
         <section>
+            <h2>ColorPicker</h2>
+            <!-- The first picker is the React demo's: a chosen colour, and the colour
+                 shown beside it. The others are swatches only (hide-input), a
+                 disabled one, and one with its own swatches (a property of hex colours).
+                 A colour is #rrggbb: hmi-input fires as it changes, hmi-change when it is
+                 committed; both are logged to the console, and hmi-change updates the
+                 text beside the first picker. -->
+            <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap; padding-bottom: 288px; width: 100%">
+                <hmi-color-picker id="color-brand" aria-label="Brand color" value="#e87a5d"></hmi-color-picker>
+                <span style="font-size: 13px; color: var(--on-surface-variant)">Selected: <strong id="color-selected">#e87a5d</strong></span>
+                <hmi-color-picker id="color-swatches" aria-label="Swatches only" value="#5c9a6a" hide-input></hmi-color-picker>
+                <hmi-color-picker id="color-custom" aria-label="Own swatches" value="#0ea5e9"></hmi-color-picker>
+                <hmi-color-picker id="color-locked" aria-label="Disabled" value="#6b86b3" disabled></hmi-color-picker>
+            </div>
+        </section>
+
+        <section>
             <h2>List</h2>
             <!-- Items are a property. right-<id> takes rich content; reorderable adds
                  drag and Alt+Arrow reordering, and the page sets items back from
@@ -2092,6 +2109,14 @@ export function Example() {
                 const range = event.detail.value;
                 document.getElementById('date-range-value').textContent = range ? `${range.start} – ${range.end ?? '…'}` : 'none';
             });
+            const colorBrand = document.getElementById('color-brand');
+            colorBrand.addEventListener('hmi-input', (event) => {
+                console.log('color-picker hmi-input', event.detail);
+                document.getElementById('color-selected').textContent = event.detail.value;
+            });
+            colorBrand.addEventListener('hmi-change', (event) => console.log('color-picker hmi-change', event.detail));
+            colorBrand.addEventListener('hmi-open-change', (event) => console.log('color-picker hmi-open-change', event.detail));
+            document.getElementById('color-custom').swatches = ['#0ea5e9', '#22c55e', '#eab308', '#f97316', '#ef4444', '#a855f7'];
             for (const pager of document.querySelectorAll('hmi-pagination')) {
                 pager.addEventListener('hmi-change', (event) => {
                     console.log('pagination hmi-change', event.detail);

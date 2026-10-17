@@ -623,6 +623,24 @@ keys, Home, End, PageUp and PageDown move the focus itself and a screen reader r
 is the value: the first pick fires `hmi-change` with `end: null` and keeps the calendar open, the second
 closes it, and `required` counts a range as chosen only with both ends.
 
+`hmi-color-picker` is built on `hmi-popover` as the select and the date-picker are: the trigger is a slotted
+`<button>` showing a colour box and the hex text, and the panel (a `dialog`) holds the swatches, a hex field and the
+browser's `<input type="color">`, the last two plain inputs in the picker's own root (an `hmi-input`'s label cannot sit
+beside a field, and neither needs form association of its own). A colour is `#rrggbb` in lower case: `normalizeHex`
+reads a 3- or 6-digit hex and expands a shorthand, because `<input type="color">` takes only the long form (v5 passed
+`#abc` to it and the sampler turned black) and a swatch has to match however the value was spelled; what the user
+chooses is reported normalised, and text that is not a hex (a `value` of `red`) is shown, painted and submitted as it is.
+The picker reports the native pair: `hmi-input` for every change as it happens and `hmi-change` when a colour is
+committed (a swatch, Enter or blur on the hex field, the sampler's own `change`) and differs from the last committed one,
+kept as `#committed` and reset when `value` is set from outside. v5's single `onChange` fired for every valid hex
+keystroke, so typing `#e87a5d` went through `#e87` and the colour flashed; here only a 6-digit hex is taken while typing
+and a 3-digit one on Enter or blur. The hex field's text is the `draft` state: it follows `value` when that is set
+from outside (v5's `useState` synced it on open only), and an invalid draft is put back on blur and when the panel
+closes. The swatches are a `radiogroup` with one Tab stop; an arrow key moves to a swatch and chooses it, as a native
+radio group does. A keyboard open moves focus to the chosen swatch (as the select's list does) and a pointer open leaves it
+on the trigger. The native colour chooser is a window outside the page: only its `input` and `change` events reach
+the picker, which is how the tests drive it.
+
 The modal's machinery is the `HmiDialog` base class in `src/elements/shared/dialog.ts`; the dialog group (modal, drawer, later command-palette) extends it with its own tag, styles and body. A dialog built this way is controlled for now (`TODO.md`, "Controlled or
 element-owned state"): `#requestClose` only emits, so `open` stays `true` until
 the consumer sets it, and `#onClose` shows the `<dialog>` again when the browser

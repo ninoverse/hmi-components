@@ -180,6 +180,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/code/code.react.ts',
                 ),
+                'wc/color-picker': resolve(
+                    dirname,
+                    'src/elements/color-picker/color-picker.ts',
+                ),
+                'react/color-picker': resolve(
+                    dirname,
+                    'src/elements/color-picker/color-picker.react.ts',
+                ),
                 'wc/combobox': resolve(
                     dirname,
                     'src/elements/combobox/combobox.ts',

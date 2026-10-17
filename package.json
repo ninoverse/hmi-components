@@ -358,6 +358,10 @@
             "types": "./dist/elements/code/code.react.d.ts",
             "import": "./dist/react/code.js"
         },
+        "./react/color-picker": {
+            "types": "./dist/elements/color-picker/color-picker.react.d.ts",
+            "import": "./dist/react/color-picker.js"
+        },
         "./react/combobox": {
             "types": "./dist/elements/combobox/combobox.react.d.ts",
             "import": "./dist/react/combobox.js"
@@ -806,6 +810,10 @@
         "./wc/code": {
             "types": "./dist/elements/code/code.d.ts",
             "import": "./dist/wc/code.js"
+        },
+        "./wc/color-picker": {
+            "types": "./dist/elements/color-picker/color-picker.d.ts",
+            "import": "./dist/wc/color-picker.js"
         },
         "./wc/combobox": {
             "types": "./dist/elements/combobox/combobox.d.ts",

@@ -23,6 +23,7 @@ export * from './chart-tooltip/chart-tooltip.js';
 export * from './checkbox/checkbox.js';
 export * from './chip/chip.js';
 export * from './code/code.js';
+export * from './color-picker/color-picker.js';
 export * from './combobox/combobox.js';
 export * from './confirm-dialog/confirm-dialog.js';
 export * from './context-menu/context-menu.js';
