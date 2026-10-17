@@ -69,6 +69,12 @@ export {
 } from '../elements/chip/chip.react.js';
 export { Code } from '../elements/code/code.react.js';
 export {
+    ColorPicker,
+    type ColorPickerChangeDetail,
+    type ColorPickerInputDetail,
+    type ColorPickerOpenChangeDetail,
+} from '../elements/color-picker/color-picker.react.js';
+export {
     Combobox,
     type ComboboxChangeDetail,
     type ComboboxFilter,

@@ -38,6 +38,7 @@ const HEX_PATTERN = /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/;
  *
  * @example
  * <ColorPicker defaultValue="#5c9a6a" onChange={setColor} />
+ * @deprecated Use `ColorPicker` from `@ninoverse/hmi-components/react/color-picker`. Removed in 6.0.0.
  */
 export function ColorPicker({
     value,
