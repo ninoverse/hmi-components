@@ -4066,6 +4066,1126 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/combobox/combobox.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Editable single-select: a text field that filters a list of options as you type,\nand a list under it that opens on focus, typing and the arrow keys. The list is\na `popover=\"manual\"` panel in the top layer, so no overflowing ancestor clips it,\nplaced under the field and as wide as it. Focus stays in the field: the field is\nthe `combobox`, and the highlighted option is its `aria-activedescendant`. For a\nshort list without typing, use `hmi-select`.\n\nA native form control: it submits `name=value` for the chosen option (nothing\nwhile none is chosen), `form.reset()` restores `default-value`, and `required`\nmakes an empty choice invalid, with `required-message` as the text. A non-empty\n`error` makes it invalid with that message. Typing text that is not chosen does\nnot set the value.\n\nThe element owns `value`: choosing a different option, or clearing the field,\nsets it and fires `hmi-change` with `{ value }`, `''` for none; to veto a change,\nset `value` back from a listener. The text in the field follows the value: it is\nthe chosen option's label, and it is put back there when the list closes without\na choice (Escape, an outside press or leaving the field), so the field never\nshows text the value does not match. It also follows a `value` set from code, and\n`options` that arrive after it.\n\n`hmi-input` fires with `{ value }` for every keystroke and for the clear button,\nand `query` is the text, so a consumer can search a server and set `options` in\nresponse (with `filter=\"none\"`, so the element does not filter again). A choice\nor a close that puts the label back into the field changes `query` without\nfiring `hmi-input`.\n\nThe element owns `open`, which follows the user: focus, typing and the arrow keys\nopen the list; a choice, Escape, an outside press and leaving the field close it;\neach fires `hmi-open-change`. Setting `open` from code opens or closes it and\nfires nothing. ArrowDown and ArrowUp move the highlight over the options that are\nnot disabled, stopping at the first and last, Home and End jump to them while the\nlist is open, and Enter chooses the highlighted option.\n\n`filter` is `includes` (the default: the label contains the text, ignoring case),\n`startsWith`, `none`, or, set as a property, a function of the option and the text.\nWhile the field still shows the chosen option's label, every option is listed, as\na list that shrank to the one chosen would feel broken.\n\nAn option's `label` and `description` are text. For richer content, slot an element\nnamed `label-<value>` or `description-<value>`; the field shows the label text.\nThe field is named by `label`, else by the host's `aria-label`, else \"Combobox\".",
+          "name": "HmiCombobox",
+          "cssParts": [
+            {
+              "description": "The bordered field.",
+              "name": "base"
+            },
+            {
+              "description": "The native text input.",
+              "name": "input"
+            },
+            {
+              "description": "The clear button.",
+              "name": "clear"
+            },
+            {
+              "description": "The arrow in the field.",
+              "name": "chevron"
+            },
+            {
+              "description": "The floating list.",
+              "name": "panel"
+            },
+            {
+              "description": "One option's row.",
+              "name": "option"
+            },
+            {
+              "description": "An option's label.",
+              "name": "option-label"
+            },
+            {
+              "description": "An option's description.",
+              "name": "description"
+            },
+            {
+              "description": "The message shown when nothing matches.",
+              "name": "empty"
+            },
+            {
+              "description": "The label.",
+              "name": "label"
+            },
+            {
+              "description": "The hint text.",
+              "name": "hint"
+            },
+            {
+              "description": "The error message.",
+              "name": "error"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Rich content shown when no option matches. Defaults to `empty-message`.",
+              "name": "empty"
+            },
+            {
+              "description": "Rich label for the option with that value, in the list.",
+              "name": "label-<value>"
+            },
+            {
+              "description": "Rich description for the option with that value, in the list.",
+              "name": "description-<value>"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "formKind",
+              "type": {
+                "text": "FormKind"
+              },
+              "privacy": "protected",
+              "readonly": true,
+              "description": "How `formValue` is turned into the submitted string.",
+              "default": "'text'",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "options",
+              "type": {
+                "text": "readonly ComboboxOption[]"
+              },
+              "default": "[]",
+              "description": "The options, in order. Set it as a property."
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The chosen option's value, or `''` for none. The attribute is the initial value.",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "defaultValue",
+              "type": {
+                "text": "| string\n        | undefined"
+              },
+              "description": "Initial value, and what `form.reset()` restores. Defaults to the value at first render.",
+              "attribute": "default-value"
+            },
+            {
+              "kind": "field",
+              "name": "query",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The text in the field. It follows `value`: the chosen option's label, unless the user has typed something else. Setting it filters the list.",
+              "attribute": "query"
+            },
+            {
+              "kind": "field",
+              "name": "placeholder",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Search…'",
+              "description": "Field placeholder.",
+              "attribute": "placeholder"
+            },
+            {
+              "kind": "field",
+              "name": "filter",
+              "type": {
+                "text": "ComboboxFilter"
+              },
+              "default": "'includes'",
+              "description": "How the text filters the options: `includes`, `startsWith`, `none` or, as a property, a function of the option and the text.",
+              "attribute": "filter"
+            },
+            {
+              "kind": "field",
+              "name": "emptyMessage",
+              "type": {
+                "text": "string"
+              },
+              "default": "'No matches'",
+              "description": "Text shown when no option matches, or the `empty` slot.",
+              "attribute": "empty-message"
+            },
+            {
+              "kind": "field",
+              "name": "clearLabel",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Clear'",
+              "description": "Accessible name of the clear button.",
+              "attribute": "clear-label"
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the list is open.",
+              "attribute": "open",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "requiredMessage",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Please select an option.'",
+              "description": "Text of the error a `required` combobox reports while nothing is chosen.",
+              "attribute": "required-message"
+            },
+            {
+              "kind": "field",
+              "name": "highlight",
+              "type": {
+                "text": "number"
+              },
+              "privacy": "private",
+              "default": "-1"
+            },
+            {
+              "kind": "field",
+              "name": "field",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "input",
+              "type": {
+                "text": "HTMLInputElement"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "panel",
+              "type": {
+                "text": "HTMLElement"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "#position",
+              "privacy": "private",
+              "readonly": true,
+              "default": "new PositionController(this, { anchor: () => this.field, panel: () => this.panel, offset: 6, matchWidth: true, })"
+            },
+            {
+              "kind": "field",
+              "name": "#initialValue",
+              "privacy": "private",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "kind": "field",
+              "name": "#synced",
+              "privacy": "private",
+              "type": {
+                "text": "string"
+              },
+              "default": "''"
+            },
+            {
+              "kind": "field",
+              "name": "#listeners",
+              "privacy": "private",
+              "type": {
+                "text": "AbortController | undefined"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "formValue",
+              "type": {
+                "text": "unknown"
+              },
+              "privacy": "protected",
+              "description": "The value to submit.",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "control",
+              "type": {
+                "text": "ValidatableControl | null"
+              },
+              "privacy": "protected",
+              "description": "The native control whose validity is mirrored, once rendered.",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "resetFormValue",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "description": "Puts the value back to its initial state (`form.reset()`).",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "restoreFormValue",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "state",
+                  "type": {
+                    "text": "string | File | FormData | null"
+                  }
+                }
+              ],
+              "description": "Restores a value the browser saved (history, autofill). Optional.",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "syncForm",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "description": "Reports the chosen value, and a missing choice or an error anchored on the input.",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "formDisabledCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "disabled",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ],
+              "description": "A fieldset that disables the combobox closes the list too.",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#labelOf",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "string"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "value",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#resync",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#listed",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "readonly ComboboxOption[]"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#firstEnabled",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "number"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "listed",
+                  "type": {
+                    "text": "readonly ComboboxOption[]"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#active",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "number"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "listed",
+                  "type": {
+                    "text": "readonly ComboboxOption[]"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#sync",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#listen",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#setOpen",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "open",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#dismiss",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#commit",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "option",
+                  "type": {
+                    "text": "ComboboxOption"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#clear",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#onInput",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onBlur",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#onKeydown",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "KeyboardEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#renderOption",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "TemplateResult"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "option",
+                  "type": {
+                    "text": "ComboboxOption"
+                  }
+                },
+                {
+                  "name": "index",
+                  "type": {
+                    "text": "number"
+                  }
+                },
+                {
+                  "name": "active",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "formAssociated",
+              "type": {
+                "text": "boolean"
+              },
+              "static": true,
+              "default": "true",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "shadowRootOptions",
+              "type": {
+                "text": "object"
+              },
+              "static": true,
+              "default": "{ ...LitElement.shadowRootOptions, delegatesFocus: true, }",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Name under which the value is submitted with the form.",
+              "attribute": "name",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Disables the control.",
+              "attribute": "disabled",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "The control must have a value for the form to be valid.",
+              "attribute": "required",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Text shown above the control.",
+              "attribute": "label",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "hint",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Helper text shown below the control; hidden while `error` is set.",
+              "attribute": "hint",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "error",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Error message shown below the control. Setting it makes the control invalid.",
+              "attribute": "error",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "internals",
+              "privacy": "protected",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "#fieldsetDisabled",
+              "privacy": "private",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "formResetCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "formStateRestoreCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "state",
+                  "type": {
+                    "text": "string | File | FormData | null"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isDisabled",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "protected",
+              "description": "Whether the control is disabled, by `disabled` or an ancestor fieldset.",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "describedBy",
+              "type": {
+                "text": "string | undefined"
+              },
+              "privacy": "protected",
+              "description": "The `id` of the hint or error element to point `aria-describedby` at.",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "invalid",
+              "type": {
+                "text": "'true' | undefined"
+              },
+              "privacy": "protected",
+              "description": "`aria-invalid` for the control.",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "form",
+              "type": {
+                "text": "HTMLFormElement | null"
+              },
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "validity",
+              "type": {
+                "text": "ValidityState"
+              },
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "validationMessage",
+              "type": {
+                "text": "string"
+              },
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "willValidate",
+              "type": {
+                "text": "boolean"
+              },
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "labels",
+              "type": {
+                "text": "NodeList"
+              },
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "checkValidity",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              },
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "reportValidity",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              },
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "renderLabel",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "TemplateResult | typeof nothing"
+                }
+              },
+              "description": "The `<label>` tied to the control, with a required marker.",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "renderMessage",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "TemplateResult | typeof nothing"
+                }
+              },
+              "description": "The error (as an alert) or, without one, the hint.",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            }
+          ],
+          "events": [
+            {
+              "type": {
+                "text": "CustomEvent<ComboboxChangeDetail>"
+              },
+              "description": "The user chose a different option, or cleared the field.",
+              "name": "hmi-change"
+            },
+            {
+              "type": {
+                "text": "CustomEvent<ComboboxInputDetail>"
+              },
+              "description": "The text in the field changed by typing or by the clear button.",
+              "name": "hmi-input"
+            },
+            {
+              "type": {
+                "text": "CustomEvent<ComboboxOpenChangeDetail>"
+              },
+              "description": "The user opened or closed the list. Not cancelable, and not fired when `open` is set from code.",
+              "name": "hmi-open-change"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "value",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The chosen option's value, or `''` for none. The attribute is the initial value.",
+              "fieldName": "value"
+            },
+            {
+              "name": "default-value",
+              "type": {
+                "text": "| string\n        | undefined"
+              },
+              "description": "Initial value, and what `form.reset()` restores. Defaults to the value at first render.",
+              "fieldName": "defaultValue"
+            },
+            {
+              "name": "query",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The text in the field. It follows `value`: the chosen option's label, unless the user has typed something else. Setting it filters the list.",
+              "fieldName": "query"
+            },
+            {
+              "name": "placeholder",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Search…'",
+              "description": "Field placeholder.",
+              "fieldName": "placeholder"
+            },
+            {
+              "name": "filter",
+              "type": {
+                "text": "ComboboxFilter"
+              },
+              "default": "'includes'",
+              "description": "How the text filters the options: `includes`, `startsWith`, `none` or, as a property, a function of the option and the text.",
+              "fieldName": "filter"
+            },
+            {
+              "name": "empty-message",
+              "type": {
+                "text": "string"
+              },
+              "default": "'No matches'",
+              "description": "Text shown when no option matches, or the `empty` slot.",
+              "fieldName": "emptyMessage"
+            },
+            {
+              "name": "clear-label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Clear'",
+              "description": "Accessible name of the clear button.",
+              "fieldName": "clearLabel"
+            },
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the list is open.",
+              "fieldName": "open"
+            },
+            {
+              "name": "required-message",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Please select an option.'",
+              "description": "Text of the error a `required` combobox reports while nothing is chosen.",
+              "fieldName": "requiredMessage"
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Name under which the value is submitted with the form.",
+              "fieldName": "name",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Disables the control.",
+              "fieldName": "disabled",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "The control must have a value for the form to be valid.",
+              "fieldName": "required",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Text shown above the control.",
+              "fieldName": "label",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "name": "hint",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Helper text shown below the control; hidden while `error` is set.",
+              "fieldName": "hint",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "name": "error",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Error message shown below the control. Setting it makes the control invalid.",
+              "fieldName": "error",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "HmiFormField",
+            "module": "/src/elements/shared/form.js"
+          },
+          "tagName": "hmi-combobox",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiCombobox",
+          "declaration": {
+            "name": "HmiCombobox",
+            "module": "src/elements/combobox/combobox.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-combobox",
+          "declaration": {
+            "name": "HmiCombobox",
+            "module": "src/elements/combobox/combobox.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/confirm-dialog/confirm-dialog.ts",
       "declarations": [
         {

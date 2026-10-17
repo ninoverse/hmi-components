@@ -1368,6 +1368,23 @@ export function Example() {
         </section>
 
         <section>
+            <h2>Combobox</h2>
+            <!-- options is a property. The first combobox is the React demo's: a label, a
+                 chosen value, and the selected value shown beside it. The second has a slotted
+                 rich label and description for one option, and filters by prefix. The list
+                 opens on focus, typing and the arrow keys; hmi-change, hmi-input and
+                 hmi-open-change are logged to the console. -->
+            <div style="display: flex; gap: 24px; flex-wrap: wrap; align-items: flex-end; padding-bottom: 288px; width: 100%">
+                <hmi-combobox id="combobox-city" label="City" placeholder="Search cities…" value="paris" style="width: 288px"></hmi-combobox>
+                <p style="margin: 0; font-size: 13px; color: var(--on-surface-variant)">Selected: <strong id="combobox-selected">paris</strong></p>
+                <hmi-combobox id="combobox-rich" label="City (starts with, slots)" filter="startsWith" placeholder="Search cities…" style="width: 288px">
+                    <b slot="label-paris">Paris <small>(capital)</small></b>
+                    <em slot="description-paris">City of light</em>
+                </hmi-combobox>
+            </div>
+        </section>
+
+        <section>
             <h2>List</h2>
             <!-- Items are a property. right-<id> takes rich content; reorderable adds
                  drag and Alt+Arrow reordering, and the page sets items back from
@@ -2026,6 +2043,27 @@ export function Example() {
                 { value: 'team', label: 'Team' },
                 { value: 'enterprise', label: 'Enterprise', disabled: true },
             ];
+            const comboboxCities = [
+                { value: 'amsterdam', label: 'Amsterdam', description: 'Netherlands' },
+                { value: 'berlin', label: 'Berlin', description: 'Germany' },
+                { value: 'lisbon', label: 'Lisbon', description: 'Portugal' },
+                { value: 'london', label: 'London', description: 'United Kingdom' },
+                { value: 'madrid', label: 'Madrid', description: 'Spain' },
+                { value: 'milan', label: 'Milan', description: 'Italy' },
+                { value: 'paris', label: 'Paris', description: 'France' },
+                { value: 'rome', label: 'Rome', description: 'Italy' },
+                { value: 'vienna', label: 'Vienna', description: 'Austria' },
+                { value: 'warsaw', label: 'Warsaw', description: 'Poland' },
+            ];
+            const comboboxCity = document.getElementById('combobox-city');
+            comboboxCity.options = comboboxCities;
+            comboboxCity.addEventListener('hmi-change', (event) => {
+                console.log('combobox hmi-change', event.detail);
+                document.getElementById('combobox-selected').textContent = event.detail.value || 'none';
+            });
+            comboboxCity.addEventListener('hmi-input', (event) => console.log('combobox hmi-input', event.detail));
+            comboboxCity.addEventListener('hmi-open-change', (event) => console.log('combobox hmi-open-change', event.detail));
+            document.getElementById('combobox-rich').options = comboboxCities;
             for (const pager of document.querySelectorAll('hmi-pagination')) {
                 pager.addEventListener('hmi-change', (event) => {
                     console.log('pagination hmi-change', event.detail);

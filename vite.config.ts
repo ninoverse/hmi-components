@@ -180,6 +180,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/code/code.react.ts',
                 ),
+                'wc/combobox': resolve(
+                    dirname,
+                    'src/elements/combobox/combobox.ts',
+                ),
+                'react/combobox': resolve(
+                    dirname,
+                    'src/elements/combobox/combobox.react.ts',
+                ),
                 'wc/confirm-dialog': resolve(
                     dirname,
                     'src/elements/confirm-dialog/confirm-dialog.ts',
