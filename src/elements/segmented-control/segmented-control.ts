@@ -63,8 +63,9 @@ export class HmiSegmentedControl extends HmiFormField {
 
     protected readonly formKind: FormKind = 'text';
 
-    /** The segments. Set it as a property; a JSON attribute is accepted. @default [] */
-    @property({ type: Array }) accessor options: SegmentedControlOption[] = [];
+    /** The segments. A property only: there is no attribute. @default [] */
+    @property({ type: Array, attribute: false })
+    accessor options: SegmentedControlOption[] = [];
 
     /** The chosen segment's value, or `''` for none. The attribute is the initial value. @default '' */
     @property() accessor value = '';

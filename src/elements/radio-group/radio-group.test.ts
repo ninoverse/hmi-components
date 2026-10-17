@@ -70,10 +70,13 @@ describe('hmi-radio-group', () => {
         expect(part(el, 'base').getAttribute('role')).toBe('radiogroup');
     });
 
-    it('accepts options as a JSON attribute', async () => {
+    it('takes options as a property only: an options attribute is ignored', async () => {
         const el = await fixture(
             html`<hmi-radio-group options='[{"value":"a","label":"A"}]'></hmi-radio-group>`,
         );
+        expect(radios(el)).toHaveLength(0);
+        el.options = [{ value: 'a', label: 'A' }];
+        await settle(el);
         expect(radios(el)).toHaveLength(1);
     });
 
