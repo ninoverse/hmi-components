@@ -128,6 +128,7 @@ const rangeToISO = (r: DateRange): DateRangeISO => ({
  * @example
  * <DatePicker onChange={setDate} />
  * <DatePicker mode="range" onChange={setRange} />
+ * @deprecated Use `DatePicker` from `@ninoverse/hmi-components/react/date-picker`. Removed in 6.0.0.
  */
 export function DatePicker(props: DatePickerProps) {
     const {

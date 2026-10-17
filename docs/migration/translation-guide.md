@@ -279,7 +279,7 @@ Wrapper prop = `on` + PascalCase of the event minus `hmi-`.
 | checkbox, radio, switch | `onChange(boolean)` | `hmi-change` | `{ checked: boolean }` (`value` is the submitted string) |
 | radio-group, segmented-control, select, stepper, tabs | `onChange(T)` | `hmi-change` | `{ value: T }` |
 | combobox | `onChange(T \| null)` | `hmi-change`; `hmi-input` for the query text | `{ value: string }` (`''` for none, where v5 passed `null`) / `{ value: string }` |
-| date-picker | `onChange(date \| range \| null)` | `hmi-change` | `{ value: string \| DateRangeISO \| null }` |
+| date-picker | `onChange(date \| range \| null)` | `hmi-change` | `{ value: string }` (`YYYY-MM-DD`, `''` for none, where v5 passed an ISO date-time or `null`) / `{ value: { start: string, end: string \| null } \| null }` in `range` mode |
 | file-upload | `onChange(FileDescriptor[])` | `hmi-change` | `{ value: FileDescriptor[] }` |
 | pagination | `onChange(page)` | `hmi-change` | `{ value: number }` |
 | multi-input | `onComplete(string)` | `hmi-complete` | `{ value: string }` |
@@ -607,6 +607,21 @@ so options that arrive after the value fill the field in, and options replaced b
 search never overwrite text the user is typing. A close without a choice puts the label back.
 `--listbox-bg` is the list's surface: the lowest surface under the solid material, as v5
 painted it, and the strong panel surface under glass and liquid, as `--drawer-bg` is.
+
+`hmi-date-picker` is built on `hmi-popover`, as the select is: the trigger is a slotted `<button>`, the
+calendar is the popover's content, and the picker stops the popover's `hmi-open-change` and emits its own.
+The calendar is rendered only while the picker is open, because it needs today and `render()` may not call
+`new Date()` (SSR and hydration would disagree); `willUpdate` reads the clock as `open` turns on, and builds
+the view on the month of the value, else today, every time. Dates are days, not instants: `shared/dates.ts`
+does the calendar maths on year, month and day at local midnight, so no daylight-saving change or time zone
+moves a date. v5 reported `toISOString()` of local midnight, whose date part is the day before in every zone
+east of UTC; the element reports `YYYY-MM-DD`, as `<input type="date">` does, and reads a `Date` or an ISO
+date-time (a v5 value) as its local day. The days are `role="gridcell"` cells of a `role="grid"` that take
+real focus, one in the Tab order (v5 kept focus on the grid and drew a ring on a virtual day), so the arrow
+keys, Home, End, PageUp and PageDown move the focus itself and a screen reader reads the day. A day out of
+`min`/`max` is `aria-disabled` and still focusable, so the arrows cross the bound. A range's partial state
+is the value: the first pick fires `hmi-change` with `end: null` and keeps the calendar open, the second
+closes it, and `required` counts a range as chosen only with both ends.
 
 The modal's machinery is the `HmiDialog` base class in `src/elements/shared/dialog.ts`; the dialog group (modal, drawer, later command-palette) extends it with its own tag, styles and body. A dialog built this way is controlled for now (`TODO.md`, "Controlled or
 element-owned state"): `#requestClose` only emits, so `open` stays `true` until

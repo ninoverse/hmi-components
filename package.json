@@ -370,6 +370,10 @@
             "types": "./dist/elements/context-menu/context-menu.react.d.ts",
             "import": "./dist/react/context-menu.js"
         },
+        "./react/date-picker": {
+            "types": "./dist/elements/date-picker/date-picker.react.d.ts",
+            "import": "./dist/react/date-picker.js"
+        },
         "./react/divider": {
             "types": "./dist/elements/divider/divider.react.d.ts",
             "import": "./dist/react/divider.js"
@@ -814,6 +818,10 @@
         "./wc/context-menu": {
             "types": "./dist/elements/context-menu/context-menu.d.ts",
             "import": "./dist/wc/context-menu.js"
+        },
+        "./wc/date-picker": {
+            "types": "./dist/elements/date-picker/date-picker.d.ts",
+            "import": "./dist/wc/date-picker.js"
         },
         "./wc/divider": {
             "types": "./dist/elements/divider/divider.d.ts",
