@@ -66,6 +66,7 @@ const CheckIcon = () => (
  *
  * @example
  * <Select options={options} value={val} onChange={setVal} />
+ * @deprecated Use `Select` from `@ninoverse/hmi-components/react/select`. Removed in 6.0.0.
  */
 export function Select<T extends string = string>({
     value,

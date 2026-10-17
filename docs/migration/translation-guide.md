@@ -567,6 +567,27 @@ move focus to the first enabled item. The browser gives focus back on close only
 to what had it when that was inside the popover in the node tree, and the menu is
 slotted, so the element restores it.
 
+`hmi-select` composes `hmi-popover`, `hmi-menu` and `hmi-menu-item` in its own root, and
+extends `HmiFormField`. The trigger is a native `<button slot="trigger">` in that root, so
+the popover sets `aria-expanded` on it and the chevron's `[aria-expanded='true']` selector
+in the select's own styles still works. The select owns `value` and `open`: it listens for
+the popover's `hmi-open-change`, stops it and fires its own, so what leaves the element is
+the select's event, and `open` set from code reaches the popover and fires nothing. The
+chosen option is the item with `checked`, a `menuitemradio`, and its check mark is the
+item's `shortcut` slot, as v5 had it. A slotted node renders in one place, so
+`label-<value>` and `icon-<value>` are the list's and the trigger shows the label text
+(the `selected-<value>` slot that would give the trigger rich content is in `TODO.md`).
+An icon slot sits in the select's own box and `slotchange` hides it while empty: a slot
+forwarded into the item's `icon` slot is one assigned node, which the item would never
+see as empty. The options have `tabindex="-1"`, so Tab from the list leaves the select
+instead of walking its rows: Tab closes the list and puts focus on the trigger, from
+where the browser's Tab goes on. A list the keyboard opens (Enter, Space, ArrowDown,
+ArrowUp) focuses the chosen option, else the first enabled one. A list a pointer opens
+leaves focus on the trigger, as v5's did, and ArrowDown or ArrowUp then moves it in:
+Chromium paints the focus ring on an item that script focus reaches, whatever opened the
+list, and `focus({ focusVisible })` is not read yet. A close gives focus back to the
+trigger when it is on an option or nowhere.
+
 The modal's machinery is the `HmiDialog` base class in `src/elements/shared/dialog.ts`; the dialog group (modal, drawer, later command-palette) extends it with its own tag, styles and body. A dialog built this way is controlled for now (`TODO.md`, "Controlled or
 element-owned state"): `#requestClose` only emits, so `open` stays `true` until
 the consumer sets it, and `#onClose` shows the `<dialog>` again when the browser

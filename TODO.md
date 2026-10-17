@@ -372,6 +372,33 @@ new element that reflects `align` needs the same reset.
 
 ---
 
+## `hmi-select`: a `selected-<value>` slot for the trigger
+
+A slotted node renders in one place, and the select shows the chosen option twice: in
+the list and in the trigger. `hmi-select` shows the chosen option's `label` text in the
+trigger, and `label-<value>` and `icon-<value>` fill the list's rows only, so what v5
+showed in the trigger, the option's icon and any rich label, is not there. It was the
+maintainer's choice for the first release: a text trigger, the simplest.
+
+To do, when someone needs an icon or rich content in the trigger: an optional slot
+`selected-<value>` whose content replaces the trigger's for that option, falling back to
+the label text. It is additive, so it breaks nothing:
+
+```html
+<hmi-select name="region" .options=${options}>
+    <svg slot="icon-eu">…EU flag…</svg>
+    <span slot="selected-eu"><svg>…EU flag…</svg> EU West</span>
+</hmi-select>
+```
+
+The price is writing the icon twice, once per place. The alternative the maintainer
+passed on, moving `icon-<value>` into the trigger while that option is chosen, writes it
+once but leaves the chosen row without its icon in the open list. Add the slot to the
+class JSDoc (`@slot selected-<value>`), the story and the translation guide's select
+paragraph, with a test that the trigger shows the slotted content.
+
+---
+
 ## Controlled or element-owned state, before v6
 
 **Do this last, before the v6 flip.** `.claude/rules/lit-elements.md` says an
@@ -397,7 +424,7 @@ it. `hmi-popover` is not in it: it is a `popover="auto"`, which the browser clos
 an outside click and Escape and cannot be stopped from, so it owns its `open` and
 `hmi-open-change` reports the change. Nor are `hmi-tooltip`, `hmi-hover-card` and `hmi-context-menu`:
 the pointer, focus or a right-click open them, and they close on Escape or an
-outside press, so they own their `open` too. Nor is `hmi-table`: v5 owned its sort state, and so does the element. If the dialogs become element-owned, the
+outside press, so they own their `open` too. Nor is `hmi-table`: v5 owned its sort state, and so does the element. Nor is `hmi-select`: a form control owns its value, and it owns `open` as the popover does. If the dialogs become element-owned, the
 whole overlay family then works one way.
 
 To do: decide, once, for these elements, whether they stay controlled or become

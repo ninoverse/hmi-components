@@ -238,6 +238,13 @@ export {
     type SegmentedControlValueDetail,
 } from '../elements/segmented-control/segmented-control.react.js';
 export {
+    Select,
+    type SelectAlign,
+    type SelectChangeDetail,
+    type SelectOpenChangeDetail,
+    type SelectOption,
+} from '../elements/select/select.react.js';
+export {
     Sidebar,
     type SidebarGroup,
     type SidebarItem,

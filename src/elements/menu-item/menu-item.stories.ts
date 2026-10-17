@@ -3,21 +3,22 @@ import { html } from 'lit';
 import './menu-item.js';
 import type { HmiMenuItem } from './menu-item.js';
 
-type Args = Pick<HmiMenuItem, 'danger' | 'disabled' | 'shortcut'>;
+type Args = Pick<HmiMenuItem, 'checked' | 'danger' | 'disabled' | 'shortcut'>;
 
 const meta = {
     title: 'Components/Overlays/MenuItem',
     component: 'hmi-menu-item',
     tags: ['autodocs'],
-    args: { danger: false, disabled: false, shortcut: '⌘S' },
+    args: { checked: false, danger: false, disabled: false, shortcut: '⌘S' },
     argTypes: {
+        checked: { control: 'boolean' },
         danger: { control: 'boolean' },
         disabled: { control: 'boolean' },
         shortcut: { control: 'text' },
     },
     render: (args) =>
         html`<div style="width: 260px; display: flex; flex-direction: column">
-                <hmi-menu-item ?danger=${args.danger} ?disabled=${args.disabled} shortcut=${args.shortcut}>Save</hmi-menu-item>
+                <hmi-menu-item ?checked=${args.checked} ?danger=${args.danger} ?disabled=${args.disabled} shortcut=${args.shortcut}>Save</hmi-menu-item>
         </div>`,
     parameters: {
         docs: {
@@ -37,6 +38,20 @@ export const Default: Story = {};
 /** `danger` styles a destructive action. */
 export const Danger: Story = {
     args: { danger: true, shortcut: '⌫' },
+};
+
+/** `checked` makes the item a `menuitemradio` with `aria-checked`, for the chosen one of a group. It paints no mark: show it in the `shortcut` slot. */
+export const Checked: Story = {
+    args: { checked: true, shortcut: '' },
+    render: () =>
+        html`<div style="width: 260px; display: flex; flex-direction: column">
+                <hmi-menu-item>Free</hmi-menu-item>
+                <hmi-menu-item checked>
+                    Pro
+                    <svg slot="shortcut" viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8.5l3 3 7-7" /></svg>
+                </hmi-menu-item>
+                <hmi-menu-item>Team</hmi-menu-item>
+        </div>`,
 };
 
 /** A disabled item takes no focus and no click. */

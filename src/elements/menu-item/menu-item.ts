@@ -1,5 +1,6 @@
 import { html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { baseStyles } from '../shared/base.styles.js';
 import { toggleEmpty } from '../shared/dom.js';
 import { styles } from './menu-item.styles.js';
@@ -14,6 +15,11 @@ import { styles } from './menu-item.styles.js';
  * Use it inside `hmi-menu`, `hmi-popover` or `hmi-context-menu`. An item inside a
  * context menu closes it; one inside a popover leaves that to the page, which
  * sets the popover's `open` to `false`.
+ *
+ * `checked` marks the item as the chosen one of a group, as in a select's list:
+ * the row becomes a `menuitemradio` with `aria-checked="true"`, which is how
+ * assistive technology learns which one is chosen. It paints nothing, so show the
+ * mark yourself, in the `shortcut` slot.
  *
  * `shortcut` is a plain-text default of the `shortcut` slot, and an
  * `<svg slot="icon">` is sized to the row's text. `aria-label` and other
@@ -46,6 +52,9 @@ export class HmiMenuItem extends LitElement {
     /** Disables the item: it takes no focus and no click. @default false */
     @property({ type: Boolean, reflect: true }) accessor disabled = false;
 
+    /** Marks the item as the chosen one: a `menuitemradio` with `aria-checked`. It paints no mark. @default false */
+    @property({ type: Boolean, reflect: true }) accessor checked = false;
+
     /** A trailing hint, such as a keyboard shortcut: the default of the `shortcut` slot. */
     @property() accessor shortcut = '';
 
@@ -54,7 +63,8 @@ export class HmiMenuItem extends LitElement {
             part="base"
             class="base"
             type="button"
-            role="menuitem"
+            role=${this.checked ? 'menuitemradio' : 'menuitem'}
+            aria-checked=${ifDefined(this.checked ? 'true' : undefined)}
             ?disabled=${this.disabled}
         >
             <span part="icon" class="icon" hidden

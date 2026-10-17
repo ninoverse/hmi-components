@@ -121,7 +121,15 @@ export abstract class HmiFormField extends LitElement {
        `disabled` the author set. */
     formDisabledCallback(disabled: boolean): void {
         this.#fieldsetDisabled = disabled;
-        this.requestUpdate();
+        // The browser also calls this while the update that reflects `disabled` to
+        // its attribute is under way, and a request made then is dropped, which would
+        // leave a control rendered disabled after `disabled = false`: ask again once
+        // that update has finished.
+        if (this.isUpdatePending) {
+            void this.updateComplete.then(() => this.requestUpdate());
+        } else {
+            this.requestUpdate();
+        }
     }
 
     formResetCallback(): void {
