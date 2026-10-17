@@ -5803,6 +5803,1374 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/date-picker/date-picker.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Calendar date picker: a trigger that shows the chosen date, and a month calendar\nin a popover that opens under it. It is built from `hmi-popover`, so the calendar\nis a panel in the top layer that the page's overflow cannot clip. `mode` is\n`single` (one date, the default) or `range` (a start and an end).\n\nA date is its calendar day, never a moment: `value` is the plain `YYYY-MM-DD`\ntext of a native `<input type=\"date\">`, in the user's own calendar, so it does\nnot move with a time zone and a server reads the day the user clicked. `value`,\n`min` and `max` also take a `Date` (set as a property) or an ISO date-time, each\nread as its local day, which is how a v5 value reads back. In `range` mode `value`\nis a property, `{ start, end }`, with `end` `null` until the second date is\nchosen, and `null` for none; in `single` mode it is a string, `''` for none.\n\nA native form control: it submits `name=value` (a single date, or a range as JSON,\n`{\"start\":\"2026-05-15\",\"end\":\"2026-05-20\"}`; nothing while none is chosen),\n`form.reset()` restores `default-value`, and `required` makes an empty choice\ninvalid, with `required-message` as the text. A range counts as chosen only when\nboth ends are, so a start without an end is invalid while `required`. A non-empty\n`error` makes it invalid with that message.\n\nThe element owns `value`: choosing a date or a range fires `hmi-change` with\n`{ value }`, in the shape of `value`, only when it differs from what it held. In\n`single` mode choosing a date closes the calendar. In `range` mode the first date\nfires `hmi-change` with `end` `null` and keeps it open, the second closes it (the\nearlier of the two is the start), and a third starts a new range. To veto a\nchoice, set `value` back from a listener. It owns `open` too, which follows the\nuser; setting it from code opens or closes the calendar and fires nothing.\n\nThe calendar is a `dialog` holding the month, previous and next buttons for month\nand year, a `grid` of days and Today and Clear buttons. It is built when it opens,\non the month of the value (else today), and focus goes to the chosen day, else the\nfirst day of a range, else today. The arrow keys move focus by a day or a week,\nHome and End to the start and end of the week, PageUp and PageDown by a month, and\nShift with either by a year; Enter and Space choose. Escape closes the calendar\nand gives focus back to the trigger. A day before `min` or after `max` is\n`aria-disabled`: it takes focus, so the arrow keys cross the bound, and cannot be\nchosen. Today is `aria-current=\"date\"`.\n\n`locale` (a BCP 47 tag, default `en-GB`) sets the month and weekday names and the\ntrigger's text through `Intl`, and `week-start` the first day of the week, from 0\n(Sunday) to 6, default 1 (Monday). The names of the buttons are properties.",
+          "name": "HmiDatePicker",
+          "cssParts": [
+            {
+              "description": "The trigger `<button>`.",
+              "name": "base"
+            },
+            {
+              "description": "The calendar icon in the trigger.",
+              "name": "icon"
+            },
+            {
+              "description": "The trigger's text: the chosen date or range.",
+              "name": "value"
+            },
+            {
+              "description": "The trigger's text while nothing is chosen.",
+              "name": "placeholder"
+            },
+            {
+              "description": "The floating calendar panel.",
+              "name": "panel"
+            },
+            {
+              "description": "The row of month and year buttons and the month title.",
+              "name": "header"
+            },
+            {
+              "description": "A month or year button.",
+              "name": "nav"
+            },
+            {
+              "description": "The month and year.",
+              "name": "title"
+            },
+            {
+              "description": "A weekday heading.",
+              "name": "weekday"
+            },
+            {
+              "description": "The grid of days.",
+              "name": "grid"
+            },
+            {
+              "description": "One day. `data-selected`, `data-in-range`, `data-today`, `data-outside` and `data-focus` mark it.",
+              "name": "day"
+            },
+            {
+              "description": "The row of Today and Clear.",
+              "name": "footer"
+            },
+            {
+              "description": "The Today and Clear buttons.",
+              "name": "action"
+            },
+            {
+              "description": "The label.",
+              "name": "label"
+            },
+            {
+              "description": "The hint text.",
+              "name": "hint"
+            },
+            {
+              "description": "The error message.",
+              "name": "error"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "formKind",
+              "type": {
+                "text": "FormKind"
+              },
+              "privacy": "protected",
+              "readonly": true,
+              "description": "How `formValue` is turned into the submitted string.",
+              "default": "'text'",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "mode",
+              "type": {
+                "text": "DatePickerMode"
+              },
+              "default": "'single'",
+              "description": "One date, or a start and an end.",
+              "attribute": "mode",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "DatePickerValueInput"
+              },
+              "default": "''",
+              "description": "The chosen date as `YYYY-MM-DD` (`''` for none), or in `range` mode a `{ start, end }` property (`null` for none). Also a `Date` or an ISO date-time, as a property. The attribute is the initial value.",
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "defaultValue",
+              "type": {
+                "text": "| DatePickerValueInput\n        | undefined"
+              },
+              "description": "Initial value, and what `form.reset()` restores. Defaults to the value at first render.",
+              "attribute": "default-value"
+            },
+            {
+              "kind": "field",
+              "name": "min",
+              "type": {
+                "text": "DateInput | undefined"
+              },
+              "description": "The earliest day that can be chosen: `YYYY-MM-DD`, or a `Date` as a property.",
+              "attribute": "min"
+            },
+            {
+              "kind": "field",
+              "name": "max",
+              "type": {
+                "text": "DateInput | undefined"
+              },
+              "description": "The latest day that can be chosen: `YYYY-MM-DD`, or a `Date` as a property.",
+              "attribute": "max"
+            },
+            {
+              "kind": "field",
+              "name": "placeholder",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Pick a date'",
+              "description": "Trigger text while nothing is chosen.",
+              "attribute": "placeholder"
+            },
+            {
+              "kind": "field",
+              "name": "locale",
+              "type": {
+                "text": "string"
+              },
+              "default": "'en-GB'",
+              "description": "The language of the month and weekday names and the trigger's text: a BCP 47 tag.",
+              "attribute": "locale"
+            },
+            {
+              "kind": "field",
+              "name": "weekStart",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "description": "The first day of the week, 0 for Sunday to 6 for Saturday.",
+              "attribute": "week-start"
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the calendar is open.",
+              "attribute": "open",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "requiredMessage",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Please pick a date.'",
+              "description": "Text of the error a `required` picker reports while nothing is chosen.",
+              "attribute": "required-message"
+            },
+            {
+              "kind": "field",
+              "name": "prevYearLabel",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Previous year'",
+              "description": "Accessible name of the previous-year button.",
+              "attribute": "prev-year-label"
+            },
+            {
+              "kind": "field",
+              "name": "prevMonthLabel",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Previous month'",
+              "description": "Accessible name of the previous-month button.",
+              "attribute": "prev-month-label"
+            },
+            {
+              "kind": "field",
+              "name": "nextMonthLabel",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Next month'",
+              "description": "Accessible name of the next-month button.",
+              "attribute": "next-month-label"
+            },
+            {
+              "kind": "field",
+              "name": "nextYearLabel",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Next year'",
+              "description": "Accessible name of the next-year button.",
+              "attribute": "next-year-label"
+            },
+            {
+              "kind": "field",
+              "name": "todayLabel",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Today'",
+              "description": "Text of the button that chooses today.",
+              "attribute": "today-label"
+            },
+            {
+              "kind": "field",
+              "name": "clearLabel",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Clear'",
+              "description": "Text of the button that clears the choice.",
+              "attribute": "clear-label"
+            },
+            {
+              "kind": "field",
+              "name": "viewMonth",
+              "type": {
+                "text": "Date | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "focusDate",
+              "type": {
+                "text": "Date | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "today",
+              "type": {
+                "text": "Date | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "hoverEnd",
+              "type": {
+                "text": "Date | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "trigger",
+              "type": {
+                "text": "HTMLButtonElement"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "list",
+              "type": {
+                "text": "HmiPopover"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "#initialValue",
+              "privacy": "private",
+              "type": {
+                "text": "DatePickerValueInput"
+              },
+              "default": "''"
+            },
+            {
+              "kind": "field",
+              "name": "#formats",
+              "privacy": "private",
+              "type": {
+                "text": "Formats | undefined"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "formValue",
+              "type": {
+                "text": "unknown"
+              },
+              "privacy": "protected",
+              "description": "The value to submit.",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "control",
+              "type": {
+                "text": "ValidatableControl | null"
+              },
+              "privacy": "protected",
+              "description": "The native control whose validity is mirrored, once rendered.",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "resetFormValue",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "description": "Puts the value back to its initial state (`form.reset()`).",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "restoreFormValue",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "state",
+                  "type": {
+                    "text": "string | File | FormData | null"
+                  }
+                }
+              ],
+              "description": "Restores a value the browser saved (history, autofill). Optional.",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "syncForm",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "description": "Reports the chosen value, and a missing choice or an error anchored on the trigger.",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "formDisabledCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "disabled",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ],
+              "description": "A fieldset that disables the picker closes the calendar too.",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#selection",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "Selection | undefined"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#output",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "DatePickerValue"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "selection",
+                  "type": {
+                    "text": "Selection"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#bounds",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "{ min: Date | null; max: Date | null }"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#outOfBounds",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "day",
+                  "type": {
+                    "text": "Date"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#week",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "number"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#intl",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "Formats"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#initCalendar",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#sameSelection",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "a",
+                  "type": {
+                    "text": "Selection | undefined"
+                  }
+                },
+                {
+                  "name": "b",
+                  "type": {
+                    "text": "Selection | undefined"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#choose",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "next",
+                  "type": {
+                    "text": "Selection | undefined"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#pick",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "day",
+                  "type": {
+                    "text": "Date"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#clear",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#setOpen",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "open",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#focusDay",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "Promise<void>"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#restoreFocus",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#onPopoverOpenChange",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "CustomEvent<PopoverOpenChangeDetail>"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#moveTo",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "day",
+                  "type": {
+                    "text": "Date"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#navigate",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "months",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onGridKeydown",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "KeyboardEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#inRange",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "day",
+                  "type": {
+                    "text": "Date"
+                  }
+                },
+                {
+                  "name": "selection",
+                  "type": {
+                    "text": "Selection | undefined"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "renderLabel",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "TemplateResult | typeof nothing"
+                }
+              },
+              "description": "The label names the trigger together with the chosen date.",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#triggerText",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "string | undefined"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "selection",
+                  "type": {
+                    "text": "Selection | undefined"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#renderDay",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "TemplateResult"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "day",
+                  "type": {
+                    "text": "Date"
+                  }
+                },
+                {
+                  "name": "selection",
+                  "type": {
+                    "text": "Selection | undefined"
+                  }
+                },
+                {
+                  "name": "view",
+                  "type": {
+                    "text": "Date"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#renderCalendar",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "TemplateResult"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "name",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "formAssociated",
+              "type": {
+                "text": "boolean"
+              },
+              "static": true,
+              "default": "true",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "shadowRootOptions",
+              "type": {
+                "text": "object"
+              },
+              "static": true,
+              "default": "{ ...LitElement.shadowRootOptions, delegatesFocus: true, }",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Name under which the value is submitted with the form.",
+              "attribute": "name",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Disables the control.",
+              "attribute": "disabled",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "The control must have a value for the form to be valid.",
+              "attribute": "required",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Text shown above the control.",
+              "attribute": "label",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "hint",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Helper text shown below the control; hidden while `error` is set.",
+              "attribute": "hint",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "error",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Error message shown below the control. Setting it makes the control invalid.",
+              "attribute": "error",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "internals",
+              "privacy": "protected",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "#fieldsetDisabled",
+              "privacy": "private",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "formResetCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "formStateRestoreCallback",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "state",
+                  "type": {
+                    "text": "string | File | FormData | null"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isDisabled",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "protected",
+              "description": "Whether the control is disabled, by `disabled` or an ancestor fieldset.",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "describedBy",
+              "type": {
+                "text": "string | undefined"
+              },
+              "privacy": "protected",
+              "description": "The `id` of the hint or error element to point `aria-describedby` at.",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "invalid",
+              "type": {
+                "text": "'true' | undefined"
+              },
+              "privacy": "protected",
+              "description": "`aria-invalid` for the control.",
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "form",
+              "type": {
+                "text": "HTMLFormElement | null"
+              },
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "validity",
+              "type": {
+                "text": "ValidityState"
+              },
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "validationMessage",
+              "type": {
+                "text": "string"
+              },
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "willValidate",
+              "type": {
+                "text": "boolean"
+              },
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "labels",
+              "type": {
+                "text": "NodeList"
+              },
+              "readonly": true,
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "checkValidity",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              },
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "reportValidity",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              },
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "renderMessage",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "TemplateResult | typeof nothing"
+                }
+              },
+              "description": "The error (as an alert) or, without one, the hint.",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            }
+          ],
+          "events": [
+            {
+              "type": {
+                "text": "CustomEvent<DatePickerChangeDetail>"
+              },
+              "description": "The user chose a different date or range, or cleared it.",
+              "name": "hmi-change"
+            },
+            {
+              "type": {
+                "text": "CustomEvent<DatePickerOpenChangeDetail>"
+              },
+              "description": "The user opened or closed the calendar. Not cancelable, and not fired when `open` is set from code.",
+              "name": "hmi-open-change"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "mode",
+              "type": {
+                "text": "DatePickerMode"
+              },
+              "default": "'single'",
+              "description": "One date, or a start and an end.",
+              "fieldName": "mode"
+            },
+            {
+              "name": "value",
+              "type": {
+                "text": "DatePickerValueInput"
+              },
+              "default": "''",
+              "description": "The chosen date as `YYYY-MM-DD` (`''` for none), or in `range` mode a `{ start, end }` property (`null` for none). Also a `Date` or an ISO date-time, as a property. The attribute is the initial value.",
+              "fieldName": "value"
+            },
+            {
+              "name": "default-value",
+              "type": {
+                "text": "| DatePickerValueInput\n        | undefined"
+              },
+              "description": "Initial value, and what `form.reset()` restores. Defaults to the value at first render.",
+              "fieldName": "defaultValue"
+            },
+            {
+              "name": "min",
+              "type": {
+                "text": "DateInput | undefined"
+              },
+              "description": "The earliest day that can be chosen: `YYYY-MM-DD`, or a `Date` as a property.",
+              "fieldName": "min"
+            },
+            {
+              "name": "max",
+              "type": {
+                "text": "DateInput | undefined"
+              },
+              "description": "The latest day that can be chosen: `YYYY-MM-DD`, or a `Date` as a property.",
+              "fieldName": "max"
+            },
+            {
+              "name": "placeholder",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Pick a date'",
+              "description": "Trigger text while nothing is chosen.",
+              "fieldName": "placeholder"
+            },
+            {
+              "name": "locale",
+              "type": {
+                "text": "string"
+              },
+              "default": "'en-GB'",
+              "description": "The language of the month and weekday names and the trigger's text: a BCP 47 tag.",
+              "fieldName": "locale"
+            },
+            {
+              "name": "week-start",
+              "type": {
+                "text": "number"
+              },
+              "default": "1",
+              "description": "The first day of the week, 0 for Sunday to 6 for Saturday.",
+              "fieldName": "weekStart"
+            },
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the calendar is open.",
+              "fieldName": "open"
+            },
+            {
+              "name": "required-message",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Please pick a date.'",
+              "description": "Text of the error a `required` picker reports while nothing is chosen.",
+              "fieldName": "requiredMessage"
+            },
+            {
+              "name": "prev-year-label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Previous year'",
+              "description": "Accessible name of the previous-year button.",
+              "fieldName": "prevYearLabel"
+            },
+            {
+              "name": "prev-month-label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Previous month'",
+              "description": "Accessible name of the previous-month button.",
+              "fieldName": "prevMonthLabel"
+            },
+            {
+              "name": "next-month-label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Next month'",
+              "description": "Accessible name of the next-month button.",
+              "fieldName": "nextMonthLabel"
+            },
+            {
+              "name": "next-year-label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Next year'",
+              "description": "Accessible name of the next-year button.",
+              "fieldName": "nextYearLabel"
+            },
+            {
+              "name": "today-label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Today'",
+              "description": "Text of the button that chooses today.",
+              "fieldName": "todayLabel"
+            },
+            {
+              "name": "clear-label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Clear'",
+              "description": "Text of the button that clears the choice.",
+              "fieldName": "clearLabel"
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Name under which the value is submitted with the form.",
+              "fieldName": "name",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "name": "disabled",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Disables the control.",
+              "fieldName": "disabled",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "name": "required",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "The control must have a value for the form to be valid.",
+              "fieldName": "required",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Text shown above the control.",
+              "fieldName": "label",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "name": "hint",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Helper text shown below the control; hidden while `error` is set.",
+              "fieldName": "hint",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            },
+            {
+              "name": "error",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Error message shown below the control. Setting it makes the control invalid.",
+              "fieldName": "error",
+              "inheritedFrom": {
+                "name": "HmiFormField",
+                "module": "src/elements/shared/form.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "HmiFormField",
+            "module": "/src/elements/shared/form.js"
+          },
+          "tagName": "hmi-date-picker",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "DateInput",
+          "declaration": {
+            "name": "DateInput",
+            "module": "../shared/dates.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "HmiDatePicker",
+          "declaration": {
+            "name": "HmiDatePicker",
+            "module": "src/elements/date-picker/date-picker.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-date-picker",
+          "declaration": {
+            "name": "HmiDatePicker",
+            "module": "src/elements/date-picker/date-picker.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/divider/divider.ts",
       "declarations": [
         {

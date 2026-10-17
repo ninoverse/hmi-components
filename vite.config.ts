@@ -204,6 +204,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/context-menu/context-menu.react.ts',
                 ),
+                'wc/date-picker': resolve(
+                    dirname,
+                    'src/elements/date-picker/date-picker.ts',
+                ),
+                'react/date-picker': resolve(
+                    dirname,
+                    'src/elements/date-picker/date-picker.react.ts',
+                ),
                 'wc/divider': resolve(
                     dirname,
                     'src/elements/divider/divider.ts',

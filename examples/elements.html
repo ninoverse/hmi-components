@@ -1385,6 +1385,22 @@ export function Example() {
         </section>
 
         <section>
+            <h2>DatePicker</h2>
+            <!-- The first two are the React demo's: a single date and a range. A date is
+                 plain YYYY-MM-DD text; the range is a { start, end } object, read from
+                 hmi-change, which is logged to the console with hmi-open-change. The others bound the days with min and max, and write
+                 the calendar in another language with a Sunday-first week. -->
+            <div style="display: flex; gap: 24px; flex-wrap: wrap; align-items: flex-start; padding-bottom: 400px; width: 100%">
+                <hmi-date-picker id="date-single" label="Single date" value="2026-05-15" style="width: 256px"></hmi-date-picker>
+                <hmi-date-picker id="date-range" label="Date range" mode="range" placeholder="Pick a range" style="width: 320px"></hmi-date-picker>
+                <hmi-date-picker id="date-bounded" label="Only 10–25 May" hint="Other days cannot be chosen." value="2026-05-15" min="2026-05-10" max="2026-05-25" style="width: 256px"></hmi-date-picker>
+                <hmi-date-picker id="date-it" label="Italiano" locale="it-IT" week-start="0" today-label="Oggi" clear-label="Cancella" prev-year-label="Anno precedente" prev-month-label="Mese precedente" next-month-label="Mese successivo" next-year-label="Anno successivo" placeholder="Scegli una data" style="width: 256px"></hmi-date-picker>
+                <hmi-date-picker id="date-locked" label="Disabled" disabled value="2026-05-15" style="width: 256px"></hmi-date-picker>
+                <p style="margin: 0; font-size: 13px; color: var(--on-surface-variant); width: 100%">Single: <strong id="date-single-value">2026-05-15</strong> · Range: <strong id="date-range-value">none</strong></p>
+            </div>
+        </section>
+
+        <section>
             <h2>List</h2>
             <!-- Items are a property. right-<id> takes rich content; reorderable adds
                  drag and Alt+Arrow reordering, and the page sets items back from
@@ -2064,6 +2080,18 @@ export function Example() {
             comboboxCity.addEventListener('hmi-input', (event) => console.log('combobox hmi-input', event.detail));
             comboboxCity.addEventListener('hmi-open-change', (event) => console.log('combobox hmi-open-change', event.detail));
             document.getElementById('combobox-rich').options = comboboxCities;
+            const dateSingle = document.getElementById('date-single');
+            dateSingle.addEventListener('hmi-change', (event) => {
+                console.log('date-picker hmi-change', event.detail);
+                document.getElementById('date-single-value').textContent = event.detail.value || 'none';
+            });
+            dateSingle.addEventListener('hmi-open-change', (event) => console.log('date-picker hmi-open-change', event.detail));
+            const dateRange = document.getElementById('date-range');
+            dateRange.addEventListener('hmi-change', (event) => {
+                console.log('date-picker range hmi-change', event.detail);
+                const range = event.detail.value;
+                document.getElementById('date-range-value').textContent = range ? `${range.start} – ${range.end ?? '…'}` : 'none';
+            });
             for (const pager of document.querySelectorAll('hmi-pagination')) {
                 pager.addEventListener('hmi-change', (event) => {
                     console.log('pagination hmi-change', event.detail);

@@ -89,6 +89,17 @@ export {
     type ContextMenuOpenChangeDetail,
 } from '../elements/context-menu/context-menu.react.js';
 export {
+    type DateInput,
+    DatePicker,
+    type DatePickerChangeDetail,
+    type DatePickerMode,
+    type DatePickerOpenChangeDetail,
+    type DatePickerRange,
+    type DatePickerRangeInput,
+    type DatePickerValue,
+    type DatePickerValueInput,
+} from '../elements/date-picker/date-picker.react.js';
+export {
     Divider,
     type DividerAlign,
     type DividerOrientation,
