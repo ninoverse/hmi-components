@@ -80,6 +80,10 @@
        glass and liquid still reach the drawer. */
     --drawer-bg: var(--surface-container-lowest);
 
+    /* The combobox listbox's surface: v5 painted it with the lowest surface too.
+       The materials override it with their strong surface. */
+    --listbox-bg: var(--surface-container-lowest);
+
     /* Per-element hooks a structure may override (the journal structure does) */
     --list-divider-style: solid;
     --progress-track-border: none;
