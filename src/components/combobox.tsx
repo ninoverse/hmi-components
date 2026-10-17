@@ -56,6 +56,7 @@ const defaultFilter = <T extends string>(
  *
  * @example
  * <Combobox options={cities} onChange={setCity} placeholder="City" />
+ * @deprecated Use `Combobox` from `@ninoverse/hmi-components/react/combobox`. Removed in 6.0.0.
  */
 export function Combobox<T extends string = string>({
     value,

@@ -358,6 +358,10 @@
             "types": "./dist/elements/code/code.react.d.ts",
             "import": "./dist/react/code.js"
         },
+        "./react/combobox": {
+            "types": "./dist/elements/combobox/combobox.react.d.ts",
+            "import": "./dist/react/combobox.js"
+        },
         "./react/confirm-dialog": {
             "types": "./dist/elements/confirm-dialog/confirm-dialog.react.d.ts",
             "import": "./dist/react/confirm-dialog.js"
@@ -798,6 +802,10 @@
         "./wc/code": {
             "types": "./dist/elements/code/code.d.ts",
             "import": "./dist/wc/code.js"
+        },
+        "./wc/combobox": {
+            "types": "./dist/elements/combobox/combobox.d.ts",
+            "import": "./dist/wc/combobox.js"
         },
         "./wc/confirm-dialog": {
             "types": "./dist/elements/confirm-dialog/confirm-dialog.d.ts",

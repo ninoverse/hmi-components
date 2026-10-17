@@ -278,7 +278,7 @@ Wrapper prop = `on` + PascalCase of the event minus `hmi-`.
 | value-scale-selector | `onChange(number)` | `hmi-change` | `{ value: number }` |
 | checkbox, radio, switch | `onChange(boolean)` | `hmi-change` | `{ checked: boolean }` (`value` is the submitted string) |
 | radio-group, segmented-control, select, stepper, tabs | `onChange(T)` | `hmi-change` | `{ value: T }` |
-| combobox | `onChange(T \| null)` | `hmi-change`; `hmi-input` for the query text | `{ value: T \| null }` / `{ value: string }` |
+| combobox | `onChange(T \| null)` | `hmi-change`; `hmi-input` for the query text | `{ value: string }` (`''` for none, where v5 passed `null`) / `{ value: string }` |
 | date-picker | `onChange(date \| range \| null)` | `hmi-change` | `{ value: string \| DateRangeISO \| null }` |
 | file-upload | `onChange(FileDescriptor[])` | `hmi-change` | `{ value: FileDescriptor[] }` |
 | pagination | `onChange(page)` | `hmi-change` | `{ value: number }` |
@@ -587,6 +587,26 @@ leaves focus on the trigger, as v5's did, and ArrowDown or ArrowUp then moves it
 Chromium paints the focus ring on an item that script focus reaches, whatever opened the
 list, and `focus({ focusVisible })` is not read yet. A close gives focus back to the
 trigger when it is on an option or nowhere.
+
+`hmi-combobox` is not built on `hmi-popover`: its field is the trigger, and `hmi-popover`
+toggles on a click on its trigger and light-dismisses on a press there, while the combobox
+keeps its list open on a click in the field and keeps focus in it. The list is its own
+`popover="manual"` panel, placed under the bordered field by `PositionController` (6px
+below, `matchWidth`) and closed by the element: on an outside press (a `pointerdown` on the
+document, checked with `composedPath()`, listening only while open), on Escape, on a choice
+and when the field loses focus. The field is a native `<input role="combobox">` in the
+combobox's own root, not an `hmi-input`: `aria-controls` and `aria-activedescendant` cannot
+cross a shadow boundary into the list. The highlighted option is the active descendant and
+`aria-selected` marks the chosen one (v5 put it on the highlighted one). A `mousedown` on an
+option, on the list and on the clear button is prevented, so the field never loses focus to
+them and a blur always means the user left. `query` is the text in the field, and it follows
+`value`: v5's `useState(selected?.label)` ran once, so a `value` set from outside left the
+field stale. `willUpdate` puts the chosen label into the field when `value` changes, and
+when `options` change while the field still shows the label it last put there (`#synced`),
+so options that arrive after the value fill the field in, and options replaced by a server
+search never overwrite text the user is typing. A close without a choice puts the label back.
+`--listbox-bg` is the list's surface: the lowest surface under the solid material, as v5
+painted it, and the strong panel surface under glass and liquid, as `--drawer-bg` is.
 
 The modal's machinery is the `HmiDialog` base class in `src/elements/shared/dialog.ts`; the dialog group (modal, drawer, later command-palette) extends it with its own tag, styles and body. A dialog built this way is controlled for now (`TODO.md`, "Controlled or
 element-owned state"): `#requestClose` only emits, so `open` stays `true` until

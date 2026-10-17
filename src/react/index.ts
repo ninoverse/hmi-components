@@ -69,6 +69,15 @@ export {
 } from '../elements/chip/chip.react.js';
 export { Code } from '../elements/code/code.react.js';
 export {
+    Combobox,
+    type ComboboxChangeDetail,
+    type ComboboxFilter,
+    type ComboboxFilterFn,
+    type ComboboxInputDetail,
+    type ComboboxOpenChangeDetail,
+    type ComboboxOption,
+} from '../elements/combobox/combobox.react.js';
+export {
     ConfirmDialog,
     type ConfirmDialogCancelDetail,
     type ConfirmDialogConfirmDetail,
