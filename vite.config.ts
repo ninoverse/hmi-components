@@ -596,6 +596,7 @@ export default defineConfig({
                     dirname,
                     'src/elements/textarea/textarea.react.ts',
                 ),
+                'wc/theme': resolve(dirname, 'src/elements/shared/theme.ts'),
                 'wc/timeline': resolve(
                     dirname,
                     'src/elements/timeline/timeline.ts',

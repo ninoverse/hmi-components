@@ -52,7 +52,8 @@ Existing exports do not change. Each migrated element adds two subpaths.
   "exports": {
     ".":                 { "types": "./dist/index.d.ts", "import": "./dist/index.js" },           // React, unchanged
     "./<kebab>":         { "types": "./dist/components/<camel>.d.ts", "import": "./dist/<camel>.js" }, // React, unchanged
-    "./theme":           { "types": "./dist/theme.d.ts", "import": "./dist/theme.js" },           // unchanged
+    "./theme":           { "types": "./dist/theme.d.ts", "import": "./dist/theme.js" },           // React ThemeProvider, unchanged until the flip
+    "./wc/theme":        { "types": "./dist/elements/shared/theme.d.ts", "import": "./dist/wc/theme.js" }, // the theme module (phase 11)
     "./wc":              { "types": "./dist/elements/index.d.ts", "import": "./dist/wc/index.js" },   // registers all migrated elements
     "./wc/<kebab>":      { "types": "./dist/elements/<kebab>/<kebab>.d.ts", "import": "./dist/wc/<kebab>.js" },
     "./react":           { "types": "./dist/react/index.d.ts", "import": "./dist/react/index.js" },
@@ -95,7 +96,7 @@ page. Both define the same tags; the second `customElements.define` throws.
     "./wc/<kebab>":    "./dist/wc/<kebab>.js",        // deprecated alias, one major
     "./react":         { "types": "./dist/react/index.d.ts", "import": "./dist/react/index.js" },
     "./react/<kebab>": { "types": "./dist/elements/<kebab>/<kebab>.react.d.ts", "import": "./dist/react/<kebab>.js" },
-    "./theme":         { "types": "./dist/wc/theme.d.ts", "import": "./dist/wc/theme.js" },
+    "./theme":         { "types": "./dist/elements/shared/theme.d.ts", "import": "./dist/wc/theme.js" },
     "./web-components": { "default": "./dist/hmi-components.iife.js" },   // now the Lit bundle
     "./base.css":      "./dist/base.css",
     "./style.css":     "./dist/base.css",             // transition alias, removed at v7
@@ -127,7 +128,7 @@ src/
 │   │   ├── chart.ts              # scales, renderCartesianGrid()      (phase 8)
 │   │   ├── positioning.ts        # PositionController                 (phase 9)
 │   │   ├── toast.ts              # toast store                        (phase 11)
-│   │   └── theme.ts              # setTheme/getTheme/subscribe        (phase 11)
+│   │   └── theme.ts              # setTheme/getTheme/subscribe/restoreTheme (phase 11)
 │   └── index.ts                  # registers every migrated element
 ├── react/
 │   ├── index.ts                  # re-exports every wrapper + useTheme
@@ -266,7 +267,7 @@ PR 2 was the only infrastructure PR; it added no elements. What it settled:
 - Theme token rebase: every `rem` in `constants.css`, `structure/*.css` and `material/*.css` is `calc(var(--hmi-base, 8px) * N)`; `--panel-*` and the journal hooks are defined in `constants.css` and overridden in `material/glass.css`, `material/liquid.css`, `structure/journal.css`; the material files no longer contain class or `body` selectors (backdrops moved to `base.css`).
 - `vite.config.ts` entries `wc/index` and `react/index` (element PRs add `wc/<kebab>`, `react/<kebab>`), `lit`/`@lit/*` external in the ESM build; declarations are **not** remapped — `exports.types` points at `dist/elements/…` (§3); `vite.elements.config.ts` builds `dist/hmi-elements.iife.js` with Lit bundled; `scripts/copy-css-plugin.ts` replaces the duplicated theme-copy plugin.
 - `custom-elements-manifest.config.mjs` (`litelement: true`, `packagejson: false`); `custom-elements.json` committed and excluded from Biome.
-- `vitest.config.ts`: `browser` project (Chromium, headless) for `*.test.ts`, `ssr` project (Node) for `*.ssr.test.ts`, `passWithNoTests`.
+- `vitest.config.ts`: `browser` project (Chromium, headless) for `*.test.ts`, `ssr` project (Node) for `*.ssr.test.ts`, both under `src/elements` and, since the theme hook, `src/react`; `passWithNoTests`.
 - Storybook swapped to `@storybook/web-components-vite` with `setCustomElementsManifest` in `preview.ts`. The React `*.stories.tsx` are no longer built (one framework per config); they stay in the frozen tree, type-checked, and the React demo page remains at `/demo/`. `@storybook/react-vite` is kept only for their types until the flip.
 - `.github/workflows/ci-gate.yml`: `lint`, `build`, Playwright Chromium install, `test`, `test:ssr`, manifest/base.css drift check.
 - `tsconfig.node.json` covers every config file and `scripts/*.ts`; Biome formats `accessor` decorators without configuration.
@@ -289,4 +290,4 @@ PR 2 was the only infrastructure PR; it added no elements. What it settled:
 - **Why do booleans ignore `"false"`?** That is HTML. `<hmi-button disabled="false">` is disabled, exactly like `<button disabled="false">`. String hosts set the property instead.
 - **Why one package instead of a separate React package?** The wrappers are a few lines each and share the element types; a second package would double the release pipeline for no consumer benefit. React is an optional peer.
 - **Why `hmi-input` and `hmi-change` on text inputs?** Native semantics that Angular, Vue and plain HTML consumers expect; v5's per-keystroke `onChange` was a React-ism.
-- **What happens to `ThemeProvider`?** Replaced by `setTheme`/`getTheme`/`subscribe` in `./theme` and a `useTheme` hook in `./react`; same attributes and `localStorage` keys, no provider wrapper.
+- **What happens to `ThemeProvider`?** Replaced by the theme module (`setTheme`, `getTheme`, `subscribe`, `restoreTheme`, `registerColorTheme`) at `./wc/theme`, and at `./theme` from the flip, and by a `useTheme` hook in `./react` that returns `{ theme, structure, material, set }`; same attributes and `localStorage` keys, no provider wrapper (`docs/theming.md`).

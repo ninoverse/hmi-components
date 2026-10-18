@@ -71,6 +71,8 @@ export * from './scroll-area/scroll-area.js';
 export * from './search-input/search-input.js';
 export * from './segmented-control/segmented-control.js';
 export * from './select/select.js';
+// Not an element: the theme module, as `HmiElements.theme` in the drop-in bundle.
+export * as theme from './shared/theme.js';
 export * from './sidebar/sidebar.js';
 export * from './skeleton/skeleton.js';
 export * from './slider/slider.js';

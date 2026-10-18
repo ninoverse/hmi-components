@@ -21,7 +21,11 @@
         <link rel="stylesheet" href="../dist/themes/constants.css" />
         <link rel="stylesheet" href="../dist/themes/color/default.css" />
         <link rel="stylesheet" href="../dist/themes/color/ocean.css" />
+        <link rel="stylesheet" href="../dist/themes/color/forest.css" />
         <link rel="stylesheet" href="../dist/themes/structure/default.css" />
+        <link rel="stylesheet" href="../dist/themes/structure/rounded.css" />
+        <link rel="stylesheet" href="../dist/themes/structure/sharp.css" />
+        <link rel="stylesheet" href="../dist/themes/structure/pixel.css" />
         <link rel="stylesheet" href="../dist/themes/structure/journal.css" />
         <link rel="stylesheet" href="../dist/themes/material/glass.css" />
         <link rel="stylesheet" href="../dist/themes/material/liquid.css" />
@@ -1448,6 +1452,22 @@ export function Example() {
         </section>
 
         <section>
+            <h2>Theme</h2>
+            <!-- Not an element: the theme module, here HmiElements.theme from the drop-in
+                 bundle (an ES module imports it from wc/theme). The pickers call setTheme(),
+                 which sets the attributes on <html> and saves the choice; restoreTheme() at
+                 startup applies the saved one. The readout is subscribe(), so it also follows
+                 the toggle buttons at the top, which flip the attributes directly. -->
+            <div class="row">
+                <hmi-select id="theme-color" label="Colour"></hmi-select>
+                <hmi-select id="theme-structure" label="Structure"></hmi-select>
+                <hmi-select id="theme-material" label="Material"></hmi-select>
+                <hmi-button id="theme-reset" variant="ghost">Reset</hmi-button>
+            </div>
+            <p style="margin: 0; font-size: 13px; color: var(--on-surface-variant)">getTheme(): <code id="theme-readout"></code></p>
+        </section>
+
+        <section>
             <h2>List</h2>
             <!-- Items are a property. right-<id> takes rich content; reorderable adds
                  drag and Alt+Arrow reordering, and the page sets items back from
@@ -2174,6 +2194,25 @@ export function Example() {
             document.getElementById('toast-danger').addEventListener('click', () => toast.danger('Upload failed', 'Could not reach the server.'));
             document.getElementById('toast-sticky').addEventListener('click', () => toast.info('Sticky toast', 'Stays until dismissed.', { duration: 0 }));
             document.getElementById('toast-stack').addEventListener('hmi-dismiss', (event) => console.log('toast hmi-dismiss', event.detail));
+            const { theme } = HmiElements;
+            theme.restoreTheme();
+            const pickers = {
+                theme: ['theme-color', theme.getColorThemes()],
+                structure: ['theme-structure', theme.structures],
+                material: ['theme-material', theme.materials],
+            };
+            for (const [axis, [id, values]] of Object.entries(pickers)) {
+                const picker = document.getElementById(id);
+                picker.options = values.map((value) => ({ value, label: value }));
+                picker.addEventListener('hmi-change', (event) => theme.setTheme({ [axis]: event.detail.value }));
+            }
+            const showTheme = (state) => {
+                for (const [axis, [id]] of Object.entries(pickers)) document.getElementById(id).value = state[axis];
+                document.getElementById('theme-readout').textContent = JSON.stringify(state);
+            };
+            theme.subscribe(showTheme);
+            showTheme(theme.getTheme());
+            document.getElementById('theme-reset').addEventListener('click', () => theme.setTheme(theme.defaultTheme));
             for (const pager of document.querySelectorAll('hmi-pagination')) {
                 pager.addEventListener('hmi-change', (event) => {
                     console.log('pagination hmi-change', event.detail);

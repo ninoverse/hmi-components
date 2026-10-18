@@ -2,7 +2,8 @@ import { playwright } from '@vitest/browser-playwright';
 import { defineConfig } from 'vitest/config';
 
 /* Two projects:
-   - browser: `*.test.ts` under src/elements run in real Chromium (Playwright).
+   - browser: `*.test.ts` under src/elements and src/react run in real Chromium
+     (Playwright).
    - ssr: `*.ssr.test.ts` run in Node against @lit-labs/ssr.
    `pnpm test` / `pnpm test:ssr` select one project each. */
 export default defineConfig({
@@ -29,7 +30,10 @@ export default defineConfig({
                 },
                 test: {
                     name: 'browser',
-                    include: ['src/elements/**/*.test.ts'],
+                    include: [
+                        'src/elements/**/*.test.ts',
+                        'src/react/**/*.test.ts',
+                    ],
                     exclude: ['**/*.ssr.test.ts'],
                     browser: {
                         enabled: true,
@@ -43,7 +47,10 @@ export default defineConfig({
             {
                 test: {
                     name: 'ssr',
-                    include: ['src/elements/**/*.ssr.test.ts'],
+                    include: [
+                        'src/elements/**/*.ssr.test.ts',
+                        'src/react/**/*.ssr.test.ts',
+                    ],
                     environment: 'node',
                 },
             },

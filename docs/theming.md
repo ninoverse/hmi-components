@@ -73,22 +73,398 @@ function ThemeSwitcher() {
 
 `useTheme()` throws if used outside a `ThemeProvider`.
 
-> **v6:** `ThemeProvider` is replaced by a framework-agnostic module —
-> `setTheme()`, `getTheme()`, `subscribe()` from `@ninoverse/hmi-components/theme` —
-> and a thin `useTheme()` hook from `@ninoverse/hmi-components/react` built on it. Same
-> attributes, same `localStorage` keys, no provider wrapper. See
-> [`docs/migration/README.md`](./migration/README.md).
+> **v6:** `ThemeProvider` and this `useTheme()` are replaced by a framework-agnostic
+> module and a hook that needs no provider, with the same attributes and the same
+> `localStorage` keys: see [the theme module and `useTheme` (v6)](#the-theme-module-and-usetheme-v6).
 
 > **Avoiding a flash of the default theme.** `ThemeProvider` sets the `data-*`
 > attributes after mount. To prevent a flash before hydration, also set
 > `data-theme` / `data-structure` / `data-material` on `<html>` in your HTML shell —
 > or run a tiny inline script in `<head>` that reads the same `localStorage` keys and
-> applies them before first paint (see `index.html` in this repository).
+> applies them before first paint (see `index.html` in this repository). The v6 module
+> and hook restore the saved choice after first paint too, so the same applies.
+
+## The theme module and `useTheme` (v6)
+
+A module that works in any framework, and a React hook on top of it. `<html>` is the
+source of truth: `getTheme()` reads its attributes, `setTheme()` writes them and
+saves the choice, and importing the module does nothing.
+
+```ts
+import {
+    colorThemes, // the built-in values: also structures, materials
+    getColorThemes, // the built-in colour themes, then the registered ones
+    getTheme, // { theme, structure, material }: the same object until an axis changes
+    registerColorTheme, // registerColorTheme('midnight'): adds a colour theme name
+    restoreTheme, // applies the saved choices
+    setTheme, // setTheme({ theme: 'ocean', material: 'glass' }): sets the attributes and saves
+    subscribe, // subscribe((state) => …): returns the function that stops it
+} from '@ninoverse/hmi-components/wc/theme';
+```
+
+The drop-in bundle has the same functions as `HmiElements.theme`. In React, `useTheme()`
+returns the three axes and `set`, which is `setTheme`, and re-renders when anything
+changes them:
+
+```tsx
+import { useTheme } from '@ninoverse/hmi-components/react';
+import { colorThemes } from '@ninoverse/hmi-components/wc/theme';
+
+function ThemeSwitcher() {
+    const { theme, set } = useTheme();
+    return (
+        <select value={theme} onChange={(e) => set({ theme: e.target.value })}>
+            {colorThemes.map((t) => <option key={t}>{t}</option>)}
+        </select>
+    );
+}
+```
+
+- **Defaults** are the attributes on `<html>` in your HTML shell. With none, the state
+  is `default`, `default` and `solid`. `data-theme` is read as it stands, and a missing,
+  empty or unknown `data-structure` or `data-material` reads as `default` or `solid`.
+- **`setTheme()`** changes the axes it is given and leaves the others. Each axis is
+  checked on its own, and one that is not a known value is left alone, with no error:
+  `structure` and `material` must be built in, and `theme` in `getColorThemes()`.
+- **Saved choices** are applied by `restoreTheme()`, which you call once at startup, and
+  by `useTheme()` on its first mount in the page. A saved value that is not a known one
+  is skipped. Register your custom colour themes first, or a saved one is skipped too.
+- **Custom colour themes** are CSS you load (`[data-theme='midnight'] { … }`) and a name
+  you register with `registerColorTheme('midnight')` at startup. A custom structure or
+  material is applied by setting its `data-*` attribute yourself; the module reports
+  it as `default` or `solid`.
+- **A change by anything else**, such as a script that sets `data-theme`, reaches
+  `subscribe()` listeners and the hook. While something is subscribed (the hook does), a
+  choice that another tab saves is applied here too.
+- **Storage that is blocked** (private mode, a sandboxed frame) never throws: the
+  choice applies to the page and is not saved.
+- **On the server** there is no document: `getTheme()` and the hook give the defaults,
+  and the other functions do nothing. The hook gives the defaults while hydrating, too,
+  and the browser's attributes arrive with the next render. To have the saved theme in
+  the first paint, see [server components and server rendering](#server-components-and-server-rendering).
+- **One copy per bundle.** `registerColorTheme()` is remembered by the copy of the
+  module it is called on, and the drop-in bundle has its own, as the toast queue does.
+
+Moving from v5:
+
+| v5 | v6 |
+|----|----|
+| `<ThemeProvider defaultTheme="ocean" defaultStructure="rounded">` | `<html data-theme="ocean" data-structure="rounded">` in your shell |
+| `useTheme()` returns `theme`, `setTheme(name)`, `structure`, `setStructure(name)`, `material`, `setMaterial(name)` and the three lists | `{ theme, structure, material, set }`, with `set({ theme: name })`; the lists are imports from `wc/theme` |
+| `customThemes={['midnight']}` | `registerColorTheme('midnight')` |
+| throws outside the provider | needs no provider and never throws |
+
+### In each framework
+
+Each of these imports from `@ninoverse/hmi-components/wc/theme` and reads and writes the
+same attributes and keys, so one page can mix them. Call `restoreTheme()` once at startup
+(the React hook does it for you), after `registerColorTheme()` if you use custom colour
+themes.
+
+**Plain HTML**, with the drop-in bundle:
+
+```html
+<script src="…/dist/hmi-elements.iife.js"></script>
+<script>
+    const { theme } = HmiElements;
+    theme.restoreTheme();
+    theme.subscribe((state) => (readout.textContent = JSON.stringify(state)));
+    ocean.onclick = () => theme.setTheme({ theme: 'ocean', material: 'glass' });
+</script>
+```
+
+**React**: `useTheme()` and a switcher for all three axes.
+
+```tsx
+import { useTheme } from '@ninoverse/hmi-components/react';
+import {
+    colorThemes,
+    type Material,
+    materials,
+    type Structure,
+    structures,
+} from '@ninoverse/hmi-components/wc/theme';
+
+export function ThemeSwitcher() {
+    const { theme, structure, material, set } = useTheme();
+    return (
+        <>
+            <select value={theme} onChange={(e) => set({ theme: e.target.value })}>
+                {colorThemes.map((t) => <option key={t}>{t}</option>)}
+            </select>
+            <select value={structure} onChange={(e) => set({ structure: e.target.value as Structure })}>
+                {structures.map((s) => <option key={s}>{s}</option>)}
+            </select>
+            <select value={material} onChange={(e) => set({ material: e.target.value as Material })}>
+                {materials.map((m) => <option key={m}>{m}</option>)}
+            </select>
+        </>
+    );
+}
+```
+
+**Vue 3**: a composable over `subscribe`. The state starts as the defaults and is read
+after mount, so a server-rendered page hydrates without a mismatch.
+
+```ts
+// useTheme.ts
+import { onBeforeUnmount, onMounted, shallowRef } from 'vue';
+import {
+    defaultTheme,
+    getTheme,
+    restoreTheme,
+    setTheme,
+    subscribe,
+} from '@ninoverse/hmi-components/wc/theme';
+
+let restored = false;
+
+export function useTheme() {
+    const state = shallowRef(defaultTheme);
+    let stop: (() => void) | undefined;
+    onMounted(() => {
+        if (!restored) {
+            restored = true;
+            restoreTheme();
+        }
+        state.value = getTheme();
+        stop = subscribe((next) => (state.value = next));
+    });
+    onBeforeUnmount(() => stop?.());
+    return { state, set: setTheme };
+}
+```
+
+```vue
+<script setup lang="ts">
+import { colorThemes } from '@ninoverse/hmi-components/wc/theme';
+import { useTheme } from './useTheme';
+
+const { state, set } = useTheme();
+</script>
+
+<template>
+    <select :value="state.theme" @change="set({ theme: ($event.target as HTMLSelectElement).value })">
+        <option v-for="t in colorThemes" :key="t">{{ t }}</option>
+    </select>
+</template>
+```
+
+**Angular**: a service that keeps a signal.
+
+```ts
+import { DestroyRef, inject, Injectable, signal } from '@angular/core';
+import {
+    defaultTheme,
+    getTheme,
+    restoreTheme,
+    setTheme,
+    subscribe,
+    type ThemeChange,
+} from '@ninoverse/hmi-components/wc/theme';
+
+@Injectable({ providedIn: 'root' })
+export class ThemeService {
+    readonly state = signal(defaultTheme);
+    readonly set = (change: ThemeChange) => setTheme(change);
+
+    constructor() {
+        restoreTheme(); // does nothing under Angular SSR, where there is no document
+        this.state.set(getTheme());
+        inject(DestroyRef).onDestroy(subscribe((next) => this.state.set(next)));
+    }
+}
+```
+
+```html
+<select [value]="theme.state().theme" (change)="theme.set({ theme: $any($event.target).value })">
+    @for (t of colorThemes; track t) { <option>{{ t }}</option> }
+</select>
+```
+
+Here `theme = inject(ThemeService)` and `colorThemes` is imported from `wc/theme`.
+
+**Svelte 5 / SvelteKit**: a `readable` store, whose start and stop functions are `subscribe`'s.
+
+```ts
+// theme.ts
+import { readable } from 'svelte/store';
+import {
+    defaultTheme,
+    getTheme,
+    restoreTheme,
+    setTheme,
+    subscribe,
+} from '@ninoverse/hmi-components/wc/theme';
+
+restoreTheme(); // does nothing on the server
+
+export const theme = readable(defaultTheme, (set) => {
+    set(getTheme());
+    return subscribe(set);
+});
+export { setTheme };
+```
+
+```svelte
+<script lang="ts">
+    import { colorThemes } from '@ninoverse/hmi-components/wc/theme';
+    import { theme, setTheme } from './theme';
+</script>
+
+<select value={$theme.theme} onchange={(e) => setTheme({ theme: e.currentTarget.value })}>
+    {#each colorThemes as t}<option>{t}</option>{/each}
+</select>
+```
+
+**Dioxus** (`dioxus-web` or a webview): load the bundle in the HTML shell and restore there,
+so Rust needs no startup code. The functions are the bundle's `HmiElements.theme`, reached
+through `document::eval` (Dioxus 0.6).
+
+```html
+<script src="hmi-elements.iife.js"></script>
+<script>HmiElements.theme.restoreTheme();</script>
+```
+
+```rust
+#[component]
+fn ThemePicker() -> Element {
+    let mut theme = use_signal(|| "default".to_string());
+
+    use_effect(move || {
+        // the state now, and again whenever it changes
+        let mut eval = document::eval(
+            "const send = (s) => dioxus.send(s.theme);
+             send(HmiElements.theme.getTheme());
+             HmiElements.theme.subscribe(send);",
+        );
+        spawn(async move {
+            while let Ok(name) = eval.recv::<String>().await {
+                theme.set(name);
+            }
+        });
+    });
+
+    rsx! {
+        select {
+            value: "{theme}",
+            onchange: move |e| {
+                document::eval(&format!("HmiElements.theme.setTheme({{ theme: '{}' }})", e.value()));
+            },
+            for t in ["default", "ocean", "forest"] { option { "{t}" } }
+        }
+    }
+}
+```
+
+The `format!` puts the value into JavaScript, which is safe for the fixed options of a
+`<select>` and not for text a user types.
+
+### Server components and server rendering
+
+On the server there is no document and no `localStorage`: the module reads the defaults and
+does nothing, and `useTheme()` returns the defaults. That makes server rendering safe, and
+it means the server never sees the user's saved choice. To have the right theme in the first
+paint, choose one of the two ways below.
+
+In the Next.js App Router:
+
+- `.../wc/theme` has no React and no side effects, so a Server Component can import it, for
+  `colorThemes`, `structures` and `materials`.
+- `useTheme()` uses hooks that React's server build does not export, so call it from a file
+  that starts with `'use client'`. The files of `.../react` have no `'use client'` of their
+  own either: import them from a Client Component (see
+  [Links and routers](./routers.md#notes)).
+
+**A. Static pages: an inline script.** The script sets the attributes before first paint,
+and the module and hook then read them. `suppressHydrationWarning` is needed because the
+script changes `<html>` before React hydrates. The pages stay static.
+
+```tsx
+// app/layout.tsx: a Server Component
+const noFlash = `try{var e=document.documentElement;['theme','structure','material'].forEach(function(a){var v=localStorage.getItem('hmi-'+a);if(v)e.setAttribute('data-'+a,v)})}catch(_){}`;
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+    return (
+        <html lang="en" data-theme="default" data-structure="default" data-material="solid" suppressHydrationWarning>
+            <head><script dangerouslySetInnerHTML={{ __html: noFlash }} /></head>
+            <body>{children}</body>
+        </html>
+    );
+}
+```
+
+**B. Dynamic pages: a cookie.** Mirror the choice into a cookie from the client, and let the
+layout read it, so the first byte of HTML carries the theme. Reading `cookies()` makes every
+route under that layout render dynamically, and the first visit after you add this has one
+flash, until the cookie exists.
+
+```tsx
+// app/theme-cookie.tsx
+'use client';
+import { useEffect } from 'react';
+import {
+    getTheme,
+    restoreTheme,
+    subscribe,
+    type ThemeState,
+} from '@ninoverse/hmi-components/wc/theme';
+
+const write = (state: ThemeState) => {
+    for (const [axis, value] of Object.entries(state))
+        document.cookie = `hmi-${axis}=${value}; path=/; max-age=31536000; samesite=lax`;
+};
+
+export function ThemeCookie() {
+    useEffect(() => {
+        const stop = subscribe(write); // every later change, whoever makes it
+        restoreTheme(); // a choice saved before the cookie existed
+        write(getTheme());
+        return stop;
+    }, []);
+    return null;
+}
+```
+
+```tsx
+// app/layout.tsx: a Server Component (Next 15: cookies() is async)
+import { cookies } from 'next/headers';
+import { colorThemes, materials, structures } from '@ninoverse/hmi-components/wc/theme';
+import { ThemeCookie } from './theme-cookie';
+
+// Never trust a cookie: only a known value reaches the attribute.
+const pick = <T extends string>(list: readonly T[], value: string | undefined, fallback: T) =>
+    list.includes(value as T) ? (value as T) : fallback;
+
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+    const jar = await cookies();
+    return (
+        <html
+            lang="en"
+            data-theme={pick(colorThemes, jar.get('hmi-theme')?.value, 'default')}
+            data-structure={pick(structures, jar.get('hmi-structure')?.value, 'default')}
+            data-material={pick(materials, jar.get('hmi-material')?.value, 'solid')}
+            suppressHydrationWarning
+        >
+            <body><ThemeCookie />{children}</body>
+        </html>
+    );
+}
+```
+
+If you registered custom colour themes, validate with `getColorThemes()` instead, after
+calling `registerColorTheme()` in a module that both the layout and the client import.
+
+The other server-rendered hosts get the defaults on the server as well, and the same two
+ways apply: the inline script goes in the HTML shell, and for the cookie you read the
+request's cookie where the framework gives it to you (Nuxt's `useCookie`, SvelteKit's
+`event.cookies` in `hooks.server.ts` or a layout load, Angular SSR's request) and put the
+three attributes on `<html>`.
 
 ## Non-React / Web Components: pure CSS
 
-There is **no** `ThemeProvider` outside React — the tokens come entirely from the
-theme stylesheets. Set the attributes on `<html>` (or any ancestor) and load the
+The tokens come entirely from the theme stylesheets; the theme module above only sets
+the attributes. Set them on `<html>` (or any ancestor) and load the
 token CSS in order: constants first, then **one** color theme, **one** structure
 theme and optionally **one** material.
 
@@ -247,7 +623,9 @@ relevant token set:
 - **Custom structure theme:** copy a file from `public/css/themes/structure/` and redefine the shape/density/motion/type tokens under `[data-structure='your-name']`.
 - **Custom material:** copy a file from `public/css/themes/material/` and redefine the `--panel-*` tokens under `[data-material='your-name']`. Do not add component selectors — they will not reach into the elements.
 
-Pure-CSS / Web Component consumers can point at your stylesheet directly. In React,
+Pure-CSS / Web Component consumers can point at your stylesheet directly. In React (v5),
 `ThemeProvider`'s pickers are populated from the const arrays in `colorThemes` /
 `structures` / `materials`; a fully custom value not in those lists can still be
-applied by setting the `data-*` attribute yourself.
+applied by setting the `data-*` attribute yourself. In v6, a custom colour theme is
+added with `registerColorTheme()`, and a custom structure or material is applied by
+setting the attribute.

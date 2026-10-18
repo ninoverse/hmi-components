@@ -1,6 +1,5 @@
-/* React barrel — every `@lit/react` wrapper is re-exported here (plus
-   `useTheme` once the theme module lands). Built to dist/react/index.js.
-   Keep the list alphabetical. */
+/* React barrel — every `@lit/react` wrapper is re-exported here, plus
+   `useTheme`. Built to dist/react/index.js. Keep the list alphabetical. */
 
 export {
     Accordion,
@@ -374,3 +373,9 @@ export {
     type ValueScaleSelectorValueDetail,
 } from '../elements/value-scale-selector/value-scale-selector.react.js';
 export { VisuallyHidden } from '../elements/visually-hidden/visually-hidden.react.js';
+export {
+    type ThemeChange,
+    type ThemeState,
+    type UseThemeResult,
+    useTheme,
+} from './use-theme.js';
