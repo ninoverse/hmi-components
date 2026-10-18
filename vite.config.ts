@@ -604,6 +604,11 @@ export default defineConfig({
                     dirname,
                     'src/elements/timeline/timeline.react.ts',
                 ),
+                'wc/toast': resolve(dirname, 'src/elements/toast/toast.ts'),
+                'react/toast': resolve(
+                    dirname,
+                    'src/elements/toast/toast.react.ts',
+                ),
                 'wc/tooltip': resolve(
                     dirname,
                     'src/elements/tooltip/tooltip.ts',

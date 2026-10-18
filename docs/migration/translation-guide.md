@@ -141,7 +141,7 @@ this applies to (from the v5 sources):
 | select | `placeholder` | `placeholder` |
 | stat | `label`, `value`, `icon`, `delta`, `helpText` | `label`, `value`, `icon`, `delta`, `help-text` |
 | carousel | `slides: ReactNode[]` | children with `slot="slide"` |
-| toast | `title`, `body` | `title`, `body` (via the store; see phase 11) |
+| toast | `title`, `body` | none: `string \| Node` options of `toast.show()` |
 
 Pattern:
 
@@ -290,7 +290,7 @@ Wrapper prop = `on` + PascalCase of the event minus `hmi-`.
 | modal, drawer, command-palette, table (`actions` cells) | `onAction(string)` (command-palette: also each command's `onSelect()`) | `hmi-action` | `{ value: string, row?: Row }` |
 | confirm-dialog | `onCancel()` / `onConfirm()` | `hmi-cancel` (cancelable) / `hmi-confirm` | `{}` |
 | banner | `onDismiss()` | `hmi-dismiss` (cancelable) | `{}` |
-| toast | `onDismiss()` | `hmi-dismiss` (cancelable) | `{ id: string }` |
+| toast | none in v5 (new) | `hmi-dismiss` (cancelable; the close button only, not the timer or `toast.dismiss()`) | `{ id: number }` |
 | tree | `onSelect(T)` / `onExpandedChange(T[])` | `hmi-select` / `hmi-expanded-change` | `{ value: T }` / `{ expanded: T[] }` |
 | command-palette | search text (internal in v5) | `hmi-input` (per keystroke) | `{ value: string }` |
 | navbar, sidebar | `onNav(T)` | `hmi-nav` (cancelable) | `{ value: T, href: string \| undefined }` |
@@ -668,6 +668,27 @@ searches a server. A group is a `role="group"` named by its heading in the listb
 assistive technology and, for a command without a group between two of one, printed no heading for the second. The surface
 is `--palette-bg`: the lowest surface under the solid material, as v5 painted it, and the strong panel surface under glass
 and liquid.
+
+`hmi-toast` is the stack, and `shared/toast.ts` is the queue: module-level state, the one place the library keeps any,
+because `toast.show()` has to work from code that never touches the DOM. It is v5's store with the same calls and
+the same timers (4000 ms by default, `0` to stay, the exit flagged first and the toast removed 220 ms later), with
+immutable items so a render reads a snapshot, and with no effect on the server, where a module-level queue would
+leak between requests (`show()` returns 0 there). `toast.show()` returns a number, as in v5, so `hmi-dismiss` carries
+`{ id: number }`. `title` and `body` are `string | Node`: Lit renders a node as it is, so a framework consumer builds
+one in a detached element, where v5 took any `ReactNode`. The stack is a `popover="manual"` in the element's own root,
+opened when the element connects and kept open: it is the `aria-live="polite"` region that each toast (a `role="status"`)
+is announced from, and a region that appears together with its first toast is not announced. Empty, it is zero-sized
+and ignores the pointer. A toast's clock is paused through the store while the pointer is over it or focus is inside it
+(`pauseToast()` and `resumeToast()`, held by either reason, released when the host leaves the document), which v5's was
+not. The close button fires the cancelable `hmi-dismiss` and the queue dismisses the toast unless a listener cancelled it.
+
+A modal dialog and the toast stack do not mix well, and the stack cannot fix it. A modal `showModal()` makes everything
+outside it inert, and the stack is outside it. Measured in Chromium: a toast that is up when a modal opens, or that is
+raised while one is open, stays in the top layer under the modal's scrim, dimmed (and blurred, by the modal's backdrop
+filter), cannot be clicked or focused, and is not announced; its clock keeps running, and it works again once the dialog
+closes. A hide and show of the popover would draw it above the scrim, but it would still be inert. v5 drew it above the
+dialog (`z-index: 1200` against 1000) and clickable. The only way to a clickable toast over a modal is a stack inside the
+dialog, which the element cannot make, so this is documented and left: see `TODO.md`, "Toasts under a modal dialog".
 
 `PositionController` (`src/elements/shared/positioning.ts`): a `ReactiveController`
 whose `start()` places the panel, then again on every scroll (captured), resize

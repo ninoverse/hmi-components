@@ -271,7 +271,7 @@ PR 2 was the only infrastructure PR; it added no elements. What it settled:
 - `.github/workflows/ci-gate.yml`: `lint`, `build`, Playwright Chromium install, `test`, `test:ssr`, manifest/base.css drift check.
 - `tsconfig.node.json` covers every config file and `scripts/*.ts`; Biome formats `accessor` decorators without configuration.
 - Found by the Badge pilot: Rollup cannot parse the `accessor` keyword, so every vite config that bundles elements sets `esbuild: { target: 'es2022' }` to have esbuild lower the standard decorators first; the Vitest browser project pre-bundles `lit`, `@lit/react`, `react` and `react-dom/client` (`optimizeDeps.include`) so Vite does not reload tests mid-run. The `sideEffects` check passed: an esbuild consumer bundle that only side-effect imports `wc/badge` keeps the `customElements.define` call.
-- Still open: top-layer stacking of toasts under modals (phase 11); typedoc still documents the React API only.
+- Still open: toasts under a modal dialog stay inert and dimmed under its scrim, since the page behind a modal is inert (`hmi-toast`, `TODO.md`, "Toasts under a modal dialog"); typedoc still documents the React API only.
 
 ## 11. Theme rules during the migration
 

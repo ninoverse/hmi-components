@@ -85,6 +85,7 @@ export * from './tabs/tabs.js';
 export * from './text/text.js';
 export * from './textarea/textarea.js';
 export * from './timeline/timeline.js';
+export * from './toast/toast.js';
 export * from './tooltip/tooltip.js';
 export * from './tree/tree.js';
 export * from './value-scale-selector/value-scale-selector.js';
