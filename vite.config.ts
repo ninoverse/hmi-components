@@ -196,6 +196,14 @@ export default defineConfig({
                     dirname,
                     'src/elements/combobox/combobox.react.ts',
                 ),
+                'wc/command-palette': resolve(
+                    dirname,
+                    'src/elements/command-palette/command-palette.ts',
+                ),
+                'react/command-palette': resolve(
+                    dirname,
+                    'src/elements/command-palette/command-palette.react.ts',
+                ),
                 'wc/confirm-dialog': resolve(
                     dirname,
                     'src/elements/confirm-dialog/confirm-dialog.ts',

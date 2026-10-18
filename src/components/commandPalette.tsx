@@ -71,6 +71,7 @@ const matchesQuery = (
  *
  * @example
  * <CommandPalette open={open} onOpenChange={setOpen} commands={commands} />
+ * @deprecated Use `CommandPalette` from `@ninoverse/hmi-components/react/command-palette`. Removed in 6.0.0.
  */
 export function CommandPalette({
     open,

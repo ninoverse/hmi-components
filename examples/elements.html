@@ -1418,6 +1418,19 @@ export function Example() {
         </section>
 
         <section>
+            <h2>CommandPalette</h2>
+            <!-- The commands are the React demo's. commands is a property; the palette is
+                 controlled, so the page sets open to false from hmi-close, which fires for
+                 Escape, a press outside it and a chosen command (reason: select).
+                 hmi-action carries the chosen command's value, and hmi-input the text. -->
+            <div style="display: flex; gap: 2rem; align-items: center; flex-wrap: wrap">
+                <hmi-button id="palette-open">Open command palette</hmi-button>
+                <p style="margin: 0; font-size: 13px; color: var(--on-surface-variant)">Last action: <strong id="palette-result">none</strong></p>
+            </div>
+            <hmi-command-palette id="palette-demo"></hmi-command-palette>
+        </section>
+
+        <section>
             <h2>List</h2>
             <!-- Items are a property. right-<id> takes rich content; reorderable adds
                  drag and Alt+Arrow reordering, and the page sets items back from
@@ -2117,6 +2130,26 @@ export function Example() {
             colorBrand.addEventListener('hmi-change', (event) => console.log('color-picker hmi-change', event.detail));
             colorBrand.addEventListener('hmi-open-change', (event) => console.log('color-picker hmi-open-change', event.detail));
             document.getElementById('color-custom').swatches = ['#0ea5e9', '#22c55e', '#eab308', '#f97316', '#ef4444', '#a855f7'];
+            const paletteDemo = document.getElementById('palette-demo');
+            paletteDemo.commands = [
+                { value: 'new-doc', label: 'New document', description: 'Start a blank page', group: 'Create', keywords: ['create', 'blank'] },
+                { value: 'new-folder', label: 'New folder', group: 'Create', keywords: ['directory'] },
+                { value: 'open-recent', label: 'Open recent', description: 'Browse the last 20 files', group: 'Navigation' },
+                { value: 'go-settings', label: 'Go to settings', group: 'Navigation' },
+                { value: 'cycle-theme', label: 'Cycle color theme', description: 'Palette — now: default', group: 'Preferences' },
+                { value: 'cycle-structure', label: 'Cycle structure', description: 'Shape · type · motion — now: default', group: 'Preferences' },
+                { value: 'sign-out', label: 'Sign out', group: 'Account', keywords: ['logout', 'leave'] },
+            ];
+            document.getElementById('palette-open').addEventListener('click', () => { paletteDemo.open = true; });
+            paletteDemo.addEventListener('hmi-action', (event) => {
+                console.log('command-palette hmi-action', event.detail);
+                document.getElementById('palette-result').textContent = event.detail.value;
+            });
+            paletteDemo.addEventListener('hmi-close', (event) => {
+                console.log('command-palette hmi-close', event.detail);
+                paletteDemo.open = false;
+            });
+            paletteDemo.addEventListener('hmi-input', (event) => console.log('command-palette hmi-input', event.detail));
             for (const pager of document.querySelectorAll('hmi-pagination')) {
                 pager.addEventListener('hmi-change', (event) => {
                     console.log('pagination hmi-change', event.detail);

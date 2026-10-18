@@ -84,6 +84,16 @@ export {
     type ComboboxOption,
 } from '../elements/combobox/combobox.react.js';
 export {
+    CommandPalette,
+    type CommandPaletteActionDetail,
+    type CommandPaletteCloseDetail,
+    type CommandPaletteCloseReason,
+    type CommandPaletteCommand,
+    type CommandPaletteFilter,
+    type CommandPaletteFilterFn,
+    type CommandPaletteInputDetail,
+} from '../elements/command-palette/command-palette.react.js';
+export {
     ConfirmDialog,
     type ConfirmDialogCancelDetail,
     type ConfirmDialogConfirmDetail,

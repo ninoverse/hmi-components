@@ -284,15 +284,15 @@ Wrapper prop = `on` + PascalCase of the event minus `hmi-`.
 | pagination | `onChange(page)` | `hmi-change` | `{ value: number }` |
 | multi-input | `onComplete(string)` | `hmi-complete` | `{ value: string }` |
 | accordion | `onOpenChange(number[])` | `hmi-open-change` | `{ open: number[] }` |
-| popover, hover-card, tooltip, context-menu, command-palette | `onOpenChange(boolean)` | `hmi-open-change` | `{ open: boolean }` |
-| modal, drawer | `onClose()` | `hmi-close` (cancelable; the dialog is controlled and stays open until `open` is set to false) | `{ reason: 'escape' \| 'backdrop' }` |
+| popover, hover-card, tooltip, context-menu | `onOpenChange(boolean)` | `hmi-open-change` | `{ open: boolean }` |
+| modal, drawer, command-palette | `onClose()` (command-palette: `onOpenChange(false)`) | `hmi-close` (cancelable; the dialog is controlled and stays open until `open` is set to false) | `{ reason: 'escape' \| 'backdrop' }` (command-palette also `'select'`, after a command is chosen) |
 | chip | `onClose()` / `onSelect()` | `hmi-close` (cancelable) / `hmi-select` (cancelable) | `{}` / `{ selected: boolean }` |
-| modal, drawer, command-palette, table (`actions` cells) | `onAction(string)` | `hmi-action` | `{ value: string, row?: Row }` |
+| modal, drawer, command-palette, table (`actions` cells) | `onAction(string)` (command-palette: also each command's `onSelect()`) | `hmi-action` | `{ value: string, row?: Row }` |
 | confirm-dialog | `onCancel()` / `onConfirm()` | `hmi-cancel` (cancelable) / `hmi-confirm` | `{}` |
 | banner | `onDismiss()` | `hmi-dismiss` (cancelable) | `{}` |
 | toast | `onDismiss()` | `hmi-dismiss` (cancelable) | `{ id: string }` |
 | tree | `onSelect(T)` / `onExpandedChange(T[])` | `hmi-select` / `hmi-expanded-change` | `{ value: T }` / `{ expanded: T[] }` |
-| command-palette command | `commands[].onSelect()` | `hmi-select` | `{ value: string }` |
+| command-palette | search text (internal in v5) | `hmi-input` (per keystroke) | `{ value: string }` |
 | navbar, sidebar | `onNav(T)` | `hmi-nav` (cancelable) | `{ value: T, href: string \| undefined }` |
 | breadcrumbs | `items[].onClick()` | `hmi-nav` (cancelable) | `{ value: string, index: number, href: string \| undefined }` |
 | carousel | `onIndexChange(n)` | `hmi-index-change` | `{ index: number }` |
@@ -641,8 +641,8 @@ radio group does. A keyboard open moves focus to the chosen swatch (as the selec
 on the trigger. The native colour chooser is a window outside the page: only its `input` and `change` events reach
 the picker, which is how the tests drive it.
 
-The modal's machinery is the `HmiDialog` base class in `src/elements/shared/dialog.ts`; the dialog group (modal, drawer, later command-palette) extends it with its own tag, styles and body. A dialog built this way is controlled for now (`TODO.md`, "Controlled or
-element-owned state"): `#requestClose` only emits, so `open` stays `true` until
+The modal's machinery is the `HmiDialogBase` class in `src/elements/shared/dialog.ts` (the `<dialog>`, `open`, the scroll lock, focus restore, Escape and the backdrop press), and `HmiDialog` adds a title, a description and footer actions to it; the dialog group (modal, drawer) extends `HmiDialog`, and the command palette, which has none of those, extends the base and renders its own content through `renderDialog()`. A dialog built this way is controlled for now (`TODO.md`, "Controlled or
+element-owned state"): `requestClose()` only emits, so `open` stays `true` until
 the consumer sets it, and `#onClose` shows the `<dialog>` again when the browser
 closed it by itself (a second Escape with no other interaction in between cannot
 be cancelled). The page's scroll lock is `lockScroll()` from
@@ -654,6 +654,20 @@ be cancelled). The page's scroll lock is `lockScroll()` from
 the pointer with the dialog's rectangle. An element that renders a `<hmi-modal>`
 (confirm-dialog) forwards `exportparts` and its own slots into the modal's, and
 stops the modal's `hmi-close` so only its own event leaves it.
+
+`hmi-command-palette` is a native `<dialog>` like the other dialogs, replacing v5's portal, its document-level Escape and
+scrim listeners, its body-overflow handling and its 310 ms exit-animation timer (it closes at once, and keeps the enter
+animation). It is controlled: choosing a command fires `hmi-action { value }` and then the cancelable `hmi-close` with
+`reason: 'select'`, as Escape and a press outside fire it with `'escape'` and `'backdrop'`, so one listener that sets `open`
+to `false` closes it whichever way it was asked, as the single `onOpenChange` did. The field is a plain `<input
+role="combobox">` in the palette's root, so `aria-activedescendant` resolves to an option; the highlight is
+`aria-selected`, is clamped inside the listed commands, goes back to the first when the text changes, and is scrolled
+into view (v5's never was). `query` is cleared whenever the palette opens, except for one that is open from the start, so
+a consumer that wants a starting text sets it after opening; `filter` and `hmi-input` are the combobox's, for a page that
+searches a server. A group is a `role="group"` named by its heading in the listbox, where v5 hid the heading from
+assistive technology and, for a command without a group between two of one, printed no heading for the second. The surface
+is `--palette-bg`: the lowest surface under the solid material, as v5 painted it, and the strong panel surface under glass
+and liquid.
 
 `PositionController` (`src/elements/shared/positioning.ts`): a `ReactiveController`
 whose `start()` places the panel, then again on every scroll (captured), resize
