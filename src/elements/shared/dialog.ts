@@ -28,46 +28,34 @@ export interface DialogActionDetail {
     value: string;
 }
 
+/** The words that name a dialog: the ids of its title and description, or its own label. */
+export interface DialogNaming {
+    /** The `id` of the element that holds the title. */
+    labelledBy?: string | undefined;
+    /** The `id` of the element that holds the description. */
+    describedBy?: string | undefined;
+    /** The accessible name, for a dialog without a title. */
+    label?: string | undefined;
+}
+
 /**
- * What the dialog group (modal, drawer) shares: a native `<dialog>` opened with
- * `showModal()`, a title, a description, a body and footer actions, kept in step
- * with `open`. The page behind is inert and stops scrolling while it is open,
- * and focus goes back to what had it when it closes.
+ * What every modal dialog shares: a native `<dialog>` opened with `showModal()`,
+ * kept in step with `open`. The page behind is inert and stops scrolling while it
+ * is open, and focus goes back to what had it when it closes.
  *
  * The dialog is controlled, as the v5 components were: it never closes itself.
  * Escape and a press on the backdrop fire the cancelable `hmi-close` with the
- * `reason`; set `open` to `false` from the listener to close it. Footer actions
- * given as an `actions` array fire `hmi-action` with the action's `value`, and
- * do not close it either.
+ * `reason`; set `open` to `false` from the listener to close it.
  *
- * A subclass is the element: it brings its `@customElement` tag, its styles, its
- * own properties and, when its body is wrapped, `renderBody()`.
+ * A subclass is the element: it brings its `@customElement` tag, its styles and
+ * its content, which it renders through `renderDialog()`, and it can ask for a
+ * close of its own with `requestClose()`.
  */
-export class HmiDialog extends LitElement {
+export class HmiDialogBase extends LitElement {
     /** Whether the dialog is open. Set it from the `hmi-close` listener to close it. @default false */
     @property({ type: Boolean, reflect: true }) accessor open = false;
 
-    /** The title, as plain text: the default of the `title` slot. */
-    @property() accessor heading = '';
-
-    /** Supporting text under the title: the default of the `description` slot. */
-    @property() accessor description = '';
-
-    /** The footer actions, rendered as buttons: the default of the `actions` slot. A property only: there is no attribute. @default [] */
-    @property({ type: Array, attribute: false })
-    accessor actions: DialogAction[] = [];
-
-    /** The accessible name of the dialog when it has no title. */
-    @property() accessor label = '';
-
     @query('dialog') private accessor dialog!: HTMLDialogElement;
-
-    // Whether a slot holds content of the consumer's: an element, or text that
-    // is not blank. A slot another element forwards into this one counts through
-    // what it holds.
-    @state() private accessor titleSlotted = false;
-    @state() private accessor descriptionSlotted = false;
-    @state() private accessor actionsSlotted = false;
 
     #restoreFocusTo: HTMLElement | null = null;
     #unlockScroll: (() => void) | undefined;
@@ -85,7 +73,7 @@ export class HmiDialog extends LitElement {
         this.#unlockScroll = undefined;
     }
 
-    protected override updated(changed: PropertyValues<this>): void {
+    protected override updated(changed: PropertyValues): void {
         if (changed.has('open') && !isServer) this.#sync();
     }
 
@@ -117,8 +105,9 @@ export class HmiDialog extends LitElement {
         if (target?.isConnected) target.focus?.();
     }
 
-    #requestClose(reason: DialogCloseReason): void {
-        emit<DialogCloseDetail>(
+    /** Fires the cancelable `hmi-close` with `reason`. The dialog stays open until `open` is set to `false`. */
+    protected requestClose(reason: string): void {
+        emit<{ reason: string }>(
             this,
             'hmi-close',
             { reason },
@@ -129,7 +118,7 @@ export class HmiDialog extends LitElement {
     // Escape. The dialog stays open until `open` is set to false.
     #onCancel(event: Event): void {
         event.preventDefault();
-        this.#requestClose('escape');
+        this.requestClose('escape');
     }
 
     // The browser closed the dialog by itself (a second Escape with no other
@@ -138,7 +127,7 @@ export class HmiDialog extends LitElement {
     #onClose(): void {
         if (!this.open || this.dialog.open) return;
         this.dialog.showModal();
-        this.#requestClose('escape');
+        this.requestClose('escape');
     }
 
     // A press outside the dialog's box lands on the `<dialog>` itself, through
@@ -151,8 +140,58 @@ export class HmiDialog extends LitElement {
             event.clientX > box.right ||
             event.clientY < box.top ||
             event.clientY > box.bottom;
-        if (outside) this.#requestClose('backdrop');
+        if (outside) this.requestClose('backdrop');
     }
+
+    /** The `<dialog>` around `content`, wired to Escape, the backdrop and `open`. */
+    protected renderDialog(
+        content: TemplateResult,
+        naming: DialogNaming = {},
+    ): TemplateResult {
+        return html`<dialog
+            part="base panel"
+            class="panel"
+            aria-labelledby=${naming.labelledBy ?? nothing}
+            aria-describedby=${naming.describedBy ?? nothing}
+            aria-label=${naming.label || nothing}
+            @cancel=${this.#onCancel}
+            @close=${this.#onClose}
+            @mousedown=${this.#onPointerDown}
+        >
+            ${renderLiquidFilter()} ${content}
+        </dialog>`;
+    }
+}
+
+/**
+ * What the dialog group (modal, drawer) shares on top of the base: a title, a
+ * description, a body and footer actions. Footer actions given as an `actions`
+ * array fire `hmi-action` with the action's `value`, and do not close the dialog
+ * either.
+ *
+ * A subclass is the element: it brings its `@customElement` tag, its styles, its
+ * own properties and, when its body is wrapped, `renderBody()`.
+ */
+export class HmiDialog extends HmiDialogBase {
+    /** The title, as plain text: the default of the `title` slot. */
+    @property() accessor heading = '';
+
+    /** Supporting text under the title: the default of the `description` slot. */
+    @property() accessor description = '';
+
+    /** The footer actions, rendered as buttons: the default of the `actions` slot. A property only: there is no attribute. @default [] */
+    @property({ type: Array, attribute: false })
+    accessor actions: DialogAction[] = [];
+
+    /** The accessible name of the dialog when it has no title. */
+    @property() accessor label = '';
+
+    // Whether a slot holds content of the consumer's: an element, or text that
+    // is not blank. A slot another element forwards into this one counts through
+    // what it holds.
+    @state() private accessor titleSlotted = false;
+    @state() private accessor descriptionSlotted = false;
+    @state() private accessor actionsSlotted = false;
 
     #onSlotChange(event: Event, set: (hasContent: boolean) => void): void {
         const slot = event.currentTarget as HTMLSlotElement;
@@ -178,55 +217,52 @@ export class HmiDialog extends LitElement {
         const hasDescription =
             this.descriptionSlotted || this.description !== '';
         const hasActions = this.actionsSlotted || this.actions.length > 0;
-        return html`<dialog
-            part="base panel"
-            class="panel"
-            aria-labelledby=${hasTitle ? 'title' : nothing}
-            aria-describedby=${hasDescription ? 'description' : nothing}
-            aria-label=${!hasTitle && this.label ? this.label : nothing}
-            @cancel=${this.#onCancel}
-            @close=${this.#onClose}
-            @mousedown=${this.#onPointerDown}
-        >
-            ${renderLiquidFilter()}
-            <h2 part="title" class="title" id="title" ?hidden=${!hasTitle}>
-                <slot
-                    name="title"
-                    @slotchange=${(e: Event) =>
-                        this.#onSlotChange(e, (v) => {
-                            this.titleSlotted = v;
-                        })}
-                    ></slot
-                >${this.titleSlotted ? nothing : this.heading}
-            </h2>
-            <p
-                part="description"
-                class="description"
-                id="description"
-                ?hidden=${!hasDescription}
-            >
-                <slot
-                    name="description"
-                    @slotchange=${(e: Event) =>
-                        this.#onSlotChange(e, (v) => {
-                            this.descriptionSlotted = v;
-                        })}
-                    ></slot
-                >${this.descriptionSlotted ? nothing : this.description}
-            </p>
-            ${this.renderBody()}
-            <div part="actions" class="actions" ?hidden=${!hasActions}>
-                <slot
-                    name="actions"
-                    @slotchange=${(e: Event) =>
-                        this.#onSlotChange(e, (v) => {
-                            this.actionsSlotted = v;
-                        })}
-                    >${renderDialogActions(this.actions, (value) =>
-                        emit<DialogActionDetail>(this, 'hmi-action', { value }),
-                    )}</slot
+        return this.renderDialog(
+            html`<h2 part="title" class="title" id="title" ?hidden=${!hasTitle}>
+                    <slot
+                        name="title"
+                        @slotchange=${(e: Event) =>
+                            this.#onSlotChange(e, (v) => {
+                                this.titleSlotted = v;
+                            })}
+                        ></slot
+                    >${this.titleSlotted ? nothing : this.heading}
+                </h2>
+                <p
+                    part="description"
+                    class="description"
+                    id="description"
+                    ?hidden=${!hasDescription}
                 >
-            </div>
-        </dialog>`;
+                    <slot
+                        name="description"
+                        @slotchange=${(e: Event) =>
+                            this.#onSlotChange(e, (v) => {
+                                this.descriptionSlotted = v;
+                            })}
+                        ></slot
+                    >${this.descriptionSlotted ? nothing : this.description}
+                </p>
+                ${this.renderBody()}
+                <div part="actions" class="actions" ?hidden=${!hasActions}>
+                    <slot
+                        name="actions"
+                        @slotchange=${(e: Event) =>
+                            this.#onSlotChange(e, (v) => {
+                                this.actionsSlotted = v;
+                            })}
+                        >${renderDialogActions(this.actions, (value) =>
+                            emit<DialogActionDetail>(this, 'hmi-action', {
+                                value,
+                            }),
+                        )}</slot
+                    >
+                </div>`,
+            {
+                labelledBy: hasTitle ? 'title' : undefined,
+                describedBy: hasDescription ? 'description' : undefined,
+                label: hasTitle ? undefined : this.label,
+            },
+        );
     }
 }
