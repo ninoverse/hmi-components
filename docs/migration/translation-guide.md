@@ -854,15 +854,24 @@ The charts are pure functions of props and port almost verbatim:
 ## 15. Theme module
 
 ```ts
-// src/elements/shared/theme.ts (phase 11)
-export function getTheme(): { theme: string; structure: Structure; material: Material };
-export function setTheme(next: Partial<{ theme: string; structure: Structure; material: Material }>): void; // writes html[data-*] + localStorage (same keys: hmi-theme, hmi-structure, hmi-material)
+// src/elements/shared/theme.ts, built to dist/wc/theme.js (HmiElements.theme in the drop-in bundle)
+export const defaultTheme: ThemeState;
+export function getTheme(): ThemeState; // reads html[data-*]; the same object until an axis changes
+export function setTheme(change: ThemeChange): void; // sets html[data-*] and saves (hmi-theme, hmi-structure, hmi-material); an unknown value is ignored, axis by axis
+export function restoreTheme(): void; // applies the saved choices
 export function subscribe(listener: (state: ThemeState) => void): () => void;
+export function registerColorTheme(...names: string[]): void; // v5's customThemes
+export function getColorThemes(): readonly string[];
+export { colorThemes, structures, materials }; // and the types ColorTheme, Structure, Material
 ```
 
 `src/react/use-theme.ts` wraps it with `useSyncExternalStore` and is exported
-as `useTheme` from `./react`. There is no provider element; the anti-flash
-inline script in `index.html` stays as documented in `docs/theming.md`.
+as `useTheme` from `./react`. It returns `{ theme, structure, material, set }`
+(v5's returned `setTheme`, `setStructure`, `setMaterial` and the three lists;
+`set({ theme: 'ocean' })` replaces the setters and the lists are imports). There
+is no provider and no provider element; the first mount in the page applies the
+saved choices, and the anti-flash inline script in `index.html` stays as
+documented in `docs/theming.md`.
 
 ## 16. What the r2wc layer did that Lit makes obsolete
 

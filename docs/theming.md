@@ -73,22 +73,90 @@ function ThemeSwitcher() {
 
 `useTheme()` throws if used outside a `ThemeProvider`.
 
-> **v6:** `ThemeProvider` is replaced by a framework-agnostic module —
-> `setTheme()`, `getTheme()`, `subscribe()` from `@ninoverse/hmi-components/theme` —
-> and a thin `useTheme()` hook from `@ninoverse/hmi-components/react` built on it. Same
-> attributes, same `localStorage` keys, no provider wrapper. See
-> [`docs/migration/README.md`](./migration/README.md).
+> **v6:** `ThemeProvider` and this `useTheme()` are replaced by a framework-agnostic
+> module and a hook that needs no provider, with the same attributes and the same
+> `localStorage` keys: see [the theme module and `useTheme` (v6)](#the-theme-module-and-usetheme-v6).
 
 > **Avoiding a flash of the default theme.** `ThemeProvider` sets the `data-*`
 > attributes after mount. To prevent a flash before hydration, also set
 > `data-theme` / `data-structure` / `data-material` on `<html>` in your HTML shell —
 > or run a tiny inline script in `<head>` that reads the same `localStorage` keys and
-> applies them before first paint (see `index.html` in this repository).
+> applies them before first paint (see `index.html` in this repository). The v6 module
+> and hook restore the saved choice after first paint too, so the same applies.
+
+## The theme module and `useTheme` (v6)
+
+A module that works in any framework, and a React hook on top of it. `<html>` is the
+source of truth: `getTheme()` reads its attributes, `setTheme()` writes them and
+saves the choice, and importing the module does nothing.
+
+```ts
+import {
+    colorThemes, // the built-in values: also structures, materials
+    getColorThemes, // the built-in colour themes, then the registered ones
+    getTheme, // { theme, structure, material }: the same object until an axis changes
+    registerColorTheme, // registerColorTheme('midnight'): adds a colour theme name
+    restoreTheme, // applies the saved choices
+    setTheme, // setTheme({ theme: 'ocean', material: 'glass' }): sets the attributes and saves
+    subscribe, // subscribe((state) => …): returns the function that stops it
+} from '@ninoverse/hmi-components/wc/theme';
+```
+
+The drop-in bundle has the same functions as `HmiElements.theme`. In React, `useTheme()`
+returns the three axes and `set`, which is `setTheme`, and re-renders when anything
+changes them:
+
+```tsx
+import { useTheme } from '@ninoverse/hmi-components/react';
+import { colorThemes } from '@ninoverse/hmi-components/wc/theme';
+
+function ThemeSwitcher() {
+    const { theme, set } = useTheme();
+    return (
+        <select value={theme} onChange={(e) => set({ theme: e.target.value })}>
+            {colorThemes.map((t) => <option key={t}>{t}</option>)}
+        </select>
+    );
+}
+```
+
+- **Defaults** are the attributes on `<html>` in your HTML shell. With none, the state
+  is `default`, `default` and `solid`. `data-theme` is read as it stands, and a missing,
+  empty or unknown `data-structure` or `data-material` reads as `default` or `solid`.
+- **`setTheme()`** changes the axes it is given and leaves the others. Each axis is
+  checked on its own, and one that is not a known value is left alone, with no error:
+  `structure` and `material` must be built in, and `theme` in `getColorThemes()`.
+- **Saved choices** are applied by `restoreTheme()`, which you call once at startup, and
+  by `useTheme()` on its first mount in the page. A saved value that is not a known one
+  is skipped. Register your custom colour themes first, or a saved one is skipped too.
+- **Custom colour themes** are CSS you load (`[data-theme='midnight'] { … }`) and a name
+  you register with `registerColorTheme('midnight')` at startup. A custom structure or
+  material is applied by setting its `data-*` attribute yourself; the module reports
+  it as `default` or `solid`.
+- **A change by anything else**, such as a script that sets `data-theme`, reaches
+  `subscribe()` listeners and the hook. While something is subscribed (the hook does), a
+  choice that another tab saves is applied here too.
+- **Storage that is blocked** (private mode, a sandboxed frame) never throws: the
+  choice applies to the page and is not saved.
+- **On the server** there is no document: `getTheme()` and the hook give the defaults,
+  and the other functions do nothing. The hook gives the defaults while hydrating, too,
+  and the browser's attributes arrive with the next render.
+- **One copy per bundle.** `registerColorTheme()` is remembered by the copy of the
+  module it is called on, and the drop-in bundle has its own, as the toast queue does.
+
+Moving from v5:
+
+| v5 | v6 |
+|----|----|
+| `<ThemeProvider defaultTheme="ocean" defaultStructure="rounded">` | `<html data-theme="ocean" data-structure="rounded">` in your shell |
+| `useTheme()` returns `theme`, `setTheme(name)`, `structure`, `setStructure(name)`, `material`, `setMaterial(name)` and the three lists | `{ theme, structure, material, set }`, with `set({ theme: name })`; the lists are imports from `wc/theme` |
+| `customThemes={['midnight']}` | `registerColorTheme('midnight')` |
+| throws outside the provider | needs no provider and never throws |
 
 ## Non-React / Web Components: pure CSS
 
-There is **no** `ThemeProvider` outside React — the tokens come entirely from the
-theme stylesheets. Set the attributes on `<html>` (or any ancestor) and load the
+The tokens come entirely from the theme stylesheets; the theme module above only sets
+the attributes. Set them on `<html>` (or any ancestor) and load the
 token CSS in order: constants first, then **one** color theme, **one** structure
 theme and optionally **one** material.
 
@@ -247,7 +315,9 @@ relevant token set:
 - **Custom structure theme:** copy a file from `public/css/themes/structure/` and redefine the shape/density/motion/type tokens under `[data-structure='your-name']`.
 - **Custom material:** copy a file from `public/css/themes/material/` and redefine the `--panel-*` tokens under `[data-material='your-name']`. Do not add component selectors — they will not reach into the elements.
 
-Pure-CSS / Web Component consumers can point at your stylesheet directly. In React,
+Pure-CSS / Web Component consumers can point at your stylesheet directly. In React (v5),
 `ThemeProvider`'s pickers are populated from the const arrays in `colorThemes` /
 `structures` / `materials`; a fully custom value not in those lists can still be
-applied by setting the `data-*` attribute yourself.
+applied by setting the `data-*` attribute yourself. In v6, a custom colour theme is
+added with `registerColorTheme()`, and a custom structure or material is applied by
+setting the attribute.

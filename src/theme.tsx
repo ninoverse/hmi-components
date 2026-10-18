@@ -74,6 +74,8 @@ export type ThemeProviderProps = {
  * localStorage and reflects it onto `html[data-theme]` / `html[data-structure]`,
  * so components re-theme instantly. Consume via {@link useTheme}.
  *
+ * @deprecated Use `useTheme` from `@ninoverse/hmi-components/react`, which needs no provider and applies the saved choices on its first mount, or `restoreTheme` from `@ninoverse/hmi-components/wc/theme`. Removed in 6.0.0.
+ *
  * @example
  * <ThemeProvider defaultTheme="ocean"><App /></ThemeProvider>
  */
@@ -136,6 +138,8 @@ export function ThemeProvider({
  * Reads the current theme axes and their setters from {@link ThemeProvider}.
  * Throws if used outside a provider. Returns the active `theme`/`structure`,
  * their `setTheme`/`setStructure` setters, and the available option lists.
+ *
+ * @deprecated Use `useTheme` from `@ninoverse/hmi-components/react`, which returns `{ theme, structure, material, set }`. Removed in 6.0.0.
  *
  * @example
  * const { theme, setTheme, colorThemes } = useTheme();
