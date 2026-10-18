@@ -6219,6 +6219,590 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/elements/command-palette/command-palette.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "Command palette: a search field over a list of commands, in a modal dialog. It\nis a native `<dialog>` opened with `showModal()`, so the page behind it is inert\nand focus is trapped inside; the page also stops scrolling while it is open, and\nfocus goes back to what had it when it closes.\n\nThe palette is controlled, as modal and drawer are: it never closes itself. A\npress on Escape, a press outside it and choosing a command fire the cancelable\n`hmi-close` with the `reason` (`escape`, `backdrop` or `select`); set `open` to\n`false` from the listener to close it. Choosing a command fires `hmi-action`\nwith its `value`, and then `hmi-close`.\n\n`commands` is a property: `{ value, label, description?, shortcut?, group?,\nkeywords? }`. Their text is plain; for richer content slot an element named\n`label-<value>`, `description-<value>`, `shortcut-<value>` or, for a leading\nicon, `icon-<value>`. A command with a `group` is listed under its heading, which\nrepeats when the group changes between consecutive commands, and the group is a\n`group` of the list named by it.\n\nOpening clears the search text and highlights the first command, and focus goes\nto the field. The field is a combobox: typing filters the commands, ArrowDown\nand ArrowUp move the highlight (it stops at the first and the last), Home and\nEnd jump to them, Enter chooses the highlighted one (not while an input method\nis composing), and the pointer highlights what it is over and chooses on a\npress. The highlighted command is the active descendant and `aria-selected`, and\nis scrolled into view.\n\n`query` is the text in the field: it fires `hmi-input` per keystroke, and setting\nit from code sets the text without firing. `filter` is `includes` (the default:\nthe label, the description or a keyword contains the text, ignoring case), `none`\n(the page filters, and sets `commands` in response to `hmi-input`) or, as a\nproperty, a function of the command and the trimmed text. The palette is named by\n`label`.",
+          "name": "HmiCommandPalette",
+          "cssParts": [
+            {
+              "description": "The `<dialog>`.",
+              "name": "base"
+            },
+            {
+              "description": "The `<dialog>`, under its panel-group name.",
+              "name": "panel"
+            },
+            {
+              "description": "The row of the search icon and the field.",
+              "name": "searchbox"
+            },
+            {
+              "description": "The magnifier.",
+              "name": "search-icon"
+            },
+            {
+              "description": "The search field.",
+              "name": "input"
+            },
+            {
+              "description": "The scrolling list of commands.",
+              "name": "list"
+            },
+            {
+              "description": "A group's heading.",
+              "name": "group"
+            },
+            {
+              "description": "One command's row. `data-highlighted` marks the highlighted one.",
+              "name": "option"
+            },
+            {
+              "description": "A command's leading icon.",
+              "name": "option-icon"
+            },
+            {
+              "description": "The label and the description of a command.",
+              "name": "option-text"
+            },
+            {
+              "description": "A command's label.",
+              "name": "option-label"
+            },
+            {
+              "description": "A command's second line.",
+              "name": "option-description"
+            },
+            {
+              "description": "A command's trailing hint.",
+              "name": "shortcut"
+            },
+            {
+              "description": "The message shown when no command matches.",
+              "name": "empty"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Shown when no command matches. Defaults to `empty-message`.",
+              "name": "empty"
+            },
+            {
+              "description": "Rich label for the command with that value.",
+              "name": "label-<value>"
+            },
+            {
+              "description": "Rich second line for the command with that value.",
+              "name": "description-<value>"
+            },
+            {
+              "description": "Leading icon for the command with that value.",
+              "name": "icon-<value>"
+            },
+            {
+              "description": "Trailing hint for the command with that value.",
+              "name": "shortcut-<value>"
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "commands",
+              "type": {
+                "text": "readonly CommandPaletteCommand[]"
+              },
+              "default": "[]",
+              "description": "The commands, in order. Set it as a property."
+            },
+            {
+              "kind": "field",
+              "name": "query",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The text in the search field. It is cleared each time the palette opens.",
+              "attribute": "query"
+            },
+            {
+              "kind": "field",
+              "name": "filter",
+              "type": {
+                "text": "CommandPaletteFilter"
+              },
+              "default": "'includes'",
+              "description": "How the text filters the commands: `includes`, `none` or, as a property, a function of the command and the text.",
+              "attribute": "filter"
+            },
+            {
+              "kind": "field",
+              "name": "placeholder",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Type a command or search…'",
+              "description": "Search field placeholder.",
+              "attribute": "placeholder"
+            },
+            {
+              "kind": "field",
+              "name": "emptyMessage",
+              "type": {
+                "text": "string"
+              },
+              "default": "'No matches'",
+              "description": "Text shown when no command matches, or the `empty` slot.",
+              "attribute": "empty-message"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Command palette'",
+              "description": "The accessible name of the dialog.",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "highlight",
+              "type": {
+                "text": "number"
+              },
+              "privacy": "private",
+              "default": "0"
+            },
+            {
+              "kind": "method",
+              "name": "#listed",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "readonly CommandPaletteCommand[]"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#active",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "number"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "listed",
+                  "type": {
+                    "text": "readonly CommandPaletteCommand[]"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#commit",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "command",
+                  "type": {
+                    "text": "CommandPaletteCommand"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onInput",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#onKeydown",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "KeyboardEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#runs",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "Run[]"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "listed",
+                  "type": {
+                    "text": "readonly CommandPaletteCommand[]"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "#renderOption",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "command",
+                  "type": {
+                    "text": "CommandPaletteCommand"
+                  }
+                },
+                {
+                  "name": "index",
+                  "type": {
+                    "text": "number"
+                  }
+                },
+                {
+                  "name": "active",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the dialog is open. Set it from the `hmi-close` listener to close it.",
+              "attribute": "open",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "HmiDialogBase",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "dialog",
+              "type": {
+                "text": "HTMLDialogElement"
+              },
+              "privacy": "private",
+              "inheritedFrom": {
+                "name": "HmiDialogBase",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "#restoreFocusTo",
+              "privacy": "private",
+              "type": {
+                "text": "HTMLElement | null"
+              },
+              "default": "null",
+              "inheritedFrom": {
+                "name": "HmiDialogBase",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "#unlockScroll",
+              "privacy": "private",
+              "type": {
+                "text": "(() => void) | undefined"
+              },
+              "inheritedFrom": {
+                "name": "HmiDialogBase",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#sync",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "inheritedFrom": {
+                "name": "HmiDialogBase",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#release",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "inheritedFrom": {
+                "name": "HmiDialogBase",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "requestClose",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "reason",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ],
+              "description": "Fires the cancelable `hmi-close` with `reason`. The dialog stays open until `open` is set to `false`.",
+              "inheritedFrom": {
+                "name": "HmiDialogBase",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#onCancel",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "HmiDialogBase",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#onClose",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "inheritedFrom": {
+                "name": "HmiDialogBase",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#onPointerDown",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "MouseEvent"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "HmiDialogBase",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "renderDialog",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "TemplateResult"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "content",
+                  "type": {
+                    "text": "TemplateResult"
+                  }
+                },
+                {
+                  "name": "naming",
+                  "default": "{}",
+                  "type": {
+                    "text": "DialogNaming"
+                  }
+                }
+              ],
+              "description": "The `<dialog>` around `content`, wired to Escape, the backdrop and `open`.",
+              "inheritedFrom": {
+                "name": "HmiDialogBase",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            }
+          ],
+          "events": [
+            {
+              "type": {
+                "text": "CustomEvent<CommandPaletteCloseDetail>"
+              },
+              "description": "Escape, a press outside the palette, or a chosen command. Cancelable, but the palette does not close itself either way: set `open` to `false`.",
+              "name": "hmi-close"
+            },
+            {
+              "type": {
+                "text": "CustomEvent<CommandPaletteActionDetail>"
+              },
+              "description": "A command was chosen: the pointer pressed it, or Enter chose the highlighted one.",
+              "name": "hmi-action"
+            },
+            {
+              "type": {
+                "text": "CustomEvent<CommandPaletteInputDetail>"
+              },
+              "description": "The user changed the text in the search field.",
+              "name": "hmi-input"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "query",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The text in the search field. It is cleared each time the palette opens.",
+              "fieldName": "query"
+            },
+            {
+              "name": "filter",
+              "type": {
+                "text": "CommandPaletteFilter"
+              },
+              "default": "'includes'",
+              "description": "How the text filters the commands: `includes`, `none` or, as a property, a function of the command and the text.",
+              "fieldName": "filter"
+            },
+            {
+              "name": "placeholder",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Type a command or search…'",
+              "description": "Search field placeholder.",
+              "fieldName": "placeholder"
+            },
+            {
+              "name": "empty-message",
+              "type": {
+                "text": "string"
+              },
+              "default": "'No matches'",
+              "description": "Text shown when no command matches, or the `empty` slot.",
+              "fieldName": "emptyMessage"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'Command palette'",
+              "description": "The accessible name of the dialog.",
+              "fieldName": "label"
+            },
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the dialog is open. Set it from the `hmi-close` listener to close it.",
+              "fieldName": "open",
+              "inheritedFrom": {
+                "name": "HmiDialogBase",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "HmiDialogBase",
+            "module": "/src/elements/shared/dialog.js"
+          },
+          "tagName": "hmi-command-palette",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "HmiCommandPalette",
+          "declaration": {
+            "name": "HmiCommandPalette",
+            "module": "src/elements/command-palette/command-palette.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "hmi-command-palette",
+          "declaration": {
+            "name": "HmiCommandPalette",
+            "module": "src/elements/command-palette/command-palette.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/elements/confirm-dialog/confirm-dialog.ts",
       "declarations": [
         {
@@ -8562,21 +9146,6 @@
             },
             {
               "kind": "field",
-              "name": "open",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Whether the dialog is open. Set it from the `hmi-close` listener to close it.",
-              "attribute": "open",
-              "reflects": true,
-              "inheritedFrom": {
-                "name": "HmiDialog",
-                "module": "src/elements/shared/dialog.ts"
-              }
-            },
-            {
-              "kind": "field",
               "name": "heading",
               "type": {
                 "text": "string"
@@ -8632,18 +9201,6 @@
             },
             {
               "kind": "field",
-              "name": "dialog",
-              "type": {
-                "text": "HTMLDialogElement"
-              },
-              "privacy": "private",
-              "inheritedFrom": {
-                "name": "HmiDialog",
-                "module": "src/elements/shared/dialog.ts"
-              }
-            },
-            {
-              "kind": "field",
               "name": "titleSlotted",
               "type": {
                 "text": "boolean"
@@ -8682,139 +9239,6 @@
               }
             },
             {
-              "kind": "field",
-              "name": "#restoreFocusTo",
-              "privacy": "private",
-              "type": {
-                "text": "HTMLElement | null"
-              },
-              "default": "null",
-              "inheritedFrom": {
-                "name": "HmiDialog",
-                "module": "src/elements/shared/dialog.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "#unlockScroll",
-              "privacy": "private",
-              "type": {
-                "text": "(() => void) | undefined"
-              },
-              "inheritedFrom": {
-                "name": "HmiDialog",
-                "module": "src/elements/shared/dialog.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "#sync",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "inheritedFrom": {
-                "name": "HmiDialog",
-                "module": "src/elements/shared/dialog.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "#release",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "inheritedFrom": {
-                "name": "HmiDialog",
-                "module": "src/elements/shared/dialog.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "#requestClose",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "reason",
-                  "type": {
-                    "text": "DialogCloseReason"
-                  }
-                }
-              ],
-              "inheritedFrom": {
-                "name": "HmiDialog",
-                "module": "src/elements/shared/dialog.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "#onCancel",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "Event"
-                  }
-                }
-              ],
-              "inheritedFrom": {
-                "name": "HmiDialog",
-                "module": "src/elements/shared/dialog.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "#onClose",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "inheritedFrom": {
-                "name": "HmiDialog",
-                "module": "src/elements/shared/dialog.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "#onPointerDown",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "MouseEvent"
-                  }
-                }
-              ],
-              "inheritedFrom": {
-                "name": "HmiDialog",
-                "module": "src/elements/shared/dialog.ts"
-              }
-            },
-            {
               "kind": "method",
               "name": "#onSlotChange",
               "privacy": "private",
@@ -8839,6 +9263,197 @@
               ],
               "inheritedFrom": {
                 "name": "HmiDialog",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the dialog is open. Set it from the `hmi-close` listener to close it.",
+              "attribute": "open",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "HmiDialogBase",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "dialog",
+              "type": {
+                "text": "HTMLDialogElement"
+              },
+              "privacy": "private",
+              "inheritedFrom": {
+                "name": "HmiDialogBase",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "#restoreFocusTo",
+              "privacy": "private",
+              "type": {
+                "text": "HTMLElement | null"
+              },
+              "default": "null",
+              "inheritedFrom": {
+                "name": "HmiDialogBase",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "#unlockScroll",
+              "privacy": "private",
+              "type": {
+                "text": "(() => void) | undefined"
+              },
+              "inheritedFrom": {
+                "name": "HmiDialogBase",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#sync",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "inheritedFrom": {
+                "name": "HmiDialogBase",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#release",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "inheritedFrom": {
+                "name": "HmiDialogBase",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "requestClose",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "reason",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ],
+              "description": "Fires the cancelable `hmi-close` with `reason`. The dialog stays open until `open` is set to `false`.",
+              "inheritedFrom": {
+                "name": "HmiDialogBase",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#onCancel",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "HmiDialogBase",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#onClose",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "inheritedFrom": {
+                "name": "HmiDialogBase",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#onPointerDown",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "MouseEvent"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "HmiDialogBase",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "renderDialog",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "TemplateResult"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "content",
+                  "type": {
+                    "text": "TemplateResult"
+                  }
+                },
+                {
+                  "name": "naming",
+                  "default": "{}",
+                  "type": {
+                    "text": "DialogNaming"
+                  }
+                }
+              ],
+              "description": "The `<dialog>` around `content`, wired to Escape, the backdrop and `open`.",
+              "inheritedFrom": {
+                "name": "HmiDialogBase",
                 "module": "src/elements/shared/dialog.ts"
               }
             }
@@ -8878,19 +9493,6 @@
               "fieldName": "size"
             },
             {
-              "name": "open",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Whether the dialog is open. Set it from the `hmi-close` listener to close it.",
-              "fieldName": "open",
-              "inheritedFrom": {
-                "name": "HmiDialog",
-                "module": "src/elements/shared/dialog.ts"
-              }
-            },
-            {
               "name": "heading",
               "type": {
                 "text": "string"
@@ -8926,6 +9528,19 @@
               "fieldName": "label",
               "inheritedFrom": {
                 "name": "HmiDialog",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the dialog is open. Set it from the `hmi-close` listener to close it.",
+              "fieldName": "open",
+              "inheritedFrom": {
+                "name": "HmiDialogBase",
                 "module": "src/elements/shared/dialog.ts"
               }
             }
@@ -14437,21 +15052,6 @@
             },
             {
               "kind": "field",
-              "name": "open",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Whether the dialog is open. Set it from the `hmi-close` listener to close it.",
-              "attribute": "open",
-              "reflects": true,
-              "inheritedFrom": {
-                "name": "HmiDialog",
-                "module": "src/elements/shared/dialog.ts"
-              }
-            },
-            {
-              "kind": "field",
               "name": "heading",
               "type": {
                 "text": "string"
@@ -14507,18 +15107,6 @@
             },
             {
               "kind": "field",
-              "name": "dialog",
-              "type": {
-                "text": "HTMLDialogElement"
-              },
-              "privacy": "private",
-              "inheritedFrom": {
-                "name": "HmiDialog",
-                "module": "src/elements/shared/dialog.ts"
-              }
-            },
-            {
-              "kind": "field",
               "name": "titleSlotted",
               "type": {
                 "text": "boolean"
@@ -14551,139 +15139,6 @@
               },
               "privacy": "private",
               "default": "false",
-              "inheritedFrom": {
-                "name": "HmiDialog",
-                "module": "src/elements/shared/dialog.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "#restoreFocusTo",
-              "privacy": "private",
-              "type": {
-                "text": "HTMLElement | null"
-              },
-              "default": "null",
-              "inheritedFrom": {
-                "name": "HmiDialog",
-                "module": "src/elements/shared/dialog.ts"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "#unlockScroll",
-              "privacy": "private",
-              "type": {
-                "text": "(() => void) | undefined"
-              },
-              "inheritedFrom": {
-                "name": "HmiDialog",
-                "module": "src/elements/shared/dialog.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "#sync",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "inheritedFrom": {
-                "name": "HmiDialog",
-                "module": "src/elements/shared/dialog.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "#release",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "inheritedFrom": {
-                "name": "HmiDialog",
-                "module": "src/elements/shared/dialog.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "#requestClose",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "reason",
-                  "type": {
-                    "text": "DialogCloseReason"
-                  }
-                }
-              ],
-              "inheritedFrom": {
-                "name": "HmiDialog",
-                "module": "src/elements/shared/dialog.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "#onCancel",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "Event"
-                  }
-                }
-              ],
-              "inheritedFrom": {
-                "name": "HmiDialog",
-                "module": "src/elements/shared/dialog.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "#onClose",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "inheritedFrom": {
-                "name": "HmiDialog",
-                "module": "src/elements/shared/dialog.ts"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "#onPointerDown",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "MouseEvent"
-                  }
-                }
-              ],
               "inheritedFrom": {
                 "name": "HmiDialog",
                 "module": "src/elements/shared/dialog.ts"
@@ -14731,6 +15186,197 @@
                 "name": "HmiDialog",
                 "module": "src/elements/shared/dialog.ts"
               }
+            },
+            {
+              "kind": "field",
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the dialog is open. Set it from the `hmi-close` listener to close it.",
+              "attribute": "open",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "HmiDialogBase",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "dialog",
+              "type": {
+                "text": "HTMLDialogElement"
+              },
+              "privacy": "private",
+              "inheritedFrom": {
+                "name": "HmiDialogBase",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "#restoreFocusTo",
+              "privacy": "private",
+              "type": {
+                "text": "HTMLElement | null"
+              },
+              "default": "null",
+              "inheritedFrom": {
+                "name": "HmiDialogBase",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "#unlockScroll",
+              "privacy": "private",
+              "type": {
+                "text": "(() => void) | undefined"
+              },
+              "inheritedFrom": {
+                "name": "HmiDialogBase",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#sync",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "inheritedFrom": {
+                "name": "HmiDialogBase",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#release",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "inheritedFrom": {
+                "name": "HmiDialogBase",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "requestClose",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "reason",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ],
+              "description": "Fires the cancelable `hmi-close` with `reason`. The dialog stays open until `open` is set to `false`.",
+              "inheritedFrom": {
+                "name": "HmiDialogBase",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#onCancel",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "HmiDialogBase",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#onClose",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "inheritedFrom": {
+                "name": "HmiDialogBase",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#onPointerDown",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "MouseEvent"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "HmiDialogBase",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "renderDialog",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "TemplateResult"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "content",
+                  "type": {
+                    "text": "TemplateResult"
+                  }
+                },
+                {
+                  "name": "naming",
+                  "default": "{}",
+                  "type": {
+                    "text": "DialogNaming"
+                  }
+                }
+              ],
+              "description": "The `<dialog>` around `content`, wired to Escape, the backdrop and `open`.",
+              "inheritedFrom": {
+                "name": "HmiDialogBase",
+                "module": "src/elements/shared/dialog.ts"
+              }
             }
           ],
           "events": [
@@ -14758,19 +15404,6 @@
               "default": "'medium'",
               "description": "The width preset.",
               "fieldName": "size"
-            },
-            {
-              "name": "open",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false",
-              "description": "Whether the dialog is open. Set it from the `hmi-close` listener to close it.",
-              "fieldName": "open",
-              "inheritedFrom": {
-                "name": "HmiDialog",
-                "module": "src/elements/shared/dialog.ts"
-              }
             },
             {
               "name": "heading",
@@ -14808,6 +15441,19 @@
               "fieldName": "label",
               "inheritedFrom": {
                 "name": "HmiDialog",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the dialog is open. Set it from the `hmi-close` listener to close it.",
+              "fieldName": "open",
+              "inheritedFrom": {
+                "name": "HmiDialogBase",
                 "module": "src/elements/shared/dialog.ts"
               }
             }
@@ -24519,8 +25165,8 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "What the dialog group (modal, drawer) shares: a native `<dialog>` opened with\n`showModal()`, a title, a description, a body and footer actions, kept in step\nwith `open`. The page behind is inert and stops scrolling while it is open,\nand focus goes back to what had it when it closes.\n\nThe dialog is controlled, as the v5 components were: it never closes itself.\nEscape and a press on the backdrop fire the cancelable `hmi-close` with the\n`reason`; set `open` to `false` from the listener to close it. Footer actions\ngiven as an `actions` array fire `hmi-action` with the action's `value`, and\ndo not close it either.\n\nA subclass is the element: it brings its `@customElement` tag, its styles, its\nown properties and, when its body is wrapped, `renderBody()`.",
-          "name": "HmiDialog",
+          "description": "What every modal dialog shares: a native `<dialog>` opened with `showModal()`,\nkept in step with `open`. The page behind is inert and stops scrolling while it\nis open, and focus goes back to what had it when it closes.\n\nThe dialog is controlled, as the v5 components were: it never closes itself.\nEscape and a press on the backdrop fire the cancelable `hmi-close` with the\n`reason`; set `open` to `false` from the listener to close it.\n\nA subclass is the element: it brings its `@customElement` tag, its styles and\nits content, which it renders through `renderDialog()`, and it can ask for a\nclose of its own with `requestClose()`.",
+          "name": "HmiDialogBase",
           "members": [
             {
               "kind": "field",
@@ -24535,77 +25181,11 @@
             },
             {
               "kind": "field",
-              "name": "heading",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "The title, as plain text: the default of the `title` slot.",
-              "attribute": "heading"
-            },
-            {
-              "kind": "field",
-              "name": "description",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "Supporting text under the title: the default of the `description` slot.",
-              "attribute": "description"
-            },
-            {
-              "kind": "field",
-              "name": "actions",
-              "type": {
-                "text": "DialogAction[]"
-              },
-              "default": "[]",
-              "description": "The footer actions, rendered as buttons: the default of the `actions` slot. A property only: there is no attribute."
-            },
-            {
-              "kind": "field",
-              "name": "label",
-              "type": {
-                "text": "string"
-              },
-              "default": "''",
-              "description": "The accessible name of the dialog when it has no title.",
-              "attribute": "label"
-            },
-            {
-              "kind": "field",
               "name": "dialog",
               "type": {
                 "text": "HTMLDialogElement"
               },
               "privacy": "private"
-            },
-            {
-              "kind": "field",
-              "name": "titleSlotted",
-              "type": {
-                "text": "boolean"
-              },
-              "privacy": "private",
-              "default": "false"
-            },
-            {
-              "kind": "field",
-              "name": "descriptionSlotted",
-              "type": {
-                "text": "boolean"
-              },
-              "privacy": "private",
-              "default": "false"
-            },
-            {
-              "kind": "field",
-              "name": "actionsSlotted",
-              "type": {
-                "text": "boolean"
-              },
-              "privacy": "private",
-              "default": "false"
             },
             {
               "kind": "field",
@@ -24646,8 +25226,8 @@
             },
             {
               "kind": "method",
-              "name": "#requestClose",
-              "privacy": "private",
+              "name": "requestClose",
+              "privacy": "protected",
               "return": {
                 "type": {
                   "text": "void"
@@ -24657,10 +25237,11 @@
                 {
                   "name": "reason",
                   "type": {
-                    "text": "DialogCloseReason"
+                    "text": "string"
                   }
                 }
-              ]
+              ],
+              "description": "Fires the cancelable `hmi-close` with `reason`. The dialog stays open until `open` is set to `false`."
             },
             {
               "kind": "method",
@@ -24710,6 +25291,121 @@
             },
             {
               "kind": "method",
+              "name": "renderDialog",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "TemplateResult"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "content",
+                  "type": {
+                    "text": "TemplateResult"
+                  }
+                },
+                {
+                  "name": "naming",
+                  "default": "{}",
+                  "type": {
+                    "text": "DialogNaming"
+                  }
+                }
+              ],
+              "description": "The `<dialog>` around `content`, wired to Escape, the backdrop and `open`."
+            }
+          ],
+          "attributes": [
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the dialog is open. Set it from the `hmi-close` listener to close it.",
+              "fieldName": "open"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "customElement": true
+        },
+        {
+          "kind": "class",
+          "description": "What the dialog group (modal, drawer) shares on top of the base: a title, a\ndescription, a body and footer actions. Footer actions given as an `actions`\narray fire `hmi-action` with the action's `value`, and do not close the dialog\neither.\n\nA subclass is the element: it brings its `@customElement` tag, its styles, its\nown properties and, when its body is wrapped, `renderBody()`.",
+          "name": "HmiDialog",
+          "members": [
+            {
+              "kind": "field",
+              "name": "heading",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The title, as plain text: the default of the `title` slot.",
+              "attribute": "heading"
+            },
+            {
+              "kind": "field",
+              "name": "description",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Supporting text under the title: the default of the `description` slot.",
+              "attribute": "description"
+            },
+            {
+              "kind": "field",
+              "name": "actions",
+              "type": {
+                "text": "DialogAction[]"
+              },
+              "default": "[]",
+              "description": "The footer actions, rendered as buttons: the default of the `actions` slot. A property only: there is no attribute."
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The accessible name of the dialog when it has no title.",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "titleSlotted",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "descriptionSlotted",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "actionsSlotted",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "method",
               "name": "#onSlotChange",
               "privacy": "private",
               "return": {
@@ -24742,18 +25438,200 @@
                 }
               },
               "description": "What sits between the description and the footer. The default is the body slot."
-            }
-          ],
-          "attributes": [
+            },
             {
+              "kind": "field",
               "name": "open",
               "type": {
                 "text": "boolean"
               },
               "default": "false",
               "description": "Whether the dialog is open. Set it from the `hmi-close` listener to close it.",
-              "fieldName": "open"
+              "attribute": "open",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "HmiDialogBase",
+                "module": "src/elements/shared/dialog.ts"
+              }
             },
+            {
+              "kind": "field",
+              "name": "dialog",
+              "type": {
+                "text": "HTMLDialogElement"
+              },
+              "privacy": "private",
+              "inheritedFrom": {
+                "name": "HmiDialogBase",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "#restoreFocusTo",
+              "privacy": "private",
+              "type": {
+                "text": "HTMLElement | null"
+              },
+              "default": "null",
+              "inheritedFrom": {
+                "name": "HmiDialogBase",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "#unlockScroll",
+              "privacy": "private",
+              "type": {
+                "text": "(() => void) | undefined"
+              },
+              "inheritedFrom": {
+                "name": "HmiDialogBase",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#sync",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "inheritedFrom": {
+                "name": "HmiDialogBase",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#release",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "inheritedFrom": {
+                "name": "HmiDialogBase",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "requestClose",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "reason",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ],
+              "description": "Fires the cancelable `hmi-close` with `reason`. The dialog stays open until `open` is set to `false`.",
+              "inheritedFrom": {
+                "name": "HmiDialogBase",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#onCancel",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "HmiDialogBase",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#onClose",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "inheritedFrom": {
+                "name": "HmiDialogBase",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#onPointerDown",
+              "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "MouseEvent"
+                  }
+                }
+              ],
+              "inheritedFrom": {
+                "name": "HmiDialogBase",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "renderDialog",
+              "privacy": "protected",
+              "return": {
+                "type": {
+                  "text": "TemplateResult"
+                }
+              },
+              "parameters": [
+                {
+                  "name": "content",
+                  "type": {
+                    "text": "TemplateResult"
+                  }
+                },
+                {
+                  "name": "naming",
+                  "default": "{}",
+                  "type": {
+                    "text": "DialogNaming"
+                  }
+                }
+              ],
+              "description": "The `<dialog>` around `content`, wired to Escape, the backdrop and `open`.",
+              "inheritedFrom": {
+                "name": "HmiDialogBase",
+                "module": "src/elements/shared/dialog.ts"
+              }
+            }
+          ],
+          "attributes": [
             {
               "name": "heading",
               "type": {
@@ -24780,13 +25658,25 @@
               "default": "''",
               "description": "The accessible name of the dialog when it has no title.",
               "fieldName": "label"
+            },
+            {
+              "name": "open",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Whether the dialog is open. Set it from the `hmi-close` listener to close it.",
+              "fieldName": "open",
+              "inheritedFrom": {
+                "name": "HmiDialogBase",
+                "module": "src/elements/shared/dialog.ts"
+              }
             }
           ],
           "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "customElement": true
+            "name": "HmiDialogBase",
+            "module": "src/elements/shared/dialog.ts"
+          }
         }
       ],
       "exports": [
@@ -24796,6 +25686,14 @@
           "declaration": {
             "name": "DialogAction",
             "module": "./dialog-actions.js"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "HmiDialogBase",
+          "declaration": {
+            "name": "HmiDialogBase",
+            "module": "src/elements/shared/dialog.ts"
           }
         },
         {

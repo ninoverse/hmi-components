@@ -418,6 +418,7 @@ set the property, as the v5 React components were when controlled.
 | `hmi-modal` | `open` | `hmi-close` |
 | `hmi-confirm-dialog` | `open` | `hmi-cancel` |
 | `hmi-drawer` | `open` | `hmi-close` |
+| `hmi-command-palette` | `open` | `hmi-close` |
 
 The other overlays join this table as they are built, each on the choice made for
 it. `hmi-popover` is not in it: it is a `popover="auto"`, which the browser closes on
