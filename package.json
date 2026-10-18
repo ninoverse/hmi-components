@@ -606,6 +606,10 @@
             "types": "./dist/elements/timeline/timeline.react.d.ts",
             "import": "./dist/react/timeline.js"
         },
+        "./react/toast": {
+            "types": "./dist/elements/toast/toast.react.d.ts",
+            "import": "./dist/react/toast.js"
+        },
         "./react/tooltip": {
             "types": "./dist/elements/tooltip/tooltip.react.d.ts",
             "import": "./dist/react/tooltip.js"
@@ -1062,6 +1066,10 @@
         "./wc/timeline": {
             "types": "./dist/elements/timeline/timeline.d.ts",
             "import": "./dist/wc/timeline.js"
+        },
+        "./wc/toast": {
+            "types": "./dist/elements/toast/toast.d.ts",
+            "import": "./dist/wc/toast.js"
         },
         "./wc/tooltip": {
             "types": "./dist/elements/tooltip/tooltip.d.ts",

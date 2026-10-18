@@ -1431,6 +1431,23 @@ export function Example() {
         </section>
 
         <section>
+            <h2>Toast</h2>
+            <!-- The buttons are the React demo's. hmi-toast is the stack: mount it once and
+                 raise toasts from anywhere with toast, here HmiElements.toast from the
+                 drop-in bundle (an ES module imports it from wc/toast). A toast's clock
+                 stops while the pointer is over it, and its close button fires hmi-dismiss,
+                 which is logged to the console. -->
+            <div style="display: flex; gap: 2rem; flex-wrap: wrap; align-items: center">
+                <hmi-button id="toast-info" variant="soft">Info</hmi-button>
+                <hmi-button id="toast-success">Success</hmi-button>
+                <hmi-button id="toast-warning" variant="secondary">Warning</hmi-button>
+                <hmi-button id="toast-danger" variant="danger">Danger</hmi-button>
+                <hmi-button id="toast-sticky" variant="ghost">Sticky</hmi-button>
+            </div>
+            <hmi-toast id="toast-stack"></hmi-toast>
+        </section>
+
+        <section>
             <h2>List</h2>
             <!-- Items are a property. right-<id> takes rich content; reorderable adds
                  drag and Alt+Arrow reordering, and the page sets items back from
@@ -2150,6 +2167,13 @@ export function Example() {
                 paletteDemo.open = false;
             });
             paletteDemo.addEventListener('hmi-input', (event) => console.log('command-palette hmi-input', event.detail));
+            const { toast } = HmiElements;
+            document.getElementById('toast-info').addEventListener('click', () => toast.info('New version available', 'Reload to pick up the latest build.'));
+            document.getElementById('toast-success').addEventListener('click', () => toast.success('Saved', 'Changes synced to the cloud.'));
+            document.getElementById('toast-warning').addEventListener('click', () => toast.warning('Low storage', '1.2 GB free on this device.'));
+            document.getElementById('toast-danger').addEventListener('click', () => toast.danger('Upload failed', 'Could not reach the server.'));
+            document.getElementById('toast-sticky').addEventListener('click', () => toast.info('Sticky toast', 'Stays until dismissed.', { duration: 0 }));
+            document.getElementById('toast-stack').addEventListener('hmi-dismiss', (event) => console.log('toast hmi-dismiss', event.detail));
             for (const pager of document.querySelectorAll('hmi-pagination')) {
                 pager.addEventListener('hmi-change', (event) => {
                     console.log('pagination hmi-change', event.detail);

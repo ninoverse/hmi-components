@@ -79,6 +79,7 @@ type ShortcutOptions = Omit<ToastOptions, 'variant' | 'title' | 'body'>;
  * toast.success('Saved', 'Your changes are live.');
  * const id = toast.show({ variant: 'info', title: 'Working…', duration: 0 });
  * toast.dismiss(id);
+ * @deprecated Use `toast` from `@ninoverse/hmi-components/react/toast`. Removed in 6.0.0.
  */
 export const toast = {
     show,
@@ -183,6 +184,7 @@ const VARIANT_ICONS = {
  *
  * @example
  * <ToastHost />
+ * @deprecated Use `ToastHost` from `@ninoverse/hmi-components/react/toast`. Removed in 6.0.0.
  */
 export function ToastHost() {
     const [list, setList] = useState<ToastItem[]>([]);

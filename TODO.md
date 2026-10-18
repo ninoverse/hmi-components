@@ -399,6 +399,40 @@ paragraph, with a test that the trigger shows the slotted content.
 
 ---
 
+## Toasts under a modal dialog
+
+`hmi-toast` is a `popover="manual"` stack in the top layer, and a modal dialog (modal,
+drawer, confirm-dialog, command-palette: a native `<dialog>` opened with `showModal()`)
+makes everything outside itself inert. So a toast that is up when a dialog opens, or that is
+raised while one is open, behaves like this (measured in Chromium):
+
+- it stays in the top layer under the dialog's scrim: dimmed, and blurred by the modal's
+  backdrop filter;
+- it cannot be clicked or focused, and a screen reader does not announce it, because inert
+  content is out of the accessibility tree;
+- its clock keeps running, so a 4 s toast can expire before the dialog closes, and one that
+  is still up works normally afterwards.
+
+v5 drew the toast above the dialog (`z-index: 1200` against 1000) and clickable. It was left
+because the element cannot fix it: even a hide and show of the popover, which moves it above
+the scrim, leaves it inert. What would fix it, if someone needs it:
+
+1. **Re-promote above the scrim** when a toast is raised during a dialog (the dialog base
+   keeps a count of open modals and the stack hides and shows its popover). It makes the toast
+   legible, not interactive or announced.
+2. **A stack inside the dialog:** a second `<hmi-toast>` in the dialog's content, shown only
+   while the dialog is open and the main one is under it. Every stack shows the whole queue,
+   so this needs a way to say which stack shows which toast (a `scope` on the stack and on
+   `toast.show()`), and the toast raised for a dialog should leave with it.
+3. **Hold the clock while a dialog is open,** so a toast raised during one is still there when
+   it closes (the store would need to know about open dialogs, as in 1).
+
+Decide when a real use turns up (a validation error or a "copied" raised while a dialog stays
+open). Whichever it is, update the class docs of `hmi-toast`, the translation guide's toast
+paragraph and the tracker row, which describe the limit today.
+
+---
+
 ## Controlled or element-owned state, before v6
 
 **Do this last, before the v6 flip.** `.claude/rules/lit-elements.md` says an
