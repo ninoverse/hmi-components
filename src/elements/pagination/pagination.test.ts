@@ -159,21 +159,63 @@ describe('hmi-pagination changes', () => {
         );
         const seen = onChange(el);
         (all(el, 'button')[4] as HTMLElement).click();
+        await el.updateComplete;
         (all(el, 'prev')[0] as HTMLElement).click();
+        await el.updateComplete;
         (all(el, 'next')[0] as HTMLElement).click();
-        expect(seen).toEqual([5, 2, 4]);
+        expect(seen).toEqual([5, 4, 5]);
     });
 
-    it('is controlled: it keeps the page until the consumer sets it', async () => {
+    it('owns page: a choice sets it, then fires a cancelable hmi-change that leaves the shadow root', async () => {
         const el = await fixture(
             html`<hmi-pagination page="1" total="5"></hmi-pagination>`,
         );
+        let event: CustomEvent<PaginationChangeDetail> | undefined;
+        let pageDuring: number | undefined;
+        document.addEventListener(
+            'hmi-change',
+            (e) => {
+                event = e as CustomEvent<PaginationChangeDetail>;
+                pageDuring = el.page;
+            },
+            { once: true },
+        );
+        (all(el, 'button')[2] as HTMLElement).click();
+        expect(event?.detail).toEqual({ value: 3 });
+        expect(event?.bubbles).toBe(true);
+        expect(event?.composed).toBe(true);
+        expect(event?.cancelable).toBe(true);
+        expect(pageDuring).toBe(3);
+        await el.updateComplete;
+        expect(all(el, 'button')[2]?.getAttribute('aria-current')).toBe('page');
+    });
+
+    it('keeps the old page when a listener cancels, or the one a listener sets', async () => {
+        const el = await fixture(
+            html`<hmi-pagination page="1" total="5"></hmi-pagination>`,
+        );
+        const cancel = (e: Event) => e.preventDefault();
+        el.addEventListener('hmi-change', cancel);
         (all(el, 'button')[2] as HTMLElement).click();
         await el.updateComplete;
         expect(el.page).toBe(1);
-        el.page = 3;
+        expect(all(el, 'button')[0]?.getAttribute('aria-current')).toBe('page');
+        el.removeEventListener('hmi-change', cancel);
+        el.addEventListener('hmi-change', () => {
+            el.page = 1;
+        });
+        (all(el, 'button')[3] as HTMLElement).click();
         await el.updateComplete;
-        expect(all(el, 'button')[2]?.getAttribute('aria-current')).toBe('page');
+        expect(el.page).toBe(1);
+    });
+
+    it('does not fire for the current page', async () => {
+        const el = await fixture(
+            html`<hmi-pagination page="2" total="5"></hmi-pagination>`,
+        );
+        const seen = onChange(el);
+        (all(el, 'button')[1] as HTMLElement).click();
+        expect(seen).toEqual([]);
     });
 
     it('does not fire from a disabled arrow', async () => {

@@ -68,6 +68,30 @@ stem (`AreaChart`), the tag is `hmi-<kebab>`, the class is `Hmi<Pascal>`,
 - Controlled and uncontrolled collapse into the element owning its state.
   Provide `defaultValue`/`defaultChecked` only where the React component had
   them (form reset uses them). No `isControlled` mirror.
+- **Who owns what.** An element owns the state its own interaction produces and
+  the page only watches: the user's action changes the property, then fires the
+  event. Outside the form controls that event is cancelable. The element changes
+  first, so a listener reads the new value, and puts the old one back when the
+  listener calls `preventDefault()`, unless the listener has set the property
+  itself. Setting the property back from a listener vetoes too, except in React,
+  where a prop that did not change does not re-render, so React consumers
+  cancel. This is `hmi-pagination`, `hmi-tabs`, `hmi-stepper`, `hmi-list`,
+  `hmi-accordion`, `hmi-carousel`, `hmi-tree` and `hmi-table`'s sort, as it is
+  `hmi-chip`, `hmi-banner` and `hmi-toast`.
+- Form controls own their value and follow the native pair: `hmi-input` and
+  `hmi-change`, which are not cancelable, as native `input` and `change` are not.
+- Two kinds of state are controlled: the element never sets the property, and
+  the user's action only asks, through a cancelable event, for the page to set
+  it. **The route:** `hmi-navbar` and `hmi-sidebar` highlight `current` and never
+  change it, since a link with an `href` leaves the page and a router that
+  cancels `hmi-nav` navigates itself. **A dialog the page opens:** `hmi-modal`,
+  `hmi-drawer`, `hmi-confirm-dialog` and `hmi-command-palette` stay open until the
+  page sets `open` to `false`, as v5's did: Escape, the backdrop and a chosen
+  command fire `hmi-close` (`hmi-cancel` for the confirm dialog) and nothing else,
+  so a v5 guard such as `onClose={() => dirty ? ask() : setOpen(false)}` still
+  works.
+- An event fires for what the user did, never for a property set from code, and
+  `hmi-change` never fires for the value the element already has.
 
 ## R3 — State and lifecycle
 
@@ -208,7 +232,7 @@ stem (`AreaChart`), the tag is `hmi-<kebab>`, the class is `Hmi<Pascal>`,
   outside click, on Escape and when another popover opens, and that cannot be
   cancelled, so `<prefix>-open-change` reports a change that has happened. It
   fires for what the user did, never for `open` set from code. A dialog can stop
-  its own closing, so the dialogs are controlled instead (`TODO.md`).
+  its own closing, so the dialogs are controlled instead (R2).
 - **Without the Popover API** the same panel is a fixed-position element the
   element shows and hides, closing it on an outside press or Escape itself;
   `@supports not selector(:popover-open)` carries its CSS.

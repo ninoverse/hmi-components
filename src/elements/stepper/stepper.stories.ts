@@ -38,7 +38,7 @@ const meta = {
         readonly: { control: 'boolean' },
         label: { control: 'text' },
     },
-    // Controlled: set `current` back from `hmi-change`.
+    // The element owns `current`: a click moves it, then fires `hmi-change`.
     render: (args) =>
         html`<hmi-stepper
             .steps=${args.steps}
@@ -47,9 +47,7 @@ const meta = {
             spacing=${args.spacing ?? ''}
             ?readonly=${args.readonly}
             label=${args.label}
-            @hmi-change=${(e: CustomEvent) => {
-                (e.currentTarget as HmiStepper).current = e.detail.value;
-            }}
+            @hmi-change=${(e: CustomEvent) => console.log('hmi-change', e.detail)}
         ></hmi-stepper>`,
     parameters: {
         docs: {

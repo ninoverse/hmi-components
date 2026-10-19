@@ -31,7 +31,8 @@ const isEditable = (target: EventTarget | undefined): boolean =>
  *
  * `hmi-index-change` fires with `{ index }` whenever the shown slide changes
  * through the arrows, the dots, the keyboard or autoplay. The element owns
- * `index`: to veto a change, set `index` back from a listener. Autoplay pauses
+ * `index`: to veto a change, cancel the event or set `index` back from the
+ * listener; autoplay then tries again at its next tick. Autoplay pauses
  * while the pointer is over the carousel or focus is inside it.
  *
  * The element never changes your slides. A slide that is not shown is
@@ -43,7 +44,7 @@ const isEditable = (target: EventTarget | undefined): boolean =>
  *
  * @tag hmi-carousel
  * @slot - The slides: each element child is one.
- * @fires {CustomEvent<CarouselIndexChangeDetail>} hmi-index-change - The shown slide changed.
+ * @fires {CustomEvent<CarouselIndexChangeDetail>} hmi-index-change - The shown slide changed, and `index` already holds it. Cancelable: `preventDefault()` puts the old slide back.
  * @csspart base - The carousel region.
  * @csspart viewport - The clipped window onto the slides.
  * @csspart track - The row of slides that slides sideways.
@@ -139,10 +140,17 @@ export class HmiCarousel extends LitElement {
             ? Math.max(0, Math.min(next, count - 1))
             : (next + count) % count;
         if (target === this.#current) return;
+        const previous = this.index;
         this.index = target;
-        emit<CarouselIndexChangeDetail>(this, 'hmi-index-change', {
-            index: target,
-        });
+        const proceed = emit<CarouselIndexChangeDetail>(
+            this,
+            'hmi-index-change',
+            { index: target },
+            { cancelable: true },
+        );
+        // A listener that cancels puts the old slide back, unless it has set
+        // `index` itself.
+        if (!proceed && this.index === target) this.index = previous;
     }
 
     #syncTimer(): void {

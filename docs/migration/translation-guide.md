@@ -277,13 +277,14 @@ Wrapper prop = `on` + PascalCase of the event minus `hmi-`.
 | slider | `onChange(number)` | `hmi-input` (drag) + `hmi-change` (release) | `{ value: number }` |
 | value-scale-selector | `onChange(number)` | `hmi-change` | `{ value: number }` |
 | checkbox, radio, switch | `onChange(boolean)` | `hmi-change` | `{ checked: boolean }` (`value` is the submitted string) |
-| radio-group, segmented-control, select, stepper, tabs | `onChange(T)` | `hmi-change` | `{ value: T }` |
+| radio-group, segmented-control, select | `onChange(T)` | `hmi-change` | `{ value: T }` |
+| stepper, tabs | `onChange(T)` | `hmi-change` (cancelable: `preventDefault()` keeps the old step or tab) | `{ value: T }` |
 | combobox | `onChange(T \| null)` | `hmi-change`; `hmi-input` for the query text | `{ value: string }` (`''` for none, where v5 passed `null`) / `{ value: string }` |
 | date-picker | `onChange(date \| range \| null)` | `hmi-change` | `{ value: string }` (`YYYY-MM-DD`, `''` for none, where v5 passed an ISO date-time or `null`) / `{ value: { start: string, end: string \| null } \| null }` in `range` mode |
 | file-upload | `onChange(FileDescriptor[])` | `hmi-change` | `{ value: FileDescriptor[] }` |
-| pagination | `onChange(page)` | `hmi-change` | `{ value: number }` |
+| pagination | `onChange(page)` | `hmi-change` (cancelable: `preventDefault()` keeps the old page) | `{ value: number }` |
 | multi-input | `onComplete(string)` | `hmi-complete` | `{ value: string }` |
-| accordion | `onOpenChange(number[])` | `hmi-open-change` | `{ open: number[] }` |
+| accordion | `onOpenChange(number[])` | `hmi-open-change` (cancelable: `preventDefault()` keeps the sections as they were) | `{ open: number[] }` |
 | popover, hover-card, tooltip, context-menu | `onOpenChange(boolean)` | `hmi-open-change` | `{ open: boolean }` |
 | modal, drawer, command-palette | `onClose()` (command-palette: `onOpenChange(false)`) | `hmi-close` (cancelable; the dialog is controlled and stays open until `open` is set to false) | `{ reason: 'escape' \| 'backdrop' }` (command-palette also `'select'`, after a command is chosen) |
 | chip | `onClose()` / `onSelect()` | `hmi-close` (cancelable) / `hmi-select` (cancelable) | `{}` / `{ selected: boolean }` |
@@ -291,13 +292,13 @@ Wrapper prop = `on` + PascalCase of the event minus `hmi-`.
 | confirm-dialog | `onCancel()` / `onConfirm()` | `hmi-cancel` (cancelable) / `hmi-confirm` | `{}` |
 | banner | `onDismiss()` | `hmi-dismiss` (cancelable) | `{}` |
 | toast | none in v5 (new) | `hmi-dismiss` (cancelable; the close button only, not the timer or `toast.dismiss()`) | `{ id: number }` |
-| tree | `onSelect(T)` / `onExpandedChange(T[])` | `hmi-select` / `hmi-expanded-change` | `{ value: T }` / `{ expanded: T[] }` |
+| tree | `onSelect(T)` / `onExpandedChange(T[])` | `hmi-select` / `hmi-expanded-change` (both cancelable) | `{ value: T }` / `{ expanded: T[] }` |
 | command-palette | search text (internal in v5) | `hmi-input` (per keystroke) | `{ value: string }` |
 | navbar, sidebar | `onNav(T)` | `hmi-nav` (cancelable) | `{ value: T, href: string \| undefined }` |
 | breadcrumbs | `items[].onClick()` | `hmi-nav` (cancelable) | `{ value: string, index: number, href: string \| undefined }` |
-| carousel | `onIndexChange(n)` | `hmi-index-change` | `{ index: number }` |
-| list | `onReorder(items)` | `hmi-reorder` | `{ items: ListItem[] }` |
-| table | (internal sort state) | `hmi-sort` | `{ key: string, dir: 'asc' \| 'desc' }` |
+| carousel | `onIndexChange(n)` | `hmi-index-change` (cancelable: `preventDefault()` keeps the slide) | `{ index: number }` |
+| list | `onReorder(items)` | `hmi-reorder` (cancelable: `preventDefault()` keeps the old order) | `{ items: ListItem[] }` |
+| table | (internal sort state) | `hmi-sort` (cancelable: `preventDefault()` keeps the old sort) | `{ key: string, dir: 'asc' \| 'desc' }` |
 | image | `onLoad` / `onError` (and those a `renderImage` was handed) | `hmi-load` / `hmi-error` | `{ src: string }` |
 | responsive-container | `children(size)` | `hmi-resize` | `{ width: number, height: number }` |
 | charts (14) | none | none | — |
@@ -315,7 +316,7 @@ export function emit<T>(host: HTMLElement, type: `hmi-${string}`, detail: T, ini
     if (emit<ModalCloseDetail>(this, 'hmi-close', { reason }, { cancelable: true })) this.open = false;
 }
 
-// in a controlled element (the dialogs, until the v6 decision in TODO.md): it only asks
+// in a controlled element (the dialogs, R2): it only asks
 #requestClose(reason: ModalCloseDetail['reason']): void {
     emit<ModalCloseDetail>(this, 'hmi-close', { reason }, { cancelable: true });
 }
@@ -384,23 +385,44 @@ html`<button id="trigger" aria-controls="panel">…</button><div id="panel" aria
 ## 9. Controlled / uncontrolled
 
 The 14 components using the `isControlled = value !== undefined` mirror
-(`tabs.tsx:59-61`, `select.tsx:80-86`, …) collapse to:
+(`tabs.tsx:59-61`, `select.tsx:80-86`, …) collapse into the element owning its
+state (R2 in `.claude/lit-migration.md`). Outside the form controls, the event is
+cancelable:
 
 ```ts
-/** Current value. Set it to change the selection programmatically. */
+/** Current value. A choice sets it; set it to change the selection programmatically. */
 @property() accessor value = '';
 
+// The value changes first, so a listener reads the new one; a listener that
+// cancels puts the old one back, unless it has set `value` itself.
 #select(next: string): void {
     if (next === this.value) return;
-    this.value = next;               // element owns the state
-    emit(this, 'hmi-change', { value: next });
+    const previous = this.value;
+    this.value = next;
+    const proceed = emit(this, 'hmi-change', { value: next }, { cancelable: true });
+    if (!proceed && this.value === next) this.value = previous;
 }
 ```
 
-Consumers that want to veto a change listen to `hmi-change` and set `value`
-back. `defaultValue` is kept only on form elements (form reset). The combobox's
-private `query` state must be re-derived from `value` in `willUpdate` (the v5
-version never re-syncs — a known hazard).
+This is the shape of `hmi-pagination`, `hmi-tabs`, `hmi-stepper`, `hmi-list`
+(`hmi-reorder`), `hmi-accordion` (`hmi-open-change`), `hmi-carousel`
+(`hmi-index-change`), `hmi-tree` (`hmi-select`, `hmi-expanded-change`) and
+`hmi-table` (`hmi-sort`). A consumer that wants to veto a change calls
+`event.preventDefault()`, or sets the property back from the listener. React
+consumers cancel: `@lit/react` passes a prop to the element when React
+re-renders, and a state set back to the value it already had does not re-render,
+so the element would keep the new value.
+
+A form control follows the native pair and the same order, but its `hmi-input`
+and `hmi-change` are not cancelable, as native `input` and `change` are not; to
+veto, set `value` back. `defaultValue` is kept only on form elements (form
+reset). The combobox's private `query` state must be re-derived from `value` in
+`willUpdate` (the v5 version never re-syncs — a known hazard).
+
+Controlled, by R2: `hmi-navbar` and `hmi-sidebar` (`current` is the route) and
+the dialogs `hmi-modal`, `hmi-drawer`, `hmi-confirm-dialog` and
+`hmi-command-palette` (`open` stays `true` until the page sets it). Their events
+only ask.
 
 ## 10. className, rest, as, ref
 
@@ -641,8 +663,8 @@ radio group does. A keyboard open moves focus to the chosen swatch (as the selec
 on the trigger. The native colour chooser is a window outside the page: only its `input` and `change` events reach
 the picker, which is how the tests drive it.
 
-The modal's machinery is the `HmiDialogBase` class in `src/elements/shared/dialog.ts` (the `<dialog>`, `open`, the scroll lock, focus restore, Escape and the backdrop press), and `HmiDialog` adds a title, a description and footer actions to it; the dialog group (modal, drawer) extends `HmiDialog`, and the command palette, which has none of those, extends the base and renders its own content through `renderDialog()`. A dialog built this way is controlled for now (`TODO.md`, "Controlled or
-element-owned state"): `requestClose()` only emits, so `open` stays `true` until
+The modal's machinery is the `HmiDialogBase` class in `src/elements/shared/dialog.ts` (the `<dialog>`, `open`, the scroll lock, focus restore, Escape and the backdrop press), and `HmiDialog` adds a title, a description and footer actions to it; the dialog group (modal, drawer) extends `HmiDialog`, and the command palette, which has none of those, extends the base and renders its own content through `renderDialog()`. A dialog built this way is controlled (R2 in `.claude/lit-migration.md`):
+`requestClose()` only emits, so `open` stays `true` until
 the consumer sets it, and `#onClose` shows the `<dialog>` again when the browser
 closed it by itself (a second Escape with no other interaction in between cannot
 be cancelled). The page's scroll lock is `lockScroll()` from

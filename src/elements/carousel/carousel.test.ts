@@ -226,6 +226,34 @@ describe('hmi-carousel', () => {
         expect(part(el, 'dots')).toBeNull();
     });
 
+    it('sets index, then fires a cancelable hmi-index-change that leaves the shadow root', async () => {
+        const el = await fixture(html`<hmi-carousel>${slides}</hmi-carousel>`);
+        let event: CustomEvent<CarouselIndexChangeDetail> | undefined;
+        let indexDuring: number | undefined;
+        document.addEventListener(
+            'hmi-index-change',
+            (e) => {
+                event = e as CustomEvent<CarouselIndexChangeDetail>;
+                indexDuring = el.index;
+            },
+            { once: true },
+        );
+        await click(el, part(el, 'next'));
+        expect(event?.detail).toEqual({ index: 1 });
+        expect(event?.bubbles).toBe(true);
+        expect(event?.composed).toBe(true);
+        expect(event?.cancelable).toBe(true);
+        expect(indexDuring).toBe(1);
+    });
+
+    it('lets a listener veto a change by cancelling it', async () => {
+        const el = await fixture(html`<hmi-carousel>${slides}</hmi-carousel>`);
+        el.addEventListener('hmi-index-change', (e) => e.preventDefault());
+        await click(el, part(el, 'next'));
+        expect(el.index).toBe(0);
+        expect(transform(el)).toBe('translateX(0%)');
+    });
+
     it('lets a listener veto a change by setting index back', async () => {
         const el = await fixture(html`<hmi-carousel>${slides}</hmi-carousel>`);
         el.addEventListener('hmi-index-change', () => {
@@ -298,6 +326,18 @@ describe('hmi-carousel', () => {
             el.remove();
             await wait(150);
             expect(seen.length).toBe(at);
+        });
+
+        it('keeps the slide when a listener cancels an autoplay step, and tries again', async () => {
+            const el = await fixture(
+                html`<hmi-carousel auto-play="40">${slides}</hmi-carousel>`,
+            );
+            el.addEventListener('hmi-index-change', (e) => e.preventDefault());
+            const seen = counter(el);
+            await wait(130);
+            expect(seen.length).toBeGreaterThan(1);
+            expect(new Set(seen)).toEqual(new Set([1]));
+            expect(el.index).toBe(0);
         });
 
         it('does not advance without auto-play', async () => {

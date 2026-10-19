@@ -93,8 +93,8 @@ const chevron = html`<svg
  * children. Disabled nodes are skipped.
  *
  * The element owns `expanded` and `selected`: a click or a key updates them, then
- * fires `hmi-expanded-change` or `hmi-select`. Set a property back from the
- * handler to veto the change.
+ * fires the cancelable `hmi-expanded-change` or `hmi-select`. Cancel the event,
+ * or set the property back from the listener, to veto the change.
  *
  * @tag hmi-tree
  * @slot label-<value> - Rich label for the node with that value.
@@ -109,8 +109,8 @@ const chevron = html`<svg
  * @csspart label - A node's label.
  * @csspart badge - A node's `<hmi-badge>`.
  * @csspart group - The `role="group"` holding an expanded node's children.
- * @fires hmi-select - A node was activated. `detail` is `{ value }`.
- * @fires hmi-expanded-change - A node was expanded or collapsed. `detail` is `{ expanded }`.
+ * @fires hmi-select - A node was activated, and `selected` already holds it. Cancelable: `preventDefault()` puts the old `selected` back. `detail` is `{ value }`.
+ * @fires hmi-expanded-change - A node was expanded or collapsed, and `expanded` already holds the result. Cancelable: `preventDefault()` puts the old `expanded` back. `detail` is `{ expanded }`.
  *
  * @example
  * const tree = document.querySelector('hmi-tree');
@@ -159,15 +159,30 @@ export class HmiTree extends LitElement {
         const next = new Set(this.expanded);
         if (next.has(value)) next.delete(value);
         else next.add(value);
-        this.expanded = Array.from(next);
-        emit<TreeExpandedChangeDetail>(this, 'hmi-expanded-change', {
-            expanded: this.expanded,
-        });
+        const previous = this.expanded;
+        const expanded = Array.from(next);
+        this.expanded = expanded;
+        const proceed = emit<TreeExpandedChangeDetail>(
+            this,
+            'hmi-expanded-change',
+            { expanded },
+            { cancelable: true },
+        );
+        // A listener that cancels puts the old state back, unless it has set the
+        // property itself; the same in `#select`.
+        if (!proceed && this.expanded === expanded) this.expanded = previous;
     }
 
     #select(value: string): void {
+        const previous = this.selected;
         this.selected = value;
-        emit<TreeSelectDetail>(this, 'hmi-select', { value });
+        const proceed = emit<TreeSelectDetail>(
+            this,
+            'hmi-select',
+            { value },
+            { cancelable: true },
+        );
+        if (!proceed && this.selected === value) this.selected = previous;
     }
 
     #focus(value: string | undefined): void {

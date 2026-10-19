@@ -27,16 +27,14 @@ const meta = {
         variant: { control: 'inline-radio', options: ['pill', 'underline'] },
         label: { control: 'text' },
     },
-    // Controlled: set `value` back from `hmi-change`.
+    // The element owns `value`: a click moves it, then fires `hmi-change`.
     render: (args) =>
         html`<hmi-tabs
             .options=${args.options}
             value=${args.value ?? ''}
             variant=${args.variant}
             label=${args.label ?? ''}
-            @hmi-change=${(e: CustomEvent) => {
-                (e.currentTarget as HmiTabs).value = e.detail.value;
-            }}
+            @hmi-change=${(e: CustomEvent) => console.log('hmi-change', e.detail)}
         ></hmi-tabs>`,
     parameters: {
         docs: {

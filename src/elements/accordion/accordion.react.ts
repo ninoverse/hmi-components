@@ -8,7 +8,8 @@ export type { AccordionItem, AccordionOpenChangeDetail } from './accordion.js';
  * React wrapper for `<hmi-accordion>`.
  *
  * `onOpenChange` receives the event: read `event.detail.open`. Set `open` from
- * state to control it, and set it back in the handler to veto a toggle. Rich
+ * state to control it. To veto a toggle, call `event.preventDefault()`: setting
+ * the prop back changes nothing when your state did not change. Rich
  * titles and bodies are children with `slot="title-<index>"` or
  * `slot="body-<index>"`.
  *
