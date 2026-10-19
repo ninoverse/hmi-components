@@ -1,0 +1,69 @@
+.dash-kpis {
+    display: grid;
+    grid-template-columns: repeat(
+            auto-fit,
+            minmax(min(100%, calc(var(--hmi-base) * 30)), 1fr)
+        );
+    gap: calc(var(--hmi-base) * 2);
+}
+
+.dash-help {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--hmi-base);
+}
+
+.dash-charts {
+    display: grid;
+    grid-template-columns: repeat(
+            auto-fit,
+            minmax(min(100%, calc(var(--hmi-base) * 40)), 1fr)
+        );
+    gap: calc(var(--hmi-base) * 3);
+}
+
+/* Wide cards span two tracks where there are three, and stack on a phone. */
+@media (min-width: 75em) {
+    .dash-charts {
+        grid-template-columns: 2fr 1fr;
+    }
+}
+
+.dash-gauges {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: calc(var(--hmi-base) * 2);
+}
+
+.dash-gauges figure {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: calc(var(--hmi-base) * 0.5);
+}
+
+.dash-gauges figcaption {
+    color: var(--on-surface-variant);
+    font-size: calc(var(--hmi-base) * 1.75);
+}
+
+.dash-shift {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--hmi-base) * 2);
+}
+
+.dash-shift > div {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--hmi-base) * 0.75);
+}
+
+.dash-card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--hmi-base);
+}

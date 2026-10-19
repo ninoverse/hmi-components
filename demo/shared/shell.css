@@ -1,0 +1,39 @@
+/* Page layout shared by the demo pages. Sizes come from --hmi-base, as in the
+   elements, and colours from the theme tokens. */
+
+.demo-main {
+    box-sizing: border-box;
+    max-width: calc(var(--hmi-base) * 160);
+    margin: 0 auto;
+    padding: calc(var(--hmi-base) * 4) calc(var(--hmi-base) * 3)
+        calc(var(--hmi-base) * 8);
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--hmi-base) * 3);
+}
+
+.demo-page-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    justify-content: space-between;
+    gap: calc(var(--hmi-base) * 2);
+}
+
+.demo-page-head > div {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--hmi-base) * 0.5);
+}
+
+.demo-theme-panel {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--hmi-base) * 3);
+}
+
+@media (max-width: 40em) {
+    .demo-main {
+        padding-inline: calc(var(--hmi-base) * 2);
+    }
+}

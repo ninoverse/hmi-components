@@ -9,6 +9,7 @@
         "includes": [
             ".storybook/**",
             "src/**",
+            "demo/**",
             "*.ts",
             "*.tsx",
             "*.js",

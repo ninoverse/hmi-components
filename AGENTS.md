@@ -56,7 +56,7 @@ migrated element is a `feat`, since it adds public subpaths.
 
 ## Releases
 
-Every tag deploys the docs site, Storybook at `/` and the demo page at `/demo`,
+Every tag deploys the docs site, Storybook at `/` and the demo pages at `/demo`,
 through `release-demo-page.yml`. That is an exception to *Releases and API
 stability*, which deploys docs with the publish: while 5.x is released, the site
 shows the migration as it lands, ahead of npm. Once v6 is live, the deploy
@@ -94,7 +94,8 @@ counterpart's JSDoc: `@deprecated`, naming the wrapper that replaces it and
 pnpm dev              # Vite dev server: the legacy React demo, src/App.tsx
 pnpm storybook        # Storybook on :6006
 pnpm build:storybook  # Storybook → dist-site
-pnpm build:demo       # the demo page → dist-site/demo
+pnpm dev:demo         # the demo pages, demo/, on a dev server at /demo/
+pnpm build:demo       # the demo pages → dist-site/demo, with the reference page at /demo/all/
 pnpm build:site       # both, as the docs deploy builds them
 pnpm build:elements   # the Lit drop-in bundle, dist/hmi-elements.iife.js
 pnpm build:wc         # the r2wc bundle, dist/hmi-components.iife.js
