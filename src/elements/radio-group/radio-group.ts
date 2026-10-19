@@ -58,8 +58,9 @@ export class HmiRadioGroup extends HmiFormField {
 
     protected readonly formKind: FormKind = 'text';
 
-    /** The choices. Set it as a property; a JSON attribute is accepted. @default [] */
-    @property({ type: Array }) accessor options: RadioOption[] = [];
+    /** The choices. A property only: there is no attribute. @default [] */
+    @property({ type: Array, attribute: false })
+    accessor options: RadioOption[] = [];
 
     /** The chosen option's value, or `''` for none. The attribute is the initial value. @default '' */
     @property() accessor value = '';

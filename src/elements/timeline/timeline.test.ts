@@ -141,10 +141,13 @@ describe('hmi-timeline', () => {
         ).toBe('none');
     });
 
-    it('accepts items as a JSON attribute', async () => {
+    it('takes items as a property only: an items attribute is ignored', async () => {
         const el = await fixture(
             html`<hmi-timeline items='[{"title":"A"}]'></hmi-timeline>`,
         );
+        expect(all(el, 'item')).toHaveLength(0);
+        el.items = [{ title: 'A' }];
+        await el.updateComplete;
         expect(all(el, 'item')).toHaveLength(1);
     });
 });
