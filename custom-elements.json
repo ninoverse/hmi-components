@@ -8,7 +8,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "Vertically stacked, collapsible sections. Each trigger is a button with\n`aria-expanded`, and each panel is a region labelled by its trigger. The\npanel of a closed section is `inert`: its content cannot take focus and is\nskipped by assistive technology.\n\n`hmi-open-change` fires with `{ open }`, the sorted indices of the open\nsections, when the user toggles one. The event has its own name because a\ncontrol inside a panel fires `hmi-change`, which also bubbles through the\naccordion. The element owns `open`: to veto a toggle, set `open` back from a\nlistener. Without `multiple`, opening a section closes the others.\n\nA section's `title` and `body` are text. For richer content, slot an element\nnamed `title-<index>` or `body-<index>` (the item's position, from 0), which\nreplaces that text.",
+          "description": "Vertically stacked, collapsible sections. Each trigger is a button with\n`aria-expanded`, and each panel is a region labelled by its trigger. The\npanel of a closed section is `inert`: its content cannot take focus and is\nskipped by assistive technology.\n\n`hmi-open-change` fires with `{ open }`, the sorted indices of the open\nsections, when the user toggles one. The event has its own name because a\ncontrol inside a panel fires `hmi-change`, which also bubbles through the\naccordion. The element owns `open`: to veto a toggle, cancel the event or set\n`open` back from the listener. Without `multiple`, opening a section closes\nthe others.\n\nA section's `title` and `body` are text. For richer content, slot an element\nnamed `title-<index>` or `body-<index>` (the item's position, from 0), which\nreplaces that text.",
           "name": "HmiAccordion",
           "cssParts": [
             {
@@ -114,7 +114,7 @@
               "type": {
                 "text": "CustomEvent<AccordionOpenChangeDetail>"
               },
-              "description": "The user toggled a section.",
+              "description": "The user toggled a section, and `open` already holds the result. Cancelable: `preventDefault()` puts the old `open` back.",
               "name": "hmi-open-change"
             }
           ],
@@ -2195,7 +2195,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "Sliding content carousel with arrows, dot pagination, looping, autoplay and\nkeyboard (left and right arrow) support. Every element child is a slide.\n\n`hmi-index-change` fires with `{ index }` whenever the shown slide changes\nthrough the arrows, the dots, the keyboard or autoplay. The element owns\n`index`: to veto a change, set `index` back from a listener. Autoplay pauses\nwhile the pointer is over the carousel or focus is inside it.\n\nThe element never changes your slides. A slide that is not shown is\n`visibility: hidden` (through a style the element injects for its position),\nso its content takes no focus and is skipped by assistive technology. To\nannounce slides as \"slide 2 of 3\", put `role=\"group\"`,\n`aria-roledescription=\"slide\"` and an `aria-label` on your own slides. The\ncarousel region is named by `label`.",
+          "description": "Sliding content carousel with arrows, dot pagination, looping, autoplay and\nkeyboard (left and right arrow) support. Every element child is a slide.\n\n`hmi-index-change` fires with `{ index }` whenever the shown slide changes\nthrough the arrows, the dots, the keyboard or autoplay. The element owns\n`index`: to veto a change, cancel the event or set `index` back from the\nlistener; autoplay then tries again at its next tick. Autoplay pauses\nwhile the pointer is over the carousel or focus is inside it.\n\nThe element never changes your slides. A slide that is not shown is\n`visibility: hidden` (through a style the element injects for its position),\nso its content takes no focus and is skipped by assistive technology. To\nannounce slides as \"slide 2 of 3\", put `role=\"group\"`,\n`aria-roledescription=\"slide\"` and an `aria-label` on your own slides. The\ncarousel region is named by `label`.",
           "name": "HmiCarousel",
           "cssParts": [
             {
@@ -2517,7 +2517,7 @@
               "type": {
                 "text": "CustomEvent<CarouselIndexChangeDetail>"
               },
-              "description": "The shown slide changed.",
+              "description": "The shown slide changed, and `index` already holds it. Cancelable: `preventDefault()` puts the old slide back.",
               "name": "hmi-index-change"
             }
           ],
@@ -14150,7 +14150,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "Vertical list of rows in one card: an optional avatar, a title and subtitle,\nand trailing content. With `reorderable`, rows drag to a new place, and a\nhandle moves them with Alt+ArrowUp and Alt+ArrowDown.\n\nA row's `title`, `subtitle` and `right` are text. For richer content, slot an\nelement named `title-<id>`, `subtitle-<id>` or `right-<id>` (the item's `id`),\nwhich replaces that text. A slot named `item-<id>` replaces the whole row.\n\nThe list never reorders itself: it fires `hmi-reorder` with the new order, and\nthe consumer sets `items` back.",
+          "description": "Vertical list of rows in one card: an optional avatar, a title and subtitle,\nand trailing content. With `reorderable`, rows drag to a new place, and a\nhandle moves them with Alt+ArrowUp and Alt+ArrowDown.\n\nA row's `title`, `subtitle` and `right` are text. For richer content, slot an\nelement named `title-<id>`, `subtitle-<id>` or `right-<id>` (the item's `id`),\nwhich replaces that text. A slot named `item-<id>` replaces the whole row.\n\nThe element owns the order: a drop or a key sets `items` to a new array in the\nnew order (the old array is not changed) and fires the cancelable\n`hmi-reorder`. Cancel the event, or set `items` back from the listener, to\nkeep the old order.",
           "name": "HmiList",
           "cssParts": [
             {
@@ -14269,6 +14269,11 @@
               "kind": "method",
               "name": "#reorder",
               "privacy": "private",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              },
               "parameters": [
                 {
                   "name": "from",
@@ -14387,7 +14392,7 @@
           ],
           "events": [
             {
-              "description": "A row was dropped, or moved with the keyboard, to a new place. `detail.items` is the new order.",
+              "description": "A row was dropped, or moved with the keyboard, to a new place, and `items` already holds the new order. Cancelable: `preventDefault()` puts the old order back. `detail.items` is the new order.",
               "name": "hmi-reorder"
             }
           ],
@@ -17703,7 +17708,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "Page navigation with previous and next buttons and a window of page numbers,\nwith ellipses for long ranges. The current page is marked\n`aria-current=\"page\"`.\n\nIt is controlled: choosing a page fires `hmi-change` and the consumer sets\n`page` in response. Until it does, the element keeps showing the old page.",
+          "description": "Page navigation with previous and next buttons and a window of page numbers,\nwith ellipses for long ranges. The current page is marked\n`aria-current=\"page\"`.\n\nThe element owns `page`: choosing a page sets it and fires the cancelable\n`hmi-change`. Cancel the event, or set `page` back from the listener, to keep\nthe page that was shown. Choosing the current page fires nothing.",
           "name": "HmiPagination",
           "cssParts": [
             {
@@ -17804,7 +17809,7 @@
           ],
           "events": [
             {
-              "description": "A page was chosen. `detail` is `{ value }`, the 1-based page.",
+              "description": "A page was chosen, and `page` already holds it. Cancelable: `preventDefault()` puts the old page back. `detail` is `{ value }`, the 1-based page.",
               "name": "hmi-change"
             }
           ],
@@ -28262,7 +28267,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "Step progress indicator: an ordered list in which the steps before `current`\nare completed, the current step is active and the rest are upcoming, joined by\nconnector lines. A completed step is a button that fires `hmi-change`, so a\nwizard can go back to it.\n\nA step's `label` and `description` are text. For richer content, slot an\nelement named `label-<value>` or `description-<value>`.\n\nIt is controlled: choosing a completed step fires `hmi-change` and the element\nkeeps showing the old step until you set `current`. `readonly` makes the steps\nplain text, for a wizard that cannot go back. Below 40em a horizontal stepper\nfalls back to the vertical layout.",
+          "description": "Step progress indicator: an ordered list in which the steps before `current`\nare completed, the current step is active and the rest are upcoming, joined by\nconnector lines. A completed step is a button that fires `hmi-change`, so a\nwizard can go back to it.\n\nA step's `label` and `description` are text. For richer content, slot an\nelement named `label-<value>` or `description-<value>`.\n\nThe element owns `current`: choosing a completed step sets it and fires the\ncancelable `hmi-change`. Cancel the event, or set `current` back from the\nlistener, to keep the step that was active. `readonly` makes the steps\nplain text, for a wizard that cannot go back. Below 40em a horizontal stepper\nfalls back to the vertical layout.",
           "name": "HmiStepper",
           "cssProperties": [
             {
@@ -28326,7 +28331,7 @@
               "type": {
                 "text": "string | undefined"
               },
-              "description": "The `value` of the active step. The element never changes it. With none, every step is upcoming.",
+              "description": "The `value` of the active step. Choosing a completed step sets it. With none, every step is upcoming.",
               "attribute": "current"
             },
             {
@@ -28416,7 +28421,7 @@
           ],
           "events": [
             {
-              "description": "A completed step was chosen. `detail` is `{ value }`.",
+              "description": "A completed step was chosen, and `current` already holds it. Cancelable: `preventDefault()` puts the old step back. `detail` is `{ value }`.",
               "name": "hmi-change"
             }
           ],
@@ -28426,7 +28431,7 @@
               "type": {
                 "text": "string | undefined"
               },
-              "description": "The `value` of the active step. The element never changes it. With none, every step is upcoming.",
+              "description": "The `value` of the active step. Choosing a completed step sets it. With none, every step is upcoming.",
               "fieldName": "current"
             },
             {
@@ -29372,7 +29377,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "Data table with click-to-sort headers. `columns` and `rows` are properties.\nA cell shows `row[column.key]` as text, and can show it as a `format`ted\ntemplate, a `badge`, a `link` or a row of `actions` buttons with the column's\n`kind`. For anything else there are two ways, in this order of precedence:\na slotted element named `cell-<rowKey>-<columnKey>`, and the column's `render`\nfunction, which returns a string, a Lit template or a DOM node. A header's\nlabel can likewise be replaced by an element slotted as `header-<columnKey>`.\n\n`row-key` names the row property that identifies a row (or, as a property, a\nfunction of the row), and is the `<rowKey>` of the slot names, so give it a\nunique field when you slot cells: the slot then stays with its row when the\ntable is sorted. Without it a row is named by its position in `rows`.\n\nSorting is the table's own: a click sorts by the column, ascending first and\nthen flipping, and fires `hmi-sort`. `sort-key` and `sort-dir` set it from\noutside. `rows` is never reordered, only shown sorted. `no-sort` turns\nsorting off for every column.",
+          "description": "Data table with click-to-sort headers. `columns` and `rows` are properties.\nA cell shows `row[column.key]` as text, and can show it as a `format`ted\ntemplate, a `badge`, a `link` or a row of `actions` buttons with the column's\n`kind`. For anything else there are two ways, in this order of precedence:\na slotted element named `cell-<rowKey>-<columnKey>`, and the column's `render`\nfunction, which returns a string, a Lit template or a DOM node. A header's\nlabel can likewise be replaced by an element slotted as `header-<columnKey>`.\n\n`row-key` names the row property that identifies a row (or, as a property, a\nfunction of the row), and is the `<rowKey>` of the slot names, so give it a\nunique field when you slot cells: the slot then stays with its row when the\ntable is sorted. Without it a row is named by its position in `rows`.\n\nSorting is the table's own: a click sorts by the column, ascending first and\nthen flipping, and fires the cancelable `hmi-sort`; cancel it, or set\n`sort-key` and `sort-dir` back from the listener, to keep the old sort.\n`sort-key` and `sort-dir` set it from outside. `rows` is never reordered, only shown sorted. `no-sort` turns\nsorting off for every column.",
           "name": "HmiTable",
           "cssParts": [
             {
@@ -29607,7 +29612,7 @@
           ],
           "events": [
             {
-              "description": "The user sorted a column. `detail` is `{ key, dir }`. Not fired when `sort-key` or `sort-dir` is set from code.",
+              "description": "The user sorted a column, and `sortKey` and `sortDir` already hold it. Cancelable: `preventDefault()` puts the old sort back. `detail` is `{ key, dir }`. Not fired when `sort-key` or `sort-dir` is set from code.",
               "name": "hmi-sort"
             },
             {
@@ -29685,7 +29690,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "Tab switcher with an animated active indicator. It is the tab strip only:\nswitching the panels is up to you, keyed on `value`.\n\nA tab's `label` is text. For richer content, slot an element named\n`label-<value>`; an icon is an element slotted as `icon-<value>`. A badge is\n`badge` text, or content slotted as `badge-<value>` inside the pill, or an\nelement slotted as `end-<value>` in its place. The badge is `primary` on the\nactive tab and `default` on the others, unless `badgeVariant` says otherwise.\n\nIt is controlled: choosing a tab fires `hmi-change` and the element keeps\nshowing the old one until you set `value`. The tabs are one tab stop; Arrow\nLeft and Right, Home and End move focus and choose. An id cannot point across\nthe shadow boundary, so wire your panels to `value` yourself.",
+          "description": "Tab switcher with an animated active indicator. It is the tab strip only:\nswitching the panels is up to you, keyed on `value`.\n\nA tab's `label` is text. For richer content, slot an element named\n`label-<value>`; an icon is an element slotted as `icon-<value>`. A badge is\n`badge` text, or content slotted as `badge-<value>` inside the pill, or an\nelement slotted as `end-<value>` in its place. The badge is `primary` on the\nactive tab and `default` on the others, unless `badgeVariant` says otherwise.\n\nThe element owns `value`: choosing a tab sets it and fires the cancelable\n`hmi-change`. Cancel the event, or set `value` back from the listener, to keep\nthe tab that was active. The tabs are one tab stop; Arrow\nLeft and Right, Home and End move focus and choose. An id cannot point across\nthe shadow boundary, so wire your panels to `value` yourself.",
           "name": "HmiTabs",
           "cssParts": [
             {
@@ -29747,7 +29752,7 @@
               "type": {
                 "text": "string | undefined"
               },
-              "description": "The `value` of the active tab. The element never changes it. With none, no tab is active.",
+              "description": "The `value` of the active tab. Choosing a tab sets it. With none, no tab is active.",
               "attribute": "value"
             },
             {
@@ -29850,7 +29855,7 @@
           ],
           "events": [
             {
-              "description": "A tab was chosen. `detail` is `{ value }`.",
+              "description": "A tab was chosen, and `value` already holds it. Cancelable: `preventDefault()` puts the old tab back. `detail` is `{ value }`.",
               "name": "hmi-change"
             }
           ],
@@ -29860,7 +29865,7 @@
               "type": {
                 "text": "string | undefined"
               },
-              "description": "The `value` of the active tab. The element never changes it. With none, no tab is active.",
+              "description": "The `value` of the active tab. Choosing a tab sets it. With none, no tab is active.",
               "fieldName": "value"
             },
             {
@@ -31794,7 +31799,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "Accessible tree view (the WAI-ARIA tree pattern): expand and collapse, single\nselection and keyboard navigation. Only expanded levels are rendered.\n\nA node's `label` is text. For richer content, slot an element named\n`label-<value>`; an icon is an element slotted as `icon-<value>`. A badge is\n`badge` text, or content slotted as `badge-<value>` inside the pill, or an\nelement slotted as `end-<value>` in its place.\n\nIt is one tab stop. Arrow Down and Up move through the visible nodes, Home and\nEnd jump to the first and last, Arrow Right opens a closed node or moves to its\nfirst child, Arrow Left closes an open node or moves to its parent, and Enter\nor Space activates. Activating a node selects it, and toggles it when it has\nchildren. Disabled nodes are skipped.\n\nThe element owns `expanded` and `selected`: a click or a key updates them, then\nfires `hmi-expanded-change` or `hmi-select`. Set a property back from the\nhandler to veto the change.",
+          "description": "Accessible tree view (the WAI-ARIA tree pattern): expand and collapse, single\nselection and keyboard navigation. Only expanded levels are rendered.\n\nA node's `label` is text. For richer content, slot an element named\n`label-<value>`; an icon is an element slotted as `icon-<value>`. A badge is\n`badge` text, or content slotted as `badge-<value>` inside the pill, or an\nelement slotted as `end-<value>` in its place.\n\nIt is one tab stop. Arrow Down and Up move through the visible nodes, Home and\nEnd jump to the first and last, Arrow Right opens a closed node or moves to its\nfirst child, Arrow Left closes an open node or moves to its parent, and Enter\nor Space activates. Activating a node selects it, and toggles it when it has\nchildren. Disabled nodes are skipped.\n\nThe element owns `expanded` and `selected`: a click or a key updates them, then\nfires the cancelable `hmi-expanded-change` or `hmi-select`. Cancel the event,\nor set the property back from the listener, to veto the change.",
           "name": "HmiTree",
           "cssParts": [
             {
@@ -32102,11 +32107,11 @@
           ],
           "events": [
             {
-              "description": "A node was activated. `detail` is `{ value }`.",
+              "description": "A node was activated, and `selected` already holds it. Cancelable: `preventDefault()` puts the old `selected` back. `detail` is `{ value }`.",
               "name": "hmi-select"
             },
             {
-              "description": "A node was expanded or collapsed. `detail` is `{ expanded }`.",
+              "description": "A node was expanded or collapsed, and `expanded` already holds the result. Cancelable: `preventDefault()` puts the old `expanded` back. `detail` is `{ expanded }`.",
               "name": "hmi-expanded-change"
             }
           ],

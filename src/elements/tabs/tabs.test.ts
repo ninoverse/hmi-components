@@ -231,17 +231,47 @@ describe('hmi-tabs changes', () => {
         expect(seen).toEqual([]);
     });
 
-    it('is controlled: it keeps the active tab until the consumer sets value', async () => {
+    it('owns value: a choice sets it, then fires a cancelable hmi-change that leaves the shadow root', async () => {
         const el = await fixture(
             html`<hmi-tabs value="inbox" .options=${OPTIONS}></hmi-tabs>`,
         );
+        let event: CustomEvent<TabsChangeDetail> | undefined;
+        let valueDuring: string | undefined;
+        document.addEventListener(
+            'hmi-change',
+            (e) => {
+                event = e as CustomEvent<TabsChangeDetail>;
+                valueDuring = el.value;
+            },
+            { once: true },
+        );
+        all(el, 'tab')[1]?.click();
+        expect(event?.detail).toEqual({ value: 'sent' });
+        expect(event?.bubbles).toBe(true);
+        expect(event?.composed).toBe(true);
+        expect(event?.cancelable).toBe(true);
+        expect(valueDuring).toBe('sent');
+        await el.updateComplete;
+        expect(all(el, 'tab')[1]?.getAttribute('aria-selected')).toBe('true');
+    });
+
+    it('keeps the old tab when a listener cancels, or the one a listener sets', async () => {
+        const el = await fixture(
+            html`<hmi-tabs value="inbox" .options=${OPTIONS}></hmi-tabs>`,
+        );
+        const cancel = (e: Event) => e.preventDefault();
+        el.addEventListener('hmi-change', cancel);
         all(el, 'tab')[1]?.click();
         await el.updateComplete;
         expect(el.value).toBe('inbox');
         expect(all(el, 'tab')[0]?.getAttribute('aria-selected')).toBe('true');
-        el.value = 'sent';
+        el.removeEventListener('hmi-change', cancel);
+        el.addEventListener('hmi-change', () => {
+            el.value = 'inbox';
+        });
+        all(el, 'tab')[2]?.click();
         await el.updateComplete;
-        expect(all(el, 'tab')[1]?.getAttribute('aria-selected')).toBe('true');
+        expect(el.value).toBe('inbox');
     });
 
     it('moves focus and chooses with the arrow keys, wrapping at the ends', async () => {
@@ -406,6 +436,28 @@ describe('Tabs (React wrapper)', () => {
         expect(all(el, 'tab')).toHaveLength(3);
         all(el, 'tab')[0]?.click();
         expect(seen).toEqual(['inbox']);
+        await act(async () => root.unmount());
+    });
+
+    it('refuses a tab when onChange calls preventDefault', async () => {
+        const host = document.createElement('div');
+        document.body.append(host);
+        const root = createRoot(host);
+        await act(async () => {
+            root.render(
+                createElement(Tabs, {
+                    options: OPTIONS,
+                    value: 'sent',
+                    onChange: (e) => e.preventDefault(),
+                }),
+            );
+        });
+        const el = host.querySelector('hmi-tabs') as HmiTabs;
+        await el.updateComplete;
+        all(el, 'tab')[0]?.click();
+        await el.updateComplete;
+        expect(el.value).toBe('sent');
+        expect(all(el, 'tab')[1]?.getAttribute('aria-selected')).toBe('true');
         await act(async () => root.unmount());
     });
 });

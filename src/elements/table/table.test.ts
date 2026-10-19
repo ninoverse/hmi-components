@@ -434,7 +434,19 @@ describe('hmi-table', () => {
             expect(event.detail).toEqual({ key: 'name', dir: 'asc' });
             expect(event.bubbles).toBe(true);
             expect(event.composed).toBe(true);
-            expect(event.cancelable).toBe(false);
+            expect(event.cancelable).toBe(true);
+            expect(el.sortKey).toBe('name');
+        });
+
+        it('keeps the old sort when a listener cancels hmi-sort', async () => {
+            const el = await plain();
+            const before = columnText(el, 1);
+            el.addEventListener('hmi-sort', (e) => e.preventDefault());
+            sortButton(el, 'Commits')?.click();
+            await el.updateComplete;
+            expect(el.sortKey).toBeNull();
+            expect(el.sortDir).toBe('asc');
+            expect(columnText(el, 1)).toEqual(before);
         });
 
         it('starts a new column ascending', async () => {

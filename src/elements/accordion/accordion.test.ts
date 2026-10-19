@@ -143,6 +143,38 @@ describe('hmi-accordion', () => {
         expect(panels(el)[0]?.getAttribute('data-open')).toBe('false');
     });
 
+    it('sets open, then fires a cancelable hmi-open-change that leaves the shadow root', async () => {
+        const el = await fixture(
+            html`<hmi-accordion .items=${ITEMS}></hmi-accordion>`,
+        );
+        let event: CustomEvent<AccordionOpenChangeDetail> | undefined;
+        let openDuring: number[] | undefined;
+        document.addEventListener(
+            'hmi-open-change',
+            (e) => {
+                event = e as CustomEvent<AccordionOpenChangeDetail>;
+                openDuring = el.open;
+            },
+            { once: true },
+        );
+        await click(el, 1);
+        expect(event?.detail).toEqual({ open: [1] });
+        expect(event?.bubbles).toBe(true);
+        expect(event?.composed).toBe(true);
+        expect(event?.cancelable).toBe(true);
+        expect(openDuring).toEqual([1]);
+    });
+
+    it('lets a listener veto a toggle by cancelling it', async () => {
+        const el = await fixture(
+            html`<hmi-accordion .open=${[0]} .items=${ITEMS}></hmi-accordion>`,
+        );
+        el.addEventListener('hmi-open-change', (e) => e.preventDefault());
+        await click(el, 1);
+        expect(el.open).toEqual([0]);
+        expect(expanded(el)).toEqual([true, false, false]);
+    });
+
     it('lets a listener veto a toggle by setting open back', async () => {
         const el = await fixture(
             html`<hmi-accordion .open=${[0]} .items=${ITEMS}></hmi-accordion>`,

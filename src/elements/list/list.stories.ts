@@ -64,7 +64,7 @@ export const Default: Story = {};
 
 export const WithAvatars: Story = { args: { items: PEOPLE } };
 
-/** Drag a row, or focus its handle and press Alt+ArrowUp / Alt+ArrowDown. The list fires `hmi-reorder`; the consumer sets `items` back. */
+/** Drag a row, or focus its handle and press Alt+ArrowUp / Alt+ArrowDown. The list reorders `items` and fires `hmi-reorder`; cancel it to keep the old order. */
 export const Reorderable: Story = {
     args: { items: PEOPLE, reorderable: true },
     render: (args) =>
@@ -72,9 +72,8 @@ export const Reorderable: Story = {
             style="max-width: 40rem"
             .items=${args.items}
             ?reorderable=${args.reorderable}
-            @hmi-reorder=${(e: CustomEvent<ListReorderDetail>) => {
-                (e.currentTarget as HmiList).items = e.detail.items;
-            }}
+            @hmi-reorder=${(e: CustomEvent<ListReorderDetail>) =>
+                console.log('hmi-reorder', e.detail)}
         ></hmi-list>`,
 };
 

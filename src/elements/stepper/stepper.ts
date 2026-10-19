@@ -20,7 +20,7 @@ export interface StepperStep {
 
 /** Detail of `hmi-change`. */
 export interface StepperChangeDetail {
-    /** The `value` of the completed step that was chosen. */
+    /** The `value` of the completed step that was chosen, which `current` already holds. */
     value: string;
 }
 
@@ -47,8 +47,9 @@ const checkIcon = html`<svg
  * A step's `label` and `description` are text. For richer content, slot an
  * element named `label-<value>` or `description-<value>`.
  *
- * It is controlled: choosing a completed step fires `hmi-change` and the element
- * keeps showing the old step until you set `current`. `readonly` makes the steps
+ * The element owns `current`: choosing a completed step sets it and fires the
+ * cancelable `hmi-change`. Cancel the event, or set `current` back from the
+ * listener, to keep the step that was active. `readonly` makes the steps
  * plain text, for a wizard that cannot go back. Below 40em a horizontal stepper
  * falls back to the vertical layout.
  *
@@ -63,13 +64,13 @@ const checkIcon = html`<svg
  * @csspart label - A step's title.
  * @csspart description - A step's secondary line.
  * @csspart connector - The line to the next step.
- * @fires hmi-change - A completed step was chosen. `detail` is `{ value }`.
+ * @fires hmi-change - A completed step was chosen, and `current` already holds it. Cancelable: `preventDefault()` puts the old step back. `detail` is `{ value }`.
  *
  * @example
  * const stepper = document.querySelector('hmi-stepper');
  * stepper.steps = [{ value: 'cart', label: 'Cart' }, { value: 'pay', label: 'Payment' }];
  * stepper.current = 'pay';
- * stepper.addEventListener('hmi-change', (e) => { stepper.current = e.detail.value; });
+ * stepper.addEventListener('hmi-change', (e) => showStep(e.detail.value));
  */
 @customElement('hmi-stepper')
 export class HmiStepper extends LitElement {
@@ -79,7 +80,7 @@ export class HmiStepper extends LitElement {
     @property({ type: Array, attribute: false }) accessor steps: StepperStep[] =
         [];
 
-    /** The `value` of the active step. The element never changes it. With none, every step is upcoming. */
+    /** The `value` of the active step. Choosing a completed step sets it. With none, every step is upcoming. */
     @property() accessor current: string | undefined;
 
     /** Layout direction. @default 'horizontal' */
@@ -95,8 +96,19 @@ export class HmiStepper extends LitElement {
     /** The name of the list. @default 'Progress steps' */
     @property() accessor label = 'Progress steps';
 
+    // The step changes first, so a listener reads the new one; a listener that
+    // cancels puts the old one back, unless it has set `current` itself.
     #choose(value: string): void {
-        emit<StepperChangeDetail>(this, 'hmi-change', { value });
+        if (value === this.current) return;
+        const previous = this.current;
+        this.current = value;
+        const proceed = emit<StepperChangeDetail>(
+            this,
+            'hmi-change',
+            { value },
+            { cancelable: true },
+        );
+        if (!proceed && this.current === value) this.current = previous;
     }
 
     #renderStep(step: StepperStep, index: number, currentIndex: number) {

@@ -23,7 +23,7 @@ export interface ListItem {
 
 /** Detail of `hmi-reorder`. */
 export interface ListReorderDetail {
-    /** The items in their new order. The list does not reorder itself: set it back. */
+    /** The items in their new order, which `items` already holds. */
     items: ListItem[];
 }
 
@@ -50,8 +50,10 @@ const move = (items: ListItem[], from: number, to: number): ListItem[] => {
  * element named `title-<id>`, `subtitle-<id>` or `right-<id>` (the item's `id`),
  * which replaces that text. A slot named `item-<id>` replaces the whole row.
  *
- * The list never reorders itself: it fires `hmi-reorder` with the new order, and
- * the consumer sets `items` back.
+ * The element owns the order: a drop or a key sets `items` to a new array in the
+ * new order (the old array is not changed) and fires the cancelable
+ * `hmi-reorder`. Cancel the event, or set `items` back from the listener, to
+ * keep the old order.
  *
  * @tag hmi-list
  * @slot item-<id> - The whole row for the item with that id, replacing the avatar, text and trailing content.
@@ -67,12 +69,12 @@ const move = (items: ListItem[], from: number, to: number): ListItem[] => {
  * @csspart subtitle - A row's subtitle.
  * @csspart right - A row's trailing content.
  * @csspart status - The live region that announces a keyboard move.
- * @fires hmi-reorder - A row was dropped, or moved with the keyboard, to a new place. `detail.items` is the new order.
+ * @fires hmi-reorder - A row was dropped, or moved with the keyboard, to a new place, and `items` already holds the new order. Cancelable: `preventDefault()` puts the old order back. `detail.items` is the new order.
  *
  * @example
  * const list = document.querySelector('hmi-list');
  * list.items = [{ id: 1, title: 'Ada', subtitle: 'Engineer' }];
- * list.addEventListener('hmi-reorder', (e) => { list.items = e.detail.items; });
+ * list.addEventListener('hmi-reorder', (e) => saveOrder(e.detail.items));
  */
 @customElement('hmi-list')
 export class HmiList extends LitElement {
@@ -91,10 +93,20 @@ export class HmiList extends LitElement {
 
     #focusId: ListItem['id'] | null = null;
 
-    #reorder(from: number, to: number) {
-        emit<ListReorderDetail>(this, 'hmi-reorder', {
-            items: move(this.items, from, to),
-        });
+    // The order changes first, so a listener reads the new one; a listener that
+    // cancels puts the old one back, unless it has set `items` itself.
+    #reorder(from: number, to: number): boolean {
+        const previous = this.items;
+        const items = move(previous, from, to);
+        this.items = items;
+        const proceed = emit<ListReorderDetail>(
+            this,
+            'hmi-reorder',
+            { items },
+            { cancelable: true },
+        );
+        if (!proceed && this.items === items) this.items = previous;
+        return proceed;
     }
 
     #onDragStart(event: DragEvent, index: number) {
@@ -133,9 +145,11 @@ export class HmiList extends LitElement {
         if (to < 0 || to >= this.items.length) return;
         event.preventDefault();
         const item = this.items[index] as ListItem;
+        // The handle keeps focus whether or not the move is kept.
         this.#focusId = item.id;
-        this.announcement = `${item.title ?? item.id} moved to position ${to + 1} of ${this.items.length}`;
-        this.#reorder(index, to);
+        if (this.#reorder(index, to)) {
+            this.announcement = `${item.title ?? item.id} moved to position ${to + 1} of ${this.items.length}`;
+        }
     }
 
     protected override updated(changed: Map<PropertyKey, unknown>) {

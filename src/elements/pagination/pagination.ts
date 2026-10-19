@@ -7,7 +7,7 @@ import { styles } from './pagination.styles.js';
 
 /** Detail of `hmi-change`. */
 export interface PaginationChangeDetail {
-    /** The requested 1-based page. */
+    /** The chosen 1-based page, which `page` already holds. */
     value: number;
 }
 
@@ -48,8 +48,9 @@ const chevron = (path: string) => html`<svg
  * with ellipses for long ranges. The current page is marked
  * `aria-current="page"`.
  *
- * It is controlled: choosing a page fires `hmi-change` and the consumer sets
- * `page` in response. Until it does, the element keeps showing the old page.
+ * The element owns `page`: choosing a page sets it and fires the cancelable
+ * `hmi-change`. Cancel the event, or set `page` back from the listener, to keep
+ * the page that was shown. Choosing the current page fires nothing.
  *
  * @tag hmi-pagination
  * @csspart base - The `<nav>`.
@@ -57,12 +58,12 @@ const chevron = (path: string) => html`<svg
  * @csspart prev - The previous-page button.
  * @csspart next - The next-page button.
  * @csspart ellipsis - A gap in the window.
- * @fires hmi-change - A page was chosen. `detail` is `{ value }`, the 1-based page.
+ * @fires hmi-change - A page was chosen, and `page` already holds it. Cancelable: `preventDefault()` puts the old page back. `detail` is `{ value }`, the 1-based page.
  *
  * @example
  * const pager = document.querySelector('hmi-pagination');
  * pager.total = 20;
- * pager.addEventListener('hmi-change', (e) => { pager.page = e.detail.value; });
+ * pager.addEventListener('hmi-change', (e) => loadPage(e.detail.value));
  */
 @customElement('hmi-pagination')
 export class HmiPagination extends LitElement {
@@ -86,8 +87,19 @@ export class HmiPagination extends LitElement {
     /** The name of a page button, with `{page}` for its number. @default 'Page {page}' */
     @property({ attribute: 'page-label' }) accessor pageLabel = 'Page {page}';
 
+    // The page changes first, so a listener reads the new one; a listener that
+    // cancels puts the old one back, unless it has set `page` itself.
     #go(value: number) {
-        emit<PaginationChangeDetail>(this, 'hmi-change', { value });
+        if (value < 1 || value > this.total || value === this.page) return;
+        const previous = this.page;
+        this.page = value;
+        const proceed = emit<PaginationChangeDetail>(
+            this,
+            'hmi-change',
+            { value },
+            { cancelable: true },
+        );
+        if (!proceed && this.page === value) this.page = previous;
     }
 
     override render() {

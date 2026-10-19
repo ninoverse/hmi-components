@@ -9,7 +9,8 @@ export type { CarouselIndexChangeDetail } from './carousel.js';
  *
  * The slides are the children: every element child is one. `onIndexChange`
  * receives the event: read `event.detail.index`. Set `index` from state to
- * control it, and set it back in the handler to veto a change. `noLoop`,
+ * control it. To veto a change, call `event.preventDefault()`: setting the prop
+ * back changes nothing when your state did not change. `noLoop`,
  * `hideArrows` and `hideDots` turn the defaults off.
  *
  * @example

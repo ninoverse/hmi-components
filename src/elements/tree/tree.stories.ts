@@ -130,7 +130,7 @@ export const Slots: Story = {
         </hmi-tree>`,
 };
 
-/** Listen to `hmi-expanded-change` and `hmi-select`; set the property back to veto. */
+/** Listen to `hmi-expanded-change` and `hmi-select`; cancel the event, or set the property back, to veto. */
 export const Events: Story = {
     render: (args) =>
         html`<hmi-tree

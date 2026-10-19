@@ -191,15 +191,54 @@ describe('hmi-list reordering', () => {
         expect((rows[0] as HTMLElement).dataset.dragging).toBe('false');
     });
 
-    it('does not reorder itself', async () => {
+    it('owns the order: a drop sets items to a new array, then fires a cancelable hmi-reorder that leaves the shadow root', async () => {
+        const items = [...ITEMS];
         const el = await fixture(
-            html`<hmi-list reorderable .items=${ITEMS}></hmi-list>`,
+            html`<hmi-list reorderable .items=${items}></hmi-list>`,
+        );
+        let event: CustomEvent<ListReorderDetail> | undefined;
+        let itemsDuring: ListItem[] | undefined;
+        document.addEventListener(
+            'hmi-reorder',
+            (e) => {
+                event = e as CustomEvent<ListReorderDetail>;
+                itemsDuring = el.items;
+            },
+            { once: true },
         );
         const rows = all(el, 'item');
         const data = drag(rows[0] as Element, 'dragstart');
         drag(rows[2] as Element, 'drop', data);
+        expect(ids(event?.detail.items ?? [])).toEqual(['b', 'c', 'a']);
+        expect(event?.bubbles).toBe(true);
+        expect(event?.composed).toBe(true);
+        expect(event?.cancelable).toBe(true);
+        expect(itemsDuring).toBe(event?.detail.items);
         await el.updateComplete;
-        expect(ids(el.items)).toEqual(['a', 'b', 'c']);
+        expect(ids(el.items)).toEqual(['b', 'c', 'a']);
+        expect(ids(items)).toEqual(['a', 'b', 'c']);
+    });
+
+    it('keeps the old order when a listener cancels, or the one a listener sets', async () => {
+        const el = await fixture(
+            html`<hmi-list reorderable .items=${ITEMS}></hmi-list>`,
+        );
+        const cancel = (e: Event) => e.preventDefault();
+        el.addEventListener('hmi-reorder', cancel);
+        let rows = all(el, 'item');
+        let data = drag(rows[0] as Element, 'dragstart');
+        drag(rows[2] as Element, 'drop', data);
+        await el.updateComplete;
+        expect(el.items).toBe(ITEMS);
+        el.removeEventListener('hmi-reorder', cancel);
+        el.addEventListener('hmi-reorder', () => {
+            el.items = ITEMS;
+        });
+        rows = all(el, 'item');
+        data = drag(rows[1] as Element, 'dragstart');
+        drag(rows[0] as Element, 'drop', data);
+        await el.updateComplete;
+        expect(el.items).toBe(ITEMS);
     });
 
     it('ignores a drop on the row it started from', async () => {
@@ -268,9 +307,6 @@ describe('hmi-list reordering', () => {
         const el = await fixture(
             html`<hmi-list reorderable .items=${ITEMS}></hmi-list>`,
         );
-        el.addEventListener('hmi-reorder', (e) => {
-            el.items = (e as CustomEvent<ListReorderDetail>).detail.items;
-        });
         (all(el, 'handle')[0] as HTMLElement).focus();
         key(all(el, 'handle')[0] as Element, 'ArrowDown');
         await el.updateComplete;
@@ -280,6 +316,19 @@ describe('hmi-list reordering', () => {
         expect(all(el, 'status')[0]?.textContent?.trim()).toBe(
             'Inbox moved to position 2 of 3',
         );
+    });
+
+    it('announces nothing and keeps the row when a listener cancels a keyboard move', async () => {
+        const el = await fixture(
+            html`<hmi-list reorderable .items=${ITEMS}></hmi-list>`,
+        );
+        el.addEventListener('hmi-reorder', (e) => e.preventDefault());
+        (all(el, 'handle')[0] as HTMLElement).focus();
+        key(all(el, 'handle')[0] as Element, 'ArrowDown');
+        await el.updateComplete;
+        expect(ids(el.items)).toEqual(['a', 'b', 'c']);
+        expect(el.shadowRoot?.activeElement).toBe(all(el, 'handle')[0]);
+        expect(all(el, 'status')[0]?.textContent?.trim()).toBe('');
     });
 });
 

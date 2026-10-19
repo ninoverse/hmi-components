@@ -283,6 +283,50 @@ describe('hmi-tree activation', () => {
         expect(el.selected).toBeUndefined();
     });
 
+    it('sets the state, then fires a cancelable hmi-expanded-change and hmi-select that leave the shadow root', async () => {
+        const el = await fixture(html`<hmi-tree .nodes=${NODES}></hmi-tree>`);
+        const seen: { type: string; event: CustomEvent; state: unknown }[] = [];
+        const record = (e: Event) =>
+            seen.push({
+                type: e.type,
+                event: e as CustomEvent,
+                state:
+                    e.type === 'hmi-select'
+                        ? el.selected
+                        : [...(el.expanded ?? [])],
+            });
+        document.addEventListener('hmi-expanded-change', record);
+        document.addEventListener('hmi-select', record);
+        row(el, 'src').click();
+        document.removeEventListener('hmi-expanded-change', record);
+        document.removeEventListener('hmi-select', record);
+        expect(seen.map((s) => s.type)).toEqual([
+            'hmi-expanded-change',
+            'hmi-select',
+        ]);
+        expect(seen.map((s) => s.event.detail)).toEqual([
+            { expanded: ['src'] },
+            { value: 'src' },
+        ]);
+        expect(seen.map((s) => s.state)).toEqual([['src'], 'src']);
+        for (const { event } of seen) {
+            expect(event.bubbles).toBe(true);
+            expect(event.composed).toBe(true);
+            expect(event.cancelable).toBe(true);
+        }
+    });
+
+    it('lets a handler veto by cancelling the event', async () => {
+        const el = await fixture(html`<hmi-tree .nodes=${NODES}></hmi-tree>`);
+        el.addEventListener('hmi-select', (e) => e.preventDefault());
+        el.addEventListener('hmi-expanded-change', (e) => e.preventDefault());
+        row(el, 'src').click();
+        await el.updateComplete;
+        expect(el.selected).toBeUndefined();
+        expect(el.expanded).toEqual([]);
+        expect(values(el)).toEqual(['src', 'docs', 'readme']);
+    });
+
     it('owns its state: a handler can veto by setting the property back', async () => {
         const el = await fixture(html`<hmi-tree .nodes=${NODES}></hmi-tree>`);
         el.addEventListener('hmi-select', () => {

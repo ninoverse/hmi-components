@@ -28,8 +28,9 @@ export interface AccordionOpenChangeDetail {
  * `hmi-open-change` fires with `{ open }`, the sorted indices of the open
  * sections, when the user toggles one. The event has its own name because a
  * control inside a panel fires `hmi-change`, which also bubbles through the
- * accordion. The element owns `open`: to veto a toggle, set `open` back from a
- * listener. Without `multiple`, opening a section closes the others.
+ * accordion. The element owns `open`: to veto a toggle, cancel the event or set
+ * `open` back from the listener. Without `multiple`, opening a section closes
+ * the others.
  *
  * A section's `title` and `body` are text. For richer content, slot an element
  * named `title-<index>` or `body-<index>` (the item's position, from 0), which
@@ -38,7 +39,7 @@ export interface AccordionOpenChangeDetail {
  * @tag hmi-accordion
  * @slot title-<index> - Rich title for the section at that position.
  * @slot body-<index> - Rich body for the section at that position.
- * @fires {CustomEvent<AccordionOpenChangeDetail>} hmi-open-change - The user toggled a section.
+ * @fires {CustomEvent<AccordionOpenChangeDetail>} hmi-open-change - The user toggled a section, and `open` already holds the result. Cancelable: `preventDefault()` puts the old `open` back.
  * @csspart base - The stack of sections.
  * @csspart item - One section.
  * @csspart trigger - A section's header button.
@@ -83,10 +84,18 @@ export class HmiAccordion extends LitElement {
         const next = new Set(this.multiple ? this.open : []);
         if (this.open.includes(index)) next.delete(index);
         else next.add(index);
-        this.open = Array.from(next).sort((a, b) => a - b);
-        emit<AccordionOpenChangeDetail>(this, 'hmi-open-change', {
-            open: this.open,
-        });
+        const previous = this.open;
+        const open = Array.from(next).sort((a, b) => a - b);
+        this.open = open;
+        const proceed = emit<AccordionOpenChangeDetail>(
+            this,
+            'hmi-open-change',
+            { open },
+            { cancelable: true },
+        );
+        // A listener that cancels puts the old sections back, unless it has set
+        // `open` itself.
+        if (!proceed && this.open === open) this.open = previous;
     }
 
     override render() {

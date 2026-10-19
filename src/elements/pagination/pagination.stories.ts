@@ -14,14 +14,13 @@ const meta = {
         page: { control: { type: 'number', min: 1 } },
         total: { control: { type: 'number', min: 0 } },
     },
-    // Controlled: set `page` back from `hmi-change`.
+    // The element owns `page`: a click moves it, then fires `hmi-change`.
     render: (args) =>
         html`<hmi-pagination
             .page=${args.page}
             .total=${args.total}
-            @hmi-change=${(e: CustomEvent<PaginationChangeDetail>) => {
-                (e.currentTarget as HmiPagination).page = e.detail.value;
-            }}
+            @hmi-change=${(e: CustomEvent<PaginationChangeDetail>) =>
+                console.log('hmi-change', e.detail)}
         ></hmi-pagination>`,
     parameters: {
         docs: {

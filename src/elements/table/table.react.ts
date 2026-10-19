@@ -26,7 +26,8 @@ export type {
  * string, a Lit template or a DOM node, never JSX: for a React element in a
  * cell, pass it as a child with `slot="cell-<rowKey>-<columnKey>"`, and for the
  * header `slot="header-<columnKey>"`. `onSort` and `onAction` receive the event,
- * so read `event.detail`.
+ * so read `event.detail`; `event.preventDefault()` in `onSort` keeps the old
+ * sort.
  *
  * @example
  * <Table

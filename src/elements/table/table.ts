@@ -126,8 +126,9 @@ const sortIcon = html`<svg
  * table is sorted. Without it a row is named by its position in `rows`.
  *
  * Sorting is the table's own: a click sorts by the column, ascending first and
- * then flipping, and fires `hmi-sort`. `sort-key` and `sort-dir` set it from
- * outside. `rows` is never reordered, only shown sorted. `no-sort` turns
+ * then flipping, and fires the cancelable `hmi-sort`; cancel it, or set
+ * `sort-key` and `sort-dir` back from the listener, to keep the old sort.
+ * `sort-key` and `sort-dir` set it from outside. `rows` is never reordered, only shown sorted. `no-sort` turns
  * sorting off for every column.
  *
  * @tag hmi-table
@@ -141,7 +142,7 @@ const sortIcon = html`<svg
  * @csspart row - A body row.
  * @csspart cell - A body cell.
  * @csspart action - A button of an `actions` cell.
- * @fires hmi-sort - The user sorted a column. `detail` is `{ key, dir }`. Not fired when `sort-key` or `sort-dir` is set from code.
+ * @fires hmi-sort - The user sorted a column, and `sortKey` and `sortDir` already hold it. Cancelable: `preventDefault()` puts the old sort back. `detail` is `{ key, dir }`. Not fired when `sort-key` or `sort-dir` is set from code.
  * @fires hmi-action - The user activated an `actions` button. `detail` is `{ value, row }`.
  *
  * @example
@@ -198,9 +199,21 @@ export class HmiTable extends LitElement {
             this.sortKey === column.key && this.sortDir !== 'desc'
                 ? 'desc'
                 : 'asc';
+        const previous = { key: this.sortKey, dir: this.sortDir };
         this.sortKey = column.key;
         this.sortDir = dir;
-        emit(this, 'hmi-sort', { key: column.key, dir });
+        const proceed = emit<TableSortDetail>(
+            this,
+            'hmi-sort',
+            { key: column.key, dir },
+            { cancelable: true },
+        );
+        // A listener that cancels puts the old sort back, unless it has set
+        // one itself.
+        if (!proceed && this.sortKey === column.key && this.sortDir === dir) {
+            this.sortKey = previous.key;
+            this.sortDir = previous.dir;
+        }
     }
 
     #text(column: TableColumn, row: TableRow): string {

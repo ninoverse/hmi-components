@@ -23,7 +23,7 @@ export interface TabOption {
 
 /** Detail of `hmi-change`. */
 export interface TabsChangeDetail {
-    /** The `value` of the tab that was chosen. */
+    /** The `value` of the tab that was chosen, which `value` already holds. */
     value: string;
 }
 
@@ -37,8 +37,9 @@ export interface TabsChangeDetail {
  * element slotted as `end-<value>` in its place. The badge is `primary` on the
  * active tab and `default` on the others, unless `badgeVariant` says otherwise.
  *
- * It is controlled: choosing a tab fires `hmi-change` and the element keeps
- * showing the old one until you set `value`. The tabs are one tab stop; Arrow
+ * The element owns `value`: choosing a tab sets it and fires the cancelable
+ * `hmi-change`. Cancel the event, or set `value` back from the listener, to keep
+ * the tab that was active. The tabs are one tab stop; Arrow
  * Left and Right, Home and End move focus and choose. An id cannot point across
  * the shadow boundary, so wire your panels to `value` yourself.
  *
@@ -53,13 +54,13 @@ export interface TabsChangeDetail {
  * @csspart icon - A tab's icon.
  * @csspart label - A tab's label.
  * @csspart badge - A tab's `<hmi-badge>`.
- * @fires hmi-change - A tab was chosen. `detail` is `{ value }`.
+ * @fires hmi-change - A tab was chosen, and `value` already holds it. Cancelable: `preventDefault()` puts the old tab back. `detail` is `{ value }`.
  *
  * @example
  * const tabs = document.querySelector('hmi-tabs');
  * tabs.options = [{ value: 'all', label: 'All' }, { value: 'mine', label: 'Mine', badge: '3' }];
  * tabs.value = 'all';
- * tabs.addEventListener('hmi-change', (e) => { tabs.value = e.detail.value; });
+ * tabs.addEventListener('hmi-change', (e) => showPanel(e.detail.value));
  */
 @customElement('hmi-tabs')
 export class HmiTabs extends LitElement {
@@ -69,7 +70,7 @@ export class HmiTabs extends LitElement {
     @property({ type: Array, attribute: false }) accessor options: TabOption[] =
         [];
 
-    /** The `value` of the active tab. The element never changes it. With none, no tab is active. */
+    /** The `value` of the active tab. Choosing a tab sets it. With none, no tab is active. */
     @property() accessor value: string | undefined;
 
     /** Visual style. @default 'pill' */
@@ -133,9 +134,19 @@ export class HmiTabs extends LitElement {
         marker.style.opacity = '1';
     }
 
+    // The tab changes first, so a listener reads the new one; a listener that
+    // cancels puts the old one back, unless it has set `value` itself.
     #choose(value: string): void {
         if (value === this.value) return;
-        emit<TabsChangeDetail>(this, 'hmi-change', { value });
+        const previous = this.value;
+        this.value = value;
+        const proceed = emit<TabsChangeDetail>(
+            this,
+            'hmi-change',
+            { value },
+            { cancelable: true },
+        );
+        if (!proceed && this.value === value) this.value = previous;
     }
 
     #onKeydown(event: KeyboardEvent, index: number): void {

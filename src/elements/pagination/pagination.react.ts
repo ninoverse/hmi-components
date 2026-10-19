@@ -7,9 +7,12 @@ export type { PaginationChangeDetail } from './pagination.js';
 /**
  * React wrapper for `<hmi-pagination>`.
  *
- * It is controlled, as the v5 component was: `onChange` receives the event, so
- * read `event.detail.value` and set `page` from it. `label`, `prevLabel`,
- * `nextLabel` and `pageLabel` name the landmark and the buttons.
+ * The element owns `page`: a click sets it, then `onChange` receives the event,
+ * whose `detail.value` is the new page. Keep your state in step from it, as
+ * with v5, or leave `page` out to let the element keep it. To refuse a page,
+ * call `event.preventDefault()`: setting the prop back changes nothing when
+ * your state did not change. `label`, `prevLabel`, `nextLabel` and `pageLabel`
+ * name the landmark and the buttons.
  *
  * @example
  * <Pagination page={page} total={20} onChange={(e) => setPage(e.detail.value)} />

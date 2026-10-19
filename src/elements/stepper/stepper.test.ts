@@ -238,14 +238,26 @@ describe('hmi-stepper changes', () => {
         expect(seen).toEqual(['cart']);
     });
 
-    it('is controlled: it keeps current until the consumer sets it', async () => {
+    it('owns current: a choice sets it, then fires a cancelable hmi-change that leaves the shadow root', async () => {
         const el = await fixture(
             html`<hmi-stepper current="pay" .steps=${STEPS}></hmi-stepper>`,
         );
+        let event: CustomEvent<StepperChangeDetail> | undefined;
+        let currentDuring: string | undefined;
+        document.addEventListener(
+            'hmi-change',
+            (e) => {
+                event = e as CustomEvent<StepperChangeDetail>;
+                currentDuring = el.current;
+            },
+            { once: true },
+        );
         all(el, 'button')[0]?.click();
-        await el.updateComplete;
-        expect(el.current).toBe('pay');
-        el.current = 'cart';
+        expect(event?.detail).toEqual({ value: 'cart' });
+        expect(event?.bubbles).toBe(true);
+        expect(event?.composed).toBe(true);
+        expect(event?.cancelable).toBe(true);
+        expect(currentDuring).toBe('cart');
         await el.updateComplete;
         expect(all(el, 'step').map((s) => s.dataset.status)).toEqual([
             'active',
@@ -253,6 +265,24 @@ describe('hmi-stepper changes', () => {
             'upcoming',
             'upcoming',
         ]);
+    });
+
+    it('keeps the old step when a listener cancels, or the one a listener sets', async () => {
+        const el = await fixture(
+            html`<hmi-stepper current="pay" .steps=${STEPS}></hmi-stepper>`,
+        );
+        const cancel = (e: Event) => e.preventDefault();
+        el.addEventListener('hmi-change', cancel);
+        all(el, 'button')[0]?.click();
+        await el.updateComplete;
+        expect(el.current).toBe('pay');
+        el.removeEventListener('hmi-change', cancel);
+        el.addEventListener('hmi-change', () => {
+            el.current = 'pay';
+        });
+        all(el, 'button')[1]?.click();
+        await el.updateComplete;
+        expect(el.current).toBe('pay');
     });
 
     it('does not fire from the active or an upcoming step', async () => {
