@@ -87,6 +87,8 @@ counterpart's JSDoc: `@deprecated`, naming the wrapper that replaces it and
   per element: the one exception to *Element sequencing*'s one element per PR.
 - `.claude/reproduction-guide.md` rebuilds the v5 React library from a design
   file.
+- The v6 flip happens only when the maintainer asks for it explicitly, after
+  testing every element. Never start or prepare it on your own.
 
 ## Commands beyond the gates
 
