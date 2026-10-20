@@ -1,6 +1,7 @@
 import { cpSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import react from '@vitejs/plugin-react';
 import { defineConfig, type Plugin } from 'vite';
 
 const dirname = fileURLToPath(new URL('.', import.meta.url));
@@ -50,7 +51,8 @@ export default defineConfig({
     // Standard decorators with `accessor` (the Lit elements) must be lowered by
     // esbuild before Rollup parses the output.
     esbuild: { target: 'es2022' },
-    plugins: [allElementsPage()],
+    // React only for the pages written with the wrappers, which are .tsx.
+    plugins: [react({ include: /\.tsx$/ }), allElementsPage()],
     build: {
         outDir,
         emptyOutDir: true,
@@ -60,6 +62,7 @@ export default defineConfig({
                 index: resolve(dirname, 'demo/index.html'),
                 dashboard: resolve(dirname, 'demo/dashboard/index.html'),
                 control: resolve(dirname, 'demo/control/index.html'),
+                settings: resolve(dirname, 'demo/settings/index.html'),
             },
         },
     },
