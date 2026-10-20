@@ -40,6 +40,7 @@ import {
 const PAGES = [
     { value: 'home', label: 'Overview', path: '' },
     { value: 'dashboard', label: 'Dashboard', path: 'dashboard/' },
+    { value: 'control', label: 'Control panel', path: 'control/' },
     { value: 'all', label: 'All elements', path: 'all/' },
 ] as const;
 

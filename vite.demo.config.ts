@@ -59,6 +59,7 @@ export default defineConfig({
             input: {
                 index: resolve(dirname, 'demo/index.html'),
                 dashboard: resolve(dirname, 'demo/dashboard/index.html'),
+                control: resolve(dirname, 'demo/control/index.html'),
             },
         },
     },

@@ -1,0 +1,77 @@
+.ctl-title {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: calc(var(--hmi-base) * 1.5);
+}
+
+.ctl-grid {
+    display: grid;
+    grid-template-columns: repeat(
+            auto-fit,
+            minmax(min(100%, calc(var(--hmi-base) * 40)), 1fr)
+        );
+    gap: calc(var(--hmi-base) * 3);
+}
+
+.ctl-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(var(--hmi-base) * 1.5);
+    margin-bottom: calc(var(--hmi-base) * 1.5);
+}
+
+.ctl-batch,
+.ctl-stack {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--hmi-base) * 2.5);
+}
+
+.ctl-batch {
+    gap: var(--hmi-base);
+    margin-top: calc(var(--hmi-base) * 2.5);
+}
+
+.ctl-row {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--hmi-base);
+}
+
+.ctl-gauges {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: calc(var(--hmi-base) * 2);
+}
+
+.ctl-gauges figure {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: calc(var(--hmi-base) * 0.5);
+}
+
+.ctl-gauges figcaption {
+    color: var(--on-surface-variant);
+    font-size: calc(var(--hmi-base) * 1.75);
+}
+
+.ctl-gauges + *,
+hmi-alert + .ctl-gauges {
+    margin-top: calc(var(--hmi-base) * 2);
+}
+
+/* The run controls and the log take two tracks where there are three. */
+@media (min-width: 75em) {
+    .ctl-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .ctl-run,
+    .ctl-log {
+        grid-column: span 2;
+    }
+}
