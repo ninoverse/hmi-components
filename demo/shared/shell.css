@@ -26,6 +26,11 @@
     gap: calc(var(--hmi-base) * 0.5);
 }
 
+/* A card's header slot carries no spacing of its own. */
+.demo-main hmi-card > [slot="header"] {
+    margin-bottom: calc(var(--hmi-base) * 1.5);
+}
+
 .demo-theme-panel {
     display: flex;
     flex-direction: column;
