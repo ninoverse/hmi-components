@@ -3321,8 +3321,9 @@
                 "text": "string"
               },
               "default": "''",
-              "description": "Name under which the value is submitted with the form.",
+              "description": "Name under which the value is submitted with the form. Reflected: a\nform-associated element submits under its `name` attribute.",
               "attribute": "name",
+              "reflects": true,
               "inheritedFrom": {
                 "name": "HmiFormField",
                 "module": "src/elements/shared/form.ts"
@@ -3701,7 +3702,7 @@
                 "text": "string"
               },
               "default": "''",
-              "description": "Name under which the value is submitted with the form.",
+              "description": "Name under which the value is submitted with the form. Reflected: a\nform-associated element submits under its `name` attribute.",
               "fieldName": "name",
               "inheritedFrom": {
                 "name": "HmiFormField",
@@ -4637,8 +4638,9 @@
                 "text": "string"
               },
               "default": "''",
-              "description": "Name under which the value is submitted with the form.",
+              "description": "Name under which the value is submitted with the form. Reflected: a\nform-associated element submits under its `name` attribute.",
               "attribute": "name",
+              "reflects": true,
               "inheritedFrom": {
                 "name": "HmiFormField",
                 "module": "src/elements/shared/form.ts"
@@ -4997,7 +4999,7 @@
                 "text": "string"
               },
               "default": "''",
-              "description": "Name under which the value is submitted with the form.",
+              "description": "Name under which the value is submitted with the form. Reflected: a\nform-associated element submits under its `name` attribute.",
               "fieldName": "name",
               "inheritedFrom": {
                 "name": "HmiFormField",
@@ -5712,8 +5714,9 @@
                 "text": "string"
               },
               "default": "''",
-              "description": "Name under which the value is submitted with the form.",
+              "description": "Name under which the value is submitted with the form. Reflected: a\nform-associated element submits under its `name` attribute.",
               "attribute": "name",
+              "reflects": true,
               "inheritedFrom": {
                 "name": "HmiFormField",
                 "module": "src/elements/shared/form.ts"
@@ -6117,7 +6120,7 @@
                 "text": "string"
               },
               "default": "''",
-              "description": "Name under which the value is submitted with the form.",
+              "description": "Name under which the value is submitted with the form. Reflected: a\nform-associated element submits under its `name` attribute.",
               "fieldName": "name",
               "inheritedFrom": {
                 "name": "HmiFormField",
@@ -8234,8 +8237,9 @@
                 "text": "string"
               },
               "default": "''",
-              "description": "Name under which the value is submitted with the form.",
+              "description": "Name under which the value is submitted with the form. Reflected: a\nform-associated element submits under its `name` attribute.",
               "attribute": "name",
+              "reflects": true,
               "inheritedFrom": {
                 "name": "HmiFormField",
                 "module": "src/elements/shared/form.ts"
@@ -8678,7 +8682,7 @@
                 "text": "string"
               },
               "default": "''",
-              "description": "Name under which the value is submitted with the form.",
+              "description": "Name under which the value is submitted with the form. Reflected: a\nform-associated element submits under its `name` attribute.",
               "fieldName": "name",
               "inheritedFrom": {
                 "name": "HmiFormField",
@@ -10099,8 +10103,9 @@
                 "text": "string"
               },
               "default": "''",
-              "description": "Name under which the value is submitted with the form.",
+              "description": "Name under which the value is submitted with the form. Reflected: a\nform-associated element submits under its `name` attribute.",
               "attribute": "name",
+              "reflects": true,
               "inheritedFrom": {
                 "name": "HmiFormField",
                 "module": "src/elements/shared/form.ts"
@@ -10422,7 +10427,7 @@
                 "text": "string"
               },
               "default": "''",
-              "description": "Name under which the value is submitted with the form.",
+              "description": "Name under which the value is submitted with the form. Reflected: a\nform-associated element submits under its `name` attribute.",
               "fieldName": "name",
               "inheritedFrom": {
                 "name": "HmiFormField",
@@ -13051,8 +13056,9 @@
                 "text": "string"
               },
               "default": "''",
-              "description": "Name under which the value is submitted with the form.",
+              "description": "Name under which the value is submitted with the form. Reflected: a\nform-associated element submits under its `name` attribute.",
               "attribute": "name",
+              "reflects": true,
               "inheritedFrom": {
                 "name": "HmiFormField",
                 "module": "src/elements/shared/form.ts"
@@ -13488,7 +13494,7 @@
                 "text": "string"
               },
               "default": "''",
-              "description": "Name under which the value is submitted with the form.",
+              "description": "Name under which the value is submitted with the form. Reflected: a\nform-associated element submits under its `name` attribute.",
               "fieldName": "name",
               "inheritedFrom": {
                 "name": "HmiFormField",
@@ -16030,8 +16036,9 @@
                 "text": "string"
               },
               "default": "''",
-              "description": "Name under which the value is submitted with the form.",
+              "description": "Name under which the value is submitted with the form. Reflected: a\nform-associated element submits under its `name` attribute.",
               "attribute": "name",
+              "reflects": true,
               "inheritedFrom": {
                 "name": "HmiFormField",
                 "module": "src/elements/shared/form.ts"
@@ -16472,7 +16479,7 @@
                 "text": "string"
               },
               "default": "''",
-              "description": "Name under which the value is submitted with the form.",
+              "description": "Name under which the value is submitted with the form. Reflected: a\nform-associated element submits under its `name` attribute.",
               "fieldName": "name",
               "inheritedFrom": {
                 "name": "HmiFormField",
@@ -17171,8 +17178,9 @@
                 "text": "string"
               },
               "default": "''",
-              "description": "Name under which the value is submitted with the form.",
+              "description": "Name under which the value is submitted with the form. Reflected: a\nform-associated element submits under its `name` attribute.",
               "attribute": "name",
+              "reflects": true,
               "inheritedFrom": {
                 "name": "HmiFormField",
                 "module": "src/elements/shared/form.ts"
@@ -17602,7 +17610,7 @@
                 "text": "string"
               },
               "default": "''",
-              "description": "Name under which the value is submitted with the form.",
+              "description": "Name under which the value is submitted with the form. Reflected: a\nform-associated element submits under its `name` attribute.",
               "fieldName": "name",
               "inheritedFrom": {
                 "name": "HmiFormField",
@@ -18370,8 +18378,9 @@
                 "text": "string"
               },
               "default": "''",
-              "description": "Name under which the value is submitted with the form.",
+              "description": "Name under which the value is submitted with the form. Reflected: a\nform-associated element submits under its `name` attribute.",
               "attribute": "name",
+              "reflects": true,
               "inheritedFrom": {
                 "name": "HmiFormField",
                 "module": "src/elements/shared/form.ts"
@@ -18873,7 +18882,7 @@
                 "text": "string"
               },
               "default": "''",
-              "description": "Name under which the value is submitted with the form.",
+              "description": "Name under which the value is submitted with the form. Reflected: a\nform-associated element submits under its `name` attribute.",
               "fieldName": "name",
               "inheritedFrom": {
                 "name": "HmiFormField",
@@ -19784,8 +19793,9 @@
                 "text": "string"
               },
               "default": "''",
-              "description": "Name under which the value is submitted with the form.",
+              "description": "Name under which the value is submitted with the form. Reflected: a\nform-associated element submits under its `name` attribute.",
               "attribute": "name",
+              "reflects": true,
               "inheritedFrom": {
                 "name": "HmiFormField",
                 "module": "src/elements/shared/form.ts"
@@ -20127,7 +20137,7 @@
                 "text": "string"
               },
               "default": "''",
-              "description": "Name under which the value is submitted with the form.",
+              "description": "Name under which the value is submitted with the form. Reflected: a\nform-associated element submits under its `name` attribute.",
               "fieldName": "name",
               "inheritedFrom": {
                 "name": "HmiFormField",
@@ -20636,8 +20646,9 @@
                 "text": "string"
               },
               "default": "''",
-              "description": "Name under which the value is submitted with the form.",
+              "description": "Name under which the value is submitted with the form. Reflected: a\nform-associated element submits under its `name` attribute.",
               "attribute": "name",
+              "reflects": true,
               "inheritedFrom": {
                 "name": "HmiFormField",
                 "module": "src/elements/shared/form.ts"
@@ -21016,7 +21027,7 @@
                 "text": "string"
               },
               "default": "''",
-              "description": "Name under which the value is submitted with the form.",
+              "description": "Name under which the value is submitted with the form. Reflected: a\nform-associated element submits under its `name` attribute.",
               "fieldName": "name",
               "inheritedFrom": {
                 "name": "HmiFormField",
@@ -22043,8 +22054,9 @@
                 "text": "string"
               },
               "default": "''",
-              "description": "Name under which the value is submitted with the form.",
+              "description": "Name under which the value is submitted with the form. Reflected: a\nform-associated element submits under its `name` attribute.",
               "attribute": "name",
+              "reflects": true,
               "inheritedFrom": {
                 "name": "HmiFormField",
                 "module": "src/elements/shared/form.ts"
@@ -22534,7 +22546,7 @@
                 "text": "string"
               },
               "default": "''",
-              "description": "Name under which the value is submitted with the form.",
+              "description": "Name under which the value is submitted with the form. Reflected: a\nform-associated element submits under its `name` attribute.",
               "fieldName": "name",
               "inheritedFrom": {
                 "name": "HmiFormField",
@@ -22970,8 +22982,9 @@
                 "text": "string"
               },
               "default": "''",
-              "description": "Name under which the value is submitted with the form.",
+              "description": "Name under which the value is submitted with the form. Reflected: a\nform-associated element submits under its `name` attribute.",
               "attribute": "name",
+              "reflects": true,
               "inheritedFrom": {
                 "name": "HmiFormField",
                 "module": "src/elements/shared/form.ts"
@@ -23340,7 +23353,7 @@
                 "text": "string"
               },
               "default": "''",
-              "description": "Name under which the value is submitted with the form.",
+              "description": "Name under which the value is submitted with the form. Reflected: a\nform-associated element submits under its `name` attribute.",
               "fieldName": "name",
               "inheritedFrom": {
                 "name": "HmiFormField",
@@ -23907,8 +23920,9 @@
                 "text": "string"
               },
               "default": "''",
-              "description": "Name under which the value is submitted with the form.",
+              "description": "Name under which the value is submitted with the form. Reflected: a\nform-associated element submits under its `name` attribute.",
               "attribute": "name",
+              "reflects": true,
               "inheritedFrom": {
                 "name": "HmiFormField",
                 "module": "src/elements/shared/form.ts"
@@ -24263,7 +24277,7 @@
                 "text": "string"
               },
               "default": "''",
-              "description": "Name under which the value is submitted with the form.",
+              "description": "Name under which the value is submitted with the form. Reflected: a\nform-associated element submits under its `name` attribute.",
               "fieldName": "name",
               "inheritedFrom": {
                 "name": "HmiFormField",
@@ -24669,8 +24683,9 @@
                 "text": "string"
               },
               "default": "''",
-              "description": "Name under which the value is submitted with the form.",
+              "description": "Name under which the value is submitted with the form. Reflected: a\nform-associated element submits under its `name` attribute.",
               "attribute": "name",
+              "reflects": true,
               "inheritedFrom": {
                 "name": "HmiFormField",
                 "module": "src/elements/shared/form.ts"
@@ -25027,7 +25042,7 @@
                 "text": "string"
               },
               "default": "''",
-              "description": "Name under which the value is submitted with the form.",
+              "description": "Name under which the value is submitted with the form. Reflected: a\nform-associated element submits under its `name` attribute.",
               "fieldName": "name",
               "inheritedFrom": {
                 "name": "HmiFormField",
@@ -25805,8 +25820,9 @@
                 "text": "string"
               },
               "default": "''",
-              "description": "Name under which the value is submitted with the form.",
-              "attribute": "name"
+              "description": "Name under which the value is submitted with the form. Reflected: a\nform-associated element submits under its `name` attribute.",
+              "attribute": "name",
+              "reflects": true
             },
             {
               "kind": "field",
@@ -26107,7 +26123,7 @@
                 "text": "string"
               },
               "default": "''",
-              "description": "Name under which the value is submitted with the form.",
+              "description": "Name under which the value is submitted with the form. Reflected: a\nform-associated element submits under its `name` attribute.",
               "fieldName": "name"
             },
             {
@@ -27179,8 +27195,9 @@
                 "text": "string"
               },
               "default": "''",
-              "description": "Name under which the value is submitted with the form.",
+              "description": "Name under which the value is submitted with the form. Reflected: a\nform-associated element submits under its `name` attribute.",
               "attribute": "name",
+              "reflects": true,
               "inheritedFrom": {
                 "name": "HmiFormField",
                 "module": "src/elements/shared/form.ts"
@@ -27594,7 +27611,7 @@
                 "text": "string"
               },
               "default": "''",
-              "description": "Name under which the value is submitted with the form.",
+              "description": "Name under which the value is submitted with the form. Reflected: a\nform-associated element submits under its `name` attribute.",
               "fieldName": "name",
               "inheritedFrom": {
                 "name": "HmiFormField",
@@ -28889,8 +28906,9 @@
                 "text": "string"
               },
               "default": "''",
-              "description": "Name under which the value is submitted with the form.",
+              "description": "Name under which the value is submitted with the form. Reflected: a\nform-associated element submits under its `name` attribute.",
               "attribute": "name",
+              "reflects": true,
               "inheritedFrom": {
                 "name": "HmiFormField",
                 "module": "src/elements/shared/form.ts"
@@ -29269,7 +29287,7 @@
                 "text": "string"
               },
               "default": "''",
-              "description": "Name under which the value is submitted with the form.",
+              "description": "Name under which the value is submitted with the form. Reflected: a\nform-associated element submits under its `name` attribute.",
               "fieldName": "name",
               "inheritedFrom": {
                 "name": "HmiFormField",
@@ -30341,8 +30359,9 @@
                 "text": "string"
               },
               "default": "''",
-              "description": "Name under which the value is submitted with the form.",
+              "description": "Name under which the value is submitted with the form. Reflected: a\nform-associated element submits under its `name` attribute.",
               "attribute": "name",
+              "reflects": true,
               "inheritedFrom": {
                 "name": "HmiFormField",
                 "module": "src/elements/shared/form.ts"
@@ -30761,7 +30780,7 @@
                 "text": "string"
               },
               "default": "''",
-              "description": "Name under which the value is submitted with the form.",
+              "description": "Name under which the value is submitted with the form. Reflected: a\nform-associated element submits under its `name` attribute.",
               "fieldName": "name",
               "inheritedFrom": {
                 "name": "HmiFormField",
@@ -32597,8 +32616,9 @@
                 "text": "string"
               },
               "default": "''",
-              "description": "Name under which the value is submitted with the form.",
+              "description": "Name under which the value is submitted with the form. Reflected: a\nform-associated element submits under its `name` attribute.",
               "attribute": "name",
+              "reflects": true,
               "inheritedFrom": {
                 "name": "HmiFormField",
                 "module": "src/elements/shared/form.ts"
@@ -32985,7 +33005,7 @@
                 "text": "string"
               },
               "default": "''",
-              "description": "Name under which the value is submitted with the form.",
+              "description": "Name under which the value is submitted with the form. Reflected: a\nform-associated element submits under its `name` attribute.",
               "fieldName": "name",
               "inheritedFrom": {
                 "name": "HmiFormField",

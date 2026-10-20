@@ -179,6 +179,25 @@ describe('hmi-input', () => {
         expect(note.form).toBe(form);
     });
 
+    it('submits under a name set as a property, as the React wrapper sets it', async () => {
+        const host = document.createElement('div');
+        document.body.append(host);
+        render(
+            html`<form>
+                <hmi-input .name=${'email'} value="a@b.co"></hmi-input>
+            </form>`,
+            host,
+        );
+        const el = host.querySelector('hmi-input') as HmiInput;
+        await el.updateComplete;
+        expect(el.getAttribute('name')).toBe('email');
+        expect(
+            new FormData(host.querySelector('form') as HTMLFormElement).get(
+                'email',
+            ),
+        ).toBe('a@b.co');
+    });
+
     it('restores the initial value on form reset', async () => {
         const host = document.createElement('div');
         document.body.append(host);

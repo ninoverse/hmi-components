@@ -81,8 +81,11 @@ export abstract class HmiFormField extends LitElement {
         delegatesFocus: true,
     };
 
-    /** Name under which the value is submitted with the form. */
-    @property() accessor name = '';
+    /**
+     * Name under which the value is submitted with the form. Reflected: a
+     * form-associated element submits under its `name` attribute.
+     */
+    @property({ reflect: true }) accessor name = '';
 
     /** Disables the control. @default false */
     @property({ type: Boolean, reflect: true }) accessor disabled = false;
