@@ -1,0 +1,206 @@
+/* The mailboxes and the shift plan beside the messages where there is room. */
+.inbox-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: calc(var(--hmi-base) * 3);
+    align-items: start;
+}
+
+.inbox-layout hmi-sidebar {
+    max-width: none;
+}
+
+.inbox-priorities hmi-text {
+    display: block;
+    margin-bottom: calc(var(--hmi-base) * 1.5);
+}
+
+.inbox-actions,
+.inbox-tools,
+.inbox-chips {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--hmi-base);
+}
+
+.demo-page-head > .inbox-actions {
+    flex-direction: row;
+}
+
+.inbox-keys {
+    display: inline-flex;
+    gap: calc(var(--hmi-base) * 0.5);
+    margin-inline-start: var(--hmi-base);
+}
+
+.inbox-main::part(body),
+.inbox-main {
+    min-width: 0;
+}
+
+.inbox-toolbar,
+.inbox-message-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: calc(var(--hmi-base) * 1.5);
+}
+
+/* Three tabs fit a phone, but the row may still be wider than the card. */
+.inbox-toolbar hmi-tabs {
+    max-width: 100%;
+}
+
+.inbox-toolbar hmi-tabs::part(base) {
+    min-width: 0;
+    overflow-x: auto;
+}
+
+.inbox-main hmi-search-input,
+.inbox-chips {
+    display: flex;
+    margin-top: calc(var(--hmi-base) * 2);
+}
+
+.inbox-main hmi-list,
+.inbox-main hmi-empty-state {
+    display: block;
+    margin-top: calc(var(--hmi-base) * 2);
+}
+
+/* The subject is the row's button: it opens the message. */
+.inbox-subject {
+    all: unset;
+    cursor: pointer;
+    font-weight: 500;
+    color: var(--on-surface-variant);
+    overflow-wrap: break-word;
+}
+
+.inbox-subject[data-unread] {
+    font-weight: 700;
+    color: var(--on-background);
+}
+
+.inbox-subject:hover {
+    text-decoration: underline;
+}
+
+.inbox-subject:focus-visible {
+    outline: calc(var(--hmi-base) * 0.25) solid var(--ring);
+    outline-offset: calc(var(--hmi-base) * 0.25);
+    border-radius: var(--corner-extra-small);
+}
+
+.inbox-meta {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(var(--hmi-base) * 0.75);
+}
+
+/* The sidebar, the chip and the empty state size their own slotted icons. */
+.inbox-meta .inbox-icon {
+    width: calc(var(--hmi-base) * 2);
+    height: calc(var(--hmi-base) * 2);
+    flex: none;
+    color: var(--on-surface-variant);
+}
+
+.inbox-pages {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: calc(var(--hmi-base) * 1.5);
+    margin-top: calc(var(--hmi-base) * 2);
+}
+
+.inbox-message {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--hmi-base) * 2.5);
+}
+
+.inbox-sender {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: calc(var(--hmi-base) * 1.5);
+}
+
+.inbox-sender > div {
+    flex: 1;
+    min-width: 0;
+}
+
+.inbox-sender hmi-text,
+.inbox-body hmi-text {
+    display: block;
+}
+
+.inbox-body {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--hmi-base) * 1.5);
+    max-width: 70ch;
+}
+
+.inbox-reply {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--hmi-base) * 1.5);
+    padding-top: calc(var(--hmi-base) * 2.5);
+    border-top: 1px solid var(--outline-variant);
+}
+
+.inbox-filters,
+.inbox-compose {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--hmi-base) * 3);
+}
+
+.inbox-group {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--hmi-base) * 1.5);
+}
+
+.inbox-group legend {
+    padding: 0;
+    margin-bottom: calc(var(--hmi-base) * 1.5);
+    color: var(--on-surface);
+    font-family: var(--font-default);
+    font-weight: 600;
+}
+
+/* On a phone a row keeps the sender and the time; the message opens in full. */
+@media (max-width: 40em) {
+    .inbox-preview,
+    .inbox-meta .inbox-icon {
+        display: none;
+    }
+}
+
+/* The messages take the second column, the mailboxes and the plan the first. */
+@media (min-width: 64em) {
+    .inbox-layout {
+        grid-template-columns: calc(var(--hmi-base) * 34) minmax(0, 1fr);
+        grid-template-rows: auto 1fr;
+    }
+
+    .inbox-main {
+        grid-column: 2;
+        grid-row: 1 / span 2;
+    }
+
+    .inbox-priorities {
+        grid-column: 1;
+        grid-row: 2;
+    }
+}

@@ -42,6 +42,7 @@ const PAGES = [
     { value: 'dashboard', label: 'Dashboard', path: 'dashboard/' },
     { value: 'control', label: 'Control panel', path: 'control/' },
     { value: 'settings', label: 'Settings', path: 'settings/' },
+    { value: 'inbox', label: 'Inbox', path: 'inbox/' },
     { value: 'all', label: 'All elements', path: 'all/' },
 ] as const;
 

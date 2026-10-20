@@ -63,6 +63,7 @@ export default defineConfig({
                 dashboard: resolve(dirname, 'demo/dashboard/index.html'),
                 control: resolve(dirname, 'demo/control/index.html'),
                 settings: resolve(dirname, 'demo/settings/index.html'),
+                inbox: resolve(dirname, 'demo/inbox/index.html'),
             },
         },
     },
