@@ -1,0 +1,17 @@
+.demo-cards {
+    display: grid;
+    grid-template-columns: repeat(
+            auto-fill,
+            minmax(min(100%, calc(var(--hmi-base) * 40)), 1fr)
+        );
+    gap: calc(var(--hmi-base) * 3);
+}
+
+.demo-cards hmi-card {
+    height: 100%;
+}
+
+.demo-cards hmi-link {
+    display: inline-block;
+    margin-top: calc(var(--hmi-base) * 1.5);
+}

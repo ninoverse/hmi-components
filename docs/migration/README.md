@@ -174,7 +174,7 @@ v5 PascalCase export (`AreaChart`).
 | 8 | charts: cartesian-grid, chart-tooltip, legend, responsive-container first; then the eleven chart elements | phase 7 merged |
 | 9 | overlay infrastructure (`shared/positioning.ts`) + modal (with `shared/dialog-actions.ts`), confirm-dialog, drawer, popover, tooltip, hover-card, context-menu, menu, then table | phase 8 merged |
 | 10 | select, combobox, date-picker, color-picker, command-palette | phase 9 merged |
-| 11 | toast, theme module + `useTheme`, then the state decision (R2: pagination, tabs, stepper and list own their state, and they, accordion, carousel, tree and table's sort fire cancelable events; navbar, sidebar and the dialogs stay controlled), and the v6 flip last | phase 10 merged |
+| 11 | toast, theme module + `useTheme`, then the state decision (R2: pagination, tabs, stepper and list own their state, and they, accordion, carousel, tree and table's sort fire cancelable events; navbar, sidebar and the dialogs stay controlled), the demo pages in `demo/` (a scaffold with the operations dashboard, then the control panel, settings and inbox, one PR each), and the v6 flip last | phase 10 merged |
 
 Rules: one element per commit; batches of up to five leaves per PR in phases
 2, 3 and 8; every branch is cut from `main` after the previous PR merged

@@ -4,22 +4,23 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 # @ninoverse/hmi-components
 
-A React component library providing Human-Machine Interface (HMI) UI
-components — built on Material Design 3 color tokens with a warm, asymmetric
-styling system.
+Native custom elements, `hmi-<name>`, for Human-Machine Interface (HMI)
+screens: they work in plain HTML, React, Vue, Angular, Svelte and Dioxus alike,
+on Material Design 3 color tokens with a warm, asymmetric styling system.
 
-Browse the components in the sidebar. Every page is generated from the props
-and doc comments in the source, so the tables stay in step with the code.
+Browse the elements in the sidebar. Every page is generated from the
+properties, slots, parts, events and doc comments in the source, so the tables
+stay in step with the code.
 
-## The full demo page
+## The demo pages
 
-Storybook shows one component at a time. To see all of them together under a
-single theme — which is where layout and stylesheet interactions actually
-show up — open the demo page.
+Storybook shows one element at a time. The demo pages put them to work in
+small apps, each with its own data and layout, such as an operations
+dashboard, and the reference page shows every element at once.
 
 {/* A plain markdown link would be rewritten into a story path, and docs render
     inside an iframe — hence the explicit anchor and target. */}
-<a href="/demo/" target="_top">Open the full demo page →</a>
+<a href="/demo/" target="_top">Open the demo pages →</a>
 
 ## Theming
 
@@ -39,13 +40,18 @@ Light and dark follow the OS setting via `prefers-color-scheme`.
 pnpm add @ninoverse/hmi-components
 ```
 
-Requires React ^19 and react-dom ^19 as peer dependencies. Import the
-stylesheet once at your app entry point:
+Import the elements you use, and load the base stylesheet with one theme per
+axis:
 
-```tsx
-import { Button } from '@ninoverse/hmi-components';
-import '@ninoverse/hmi-components/style.css';
+```ts
+import '@ninoverse/hmi-components/wc/button';
+import '@ninoverse/hmi-components/base.css';
+import '@ninoverse/hmi-components/themes/constants.css';
+import '@ninoverse/hmi-components/themes/color/default.css';
+import '@ninoverse/hmi-components/themes/structure/default.css';
 ```
 
-Every component is also available on its own subpath —
-`@ninoverse/hmi-components/button` — for finer-grained imports.
+React gets a wrapper per element, named as the v5 component:
+`import { Button } from '@ninoverse/hmi-components/react/button'`, with React
+^19 as a peer dependency. Until 6.0 the package root is still the v5 React
+library.
