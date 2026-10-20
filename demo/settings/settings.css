@@ -1,0 +1,123 @@
+/* The form and its summary side by side where there is room. */
+.set-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: calc(var(--hmi-base) * 3);
+    align-items: start;
+}
+
+/* Four tabs are wider than a phone: the row scrolls instead. */
+.set-card hmi-tabs {
+    max-width: 100%;
+}
+
+.set-card hmi-tabs::part(base) {
+    min-width: 0;
+    overflow-x: auto;
+}
+
+.set-card section {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--hmi-base) * 3);
+    padding-top: calc(var(--hmi-base) * 3);
+}
+
+.set-card section[hidden] {
+    display: none;
+}
+
+.set-profile {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: calc(var(--hmi-base) * 3);
+}
+
+.set-profile hmi-file-upload {
+    flex: 1 1 calc(var(--hmi-base) * 30);
+}
+
+.set-fields {
+    display: grid;
+    grid-template-columns: repeat(
+            auto-fit,
+            minmax(min(100%, calc(var(--hmi-base) * 40)), 1fr)
+        );
+    gap: calc(var(--hmi-base) * 2.5) calc(var(--hmi-base) * 3);
+    align-items: start;
+}
+
+.set-wide {
+    grid-column: 1 / -1;
+}
+
+.set-group {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--hmi-base) * 1.5);
+}
+
+.set-group legend {
+    padding: 0;
+    margin-bottom: calc(var(--hmi-base) * 1.5);
+    color: var(--on-surface);
+    font-family: var(--font-default);
+    font-weight: 600;
+}
+
+.set-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(var(--hmi-base) * 1.5);
+}
+
+.set-actions {
+    margin-top: calc(var(--hmi-base) * 3);
+    padding-top: calc(var(--hmi-base) * 2);
+    border-top: 1px solid var(--outline-variant);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: calc(var(--hmi-base) * 1.5);
+}
+
+.set-saved dl {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--hmi-base);
+    font-family: var(--font-default);
+    font-size: calc(var(--hmi-base) * 1.75);
+}
+
+.set-saved dl > div {
+    display: flex;
+    justify-content: space-between;
+    gap: calc(var(--hmi-base) * 2);
+}
+
+.set-saved code {
+    font-family: var(--font-mono);
+}
+
+.set-saved dt {
+    color: var(--on-surface-variant);
+}
+
+.set-saved dd {
+    margin: 0;
+    color: var(--on-surface);
+    text-align: end;
+    overflow-wrap: anywhere;
+}
+
+@media (min-width: 75em) {
+    .set-layout {
+        grid-template-columns: minmax(0, 1fr) calc(var(--hmi-base) * 40);
+    }
+}
