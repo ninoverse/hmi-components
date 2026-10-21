@@ -42,3 +42,14 @@
         padding-inline: calc(var(--hmi-base) * 2);
     }
 }
+
+/* The navbar collapses only below 40em. Above that, a row of links wider than
+   the screen scrolls inside the navbar rather than widening the page. */
+hmi-navbar::part(links) {
+    min-width: 0;
+    overflow-x: auto;
+}
+
+hmi-navbar::part(link) {
+    white-space: nowrap;
+}
