@@ -1,7 +1,10 @@
+// The Playwright provider's types give `cdp()` its `send`.
+import type {} from '@vitest/browser-playwright';
 import { html, render } from 'lit';
 import { act, createElement } from 'react';
 import { createRoot } from 'react-dom/client';
 import { afterEach, describe, expect, it } from 'vitest';
+import { cdp } from 'vitest/browser';
 import './badge.js';
 import type { HmiBadge } from './badge.js';
 import { Badge } from './badge.react.js';
@@ -68,6 +71,28 @@ describe('hmi-badge', () => {
         expect(
             el.shadowRoot?.querySelector('[part="base"]')?.getAttribute('role'),
         ).toBeNull();
+    });
+
+    it('keeps the dot visible in forced colors', async () => {
+        const el = await fixture(html`<hmi-badge dot>Hi</hmi-badge>`);
+        const session = cdp();
+        await session.send('Emulation.setEmulatedMedia', {
+            features: [{ name: 'forced-colors', value: 'active' }],
+        });
+        try {
+            const style = (part: string) =>
+                getComputedStyle(
+                    el.shadowRoot?.querySelector(
+                        `[part="${part}"]`,
+                    ) as HTMLElement,
+                );
+            /* Forced colors repaint backgrounds as Canvas, the page's own:
+               a dot painted as a background then vanishes. It takes the
+               text's colour instead. */
+            expect(style('dot').backgroundColor).toBe(style('base').color);
+        } finally {
+            await session.send('Emulation.setEmulatedMedia', { features: [] });
+        }
     });
 
     it('mounts through the React wrapper', async () => {

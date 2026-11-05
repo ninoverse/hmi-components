@@ -2,11 +2,12 @@ import { html, render, type TemplateResult } from 'lit';
 import { afterEach, describe, expect, it } from 'vitest';
 import '../index.js';
 
-/* Every migrated element, rendered the way a consumer minimally would.
-   A node that renders but paints nothing still satisfies a `[part="base"]`
-   existence check — that is how hmi-skeleton shipped invisible through lint,
-   build, tests and the manifest (#124). This asserts the base actually
-   occupies a box. Add a row here with every new element. */
+/* Elements rendered the way a consumer minimally would. A node that renders
+   but paints nothing still satisfies a `[part="base"]` existence check — that
+   is how hmi-skeleton shipped invisible through lint, build, tests and the
+   manifest (#124). This asserts the base actually occupies a box. Not every
+   element has a row yet: each element's review adds its own, as it does in
+   `axe.test.ts`, and so does every new element. */
 const cases: ReadonlyArray<{
     tag: string;
     template: TemplateResult;

@@ -84,4 +84,13 @@ export const styles = css`
         opacity: 0.7;
         flex: none;
     }
+
+    /* Forced colors repaint every background as Canvas, so the dot would
+       vanish: paint it in the text's colour, as the system palette has it. */
+    @media (forced-colors: active) {
+        .dot {
+            forced-color-adjust: none;
+            background: CanvasText;
+        }
+    }
 `;

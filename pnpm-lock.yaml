@@ -54,6 +54,9 @@ importers:
       autoprefixer:
         specifier: ^10.4.20
         version: 10.5.0(postcss@8.5.23)
+      axe-core:
+        specifier: 4.14.0
+        version: 4.14.0
       playwright:
         specifier: 1.63.0
         version: 1.63.0
@@ -1332,6 +1335,10 @@ packages:
     hasBin: true
     peerDependencies:
       postcss: ^8.1.0
+
+  axe-core@4.14.0:
+    resolution: {integrity: sha512-9WTZxEjsZ7b13TH8JPmbV2z8CHbl80/2hm3XPEG4JgNdQLK81IBRXmSxHfMAOkSqQeRxT/0dwNDz2GOm3zzpcQ==}
+    engines: {node: '>=4'}
 
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
@@ -3412,6 +3419,8 @@ snapshots:
       picocolors: 1.1.1
       postcss: 8.5.23
       postcss-value-parser: 4.2.0
+
+  axe-core@4.14.0: {}
 
   balanced-match@1.0.2: {}
 
