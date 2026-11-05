@@ -16,6 +16,12 @@ A React component library providing Human-Machine Interface (HMI) UI components 
 > `@ninoverse/hmi-components/react/<name>`. At v6 the root becomes the Lit
 > elements and the React tree is removed.
 >
+> **The Lit elements are a preview until v6.** Their API, under `./wc`,
+> `./react`, `./elements` and `./base.css`, can change in any 5.x release,
+> patches included. If you use them before 6.0.0, pin an exact version. The
+> React API at the root, the theme tokens and `--hmi-base` keep semver as
+> usual.
+>
 > **What changes for React consumers at v6**
 >
 > - Import from `@ninoverse/hmi-components/react` (or `/react/<name>`).

@@ -270,6 +270,11 @@ CSS (`:host([direction='column'])`), numeric values via host custom properties
   `./react/<kebab>` → `dist/react/<kebab>.js`; barrels `./wc`, `./react`;
   drop-in bundle `./elements` → `dist/hmi-elements.iife.js`; global sheet
   `./base.css`. The root export and `./<kebab>` stay React until the v6 flip.
+- Until 6.0.0 these subpaths, the drop-in bundle's global `HmiElements`, and
+  each element's and wrapper's API are a preview: a change to them ships as a
+  `fix`, never with `!`. Only the React root, `./theme`, `./style.css`, the
+  r2wc bundle, the theme token names and `--hmi-base` are breaking to change
+  (`AGENTS.md`, *The package's public surface*).
 - `sideEffects` lists `./dist/wc/*.js` (elements self-register).
 - Never load `hmi-elements.iife.js` and `hmi-components.iife.js` on the same
   page: both define the same tags and the second `customElements.define`

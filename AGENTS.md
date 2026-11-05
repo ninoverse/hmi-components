@@ -35,16 +35,27 @@ fragments, not here.
 
 ## The package's public surface
 
-An element's own surface is in *Elements*. Changing any of these is breaking
-too:
+Until 6.0.0 the package has two surfaces. What v5 consumers use is live:
+changing it is breaking, and waits for the flip.
 
-- the `exports` subpaths: `./wc/<name>` and `./react/<name>` for each element,
-  the barrels `./wc` and `./react`, the drop-in bundle `./elements`, and
-  `./base.css`. The root export and `./<name>` stay React until 6.0.0;
-- the React wrappers' names, which are the v5 components' names, and their
-  props;
-- the theme token names and `--hmi-base`;
-- the script bundles' globals, `HmiElements` and `HmiComponents`.
+- the root export and `./<name>`, the React components;
+- `./theme`, with `ThemeProvider` and v5's `useTheme`, and `./style.css`;
+- the r2wc bundle, `./web-components`, and its global `HmiComponents`;
+- the theme token names and `--hmi-base`, which the React tree reads too.
+
+The Lit elements and their wrappers are a preview. A change to them, a removal
+included, ships in any 5.x release as a `fix`, never with `!`:
+
+- `./wc/<name>` and `./react/<name>` for each element, the barrels `./wc` and
+  `./react`, and the theme module at `./wc/theme`;
+- the drop-in bundle `./elements` and its global `HmiElements`, and
+  `./base.css`;
+- each element's own surface, as *Elements* lists it, and each React
+  wrapper's name and props.
+
+At 6.0.0 the root becomes the Lit elements, the React tree goes, and the
+preview surface becomes live: *Releases and API stability* then applies to it
+in full.
 
 ## Commits
 
