@@ -1146,6 +1146,7 @@
         "@vitejs/plugin-react": "^5.0.0",
         "@vitest/browser-playwright": "5.0.0",
         "autoprefixer": "^10.4.20",
+        "axe-core": "4.14.0",
         "playwright": "1.63.0",
         "postcss": "^8.5.23",
         "react": "^19.0.0",
