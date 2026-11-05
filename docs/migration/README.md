@@ -33,7 +33,7 @@ Companion documents:
 | Forms | native inputs inside light DOM | form-associated elements (`ElementInternals`) |
 | Overlays | `createPortal` to `document.body`, hand-rolled dismiss and z-index | `<dialog>.showModal()` and `popover` (top layer, native dismiss) |
 | Theming | 147 tokens on `html[data-theme|structure|material]`; two material themes style component classes globally | same tokens, theme files are token-only; panel look via `--panel-*`; `part="panel"` escape hatch |
-| Sizing | `rem` against `html { font-size: 8px }` | `--hmi-base` (8px) on the host chain; no root font-size requirement |
+| Sizing | `rem` against `html { font-size: 8px }` | `--hmi-base` (8px) on `:root`; no root font-size requirement |
 | Global CSS | `dist/style.css` (React), `dist/hmi-components.css` (WC) | `dist/base.css` + `dist/themes/*` |
 | Docs | react-docgen prop tables | `custom-elements.json` (attributes, properties, events, slots, parts) |
 | Tests | none | Vitest browser mode + Node SSR smoke per element |

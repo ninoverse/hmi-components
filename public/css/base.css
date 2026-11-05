@@ -2,10 +2,13 @@
    load besides the theme tokens (constants + one color + one structure, and
    optionally one material). It never sets a root font-size: the elements size
    from --hmi-base instead of rem, so the host keeps its own typography scale.
-   Scale the whole library with `:root { --hmi-base: 10px; }`. */
+   Scale the whole library with `:root { --hmi-base: 10px; }`: on the root
+   only, since elements read the root's value, kept here as --_hmi-root-base,
+   and --hmi-base set on an element or a container changes nothing. */
 
 :root {
     --hmi-base: 8px;
+    --_hmi-root-base: var(--hmi-base);
 }
 
 body {
