@@ -44,6 +44,12 @@ Companion documents:
 
 Existing exports do not change. Each migrated element adds two subpaths.
 
+What these add is a preview until 6.0.0: `./wc`, `./react`, `./elements` with
+its global `HmiElements`, `./base.css`, and each element's and wrapper's API can
+change in any 5.x release, as a `fix`. The exports v5 consumers use, the theme
+token names and `--hmi-base` keep semver until the flip, and the preview
+becomes live with it (`AGENTS.md`, *The package's public surface*).
+
 ```jsonc
 {
   "sideEffects": ["**/*.css", "./dist/wc/*.js", "./dist/hmi-elements.iife.js", "./dist/hmi-components.iife.js"],
