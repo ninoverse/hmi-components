@@ -514,7 +514,10 @@ do **not** cross the boundary, which changes how themes may be written:
   `glass` and `liquid`.
 - **Sizing base.** The elements never use `rem`. They size from `--hmi-base`
   (`8px` by default, set in `base.css`), so a host app keeps its own root font
-  size. Scale the whole library with `:root { --hmi-base: 10px; }`. Every theme
+  size. Scale the whole library with `:root { --hmi-base: 10px; }`, on the root
+  only: the elements read the root's value, which `base.css` keeps as
+  `--_hmi-root-base`, so `--hmi-base` set on an element or a container changes
+  nothing. Every theme
   token that carries a length (`--space-*`, `--corner-*`, `--elevation-*`, the
   material rims) is expressed as `calc(var(--hmi-base, 8px) * N)`. For the v5
   React tree, whose `html { font-size: 8px }` makes `1rem = 8px`, the values are

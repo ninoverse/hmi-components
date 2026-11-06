@@ -1,12 +1,15 @@
 import { css } from 'lit';
 
 /* Shared by every element as `static override styles = [baseStyles, styles]`.
-   Provides the sizing base (`--_base`, derived from the host-chain token
-   `--hmi-base`), the box-sizing reset and the focus ring that the light-DOM
-   `globals.css` gives the React tree — none of which cross a shadow boundary. */
+   Provides the sizing base (`--_base`, the root's `--hmi-base`, which
+   `base.css` keeps as `--_hmi-root-base`), the box-sizing reset and the focus
+   ring that the light-DOM `globals.css` gives the React tree — none of which
+   cross a shadow boundary. `--hmi-base` set below the root changes nothing,
+   as the theme's `--space-*` and `--corner-*` resolve at the root too. Without
+   `base.css`, the nearest `--hmi-base` stands in. */
 export const baseStyles = css`
     :host {
-        --_base: var(--hmi-base, 8px);
+        --_base: var(--_hmi-root-base, var(--hmi-base, 8px));
         box-sizing: border-box;
     }
 
