@@ -4,7 +4,7 @@ import '../button/button.js';
 import './alert.js';
 import type { HmiAlert } from './alert.js';
 
-type Args = Pick<HmiAlert, 'variant'>;
+type Args = Pick<HmiAlert, 'variant' | 'variantLabel'>;
 
 const variants = ['info', 'success', 'warning', 'danger'] as const;
 
@@ -12,12 +12,16 @@ const meta = {
     title: 'Components/Feedback/Alert',
     component: 'hmi-alert',
     tags: ['autodocs'],
-    args: { variant: 'info' },
+    args: { variant: 'info', variantLabel: '' },
     argTypes: {
         variant: { control: 'inline-radio', options: variants },
+        variantLabel: { control: 'text' },
     },
     render: (args) =>
-        html`<hmi-alert variant=${args.variant}>
+        html`<hmi-alert
+            variant=${args.variant}
+            variant-label=${args.variantLabel}
+        >
             Your changes were saved.
         </hmi-alert>`,
     parameters: {
