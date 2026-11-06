@@ -22,6 +22,8 @@ export const styles = css`
         color: var(--on-background);
     }
 
+    /* The icon takes the text's colour, the variant's own: its accent
+       colour fell under 3:1 on the container in the light palettes. */
     .icon {
         display: inline-flex;
         flex: none;
@@ -45,6 +47,19 @@ export const styles = css`
         color: inherit;
     }
 
+    /* Read before the message, never seen: the icon and colour show it. */
+    .tone {
+        position: absolute;
+        width: calc(var(--_base) * 0.125);
+        height: calc(var(--_base) * 0.125);
+        margin: calc(var(--_base) * -0.125);
+        padding: 0;
+        border: 0;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+    }
+
     ::slotted([slot='title']) {
         margin: 0;
         font-size: calc(var(--_base) * 1.75);
@@ -66,9 +81,6 @@ export const styles = css`
             var(--outline-variant)
         );
     }
-    :host([variant='info']) .icon {
-        color: var(--tertiary);
-    }
 
     :host([variant='success']) .base {
         background: var(--success-container);
@@ -78,9 +90,6 @@ export const styles = css`
             var(--success) 30%,
             var(--outline-variant)
         );
-    }
-    :host([variant='success']) .icon {
-        color: var(--success);
     }
 
     :host([variant='warning']) .base {
@@ -92,9 +101,6 @@ export const styles = css`
             var(--outline-variant)
         );
     }
-    :host([variant='warning']) .icon {
-        color: var(--warning);
-    }
 
     :host([variant='danger']) .base {
         background: var(--error-container);
@@ -104,8 +110,5 @@ export const styles = css`
             var(--error) 30%,
             var(--outline-variant)
         );
-    }
-    :host([variant='danger']) .icon {
-        color: var(--error);
     }
 `;

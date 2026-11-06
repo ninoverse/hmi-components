@@ -188,7 +188,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "Inline message with a variant-matched icon, an optional title and an\noptional trailing action. The body is the default slot.\n\nThere is no `title` property: `title` is the native tooltip attribute on\nevery element, so the heading is the `title` slot only. The element carries\nno ARIA role; add `role` to the host when the message must be announced.",
+          "description": "Inline message with a variant-matched icon, an optional title and an\noptional trailing action. The body is the default slot.\n\nThere is no `title` property: `title` is the native tooltip attribute on\nevery element, so the heading is the `title` slot only. The element carries\nno ARIA role; add `role` to the host when the message must be announced.\nScreen readers hear the tone before the message, such as \"Error:\", since the\nicon and the colour only show it.",
           "name": "HmiAlert",
           "cssParts": [
             {
@@ -229,6 +229,16 @@
               "description": "Tone, which also selects the built-in status icon.",
               "attribute": "variant",
               "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "variantLabel",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The tone screen readers hear before the message; empty uses the variant's: \"Info:\", \"Success:\", \"Warning:\" or \"Error:\".",
+              "attribute": "variant-label"
             }
           ],
           "attributes": [
@@ -240,6 +250,15 @@
               "default": "'info'",
               "description": "Tone, which also selects the built-in status icon.",
               "fieldName": "variant"
+            },
+            {
+              "name": "variant-label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The tone screen readers hear before the message; empty uses the variant's: \"Info:\", \"Success:\", \"Warning:\" or \"Error:\".",
+              "fieldName": "variantLabel"
             }
           ],
           "superclass": {
