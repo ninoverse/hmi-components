@@ -13,6 +13,7 @@ const cases: ReadonlyArray<{
     template: TemplateResult;
     setup?: (el: HTMLElement) => void;
 }> = [
+    { tag: 'hmi-alert', template: html`<hmi-alert>Saved</hmi-alert>` },
     { tag: 'hmi-avatar', template: html`<hmi-avatar name="Ada"></hmi-avatar>` },
     {
         tag: 'hmi-avatar-stack',

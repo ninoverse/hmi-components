@@ -12,6 +12,16 @@ import '../index.js';
    every look. */
 const cases: ReadonlyArray<{ name: string; template: TemplateResult }> = [
     {
+        name: 'hmi-alert',
+        template: html`<hmi-alert variant="danger"
+            ><span slot="title">Upload failed</span>The file could not be sent.<button
+                slot="action"
+            >
+                Retry
+            </button></hmi-alert
+        >`,
+    },
+    {
         name: 'hmi-badge',
         template: html`<hmi-badge variant="success" dot>Online</hmi-badge>`,
     },
