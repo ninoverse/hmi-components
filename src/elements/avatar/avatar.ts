@@ -10,7 +10,9 @@ export type AvatarStatus = 'online' | 'away' | 'offline';
 
 /* Six warm/cool background+text pairs picked to harmonize with the theme. Each
    name hashes deterministically to one pair so the same person always gets the
-   same colour across reloads — and the same one the React Avatar gave them. */
+   same colour across reloads — and the same one the React Avatar gave them.
+   Each pair is a token, `--avatar-tint-N` and `--on-avatar-tint-N`, whose
+   fallback is the v5 colour, so a theme can repaint them. */
 const PALETTE: ReadonlyArray<readonly [string, string]> = [
     ['#FCD9C8', '#8C3A20'],
     ['#E0EAD8', '#3F5A2E'],
@@ -18,14 +20,22 @@ const PALETTE: ReadonlyArray<readonly [string, string]> = [
     ['#F2DCE9', '#7A2F58'],
     ['#F5E6B8', '#6F4E13'],
     ['#DEEFEC', '#1F5B58'],
-];
+].map(
+    ([bg, fg], i) =>
+        [
+            `var(--avatar-tint-${i + 1}, ${bg})`,
+            `var(--on-avatar-tint-${i + 1}, ${fg})`,
+        ] as const,
+);
 
 function colorFor(name: string): readonly [string, string] {
     let h = 0;
     for (let i = 0; i < name.length; i++) {
         h = (h * 31 + name.charCodeAt(i)) >>> 0;
     }
-    return PALETTE[h % PALETTE.length] ?? (['#FCD9C8', '#8C3A20'] as const);
+    return (
+        PALETTE[h % PALETTE.length] ?? (PALETTE[0] as readonly [string, string])
+    );
 }
 
 /* The first grapheme, not the first UTF-16 unit, so an emoji or a letter with
@@ -65,6 +75,10 @@ const STATUS_LABELS: Record<AvatarStatus, string> = {
  * @tag hmi-avatar
  * @csspart base - The circle; paints the image or the hashed tint.
  * @csspart image - The `<img>`, present only when `src` is set.
+ * @cssprop --avatar-tint-1 - The first of the six initials backgrounds, to
+ *   `--avatar-tint-6`. Defaults to v5's colours, from `#FCD9C8` to `#DEEFEC`.
+ * @cssprop --on-avatar-tint-1 - The initials' colour on `--avatar-tint-1`, to
+ *   `--on-avatar-tint-6`. Defaults to v5's, from `#8C3A20` to `#1F5B58`.
  * @csspart status - The presence dot, present only when `status` is set: filled
  *   when online, half filled when away, hollow when offline.
  *

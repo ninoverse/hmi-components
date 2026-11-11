@@ -88,16 +88,28 @@ describe('hmi-avatar', () => {
         const el = await fixture(
             html`<hmi-avatar name="Ada Lovelace"></hmi-avatar>`,
         );
-        const style = (base(el) as HTMLElement).style;
-        expect(style.background).toBe('rgb(222, 239, 236)'); // #DEEFEC
+        const style = getComputedStyle(base(el) as HTMLElement);
+        expect(style.backgroundColor).toBe('rgb(222, 239, 236)'); // #DEEFEC
         expect(style.color).toBe('rgb(31, 91, 88)'); // #1F5B58
 
         const other = await fixture(
             html`<hmi-avatar name="Alan Turing"></hmi-avatar>`,
         );
-        expect((base(other) as HTMLElement).style.background).toBe(
-            'rgb(242, 220, 233)',
-        ); // #F2DCE9
+        expect(
+            getComputedStyle(base(other) as HTMLElement).backgroundColor,
+        ).toBe('rgb(242, 220, 233)'); // #F2DCE9
+    });
+
+    it('lets a theme repaint a tint through its token', async () => {
+        const el = await fixture(
+            html`<hmi-avatar
+                name="Ada Lovelace"
+                style="--avatar-tint-6: rgb(1, 2, 3); --on-avatar-tint-6: rgb(4, 5, 6)"
+            ></hmi-avatar>`,
+        );
+        const style = getComputedStyle(base(el) as HTMLElement);
+        expect(style.backgroundColor).toBe('rgb(1, 2, 3)');
+        expect(style.color).toBe('rgb(4, 5, 6)');
     });
 
     it('renders the image only when src is set, and drops the tint', async () => {
