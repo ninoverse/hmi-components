@@ -654,7 +654,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "User avatar showing an image, or colour-hashed initials derived from `name`\nwhen no `src` is given or the image fails to load, with an optional\npresence dot.\n\nThe avatar is one image to assistive technology, named `name` and then the\npresence, as in \"Ada Lovelace, Away\". Without `name` and `status` it is\ndecorative and hidden from them.\n\nThe host carries the circle's box — size, radius and position — so that\n`hmi-avatar-stack` can put a rim on it through `::slotted(hmi-avatar)`.",
+          "description": "User avatar showing an image, or colour-hashed initials derived from `name`\nwhen no `src` is given or the image fails to load, with an optional\npresence dot. A failed image logs a console warning naming its `src`.\n\nThe avatar is one image to assistive technology, named `name` and then the\npresence, as in \"Ada Lovelace, Away\". Without `name` and `status` it is\ndecorative and hidden from them.\n\nThe host carries the circle's box — size, radius and position — so that\n`hmi-avatar-stack` can put a rim on it through `::slotted(hmi-avatar)`.",
           "name": "HmiAvatar",
           "cssProperties": [
             {

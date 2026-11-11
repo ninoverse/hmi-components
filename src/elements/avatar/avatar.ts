@@ -63,7 +63,7 @@ const STATUS_LABELS: Record<AvatarStatus, string> = {
 /**
  * User avatar showing an image, or colour-hashed initials derived from `name`
  * when no `src` is given or the image fails to load, with an optional
- * presence dot.
+ * presence dot. A failed image logs a console warning naming its `src`.
  *
  * The avatar is one image to assistive technology, named `name` and then the
  * presence, as in "Ada Lovelace, Away". Without `name` and `status` it is
@@ -120,8 +120,11 @@ export class HmiAvatar extends LitElement {
         return [this.name.trim(), presence].filter(Boolean).join(', ');
     }
 
+    /* The initials keep the page whole; the warning says which image broke,
+       so a page with many avatars can find it. */
     #onError = () => {
         this.broken = true;
+        console.warn(`hmi-avatar: the image at ${this.src} failed to load.`);
     };
 
     override render() {

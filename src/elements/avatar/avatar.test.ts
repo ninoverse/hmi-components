@@ -1,7 +1,7 @@
 import { html, render } from 'lit';
 import { act, createElement } from 'react';
 import { createRoot } from 'react-dom/client';
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import defaultPalette from '../../../public/css/themes/color/default.css?inline';
 import './avatar.js';
 import type { HmiAvatar } from './avatar.js';
@@ -183,6 +183,26 @@ describe('hmi-avatar', () => {
         el.name = '👩🏽‍💻 e\u0301lise';
         await el.updateComplete;
         expect(base(el)?.textContent?.trim()).toBe('👩🏽‍💻E\u0301');
+    });
+
+    it('warns with the src when the image fails to load', async () => {
+        const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+        const BROKEN = 'data:image/png;base64,broken';
+        try {
+            const el = await fixture(
+                html`<hmi-avatar name="Ada" src=${BROKEN}></hmi-avatar>`,
+            );
+            await new Promise((resolve) =>
+                el.shadowRoot
+                    ?.querySelector('img')
+                    ?.addEventListener('error', resolve),
+            );
+            expect(warn).toHaveBeenCalledWith(
+                `hmi-avatar: the image at ${BROKEN} failed to load.`,
+            );
+        } finally {
+            warn.mockRestore();
+        }
     });
 
     it('falls back to the initials when the image fails to load', async () => {
