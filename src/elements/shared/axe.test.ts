@@ -22,6 +22,22 @@ const cases: ReadonlyArray<{ name: string; template: TemplateResult }> = [
         >`,
     },
     {
+        name: 'hmi-avatar',
+        template: html`<hmi-avatar name="Ada Lovelace" status="away"></hmi-avatar>`,
+    },
+    {
+        name: 'hmi-avatar with an image',
+        template: html`<hmi-avatar
+            name="Ada Lovelace"
+            status="online"
+            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E"
+        ></hmi-avatar>`,
+    },
+    {
+        name: 'hmi-avatar without a name',
+        template: html`<hmi-avatar></hmi-avatar>`,
+    },
+    {
         name: 'hmi-badge',
         template: html`<hmi-badge variant="success" dot>Online</hmi-badge>`,
     },

@@ -654,8 +654,18 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "User avatar showing an image, or colour-hashed initials derived from `name`\nwhen no `src` is given, with an optional presence dot.\n\nThe host carries the circle's box — size, radius and position — so that\n`hmi-avatar-stack` can put a rim on it through `::slotted(hmi-avatar)`.",
+          "description": "User avatar showing an image, or colour-hashed initials derived from `name`\nwhen no `src` is given or the image fails to load, with an optional\npresence dot. A failed image logs a console warning naming its `src`.\n\nThe avatar is one image to assistive technology, named `name` and then the\npresence, as in \"Ada Lovelace, Away\". Without `name` and `status` it is\ndecorative and hidden from them.\n\nThe host carries the circle's box — size, radius and position — so that\n`hmi-avatar-stack` can put a rim on it through `::slotted(hmi-avatar)`.",
           "name": "HmiAvatar",
+          "cssProperties": [
+            {
+              "description": "The first of the six initials backgrounds, to `--avatar-tint-6`. Defaults to v5's colours, from `#FCD9C8` to `#DEEFEC`.",
+              "name": "--avatar-tint-1"
+            },
+            {
+              "description": "The initials' colour on `--avatar-tint-1`, to `--on-avatar-tint-6`. Defaults to v5's, from `#8C3A20` to `#1F5B58`.",
+              "name": "--on-avatar-tint-1"
+            }
+          ],
           "cssParts": [
             {
               "description": "The circle; paints the image or the hashed tint.",
@@ -666,7 +676,7 @@
               "name": "image"
             },
             {
-              "description": "The presence dot, present only when `status` is set.",
+              "description": "The presence dot, present only when `status` is set: filled when online, half filled when away, hollow when offline.",
               "name": "status"
             }
           ],
@@ -712,6 +722,41 @@
               "description": "Optional presence indicator dot.",
               "attribute": "status",
               "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "statusLabel",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The presence read after the name; `''` uses the status's own.",
+              "attribute": "status-label"
+            },
+            {
+              "kind": "field",
+              "name": "broken",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false",
+              "description": "The image at `src` failed to load, so the initials stand in."
+            },
+            {
+              "kind": "field",
+              "name": "#label",
+              "privacy": "private",
+              "type": {
+                "text": "string"
+              },
+              "description": "The accessible name: the person, then their presence.",
+              "readonly": true
+            },
+            {
+              "kind": "field",
+              "name": "#onError",
+              "privacy": "private"
             }
           ],
           "attributes": [
@@ -750,6 +795,15 @@
               "default": "undefined",
               "description": "Optional presence indicator dot.",
               "fieldName": "status"
+            },
+            {
+              "name": "status-label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The presence read after the name; `''` uses the status's own.",
+              "fieldName": "statusLabel"
             }
           ],
           "superclass": {
