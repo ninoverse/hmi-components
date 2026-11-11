@@ -3,7 +3,7 @@ import { html } from 'lit';
 import './avatar.js';
 import type { HmiAvatar } from './avatar.js';
 
-type Args = Pick<HmiAvatar, 'name' | 'src' | 'size' | 'status'>;
+type Args = Pick<HmiAvatar, 'name' | 'src' | 'size' | 'status' | 'statusLabel'>;
 
 const sizes = ['small', 'medium', 'large', 'xlarge'] as const;
 const statuses = ['online', 'away', 'offline'] as const;
@@ -26,7 +26,13 @@ const meta = {
     title: 'Components/Data display/Avatar',
     component: 'hmi-avatar',
     tags: ['autodocs'],
-    args: { name: 'Ada Lovelace', src: '', size: 'medium', status: undefined },
+    args: {
+        name: 'Ada Lovelace',
+        src: '',
+        size: 'medium',
+        status: undefined,
+        statusLabel: '',
+    },
     argTypes: {
         size: { control: 'select', options: sizes },
         status: { control: 'select', options: [undefined, ...statuses] },
@@ -38,6 +44,7 @@ const meta = {
             src=${args.src}
             size=${args.size}
             status=${args.status ?? ''}
+            status-label=${args.statusLabel}
         ></hmi-avatar>
     `,
     parameters: {

@@ -1,5 +1,5 @@
-import { html, LitElement, nothing } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { html, LitElement, nothing, type PropertyValues } from 'lit';
+import { customElement, property, state } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { baseStyles } from '../shared/base.styles.js';
 import { styles } from './avatar.styles.js';
@@ -28,14 +28,36 @@ function colorFor(name: string): readonly [string, string] {
     return PALETTE[h % PALETTE.length] ?? (['#FCD9C8', '#8C3A20'] as const);
 }
 
+/* The first grapheme, not the first UTF-16 unit, so an emoji or a letter with
+   a combining accent is kept whole. */
+const graphemes = new Intl.Segmenter(undefined, { granularity: 'grapheme' });
+
+function first(word: string): string {
+    return (
+        graphemes.segment(word)[Symbol.iterator]().next().value?.segment ?? ''
+    );
+}
+
 function initials(name: string): string {
     const parts = name.trim().split(/\s+/);
-    return ((parts[0]?.[0] ?? '') + (parts[1]?.[0] ?? '')).toUpperCase();
+    return (first(parts[0] ?? '') + first(parts[1] ?? '')).toUpperCase();
 }
+
+/** The presence screen readers hear after the name, unless `status-label` is set. */
+const STATUS_LABELS: Record<AvatarStatus, string> = {
+    online: 'Online',
+    away: 'Away',
+    offline: 'Offline',
+};
 
 /**
  * User avatar showing an image, or colour-hashed initials derived from `name`
- * when no `src` is given, with an optional presence dot.
+ * when no `src` is given or the image fails to load, with an optional
+ * presence dot.
+ *
+ * The avatar is one image to assistive technology, named `name` and then the
+ * presence, as in "Ada Lovelace, Away". Without `name` and `status` it is
+ * decorative and hidden from them.
  *
  * The host carries the circle's box — size, radius and position — so that
  * `hmi-avatar-stack` can put a rim on it through `::slotted(hmi-avatar)`.
@@ -43,7 +65,8 @@ function initials(name: string): string {
  * @tag hmi-avatar
  * @csspart base - The circle; paints the image or the hashed tint.
  * @csspart image - The `<img>`, present only when `src` is set.
- * @csspart status - The presence dot, present only when `status` is set.
+ * @csspart status - The presence dot, present only when `status` is set: filled
+ *   when online, half filled when away, hollow when offline.
  *
  * @example
  * <hmi-avatar name="Ada Lovelace" status="online"></hmi-avatar>
@@ -65,20 +88,49 @@ export class HmiAvatar extends LitElement {
     @property({ reflect: true }) accessor status: AvatarStatus | undefined =
         undefined;
 
+    /** The presence read after the name; `''` uses the status's own. */
+    @property({ attribute: 'status-label' }) accessor statusLabel = '';
+
+    /** The image at `src` failed to load, so the initials stand in. */
+    @state() private accessor broken = false;
+
+    protected override willUpdate(changed: PropertyValues<this>) {
+        if (changed.has('src')) this.broken = false;
+    }
+
+    /** The accessible name: the person, then their presence. */
+    get #label(): string {
+        const presence = this.status
+            ? this.statusLabel || STATUS_LABELS[this.status]
+            : '';
+        return [this.name.trim(), presence].filter(Boolean).join(', ');
+    }
+
+    #onError = () => {
+        this.broken = true;
+    };
+
     override render() {
+        const label = this.#label;
+        const image = Boolean(this.src) && !this.broken;
         const [background, color] = colorFor(this.name);
         return html`
             <span
                 part="base"
                 class="base"
-                role=${this.src ? nothing : 'img'}
-                aria-label=${this.src ? nothing : this.name}
-                style=${styleMap(this.src ? {} : { background, color })}
+                role=${image ? nothing : label ? 'img' : 'presentation'}
+                aria-label=${image || !label ? nothing : label}
+                style=${styleMap(image ? {} : { background, color })}
             >
                 ${
-                    this.src
-                        ? html`<img part="image" src=${this.src} alt=${this.name} />`
-                        : initials(this.name)
+                    image
+                        ? html`<img
+                              part="image"
+                              src=${this.src}
+                              alt=${label}
+                              @error=${this.#onError}
+                          />`
+                        : html`<span aria-hidden="true">${initials(this.name)}</span>`
                 }
             </span>
             ${

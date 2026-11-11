@@ -60,22 +60,55 @@ export const styles = css`
         clip-path: inset(0 round 50%);
     }
 
+    /* Each presence has its own shape as well as its own colour (WCAG 1.4.1):
+       online is filled, away half filled, offline a hollow ring. The colours
+       reach 3:1 against the surface in every palette (WCAG 1.4.11): --warning
+       and --outline alone fall to 2.3, so away is darkened towards the ink,
+       and offline takes the variant ink. It sits at the inline end, so it
+       follows the text direction. */
     .status {
         position: absolute;
         bottom: 0;
-        right: 0;
+        inset-inline-end: 0;
         width: calc(var(--_base) * 1.25);
         height: calc(var(--_base) * 1.25);
         border-radius: 50%;
         border: calc(var(--_base) * 0.25) solid var(--surface);
-        background: var(--success);
+        color: var(--success);
+        background: currentColor;
     }
 
     :host([status='away']) .status {
-        background: var(--warning);
+        color: color-mix(in srgb, var(--warning) 70%, var(--on-surface));
+        background: linear-gradient(to top, currentColor 50%, var(--surface) 50%);
+        box-shadow: inset 0 0 0 calc(var(--_base) * 0.1875) currentColor;
     }
 
     :host([status='offline']) .status {
-        background: var(--outline);
+        color: var(--on-surface-variant);
+        background: var(--surface);
+        box-shadow: inset 0 0 0 calc(var(--_base) * 0.1875) currentColor;
+    }
+
+    /* Forced colours drop the tint and the box shadows: the circle keeps a
+       rim, and the dot keeps its three shapes in system colours. */
+    @media (forced-colors: active) {
+        .base {
+            border: 1px solid CanvasText;
+        }
+
+        .status {
+            forced-color-adjust: none;
+            color: CanvasText;
+            border-color: Canvas;
+        }
+
+        :host([status='away']) .status {
+            background: linear-gradient(to top, CanvasText 50%, Canvas 50%);
+        }
+
+        :host([status='offline']) .status {
+            background: Canvas;
+        }
     }
 `;
