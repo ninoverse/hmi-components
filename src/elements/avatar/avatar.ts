@@ -70,7 +70,8 @@ const STATUS_LABELS: Record<AvatarStatus, string> = {
  * decorative and hidden from them.
  *
  * The host carries the circle's box — size, radius and position — so that
- * `hmi-avatar-stack` can put a rim on it through `::slotted(hmi-avatar)`.
+ * `hmi-avatar-stack`, which renders its avatars in its own shadow root, can put
+ * a rim on it with a plain `hmi-avatar` rule.
  *
  * @tag hmi-avatar
  * @csspart base - The circle; paints the image or the hashed tint.

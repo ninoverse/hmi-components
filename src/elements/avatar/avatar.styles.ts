@@ -5,8 +5,9 @@ import { css } from 'lit';
 
    Ported from src/components/styled/avatar.styled.css. The host takes what
    `.avatar` carried — size, radius, position and typography — instead of an
-   inner wrapper, because hmi-avatar-stack rims each avatar through
-   `::slotted(hmi-avatar)`, and a rim only reads as round on the host itself.
+   inner wrapper, because hmi-avatar-stack rims each avatar with a plain
+   `hmi-avatar` rule in its own root, and a rim only reads as round on the
+   host itself.
    The `.avatar--overflow`, `.avatar-stack` and `.avatar-stack .avatar` rules in
    that file belong to hmi-avatar-stack and are left for its migration. */
 export const styles = css`
