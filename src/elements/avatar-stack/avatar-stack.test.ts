@@ -133,7 +133,26 @@ describe('hmi-avatar-stack', () => {
         expect(el.getAttribute('role')).toBeNull();
     });
 
-    it('widens the chip to fit a count of several digits', async () => {
+    for (const [hidden, label] of [
+        [3, '+3'],
+        [99, '+99'],
+        [100, '99+'],
+        [996, '99+'],
+    ] as const) {
+        it(`shows ${hidden} hidden people as ${label}`, async () => {
+            const el = await fixture(
+                html`<hmi-avatar-stack
+                    .names=${Array.from({ length: hidden + 4 }, (_, i) => `Person ${i}`)}
+                ></hmi-avatar-stack>`,
+            );
+            expect(chip(el)?.textContent?.trim()).toBe(label);
+            expect(chip(el)?.getAttribute('aria-label')).toMatch(
+                new RegExp(`^${hidden} more: `),
+            );
+        });
+    }
+
+    it('keeps the count inside a round chip, on top of the last avatar', async () => {
         for (const size of ['small', 'medium', 'large', 'xlarge'] as const) {
             const el = await fixture(
                 html`<hmi-avatar-stack
@@ -142,18 +161,24 @@ describe('hmi-avatar-stack', () => {
                 ></hmi-avatar-stack>`,
             );
             const box = chip(el) as HTMLElement;
-            expect(box.textContent?.trim()).toBe('+996');
+            const outer = box.getBoundingClientRect();
+            const avatar = (
+                avatars(el).at(-1) as HTMLElement
+            ).getBoundingClientRect();
+            expect(outer.width, size).toBe(avatar.width);
+            expect(outer.height, size).toBe(avatar.height);
             const text = document.createRange();
             text.selectNodeContents(box);
             const count = text.getBoundingClientRect();
-            // The avatars paint over the chip, so the count must clear the
-            // last one's edge, or its "+" disappears under it.
-            const last = (
-                avatars(el).at(-1) as HTMLElement
-            ).getBoundingClientRect();
-            const inner = box.getBoundingClientRect();
-            expect(count.left, size).toBeGreaterThanOrEqual(last.right);
-            expect(count.right, size).toBeLessThanOrEqual(inner.right);
+            expect(count.left, size).toBeGreaterThanOrEqual(outer.left);
+            expect(count.right, size).toBeLessThanOrEqual(outer.right);
+            // Where the chip overlaps the last avatar, the chip is the one seen.
+            const x = (outer.left + avatar.right) / 2;
+            const y = outer.top + outer.height / 2;
+            expect(
+                el.shadowRoot?.elementFromPoint(x, y)?.closest('.overflow'),
+                size,
+            ).toBe(box);
         }
     });
 
@@ -215,6 +240,13 @@ describe('hmi-avatar-stack', () => {
         const text = '2 more: Linus Torvalds, Barbara Liskov';
         expect(chip(el)?.getAttribute('aria-label')).toBe(text);
         expect(chip(el)?.getAttribute('title')).toBe(text);
+        expect(chip(el)?.getAttributeNames().sort()).toEqual([
+            'aria-label',
+            'class',
+            'part',
+            'role',
+            'title',
+        ]);
     });
 
     it('rewords the chip with overflow-label', async () => {

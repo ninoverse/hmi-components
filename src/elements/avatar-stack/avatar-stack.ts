@@ -40,7 +40,7 @@ const fill = (template: string, count: number) =>
  * @csspart base - The row.
  * @csspart avatar - Each rendered `<hmi-avatar>`.
  * @csspart overflow - The `+N` chip, present only when `names` exceeds `max`.
- *   Round for one digit, a pill for more.
+ *   An avatar's size, on top of the last avatar; past 99 it reads `99+`.
  * @cssprop --avatar-stack-rim - The ring that separates each avatar from the
  *   one behind it. Set it to the colour of what the stack sits on. Defaults to
  *   `--surface`.
@@ -124,7 +124,9 @@ export class HmiAvatarStack extends LitElement {
                               role="img"
                               aria-label=${more}
                               title=${more}
-                              "><span class="count">+${hidden.length}</span></span
+                              ><span class=${hidden.length > 9 ? 'count long' : 'count'}
+                                  >${hidden.length > 99 ? '99+' : `+${hidden.length}`}</span
+                              ></span
                           >`
                         : nothing
                 }

@@ -571,7 +571,7 @@
               "name": "avatar"
             },
             {
-              "description": "The `+N` chip, present only when `names` exceeds `max`. Round for one digit, a pill for more.",
+              "description": "The `+N` chip, present only when `names` exceeds `max`. An avatar's size, on top of the last avatar; past 99 it reads `99+`.",
               "name": "overflow"
             }
           ],
