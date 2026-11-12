@@ -726,7 +726,7 @@
               "name": "image"
             },
             {
-              "description": "The presence dot, present only when `status` is set: filled when online, half filled when away, hollow when offline.",
+              "description": "The presence dot, present only when `status` is set: filled when online, half filled when away, hollow when offline. It grows with `size`: 10, 14, 18 and 22px at the default base.",
               "name": "status"
             }
           ],

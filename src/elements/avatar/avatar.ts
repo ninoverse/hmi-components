@@ -81,7 +81,8 @@ const STATUS_LABELS: Record<AvatarStatus, string> = {
  * @cssprop --on-avatar-tint-1 - The initials' colour on `--avatar-tint-1`, to
  *   `--on-avatar-tint-6`. Defaults to v5's, from `#8C3A20` to `#1F5B58`.
  * @csspart status - The presence dot, present only when `status` is set: filled
- *   when online, half filled when away, hollow when offline.
+ *   when online, half filled when away, hollow when offline. It grows with
+ *   `size`: 10, 14, 18 and 22px at the default base.
  *
  * @example
  * <hmi-avatar name="Ada Lovelace" status="online"></hmi-avatar>
