@@ -553,8 +553,14 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "Overlapping row of avatars, collapsing any beyond `max` into a trailing\n`+N` chip.\n\nThe avatars are `<hmi-avatar>` elements rendered into this element's own\nshadow root, not slotted children: `size` has to reach every one of them and\n`max` has to hide the rest, and neither is possible on consumer-owned nodes\nwithout mutating light DOM.",
+          "description": "Overlapping row of avatars, collapsing any beyond `max` into a trailing\n`+N` chip.\n\nThe avatars are `<hmi-avatar>` elements rendered into this element's own\nshadow root, not slotted children: `size` has to reach every one of them and\n`max` has to hide the rest, and neither is possible on consumer-owned nodes\nwithout mutating light DOM.\n\nThe row is a group named after its head count, as in \"5 people\", and the\nchip is named after the people it hides, as in \"2 more: Linus Torvalds,\nBarbara Liskov\", which it also shows on hover.",
           "name": "HmiAvatarStack",
+          "cssProperties": [
+            {
+              "description": "The ring that separates each avatar from the one behind it. Set it to the colour of what the stack sits on. Defaults to `--surface`.",
+              "name": "--avatar-stack-rim"
+            }
+          ],
           "cssParts": [
             {
               "description": "The row.",
@@ -565,7 +571,7 @@
               "name": "avatar"
             },
             {
-              "description": "The `+N` chip, present only when `names` exceeds `max`.",
+              "description": "The `+N` chip, present only when `names` exceeds `max`. An avatar's size, on top of the last avatar; past 99 it reads `99+`.",
               "name": "overflow"
             }
           ],
@@ -574,20 +580,20 @@
               "kind": "field",
               "name": "names",
               "type": {
-                "text": "readonly string[]"
+                "text": "readonly AvatarStackEntry[]"
               },
               "default": "[]",
-              "description": "Names to render as overlapping avatars, in display order."
+              "description": "People to render as overlapping avatars, in display order: each a name, or `{ name, src, status }`."
             },
             {
               "kind": "field",
               "name": "max",
+              "default": "4",
+              "description": "Maximum avatars shown before collapsing the rest into a `+N` chip: a whole number, 0 or more.",
+              "attribute": "max",
               "type": {
                 "text": "number"
-              },
-              "default": "4",
-              "description": "Maximum avatars shown before collapsing the rest into a `+N` chip.",
-              "attribute": "max"
+              }
             },
             {
               "kind": "field",
@@ -599,16 +605,42 @@
               "description": "Diameter preset applied to every avatar.",
               "attribute": "size",
               "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'{count} people'",
+              "description": "The group's name, with `{count}` for the number of people.",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "overflowLabel",
+              "type": {
+                "text": "string"
+              },
+              "default": "'{count} more'",
+              "description": "The chip's name, with `{count}` for the number hidden; the hidden names follow it.",
+              "attribute": "overflow-label"
+            },
+            {
+              "kind": "field",
+              "name": "#shown",
+              "privacy": "private",
+              "default": "4",
+              "type": {
+                "text": "number"
+              }
             }
           ],
           "attributes": [
             {
               "name": "max",
-              "type": {
-                "text": "number"
-              },
-              "default": "4",
-              "description": "Maximum avatars shown before collapsing the rest into a `+N` chip.",
+              "default": "DEFAULT_MAX",
+              "description": "Maximum avatars shown before collapsing the rest into a `+N` chip: a whole number, 0 or more.",
               "fieldName": "max"
             },
             {
@@ -619,6 +651,24 @@
               "default": "'medium'",
               "description": "Diameter preset applied to every avatar.",
               "fieldName": "size"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'{count} people'",
+              "description": "The group's name, with `{count}` for the number of people.",
+              "fieldName": "label"
+            },
+            {
+              "name": "overflow-label",
+              "type": {
+                "text": "string"
+              },
+              "default": "'{count} more'",
+              "description": "The chip's name, with `{count}` for the number hidden; the hidden names follow it.",
+              "fieldName": "overflowLabel"
             }
           ],
           "superclass": {
@@ -654,7 +704,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "User avatar showing an image, or colour-hashed initials derived from `name`\nwhen no `src` is given or the image fails to load, with an optional\npresence dot. A failed image logs a console warning naming its `src`.\n\nThe avatar is one image to assistive technology, named `name` and then the\npresence, as in \"Ada Lovelace, Away\". Without `name` and `status` it is\ndecorative and hidden from them.\n\nThe host carries the circle's box — size, radius and position — so that\n`hmi-avatar-stack` can put a rim on it through `::slotted(hmi-avatar)`.",
+          "description": "User avatar showing an image, or colour-hashed initials derived from `name`\nwhen no `src` is given or the image fails to load, with an optional\npresence dot. A failed image logs a console warning naming its `src`.\n\nThe avatar is one image to assistive technology, named `name` and then the\npresence, as in \"Ada Lovelace, Away\". Without `name` and `status` it is\ndecorative and hidden from them.\n\nThe host carries the circle's box — size, radius and position — so that\n`hmi-avatar-stack`, which renders its avatars in its own shadow root, can put\na rim on it with a plain `hmi-avatar` rule.",
           "name": "HmiAvatar",
           "cssProperties": [
             {
@@ -676,7 +726,7 @@
               "name": "image"
             },
             {
-              "description": "The presence dot, present only when `status` is set: filled when online, half filled when away, hollow when offline.",
+              "description": "The presence dot, present only when `status` is set: filled when online, half filled when away, hollow when offline. It grows with `size`: 10, 14, 18 and 22px at the default base.",
               "name": "status"
             }
           ],

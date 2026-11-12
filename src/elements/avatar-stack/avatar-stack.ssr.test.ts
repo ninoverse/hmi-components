@@ -2,8 +2,11 @@
 import { render } from '@lit-labs/ssr';
 import { collectResult } from '@lit-labs/ssr/lib/render-result.js';
 import { html } from 'lit';
+import { createElement } from 'react';
+import { renderToString } from 'react-dom/server';
 import { expect, it } from 'vitest';
 import './avatar-stack.js';
+import { AvatarStack } from './avatar-stack.react.js';
 
 const NAMES = ['Ada Lovelace', 'Alan Turing', 'Grace Hopper', 'Linus Torvalds'];
 
@@ -25,7 +28,9 @@ it('renders declarative shadow DOM on the server', async () => {
     expect(out).toContain('<template shadowroot');
     expect(out).toContain('part="base"');
     expect(out).toContain('part="overflow"');
-    expect(out).toContain('aria-label="2 more"');
+    expect(out).toContain('role="group"');
+    expect(out).toContain('aria-label="4 people"');
+    expect(out).toContain('aria-label="2 more: Grace Hopper, Linus Torvalds"');
     expect(text(out)).toContain('+2');
 });
 
@@ -56,4 +61,11 @@ it('renders no chip when the names fit', async () => {
     );
     expect(out).not.toContain('part="overflow"');
     expect([...out.matchAll(/<hmi-avatar[\s>]/g)]).toHaveLength(4);
+});
+
+it('renders through the React wrapper on the server', () => {
+    const out = renderToString(
+        createElement(AvatarStack, { names: NAMES, max: 2 }),
+    );
+    expect(out).toMatch(/^<hmi-avatar-stack[^>]*><\/hmi-avatar-stack>$/);
 });

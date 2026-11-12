@@ -2,7 +2,8 @@ import { createComponent } from '@lit/react';
 import * as React from 'react';
 import { HmiAvatarStack } from './avatar-stack.js';
 
-export type { AvatarSize } from '../avatar/avatar.js';
+export type { AvatarSize, AvatarStatus } from '../avatar/avatar.js';
+export type { AvatarStackEntry } from './avatar-stack.js';
 
 /**
  * React wrapper for `<hmi-avatar-stack>`.
