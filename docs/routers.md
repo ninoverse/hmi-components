@@ -109,8 +109,11 @@ props to its anchor. Check your framework's link component the same way.
 
 ## Notes
 
-- **`'use client'`:** the `@lit/react` wrappers use React hooks, so in the Next.js App
-  Router import them from a Client Component.
+- **`'use client'`:** every file of `.../react` starts with `'use client'`, so a Server
+  Component in the Next.js App Router can import a wrapper and pass it props that are
+  not functions. The wrapper is still rendered on the server, and server content passed
+  as children stays server-only. An event handler such as `onNav` is a function, so the
+  component that passes it must be a Client Component, as above.
 - **Server HTML:** `links` and `groups` are properties and are not rendered on the
   server. Slotted links are, so use them for navigation that must be in the server
   HTML.

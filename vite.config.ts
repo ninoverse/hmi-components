@@ -768,6 +768,15 @@ export default defineConfig({
             output: {
                 preserveModules: false,
                 entryFileNames: '[name].js',
+                // The `@lit/react` wrappers use hooks, so each react/* entry
+                // starts with 'use client' and a Next.js Server Component can
+                // import it. Rollup drops a directive written in a source
+                // module, so it goes in as a banner, which lands after
+                // minification. `pnpm check:use-client` checks the output.
+                banner: (chunk) =>
+                    chunk.isEntry && chunk.name.startsWith('react/')
+                        ? "'use client';"
+                        : '',
                 // Code that several entries share, such as a class another
                 // element extends, lands here; sideEffects in package.json
                 // lists this directory, so a bare import of one entry keeps

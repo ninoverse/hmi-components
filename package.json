@@ -1113,10 +1113,11 @@
         "test": "vitest run",
         "test:ssr": "vitest run --project ssr",
         "check:subpaths": "node scripts/check-subpaths.mjs",
+        "check:use-client": "node scripts/check-use-client.mjs",
         "cem": "cem analyze && node scripts/gen-base-css.mjs",
         "docs": "typedoc",
         "agentcfg": "sh scripts/agentcfg.sh",
-        "ci": "pnpm lint && pnpm typecheck && pnpm test && pnpm build && pnpm check:subpaths"
+        "ci": "pnpm lint && pnpm typecheck && pnpm test && pnpm build && pnpm check:subpaths && pnpm check:use-client"
     },
     "dependencies": {
         "@lit/react": "^1.0.8",

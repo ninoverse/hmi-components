@@ -372,9 +372,9 @@ In the Next.js App Router:
 - `.../wc/theme` has no React and no side effects, so a Server Component can import it, for
   `colorThemes`, `structures` and `materials`.
 - `useTheme()` uses hooks that React's server build does not export, so call it from a file
-  that starts with `'use client'`. The files of `.../react` have no `'use client'` of their
-  own either: import them from a Client Component (see
-  [Links and routers](./routers.md#notes)).
+  that starts with `'use client'`. The files of `.../react` start with `'use client'`, which
+  lets a Server Component import a wrapper (see [Links and routers](./routers.md#notes)), but
+  a hook is still called only from a Client Component.
 
 **A. Static pages: an inline script.** The script sets the attributes before first paint,
 and the module and hook then read them. `suppressHydrationWarning` is needed because the
