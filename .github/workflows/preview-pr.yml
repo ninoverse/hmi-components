@@ -1,0 +1,105 @@
+name: Preview PR on Firebase
+
+# Deploys the docs site, Storybook at / and the demo pages at /demo, as a pull
+# request builds it, to a Firebase Hosting preview channel named pr-<number>,
+# and keeps one comment on the pull request with the channel's URL. Each push
+# redeploys the same channel, so the link stays the same while the review goes
+# on.
+#
+# It mirrors release-demo-page.yml, which deploys the live channel on a tag
+# through ninoverse/.github's firebase-deploy.yml. That shared workflow has no
+# preview mode, so this one runs the same steps itself:
+# `firebase hosting:channel:deploy` goes through the same predeploy hook in
+# firebase.json, so the preview builds exactly as the live site does.
+#
+# Same-repository pull requests only. A fork's pull request gets no secrets,
+# and must not get a deploy key either.
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  # The comment with the preview URL.
+  pull-requests: write
+
+# A newer push supersedes a deploy still running for the same pull request.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  preview:
+    name: Deploy preview
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+
+      # Writes the key to a file and points GOOGLE_APPLICATION_CREDENTIALS at
+      # it, which is where the Firebase CLI looks.
+      - uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.FIREBASE_DEPLOY_SERVICE_ACCOUNT }}
+
+      # --no-authorized-domains: the site uses no Firebase Auth, so the channel
+      # is not added to its authorized domains, and the service account needs
+      # no Auth role beyond Firebase Hosting Admin. 30d is the longest a
+      # channel may live; each deploy restarts the clock.
+      - name: Deploy to the preview channel
+        id: deploy
+        env:
+          CHANNEL: pr-${{ github.event.pull_request.number }}
+          # Kept in step with the version firebase-deploy.yml pins.
+          # renovate: datasource=npm depName=firebase-tools
+          FIREBASE_TOOLS_VERSION: 15.32.1
+        run: |
+          npx --yes "firebase-tools@${FIREBASE_TOOLS_VERSION}" hosting:channel:deploy "$CHANNEL" \
+            --only demo \
+            --project ninoverse-misc \
+            --expires 30d \
+            --no-authorized-domains \
+            --non-interactive \
+            --json | tee deploy.log
+          # The predeploy build prints to stdout too, ahead of the CLI's JSON,
+          # which starts on a line of its own.
+          sed -n '/^{$/,$p' deploy.log > deploy.json
+          url=$(jq -er '.result.demo.url' deploy.json)
+          expires=$(jq -er '.result.demo.expireTime' deploy.json)
+          {
+            echo "url=$url"
+            echo "expires=$expires"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Comment the preview URL
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ github.event.pull_request.number }}
+          SHA: ${{ github.event.pull_request.head.sha }}
+          URL: ${{ steps.deploy.outputs.url }}
+          EXPIRES: ${{ steps.deploy.outputs.expires }}
+        run: |
+          marker='<!-- firebase-preview -->'
+          body="${marker}
+          ### Preview
+
+          | | |
+          |---|---|
+          | Storybook | ${URL}/ |
+          | Demo pages | ${URL}/demo/ |
+          | Commit | \`${SHA:0:7}\` |
+          | Expires | ${EXPIRES%%T*} |"
+          id=$(gh api "repos/${GITHUB_REPOSITORY}/issues/${PR}/comments" --paginate \
+            --jq ".[] | select(.user.login == \"github-actions[bot]\" and (.body | startswith(\"${marker}\"))) | .id" | head -n 1)
+          if [ -n "$id" ]; then
+            gh api -X PATCH "repos/${GITHUB_REPOSITORY}/issues/comments/${id}" -f body="$body" > /dev/null
+          else
+            gh api -X POST "repos/${GITHUB_REPOSITORY}/issues/${PR}/comments" -f body="$body" > /dev/null
+          fi
