@@ -8,6 +8,7 @@
         "**/*.css",
         "./src/elements/**/*.ts",
         "./dist/wc/*.js",
+        "./dist/chunks/*.js",
         "./dist/hmi-elements.iife.js",
         "./dist/hmi-components.iife.js"
     ],
@@ -1111,10 +1112,11 @@
         "format": "biome format --write .",
         "test": "vitest run",
         "test:ssr": "vitest run --project ssr",
+        "check:subpaths": "node scripts/check-subpaths.mjs",
         "cem": "cem analyze && node scripts/gen-base-css.mjs",
         "docs": "typedoc",
         "agentcfg": "sh scripts/agentcfg.sh",
-        "ci": "pnpm lint && pnpm typecheck && pnpm test && pnpm build"
+        "ci": "pnpm lint && pnpm typecheck && pnpm test && pnpm build && pnpm check:subpaths"
     },
     "dependencies": {
         "@lit/react": "^1.0.8",

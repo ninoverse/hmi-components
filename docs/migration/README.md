@@ -52,7 +52,7 @@ becomes live with it (`AGENTS.md`, *The package's public surface*).
 
 ```jsonc
 {
-  "sideEffects": ["**/*.css", "./dist/wc/*.js", "./dist/hmi-elements.iife.js", "./dist/hmi-components.iife.js"],
+  "sideEffects": ["**/*.css", "./dist/wc/*.js", "./dist/chunks/*.js", "./dist/hmi-elements.iife.js", "./dist/hmi-components.iife.js"],
   "customElements": "custom-elements.json",
   "files": ["dist", "custom-elements.json"],
   "exports": {
@@ -84,7 +84,12 @@ renamed by the vite entries, exactly like the React exports pair
 
 `sideEffects` must list `./dist/wc/*.js`: element modules register themselves
 in `@customElement`, and a bundler would otherwise tree-shake
-`import '@ninoverse/hmi-components/wc/badge'`.
+`import '@ninoverse/hmi-components/wc/badge'`. It must list `./dist/chunks/*.js`
+too, where Rollup puts code that several entries share: `hmi-input`'s class,
+which `hmi-password-input` and `hmi-search-input` extend, lives in a chunk, and
+`./dist/wc/input.js` only re-exports it. `pnpm check:subpaths`, part of
+`pnpm run ci`, bundles each `./wc/<name>` on its own and checks in Chromium
+that `hmi-<name>` is defined.
 
 Never load `hmi-elements.iife.js` and `hmi-components.iife.js` on the same
 page. Both define the same tags; the second `customElements.define` throws.

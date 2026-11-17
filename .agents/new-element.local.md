@@ -59,7 +59,8 @@ Every list stays in alphabetical order by name.
    `wc/index` and `react/index`.
 4. `package.json` `exports`: `./wc/<name>` and `./react/<name>`, each with
    `types` under `dist/elements/<name>/` and `import` under `dist/wc/` or
-   `dist/react/`. `sideEffects` already covers `./dist/wc/*.js`.
+   `dist/react/`. `sideEffects` already covers `./dist/wc/*.js` and the shared
+   `./dist/chunks/*.js`; `pnpm check:subpaths` checks the new subpath.
 5. `examples/elements.html`: a section that sets its attributes, fills a slot
    and logs one event's `detail` to the console. Never
    `examples/web-components.html`, which loads the r2wc bundle.

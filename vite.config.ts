@@ -768,6 +768,11 @@ export default defineConfig({
             output: {
                 preserveModules: false,
                 entryFileNames: '[name].js',
+                // Code that several entries share, such as a class another
+                // element extends, lands here; sideEffects in package.json
+                // lists this directory, so a bare import of one entry keeps
+                // the `customElements.define` it reaches.
+                chunkFileNames: 'chunks/[name]-[hash].js',
                 assetFileNames: (assetInfo) => {
                     const name = assetInfo.names?.[0] ?? '';
                     return name.endsWith('.css')
