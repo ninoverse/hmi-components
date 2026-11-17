@@ -95,6 +95,25 @@ highlighting is wanted without asking consumers to wire up a highlighter; avoid
 
 ---
 
+## Avatar stack: click the `+N` chip to show more
+
+`hmi-avatar-stack` collapses everyone past `max` into a `+N` chip. Since the
+element review (HMI-4) the chip names the people it hides, to screen readers
+and as a hover tooltip, but it is not interactive: on a touch screen, with no
+hover, the names stay out of sight.
+
+### To decide
+
+- Whether a click (and Enter or Space) on the chip shows the hidden people,
+  and how: expanding the row in place, or a popover listing them, through the
+  `popover` attribute as *Forms and overlays* asks.
+- If the chip becomes a button, its role changes from `img` to `button`, with
+  `aria-expanded`, and it gets a focus stop the row does not have today.
+- Whether the page can veto it, through a cancelable event, as R2 has for the
+  state an element's own interaction produces.
+
+---
+
 ## Divider labeled-variant accessibility
 
 Surfaced during the Phase 1 utilities audit-pass. **Not a defect — left as-is.**

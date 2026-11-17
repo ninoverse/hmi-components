@@ -38,6 +38,19 @@ const cases: ReadonlyArray<{ name: string; template: TemplateResult }> = [
         template: html`<hmi-avatar></hmi-avatar>`,
     },
     {
+        name: 'hmi-avatar-stack',
+        template: html`<hmi-avatar-stack
+            .names=${[
+                { name: 'Ada Lovelace', status: 'online' },
+                'Alan Turing',
+                'Grace Hopper',
+                'Linus Torvalds',
+                'Barbara Liskov',
+            ]}
+            max="3"
+        ></hmi-avatar-stack>`,
+    },
+    {
         name: 'hmi-badge',
         template: html`<hmi-badge variant="success" dot>Online</hmi-badge>`,
     },

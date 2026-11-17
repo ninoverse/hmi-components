@@ -5,12 +5,19 @@ import { css } from 'lit';
 
    Ported from src/components/styled/avatar.styled.css. The host takes what
    `.avatar` carried — size, radius, position and typography — instead of an
-   inner wrapper, because hmi-avatar-stack rims each avatar through
-   `::slotted(hmi-avatar)`, and a rim only reads as round on the host itself.
+   inner wrapper, because hmi-avatar-stack rims each avatar with a plain
+   `hmi-avatar` rule in its own root, and a rim only reads as round on the
+   host itself.
    The `.avatar--overflow`, `.avatar-stack` and `.avatar-stack .avatar` rules in
    that file belong to hmi-avatar-stack and are left for its migration. */
 export const styles = css`
     :host {
+        /* The presence dot grows with the avatar: 10, 14, 18 and 22px at the
+           default base, its rim and its ring a little thicker on the two
+           largest. */
+        --_dot: calc(var(--_base) * 1.75);
+        --_dot-rim: calc(var(--_base) * 0.25);
+        --_dot-ring: calc(var(--_base) * 0.1875);
         position: relative;
         display: inline-flex;
         width: calc(var(--_base) * 4.5);
@@ -25,18 +32,25 @@ export const styles = css`
     }
 
     :host([size='small']) {
+        --_dot: calc(var(--_base) * 1.25);
         width: calc(var(--_base) * 3);
         height: calc(var(--_base) * 3);
         font-size: calc(var(--_base) * 1.25);
     }
 
     :host([size='large']) {
+        --_dot: calc(var(--_base) * 2.25);
+        --_dot-rim: calc(var(--_base) * 0.3125);
+        --_dot-ring: calc(var(--_base) * 0.25);
         width: calc(var(--_base) * 6);
         height: calc(var(--_base) * 6);
         font-size: calc(var(--_base) * 2);
     }
 
     :host([size='xlarge']) {
+        --_dot: calc(var(--_base) * 2.75);
+        --_dot-rim: calc(var(--_base) * 0.375);
+        --_dot-ring: calc(var(--_base) * 0.25);
         width: calc(var(--_base) * 8);
         height: calc(var(--_base) * 8);
         font-size: calc(var(--_base) * 2.75);
@@ -70,10 +84,10 @@ export const styles = css`
         position: absolute;
         bottom: 0;
         inset-inline-end: 0;
-        width: calc(var(--_base) * 1.25);
-        height: calc(var(--_base) * 1.25);
+        width: var(--_dot);
+        height: var(--_dot);
         border-radius: 50%;
-        border: calc(var(--_base) * 0.25) solid var(--surface);
+        border: var(--_dot-rim) solid var(--surface);
         color: var(--success);
         background: currentColor;
     }
@@ -81,13 +95,13 @@ export const styles = css`
     :host([status='away']) .status {
         color: color-mix(in srgb, var(--warning) 70%, var(--on-surface));
         background: linear-gradient(to top, currentColor 50%, var(--surface) 50%);
-        box-shadow: inset 0 0 0 calc(var(--_base) * 0.1875) currentColor;
+        box-shadow: inset 0 0 0 var(--_dot-ring) currentColor;
     }
 
     :host([status='offline']) .status {
         color: var(--on-surface-variant);
         background: var(--surface);
-        box-shadow: inset 0 0 0 calc(var(--_base) * 0.1875) currentColor;
+        box-shadow: inset 0 0 0 var(--_dot-ring) currentColor;
     }
 
     /* Forced colours drop the tint and the box shadows: the circle keeps a

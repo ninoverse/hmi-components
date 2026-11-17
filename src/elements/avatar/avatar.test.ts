@@ -259,6 +259,21 @@ describe('hmi-avatar', () => {
         }
     });
 
+    it('sizes the presence dot with the avatar', async () => {
+        for (const [size, px] of [
+            ['small', 10],
+            ['medium', 14],
+            ['large', 18],
+            ['xlarge', 22],
+        ] as const) {
+            const el = await fixture(
+                html`<hmi-avatar name="Ada" status="away" size=${size}></hmi-avatar>`,
+            );
+            const box = dot(el).getBoundingClientRect();
+            expect([box.width, box.height], size).toEqual([px, px]);
+        }
+    });
+
     it('puts the presence dot at the inline end', async () => {
         const el = await fixture(
             html`<hmi-avatar dir="rtl" name="Ada" status="online"></hmi-avatar>`,
