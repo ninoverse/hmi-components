@@ -138,7 +138,7 @@ Owned by PR 2 unless noted; listed in `README.md` §10. Items marked *settled* w
 4. Storybook framework swap and the fate of React stories mid-migration. *Settled: swapped to `web-components-vite`; React stories are not built until the flip, the React demo stays at `/demo/`.*
 5. Custom-elements manifest configuration and commit policy. *Settled: committed, drift checked in CI.*
 6. Vitest browser provider and CI Chromium install. *Settled: `@vitest/browser-playwright`, `playwright install --with-deps chromium`.*
-7. `sideEffects` verification with a consumer smoke bundle.
+7. `sideEffects` verification with a consumer smoke bundle. *Settled: `pnpm check:subpaths` bundles each `./wc/<name>` on its own; shared chunks go to `dist/chunks/`, which `sideEffects` lists.*
 8. Next.js example with `@lit-labs/ssr-react` (phase 11).
 9. Generated `:not(:defined)` rules in `base.css`. *Settled: `scripts/gen-base-css.mjs`.*
 10. Rebase of `rem` theme tokens onto `--hmi-base`. *Settled.*

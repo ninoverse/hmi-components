@@ -275,7 +275,9 @@ CSS (`:host([direction='column'])`), numeric values via host custom properties
   `fix`, never with `!`. Only the React root, `./theme`, `./style.css`, the
   r2wc bundle, the theme token names and `--hmi-base` are breaking to change
   (`AGENTS.md`, *The package's public surface*).
-- `sideEffects` lists `./dist/wc/*.js` (elements self-register).
+- `sideEffects` lists `./dist/wc/*.js` (elements self-register) and
+  `./dist/chunks/*.js` (shared code, such as a class another element extends).
+  `pnpm check:subpaths` checks that each `./wc/<name>` registers on its own.
 - Never load `hmi-elements.iife.js` and `hmi-components.iife.js` on the same
   page: both define the same tags and the second `customElements.define`
   throws.
