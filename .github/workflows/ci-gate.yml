@@ -61,6 +61,8 @@ jobs:
       - run: pnpm exec playwright install --with-deps chromium
       - run: pnpm build
       - run: pnpm check:subpaths
+      # Each ./react file starts with 'use client', and nothing else does.
+      - run: pnpm check:use-client
 
   # The composed agent rules are what .agentprofile.yml composes: a profile
   # change without `pnpm agentcfg sync`, or a hand edit between the agentcfg

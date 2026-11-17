@@ -115,6 +115,7 @@ pnpm build:wc         # the r2wc bundle, dist/hmi-components.iife.js
 pnpm preview          # serve the production build
 pnpm test:ssr         # the SSR tests alone, in Node
 pnpm check:subpaths   # after a build: each ./wc/<name> registers when bundled alone
+pnpm check:use-client # after a build: each ./react file starts with 'use client'
 pnpm cem              # regenerate custom-elements.json and public/css/base.css
 pnpm run docs         # TypeDoc → docs/api, the legacy React API
 pnpm agentcfg <cmd>   # agentcfg at the pinned version: check, sync, why
