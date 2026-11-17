@@ -72,7 +72,7 @@ jobs:
           # which starts on a line of its own.
           sed -n '/^{$/,$p' deploy.log > deploy.json
           url=$(jq -er '.result.demo.url' deploy.json)
-          expires=$(jq -r '.result.demo.expireTime // empty' deploy.json)
+          expires=$(jq -er '.result.demo.expireTime' deploy.json)
           {
             echo "url=$url"
             echo "expires=$expires"
@@ -95,7 +95,7 @@ jobs:
           | Storybook | ${URL}/ |
           | Demo pages | ${URL}/demo/ |
           | Commit | \`${SHA:0:7}\` |
-          | Expires | ${EXPIRES:-in 30 days} |"
+          | Expires | ${EXPIRES%%T*} |"
           id=$(gh api "repos/${GITHUB_REPOSITORY}/issues/${PR}/comments" --paginate \
             --jq ".[] | select(.user.login == \"github-actions[bot]\" and (.body | startswith(\"${marker}\"))) | .id" | head -n 1)
           if [ -n "$id" ]; then
