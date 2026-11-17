@@ -67,7 +67,10 @@ jobs:
             --expires 30d \
             --no-authorized-domains \
             --non-interactive \
-            --json > deploy.json
+            --json | tee deploy.log
+          # The predeploy build prints to stdout too, ahead of the CLI's JSON,
+          # which starts on a line of its own.
+          sed -n '/^{$/,$p' deploy.log > deploy.json
           url=$(jq -er '.result.demo.url' deploy.json)
           expires=$(jq -r '.result.demo.expireTime // empty' deploy.json)
           {
