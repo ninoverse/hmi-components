@@ -13,7 +13,7 @@ export const styles = css`
         font-size: calc(var(--_base) * 1.75);
         font-weight: 400;
         line-height: 1.5;
-        color: var(--on-surface);
+        color: var(--on-panel, var(--on-surface));
     }
 
     :host([inline]) {
@@ -44,7 +44,7 @@ export const styles = css`
     }
 
     :host([tone='muted']) {
-        color: var(--on-surface-variant);
+        color: var(--on-panel-variant, var(--on-surface-variant));
     }
     :host([tone='primary']) {
         color: var(--primary);

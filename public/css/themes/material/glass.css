@@ -41,6 +41,7 @@
     --panel-ink-bg: color-mix(in srgb, var(--inverse-surface) 72%, transparent);
     --panel-accent-bg: color-mix(in srgb, var(--primary-container) 72%, transparent);
     --panel-border: var(--glass-stroke);
+    --card-flat-border: var(--glass-stroke);
     --panel-filter: var(--glass-blur);
 }
 

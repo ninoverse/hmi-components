@@ -15,7 +15,7 @@ export const styles = css`
         font-family: var(--font-display);
         font-weight: 600;
         line-height: 1.2;
-        color: var(--on-surface);
+        color: var(--on-panel, var(--on-surface));
     }
 
     .size-xsmall {
@@ -35,7 +35,7 @@ export const styles = css`
     }
 
     :host([tone='muted']) .base {
-        color: var(--on-surface-variant);
+        color: var(--on-panel-variant, var(--on-surface-variant));
     }
     :host([tone='primary']) .base {
         color: var(--primary);

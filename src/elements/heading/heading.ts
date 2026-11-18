@@ -29,6 +29,8 @@ const sizeForLevel: Record<HeadingLevel, HeadingSize> = {
  * @tag hmi-heading
  * @slot - The heading text.
  * @csspart base - The inner `<h1>`–`<h6>` element.
+ * @cssprop --on-panel - The text colour inside a panel that sets it, such as an ink card; else `--on-surface`.
+ * @cssprop --on-panel-variant - The muted tone inside a panel that sets it; else `--on-surface-variant`.
  *
  * @example
  * <hmi-heading level="1">Dashboard</hmi-heading>

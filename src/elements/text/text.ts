@@ -20,6 +20,8 @@ export type TextAlign = 'start' | 'center' | 'end';
  *
  * @tag hmi-text
  * @slot - The text.
+ * @cssprop --on-panel - The text colour inside a panel that sets it, such as an ink card; else `--on-surface`.
+ * @cssprop --on-panel-variant - The muted tone inside a panel that sets it; else `--on-surface-variant`.
  *
  * @example
  * <hmi-text size="small" tone="muted">Secondary copy</hmi-text>
