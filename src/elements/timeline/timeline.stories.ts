@@ -34,7 +34,7 @@ const EVENTS: TimelineItem[] = [
 ];
 
 const meta = {
-    title: 'Components/DataDisplay/Timeline',
+    title: 'Components/Data display/Timeline',
     component: 'hmi-timeline',
     tags: ['autodocs'],
     args: { items: EVENTS, divider: false },

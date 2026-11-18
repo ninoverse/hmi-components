@@ -33,7 +33,7 @@ const FOLDERS: ListItem[] = [
 ];
 
 const meta = {
-    title: 'Components/DataDisplay/List',
+    title: 'Components/Data display/List',
     component: 'hmi-list',
     tags: ['autodocs'],
     args: { items: FOLDERS, reorderable: false },
