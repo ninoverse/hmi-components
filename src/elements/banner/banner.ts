@@ -7,6 +7,14 @@ import { styles } from './banner.styles.js';
 
 export type BannerVariant = StatusVariant;
 
+/** The tone screen readers hear first, by variant, unless `variant-label` is set. */
+const VARIANT_LABELS: Record<BannerVariant, string> = {
+    info: 'Info:',
+    success: 'Success:',
+    warning: 'Warning:',
+    danger: 'Error:',
+};
+
 /** Detail of `hmi-dismiss`: empty, the event carries no data. */
 export type BannerDismissDetail = Record<string, never>;
 
@@ -16,12 +24,18 @@ export type BannerDismissDetail = Record<string, never>;
  * default slot.
  *
  * `danger` and `warning` set `role="alert"` on the container, the others
- * `role="status"`. There is no `title` property: `title` is the native tooltip
- * attribute on every element, so the heading is the `title` slot only.
+ * `role="status"`, as in v5, whether the banner is there on page load or
+ * added later. Screen readers hear the tone before the message, such as
+ * "Warning:", since the icon and the colour only show it. There is no `title`
+ * property: `title` is the native tooltip attribute on every element, so the
+ * heading is the `title` slot only. A variant outside the four is painted,
+ * named and announced as `info`.
  *
  * With `dismissible`, the X button fires the cancelable `hmi-dismiss`. Unless a
  * listener calls `preventDefault()`, the banner then sets `hidden` on itself;
- * remove the attribute to show it again.
+ * remove the attribute to show it again. Focus was on the X button, so it falls
+ * back to the page: a listener should move it on, such as to the heading of the
+ * content the banner sat above.
  *
  * @tag hmi-banner
  * @slot - Message body.
@@ -42,6 +56,9 @@ export class HmiBanner extends LitElement {
 
     /** Tone, which also selects the built-in icon and the ARIA role. @default 'info' */
     @property({ reflect: true }) accessor variant: BannerVariant = 'info';
+
+    /** The tone screen readers hear before the message; empty uses the variant's: "Info:", "Success:", "Warning:" or "Error:". @default '' */
+    @property({ attribute: 'variant-label' }) accessor variantLabel = '';
 
     /** Shows the dismiss button. @default false */
     @property({ type: Boolean, reflect: true }) accessor dismissible = false;
@@ -67,12 +84,16 @@ export class HmiBanner extends LitElement {
             this.variant === 'danger' || this.variant === 'warning'
                 ? 'alert'
                 : 'status';
+        const tone =
+            this.variantLabel ||
+            (VARIANT_LABELS[this.variant] ?? VARIANT_LABELS.info);
         return html`
             <div part="base" class="base" role=${role}>
                 <span part="icon" class="icon" aria-hidden="true">
                     <slot name="icon">${statusIcon(this.variant)}</slot>
                 </span>
                 <div class="content">
+                    <span class="tone">${tone}</span>
                     <slot name="title"></slot>
                     <slot></slot>
                 </div>
