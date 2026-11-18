@@ -13,7 +13,7 @@ const slide = (text: string, background: string, color: string) =>
     html`<div style="aspect-ratio: 16 / 9; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 600; background: var(${background}); color: var(${color})">${text}</div>`;
 
 const meta = {
-    title: 'Components/DataDisplay/Carousel',
+    title: 'Components/Data display/Carousel',
     component: 'hmi-carousel',
     tags: ['autodocs'],
     args: {

@@ -23,7 +23,7 @@ const TALL =
     "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='420'%3E%3Crect width='300' height='420' fill='%231f5b58'/%3E%3Crect x='60' y='90' width='180' height='240' fill='%23fff' fill-opacity='.3'/%3E%3C/svg%3E";
 
 const meta = {
-    title: 'Components/DataDisplay/Image',
+    title: 'Components/Data display/Image',
     component: 'hmi-image',
     tags: ['autodocs'],
     args: {

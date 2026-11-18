@@ -22,7 +22,7 @@ const ITEMS: AccordionItem[] = [
 ];
 
 const meta = {
-    title: 'Components/DataDisplay/Accordion',
+    title: 'Components/Data display/Accordion',
     component: 'hmi-accordion',
     tags: ['autodocs'],
     args: { items: ITEMS, multiple: false, open: [0] },
