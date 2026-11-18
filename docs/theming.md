@@ -508,7 +508,9 @@ do **not** cross the boundary, which changes how themes may be written:
 - **Per-element hooks** replace the journal-specific rules that v5 keeps inside
   component CSS: `--list-divider-style`, `--progress-track-border`,
   `--switch-thumb-shadow` (defaults in `constants.css`, overridden by
-  `structure/journal.css`). `--drawer-bg`, `--listbox-bg` and `--palette-bg` are the
+  `structure/journal.css`). `--blockquote-accent` is the blockquote's accent rule:
+  the deeper `--ref-primary-40` (default in `constants.css`), since `--primary`
+  is under 3:1 on the default theme's light surfaces. `--drawer-bg`, `--listbox-bg` and `--palette-bg` are the
   drawer's, the combobox listbox's and the command palette's surfaces: the lowest
   surface under the solid material, as in v5, and the strong panel surface under
   `glass` and `liquid`.

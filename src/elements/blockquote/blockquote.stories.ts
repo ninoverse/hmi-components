@@ -14,7 +14,7 @@ const meta = {
         docs: {
             description: {
                 component:
-                    'React: `import { Blockquote } from \'@ninoverse/hmi-components/react/blockquote\'` — `<Blockquote>Quote<span slot="cite">Ada Lovelace</span></Blockquote>`. `cite` is a slot, not a prop.',
+                    'React: `import { Blockquote } from \'@ninoverse/hmi-components/react/blockquote\'` — `<Blockquote source="https://…">Quote<span slot="cite">Ada Lovelace</span></Blockquote>`. `cite` is a slot, not a prop: slot a `span`, not a `footer`, which would add a page landmark. `source` is the URL of the quote\'s source.',
             },
         },
     },
@@ -33,11 +33,23 @@ export const WithCitation: Story = {
         </hmi-blockquote>`,
 };
 
-/** A slotted `footer` keeps the attribution's native semantics. */
-export const FooterCitation: Story = {
+/** `source` sets the native `cite` URL of the inner `<blockquote>`. */
+export const WithSource: Story = {
+    render: () =>
+        html`<hmi-blockquote
+            source="https://en.wikipedia.org/wiki/The_Little_Prince"
+        >
+            It is only with the heart that one can see rightly.
+            <span slot="cite">— Antoine de Saint-Exupéry, The Little Prince</span>
+        </hmi-blockquote>`,
+};
+
+/** Block content: slotted paragraphs keep a gap between them and no outer margin. */
+export const Paragraphs: Story = {
     render: () =>
         html`<hmi-blockquote>
-            It is only with the heart that one can see rightly.
-            <footer slot="cite">— Antoine de Saint-Exupéry, The Little Prince</footer>
+            <p>It is only with the heart that one can see rightly.</p>
+            <p>What is essential is invisible to the eye.</p>
+            <span slot="cite">— Antoine de Saint-Exupéry, The Little Prince</span>
         </hmi-blockquote>`,
 };

@@ -88,6 +88,10 @@
        The materials override it with their strong surface. */
     --palette-bg: var(--surface-container-lowest);
 
+    /* The blockquote's accent rule: the deeper primary tone, since --primary is
+       under 3:1 on the default light surfaces. */
+    --blockquote-accent: var(--ref-primary-40, var(--primary));
+
     /* Per-element hooks a structure may override (the journal structure does) */
     --list-divider-style: solid;
     --progress-track-border: none;
