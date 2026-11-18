@@ -136,7 +136,8 @@ stem (`AreaChart`), the tag is `hmi-<kebab>`, the class is `Hmi<Pascal>`,
   that needs a per-element hook adds a token, `--<element>-<prop>`, to the theme
   file. The hooks defined so far, with defaults in `constants.css` and overrides
   in `structure/journal.css`: `--list-divider-style`, `--progress-track-border`,
-  `--switch-thumb-shadow`. The drawer's surface, `--drawer-bg`, the combobox
+  `--switch-thumb-shadow`. `--blockquote-accent`, the blockquote's rule, defaults
+  in `constants.css` to the deeper `--ref-primary-40`. The drawer's surface, `--drawer-bg`, the combobox
   listbox's, `--listbox-bg`, and the command palette's, `--palette-bg`, are hooks
   of a different kind: their default in
   `constants.css` is the lowest surface v5 painted, and `glass` and `liquid`

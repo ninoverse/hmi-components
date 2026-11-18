@@ -64,6 +64,13 @@ const cases: ReadonlyArray<{ name: string; template: TemplateResult }> = [
         name: 'hmi-badge',
         template: html`<hmi-badge variant="success" dot>Online</hmi-badge>`,
     },
+    {
+        name: 'hmi-blockquote',
+        template: html`<hmi-blockquote source="https://example.com"
+            ><p>That brain of mine is something more than mortal.</p>
+            <p>Time will show.</p><span slot="cite">Ada Lovelace</span></hmi-blockquote
+        >`,
+    },
 ];
 
 afterEach(() => {
