@@ -984,7 +984,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "Full-width, persistent status banner with a variant-matched icon, an\noptional title and action, and an optional dismiss button. The body is the\ndefault slot.\n\n`danger` and `warning` set `role=\"alert\"` on the container, the others\n`role=\"status\"`. There is no `title` property: `title` is the native tooltip\nattribute on every element, so the heading is the `title` slot only.\n\nWith `dismissible`, the X button fires the cancelable `hmi-dismiss`. Unless a\nlistener calls `preventDefault()`, the banner then sets `hidden` on itself;\nremove the attribute to show it again.",
+          "description": "Full-width, persistent status banner with a variant-matched icon, an\noptional title and action, and an optional dismiss button. The body is the\ndefault slot.\n\n`danger` and `warning` set `role=\"alert\"` on the container, the others\n`role=\"status\"`, as in v5, whether the banner is there on page load or\nadded later. Screen readers hear the tone before the message, such as\n\"Warning:\", since the icon and the colour only show it. There is no `title`\nproperty: `title` is the native tooltip attribute on every element, so the\nheading is the `title` slot only. A variant outside the four is painted,\nnamed and announced as `info`.\n\nWith `dismissible`, the X button fires the cancelable `hmi-dismiss`. Unless a\nlistener calls `preventDefault()`, the banner then sets `hidden` on itself;\nremove the attribute to show it again. Focus was on the X button, so it falls\nback to the page: a listener should move it on, such as to the heading of the\ncontent the banner sat above.",
           "name": "HmiBanner",
           "cssParts": [
             {
@@ -1029,6 +1029,16 @@
               "description": "Tone, which also selects the built-in icon and the ARIA role.",
               "attribute": "variant",
               "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "variantLabel",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The tone screen readers hear before the message; empty uses the variant's: \"Info:\", \"Success:\", \"Warning:\" or \"Error:\".",
+              "attribute": "variant-label"
             },
             {
               "kind": "field",
@@ -1080,6 +1090,15 @@
               "default": "'info'",
               "description": "Tone, which also selects the built-in icon and the ARIA role.",
               "fieldName": "variant"
+            },
+            {
+              "name": "variant-label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The tone screen readers hear before the message; empty uses the variant's: \"Info:\", \"Success:\", \"Warning:\" or \"Error:\".",
+              "fieldName": "variantLabel"
             },
             {
               "name": "dismissible",

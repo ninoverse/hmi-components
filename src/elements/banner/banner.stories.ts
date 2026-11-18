@@ -4,7 +4,10 @@ import '../button/button.js';
 import './banner.js';
 import type { HmiBanner } from './banner.js';
 
-type Args = Pick<HmiBanner, 'variant' | 'dismissible' | 'dismissLabel'>;
+type Args = Pick<
+    HmiBanner,
+    'variant' | 'variantLabel' | 'dismissible' | 'dismissLabel'
+>;
 
 const variants = ['info', 'success', 'warning', 'danger'] as const;
 
@@ -12,15 +15,22 @@ const meta = {
     title: 'Components/Feedback/Banner',
     component: 'hmi-banner',
     tags: ['autodocs'],
-    args: { variant: 'info', dismissible: false, dismissLabel: 'Dismiss' },
+    args: {
+        variant: 'info',
+        variantLabel: '',
+        dismissible: false,
+        dismissLabel: 'Dismiss',
+    },
     argTypes: {
         variant: { control: 'inline-radio', options: variants },
+        variantLabel: { control: 'text' },
         dismissible: { control: 'boolean' },
         dismissLabel: { control: 'text' },
     },
     render: (args) =>
         html`<hmi-banner
             variant=${args.variant}
+            variant-label=${args.variantLabel}
             ?dismissible=${args.dismissible}
             dismiss-label=${args.dismissLabel}
         >
@@ -30,7 +40,7 @@ const meta = {
         docs: {
             description: {
                 component:
-                    'React: `import { Banner } from \'@ninoverse/hmi-components/react/banner\'` — `<Banner variant="success" dismissible onDismiss={hide}><span slot="title">Saved</span>All set.</Banner>`. `title`, `icon` and `action` are slots, not props; `onDismiss` becomes `hmi-dismiss`, and without `preventDefault()` the banner hides itself.',
+                    'React: `import { Banner } from \'@ninoverse/hmi-components/react/banner\'` — `<Banner variant="success" dismissible onDismiss={hide}><span slot="title">Saved</span>All set.</Banner>`. `title`, `icon` and `action` are slots, not props; `onDismiss` becomes `hmi-dismiss`, and without `preventDefault()` the banner hides itself. Screen readers hear the tone first, such as "Warning:", which `variantLabel` rewords. `warning` and `danger` are `role="alert"`, the others `role="status"`.',
             },
         },
     },
@@ -73,6 +83,25 @@ export const Dismissible: Story = {
             <span slot="title">Saved</span>
             All changes were stored.
         </hmi-banner>`,
+};
+
+/** Focus was on the X button, which the banner hides with it: the listener moves it on, here to the heading below. */
+export const FocusAfterDismiss: Story = {
+    args: { variant: 'info', dismissible: true },
+    render: (args) =>
+        html`<hmi-banner
+                variant=${args.variant}
+                dismissible
+                @hmi-dismiss=${(e: Event) => {
+                    const heading = (e.currentTarget as HTMLElement)
+                        .nextElementSibling as HTMLElement;
+                    heading.focus();
+                }}
+            >
+                <span slot="title">Maintenance at 16:30</span>
+                The service will be down for ten minutes.
+            </hmi-banner>
+            <h2 tabindex="-1">Dashboard</h2>`,
 };
 
 /** `preventDefault()` on `hmi-dismiss` keeps the banner on screen. */

@@ -51,6 +51,16 @@ const cases: ReadonlyArray<{ name: string; template: TemplateResult }> = [
         ></hmi-avatar-stack>`,
     },
     {
+        name: 'hmi-banner',
+        template: html`<hmi-banner variant="warning" dismissible
+            ><span slot="title">Update available</span>A new version is ready.<button
+                slot="action"
+            >
+                Update
+            </button></hmi-banner
+        >`,
+    },
+    {
         name: 'hmi-badge',
         template: html`<hmi-badge variant="success" dot>Online</hmi-badge>`,
     },
