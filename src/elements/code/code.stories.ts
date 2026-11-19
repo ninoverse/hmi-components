@@ -5,7 +5,7 @@ import type { HmiCode } from './code.js';
 
 type Args = Pick<HmiCode, 'block'>;
 
-const snippet = `import { Code } from '@ninoverse/hmi-components';
+const snippet = `import { Code } from '@ninoverse/hmi-components/react/code';
 
 export function Example() {
     return <Code block>{'const x = 42;'}</Code>;
@@ -51,4 +51,35 @@ export const Inline: Story = {
 export const Block: Story = {
     args: { block: true },
     render: () => html`<hmi-code block>${snippet}</hmi-code>`,
+};
+
+/** A block keeps the snippet's whitespace as written, and unlike a native
+    `<pre>` it cannot drop a newline right after its opening tag. Start the
+    snippet on the tag's line, as the first block does; the second, written
+    on a new line and indented, shows an empty first line and the indent. */
+export const Whitespace: Story = {
+    render: () => html`
+        <hmi-code block>const x = 1;
+const y = 2;</hmi-code>
+        <br />
+        <hmi-code block>
+            const x = 1;
+            const y = 2;
+        </hmi-code>
+    `,
+};
+
+/** Code reads left to right in right-to-left text, and a line wider than
+    its box scrolls: Tab reaches the block, and the arrow keys scroll it. */
+export const RightToLeft: Story = {
+    render: () => html`
+        <div dir="rtl" lang="ar" style="max-width: 320px">
+            <p>
+                ثبّت الحزمة بالأمر
+                <hmi-code>pnpm add @ninoverse/hmi-components</hmi-code>
+                ثم استوردها.
+            </p>
+            <hmi-code block>const message = 'longer than the box it sits in';</hmi-code>
+        </div>
+    `,
 };

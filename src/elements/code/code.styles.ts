@@ -2,7 +2,9 @@ import { css } from 'lit';
 
 /* Code — monospace code rendering in two modes. Inline is a tinted <code>
    chip that sits within running text; block wraps a <pre><code> for
-   multi-line snippets with horizontal scroll. The mono face comes from
+   multi-line snippets with horizontal scroll. Code reads left to right,
+   isolated from the text around it, unless the host carries its own `dir`;
+   inline code wraps, each line keeping its padding and border. The mono face comes from
    --font-mono (constants.css), which carries the same stack the legacy
    code and menu-shortcut CSS hardcode. Ported from
    src/components/styled/code.styled.css. */
@@ -18,6 +20,12 @@ export const styles = css`
     .base {
         font-family: var(--font-mono);
         color: var(--on-surface);
+        unicode-bidi: isolate;
+        text-align: start;
+    }
+
+    :host(:not([dir])) .base {
+        direction: ltr;
     }
 
     :host(:not([block])) .base {
@@ -26,13 +34,15 @@ export const styles = css`
         background: var(--surface-container-high);
         border: 1px solid var(--outline-variant);
         border-radius: var(--corner-extra-small);
-        white-space: nowrap;
+        overflow-wrap: anywhere;
+        -webkit-box-decoration-break: clone;
+        box-decoration-break: clone;
     }
 
     :host([block]) .base {
         margin: 0;
         padding: var(--space-6) var(--space-8);
-        font-size: calc(var(--_base) * 1.5);
+        font-size: 0.9em;
         line-height: 1.5;
         background: var(--surface-container-high);
         border: calc(var(--_base) * 0.125) solid var(--outline-variant);
@@ -40,7 +50,11 @@ export const styles = css`
         overflow-x: auto;
     }
 
+    /* A block box as wide as the longest line, so a change to the content
+       resizes it and the element can tell when the block scrolls. */
     .content {
+        display: block;
+        inline-size: max-content;
         font-family: inherit;
     }
 `;

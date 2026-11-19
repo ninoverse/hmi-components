@@ -26,7 +26,11 @@ describe('hmi-code', () => {
 
     it('renders', async () => {
         const el = await fixture(html`<hmi-code>npm i</hmi-code>`);
-        expect(el.shadowRoot?.querySelector('[part="base"]')).not.toBeNull();
+        const base = el.shadowRoot?.querySelector('[part~="base"]');
+        expect(base).not.toBeNull();
+        const { width, height } = (base as Element).getBoundingClientRect();
+        expect(width).toBeGreaterThan(0);
+        expect(height).toBeGreaterThan(0);
     });
 
     it('reflects block', async () => {
@@ -97,6 +101,111 @@ describe('hmi-code', () => {
         expect(
             el.shadowRoot?.querySelector('[part="base"]')?.getAttribute('role'),
         ).toBeNull();
+    });
+
+    it('keeps code left to right in right-to-left text', async () => {
+        const el = await fixture(
+            html`<p dir="rtl"><hmi-code block>const x = 42;</hmi-code></p>`,
+        );
+        const code = el.querySelector('hmi-code') as HmiCode;
+        await code.updateComplete;
+        const base = code.shadowRoot?.querySelector(
+            '[part~="base"]',
+        ) as HTMLElement;
+        const style = getComputedStyle(base);
+        expect(style.direction).toBe('ltr');
+        expect(style.unicodeBidi).toBe('isolate');
+        expect(style.textAlign).toBe('start');
+    });
+
+    it('takes the direction its own dir gives it', async () => {
+        const el = await fixture(html`<hmi-code dir="rtl">x = 42;</hmi-code>`);
+        const base = el.shadowRoot?.querySelector(
+            '[part~="base"]',
+        ) as HTMLElement;
+        expect(getComputedStyle(base).direction).toBe('rtl');
+    });
+
+    it('isolates inline code from the text around it', async () => {
+        const el = await fixture(html`<hmi-code>x = 42;</hmi-code>`);
+        const base = el.shadowRoot?.querySelector(
+            '[part~="base"]',
+        ) as HTMLElement;
+        expect(getComputedStyle(base).unicodeBidi).toBe('isolate');
+    });
+
+    it('wraps a long inline command to its column', async () => {
+        const el = await fixture(
+            html`<p style="width: 200px; margin: 0">
+                Run
+                <hmi-code
+                    >pnpm --filter @ninoverse/hmi-components exec vitest run --project browser</hmi-code
+                >
+                now.
+            </p>`,
+        );
+        const code = el.querySelector('hmi-code') as HmiCode;
+        await code.updateComplete;
+        const base = code.shadowRoot?.querySelector(
+            '[part~="base"]',
+        ) as HTMLElement;
+        const lines = base.getClientRects();
+        expect(lines.length).toBeGreaterThan(1);
+        for (const line of lines) {
+            expect(line.right).toBeLessThanOrEqual(
+                el.getBoundingClientRect().right + 0.5,
+            );
+        }
+        expect(getComputedStyle(base).boxDecorationBreak).toBe('clone');
+    });
+
+    it('sizes block text from the text around it, as inline', async () => {
+        const el = await fixture(
+            html`<div style="font-size: 20px">
+                <hmi-code>npm i</hmi-code><hmi-code block>npm i</hmi-code>
+            </div>`,
+        );
+        const [inline, block] = [...el.querySelectorAll('hmi-code')] as [
+            HmiCode,
+            HmiCode,
+        ];
+        await block.updateComplete;
+        const size = (code: HmiCode) =>
+            getComputedStyle(
+                code.shadowRoot?.querySelector('[part~="base"]') as Element,
+            ).fontSize;
+        expect(size(inline)).toBe('18px');
+        expect(size(block)).toBe('18px');
+    });
+
+    it('is a tab stop only while a block scrolls', async () => {
+        const el = await fixture(
+            html`<hmi-code block style="width: 200px"
+                >const message = 'far longer than the box it sits in';</hmi-code
+            >`,
+        );
+        const base = () =>
+            el.shadowRoot?.querySelector('[part~="base"]') as HTMLElement;
+        await expect.poll(() => base().getAttribute('tabindex')).toBe('0');
+        el.style.width = '2000px';
+        await expect.poll(() => base().hasAttribute('tabindex')).toBe(false);
+        el.style.width = '200px';
+        await expect.poll(() => base().getAttribute('tabindex')).toBe('0');
+        el.block = false;
+        await el.updateComplete;
+        expect(base().hasAttribute('tabindex')).toBe(false);
+    });
+
+    it('is no tab stop when a block fits', async () => {
+        const el = await fixture(html`<hmi-code block>npm i</hmi-code>`);
+        await new Promise((r) =>
+            requestAnimationFrame(() => requestAnimationFrame(r)),
+        );
+        expect(
+            el.shadowRoot
+                ?.querySelector('[part~="base"]')
+                ?.hasAttribute('tabindex'),
+        ).toBe(false);
     });
 
     it('mounts through the React wrapper', async () => {

@@ -4180,7 +4180,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "Monospace code display, inline by default or as a block when `block` is set.",
+          "description": "Monospace code display, inline by default or as a block when `block` is set.\n\nCode reads left to right, isolated from the text around it, so a\nright-to-left page doesn't reorder its punctuation; a `dir` on the element\ngives it another direction. Inline code wraps to its line, and a block\nscrolls sideways when a line is wider than its box. A block that scrolls is\na tab stop, so the arrow keys can scroll it; one that fits is not.\n\nA block keeps the snippet's whitespace as written. A native `<pre>` drops a\nnewline right after its opening tag, but `hmi-code` cannot, so start the\nsnippet on the tag's line: `<hmi-code block>const x = 1;` rather than a new\nline, indented.",
           "name": "HmiCode",
           "cssParts": [
             {
@@ -4209,6 +4209,42 @@
               "description": "Render as a block (`<pre><code>`) instead of inline `<code>`.",
               "attribute": "block",
               "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "scrolls",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false",
+              "description": "Whether the block's content is wider than its box."
+            },
+            {
+              "kind": "field",
+              "name": "pre",
+              "type": {
+                "text": "HTMLPreElement | null"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "#observer",
+              "privacy": "private",
+              "type": {
+                "text": "ResizeObserver | undefined"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "#observe",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "#measure",
+              "privacy": "private"
             }
           ],
           "attributes": [
