@@ -264,13 +264,14 @@ describe('hmi-tree activation', () => {
         expect(expands).toEqual([]);
     });
 
-    it('fires hmi-select again for the node that is already selected', async () => {
+    it('fires no hmi-select for the node that is already selected', async () => {
         const el = await fixture(
             html`<hmi-tree selected="readme" .nodes=${NODES}></hmi-tree>`,
         );
         const { selects } = events(el);
         row(el, 'readme').click();
-        expect(selects).toEqual(['readme']);
+        expect(selects).toEqual([]);
+        expect(el.selected).toBe('readme');
     });
 
     it('ignores a disabled node', async () => {

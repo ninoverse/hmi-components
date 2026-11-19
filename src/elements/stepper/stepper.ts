@@ -64,7 +64,7 @@ const checkIcon = html`<svg
  * @csspart label - A step's title.
  * @csspart description - A step's secondary line.
  * @csspart connector - The line to the next step.
- * @fires hmi-change - A completed step was chosen, and `current` already holds it. Cancelable: `preventDefault()` puts the old step back. `detail` is `{ value }`.
+ * @fires {CustomEvent<StepperChangeDetail>} hmi-change - A completed step was chosen, and `current` already holds it. Cancelable: `preventDefault()` puts the old step back. `detail` is `{ value }`.
  *
  * @example
  * const stepper = document.querySelector('hmi-stepper');

@@ -77,7 +77,13 @@ stem (`AreaChart`), the tag is `hmi-<kebab>`, the class is `Hmi<Pascal>`,
   where a prop that did not change does not re-render, so React consumers
   cancel. This is `hmi-pagination`, `hmi-tabs`, `hmi-stepper`, `hmi-list`,
   `hmi-accordion`, `hmi-carousel`, `hmi-tree` and `hmi-table`'s sort, as it is
-  `hmi-chip`, `hmi-banner` and `hmi-toast`.
+  `hmi-chip`, `hmi-banner` and `hmi-toast`. A click that changes nothing, such
+  as on the tab or tree node already selected, fires nothing.
+  `shared/state-events.test.ts` checks each of these events, a row each: a new
+  one adds its row.
+- A dismissal the element carries out itself, hiding unless cancelled, is
+  `hmi-dismiss` (banner, toast, chip). `hmi-close` is a dialog asking the page
+  to close it.
 - Form controls own their value and follow the native pair: `hmi-input` and
   `hmi-change`, which are not cancelable, as native `input` and `change` are not.
 - Two kinds of state are controlled: the element never sets the property, and

@@ -69,7 +69,7 @@ const move = (items: ListItem[], from: number, to: number): ListItem[] => {
  * @csspart subtitle - A row's subtitle.
  * @csspart right - A row's trailing content.
  * @csspart status - The live region that announces a keyboard move.
- * @fires hmi-reorder - A row was dropped, or moved with the keyboard, to a new place, and `items` already holds the new order. Cancelable: `preventDefault()` puts the old order back. `detail.items` is the new order.
+ * @fires {CustomEvent<ListReorderDetail>} hmi-reorder - A row was dropped, or moved with the keyboard, to a new place, and `items` already holds the new order. Cancelable: `preventDefault()` puts the old order back. `detail.items` is the new order.
  *
  * @example
  * const list = document.querySelector('hmi-list');

@@ -142,8 +142,8 @@ const sortIcon = html`<svg
  * @csspart row - A body row.
  * @csspart cell - A body cell.
  * @csspart action - A button of an `actions` cell.
- * @fires hmi-sort - The user sorted a column, and `sortKey` and `sortDir` already hold it. Cancelable: `preventDefault()` puts the old sort back. `detail` is `{ key, dir }`. Not fired when `sort-key` or `sort-dir` is set from code.
- * @fires hmi-action - The user activated an `actions` button. `detail` is `{ value, row }`.
+ * @fires {CustomEvent<TableSortDetail>} hmi-sort - The user sorted a column, and `sortKey` and `sortDir` already hold it. Cancelable: `preventDefault()` puts the old sort back. `detail` is `{ key, dir }`. Not fired when `sort-key` or `sort-dir` is set from code.
+ * @fires {CustomEvent<TableActionDetail>} hmi-action - The user activated an `actions` button. `detail` is `{ value, row }`.
  *
  * @example
  * const table = document.querySelector('hmi-table');
@@ -261,7 +261,11 @@ export class HmiTable extends LitElement {
             return html`<span class="actions"
                 >${renderDialogActions(
                     column.actions ?? [],
-                    (value) => emit(this, 'hmi-action', { value, row }),
+                    (value) =>
+                        emit<TableActionDetail>(this, 'hmi-action', {
+                            value,
+                            row,
+                        }),
                     'small',
                 )}</span
             >`;

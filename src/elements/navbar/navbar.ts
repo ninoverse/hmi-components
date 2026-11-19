@@ -75,7 +75,7 @@ const closeIcon = html`<svg viewBox="0 0 16 16" fill="none" stroke="currentColor
  * @csspart badge - A link's `<hmi-badge>`.
  * @csspart cta - The trailing content.
  * @csspart toggle - The menu button, shown below 40em.
- * @fires hmi-nav - A link was activated. Cancelable. `detail` is `{ value, href }`.
+ * @fires {CustomEvent<NavbarNavDetail>} hmi-nav - A link was activated. Cancelable. `detail` is `{ value, href }`.
  *
  * @example
  * const bar = document.querySelector('hmi-navbar');

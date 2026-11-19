@@ -1688,6 +1688,9 @@
           ],
           "events": [
             {
+              "type": {
+                "text": "CustomEvent<BreadcrumbsNavDetail>"
+              },
               "description": "A link was activated. Cancelable. `detail` is `{ value, index, href }`.",
               "name": "hmi-nav"
             }
@@ -14599,6 +14602,9 @@
           ],
           "events": [
             {
+              "type": {
+                "text": "CustomEvent<ListReorderDetail>"
+              },
               "description": "A row was dropped, or moved with the keyboard, to a new place, and `items` already holds the new order. Cancelable: `preventDefault()` puts the old order back. `detail.items` is the new order.",
               "name": "hmi-reorder"
             }
@@ -16963,6 +16969,9 @@
           ],
           "events": [
             {
+              "type": {
+                "text": "CustomEvent<NavbarNavDetail>"
+              },
               "description": "A link was activated. Cancelable. `detail` is `{ value, href }`.",
               "name": "hmi-nav"
             }
@@ -18018,6 +18027,9 @@
           ],
           "events": [
             {
+              "type": {
+                "text": "CustomEvent<PaginationChangeDetail>"
+              },
               "description": "A page was chosen, and `page` already holds it. Cancelable: `preventDefault()` puts the old page back. `detail` is `{ value }`, the 1-based page.",
               "name": "hmi-change"
             }
@@ -21437,6 +21449,9 @@
           ],
           "events": [
             {
+              "type": {
+                "text": "CustomEvent<ResponsiveContainerResizeDetail>"
+              },
               "description": "The size was measured or changed. `detail` is `{ width, height }`.",
               "name": "hmi-resize"
             }
@@ -26917,6 +26932,9 @@
           ],
           "events": [
             {
+              "type": {
+                "text": "CustomEvent<SidebarNavDetail>"
+              },
               "description": "A link was activated. Cancelable. `detail` is `{ value, href }`.",
               "name": "hmi-nav"
             }
@@ -28639,6 +28657,9 @@
           ],
           "events": [
             {
+              "type": {
+                "text": "CustomEvent<StepperChangeDetail>"
+              },
               "description": "A completed step was chosen, and `current` already holds it. Cancelable: `preventDefault()` puts the old step back. `detail` is `{ value }`.",
               "name": "hmi-change"
             }
@@ -29831,10 +29852,16 @@
           ],
           "events": [
             {
+              "type": {
+                "text": "CustomEvent<TableSortDetail>"
+              },
               "description": "The user sorted a column, and `sortKey` and `sortDir` already hold it. Cancelable: `preventDefault()` puts the old sort back. `detail` is `{ key, dir }`. Not fired when `sort-key` or `sort-dir` is set from code.",
               "name": "hmi-sort"
             },
             {
+              "type": {
+                "text": "CustomEvent<TableActionDetail>"
+              },
               "description": "The user activated an `actions` button. `detail` is `{ value, row }`.",
               "name": "hmi-action"
             }
@@ -30074,6 +30101,9 @@
           ],
           "events": [
             {
+              "type": {
+                "text": "CustomEvent<TabsChangeDetail>"
+              },
               "description": "A tab was chosen, and `value` already holds it. Cancelable: `preventDefault()` puts the old tab back. `detail` is `{ value }`.",
               "name": "hmi-change"
             }
@@ -32337,11 +32367,17 @@
           ],
           "events": [
             {
-              "description": "A node was activated, and `selected` already holds it. Cancelable: `preventDefault()` puts the old `selected` back. `detail` is `{ value }`.",
+              "type": {
+                "text": "CustomEvent<TreeSelectDetail>"
+              },
+              "description": "The user selected a different node, and `selected` already holds it. Not fired for the node already selected. Cancelable: `preventDefault()` puts the old `selected` back.",
               "name": "hmi-select"
             },
             {
-              "description": "A node was expanded or collapsed, and `expanded` already holds the result. Cancelable: `preventDefault()` puts the old `expanded` back. `detail` is `{ expanded }`.",
+              "type": {
+                "text": "CustomEvent<TreeExpandedChangeDetail>"
+              },
+              "description": "A node was expanded or collapsed, and `expanded` already holds the result. Cancelable: `preventDefault()` puts the old `expanded` back.",
               "name": "hmi-expanded-change"
             }
           ],
