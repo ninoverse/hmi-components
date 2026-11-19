@@ -95,6 +95,13 @@ const cases: ReadonlyArray<{ name: string; template: TemplateResult }> = [
                 >Pinned</hmi-chip
             >`,
     },
+    {
+        name: 'hmi-code',
+        template: html`<p>Run <hmi-code>pnpm add @ninoverse/hmi-components</hmi-code></p
+            ><hmi-code block style="width: 160px"
+                >const message = 'far longer than the box it sits in';</hmi-code
+            >`,
+    },
 ];
 
 afterEach(() => {
