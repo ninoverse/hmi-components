@@ -8,8 +8,8 @@ import '../index.js';
    element's own tests may not: a control left without a name, a role without
    its required parts. Each element's review adds its row, once its findings
    are decided, so a row asserts the state the review agreed. Colour contrast
-   depends on the theme, which these tests don't load: the review checks it in
-   every look. */
+   depends on the theme, which these tests don't load: themes.test.ts checks
+   it in every look. */
 const cases: ReadonlyArray<{ name: string; template: TemplateResult }> = [
     {
         name: 'hmi-alert',
