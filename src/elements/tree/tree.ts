@@ -109,8 +109,8 @@ const chevron = html`<svg
  * @csspart label - A node's label.
  * @csspart badge - A node's `<hmi-badge>`.
  * @csspart group - The `role="group"` holding an expanded node's children.
- * @fires hmi-select - A node was activated, and `selected` already holds it. Cancelable: `preventDefault()` puts the old `selected` back. `detail` is `{ value }`.
- * @fires hmi-expanded-change - A node was expanded or collapsed, and `expanded` already holds the result. Cancelable: `preventDefault()` puts the old `expanded` back. `detail` is `{ expanded }`.
+ * @fires {CustomEvent<TreeSelectDetail>} hmi-select - The user selected a different node, and `selected` already holds it. Not fired for the node already selected. Cancelable: `preventDefault()` puts the old `selected` back.
+ * @fires {CustomEvent<TreeExpandedChangeDetail>} hmi-expanded-change - A node was expanded or collapsed, and `expanded` already holds the result. Cancelable: `preventDefault()` puts the old `expanded` back.
  *
  * @example
  * const tree = document.querySelector('hmi-tree');
@@ -174,6 +174,7 @@ export class HmiTree extends LitElement {
     }
 
     #select(value: string): void {
+        if (value === this.selected) return;
         const previous = this.selected;
         this.selected = value;
         const proceed = emit<TreeSelectDetail>(

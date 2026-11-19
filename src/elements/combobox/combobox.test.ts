@@ -842,12 +842,17 @@ describe('hmi-combobox', () => {
             await settle(el);
             const changes = listen<ComboboxChangeDetail>(el, 'hmi-change');
             const inputs = listen<ComboboxInputDetail>(el, 'hmi-input');
+            const order: string[] = [];
+            for (const type of ['hmi-input', 'hmi-change'])
+                el.addEventListener(type, () => order.push(type));
             await userEvent.click(part(el, 'clear') as HTMLElement);
             await settle(el);
             expect(el.value).toBe('');
             expect(input(el).value).toBe('');
             expect(changes.map((e) => e.detail)).toEqual([{ value: '' }]);
             expect(inputs.map((e) => e.detail)).toEqual([{ value: '' }]);
+            // As typing reports them: the text first, then the value.
+            expect(order).toEqual(['hmi-input', 'hmi-change']);
             expect(focused(el)).toBe(input(el));
             expect(part(el, 'clear')).toBeNull();
         });

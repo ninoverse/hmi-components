@@ -74,7 +74,7 @@ export interface SidebarNavDetail {
  * @csspart icon - A link's icon.
  * @csspart text - A link's label.
  * @csspart badge - A link's `<hmi-badge>`.
- * @fires hmi-nav - A link was activated. Cancelable. `detail` is `{ value, href }`.
+ * @fires {CustomEvent<SidebarNavDetail>} hmi-nav - A link was activated. Cancelable. `detail` is `{ value, href }`.
  *
  * @example
  * const side = document.querySelector('hmi-sidebar');

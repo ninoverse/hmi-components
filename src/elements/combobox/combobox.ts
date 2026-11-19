@@ -427,15 +427,16 @@ export class HmiCombobox extends HmiFormField {
         this.#setOpen(false);
     }
 
+    // The text empties first, then the value, in the order typing reports them.
     #clear(): void {
-        if (this.value !== '') {
-            this.value = '';
-            emit<ComboboxChangeDetail>(this, 'hmi-change', { value: '' });
-        }
         this.query = '';
         this.#synced = '';
         this.highlight = -1;
         emit<ComboboxInputDetail>(this, 'hmi-input', { value: '' });
+        if (this.value !== '') {
+            this.value = '';
+            emit<ComboboxChangeDetail>(this, 'hmi-change', { value: '' });
+        }
         this.input?.focus();
     }
 

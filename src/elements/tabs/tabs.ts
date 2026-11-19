@@ -54,7 +54,7 @@ export interface TabsChangeDetail {
  * @csspart icon - A tab's icon.
  * @csspart label - A tab's label.
  * @csspart badge - A tab's `<hmi-badge>`.
- * @fires hmi-change - A tab was chosen, and `value` already holds it. Cancelable: `preventDefault()` puts the old tab back. `detail` is `{ value }`.
+ * @fires {CustomEvent<TabsChangeDetail>} hmi-change - A tab was chosen, and `value` already holds it. Cancelable: `preventDefault()` puts the old tab back. `detail` is `{ value }`.
  *
  * @example
  * const tabs = document.querySelector('hmi-tabs');

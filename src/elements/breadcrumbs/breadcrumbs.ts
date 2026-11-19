@@ -47,7 +47,7 @@ export interface BreadcrumbsNavDetail {
  * @csspart link - A crumb that links.
  * @csspart current - The last crumb.
  * @csspart separator - A separator.
- * @fires hmi-nav - A link was activated. Cancelable. `detail` is `{ value, index, href }`.
+ * @fires {CustomEvent<BreadcrumbsNavDetail>} hmi-nav - A link was activated. Cancelable. `detail` is `{ value, index, href }`.
  *
  * @example
  * const crumbs = document.querySelector('hmi-breadcrumbs');

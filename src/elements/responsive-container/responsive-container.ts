@@ -30,7 +30,7 @@ export interface ResponsiveContainerResizeDetail {
  * @cssprop --container-width - Output: the measured width, in px. Set once the width is known.
  * @cssprop --container-height - Output: the resolved height, in px.
  * @csspart base - The block that is measured.
- * @fires hmi-resize - The size was measured or changed. `detail` is `{ width, height }`.
+ * @fires {CustomEvent<ResponsiveContainerResizeDetail>} hmi-resize - The size was measured or changed. `detail` is `{ width, height }`.
  *
  * @example
  * const box = document.querySelector('hmi-responsive-container');

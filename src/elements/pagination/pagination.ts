@@ -58,7 +58,7 @@ const chevron = (path: string) => html`<svg
  * @csspart prev - The previous-page button.
  * @csspart next - The next-page button.
  * @csspart ellipsis - A gap in the window.
- * @fires hmi-change - A page was chosen, and `page` already holds it. Cancelable: `preventDefault()` puts the old page back. `detail` is `{ value }`, the 1-based page.
+ * @fires {CustomEvent<PaginationChangeDetail>} hmi-change - A page was chosen, and `page` already holds it. Cancelable: `preventDefault()` puts the old page back. `detail` is `{ value }`, the 1-based page.
  *
  * @example
  * const pager = document.querySelector('hmi-pagination');
