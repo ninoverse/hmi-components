@@ -8,7 +8,8 @@ import { css } from 'lit';
    Ported from src/components/styled/sidebar.styled.css, with the surface and
    border re-based onto the --panel-* tokens so the glass and liquid materials
    reach the sidebar (R4). Under the solid material those tokens resolve to
-   exactly the values the React sidebar used. The host carries the width, as the
+   the values the React sidebar used, but for the surface: the low container,
+   a step under v5's high one. The host carries the width, as the
    v5 <aside> did, so it behaves the same as a flex item. */
 export const styles = css`
     :host {

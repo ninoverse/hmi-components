@@ -10,7 +10,7 @@
 
 [data-material='glass'] {
     /* Translucent surfaces (new tokens — never self-reference a role token) */
-    --glass-surface: color-mix(in srgb, var(--surface-container-high) 70%, transparent);
+    --glass-surface: color-mix(in srgb, var(--surface-container-low) 70%, transparent);
     --glass-surface-strong: color-mix(
         in srgb,
         var(--surface-container-lowest) 80%,
@@ -49,7 +49,7 @@
     [data-material='glass'] {
         --glass-surface: color-mix(
             in srgb,
-            var(--surface-container-high) 60%,
+            var(--surface-container-low) 60%,
             transparent
         );
         --glass-surface-strong: color-mix(
