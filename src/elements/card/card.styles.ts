@@ -28,8 +28,10 @@ export const styles = css`
         background: var(--panel-bg);
         color: var(--on-background);
         border: calc(var(--_base) * 0.125) solid var(--panel-border);
-        border-radius: var(--corner-tl) var(--corner-tr) var(--corner-br)
-            var(--corner-bl);
+        border-start-start-radius: var(--corner-tl);
+        border-start-end-radius: var(--corner-tr);
+        border-end-end-radius: var(--corner-br);
+        border-end-start-radius: var(--corner-bl);
         padding: var(--space-10);
         box-shadow: var(--elevation-1);
         overflow-wrap: anywhere;

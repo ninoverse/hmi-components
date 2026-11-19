@@ -17,8 +17,10 @@ export const styles = css`
         gap: var(--space-5);
         width: 100%;
         padding: var(--space-6) var(--space-7);
-        border-radius: var(--corner-tl) var(--corner-tr) var(--corner-br)
-            var(--corner-bl);
+        border-start-start-radius: var(--corner-tl);
+        border-start-end-radius: var(--corner-tr);
+        border-end-end-radius: var(--corner-br);
+        border-end-start-radius: var(--corner-bl);
         border-inline-start: calc(var(--_base) * 0.5) solid var(--tertiary);
         background: var(--tertiary-container);
         color: var(--on-tertiary-container);

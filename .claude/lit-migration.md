@@ -127,6 +127,14 @@ stem (`AreaChart`), the tag is `hmi-<kebab>`, the class is `Hmi<Pascal>`,
   `calc(var(--_base) * N)` (`0.125rem` → `calc(var(--_base) * 0.125)`);
   font-relative values use `em`. Theme tokens (`--space-*`, `--corner-*`) are
   used as-is; they are expressed against the same base.
+- **Corners are logical.** The per-corner tokens name logical corners, so the
+  shape mirrors in right-to-left text: `--corner-tl` goes on
+  `border-start-start-radius`, `--corner-tr` on `border-start-end-radius`,
+  `--corner-br` on `border-end-end-radius` and `--corner-bl` on
+  `border-end-start-radius`, never the `border-radius` shorthand or a physical
+  longhand. The one exception is a box pinned to a physical side, such as
+  `hmi-drawer`'s left and right panels, which pick their tokens with `:dir()`.
+  `shared/corners.test.ts` checks each element under `dir="rtl"`.
 - **Selectors from the legacy CSS.** BEM block `.button` → `:host`; modifier
   `.button--primary` → `:host([variant='primary'])`; sub-element `.button__dot`
   → `.dot` carrying `part="dot"`. Keyframes and

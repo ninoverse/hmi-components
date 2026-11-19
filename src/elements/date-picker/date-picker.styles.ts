@@ -19,8 +19,10 @@ export const styles = css`
         padding: 0 var(--space-6);
         background: var(--surface-container-lowest);
         border: calc(var(--_base) * 0.125) solid var(--outline-variant);
-        border-radius: var(--corner-tl) var(--corner-tr) var(--corner-br)
-            var(--corner-bl);
+        border-start-start-radius: var(--corner-tl);
+        border-start-end-radius: var(--corner-tr);
+        border-end-end-radius: var(--corner-br);
+        border-end-start-radius: var(--corner-bl);
         color: var(--on-background);
         font-family: var(--font-default);
         font-size: calc(var(--_base) * 1.75);

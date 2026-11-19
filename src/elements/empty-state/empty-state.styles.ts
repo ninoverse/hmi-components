@@ -21,8 +21,10 @@ export const styles = css`
         padding: var(--space-12) var(--space-11);
         background: var(--surface-container);
         border: calc(var(--_base) * 0.125) dashed var(--outline-variant);
-        border-radius: var(--corner-tl) var(--corner-tr) var(--corner-br)
-            var(--corner-bl);
+        border-start-start-radius: var(--corner-tl);
+        border-start-end-radius: var(--corner-tr);
+        border-end-end-radius: var(--corner-br);
+        border-end-start-radius: var(--corner-bl);
         color: var(--on-surface);
     }
 

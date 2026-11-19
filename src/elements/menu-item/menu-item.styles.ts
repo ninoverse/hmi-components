@@ -22,10 +22,10 @@ export const styles = css`
         padding: var(--space-4) var(--space-5);
         background: transparent;
         border: 0;
-        border-top-left-radius: var(--_radius-tl, var(--corner-extra-small));
-        border-top-right-radius: var(--_radius-tr, var(--corner-extra-small));
-        border-bottom-right-radius: var(--_radius-br, var(--corner-extra-small));
-        border-bottom-left-radius: var(--_radius-bl, var(--corner-extra-small));
+        border-start-start-radius: var(--_radius-tl, var(--corner-extra-small));
+        border-start-end-radius: var(--_radius-tr, var(--corner-extra-small));
+        border-end-end-radius: var(--_radius-br, var(--corner-extra-small));
+        border-end-start-radius: var(--_radius-bl, var(--corner-extra-small));
         font-family: var(--font-default);
         font-size: calc(var(--_base) * 1.625);
         line-height: inherit;
