@@ -1,18 +1,18 @@
 import { createComponent, type EventName } from '@lit/react';
 import * as React from 'react';
 import {
-    type ChipCloseDetail,
+    type ChipDismissDetail,
     type ChipSelectDetail,
     HmiChip,
 } from './chip.js';
 
-export type { ChipCloseDetail, ChipSelectDetail } from './chip.js';
+export type { ChipDismissDetail, ChipSelectDetail } from './chip.js';
 
 /**
  * React wrapper for `<hmi-chip>`.
  *
  * @example
- * <Chip selectable closable selected={on} onSelect={toggle} onClose={remove}>Filter</Chip>
+ * <Chip selectable closable selected={on} onSelect={toggle} onDismiss={remove}>Filter</Chip>
  */
 export const Chip = createComponent({
     tagName: 'hmi-chip',
@@ -21,6 +21,6 @@ export const Chip = createComponent({
     displayName: 'Chip',
     events: {
         onSelect: 'hmi-select' as EventName<CustomEvent<ChipSelectDetail>>,
-        onClose: 'hmi-close' as EventName<CustomEvent<ChipCloseDetail>>,
+        onDismiss: 'hmi-dismiss' as EventName<CustomEvent<ChipDismissDetail>>,
     },
 });

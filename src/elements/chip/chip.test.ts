@@ -1,7 +1,10 @@
+// The Playwright provider's types give `cdp()` its `send`.
+import type {} from '@vitest/browser-playwright';
 import { html, render } from 'lit';
 import { act, createElement } from 'react';
 import { createRoot } from 'react-dom/client';
 import { afterEach, describe, expect, it } from 'vitest';
+import { cdp } from 'vitest/browser';
 import './chip.js';
 import type { ChipSelectDetail, HmiChip } from './chip.js';
 import { Chip } from './chip.react.js';
@@ -53,6 +56,74 @@ describe('hmi-chip', () => {
         expect(el.hasAttribute('closable')).toBe(true);
     });
 
+    it('boolean attribute presence', async () => {
+        const el = await fixture(
+            html`<hmi-chip selected selectable closable>Filter</hmi-chip>`,
+        );
+        expect([el.selected, el.selectable, el.closable]).toEqual([
+            true,
+            true,
+            true,
+        ]);
+        el.removeAttribute('selected');
+        el.removeAttribute('selectable');
+        el.removeAttribute('closable');
+        expect([el.selected, el.selectable, el.closable]).toEqual([
+            false,
+            false,
+            false,
+        ]);
+    });
+
+    it('dispatches hmi-select with detail, after the change', async () => {
+        const el = await fixture(html`<hmi-chip selectable>Filter</hmi-chip>`);
+        let event: CustomEvent | undefined;
+        let during: boolean | undefined;
+        document.addEventListener(
+            'hmi-select',
+            (e) => {
+                event = e as CustomEvent;
+                during = el.selected;
+            },
+            { once: true },
+        );
+        part(el, 'control')?.click();
+        expect(event?.detail).toEqual({ selected: true });
+        expect(event?.bubbles).toBe(true);
+        expect(event?.composed).toBe(true);
+        expect(event?.cancelable).toBe(true);
+        /* R2: the element changes first, so a listener reads the new state. */
+        expect(during).toBe(true);
+    });
+
+    it('keeps the state a listener sets', async () => {
+        const el = await fixture(html`<hmi-chip selectable>Filter</hmi-chip>`);
+        el.addEventListener('hmi-select', () => {
+            el.selected = false;
+        });
+        part(el, 'control')?.click();
+        await el.updateComplete;
+        expect(el.selected).toBe(false);
+    });
+
+    it('dispatches no event on a change from code', async () => {
+        const el = await fixture(
+            html`<hmi-chip selectable closable>Filter</hmi-chip>`,
+        );
+        let fired = 0;
+        const count = () => {
+            fired += 1;
+        };
+        document.addEventListener('hmi-select', count);
+        document.addEventListener('hmi-dismiss', count);
+        el.selected = true;
+        el.hidden = true;
+        await el.updateComplete;
+        document.removeEventListener('hmi-select', count);
+        document.removeEventListener('hmi-dismiss', count);
+        expect(fired).toBe(0);
+    });
+
     it('is a static span unless selectable', async () => {
         const el = await fixture(html`<hmi-chip>Filter</hmi-chip>`);
         expect(part(el, 'control')?.tagName).toBe('SPAN');
@@ -94,23 +165,33 @@ describe('hmi-chip', () => {
         expect(el.hasAttribute('selected')).toBe(false);
     });
 
-    it('shows a labelled remove button when closable', async () => {
+    it('names the remove button after the label', async () => {
         const el = await fixture(
             html`<hmi-chip closable close-label="Drop tag">Filter</hmi-chip>`,
         );
         const close = part(el, 'close') as HTMLElement;
         expect(close.tagName).toBe('BUTTON');
-        expect(close.getAttribute('aria-label')).toBe('Drop tag');
+        /* "Drop tag Filter": a row of chips doesn't read "Remove" each time. */
+        const ids = close.getAttribute('aria-labelledby')?.split(' ') ?? [];
+        const named = ids.map((id) => el.shadowRoot?.getElementById(id));
+        expect(named[0]?.textContent).toBe('Drop tag');
+        expect(named[1]).toBe(part(el, 'label'));
+        expect(
+            (named[1]?.querySelector('slot') as HTMLSlotElement)
+                .assignedNodes()
+                .map((node) => node.textContent)
+                .join(''),
+        ).toBe('Filter');
         expect(close.querySelector('svg')?.getAttribute('aria-hidden')).toBe(
             'true',
         );
     });
 
-    it('hides itself on close unless hmi-close is cancelled', async () => {
+    it('hides itself on dismiss unless hmi-dismiss is cancelled', async () => {
         const el = await fixture(html`<hmi-chip closable>Filter</hmi-chip>`);
         let cancel = true;
         let fired = 0;
-        el.addEventListener('hmi-close', (event) => {
+        el.addEventListener('hmi-dismiss', (event) => {
             fired += 1;
             expect((event as CustomEvent).detail).toEqual({});
             if (cancel) event.preventDefault();
@@ -150,6 +231,86 @@ describe('hmi-chip', () => {
         expect(width).toBe(14);
     });
 
+    it('shows a check mark in place of its icon when selected', async () => {
+        const el = await fixture(
+            html`<hmi-chip selectable
+                ><svg slot="icon" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" /></svg
+                >Filter</hmi-chip
+            >`,
+        );
+        const icon = el.querySelector('svg') as SVGElement;
+        expect(part(el, 'check')).toBeNull();
+        expect(getComputedStyle(icon).display).not.toBe('none');
+        el.selected = true;
+        await el.updateComplete;
+        const check = part(el, 'check') as Element;
+        expect(check.getAttribute('aria-hidden')).toBe('true');
+        expect(check.getBoundingClientRect().width).toBe(14);
+        expect(getComputedStyle(icon).display).toBe('none');
+    });
+
+    it('keeps a long label on one line, and the remove button whole', async () => {
+        const box = document.createElement('div');
+        box.style.width = '180px';
+        document.body.append(box);
+        render(
+            html`<hmi-chip selectable closable
+                >A rather long filter label that wraps</hmi-chip
+            >`,
+            box,
+        );
+        const el = box.firstElementChild as HmiChip;
+        await el.updateComplete;
+        const label = part(el, 'label') as HTMLElement;
+        expect(el.getBoundingClientRect().width).toBe(180);
+        expect(label.getBoundingClientRect().height).toBe(14);
+        expect(getComputedStyle(label).textOverflow).toBe('ellipsis');
+        expect(part(el, 'close')?.getBoundingClientRect().width).toBe(24);
+    });
+
+    it('pads the remove button by its logical sides', async () => {
+        const el = await fixture(
+            html`<hmi-chip
+                closable
+                dir="rtl"
+                style="--space-1: 2px; --space-3: 6px"
+                >مرشح</hmi-chip
+            >`,
+        );
+        const close = getComputedStyle(part(el, 'close') as HTMLElement);
+        /* The outer edge, on the left in right-to-left text, keeps 6px. */
+        expect(close.paddingLeft).toBe('6px');
+        expect(close.paddingRight).toBe('2px');
+    });
+
+    it('keeps the focus ring and the selected edge in forced colors', async () => {
+        const el = await fixture(
+            html`<hmi-chip selectable selected style="--ring: blue"
+                >Filter</hmi-chip
+            >`,
+        );
+        const probe = document.createElement('span');
+        probe.style.color = 'Highlight';
+        document.body.append(probe);
+        const session = cdp();
+        await session.send('Emulation.setEmulatedMedia', {
+            features: [{ name: 'forced-colors', value: 'active' }],
+        });
+        try {
+            const control = part(el, 'control') as HTMLElement;
+            control.focus();
+            expect(control.matches(':focus-visible')).toBe(true);
+            /* Forced colors drop box-shadow: the ring is an outline. */
+            expect(getComputedStyle(control).outlineStyle).toBe('solid');
+            expect(
+                getComputedStyle(part(el, 'base') as HTMLElement)
+                    .borderTopColor,
+            ).toBe(getComputedStyle(probe).color);
+        } finally {
+            await session.send('Emulation.setEmulatedMedia', { features: [] });
+        }
+    });
+
     it('mounts through the React wrapper', async () => {
         const mount = document.createElement('div');
         document.body.append(mount);
@@ -165,7 +326,7 @@ describe('hmi-chip', () => {
                         onSelect: (event) => {
                             selects.push(event.detail.selected);
                         },
-                        onClose: () => {
+                        onDismiss: () => {
                             closed += 1;
                         },
                     },

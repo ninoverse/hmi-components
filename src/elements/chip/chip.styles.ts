@@ -6,16 +6,23 @@ import { css } from 'lit';
    markup never nests buttons or puts role="button" on a static span. The icon
    needs no wrapper: a slot with nothing assigned has no box, so its margin is
    only paid when an icon is slotted. Hover tints are a currentColor layer at
-   --state-hover-opacity, so they follow the theme's ink. Ported from
+   --state-hover-opacity, so they follow the theme's ink. The label keeps to
+   one line and ends in an ellipsis when the chip is wider than its box, and
+   the remove button never shrinks below its 24px target. The focus ring is an
+   inset outline, not a box-shadow, so forced colours keep it; there, a
+   selected chip's edge and check mark take the system's Highlight. Ported from
    src/components/styled/chip.styled.css. */
 export const styles = css`
     :host {
         display: inline-flex;
+        max-width: 100%;
     }
 
     .base {
         display: inline-flex;
         align-items: stretch;
+        min-width: 0;
+        max-width: 100%;
         height: calc(var(--_base) * 3.75);
         border-radius: var(--corner-full);
         background: var(--surface-container-lowest);
@@ -45,6 +52,7 @@ export const styles = css`
     .control {
         display: inline-flex;
         align-items: center;
+        min-width: 0;
         padding: 0 var(--space-6);
         background: transparent;
         border: 0;
@@ -68,8 +76,19 @@ export const styles = css`
 
     .control:focus-visible,
     .close:focus-visible {
-        outline: none;
-        box-shadow: inset 0 0 0 calc(var(--_base) * 0.375) var(--ring);
+        outline: calc(var(--_base) * 0.375) solid var(--ring);
+        outline-offset: calc(var(--_base) * -0.375);
+    }
+
+    .check {
+        flex: none;
+        width: calc(var(--_base) * 1.75);
+        height: calc(var(--_base) * 1.75);
+        margin-inline-end: var(--space-3);
+    }
+
+    :host([selected]) ::slotted([slot='icon']) {
+        display: none;
     }
 
     ::slotted([slot='icon']) {
@@ -84,6 +103,10 @@ export const styles = css`
     }
 
     .label {
+        min-width: 0;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
         line-height: 1;
     }
 
@@ -91,9 +114,11 @@ export const styles = css`
         display: inline-flex;
         align-items: center;
         justify-content: center;
+        flex: none;
         width: calc(var(--_base) * 3);
         margin: 0;
-        padding: 0 var(--space-3) 0 var(--space-1);
+        padding-block: 0;
+        padding-inline: var(--space-1) var(--space-3);
         background: transparent;
         border: 0;
         color: inherit;
@@ -112,5 +137,15 @@ export const styles = css`
     .close svg {
         width: calc(var(--_base) * 1.5);
         height: calc(var(--_base) * 1.5);
+    }
+
+    @media (forced-colors: active) {
+        :host([selected]) .base {
+            border-color: Highlight;
+        }
+
+        .check {
+            color: Highlight;
+        }
     }
 `;

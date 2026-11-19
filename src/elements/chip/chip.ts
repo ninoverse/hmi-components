@@ -4,33 +4,42 @@ import { baseStyles } from '../shared/base.styles.js';
 import { emit } from '../shared/events.js';
 import { styles } from './chip.styles.js';
 
-/** Detail of `hmi-select`: the state the chip is about to take. */
+/** Detail of `hmi-select`: the state the chip has taken. */
 export interface ChipSelectDetail {
     selected: boolean;
 }
 
-/** Detail of `hmi-close`: empty, the event carries no data. */
-export type ChipCloseDetail = Record<string, never>;
+/** Detail of `hmi-dismiss`: empty, the event carries no data. */
+export type ChipDismissDetail = Record<string, never>;
 
 /**
  * Compact pill for a tag or filter. It is static by default. `selectable`
  * turns the label into a toggle button, and `closable` adds a trailing remove
- * button, so the two controls are never nested.
+ * button, so the two controls are never nested. A selected chip shows a check
+ * mark, in place of its icon, so the state never rests on colour alone.
+ * `selected` without `selectable` is only that look: screen readers get no
+ * state, so a chip the user toggles is `selectable`.
  *
- * Both actions are cancelable events. A click on the toggle fires
- * `hmi-select` with the state the chip would take, and unless a listener calls
- * `preventDefault()` the chip then sets `selected` itself. A click on the
- * remove button fires `hmi-close`, and unless it is cancelled the chip sets
- * `hidden` on itself; remove the attribute to show it again.
+ * Both actions are cancelable events. A click on the toggle flips `selected`,
+ * then fires `hmi-select` with the new state; a listener that calls
+ * `preventDefault()` puts the old one back, unless it set `selected` itself.
+ * A click on the remove button fires `hmi-dismiss`, as banner's and toast's do,, and unless it is cancelled
+ * the chip sets `hidden` on itself; remove the attribute to show it again.
+ * Focus was on the remove button, so it falls back to the page: a listener
+ * should move it on, such as to the next chip.
+ *
+ * The remove button is named `close-label` followed by the chip's label, such
+ * as "Remove Beta".
  *
  * @tag hmi-chip
  * @slot - The label.
  * @slot icon - Optional leading icon, such as an `svg`.
- * @fires {CustomEvent<ChipSelectDetail>} hmi-select - The toggle was clicked. Cancelable: without `preventDefault()` the chip flips `selected`.
- * @fires {CustomEvent<ChipCloseDetail>} hmi-close - The remove button was clicked. Cancelable: without `preventDefault()` the chip hides itself.
+ * @fires {CustomEvent<ChipSelectDetail>} hmi-select - The toggle was clicked, and `selected` flipped. Cancelable: `preventDefault()` puts it back.
+ * @fires {CustomEvent<ChipDismissDetail>} hmi-dismiss - The remove button was clicked. Cancelable: without `preventDefault()` the chip hides itself.
  * @csspart base - The pill.
  * @csspart control - The toggle surface: a button when `selectable`, a span otherwise.
  * @csspart icon - The icon slot.
+ * @csspart check - The check mark a selected chip shows in place of its icon.
  * @csspart label - The label wrapper.
  * @csspart close - The remove button.
  *
@@ -47,29 +56,33 @@ export class HmiChip extends LitElement {
     /** Makes the label a toggle button that fires `hmi-select`. @default false */
     @property({ type: Boolean, reflect: true }) accessor selectable = false;
 
-    /** Adds a trailing remove button that fires `hmi-close`. @default false */
+    /** Adds a trailing remove button that fires `hmi-dismiss`. @default false */
     @property({ type: Boolean, reflect: true }) accessor closable = false;
 
-    /** Accessible label of the remove button. @default 'Remove' */
+    /** The remove button's name, read before the chip's label: "Remove Beta". @default 'Remove' */
     @property({ attribute: 'close-label' }) accessor closeLabel = 'Remove';
 
     #select(): void {
-        const selected = !this.selected;
-        if (
-            emit<ChipSelectDetail>(
-                this,
-                'hmi-select',
-                { selected },
-                { cancelable: true },
-            )
-        ) {
-            this.selected = selected;
-        }
+        const previous = this.selected;
+        const selected = !previous;
+        this.selected = selected;
+        const proceed = emit<ChipSelectDetail>(
+            this,
+            'hmi-select',
+            { selected },
+            { cancelable: true },
+        );
+        if (!proceed && this.selected === selected) this.selected = previous;
     }
 
-    #close(): void {
+    #dismiss(): void {
         if (
-            emit<ChipCloseDetail>(this, 'hmi-close', {}, { cancelable: true })
+            emit<ChipDismissDetail>(
+                this,
+                'hmi-dismiss',
+                {},
+                { cancelable: true },
+            )
         ) {
             this.hidden = true;
         }
@@ -77,8 +90,25 @@ export class HmiChip extends LitElement {
 
     override render() {
         const content = html`
+            ${
+                this.selected
+                    ? html`<svg
+                          part="check"
+                          class="check"
+                          viewBox="0 0 16 16"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          aria-hidden="true"
+                      >
+                          <path d="M3 8.5l3.5 3.5L13 4.5" />
+                      </svg>`
+                    : nothing
+            }
             <slot name="icon" part="icon"></slot>
-            <span part="label" class="label"><slot></slot></span>
+            <span part="label" class="label" id="label"><slot></slot></span>
         `;
         return html`
             <div part="base" class="base">
@@ -103,9 +133,12 @@ export class HmiChip extends LitElement {
                               part="close"
                               class="close"
                               type="button"
-                              aria-label=${this.closeLabel}
-                              @click=${this.#close}
+                              aria-labelledby="close-label label"
+                              @click=${this.#dismiss}
                           >
+                              <span id="close-label" hidden
+                                  >${this.closeLabel}</span
+                              >
                               <svg
                                   viewBox="0 0 16 16"
                                   fill="none"

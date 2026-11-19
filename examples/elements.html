@@ -337,9 +337,9 @@ export function Example() {
 
         <section>
             <h2>Chip</h2>
-            <!-- hmi-select and hmi-close are cancelable: without preventDefault()
+            <!-- hmi-select and hmi-dismiss are cancelable: without preventDefault()
                  the chip flips selected or hides itself. The pinned chip cancels
-                 hmi-close and logs the detail. -->
+                 hmi-dismiss and logs the detail. -->
             <div class="row">
                 <hmi-chip>Static</hmi-chip>
                 <hmi-chip selected>Selected</hmi-chip>
@@ -1651,9 +1651,9 @@ export function Example() {
 
             const pinned = document.getElementById('chip-pinned');
             pinned.addEventListener('hmi-select', (event) => console.log('hmi-select', event.detail));
-            pinned.addEventListener('hmi-close', (event) => {
+            pinned.addEventListener('hmi-dismiss', (event) => {
                 event.preventDefault();
-                console.log('hmi-close', event.detail);
+                console.log('hmi-dismiss', event.detail);
             });
 
             const search = document.getElementById('search-live');
