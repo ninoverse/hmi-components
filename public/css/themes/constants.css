@@ -49,6 +49,10 @@
         0 calc(var(--hmi-base, 8px) * 0.5) calc(var(--hmi-base, 8px) * 0.5) 0 rgba(43, 38, 32, 0.12),
         0 calc(var(--hmi-base, 8px) * 1) calc(var(--hmi-base, 8px) * 1.5) calc(var(--hmi-base, 8px) * 0.75) rgba(43, 38, 32, 0.12);
 
+    /* A flat card has no shadow, so its edge alone parts it from the page: a
+       step deeper than --outline-variant. glass and liquid keep their stroke. */
+    --card-flat-border: color-mix(in oklab, var(--outline) 45%, var(--outline-variant));
+
     /* Legacy spacing aliases — map the published --spacing-0..9 names onto the
        active dense --space-* scale (defined per structure) so older consumers
        keep working and gain density theming too. */
@@ -104,4 +108,28 @@
 
     /* Let native UI (form controls, scrollbars) follow the OS color scheme */
     color-scheme: light dark;
+}
+
+/* Dark elevation — the light shadows, a warm brown at 6 to 12%, vanish on a
+   near-black page, so the dark scheme casts the --shadow role at a strength
+   that still reads. Structures and materials that set their own elevation,
+   such as journal, glass and liquid, load later and win. */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --elevation-1:
+            0 calc(var(--hmi-base, 8px) * 0.125) calc(var(--hmi-base, 8px) * 0.25) 0 color-mix(in srgb, var(--shadow, #000) 45%, transparent),
+            0 calc(var(--hmi-base, 8px) * 0.125) calc(var(--hmi-base, 8px) * 0.375) calc(var(--hmi-base, 8px) * 0.125) color-mix(in srgb, var(--shadow, #000) 30%, transparent);
+        --elevation-2:
+            0 calc(var(--hmi-base, 8px) * 0.125) calc(var(--hmi-base, 8px) * 0.25) 0 color-mix(in srgb, var(--shadow, #000) 45%, transparent),
+            0 calc(var(--hmi-base, 8px) * 0.25) calc(var(--hmi-base, 8px) * 0.75) calc(var(--hmi-base, 8px) * 0.25) color-mix(in srgb, var(--shadow, #000) 35%, transparent);
+        --elevation-3:
+            0 calc(var(--hmi-base, 8px) * 0.125) calc(var(--hmi-base, 8px) * 0.375) 0 color-mix(in srgb, var(--shadow, #000) 50%, transparent),
+            0 calc(var(--hmi-base, 8px) * 0.5) calc(var(--hmi-base, 8px) * 1) calc(var(--hmi-base, 8px) * 0.375) color-mix(in srgb, var(--shadow, #000) 40%, transparent);
+        --elevation-4:
+            0 calc(var(--hmi-base, 8px) * 0.25) calc(var(--hmi-base, 8px) * 0.375) 0 color-mix(in srgb, var(--shadow, #000) 50%, transparent),
+            0 calc(var(--hmi-base, 8px) * 0.75) calc(var(--hmi-base, 8px) * 1.25) calc(var(--hmi-base, 8px) * 0.5) color-mix(in srgb, var(--shadow, #000) 40%, transparent);
+        --elevation-5:
+            0 calc(var(--hmi-base, 8px) * 0.5) calc(var(--hmi-base, 8px) * 0.5) 0 color-mix(in srgb, var(--shadow, #000) 50%, transparent),
+            0 calc(var(--hmi-base, 8px) * 1) calc(var(--hmi-base, 8px) * 1.5) calc(var(--hmi-base, 8px) * 0.75) color-mix(in srgb, var(--shadow, #000) 45%, transparent);
+    }
 }

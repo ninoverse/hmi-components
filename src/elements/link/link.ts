@@ -23,6 +23,8 @@ export type LinkTone = 'primary' | 'muted';
  * @tag hmi-link
  * @slot - The link content.
  * @csspart base - The inner `<a>`.
+ * @cssprop --on-panel-link - The link colour inside a panel that sets it, such as an ink card; else `--ref-primary-40`.
+ * @cssprop --on-panel-variant - The muted tone inside a panel that sets it; else `--on-surface-variant`.
  *
  * @example
  * <hmi-link href="/docs" underline="hover">Read the docs</hmi-link>

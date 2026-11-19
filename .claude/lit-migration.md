@@ -137,7 +137,9 @@ stem (`AreaChart`), the tag is `hmi-<kebab>`, the class is `Hmi<Pascal>`,
   file. The hooks defined so far, with defaults in `constants.css` and overrides
   in `structure/journal.css`: `--list-divider-style`, `--progress-track-border`,
   `--switch-thumb-shadow`. `--blockquote-accent`, the blockquote's rule, defaults
-  in `constants.css` to the deeper `--ref-primary-40`. The drawer's surface, `--drawer-bg`, the combobox
+  in `constants.css` to the deeper `--ref-primary-40`. `--card-flat-border`, a flat card's edge, defaults
+  in `constants.css` to a mix of `--outline` and `--outline-variant`; `glass` and
+  `liquid` set their stroke. The drawer's surface, `--drawer-bg`, the combobox
   listbox's, `--listbox-bg`, and the command palette's, `--palette-bg`, are hooks
   of a different kind: their default in
   `constants.css` is the lowest surface v5 painted, and `glass` and `liquid`
@@ -148,7 +150,10 @@ stem (`AreaChart`), the tag is `hmi-<kebab>`, the class is `Hmi<Pascal>`,
   `--panel-bg-strong` for dialogs, drawers and listboxes), `--panel-border`,
   `--panel-filter` (a `backdrop-filter` value), `--panel-ink-bg` and
   `--panel-accent-bg` (defaults in `constants.css`, overridden by the material
-  themes). Shadows keep coming from `--elevation-*`. They embed the shared
+  themes). Shadows keep coming from `--elevation-*`. A panel with its own text
+  colour sets `--on-panel`, `--on-panel-variant` and `--on-panel-link`, which
+  `hmi-text`, `hmi-heading` and `hmi-link` read before the surface roles. They
+  embed the shared
   liquid filter template (`renderLiquidFilter()` from
   `src/elements/shared/panel.ts`) so the liquid material's
   `--panel-filter: url('#liquid-glass') …` resolves inside the root.

@@ -63,11 +63,15 @@
     --drawer-bg: var(--liquid-sheen), var(--liquid-surface-strong);
     --listbox-bg: var(--liquid-sheen), var(--liquid-surface-strong);
     --palette-bg: var(--liquid-sheen), var(--liquid-surface-strong);
+    /* Deeper than the other liquid surfaces: under the sheen, a thinner ink
+       turns mid grey on a light page, where neither its text nor the page's
+       reads. */
     --panel-ink-bg: var(--liquid-sheen),
-        color-mix(in srgb, var(--inverse-surface) 55%, transparent);
+        color-mix(in srgb, var(--inverse-surface) 85%, transparent);
     --panel-accent-bg: var(--liquid-sheen),
         color-mix(in srgb, var(--primary-container) 55%, transparent);
     --panel-border: var(--liquid-stroke);
+    --card-flat-border: var(--liquid-stroke);
     --panel-filter: var(--liquid-refract);
 }
 

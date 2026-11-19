@@ -505,10 +505,22 @@ do **not** cross the boundary, which changes how themes may be written:
   `--elevation-*`. Defaults live in `constants.css`; `glass` and `liquid`
   override them. Each of those elements also exposes `part="panel"` for anything
   a token cannot express: `hmi-card::part(panel) { … }`.
+- **Text on a panel.** `hmi-text`, `hmi-heading` and `hmi-link` read
+  `--on-panel`, `--on-panel-variant` and `--on-panel-link`, and fall back to
+  `--on-surface`, `--on-surface-variant` and `--ref-primary-40`. `hmi-card`
+  sets them for what it holds: the inverse text roles on `ink`, and
+  `--on-primary-container` on `accent`, so text from those elements stays
+  readable on the card's surface. A default card sets them back.
+- **Dark elevation.** In the dark scheme, `constants.css` casts `--elevation-1`
+  to `--elevation-5` in the `--shadow` role at 30 to 50%, since the light
+  shadows don't show on a near-black page. Journal, glass and liquid keep their
+  own elevation.
 - **Per-element hooks** replace the journal-specific rules that v5 keeps inside
   component CSS: `--list-divider-style`, `--progress-track-border`,
   `--switch-thumb-shadow` (defaults in `constants.css`, overridden by
-  `structure/journal.css`). `--blockquote-accent` is the blockquote's accent rule:
+  `structure/journal.css`). `--card-flat-border` is a flat card's edge, a step deeper than
+  `--outline-variant` under the solid material, and the material's stroke under
+  `glass` and `liquid`. `--blockquote-accent` is the blockquote's accent rule:
   the deeper `--ref-primary-40` (default in `constants.css`), since `--primary`
   is under 3:1 on the default theme's light surfaces. `--drawer-bg`, `--listbox-bg` and `--palette-bg` are the
   drawer's, the combobox listbox's and the command palette's surfaces: the lowest

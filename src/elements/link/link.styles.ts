@@ -4,7 +4,8 @@ import { css } from 'lit';
    with a thick, offset underline that fades when idle and solidifies on hover.
    The underline can be always on, hover-only or off; the muted tone reuses the
    on-surface-variant role for secondary links. The accent is --ref-primary-40,
-   as Button's link variant uses. Ported from
+   as Button's link variant uses. Inside a panel that sets them, such as an
+   ink card, the link takes --on-panel-link and --on-panel-variant. Ported from
    src/components/styled/link.styled.css. */
 export const styles = css`
     :host {
@@ -12,7 +13,7 @@ export const styles = css`
     }
 
     .base {
-        color: var(--ref-primary-40);
+        color: var(--on-panel-link, var(--ref-primary-40));
         font: inherit;
         cursor: pointer;
         text-decoration-thickness: calc(var(--_base) * 0.125);
@@ -28,7 +29,7 @@ export const styles = css`
     :host([underline='always']) .base {
         text-decoration-color: color-mix(
             in oklab,
-            var(--ref-primary-40) 40%,
+            var(--on-panel-link, var(--ref-primary-40)) 40%,
             transparent
         );
     }
@@ -42,21 +43,21 @@ export const styles = css`
     }
 
     .base:hover {
-        text-decoration-color: var(--ref-primary-40);
+        text-decoration-color: var(--on-panel-link, var(--ref-primary-40));
     }
 
     :host([tone='muted']) .base {
-        color: var(--on-surface-variant);
+        color: var(--on-panel-variant, var(--on-surface-variant));
     }
     :host([tone='muted'][underline='always']) .base {
         text-decoration-color: color-mix(
             in oklab,
-            var(--on-surface-variant) 40%,
+            var(--on-panel-variant, var(--on-surface-variant)) 40%,
             transparent
         );
     }
     :host([tone='muted']) .base:hover {
-        text-decoration-color: var(--on-surface-variant);
+        text-decoration-color: var(--on-panel-variant, var(--on-surface-variant));
     }
 
     .base:focus-visible {

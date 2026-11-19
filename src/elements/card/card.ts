@@ -11,7 +11,16 @@ export type CardVariant = 'default' | 'flat' | 'ink' | 'accent';
  *
  * The three slots flow in normal block order inside the card's padding; an
  * unused `header` or `footer` takes up no space and carries no rule or spacing
- * of its own.
+ * of its own. Each is a box, so `::part(header)` and `::part(footer)` take a
+ * margin, a padding or a rule.
+ *
+ * On the `ink` and `accent` surfaces the card sets `--on-panel`,
+ * `--on-panel-variant` and `--on-panel-link`, so `hmi-text`, `hmi-heading` and
+ * `hmi-link` inside it take the card's text colours.
+ *
+ * `active` is visual only: the card raises and outlines itself, and takes a
+ * ring in forced colours, but tells assistive technology nothing. The control
+ * that selects the card says so, with `aria-current` or `aria-selected`.
  *
  * @tag hmi-card
  * @slot - Card body.
@@ -21,6 +30,7 @@ export type CardVariant = 'default' | 'flat' | 'ink' | 'accent';
  * @csspart panel - The card surface, under its panel-group name.
  * @csspart header - The header slot.
  * @csspart footer - The footer slot.
+ * @cssprop --card-flat-border - A flat card's edge: a mix of `--outline` and `--outline-variant` from the theme constants, the material's stroke under glass and liquid, else `--panel-border`.
  *
  * @example
  * <hmi-card variant="accent">…</hmi-card>
@@ -34,7 +44,7 @@ export class HmiCard extends LitElement {
     /** Surface treatment of the card. @default 'default' */
     @property({ reflect: true }) accessor variant: CardVariant = 'default';
 
-    /** Lifts the card off the page to mark it active/selected. @default false */
+    /** Lifts and outlines the card to mark it active/selected; visual only. @default false */
     @property({ type: Boolean, reflect: true }) accessor active = false;
 
     override render() {

@@ -71,6 +71,21 @@ const cases: ReadonlyArray<{ name: string; template: TemplateResult }> = [
             <p>Time will show.</p><span slot="cite">Ada Lovelace</span></hmi-blockquote
         >`,
     },
+    {
+        name: 'hmi-card',
+        template: html`<hmi-card active
+            ><hmi-heading slot="header" level="2" size="small">Line 3</hmi-heading
+            ><hmi-text>Running at 92% of its rated output.</hmi-text
+            ><hmi-link slot="footer" href="#line-3">Open the line</hmi-link></hmi-card
+        >`,
+    },
+    {
+        name: 'hmi-card, ink',
+        template: html`<hmi-card variant="ink"
+            ><hmi-heading slot="header" level="2" size="small">Shift notes</hmi-heading
+            ><hmi-text>Press 2 is down for maintenance until 14:00.</hmi-text></hmi-card
+        >`,
+    },
 ];
 
 afterEach(() => {

@@ -1,5 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/web-components-vite';
 import { html } from 'lit';
+import '../heading/heading.js';
+import '../link/link.js';
+import '../text/text.js';
 import './card.js';
 import type { HmiCard } from './card.js';
 
@@ -94,7 +97,11 @@ export const Variants: Story = {
     `,
 };
 
-/** `active` lifts the card to mark it selected. */
+/**
+ * `active` lifts and outlines the card to mark it selected, and draws a ring in
+ * forced colours. It is visual only: the control that selects the card says so
+ * to assistive technology, with `aria-current` or `aria-selected`.
+ */
 export const Active: Story = {
     args: { active: true },
     render: (args) => html`
@@ -110,7 +117,8 @@ export const Active: Story = {
 /**
  * `header` and `footer` pin content above and below the body regardless of DOM
  * order. They are structural only — the card adds no rule and no spacing of its
- * own, so the content brings its own margins.
+ * own, so the content brings its own margins, or the page sets them on
+ * `::part(header)` and `::part(footer)`, as the `PartSpacing` story does.
  */
 export const WithHeaderAndFooter: Story = {
     render: () => html`
@@ -131,6 +139,53 @@ export const WithHeaderAndFooter: Story = {
             >
                 Telemetry
             </h4>
+        </hmi-card>
+    `,
+};
+
+/**
+ * On `ink` and `accent`, `hmi-heading`, `hmi-text` and `hmi-link` take the
+ * card's text colours, through `--on-panel`, `--on-panel-variant` and
+ * `--on-panel-link`.
+ */
+export const WithTextElements: Story = {
+    render: () => html`
+        <div style=${grid}>
+            ${(['default', 'ink', 'accent'] as const).map(
+                (variant) => html`
+                    <hmi-card variant=${variant}>
+                        <hmi-heading slot="header" level="3" size="small"
+                            >Line 3</hmi-heading
+                        >
+                        <hmi-text>Running at 92% of its rated output.</hmi-text>
+                        <hmi-text tone="muted" size="small"
+                            >Updated 3 minutes ago</hmi-text
+                        >
+                        <hmi-link slot="footer" href="#">Open the line</hmi-link>
+                    </hmi-card>
+                `,
+            )}
+        </div>
+    `,
+};
+
+/** The header and footer slots are boxes, so their parts take spacing and rules. */
+export const PartSpacing: Story = {
+    render: () => html`
+        <style>
+            .part-spacing::part(header) {
+                padding-bottom: calc(var(--hmi-base) * 1.5);
+                margin-bottom: calc(var(--hmi-base) * 1.5);
+                border-bottom: 1px solid var(--outline-variant);
+            }
+            .part-spacing::part(footer) {
+                margin-top: calc(var(--hmi-base) * 2);
+            }
+        </style>
+        <hmi-card class="part-spacing" style="max-width: 45rem">
+            <hmi-heading slot="header" level="3" size="small">Telemetry</hmi-heading>
+            <hmi-text>Spindle load, temperature and vibration, sampled each second.</hmi-text>
+            <hmi-link slot="footer" href="#">Open the history</hmi-link>
         </hmi-card>
     `,
 };

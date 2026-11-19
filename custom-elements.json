@@ -2255,8 +2255,14 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "Elevated surface container for grouping related content.\n\nThe three slots flow in normal block order inside the card's padding; an\nunused `header` or `footer` takes up no space and carries no rule or spacing\nof its own.",
+          "description": "Elevated surface container for grouping related content.\n\nThe three slots flow in normal block order inside the card's padding; an\nunused `header` or `footer` takes up no space and carries no rule or spacing\nof its own. Each is a box, so `::part(header)` and `::part(footer)` take a\nmargin, a padding or a rule.\n\nOn the `ink` and `accent` surfaces the card sets `--on-panel`,\n`--on-panel-variant` and `--on-panel-link`, so `hmi-text`, `hmi-heading` and\n`hmi-link` inside it take the card's text colours.\n\n`active` is visual only: the card raises and outlines itself, and takes a\nring in forced colours, but tells assistive technology nothing. The control\nthat selects the card says so, with `aria-current` or `aria-selected`.",
           "name": "HmiCard",
+          "cssProperties": [
+            {
+              "description": "A flat card's edge: a mix of `--outline` and `--outline-variant` from the theme constants, the material's stroke under glass and liquid, else `--panel-border`.",
+              "name": "--card-flat-border"
+            }
+          ],
           "cssParts": [
             {
               "description": "The card surface.",
@@ -2308,7 +2314,7 @@
                 "text": "boolean"
               },
               "default": "false",
-              "description": "Lifts the card off the page to mark it active/selected.",
+              "description": "Lifts and outlines the card to mark it active/selected; visual only.",
               "attribute": "active",
               "reflects": true
             }
@@ -2329,7 +2335,7 @@
                 "text": "boolean"
               },
               "default": "false",
-              "description": "Lifts the card off the page to mark it active/selected.",
+              "description": "Lifts and outlines the card to mark it active/selected; visual only.",
               "fieldName": "active"
             }
           ],
@@ -11554,6 +11560,16 @@
           "kind": "class",
           "description": "Display-level title in the display font. The semantic `level` (an inner\n`<h1>`–`<h6>`) is decoupled from the visual `size`: each level picks a\ndefault size, and `size` overrides it independently. Tones reuse the\nstandard text roles.\n\nThe heading element is inside the shadow root, so it is in the\naccessibility tree and the page outline, but a `querySelectorAll('h2')` on\nthe document does not find it. A `level` outside 1–6 falls back to 2.",
           "name": "HmiHeading",
+          "cssProperties": [
+            {
+              "description": "The text colour inside a panel that sets it, such as an ink card; else `--on-surface`.",
+              "name": "--on-panel"
+            },
+            {
+              "description": "The muted tone inside a panel that sets it; else `--on-surface-variant`.",
+              "name": "--on-panel-variant"
+            }
+          ],
           "cssParts": [
             {
               "description": "The inner `<h1>`–`<h6>` element.",
@@ -14144,6 +14160,16 @@
           "kind": "class",
           "description": "Inline anchor in the primary accent with a thick, offset underline that\nfades when idle and solidifies on hover. The underline can be always on,\nhover-only or off, and the muted tone reuses the secondary text role.\n\nThe anchor is an inner `<a part=\"base\">` and the element mirrors `href`,\n`target`, `rel` and `download` onto it. With `target=\"_blank\"` and no `rel`,\n`rel` becomes `noopener noreferrer`. Other anchor attributes are not\nmirrored, and `aria-*` on the host does not name the inner anchor, so an\nicon-only link takes its accessible name from `label`. Focus is delegated:\n`el.focus()` focuses the anchor. A click is native, and `click` is composed,\nso a plain listener sees it.",
           "name": "HmiLink",
+          "cssProperties": [
+            {
+              "description": "The link colour inside a panel that sets it, such as an ink card; else `--ref-primary-40`.",
+              "name": "--on-panel-link"
+            },
+            {
+              "description": "The muted tone inside a panel that sets it; else `--on-surface-variant`.",
+              "name": "--on-panel-variant"
+            }
+          ],
           "cssParts": [
             {
               "description": "The inner `<a>`.",
@@ -30110,6 +30136,16 @@
           "kind": "class",
           "description": "The body-copy primitive. Defaults to medium size, regular weight and the\nstandard on-surface tone in the UI font; size, weight, tone, alignment and\nsingle-line truncation are opt-in.\n\nThe host is the text: a block by default, or inline with `inline`, with no\ninner element and so no paragraph semantics. Wrap it in a `<p>`, or set\n`role=\"paragraph\"` on the host, where the text is a paragraph. There is no\n`as` property. `truncate` needs a block, so it has no effect with `inline`.",
           "name": "HmiText",
+          "cssProperties": [
+            {
+              "description": "The text colour inside a panel that sets it, such as an ink card; else `--on-surface`.",
+              "name": "--on-panel"
+            },
+            {
+              "description": "The muted tone inside a panel that sets it; else `--on-surface-variant`.",
+              "name": "--on-panel-variant"
+            }
+          ],
           "slots": [
             {
               "description": "The text.",
