@@ -32,7 +32,9 @@ import { renderLiquidFilter } from './panel.js';
 
    For each look it takes one screenshot with the text hidden, then compares
    each text's computed colour with every background pixel under its line
-   boxes, and keeps the worst. Large text (24px, or 18.66px at 700) needs 3:1,
+   boxes, and keeps the worst. Text straight on the page may sit anywhere on
+   the glass and liquid backdrop, so it is compared with every pixel of the
+   viewport, in a second screenshot with the fixture hidden. Large text (24px, or 18.66px at 700) needs 3:1,
    the rest 4.5:1: WCAG AA. */
 
 const colours = ['default', 'ocean', 'forest'] as const;
@@ -52,18 +54,6 @@ const expected: ReadonlyArray<{
             f.colour === 'default' &&
             f.target.endsWith(' hmi-link') &&
             !f.target.startsWith('ink '),
-    },
-    {
-        why: "the page's muted text and links on the glass and liquid backdrop",
-        matches: (f) =>
-            /^page (muted|hmi-link)$/.test(f.target) && f.material !== 'solid',
-    },
-    {
-        why: "the ink card's heading and inherited text under liquid's sheen, light",
-        matches: (f) =>
-            /^ink card (hmi-heading|text)$/.test(f.target) &&
-            f.material === 'liquid' &&
-            f.scheme === 'light',
     },
 ];
 
@@ -130,6 +120,8 @@ const fixtureCss = `
     #themes p { margin: 0 0 8px; }
     #themes .muted { color: var(--on-surface-variant); }
     #themes.hide-text [data-t] { visibility: hidden; }
+    #themes.hide-all { visibility: hidden; }
+    #backdrop { position: fixed; inset: 0; pointer-events: none; }
 `;
 
 /* An sRGB colour as the page paints it, read back through a canvas, which
@@ -145,11 +137,13 @@ function rgba(colour: string): [number, number, number, number] {
     return [r, g, b, a / 255];
 }
 
-function luminance([r, g, b]: readonly number[]): number {
-    const channel = (v = 0) => {
-        const c = v / 255;
-        return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
-    };
+const linear = Array.from({ length: 256 }, (_, v) => {
+    const c = v / 255;
+    return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
+});
+
+function luminance(r: number, g: number, b: number): number {
+    const channel = (v: number) => linear[Math.round(v)] ?? 0;
     return 0.2126 * channel(r) + 0.7152 * channel(g) + 0.0722 * channel(b);
 }
 
@@ -211,51 +205,72 @@ async function measure(
     root.classList.add('hide-text');
     await frame();
     const bg = await pixels(root);
-    root.classList.remove('hide-text');
+    root.classList.replace('hide-text', 'hide-all');
+    await frame();
+    const view = await pixels(backdrop);
+    root.classList.remove('hide-all');
     const scale = bg.width / origin.width;
+    const whole = [{ x0: 0, y0: 0, x1: view.width, y1: view.height }];
 
-    return measured.map(({ target, colour: [r, g, b, a], min, rects }) => {
-        let worst = Number.POSITIVE_INFINITY;
-        for (const rect of rects) {
-            const x0 = Math.max(
-                0,
-                Math.floor((rect.left - origin.left) * scale),
-            );
-            const y0 = Math.max(0, Math.floor((rect.top - origin.top) * scale));
-            const x1 = Math.min(
-                bg.width,
-                Math.ceil((rect.right - origin.left) * scale),
-            );
-            const y1 = Math.min(
-                bg.height,
-                Math.ceil((rect.bottom - origin.top) * scale),
-            );
-            for (let y = y0; y < y1; y++) {
-                for (let x = x0; x < x1; x++) {
-                    const i = (y * bg.width + x) * 4;
-                    const back = [
-                        bg.data[i],
-                        bg.data[i + 1],
-                        bg.data[i + 2],
-                    ] as number[];
-                    // A translucent text colour blends over what is under it.
-                    const fore = [r, g, b].map(
-                        (c, k) => c * a + (back[k] ?? 0) * (1 - a),
-                    );
-                    worst = Math.min(
-                        worst,
-                        ratio(luminance(fore), luminance(back)),
-                    );
-                }
+    return measured.map(({ target, colour, min, rects }) => {
+        const boxes = target.startsWith('page ')
+            ? whole
+            : rects.map((rect) => ({
+                  x0: Math.max(
+                      0,
+                      Math.floor((rect.left - origin.left) * scale),
+                  ),
+                  y0: Math.max(0, Math.floor((rect.top - origin.top) * scale)),
+                  x1: Math.min(
+                      bg.width,
+                      Math.ceil((rect.right - origin.left) * scale),
+                  ),
+                  y1: Math.min(
+                      bg.height,
+                      Math.ceil((rect.bottom - origin.top) * scale),
+                  ),
+              }));
+        /* The backdrop's gradients are smooth: every second pixel of the
+           viewport finds their extremes, in a quarter of the time. */
+        const [image, step] = target.startsWith('page ') ? [view, 2] : [bg, 1];
+        return { target, ratio: worst(image, colour, boxes, step), min };
+    });
+}
+
+/* The lowest contrast of a text colour over the pixels in the boxes. */
+function worst(
+    image: ImageData,
+    [r, g, b, a]: readonly number[],
+    boxes: ReadonlyArray<{ x0: number; y0: number; x1: number; y1: number }>,
+    step: number,
+): number {
+    const alpha = a ?? 1;
+    let low = Number.POSITIVE_INFINITY;
+    for (const { x0, y0, x1, y1 } of boxes) {
+        for (let y = y0; y < y1; y += step) {
+            for (let x = x0; x < x1; x += step) {
+                const i = (y * image.width + x) * 4;
+                const br = image.data[i] ?? 0;
+                const bgr = image.data[i + 1] ?? 0;
+                const bb = image.data[i + 2] ?? 0;
+                // A translucent text colour blends over what is under it.
+                const fore = luminance(
+                    (r ?? 0) * alpha + br * (1 - alpha),
+                    (g ?? 0) * alpha + bgr * (1 - alpha),
+                    (b ?? 0) * alpha + bb * (1 - alpha),
+                );
+                low = Math.min(low, ratio(fore, luminance(br, bgr, bb)));
             }
         }
-        return { target, ratio: worst, min };
-    });
+    }
+    return low;
 }
 
 const style = document.createElement('style');
 const root = document.createElement('div');
 root.id = 'themes';
+const backdrop = document.createElement('div');
+backdrop.id = 'backdrop';
 
 beforeAll(async () => {
     await page.viewport(1240, 900);
@@ -275,7 +290,7 @@ beforeAll(async () => {
         fixtureCss,
     ].join('\n');
     document.head.append(style);
-    document.body.append(root);
+    document.body.append(root, backdrop);
     render(fixture, root);
     await Promise.all(
         [
@@ -292,6 +307,7 @@ beforeAll(async () => {
 
 afterAll(async () => {
     root.remove();
+    backdrop.remove();
     style.remove();
     for (const name of ['data-theme', 'data-structure', 'data-material']) {
         document.documentElement.removeAttribute(name);

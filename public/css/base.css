@@ -33,17 +33,17 @@ body {
     background:
         radial-gradient(
             at 18% 12%,
-            color-mix(in srgb, var(--primary) 32%, transparent),
+            color-mix(in srgb, var(--primary-container) 48%, transparent),
             transparent 45%
         ),
         radial-gradient(
             at 85% 8%,
-            color-mix(in srgb, var(--tertiary) 28%, transparent),
+            color-mix(in srgb, var(--tertiary-container) 42%, transparent),
             transparent 48%
         ),
         radial-gradient(
             at 50% 100%,
-            color-mix(in srgb, var(--secondary) 22%, transparent),
+            color-mix(in srgb, var(--secondary-container) 33%, transparent),
             transparent 55%
         ),
         var(--background);
@@ -54,17 +54,17 @@ body {
     background:
         radial-gradient(
             at 16% 10%,
-            color-mix(in srgb, var(--primary) 42%, transparent),
+            color-mix(in srgb, var(--primary-container) 63%, transparent),
             transparent 45%
         ),
         radial-gradient(
             at 86% 6%,
-            color-mix(in srgb, var(--tertiary) 38%, transparent),
+            color-mix(in srgb, var(--tertiary-container) 57%, transparent),
             transparent 48%
         ),
         radial-gradient(
             at 50% 100%,
-            color-mix(in srgb, var(--secondary) 30%, transparent),
+            color-mix(in srgb, var(--secondary-container) 45%, transparent),
             transparent 55%
         ),
         var(--background);

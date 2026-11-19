@@ -34,6 +34,15 @@
         transparent 60%,
         color-mix(in srgb, white 10%, transparent)
     );
+    /* The ink panel's streak: lighter than the others, since a white streak
+       over the dark ink lifts it towards its own pale text. */
+    --liquid-ink-sheen: linear-gradient(
+        135deg,
+        color-mix(in srgb, white 20%, transparent),
+        transparent 40%,
+        transparent 60%,
+        color-mix(in srgb, white 6%, transparent)
+    );
 
     /* Convex lens rim — bright top highlight, soft dark underside, inner glow */
     --liquid-rim:
@@ -66,7 +75,7 @@
     /* Deeper than the other liquid surfaces: under the sheen, a thinner ink
        turns mid grey on a light page, where neither its text nor the page's
        reads. */
-    --panel-ink-bg: var(--liquid-sheen),
+    --panel-ink-bg: var(--liquid-ink-sheen),
         color-mix(in srgb, var(--inverse-surface) 85%, transparent);
     --panel-accent-bg: var(--liquid-sheen),
         color-mix(in srgb, var(--primary-container) 55%, transparent);
@@ -88,6 +97,8 @@
             transparent
         );
         --liquid-stroke: color-mix(in srgb, white 20%, transparent);
+        /* In dark the ink is pale, and the streak only deepens its contrast. */
+        --liquid-ink-sheen: var(--liquid-sheen);
         --liquid-sheen: linear-gradient(
             135deg,
             color-mix(in srgb, white 16%, transparent),
