@@ -102,6 +102,21 @@ const cases: ReadonlyArray<{ name: string; template: TemplateResult }> = [
                 >const message = 'far longer than the box it sits in';</hmi-code
             >`,
     },
+    {
+        name: 'hmi-empty-state',
+        template: html`<hmi-empty-state
+            ><svg slot="icon" viewBox="0 0 24 24"><title>Empty inbox</title></svg
+            ><span slot="title">Inbox zero</span
+            ><span slot="description">No new messages.</span
+            ><button slot="action">Refresh</button></hmi-empty-state
+        >`,
+    },
+    {
+        name: 'hmi-empty-state without a title',
+        template: html`<hmi-empty-state
+            ><span slot="description">Nothing here yet.</span></hmi-empty-state
+        >`,
+    },
 ];
 
 afterEach(() => {

@@ -145,7 +145,9 @@ const cases: ReadonlyArray<{
     },
     {
         name: 'hmi-empty-state',
-        template: html`<hmi-empty-state heading="Nothing here"></hmi-empty-state>`,
+        template: html`<hmi-empty-state
+            ><span slot="title">Nothing here</span></hmi-empty-state
+        >`,
         node: (el) => el.shadowRoot?.querySelector('.base'),
         ltr: LEAF,
     },

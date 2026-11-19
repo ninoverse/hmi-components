@@ -9802,7 +9802,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "Placeholder shown when a list, table or search has no content: an optional\nicon, a title, a description and an action, centred on a soft surface.\n\nEvery part of the content is a slot. The icon is drawn into a circle by the\nelement, so it is purely decorative: give the slotted icon `aria-hidden=\"true\"`.\nThe title sits in an `<h3>`. Wrap several actions in one element, since the\n`action` slot lays out a single child.",
+          "description": "Placeholder shown when a list, table or search has no content: an optional\nicon, a title, a description and actions, centred on a soft surface.\n\nEvery part of the content is a slot. The icon is decorative: the element\ndraws it into a circle and hides it from screen readers, as the title says\nwhat it shows. The title sits in a heading, an `<h3>` unless `level` says\notherwise, which is left out while the `title` slot is empty. Several\nactions each take `slot=\"action\"` and sit in a centred row that wraps.\n\nDon't set a `title` attribute: it is the native tooltip, so\n`title=\"No results\"`, or React's `<EmptyState title=\"No results\">` as v5\ntook it, shows a tooltip over the whole box and leaves the heading out. Put\nthe title in the `title` slot.",
           "name": "HmiEmptyState",
           "cssParts": [
             {
@@ -9812,15 +9812,19 @@
             {
               "description": "The heading element around the `title` slot.",
               "name": "title"
+            },
+            {
+              "description": "The row around the `action` slot.",
+              "name": "actions"
             }
           ],
           "slots": [
             {
-              "description": "Decorative illustration, such as an `svg`, drawn inside a circle.",
+              "description": "Decorative illustration, such as an `svg`, drawn inside a circle and hidden from screen readers.",
               "name": "icon"
             },
             {
-              "description": "Primary heading, inside an `<h3>`.",
+              "description": "Primary heading, inside an `<h2>` to `<h6>` as `level` has it.",
               "name": "title"
             },
             {
@@ -9828,11 +9832,62 @@
               "name": "description"
             },
             {
-              "description": "Call to action, such as a button.",
+              "description": "Call to action, such as a button. Several sit in one row.",
               "name": "action"
             }
           ],
-          "members": [],
+          "members": [
+            {
+              "kind": "field",
+              "name": "level",
+              "type": {
+                "text": "EmptyStateLevel"
+              },
+              "default": "3",
+              "description": "The title's heading level, 2 to 6; any other value is 3.",
+              "attribute": "level",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "hasTitle",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "true"
+            },
+            {
+              "kind": "field",
+              "name": "hasActions",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "true"
+            },
+            {
+              "kind": "method",
+              "name": "#read",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "#heading",
+              "privacy": "private"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "level",
+              "type": {
+                "text": "EmptyStateLevel"
+              },
+              "default": "3",
+              "description": "The title's heading level, 2 to 6; any other value is 3.",
+              "fieldName": "level"
+            }
+          ],
           "superclass": {
             "name": "LitElement",
             "package": "lit"
