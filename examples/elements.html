@@ -268,7 +268,7 @@ export function Example() {
         <section>
             <h2>EmptyState</h2>
             <!-- no events and no boolean props: the icon, title, description
-                 and action slots. -->
+                 and action slots, and the heading's level. -->
             <div style="display: flex; flex-direction: column; gap: 1rem; width: 40rem; max-width: 100%">
                 <hmi-empty-state>
                     <span slot="title">No results</span>
@@ -279,6 +279,12 @@ export function Example() {
                     <span slot="title">No results</span>
                     <span slot="description">Nothing matches your search.</span>
                     <hmi-button slot="action">Reset filters</hmi-button>
+                </hmi-empty-state>
+                <hmi-empty-state level="2">
+                    <span slot="title">No projects yet</span>
+                    <span slot="description">Create one or import an existing project.</span>
+                    <hmi-button slot="action">Create</hmi-button>
+                    <hmi-button slot="action" variant="secondary">Import</hmi-button>
                 </hmi-empty-state>
             </div>
         </section>

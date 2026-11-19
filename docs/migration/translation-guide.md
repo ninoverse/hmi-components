@@ -446,7 +446,7 @@ Rules in R4. Mechanical translations:
 | `.button--primary { … }` | `:host([variant='primary']) button { … }` |
 | `.button--icon.button--small` | `:host([as-icon][size='small']) button` |
 | `.button svg { … }` | `::slotted(svg) { … }` |
-| `.empty-state__icon > svg` | `.icon ::slotted(svg)` |
+| `.empty-state__icon > svg` | `::slotted([slot='icon'])`: the slotted icon is the circle, inside an `aria-hidden` wrapper with `display: contents` |
 | `.avatar-stack .avatar` (`avatar.styled.css:76,80`) | in `avatar-stack.styles.ts`: `::slotted(hmi-avatar) { … }` and `::slotted(hmi-avatar:not(:first-child)) { margin-inline-start: … }` |
 | `[data-structure="journal"] .list__item` (`list.styled.css:92`) | `.item { border-bottom-style: var(--list-divider-style, solid); }` — `--list-divider-style` is `dashed` in `structure/journal.css` |
 | `[data-structure="journal"] .progress` / `.switch__thumb` | `border: var(--progress-track-border, none)`, `box-shadow: var(--switch-thumb-shadow)` — defaults in `constants.css`, journal overrides in `structure/journal.css` |
