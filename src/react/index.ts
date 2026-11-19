@@ -63,7 +63,7 @@ export {
 } from '../elements/checkbox/checkbox.react.js';
 export {
     Chip,
-    type ChipCloseDetail,
+    type ChipDismissDetail,
     type ChipSelectDetail,
 } from '../elements/chip/chip.react.js';
 export { Code } from '../elements/code/code.react.js';

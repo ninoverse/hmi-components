@@ -36,7 +36,7 @@ const meta = {
         docs: {
             description: {
                 component:
-                    "React: `import { Chip } from '@ninoverse/hmi-components/react/chip'` — `<Chip selectable closable selected={on} onSelect={toggle} onClose={remove}>Filter</Chip>`. `selectable` and `closable` replace the presence of `onSelect` and `onClose`. Both events are cancelable: a click flips `selected` before `hmi-select`, and `preventDefault()` puts it back; without `preventDefault()`, `hmi-close` hides the chip. The remove button is named `closeLabel` followed by the label, such as `Remove Filter`.",
+                    "React: `import { Chip } from '@ninoverse/hmi-components/react/chip'` — `<Chip selectable closable selected={on} onSelect={toggle} onDismiss={remove}>Filter</Chip>`. `selectable` and `closable` replace the presence of `onSelect` and v5's `onClose`, which is `onDismiss` here, as on `Banner`. Both events are cancelable: a click flips `selected` before `hmi-select`, and `preventDefault()` puts it back; without `preventDefault()`, `hmi-dismiss` hides the chip. The remove button is named `closeLabel` followed by the label, such as `Remove Filter`.",
             },
         },
     },
@@ -80,10 +80,10 @@ export const WithIcon: Story = {
         </hmi-chip>`,
 };
 
-/** `preventDefault()` on `hmi-close` keeps the chip on screen. */
-export const CancelledClose: Story = {
+/** `preventDefault()` on `hmi-dismiss` keeps the chip on screen. */
+export const CancelledDismiss: Story = {
     render: () =>
-        html`<hmi-chip closable @hmi-close=${(e: Event) => e.preventDefault()}
+        html`<hmi-chip closable @hmi-dismiss=${(e: Event) => e.preventDefault()}
             >Pinned</hmi-chip
         >`,
 };
@@ -106,11 +106,11 @@ export const LongLabel: Story = {
 
 /** Focus was on the remove button, which goes with the chip: the listener
 moves it to the next chip's, or the previous one's for the last. */
-export const FocusAfterClose: Story = {
+export const FocusAfterDismiss: Story = {
     render: () =>
         html`<div
             style="display: flex; gap: 8px"
-            @hmi-close=${(e: Event) => {
+            @hmi-dismiss=${(e: Event) => {
                 const chip = e.target as HTMLElement;
                 const next = (chip.nextElementSibling ??
                     chip.previousElementSibling) as HTMLElement | null;

@@ -9,8 +9,8 @@ export interface ChipSelectDetail {
     selected: boolean;
 }
 
-/** Detail of `hmi-close`: empty, the event carries no data. */
-export type ChipCloseDetail = Record<string, never>;
+/** Detail of `hmi-dismiss`: empty, the event carries no data. */
+export type ChipDismissDetail = Record<string, never>;
 
 /**
  * Compact pill for a tag or filter. It is static by default. `selectable`
@@ -23,7 +23,7 @@ export type ChipCloseDetail = Record<string, never>;
  * Both actions are cancelable events. A click on the toggle flips `selected`,
  * then fires `hmi-select` with the new state; a listener that calls
  * `preventDefault()` puts the old one back, unless it set `selected` itself.
- * A click on the remove button fires `hmi-close`, and unless it is cancelled
+ * A click on the remove button fires `hmi-dismiss`, as banner's and toast's do,, and unless it is cancelled
  * the chip sets `hidden` on itself; remove the attribute to show it again.
  * Focus was on the remove button, so it falls back to the page: a listener
  * should move it on, such as to the next chip.
@@ -35,7 +35,7 @@ export type ChipCloseDetail = Record<string, never>;
  * @slot - The label.
  * @slot icon - Optional leading icon, such as an `svg`.
  * @fires {CustomEvent<ChipSelectDetail>} hmi-select - The toggle was clicked, and `selected` flipped. Cancelable: `preventDefault()` puts it back.
- * @fires {CustomEvent<ChipCloseDetail>} hmi-close - The remove button was clicked. Cancelable: without `preventDefault()` the chip hides itself.
+ * @fires {CustomEvent<ChipDismissDetail>} hmi-dismiss - The remove button was clicked. Cancelable: without `preventDefault()` the chip hides itself.
  * @csspart base - The pill.
  * @csspart control - The toggle surface: a button when `selectable`, a span otherwise.
  * @csspart icon - The icon slot.
@@ -56,7 +56,7 @@ export class HmiChip extends LitElement {
     /** Makes the label a toggle button that fires `hmi-select`. @default false */
     @property({ type: Boolean, reflect: true }) accessor selectable = false;
 
-    /** Adds a trailing remove button that fires `hmi-close`. @default false */
+    /** Adds a trailing remove button that fires `hmi-dismiss`. @default false */
     @property({ type: Boolean, reflect: true }) accessor closable = false;
 
     /** The remove button's name, read before the chip's label: "Remove Beta". @default 'Remove' */
@@ -75,9 +75,14 @@ export class HmiChip extends LitElement {
         if (!proceed && this.selected === selected) this.selected = previous;
     }
 
-    #close(): void {
+    #dismiss(): void {
         if (
-            emit<ChipCloseDetail>(this, 'hmi-close', {}, { cancelable: true })
+            emit<ChipDismissDetail>(
+                this,
+                'hmi-dismiss',
+                {},
+                { cancelable: true },
+            )
         ) {
             this.hidden = true;
         }
@@ -129,7 +134,7 @@ export class HmiChip extends LitElement {
                               class="close"
                               type="button"
                               aria-labelledby="close-label label"
-                              @click=${this.#close}
+                              @click=${this.#dismiss}
                           >
                               <span id="close-label" hidden
                                   >${this.closeLabel}</span

@@ -115,12 +115,12 @@ describe('hmi-chip', () => {
             fired += 1;
         };
         document.addEventListener('hmi-select', count);
-        document.addEventListener('hmi-close', count);
+        document.addEventListener('hmi-dismiss', count);
         el.selected = true;
         el.hidden = true;
         await el.updateComplete;
         document.removeEventListener('hmi-select', count);
-        document.removeEventListener('hmi-close', count);
+        document.removeEventListener('hmi-dismiss', count);
         expect(fired).toBe(0);
     });
 
@@ -187,11 +187,11 @@ describe('hmi-chip', () => {
         );
     });
 
-    it('hides itself on close unless hmi-close is cancelled', async () => {
+    it('hides itself on dismiss unless hmi-dismiss is cancelled', async () => {
         const el = await fixture(html`<hmi-chip closable>Filter</hmi-chip>`);
         let cancel = true;
         let fired = 0;
-        el.addEventListener('hmi-close', (event) => {
+        el.addEventListener('hmi-dismiss', (event) => {
             fired += 1;
             expect((event as CustomEvent).detail).toEqual({});
             if (cancel) event.preventDefault();
@@ -326,7 +326,7 @@ describe('hmi-chip', () => {
                         onSelect: (event) => {
                             selects.push(event.detail.selected);
                         },
-                        onClose: () => {
+                        onDismiss: () => {
                             closed += 1;
                         },
                     },

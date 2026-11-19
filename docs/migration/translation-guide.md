@@ -287,7 +287,7 @@ Wrapper prop = `on` + PascalCase of the event minus `hmi-`.
 | accordion | `onOpenChange(number[])` | `hmi-open-change` (cancelable: `preventDefault()` keeps the sections as they were) | `{ open: number[] }` |
 | popover, hover-card, tooltip, context-menu | `onOpenChange(boolean)` | `hmi-open-change` | `{ open: boolean }` |
 | modal, drawer, command-palette | `onClose()` (command-palette: `onOpenChange(false)`) | `hmi-close` (cancelable; the dialog is controlled and stays open until `open` is set to false) | `{ reason: 'escape' \| 'backdrop' }` (command-palette also `'select'`, after a command is chosen) |
-| chip | `onClose()` / `onSelect()` | `hmi-close` (cancelable) / `hmi-select` (cancelable) | `{}` / `{ selected: boolean }` |
+| chip | `onClose()` / `onSelect()` | `hmi-dismiss` (cancelable, as banner's and toast's: the element hides itself unless cancelled; `hmi-close` is a dialog asking to close) / `hmi-select` (cancelable) | `{}` / `{ selected: boolean }` |
 | modal, drawer, command-palette, table (`actions` cells) | `onAction(string)` (command-palette: also each command's `onSelect()`) | `hmi-action` | `{ value: string, row?: Row }` |
 | confirm-dialog | `onCancel()` / `onConfirm()` | `hmi-cancel` (cancelable) / `hmi-confirm` | `{}` |
 | banner | `onDismiss()` | `hmi-dismiss` (cancelable) | `{}` |
