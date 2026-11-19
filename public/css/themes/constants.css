@@ -71,9 +71,11 @@
        hover-card, context-menu, toast, modal, drawer, command-palette, combobox
        listbox, menu, chart-tooltip) paint from. Materials override them; the
        theme files never select an element or a class. --panel-filter is a
-       backdrop-filter value. */
-    --panel-bg: var(--surface-container-high);
-    --panel-bg-strong: var(--surface-container-high);
+       backdrop-filter value. A panel sits on the low container, one step under
+       the page's other containers, so what it holds, such as a field or a
+       chip on --surface-container-high, still stands out from it. */
+    --panel-bg: var(--surface-container-low);
+    --panel-bg-strong: var(--surface-container-low);
     --panel-ink-bg: var(--inverse-surface);
     --panel-accent-bg: var(--primary-container);
     --panel-border: var(--outline-variant);

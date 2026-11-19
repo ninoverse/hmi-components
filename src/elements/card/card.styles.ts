@@ -8,7 +8,8 @@ import { css } from 'lit';
    Ported from src/components/styled/card.styled.css, with the surface, the
    border and the two tonal fills re-based onto the --panel-* tokens so the
    glass and liquid materials reach the card (R4). Under the solid material
-   those tokens resolve to exactly the values the React card used.
+   those tokens resolve to the values the React card used, but for the
+   surface: the low container, a step under v5's high one.
 
    Each variant sets --on-panel, --on-panel-variant and --on-panel-link, the
    text, muted text and link colours of what it holds. They inherit through

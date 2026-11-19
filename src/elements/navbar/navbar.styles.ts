@@ -9,7 +9,8 @@ import { css } from 'lit';
    Ported from src/components/styled/navbar.styled.css, with the surface and
    border re-based onto the --panel-* tokens so the glass and liquid materials
    reach the navbar (R4). Under the solid material those tokens resolve to
-   exactly the values the React navbar used. 40em is the v5 breakpoint: a media
+   the values the React navbar used, but for the surface: the low container,
+   a step under v5's high one. 40em is the v5 breakpoint: a media
    query reads the browser's initial font size for em and rem alike. */
 export const styles = css`
     :host {
