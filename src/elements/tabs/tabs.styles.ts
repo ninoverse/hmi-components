@@ -19,8 +19,10 @@ export const styles = css`
         gap: var(--space-1);
         padding: var(--space-2);
         background: var(--surface-container);
-        border-radius: var(--corner-tl) var(--corner-tr) var(--corner-br)
-            var(--corner-bl);
+        border-start-start-radius: var(--corner-tl);
+        border-start-end-radius: var(--corner-tr);
+        border-end-end-radius: var(--corner-br);
+        border-end-start-radius: var(--corner-bl);
     }
 
     .tab {
@@ -96,18 +98,20 @@ export const styles = css`
     /* The outer corners follow the strip's, so the indicator on the first or
        last tab fits its corner. A middle tab keeps the small radius. */
     :host(:not([variant='underline'])) .indicator[data-edge='start'] {
-        border-top-left-radius: var(--corner-tl);
-        border-bottom-left-radius: var(--corner-bl);
+        border-start-start-radius: var(--corner-tl);
+        border-end-start-radius: var(--corner-bl);
     }
 
     :host(:not([variant='underline'])) .indicator[data-edge='end'] {
-        border-top-right-radius: var(--corner-tr);
-        border-bottom-right-radius: var(--corner-br);
+        border-start-end-radius: var(--corner-tr);
+        border-end-end-radius: var(--corner-br);
     }
 
     :host(:not([variant='underline'])) .indicator[data-edge='both'] {
-        border-radius: var(--corner-tl) var(--corner-tr) var(--corner-br)
-            var(--corner-bl);
+        border-start-start-radius: var(--corner-tl);
+        border-start-end-radius: var(--corner-tr);
+        border-end-end-radius: var(--corner-br);
+        border-end-start-radius: var(--corner-bl);
     }
 
     :host([variant='underline']) .tabs {

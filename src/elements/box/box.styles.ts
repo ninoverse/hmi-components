@@ -54,8 +54,10 @@ export const styles = css`
         border-radius: var(--corner-full);
     }
     :host([radius='leaf']) {
-        border-radius: var(--corner-tl) var(--corner-tr) var(--corner-br)
-            var(--corner-bl);
+        border-start-start-radius: var(--corner-tl);
+        border-start-end-radius: var(--corner-tr);
+        border-end-end-radius: var(--corner-br);
+        border-end-start-radius: var(--corner-bl);
     }
 
     :host([bordered]) {

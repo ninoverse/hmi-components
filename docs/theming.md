@@ -570,6 +570,14 @@ The complete role → property map is exported as `colors` for imperative use
 
 - Scale: `--corner-none`, `--corner-extra-small`, `--corner-small`, `--corner-medium`, `--corner-large`, `--corner-extra-large`, `--corner-full`.
 - Per-corner overrides drive the signature asymmetric "notch": `--corner-tl`, `--corner-tr`, `--corner-br`, `--corner-bl`.
+  The Lit elements read them as logical corners, so the shape mirrors in
+  right-to-left text: `tl` is the start corner of the first line, `tr` its end,
+  `br` the end corner of the last line and `bl` its start. Under `dir="ltr"`
+  they are the top-left, top-right, bottom-right and bottom-left corners, as
+  their names say; under `dir="rtl"` the large `tl` corner of the default
+  structure is top right. A drawer stays on the physical side it names, so only
+  the corners facing the screen are round, and which tokens they take follows
+  the direction. The v5 React components read the tokens as physical corners.
 
 Values vary by structure theme (`default`, `rounded`, `sharp`, `pixel`, `journal`).
 

@@ -25,8 +25,10 @@ export const styles = css`
         overflow: hidden;
         background: var(--palette-bg);
         color: var(--on-background);
-        border-radius: var(--corner-tl) var(--corner-tr) var(--corner-br)
-            var(--corner-bl);
+        border-start-start-radius: var(--corner-tl);
+        border-start-end-radius: var(--corner-tr);
+        border-end-end-radius: var(--corner-br);
+        border-end-start-radius: var(--corner-bl);
         box-shadow: var(--elevation-4);
         -webkit-backdrop-filter: var(--panel-filter);
         backdrop-filter: var(--panel-filter);

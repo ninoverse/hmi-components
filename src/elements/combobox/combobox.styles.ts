@@ -18,8 +18,10 @@ export const styles = css`
         padding: 0 var(--space-6);
         background: var(--surface-container-lowest);
         border: calc(var(--_base) * 0.125) solid var(--outline-variant);
-        border-radius: var(--corner-tl) var(--corner-tr) var(--corner-br)
-            var(--corner-bl);
+        border-start-start-radius: var(--corner-tl);
+        border-start-end-radius: var(--corner-tr);
+        border-end-end-radius: var(--corner-br);
+        border-end-start-radius: var(--corner-bl);
         transition:
             border-color var(--duration-short-3) var(--easing-standard),
             box-shadow var(--duration-short-3) var(--easing-standard);
@@ -121,8 +123,10 @@ export const styles = css`
         background: var(--listbox-bg);
         color: var(--on-surface);
         border: calc(var(--_base) * 0.125) solid var(--panel-border);
-        border-radius: var(--corner-tl) var(--corner-tr) var(--corner-br)
-            var(--corner-bl);
+        border-start-start-radius: var(--corner-tl);
+        border-start-end-radius: var(--corner-tr);
+        border-end-end-radius: var(--corner-br);
+        border-end-start-radius: var(--corner-bl);
         box-shadow: var(--elevation-2);
         -webkit-backdrop-filter: var(--panel-filter);
         backdrop-filter: var(--panel-filter);
@@ -155,13 +159,13 @@ export const styles = css`
     }
 
     .option:first-of-type {
-        border-top-left-radius: var(--corner-tl);
-        border-top-right-radius: var(--corner-tr);
+        border-start-start-radius: var(--corner-tl);
+        border-start-end-radius: var(--corner-tr);
     }
 
     .option:last-of-type {
-        border-bottom-right-radius: var(--corner-br);
-        border-bottom-left-radius: var(--corner-bl);
+        border-end-end-radius: var(--corner-br);
+        border-end-start-radius: var(--corner-bl);
     }
 
     .option[data-highlighted='true'] {

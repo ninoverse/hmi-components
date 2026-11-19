@@ -58,9 +58,18 @@ export const styles = css`
         max-height: 90vh;
     }
 
+    /* Only the corners facing the screen are round, from the corner tokens,
+       which name logical corners: --corner-tl is the start of the first line.
+       A side drawer stays on its physical side, so in right-to-left text its
+       inner corners are the other logical pair: a left drawer there is at the
+       end of the line, as a right drawer is in left-to-right text. */
     :host([side='left']) .panel {
         inset: 0 auto 0 0;
         border-radius: 0 var(--corner-tr) var(--corner-br) 0;
+    }
+
+    :host([side='left']:dir(rtl)) .panel {
+        border-radius: 0 var(--corner-tl) var(--corner-bl) 0;
     }
 
     :host([side='right']) .panel,
@@ -69,14 +78,23 @@ export const styles = css`
         border-radius: var(--corner-tl) 0 0 var(--corner-bl);
     }
 
+    :host([side='right']:dir(rtl)) .panel,
+    :host(:not([side]):dir(rtl)) .panel {
+        border-radius: var(--corner-tr) 0 0 var(--corner-br);
+    }
+
     :host([side='top']) .panel {
         inset: 0 0 auto 0;
-        border-radius: 0 0 var(--corner-br) var(--corner-bl);
+        border-radius: 0;
+        border-end-end-radius: var(--corner-br);
+        border-end-start-radius: var(--corner-bl);
     }
 
     :host([side='bottom']) .panel {
         inset: auto 0 0 0;
-        border-radius: var(--corner-tl) var(--corner-tr) 0 0;
+        border-radius: 0;
+        border-start-start-radius: var(--corner-tl);
+        border-start-end-radius: var(--corner-tr);
     }
 
     :host([side='left']) .panel[open] {

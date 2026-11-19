@@ -25,8 +25,10 @@ export const styles = css`
         padding: var(--space-8);
         background: var(--panel-bg);
         border: calc(var(--_base) * 0.125) solid var(--panel-border);
-        border-radius: var(--corner-tl) var(--corner-tr) var(--corner-br)
-            var(--corner-bl);
+        border-start-start-radius: var(--corner-tl);
+        border-start-end-radius: var(--corner-tr);
+        border-end-end-radius: var(--corner-br);
+        border-end-start-radius: var(--corner-bl);
         -webkit-backdrop-filter: var(--panel-filter);
         backdrop-filter: var(--panel-filter);
         font-family: var(--font-default);
@@ -66,13 +68,13 @@ export const styles = css`
     }
 
     .group:first-child > slot:first-child > .link {
-        border-top-left-radius: var(--corner-tl);
-        border-top-right-radius: var(--corner-tr);
+        border-start-start-radius: var(--corner-tl);
+        border-start-end-radius: var(--corner-tr);
     }
 
     .group:last-child > slot:last-child > .link {
-        border-bottom-right-radius: var(--corner-br);
-        border-bottom-left-radius: var(--corner-bl);
+        border-end-end-radius: var(--corner-br);
+        border-end-start-radius: var(--corner-bl);
     }
 
     .link:hover,
