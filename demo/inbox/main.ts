@@ -411,7 +411,7 @@ const rowSlots = (message: Message) => html`
 const chip = (label: string, remove: () => void) =>
     html`<hmi-chip
         closable
-        close-label="Remove the filter ${label}"
+        close-label="Remove the filter"
         @hmi-close=${(event: Event) => {
             // The page renders the chips from the state: it removes this one.
             event.preventDefault();

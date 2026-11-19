@@ -36,7 +36,7 @@ const meta = {
         docs: {
             description: {
                 component:
-                    "React: `import { Chip } from '@ninoverse/hmi-components/react/chip'` — `<Chip selectable closable selected={on} onSelect={toggle} onClose={remove}>Filter</Chip>`. `selectable` and `closable` replace the presence of `onSelect` and `onClose`; both events are cancelable, and without `preventDefault()` the chip flips `selected` or hides itself.",
+                    "React: `import { Chip } from '@ninoverse/hmi-components/react/chip'` — `<Chip selectable closable selected={on} onSelect={toggle} onClose={remove}>Filter</Chip>`. `selectable` and `closable` replace the presence of `onSelect` and `onClose`. Both events are cancelable: a click flips `selected` before `hmi-select`, and `preventDefault()` puts it back; without `preventDefault()`, `hmi-close` hides the chip. The remove button is named `closeLabel` followed by the label, such as `Remove Filter`.",
             },
         },
     },
@@ -47,6 +47,8 @@ type Story = StoryObj<Args>;
 
 export const Default: Story = {};
 
+/** A selected chip shows a check mark, so the state doesn't rest on colour.
+Without `selectable` it is only that look: screen readers get no state. */
 export const Selected: Story = { args: { selected: true } };
 
 /** `selectable` turns the label into a toggle button. Click it. */
@@ -84,4 +86,41 @@ export const CancelledClose: Story = {
         html`<hmi-chip closable @hmi-close=${(e: Event) => e.preventDefault()}
             >Pinned</hmi-chip
         >`,
+};
+
+/** The label keeps to one line, and ends in an ellipsis when the chip is
+wider than its box. */
+export const LongLabel: Story = {
+    args: { selectable: true, closable: true },
+    render: (args) =>
+        html`<div style="width: 180px">
+            <hmi-chip
+                ?selected=${args.selected}
+                ?selectable=${args.selectable}
+                ?closable=${args.closable}
+                close-label=${args.closeLabel}
+                >A rather long filter label</hmi-chip
+            >
+        </div>`,
+};
+
+/** Focus was on the remove button, which goes with the chip: the listener
+moves it to the next chip's, or the previous one's for the last. */
+export const FocusAfterClose: Story = {
+    render: () =>
+        html`<div
+            style="display: flex; gap: 8px"
+            @hmi-close=${(e: Event) => {
+                const chip = e.target as HTMLElement;
+                const next = (chip.nextElementSibling ??
+                    chip.previousElementSibling) as HTMLElement | null;
+                next?.shadowRoot
+                    ?.querySelector<HTMLElement>('[part="close"]')
+                    ?.focus();
+            }}
+        >
+            <hmi-chip closable>Alpha</hmi-chip>
+            <hmi-chip closable>Beta</hmi-chip>
+            <hmi-chip closable>Gamma</hmi-chip>
+        </div>`,
 };

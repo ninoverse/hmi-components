@@ -3987,7 +3987,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "Compact pill for a tag or filter. It is static by default. `selectable`\nturns the label into a toggle button, and `closable` adds a trailing remove\nbutton, so the two controls are never nested.\n\nBoth actions are cancelable events. A click on the toggle fires\n`hmi-select` with the state the chip would take, and unless a listener calls\n`preventDefault()` the chip then sets `selected` itself. A click on the\nremove button fires `hmi-close`, and unless it is cancelled the chip sets\n`hidden` on itself; remove the attribute to show it again.",
+          "description": "Compact pill for a tag or filter. It is static by default. `selectable`\nturns the label into a toggle button, and `closable` adds a trailing remove\nbutton, so the two controls are never nested. A selected chip shows a check\nmark, in place of its icon, so the state never rests on colour alone.\n`selected` without `selectable` is only that look: screen readers get no\nstate, so a chip the user toggles is `selectable`.\n\nBoth actions are cancelable events. A click on the toggle flips `selected`,\nthen fires `hmi-select` with the new state; a listener that calls\n`preventDefault()` puts the old one back, unless it set `selected` itself.\nA click on the remove button fires `hmi-close`, and unless it is cancelled\nthe chip sets `hidden` on itself; remove the attribute to show it again.\nFocus was on the remove button, so it falls back to the page: a listener\nshould move it on, such as to the next chip.\n\nThe remove button is named `close-label` followed by the chip's label, such\nas \"Remove Beta\".",
           "name": "HmiChip",
           "cssParts": [
             {
@@ -4001,6 +4001,10 @@
             {
               "description": "The icon slot.",
               "name": "icon"
+            },
+            {
+              "description": "The check mark a selected chip shows in place of its icon.",
+              "name": "check"
             },
             {
               "description": "The label wrapper.",
@@ -4062,7 +4066,7 @@
                 "text": "string"
               },
               "default": "'Remove'",
-              "description": "Accessible label of the remove button.",
+              "description": "The remove button's name, read before the chip's label: \"Remove Beta\".",
               "attribute": "close-label"
             },
             {
@@ -4091,7 +4095,7 @@
               "type": {
                 "text": "CustomEvent<ChipSelectDetail>"
               },
-              "description": "The toggle was clicked. Cancelable: without `preventDefault()` the chip flips `selected`.",
+              "description": "The toggle was clicked, and `selected` flipped. Cancelable: `preventDefault()` puts it back.",
               "name": "hmi-select"
             },
             {
@@ -4136,7 +4140,7 @@
                 "text": "string"
               },
               "default": "'Remove'",
-              "description": "Accessible label of the remove button.",
+              "description": "The remove button's name, read before the chip's label: \"Remove Beta\".",
               "fieldName": "closeLabel"
             }
           ],
