@@ -117,6 +117,20 @@ const cases: ReadonlyArray<{ name: string; template: TemplateResult }> = [
             ><span slot="description">Nothing here yet.</span></hmi-empty-state
         >`,
     },
+    {
+        name: 'hmi-kbd',
+        template: html`<p>
+            Press
+            <kbd><hmi-kbd>Ctrl</hmi-kbd> + <hmi-kbd>K</hmi-kbd></kbd>
+        </p>`,
+    },
+    {
+        name: 'hmi-kbd with a label',
+        template: html`<p>
+            Press <hmi-kbd label="Command">⌘</hmi-kbd>
+            <hmi-kbd size="small" label="Escape"></hmi-kbd>
+        </p>`,
+    },
 ];
 
 afterEach(() => {

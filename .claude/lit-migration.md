@@ -151,7 +151,9 @@ stem (`AreaChart`), the tag is `hmi-<kebab>`, the class is `Hmi<Pascal>`,
   file. The hooks defined so far, with defaults in `constants.css` and overrides
   in `structure/journal.css`: `--list-divider-style`, `--progress-track-border`,
   `--switch-thumb-shadow`. `--blockquote-accent`, the blockquote's rule, defaults
-  in `constants.css` to the deeper `--ref-primary-40`. `--card-flat-border`, a flat card's edge, defaults
+  in `constants.css` to the deeper `--ref-primary-40`. `--kbd-font`, the key
+  cap's font, has no default: the element falls back to `--font-display`, and
+  `journal` and `pixel` set it to `--font-default`. `--card-flat-border`, a flat card's edge, defaults
   in `constants.css` to a mix of `--outline` and `--outline-variant`; `glass` and
   `liquid` set their stroke. The drawer's surface, `--drawer-bg`, the combobox
   listbox's, `--listbox-bg`, and the command palette's, `--palette-bg`, are hooks

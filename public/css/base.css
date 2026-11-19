@@ -27,6 +27,25 @@ body {
     color: var(--on-primary-container);
 }
 
+/* hmi-kbd's key symbols. None of the theme fonts has the arrows or the
+   keyboard symbols (⌘ ⇧ ⌥ ⏎ ⌫ ⎋ ␣), so without this each falls back to
+   whatever font the system picks, rarely one that matches its neighbours.
+   The range keeps letters in the theme font; the sources are fonts the
+   system already has, so nothing is downloaded. */
+@font-face {
+    font-family: hmi-key-symbols;
+    src:
+        local('Apple Symbols'),
+        local('AppleSymbols'),
+        local('Segoe UI Symbol'),
+        local('SegoeUISymbol'),
+        local('Noto Sans Symbols 2 Regular'),
+        local('NotoSansSymbols2-Regular'),
+        local('DejaVu Sans'),
+        local('DejaVuSans');
+    unicode-range: U+2190-21FF, U+2300-23FF, U+2400-243F;
+}
+
 /* Material backdrops — palette-derived gradients so the translucent panels of
    the glass and liquid materials have something to blur or refract. */
 [data-material='glass'] body {

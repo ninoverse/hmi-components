@@ -65,4 +65,8 @@
     /* Typography — retro pixel fonts */
     --font-default: var(--font-pixelify-sans);
     --font-display: var(--font-press-start-2p);
+
+    /* Key caps in the body font: Press Start 2P is too wide for a key, and
+       has only two of the four arrows. */
+    --kbd-font: var(--font-default);
 }

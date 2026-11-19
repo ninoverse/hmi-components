@@ -520,7 +520,12 @@ do **not** cross the boundary, which changes how themes may be written:
   `--switch-thumb-shadow` (defaults in `constants.css`, overridden by
   `structure/journal.css`). `--card-flat-border` is a flat card's edge, a step deeper than
   `--outline-variant` under the solid material, and the material's stroke under
-  `glass` and `liquid`. `--blockquote-accent` is the blockquote's accent rule:
+  `glass` and `liquid`. `--kbd-font` is the key cap's font: it has no default,
+  so the cap falls back to `--font-display`, and `structure/journal.css` and
+  `structure/pixel.css` set it to `--font-default`, since Caveat and Press
+  Start 2P are hard to read at a key's size. The cap's arrows and key symbols
+  come from `hmi-key-symbols`, an `@font-face` in `base.css` limited to those
+  glyphs and drawn from the system's own symbol font. `--blockquote-accent` is the blockquote's accent rule:
   the deeper `--ref-primary-40` (default in `constants.css`), since `--primary`
   is under 3:1 on the default theme's light surfaces. `--drawer-bg`, `--listbox-bg` and `--palette-bg` are the
   drawer's, the combobox listbox's and the command palette's surfaces: the lowest
