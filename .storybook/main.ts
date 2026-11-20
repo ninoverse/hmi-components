@@ -15,6 +15,10 @@ const config: StorybookConfig = {
         name: '@storybook/web-components-vite',
         options: {},
     },
+    // The backgrounds tool painted over the theme without switching it,
+    // leaving dark-theme text on a light block. The scheme toolbar in
+    // preview.ts switches the theme itself.
+    features: { backgrounds: false },
     staticDirs: [resolve(dirname, '../public')],
     // The root vite.config.ts is the library build (React plugin, dts emit,
     // 88 lib entries). Storybook merges it by default, so drop the parts that
