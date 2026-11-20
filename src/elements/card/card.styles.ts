@@ -15,7 +15,15 @@ import { css } from 'lit';
    text, muted text and link colours of what it holds. They inherit through
    the slots, so hmi-text, hmi-heading and hmi-link read the card's colours
    on the ink and accent surfaces; the default card sets them back, so a card
-   nested in an ink card reads its own. */
+   nested in an ink card reads its own.
+
+   The ink card is the inverse surface, so the bars it holds take inverse
+   colours too: --on-panel-track for the empty track, the card's text at 20% over the
+   inverse surface, opaque so the glass and liquid sheens don't thin it,
+   --on-panel-fill for progress's and slider's fill, and --on-panel-success,
+   --on-panel-warning and --on-panel-error for meter's levels and slider's
+   error, each blended toward the card's text. Progress, meter and slider
+   read them before their own colours. Every other card leaves them unset. */
 export const styles = css`
     :host {
         display: block;
@@ -25,6 +33,11 @@ export const styles = css`
         --on-panel: var(--on-surface);
         --on-panel-variant: var(--on-surface-variant);
         --on-panel-link: var(--ref-primary-40);
+        --on-panel-track: initial;
+        --on-panel-fill: initial;
+        --on-panel-success: initial;
+        --on-panel-warning: initial;
+        --on-panel-error: initial;
         background: var(--panel-bg);
         color: var(--on-background);
         border: calc(var(--_base) * 0.125) solid var(--panel-border);
@@ -60,6 +73,27 @@ export const styles = css`
         --on-panel-link: color-mix(
             in oklab,
             var(--inverse-primary) 35%,
+            var(--inverse-on-surface)
+        );
+        --on-panel-track: color-mix(
+            in srgb,
+            var(--inverse-on-surface) 20%,
+            var(--inverse-surface)
+        );
+        --on-panel-fill: var(--inverse-primary);
+        --on-panel-success: color-mix(
+            in oklab,
+            var(--success) 55%,
+            var(--inverse-on-surface)
+        );
+        --on-panel-warning: color-mix(
+            in oklab,
+            var(--warning) 55%,
+            var(--inverse-on-surface)
+        );
+        --on-panel-error: color-mix(
+            in oklab,
+            var(--error) 55%,
             var(--inverse-on-surface)
         );
         background: var(--panel-ink-bg);

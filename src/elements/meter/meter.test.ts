@@ -224,6 +224,21 @@ describe('hmi-meter', () => {
         expect(getComputedStyle(part(el, 'base')).borderTopStyle).toBe('none');
     });
 
+    it("takes an ink card's colours before its own hooks", async () => {
+        const el = await fixture(
+            html`<hmi-meter
+                style="--meter-suboptimal: rgb(4, 5, 6); --on-panel-warning: rgb(7, 8, 9); --on-panel-track: rgb(1, 2, 3)"
+                value="0.5"
+                low="0.3"
+                high="0.7"
+            ></hmi-meter>`,
+        );
+        expect(getComputedStyle(fill(el)).backgroundColor).toBe('rgb(7, 8, 9)');
+        expect(getComputedStyle(part(el, 'base')).backgroundColor).toBe(
+            'rgb(1, 2, 3)',
+        );
+    });
+
     it('keeps the track and fill visible in forced colors', async () => {
         const el = await fixture(html`<hmi-meter value="0.5"></hmi-meter>`);
         await withMedia([{ name: 'forced-colors', value: 'active' }], () => {

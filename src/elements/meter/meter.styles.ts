@@ -5,7 +5,9 @@ import { css } from 'lit';
    band: optimal = success, suboptimal = warning, poor = error, each behind a
    hook a theme can deepen. The track's edge is a hook too, none by default
    and an outline in journal, as progress's. Inside a panel
-   the text takes the panel's own colours, as hmi-text does. Ported from
+   the text takes the panel's own colours, as hmi-text does, and inside an
+   ink card the track and fills take the card's (--on-panel-track,
+   --on-panel-success, --on-panel-warning, --on-panel-error). Ported from
    src/components/styled/meter.styled.css. */
 export const styles = css`
     :host {
@@ -38,7 +40,7 @@ export const styles = css`
 
     .base {
         height: var(--_base);
-        background: var(--surface-container-high);
+        background: var(--on-panel-track, var(--surface-container-high));
         border: var(--meter-track-border, none);
         border-radius: var(--corner-full);
         overflow: hidden;
@@ -51,13 +53,16 @@ export const styles = css`
     }
 
     .optimal {
-        background: var(--meter-optimal, var(--success));
+        background: var(--on-panel-success, var(--meter-optimal, var(--success)));
     }
     .suboptimal {
-        background: var(--meter-suboptimal, var(--warning));
+        background: var(
+            --on-panel-warning,
+            var(--meter-suboptimal, var(--warning))
+        );
     }
     .poor {
-        background: var(--meter-poor, var(--error));
+        background: var(--on-panel-error, var(--meter-poor, var(--error)));
     }
 
     @media (prefers-reduced-motion: reduce) {

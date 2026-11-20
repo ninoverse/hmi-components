@@ -4,6 +4,9 @@ import { createRoot } from 'react-dom/client';
 import { afterEach, describe, expect, it } from 'vitest';
 import '../heading/heading.js';
 import '../link/link.js';
+import '../meter/meter.js';
+import '../progress/progress.js';
+import '../slider/slider.js';
 import '../text/text.js';
 import './card.js';
 import type { HmiCard } from './card.js';
@@ -262,6 +265,50 @@ describe('hmi-card', () => {
             el.shadowRoot?.querySelector('svg')?.getAttribute('aria-hidden'),
         ).toBe('true');
         expect(document.querySelector('filter#liquid-glass')).toBeNull();
+    });
+
+    it("gives the bars in an ink card the card's colours", async () => {
+        const el = await fixture(html`<hmi-card
+            variant="ink"
+            style="--inverse-on-surface: rgb(255, 255, 255); --inverse-surface: rgb(0, 0, 0); --inverse-primary: rgb(1, 2, 3); --surface-container-high: rgb(9, 9, 9); --primary: rgb(8, 8, 8)"
+        >
+            <hmi-progress value="50" label="Upload"></hmi-progress>
+            <hmi-meter value="0.5" label="Disk"></hmi-meter>
+            <hmi-slider value="50" label="Volume"></hmi-slider>
+            <hmi-card
+                ><hmi-progress value="50" label="Nested"></hmi-progress
+            ></hmi-card>
+        </hmi-card>`);
+        const [progress, nested] = [...el.querySelectorAll('hmi-progress')];
+        const meter = el.querySelector('hmi-meter');
+        const slider = el.querySelector('hmi-slider');
+        if (!progress || !nested || !meter || !slider) throw new Error('bars');
+        await Promise.all(
+            [progress, nested, meter, slider].map((e) => e.updateComplete),
+        );
+        const style = (host: Element, selector: string) =>
+            getComputedStyle(
+                host.shadowRoot?.querySelector(selector) as Element,
+            );
+        /* The track is the card's text at 20% over the inverse surface; the
+           fill the inverse primary. */
+        const track = 'color(srgb 0.2 0.2 0.2)';
+        expect(style(progress, '[part~="base"]').backgroundColor).toBe(track);
+        expect(style(progress, '[part~="indicator"]').backgroundColor).toBe(
+            'rgb(1, 2, 3)',
+        );
+        expect(style(meter, '[part~="base"]').backgroundColor).toBe(track);
+        expect(style(slider, 'input').backgroundImage).toContain(track);
+        expect(style(slider, 'input').backgroundImage).toContain(
+            'rgb(1, 2, 3)',
+        );
+        /* A default card inside resets them, so its bars read the page's. */
+        expect(style(nested, '[part~="base"]').backgroundColor).toBe(
+            'rgb(9, 9, 9)',
+        );
+        expect(style(nested, '[part~="indicator"]').backgroundColor).toBe(
+            'rgb(8, 8, 8)',
+        );
     });
 
     it('exposes roles', async () => {

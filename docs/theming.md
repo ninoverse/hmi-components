@@ -511,6 +511,19 @@ do **not** cross the boundary, which changes how themes may be written:
   sets them for what it holds: the inverse text roles on `ink`, and
   `--on-primary-container` on `accent`, so text from those elements stays
   readable on the card's surface. A default card sets them back.
+- **Bars on an ink card.** `hmi-progress`, `hmi-meter` and `hmi-slider` read
+  `--on-panel-track` for the empty track, `--on-panel-fill` for progress's and
+  slider's fill, and `--on-panel-success`, `--on-panel-warning` and
+  `--on-panel-error` for meter's levels and slider's error, before their own
+  colours and hooks. Only the `ink` card sets them: the track is its text at
+  20% over the inverse surface, the fill `--inverse-primary`, and the levels
+  the status colours mixed 55% toward its text. Under the solid material the
+  fills are 3.6:1 to 5.2:1 against the track in the light schemes, and, where
+  the ink card is light, 2.3:1 to 3.4:1 against the track and 3.4:1 to 5:1
+  against the card in the dark ones; glass thins the dark card further, to
+  2.2:1 against it. Without them the empty track drew in
+  `--surface-container-high`, a bar 5.6:1 to 13:1 against the card that read
+  as full.
 - **Dark elevation.** In the dark scheme, `constants.css` casts `--elevation-1`
   to `--elevation-5` in the `--shadow` role at 30 to 50%, since the light
   shadows don't show on a near-black page. Journal, glass and liquid keep their
