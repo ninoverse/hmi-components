@@ -15130,16 +15130,42 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "Scalar measurement bar within a known range, such as disk usage. The fill\ncolour reflects quality, following the native `<meter>` algorithm through\n`low`, `high` and `optimum`. For task completion use `hmi-progress`.\n\nThe label is the `label` slot. It names the track through\n`aria-labelledby`, so there is no `label` property.",
+          "description": "Scalar measurement bar within a known range, such as disk usage. For task\ncompletion use `hmi-progress`.\n\nThe fill's colour tells the value's quality. `low` and `high` split the\nrange into three bands: up to and including `low`, between them, and from\n`high` up. The band `optimum` falls in is optimal (`--success`), the band\nnext to it suboptimal (`--warning`) and the band two away poor (`--error`).\n`low` and `high` default to `min` and `max`, and `optimum` to `max`, so a\nmeter without thresholds is optimal only at `max`, poor at `min` and\nsuboptimal in between: set the thresholds its quality depends on. This is\nhmi's own rule, not the native `<meter>`'s, whose `optimum` defaults to the\nmiddle of the range and whose middle band takes in `low` and `high`.\n\nThe colour is all that tells the quality. When it matters, say it in words\ntoo, with `value-text`: `value-text=\"92%, nearly full\"`. In light schemes\nthe default green and amber fills are under 3:1 against the track; a theme that needs 3:1\ndeepens them through `--meter-optimal`, `--meter-suboptimal` and\n`--meter-poor`, and gives the track an edge through `--meter-track-border`\n(`docs/theming.md` has values).\n\nThe `label` slot is shown above the track and names it. A meter with no\nvisible label takes its name from `label` instead.\n\nA value that isn't a number is read as 0, then kept in the range, as the\nnative `<meter>` does; so is a `max` below `min`, read as `min`.",
           "name": "HmiMeter",
+          "cssProperties": [
+            {
+              "description": "The track's edge. `none` by default; the journal structure sets an `--outline` line.",
+              "name": "--meter-track-border"
+            },
+            {
+              "description": "The optimal fill. Falls back to `--success`.",
+              "name": "--meter-optimal"
+            },
+            {
+              "description": "The suboptimal fill. Falls back to `--warning`.",
+              "name": "--meter-suboptimal"
+            },
+            {
+              "description": "The poor fill. Falls back to `--error`.",
+              "name": "--meter-poor"
+            }
+          ],
           "cssParts": [
             {
               "description": "The track; carries `role=\"meter\"` and the `aria-value*` attributes.",
               "name": "base"
             },
             {
+              "description": "The fill, as wide as the value.",
+              "name": "indicator"
+            },
+            {
               "description": "The label wrapper.",
               "name": "label"
+            },
+            {
+              "description": "The number or `value-text`, shown with `show-value`.",
+              "name": "value"
             }
           ],
           "slots": [
@@ -15156,7 +15182,7 @@
                 "text": "number"
               },
               "default": "0",
-              "description": "Current measurement, clamped to `[min, max]`.",
+              "description": "Current measurement, clamped to `[min, max]`; one that isn't a number is read as 0.",
               "attribute": "value"
             },
             {
@@ -15176,7 +15202,7 @@
                 "text": "number"
               },
               "default": "1",
-              "description": "Upper bound of the scale.",
+              "description": "Upper bound of the scale; one below `min` is read as `min`.",
               "attribute": "max"
             },
             {
@@ -15185,7 +15211,7 @@
               "type": {
                 "text": "number | undefined"
               },
-              "description": "Below this the value is in the \"low\" band. Defaults to `min`.",
+              "description": "Up to and including this the value is in the low band. Defaults to `min`.",
               "attribute": "low"
             },
             {
@@ -15194,7 +15220,7 @@
               "type": {
                 "text": "number | undefined"
               },
-              "description": "Above this the value is in the \"high\" band. Defaults to `max`.",
+              "description": "From this up the value is in the high band. Defaults to `max`.",
               "attribute": "high"
             },
             {
@@ -15203,7 +15229,7 @@
               "type": {
                 "text": "number | undefined"
               },
-              "description": "Where the ideal value sits; drives optimal, suboptimal or poor. Defaults to `max`.",
+              "description": "Where the ideal value sits; its band is optimal. Defaults to `max`.",
               "attribute": "optimum"
             },
             {
@@ -15213,36 +15239,43 @@
                 "text": "boolean"
               },
               "default": "false",
-              "description": "Shows the numeric value beside the label.",
+              "description": "Shows the value beside the label.",
               "attribute": "show-value",
               "reflects": true
             },
             {
               "kind": "field",
-              "name": "#hasLabel",
-              "privacy": "private",
+              "name": "valueText",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Text shown and read out in place of the number, such as `85%` or `73 L`.",
+              "attribute": "value-text"
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The meter's name for screen readers when it has no slotted label.",
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "hasLabel",
               "type": {
                 "text": "boolean"
               },
-              "default": "false"
+              "privacy": "private",
+              "default": "true"
             },
             {
               "kind": "method",
-              "name": "#onLabelChange",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
-              },
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "Event"
-                  }
-                }
-              ]
+              "name": "#read",
+              "privacy": "private"
             }
           ],
           "attributes": [
@@ -15252,7 +15285,7 @@
                 "text": "number"
               },
               "default": "0",
-              "description": "Current measurement, clamped to `[min, max]`.",
+              "description": "Current measurement, clamped to `[min, max]`; one that isn't a number is read as 0.",
               "fieldName": "value"
             },
             {
@@ -15270,7 +15303,7 @@
                 "text": "number"
               },
               "default": "1",
-              "description": "Upper bound of the scale.",
+              "description": "Upper bound of the scale; one below `min` is read as `min`.",
               "fieldName": "max"
             },
             {
@@ -15278,7 +15311,7 @@
               "type": {
                 "text": "number | undefined"
               },
-              "description": "Below this the value is in the \"low\" band. Defaults to `min`.",
+              "description": "Up to and including this the value is in the low band. Defaults to `min`.",
               "fieldName": "low"
             },
             {
@@ -15286,7 +15319,7 @@
               "type": {
                 "text": "number | undefined"
               },
-              "description": "Above this the value is in the \"high\" band. Defaults to `max`.",
+              "description": "From this up the value is in the high band. Defaults to `max`.",
               "fieldName": "high"
             },
             {
@@ -15294,7 +15327,7 @@
               "type": {
                 "text": "number | undefined"
               },
-              "description": "Where the ideal value sits; drives optimal, suboptimal or poor. Defaults to `max`.",
+              "description": "Where the ideal value sits; its band is optimal. Defaults to `max`.",
               "fieldName": "optimum"
             },
             {
@@ -15303,8 +15336,26 @@
                 "text": "boolean"
               },
               "default": "false",
-              "description": "Shows the numeric value beside the label.",
+              "description": "Shows the value beside the label.",
               "fieldName": "showValue"
+            },
+            {
+              "name": "value-text",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Text shown and read out in place of the number, such as `85%` or `73 L`.",
+              "fieldName": "valueText"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "The meter's name for screen readers when it has no slotted label.",
+              "fieldName": "label"
             }
           ],
           "superclass": {
