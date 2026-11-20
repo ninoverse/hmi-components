@@ -172,7 +172,10 @@ stem (`AreaChart`), the tag is `hmi-<kebab>`, the class is `Hmi<Pascal>`,
   `--panel-accent-bg` (defaults in `constants.css`, overridden by the material
   themes). Shadows keep coming from `--elevation-*`. A panel with its own text
   colour sets `--on-panel`, `--on-panel-variant` and `--on-panel-link`, which
-  `hmi-text`, `hmi-heading` and `hmi-link` read before the surface roles. They
+  `hmi-text`, `hmi-heading` and `hmi-link` read before the surface roles. The
+  ink card also sets `--on-panel-track`, `--on-panel-fill`,
+  `--on-panel-success`, `--on-panel-warning` and `--on-panel-error`, which a
+  bar (progress, meter, slider) reads before its own colours. They
   embed the shared
   liquid filter template (`renderLiquidFilter()` from
   `src/elements/shared/panel.ts`) so the liquid material's

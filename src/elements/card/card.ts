@@ -18,6 +18,12 @@ export type CardVariant = 'default' | 'flat' | 'ink' | 'accent';
  * `--on-panel-variant` and `--on-panel-link`, so `hmi-text`, `hmi-heading` and
  * `hmi-link` inside it take the card's text colours.
  *
+ * The `ink` card also sets `--on-panel-track`, `--on-panel-fill`,
+ * `--on-panel-success`, `--on-panel-warning` and `--on-panel-error`, so the
+ * bars of `hmi-progress`, `hmi-meter` and `hmi-slider` inside it draw an empty
+ * track that reads as empty and fills that show on the inverse surface. Other
+ * cards leave them unset.
+ *
  * `active` is visual only: the card raises and outlines itself, and takes a
  * ring in forced colours, but tells assistive technology nothing. The control
  * that selects the card says so, with `aria-current` or `aria-selected`.

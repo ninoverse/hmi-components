@@ -2,12 +2,14 @@ import { css } from 'lit';
 
 /* Slider — a native range input. The fill left of the thumb is a gradient on
    the input driven by --slider-pct, which the element sets on the base. The
-   thumb is styled for WebKit and Firefox. The label, hint and error around it
+   thumb is styled for WebKit and Firefox. Inside an ink card the track and
+   fill take the card's colours (--on-panel-track, --on-panel-fill). The label, hint and error around it
    come from the shared form styles. Ported from
    src/components/styled/slider.styled.css. */
 export const styles = css`
     .base {
-        --_fill: var(--primary);
+        --_fill: var(--on-panel-fill, var(--primary));
+        --_track: var(--on-panel-track, var(--surface-container-high));
         display: flex;
         align-items: center;
         gap: var(--space-6);
@@ -15,7 +17,7 @@ export const styles = css`
     }
 
     .invalid {
-        --_fill: var(--error);
+        --_fill: var(--on-panel-error, var(--error));
     }
 
     .control {
@@ -30,8 +32,8 @@ export const styles = css`
             to right,
             var(--_fill) 0%,
             var(--_fill) var(--slider-pct),
-            var(--surface-container-high) var(--slider-pct),
-            var(--surface-container-high) 100%
+            var(--_track) var(--slider-pct),
+            var(--_track) 100%
         );
         outline: none;
         cursor: pointer;

@@ -5,7 +5,8 @@ import { css } from 'lit';
    the track, from the inline start to the inline end. The Field Journal border
    is the --progress-track-border token (none by default), and the bar's colour
    a hook a theme can deepen. Inside a panel the text takes the panel's own
-   colours, as hmi-text does. Ported from
+   colours, as hmi-text does, and inside an ink card the track and bar take
+   the card's (--on-panel-track, --on-panel-fill). Ported from
    src/components/styled/progress.styled.css. */
 export const styles = css`
     :host {
@@ -39,7 +40,7 @@ export const styles = css`
     .base {
         position: relative;
         height: var(--_base);
-        background: var(--surface-container-high);
+        background: var(--on-panel-track, var(--surface-container-high));
         border: var(--progress-track-border);
         border-radius: var(--corner-full);
         overflow: hidden;
@@ -47,7 +48,10 @@ export const styles = css`
 
     .bar {
         height: 100%;
-        background: var(--progress-indicator, var(--primary));
+        background: var(
+            --on-panel-fill,
+            var(--progress-indicator, var(--primary))
+        );
         border-radius: var(--corner-full);
         transition: width var(--duration-long-1) var(--easing-standard);
     }
