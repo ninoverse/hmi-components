@@ -517,8 +517,15 @@ do **not** cross the boundary, which changes how themes may be written:
   own elevation.
 - **Per-element hooks** replace the journal-specific rules that v5 keeps inside
   component CSS: `--list-divider-style`, `--progress-track-border`,
-  `--switch-thumb-shadow` (defaults in `constants.css`, overridden by
-  `structure/journal.css`). `--card-flat-border` is a flat card's edge, a step deeper than
+  `--meter-track-border`, `--switch-thumb-shadow` (defaults in `constants.css`,
+  overridden by `structure/journal.css`). The meter's fills, `--meter-optimal`,
+  `--meter-suboptimal` and `--meter-poor`, have no default: the element falls
+  back to `--success`, `--warning` and `--error`; in the light schemes the first
+  two are 2.1:1 to 2.9:1 against the track. An app that needs 3:1 opts in with
+  `--meter-track-border: 1px solid var(--outline)` and the fills mixed toward
+  `--on-surface`, `color-mix(in srgb, var(--success) 70%, var(--on-surface))`,
+  the same for `--warning`, and 85% for `--error`: 3.5:1 to 4.8:1 in light,
+  7.4:1 to 9.6:1 in dark. `--card-flat-border` is a flat card's edge, a step deeper than
   `--outline-variant` under the solid material, and the material's stroke under
   `glass` and `liquid`. `--kbd-font` is the key cap's font: it has no default,
   so the cap falls back to `--font-display`, and `structure/journal.css` and

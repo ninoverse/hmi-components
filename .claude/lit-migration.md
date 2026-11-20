@@ -150,7 +150,10 @@ stem (`AreaChart`), the tag is `hmi-<kebab>`, the class is `Hmi<Pascal>`,
   that needs a per-element hook adds a token, `--<element>-<prop>`, to the theme
   file. The hooks defined so far, with defaults in `constants.css` and overrides
   in `structure/journal.css`: `--list-divider-style`, `--progress-track-border`,
-  `--switch-thumb-shadow`. `--blockquote-accent`, the blockquote's rule, defaults
+  `--meter-track-border`, `--switch-thumb-shadow`. The meter's fills,
+  `--meter-optimal`, `--meter-suboptimal` and `--meter-poor`, have no default:
+  the element falls back to `--success`, `--warning` and `--error`, and an app
+  that wants them deeper sets them. `--blockquote-accent`, the blockquote's rule, defaults
   in `constants.css` to the deeper `--ref-primary-40`. `--kbd-font`, the key
   cap's font, has no default: the element falls back to `--font-display`, and
   `journal` and `pixel` set it to `--font-default`. `--card-flat-border`, a flat card's edge, defaults

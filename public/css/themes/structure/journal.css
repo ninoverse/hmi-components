@@ -80,11 +80,12 @@
     --elevation-4: calc(var(--hmi-base, 8px) * 0.625) calc(var(--hmi-base, 8px) * 0.625) 0 0 var(--tertiary);
     --elevation-5: calc(var(--hmi-base, 8px) * 0.75) calc(var(--hmi-base, 8px) * 0.75) 0 0 var(--tertiary);
 
-    /* Per-element hooks — penciled-in dividers, a bordered progress track, a
+    /* Per-element hooks — penciled-in dividers, bordered progress and meter tracks, a
        flat switch thumb, and key caps in the body font, since Caveat is hard
        to read at a key's size. */
     --list-divider-style: dashed;
     --progress-track-border: calc(var(--hmi-base, 8px) * 0.125) solid var(--outline);
+    --meter-track-border: calc(var(--hmi-base, 8px) * 0.125) solid var(--outline);
     --switch-thumb-shadow: none;
     --kbd-font: var(--font-default);
 }

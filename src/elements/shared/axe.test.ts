@@ -131,6 +131,20 @@ const cases: ReadonlyArray<{ name: string; template: TemplateResult }> = [
             <hmi-kbd size="small" label="Escape"></hmi-kbd>
         </p>`,
     },
+    {
+        name: 'hmi-meter',
+        template: html`<hmi-meter value="0.8" low="0.3" high="0.7" show-value
+            ><span slot="label">Disk</span></hmi-meter
+        >`,
+    },
+    {
+        name: 'hmi-meter with a label and value text',
+        template: html`<hmi-meter value="0.4" label="Memory" value-text="40%"></hmi-meter>`,
+    },
+    {
+        name: 'hmi-meter with a value that is not a number',
+        template: html`<hmi-meter value="abc" max="-1" label="Swap"></hmi-meter>`,
+    },
 ];
 
 afterEach(() => {
