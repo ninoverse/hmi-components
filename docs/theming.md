@@ -525,7 +525,13 @@ do **not** cross the boundary, which changes how themes may be written:
   `--meter-track-border: 1px solid var(--outline)` and the fills mixed toward
   `--on-surface`, `color-mix(in srgb, var(--success) 70%, var(--on-surface))`,
   the same for `--warning`, and 85% for `--error`: 3.5:1 to 4.8:1 in light,
-  7.4:1 to 9.6:1 in dark. `--card-flat-border` is a flat card's edge, a step deeper than
+  7.4:1 to 9.6:1 in dark. The progress bar's colour, `--progress-indicator`,
+  has no default either: the element falls back to `--primary`, which in the
+  default light scheme is 2.45:1 against the track. An app that needs 3:1 sets
+  `--progress-indicator: var(--ref-primary-40)`, 3.9:1 to 5.4:1 against the
+  track in light and 6.8:1 to 8:1 in dark, and draws the track's edge with
+  `--progress-track-border: 1px solid var(--outline)`, as journal does.
+  `--card-flat-border` is a flat card's edge, a step deeper than
   `--outline-variant` under the solid material, and the material's stroke under
   `glass` and `liquid`. `--kbd-font` is the key cap's font: it has no default,
   so the cap falls back to `--font-display`, and `structure/journal.css` and

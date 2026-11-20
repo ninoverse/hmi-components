@@ -145,6 +145,20 @@ const cases: ReadonlyArray<{ name: string; template: TemplateResult }> = [
         name: 'hmi-meter with a value that is not a number',
         template: html`<hmi-meter value="abc" max="-1" label="Swap"></hmi-meter>`,
     },
+    {
+        name: 'hmi-progress',
+        template: html`<hmi-progress value="3" max="7" show-value value-text="3 of 7 files"
+            ><span slot="label">Backup</span></hmi-progress
+        >`,
+    },
+    {
+        name: 'hmi-progress named by aria-label, indeterminate',
+        template: html`<hmi-progress indeterminate aria-label="Syncing"></hmi-progress>`,
+    },
+    {
+        name: 'hmi-progress with a value that is not a number',
+        template: html`<hmi-progress value="abc" max="0" label="Upload"></hmi-progress>`,
+    },
 ];
 
 afterEach(() => {
