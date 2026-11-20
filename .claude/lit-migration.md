@@ -154,7 +154,9 @@ stem (`AreaChart`), the tag is `hmi-<kebab>`, the class is `Hmi<Pascal>`,
   `--meter-optimal`, `--meter-suboptimal` and `--meter-poor`, have no default:
   the element falls back to `--success`, `--warning` and `--error`, and an app
   that wants them deeper sets them. So does the progress bar's,
-  `--progress-indicator`, which falls back to `--primary`. `--blockquote-accent`, the blockquote's rule, defaults
+  `--progress-indicator`, which falls back to `--primary`. The skeleton's
+  `--skeleton-bg` and `--skeleton-highlight` have no default either: it falls
+  back to `--surface-container-high` and `--surface-container-highest`. `--blockquote-accent`, the blockquote's rule, defaults
   in `constants.css` to the deeper `--ref-primary-40`. `--kbd-font`, the key
   cap's font, has no default: the element falls back to `--font-display`, and
   `journal` and `pixel` set it to `--font-default`. `--card-flat-border`, a flat card's edge, defaults
@@ -175,7 +177,8 @@ stem (`AreaChart`), the tag is `hmi-<kebab>`, the class is `Hmi<Pascal>`,
   `hmi-text`, `hmi-heading` and `hmi-link` read before the surface roles. The
   ink card also sets `--on-panel-track`, `--on-panel-fill`,
   `--on-panel-success`, `--on-panel-warning` and `--on-panel-error`, which a
-  bar (progress, meter, slider) reads before its own colours. They
+  bar (progress, meter, slider) reads before its own colours, as the
+  skeleton reads the track for its surface. They
   embed the shared
   liquid filter template (`renderLiquidFilter()` from
   `src/elements/shared/panel.ts`) so the liquid material's

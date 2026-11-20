@@ -21,8 +21,8 @@ export type CardVariant = 'default' | 'flat' | 'ink' | 'accent';
  * The `ink` card also sets `--on-panel-track`, `--on-panel-fill`,
  * `--on-panel-success`, `--on-panel-warning` and `--on-panel-error`, so the
  * bars of `hmi-progress`, `hmi-meter` and `hmi-slider` inside it draw an empty
- * track that reads as empty and fills that show on the inverse surface. Other
- * cards leave them unset.
+ * track that reads as empty and fills that show on the inverse surface, and
+ * `hmi-skeleton` takes its surface from the track. Other cards leave them unset.
  *
  * `active` is visual only: the card raises and outlines itself, and takes a
  * ring in forced colours, but tells assistive technology nothing. The control

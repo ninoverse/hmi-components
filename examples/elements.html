@@ -1537,9 +1537,8 @@ export function Example() {
 
         <section>
             <h2>Skeleton</h2>
-            <!-- width/height/radius accept a CSS length string here; the
-                 number form (40 → 40px) is only reachable from JS, since an
-                 attribute is always a string. -->
+            <!-- width/height/radius accept a CSS length string, or a bare
+                 number as px (height="24"), as a number from JS is. -->
             <!-- a plain block box, not .row: the page's rows shrink-to-fit,
                  and a percentage width has nothing to resolve against inside
                  one. -->
@@ -1549,6 +1548,7 @@ export function Example() {
                 <hmi-skeleton variant="text" width="80%"></hmi-skeleton>
                 <hmi-skeleton variant="text" width="100%"></hmi-skeleton>
                 <hmi-skeleton variant="rect" height="1.5rem"></hmi-skeleton>
+                <hmi-skeleton variant="rect" height="24" width="50%"></hmi-skeleton>
             </div>
             <div class="row">
                 <hmi-skeleton

@@ -23,7 +23,7 @@ import { css } from 'lit';
    --on-panel-fill for progress's and slider's fill, and --on-panel-success,
    --on-panel-warning and --on-panel-error for meter's levels and slider's
    error, each blended toward the card's text. Progress, meter and slider
-   read them before their own colours. Every other card leaves them unset. */
+   read them before their own colours, and skeleton its surface from the track. Every other card leaves them unset. */
 export const styles = css`
     :host {
         display: block;
