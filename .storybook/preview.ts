@@ -15,28 +15,80 @@ const AXES = [
     { global: 'material', attribute: 'data-material', values: materials },
 ] as const;
 
+type Scheme = 'system' | 'light' | 'dark';
+
+/* The themes switch to dark only through `@media (prefers-color-scheme:
+   dark)`, and a page cannot emulate that query for itself. To preview either
+   scheme whatever the system's, the scheme toolbar rewrites those media rules
+   in the theme sheets: `all` forces dark, `not all` forces light, and the
+   system choice restores each rule's own text. */
+const DARK = /prefers-color-scheme:\s*dark/;
+const originalMedia = new WeakMap<CSSMediaRule, string>();
+
+function applyScheme(scheme: Scheme) {
+    const visit = (rules: CSSRuleList) => {
+        for (const rule of rules) {
+            if (!(rule instanceof CSSMediaRule)) continue;
+            const original = originalMedia.get(rule) ?? rule.media.mediaText;
+            if (DARK.test(original)) {
+                originalMedia.set(rule, original);
+                rule.media.mediaText =
+                    scheme === 'dark'
+                        ? 'all'
+                        : scheme === 'light'
+                          ? 'not all'
+                          : original;
+            }
+            visit(rule.cssRules);
+        }
+    };
+    for (const sheet of document.styleSheets) {
+        if (!/\/css\/(themes\/|base\.css)/.test(sheet.href ?? '')) continue;
+        visit(sheet.cssRules);
+    }
+    // Native controls and scrollbars follow the same scheme.
+    document.documentElement.style.colorScheme =
+        scheme === 'system' ? '' : scheme;
+}
+
 const preview: Preview = {
     parameters: {
         controls: { matchers: { color: /(background|color)$/i } },
         options: { storySort: { order: ['Overview', 'Components', 'Charts'] } },
     },
-    globalTypes: Object.fromEntries(
-        AXES.map(({ global, values }) => [
-            global,
-            {
-                description: `Active ${global}`,
-                toolbar: {
-                    title: global,
-                    items: values as unknown as string[],
-                    dynamicTitle: true,
+    globalTypes: {
+        ...Object.fromEntries(
+            AXES.map(({ global, values }) => [
+                global,
+                {
+                    description: `Active ${global}`,
+                    toolbar: {
+                        title: global,
+                        items: values as unknown as string[],
+                        dynamicTitle: true,
+                    },
                 },
+            ]),
+        ),
+        scheme: {
+            description: 'Light or dark, or the system setting',
+            toolbar: {
+                title: 'scheme',
+                icon: 'mirror',
+                items: [
+                    { value: 'system', title: 'system' },
+                    { value: 'light', title: 'light', icon: 'sun' },
+                    { value: 'dark', title: 'dark', icon: 'moon' },
+                ],
+                dynamicTitle: true,
             },
-        ]),
-    ),
+        },
+    },
     initialGlobals: {
         theme: 'default',
         structure: 'default',
         material: 'solid',
+        scheme: 'system',
     },
     decorators: [
         (story, context) => {
@@ -45,6 +97,7 @@ const preview: Preview = {
                 if (value)
                     document.documentElement.setAttribute(attribute, value);
             }
+            applyScheme(context.globals.scheme ?? 'system');
             return story();
         },
     ],
