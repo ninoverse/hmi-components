@@ -2258,7 +2258,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "Elevated surface container for grouping related content.\n\nThe three slots flow in normal block order inside the card's padding; an\nunused `header` or `footer` takes up no space and carries no rule or spacing\nof its own. Each is a box, so `::part(header)` and `::part(footer)` take a\nmargin, a padding or a rule.\n\nOn the `ink` and `accent` surfaces the card sets `--on-panel`,\n`--on-panel-variant` and `--on-panel-link`, so `hmi-text`, `hmi-heading` and\n`hmi-link` inside it take the card's text colours.\n\nThe `ink` card also sets `--on-panel-track`, `--on-panel-fill`,\n`--on-panel-success`, `--on-panel-warning` and `--on-panel-error`, so the\nbars of `hmi-progress`, `hmi-meter` and `hmi-slider` inside it draw an empty\ntrack that reads as empty and fills that show on the inverse surface. Other\ncards leave them unset.\n\n`active` is visual only: the card raises and outlines itself, and takes a\nring in forced colours, but tells assistive technology nothing. The control\nthat selects the card says so, with `aria-current` or `aria-selected`.",
+          "description": "Elevated surface container for grouping related content.\n\nThe three slots flow in normal block order inside the card's padding; an\nunused `header` or `footer` takes up no space and carries no rule or spacing\nof its own. Each is a box, so `::part(header)` and `::part(footer)` take a\nmargin, a padding or a rule.\n\nOn the `ink` and `accent` surfaces the card sets `--on-panel`,\n`--on-panel-variant` and `--on-panel-link`, so `hmi-text`, `hmi-heading` and\n`hmi-link` inside it take the card's text colours.\n\nThe `ink` card also sets `--on-panel-track`, `--on-panel-fill`,\n`--on-panel-success`, `--on-panel-warning` and `--on-panel-error`, so the\nbars of `hmi-progress`, `hmi-meter` and `hmi-slider` inside it draw an empty\ntrack that reads as empty and fills that show on the inverse surface, and\n`hmi-skeleton` takes its surface from the track. Other cards leave them unset.\n\n`active` is visual only: the card raises and outlines itself, and takes a\nring in forced colours, but tells assistive technology nothing. The control\nthat selects the card says so, with `aria-current` or `aria-selected`.",
           "name": "HmiCard",
           "cssProperties": [
             {
@@ -27291,8 +27291,18 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "Animated loading placeholder. `aria-hidden` by default so it isn't announced.\n\n`width`, `height` and `radius` are written to the host's inline style, so\nthey override the variant defaults exactly as they did in React.",
+          "description": "Animated loading placeholder. `aria-hidden` by default, as v5's was; it has\nno content to announce either way. Say that the content is loading on the\nregion it stands in for: `aria-busy=\"true\"` on that region while it loads,\nand a live region or the page's own status text for the announcement.\n\n`width`, `height` and `radius` are written to the host's inline style, so\nthey override the variant defaults exactly as they did in React. A number,\nor a bare number written as an attribute (`width=\"240\"`), is pixels. A\ncircle given only one of `width` and `height` takes it for both. An empty\nor cleared size the element never wrote leaves the host's own `style` alone.\n\nThe text variant is 100% wide: inline in a sentence, give it a width, such\nas `width=\"6em\"`, or it takes a line of its own.\n\nRendered on the server, the shadow root and the variant's size arrive with\nthe page, but `width`, `height` and `radius` apply only once the script\nupgrades the element, so the placeholder would change size on hydration.\nOn a server-rendered page, size it with the host's `style` instead\n(`style=\"width: 80%\"`), which the server writes as it is.\n\nThe highlight sweeps from the inline start to the inline end, moved by\n`transform`. It stops under `prefers-reduced-motion: reduce`, leaving the\nstill surface, and forced colours draw the surface's edge in `CanvasText`.",
           "name": "HmiSkeleton",
+          "cssProperties": [
+            {
+              "description": "The surface. No default: falls back to `--surface-container-high`. Inside an ink card, `--on-panel-track` comes first.",
+              "name": "--skeleton-bg"
+            },
+            {
+              "description": "The sweeping highlight. No default: falls back to `--surface-container-highest`. Inside an ink card, the card's track mixed toward its text comes first.",
+              "name": "--skeleton-highlight"
+            }
+          ],
           "cssParts": [
             {
               "description": "The shimmering surface, filling the host.",
@@ -27317,7 +27327,8 @@
               "type": {
                 "text": "string | number | undefined"
               },
-              "description": "Explicit width; number = px.",
+              "description": "Explicit width; a number, or a bare number string, is px.",
+              "default": "undefined",
               "attribute": "width"
             },
             {
@@ -27326,7 +27337,8 @@
               "type": {
                 "text": "string | number | undefined"
               },
-              "description": "Explicit height; number = px.",
+              "description": "Explicit height; a number, or a bare number string, is px.",
+              "default": "undefined",
               "attribute": "height"
             },
             {
@@ -27335,8 +27347,16 @@
               "type": {
                 "text": "string | number | undefined"
               },
-              "description": "Corner radius override; number = px.",
+              "description": "Corner radius override; a number, or a bare number string, is px.",
+              "default": "undefined",
               "attribute": "radius"
+            },
+            {
+              "kind": "field",
+              "name": "#written",
+              "privacy": "private",
+              "default": "new Set<string>()",
+              "description": "The host style properties this element wrote, so clearing a size\nleaves the consumer's own `style` alone."
             },
             {
               "kind": "method",
@@ -27378,7 +27398,8 @@
               "type": {
                 "text": "string | number | undefined"
               },
-              "description": "Explicit width; number = px.",
+              "description": "Explicit width; a number, or a bare number string, is px.",
+              "default": "undefined",
               "fieldName": "width"
             },
             {
@@ -27386,7 +27407,8 @@
               "type": {
                 "text": "string | number | undefined"
               },
-              "description": "Explicit height; number = px.",
+              "description": "Explicit height; a number, or a bare number string, is px.",
+              "default": "undefined",
               "fieldName": "height"
             },
             {
@@ -27394,7 +27416,8 @@
               "type": {
                 "text": "string | number | undefined"
               },
-              "description": "Corner radius override; number = px.",
+              "description": "Corner radius override; a number, or a bare number string, is px.",
+              "default": "undefined",
               "fieldName": "radius"
             }
           ],

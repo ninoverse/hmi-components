@@ -159,6 +159,16 @@ const cases: ReadonlyArray<{ name: string; template: TemplateResult }> = [
         name: 'hmi-progress with a value that is not a number',
         template: html`<hmi-progress value="abc" max="0" label="Upload"></hmi-progress>`,
     },
+    {
+        name: 'hmi-skeleton',
+        template: html`<hmi-skeleton variant="circle" width="40"></hmi-skeleton>`,
+    },
+    {
+        name: 'hmi-skeleton in a region that is loading',
+        template: html`<section aria-busy="true" aria-label="Profile"
+            ><hmi-skeleton width="80%"></hmi-skeleton><hmi-skeleton variant="rect" height="24"></hmi-skeleton
+        ></section>`,
+    },
 ];
 
 afterEach(() => {

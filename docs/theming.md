@@ -515,7 +515,10 @@ do **not** cross the boundary, which changes how themes may be written:
   `--on-panel-track` for the empty track, `--on-panel-fill` for progress's and
   slider's fill, and `--on-panel-success`, `--on-panel-warning` and
   `--on-panel-error` for meter's levels and slider's error, before their own
-  colours and hooks. Only the `ink` card sets them: the track is its text at
+  colours and hooks. `hmi-skeleton` reads `--on-panel-track` for its surface,
+  and the track mixed 8% toward `--on-panel` for its highlight: 1.9:1 against
+  the ink card in light and 1.5:1 in dark, where `--surface-container-high`
+  was a slab 5.6:1 to 13.9:1 against it. Only the `ink` card sets them: the track is its text at
   20% over the inverse surface, the fill `--inverse-primary`, and the levels
   the status colours mixed 55% toward its text. Under the solid material the
   fills are 3.6:1 to 5.2:1 against the track in the light schemes, and, where
@@ -549,7 +552,17 @@ do **not** cross the boundary, which changes how themes may be written:
   `glass` and `liquid`. `--kbd-font` is the key cap's font: it has no default,
   so the cap falls back to `--font-display`, and `structure/journal.css` and
   `structure/pixel.css` set it to `--font-default`, since Caveat and Press
-  Start 2P are hard to read at a key's size. The cap's arrows and key symbols
+  Start 2P are hard to read at a key's size. `--skeleton-bg` and `--skeleton-highlight`
+  are the skeleton's surface and sweeping highlight. They have no default: the
+  element falls back to `--surface-container-high` and
+  `--surface-container-highest`, as v5 painted, which is 1.0:1 against a
+  `--surface-container-high` container in every look and 1.03:1 to 1.7:1
+  against the page. On such a container, set `--skeleton-bg:
+  var(--surface-container-highest)`; for a placeholder that shows on any
+  surface, `--skeleton-bg: color-mix(in srgb, var(--on-surface) 12%,
+  var(--surface-container-high))` and `--skeleton-highlight: color-mix(in
+  srgb, var(--on-surface) 6%, var(--surface-container-highest))`, 1.25:1 to
+  1.4:1 against the container in the default theme. The cap's arrows and key symbols
   come from `hmi-key-symbols`, an `@font-face` in `base.css` limited to those
   glyphs and drawn from the system's own symbol font. `--blockquote-accent` is the blockquote's accent rule:
   the deeper `--ref-primary-40` (default in `constants.css`), since `--primary`
