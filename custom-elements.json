@@ -19676,12 +19676,40 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "Linear progress bar for a known or indeterminate task. For a scalar\nmeasurement within a range, use `hmi-meter`.\n\nWith `indeterminate` the bar loops across the track, `value` is ignored and\n`aria-valuenow` is omitted. The track border comes from the\n`--progress-track-border` token, which the Field Journal structure theme sets.",
+          "description": "Linear progress bar for a known or indeterminate task. For a scalar\nmeasurement within a range, use `hmi-meter`.\n\n`value` counts from 0 to `max`, 100 by default, so `value=\"64\"` is 64% and\n`value=\"3\" max=\"7\"` is three of seven. A value that isn't a number is read as\n0, then kept between 0 and `max`; a `max` that isn't a number above 0 is read\nas 100. With `indeterminate` the bar loops across the track, `value` is\nignored and `aria-valuenow` is omitted.\n\nThe `label` slot is shown above the track and names it; `show-value` shows\nthe percentage beside it. A bar with no visible label takes its name from\n`label`, else from the host's `aria-label`: `aria-labelledby` on the host and\n`<label for>` don't reach the bar inside. `value-text` replaces the\npercentage, shown and read out: `value-text=\"3 of 7 files\"`.\n\nThe host is a block with no width of its own: in a flex row, give it one, or\nit shrinks to nothing. The track's thickness is set through `::part(base)`.\n\nIn the default light scheme the bar is 2.4:1 against the track and the empty\ntrack barely shows against the page; a theme that needs 3:1 deepens the bar\nthrough `--progress-indicator` and gives the track an edge through\n`--progress-track-border` (`docs/theming.md` has values).",
           "name": "HmiProgress",
+          "cssProperties": [
+            {
+              "description": "The track's edge. `none` by default; the journal structure sets an `--outline` line.",
+              "name": "--progress-track-border"
+            },
+            {
+              "description": "The bar's colour. Falls back to `--primary`.",
+              "name": "--progress-indicator"
+            }
+          ],
           "cssParts": [
             {
-              "description": "The track; carries `role=\"progressbar\"`.",
+              "description": "The track; carries `role=\"progressbar\"` and the `aria-value*` attributes.",
               "name": "base"
+            },
+            {
+              "description": "The bar, as wide as the value.",
+              "name": "indicator"
+            },
+            {
+              "description": "The label wrapper.",
+              "name": "label"
+            },
+            {
+              "description": "The percentage or `value-text`, shown with `show-value`.",
+              "name": "value"
+            }
+          ],
+          "slots": [
+            {
+              "description": "Text shown above the bar; also its accessible name.",
+              "name": "label"
             }
           ],
           "members": [
@@ -19692,8 +19720,18 @@
                 "text": "number"
               },
               "default": "0",
-              "description": "Completion percentage, clamped to 0–100.",
+              "description": "Amount done, from 0 to `max`; one that isn't a number is read as 0.",
               "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "max",
+              "type": {
+                "text": "number"
+              },
+              "default": "100",
+              "description": "The amount that means done; one that isn't a number above 0 is read as 100.",
+              "attribute": "max"
             },
             {
               "kind": "field",
@@ -19712,8 +19750,53 @@
               "type": {
                 "text": "string | undefined"
               },
-              "description": "Accessible label of the progress bar.",
+              "description": "The bar's name for screen readers when it has no slotted label.",
               "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "showValue",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Shows the percentage, or `value-text`, beside the label.",
+              "attribute": "show-value",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "valueText",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Text shown and read out in place of the percentage, such as `3 of 7 files`.",
+              "attribute": "value-text"
+            },
+            {
+              "kind": "field",
+              "name": "hostLabel",
+              "type": {
+                "text": "string | null"
+              },
+              "privacy": "private",
+              "default": "null",
+              "description": "The host's `aria-label`, the bar's name when `label` is unset; read so a change renders again.",
+              "attribute": "aria-label"
+            },
+            {
+              "kind": "field",
+              "name": "hasLabel",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "#read",
+              "privacy": "private"
             }
           ],
           "attributes": [
@@ -19723,8 +19806,17 @@
                 "text": "number"
               },
               "default": "0",
-              "description": "Completion percentage, clamped to 0–100.",
+              "description": "Amount done, from 0 to `max`; one that isn't a number is read as 0.",
               "fieldName": "value"
+            },
+            {
+              "name": "max",
+              "type": {
+                "text": "number"
+              },
+              "default": "100",
+              "description": "The amount that means done; one that isn't a number above 0 is read as 100.",
+              "fieldName": "max"
             },
             {
               "name": "indeterminate",
@@ -19740,8 +19832,35 @@
               "type": {
                 "text": "string | undefined"
               },
-              "description": "Accessible label of the progress bar.",
+              "description": "The bar's name for screen readers when it has no slotted label.",
               "fieldName": "label"
+            },
+            {
+              "name": "show-value",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Shows the percentage, or `value-text`, beside the label.",
+              "fieldName": "showValue"
+            },
+            {
+              "name": "value-text",
+              "type": {
+                "text": "string"
+              },
+              "default": "''",
+              "description": "Text shown and read out in place of the percentage, such as `3 of 7 files`.",
+              "fieldName": "valueText"
+            },
+            {
+              "name": "aria-label",
+              "type": {
+                "text": "string | null"
+              },
+              "default": "null",
+              "description": "The host's `aria-label`, the bar's name when `label` is unset; read so a change renders again.",
+              "fieldName": "hostLabel"
             }
           ],
           "superclass": {

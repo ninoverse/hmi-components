@@ -17,3 +17,23 @@ it('renders declarative shadow DOM on the server', async () => {
     expect(out).toContain('aria-valuenow="64"');
     expect(out).toContain('aria-label="Uploading"');
 });
+
+it('shows a slotted label before the slot is read', async () => {
+    const out = await collectResult(
+        render(
+            html`<hmi-progress value="40"><span slot="label">Backup</span></hmi-progress>`,
+        ),
+    );
+    /* A server can't see the slotted label, so a bar with no other name
+       assumes one: hidden, the label would only appear on hydration. */
+    expect(out).toMatch(/<div class="header"\s*>/);
+    expect(out).toContain('aria-labelledby="label"');
+});
+
+it('keeps the header hidden for a bar named by label', async () => {
+    const out = await collectResult(
+        render(html`<hmi-progress value="40" label="Backup"></hmi-progress>`),
+    );
+    expect(out).toMatch(/<div class="header"\s+hidden\s*>/);
+    expect(out).not.toContain('aria-labelledby');
+});

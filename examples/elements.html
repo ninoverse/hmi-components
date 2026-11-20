@@ -329,15 +329,17 @@ export function Example() {
 
         <section>
             <h2>Progress</h2>
-            <!-- no events: value is clamped to 0–100, indeterminate loops and
-                 ignores it. The captions are plain text: label only sets
-                 aria-label. -->
+            <!-- no events: value counts to max (100 by default) and is clamped,
+                 indeterminate loops and ignores it. The captions are plain
+                 text: label only names the bar; the label slot shows one. -->
             <div style="display: flex; flex-direction: column; gap: 1.5rem; width: 40rem; max-width: 100%">
                 <div><p>Determinate (0%)</p><hmi-progress value="0" label="Empty"></hmi-progress></div>
                 <div><p>Determinate (35%)</p><hmi-progress value="35" label="Uploading"></hmi-progress></div>
                 <div><p>Determinate (80%)</p><hmi-progress value="80" label="Almost there"></hmi-progress></div>
                 <div><p>Determinate (100%)</p><hmi-progress value="100" label="Done"></hmi-progress></div>
                 <div><p>Indeterminate</p><hmi-progress indeterminate label="Working"></hmi-progress></div>
+                <hmi-progress value="3" max="7" show-value value-text="3 of 7 files"><span slot="label">Backup</span></hmi-progress>
+                <hmi-progress value="64" show-value aria-label="Export, named by aria-label"></hmi-progress>
             </div>
         </section>
 
