@@ -153,6 +153,41 @@ describe('hmi-card', () => {
         expect(panel.scrollWidth).toBeLessThanOrEqual(panel.clientWidth);
     });
 
+    it('fills the height a grid row stretches it to', async () => {
+        const host = document.createElement('div');
+        document.body.append(host);
+        render(
+            html`
+                <div style="display: grid; grid-template-columns: 1fr 1fr">
+                    <hmi-card>Short</hmi-card>
+                    <hmi-card><div style="height: 200px">Tall</div></hmi-card>
+                </div>
+            `,
+            host,
+        );
+        const cards = [...host.querySelectorAll('hmi-card')] as HmiCard[];
+        await Promise.all(cards.map((card) => card.updateComplete));
+        const [short, tall] = cards.map(
+            (card) =>
+                (
+                    card.shadowRoot?.querySelector('.panel') as HTMLElement
+                ).getBoundingClientRect().height,
+        );
+        expect(short).toBe(tall);
+        expect(short).toBe(cards[0]?.getBoundingClientRect().height);
+    });
+
+    it('sizes to its content on its own', async () => {
+        const el = await fixture(
+            html`<hmi-card><div style="height: 50px"></div></hmi-card>`,
+        );
+        const panel = el.shadowRoot?.querySelector('.panel') as HTMLElement;
+        expect(el.getBoundingClientRect().height).toBe(
+            panel.getBoundingClientRect().height,
+        );
+        expect(panel.getBoundingClientRect().height).toBeLessThan(200);
+    });
+
     /* The tokens are set by hand, since the browser tests load no theme: each
        role gets a colour of its own, so the colour an element ends up with
        names the role it read. */

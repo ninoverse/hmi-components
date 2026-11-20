@@ -7,10 +7,6 @@
     gap: calc(var(--hmi-base) * 3);
 }
 
-.demo-cards hmi-card {
-    height: 100%;
-}
-
 .demo-cards hmi-link {
     display: inline-block;
     margin-top: calc(var(--hmi-base) * 1.5);

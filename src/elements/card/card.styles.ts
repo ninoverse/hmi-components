@@ -45,6 +45,9 @@ export const styles = css`
         border-start-end-radius: var(--corner-tr);
         border-end-end-radius: var(--corner-br);
         border-end-start-radius: var(--corner-bl);
+        /* A grid or flex row stretches the host; the panel fills it, and on
+           its own the host is as tall as the panel. */
+        height: 100%;
         padding: var(--space-10);
         box-shadow: var(--elevation-1);
         overflow-wrap: anywhere;
