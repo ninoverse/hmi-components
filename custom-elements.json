@@ -28589,11 +28589,11 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "Indeterminate loading spinner with `role=\"status\"`.\n\n`label` is announced, never drawn, so it stays a string property forwarded\nto `aria-label` on the ring rather than becoming a slot.",
+          "description": "Indeterminate loading spinner: a ring with one solid arc, in a\n`role=\"status\"` live region.\n\n`label` is announced, never drawn. It is text inside the status, hidden from\nview, and joins it one frame after the spinner connects: a live region\nannounces a change to its text, so the empty region exists first and then\ngains its label, and a later change to `label` is announced too. Name the\nspinner with `label`: an `aria-label` on the host does nothing, and\n`aria-hidden=\"true\"` on the host hides it.\n\n`label=\"\"` makes the spinner decorative: no status, and hidden from\nassistive technology. Use it where something else says what is busy, such\nas a button whose own text reads \"Saving\", or a region with `aria-busy`.\n\nThe arc is drawn in `currentColor` and the track in `currentColor` at 18%.\nThe arc is what shows the spin, so a colour set around the spinner needs\n3:1 against what it sits on: on the default light page `--primary` is\n2.65:1, `--secondary` 4.55:1.\n\nThe ring is exactly the host's box, and sits on the text's baseline in a\nline. `size` picks 14, 20 or 32px at the default `--hmi-base`; another size\nsets `width`, `height` and `border-width` on `::part(base)`.\n\nUnder `prefers-reduced-motion: reduce` the spin slows from 0.8s to 2.4s a\nturn rather than stopping, since a still ring reads as a frozen page. In\nforced colours the arc is drawn in `CanvasText` and the track drops out. It\nturns clockwise in right-to-left text too, as a clock does.",
           "name": "HmiSpinner",
           "cssParts": [
             {
-              "description": "The ring; carries `role=\"status\"` and the accessible label.",
+              "description": "The ring; carries `role=\"status\"` and the label.",
               "name": "base"
             }
           ],
@@ -28616,8 +28616,26 @@
                 "text": "string"
               },
               "default": "'Loading'",
-              "description": "Accessible status label.",
+              "description": "Announced status text; empty makes the spinner decorative.",
               "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "announced",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "#frame",
+              "privacy": "private",
+              "type": {
+                "text": "number"
+              },
+              "default": "0"
             }
           ],
           "attributes": [
@@ -28636,7 +28654,7 @@
                 "text": "string"
               },
               "default": "'Loading'",
-              "description": "Accessible status label.",
+              "description": "Announced status text; empty makes the spinner decorative.",
               "fieldName": "label"
             }
           ],

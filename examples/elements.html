@@ -1568,9 +1568,10 @@ export function Example() {
                 <hmi-spinner size="large" label="Fetching"></hmi-spinner>
             </div>
             <!-- the ring is drawn from currentColor, which inherits across
-                 the shadow boundary. -->
+                 the shadow boundary; the arc needs 3:1 against the page, which
+                 --primary misses on the default light page. -->
             <div class="row">
-                <span style="color: var(--primary)"><hmi-spinner></hmi-spinner></span>
+                <span style="color: var(--secondary)"><hmi-spinner></hmi-spinner></span>
                 <span style="color: var(--error)"><hmi-spinner></hmi-spinner></span>
                 <span style="color: var(--tertiary)"><hmi-spinner></hmi-spinner></span>
             </div>
