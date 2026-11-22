@@ -169,6 +169,16 @@ const cases: ReadonlyArray<{ name: string; template: TemplateResult }> = [
             ><hmi-skeleton width="80%"></hmi-skeleton><hmi-skeleton variant="rect" height="24"></hmi-skeleton
         ></section>`,
     },
+    {
+        name: 'hmi-spinner',
+        template: html`<hmi-spinner label="Fetching"></hmi-spinner>`,
+    },
+    {
+        name: 'hmi-spinner decorative, in a button',
+        template: html`<hmi-button
+            ><hmi-spinner slot="left-icon" size="small" label=""></hmi-spinner>Saving</hmi-button
+        >`,
+    },
 ];
 
 afterEach(() => {
