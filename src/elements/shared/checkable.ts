@@ -1,7 +1,6 @@
 import { html, nothing, type PropertyValues, type TemplateResult } from 'lit';
 import { property, query, state } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { live } from 'lit/directives/live.js';
 import { readSlots } from './dom.js';
 import { emit } from './events.js';
 import { type FormKind, HmiFormField } from './form.js';
@@ -128,6 +127,15 @@ export abstract class HmiCheckable extends HmiFormField {
         return nothing;
     }
 
+    /* The input's state is set here, on every update, as live() would: a
+       property binding would reach the server, which writes it as the
+       attribute checked="false", and draws an unchecked control as checked.
+       The ?checked attribute covers the server and the first paint. */
+    override updated(changed: PropertyValues<this>): void {
+        if (this.input) this.input.checked = this.checked;
+        super.updated(changed);
+    }
+
     /* A hydrated root fires no slotchange for the slots the server filled. */
     protected override firstUpdated(): void {
         readSlots(this.renderRoot);
@@ -142,7 +150,7 @@ export abstract class HmiCheckable extends HmiFormField {
                     name="control"
                     class="input"
                     type=${this.inputType}
-                    .checked=${live(this.checked)}
+                    ?checked=${this.checked}
                     tabindex=${ifDefined(this.inputTabindex)}
                     aria-posinset=${ifDefined(set?.position)}
                     aria-setsize=${ifDefined(set?.size)}

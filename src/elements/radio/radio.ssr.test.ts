@@ -16,3 +16,15 @@ it('renders declarative shadow DOM with a radio input and label on the server', 
     expect(out).toContain('part="box"');
     expect(out).toContain('Medium');
 });
+
+it('writes the checked attribute only while checked, so an unchecked radio draws unchecked before it hydrates', async () => {
+    const off = await collectResult(
+        render(html`<hmi-radio value="a"></hmi-radio>`),
+    );
+    const on = await collectResult(
+        render(html`<hmi-radio value="a" checked></hmi-radio>`),
+    );
+    expect(off).toMatch(/<input(?![^>]*\bchecked)[^>]*>/);
+    expect(on).toMatch(/<input[^>]*\schecked[\s/>]/);
+    expect(`${off}${on}`).not.toContain('checked="');
+});

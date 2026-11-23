@@ -24,10 +24,10 @@ declare module 'vitest/browser' {
    firstUpdated() too, through readSlots() from shared/dom.ts.
 
    Each row checks that the hydrated element, its light DOM and its shadow
-   root match the same template rendered on the client. Three attributes are left out of the comparison:
-   `style`, which carries measurements, and `checked` and `value` on an
-   `<input>`, which the server writes as attributes from property bindings
-   while the client sets the properties. An element that reads its slots adds
+   root match the same template rendered on the client. Two attributes are
+   left out of the comparison: `style`, which carries measurements, and
+   `value` on an `<input>`, which the server writes as an attribute from a
+   property binding while the client sets the property. An element that reads its slots adds
    its row, as each element's review adds its row to axe.test.ts. */
 
 type Case = { name: string; strings: string[]; values: unknown[] };
@@ -172,8 +172,7 @@ async function settle(root: Element): Promise<void> {
 }
 
 const ignored = (el: Element, name: string) =>
-    name === 'style' ||
-    (el.localName === 'input' && (name === 'checked' || name === 'value'));
+    name === 'style' || (el.localName === 'input' && name === 'value');
 
 /* A root as lines of tags, sorted attributes and text, nested shadow roots
    included, without comments or styles. */

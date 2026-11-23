@@ -26,3 +26,22 @@ it('renders declarative shadow DOM with a radio group and its label on the serve
     expect(out).toContain('Pick one');
     expect(out).toContain('<hmi-radio');
 });
+
+it('checks only the selected radio on the server, so the others draw unchecked before they hydrate', async () => {
+    const out = await collectResult(
+        render(
+            html`<hmi-radio-group
+                label="Plan"
+                value="pro"
+                .options=${[
+                    { value: 'free', label: 'Free' },
+                    { value: 'pro', label: 'Pro' },
+                ]}
+            ></hmi-radio-group>`,
+        ),
+    );
+    const inputs = [...out.matchAll(/<input[^>]*>/g)].map((m) => m[0]);
+    expect(inputs).toHaveLength(2);
+    expect(inputs[0]).not.toMatch(/\bchecked/);
+    expect(inputs[1]).toMatch(/\schecked[\s/>]/);
+});

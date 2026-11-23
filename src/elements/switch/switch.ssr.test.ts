@@ -21,3 +21,13 @@ it('renders declarative shadow DOM with the input and label on the server', asyn
     expect(out).toContain('Accept terms');
     expect(out).toContain('Read them first');
 });
+
+it('writes the checked attribute only while checked, so an unchecked switch draws unchecked before it hydrates', async () => {
+    const off = await collectResult(render(html`<hmi-switch></hmi-switch>`));
+    const on = await collectResult(
+        render(html`<hmi-switch checked></hmi-switch>`),
+    );
+    expect(off).toMatch(/<input(?![^>]*\bchecked)[^>]*>/);
+    expect(on).toMatch(/<input[^>]*\schecked[\s/>]/);
+    expect(`${off}${on}`).not.toContain('checked="');
+});
