@@ -23,6 +23,8 @@ export type CardVariant = 'default' | 'flat' | 'ink' | 'accent';
  * bars of `hmi-progress`, `hmi-meter` and `hmi-slider` inside it draw an empty
  * track that reads as empty and fills that show on the inverse surface, and
  * `hmi-skeleton` takes its surface from the track. Other cards leave them unset.
+ * A panel-like element inside an ink card, such as `hmi-stat`, paints the
+ * solid surface under every material, since glass can't lift text off ink.
  *
  * `active` is visual only: the card raises and outlines itself, and takes a
  * ring in forced colours, but tells assistive technology nothing. The control

@@ -283,7 +283,9 @@ const cases: ReadonlyArray<{
     },
     {
         name: 'hmi-stat',
-        template: html`<hmi-stat label="Users" value="12"></hmi-stat>`,
+        template: html`<hmi-stat
+            ><span slot="label">Users</span><span slot="value">12</span></hmi-stat
+        >`,
         node: (el) => el.shadowRoot?.querySelector('.base'),
         ltr: LEAF,
     },

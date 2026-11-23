@@ -179,6 +179,23 @@ const cases: ReadonlyArray<{ name: string; template: TemplateResult }> = [
             ><hmi-spinner slot="left-icon" size="small" label=""></hmi-spinner>Saving</hmi-button
         >`,
     },
+    {
+        name: 'hmi-stat',
+        template: html`<hmi-stat trend="up"
+            ><span slot="label">Revenue</span><span slot="value">$12.4k</span
+            ><span slot="delta">8%</span
+            ><span slot="help-text">vs last month</span></hmi-stat
+        >`,
+    },
+    {
+        name: 'hmi-stat with an image icon and no label',
+        template: html`<hmi-stat trend="down" tone="positive"
+            ><img slot="icon" alt="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E" /><span
+                slot="value"
+                >12</span
+            ></hmi-stat
+        >`,
+    },
 ];
 
 afterEach(() => {

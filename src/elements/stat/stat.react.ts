@@ -2,7 +2,7 @@ import { createComponent } from '@lit/react';
 import * as React from 'react';
 import { HmiStat } from './stat.js';
 
-export type { StatTrend } from './stat.js';
+export type { StatTone, StatTrend } from './stat.js';
 
 /**
  * React wrapper for `<hmi-stat>`.

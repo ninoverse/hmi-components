@@ -2,7 +2,7 @@
    dependency; any framework renders the same tags. */
 
 import './dashboard.css';
-import { html, render } from 'lit';
+import { html, nothing, render } from 'lit';
 import '../../src/elements/badge/badge.js';
 import '../../src/elements/bar-chart/bar-chart.js';
 import '../../src/elements/button/button.js';
@@ -147,7 +147,9 @@ const view = () => {
 
         <section class="dash-kpis" aria-label="Key figures">
             ${KPIS.map(
-                (kpi) => html`<hmi-stat trend=${kpi.trend}>
+                (
+                    kpi,
+                ) => html`<hmi-stat trend=${kpi.trend} tone=${kpi.tone ?? nothing}>
                     <span slot="label">${kpi.label}</span>
                     <span slot="value"
                         >${kpi.id === 'throughput' ? `${formatUnits(latest)} u/h` : kpi.value}</span

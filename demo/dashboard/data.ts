@@ -40,6 +40,8 @@ export interface Kpi {
     value: string;
     delta: string;
     trend: 'up' | 'down' | 'neutral';
+    /* Set where the direction's usual colour would mislead. */
+    tone?: 'positive' | 'negative' | 'neutral';
     help: string;
     spark: number[];
     color: string;
@@ -82,6 +84,8 @@ export const KPIS: Kpi[] = [
         value: '412 kWh',
         delta: '2.3%',
         trend: 'down',
+        // less energy per unit is good news
+        tone: 'positive',
         help: 'per 1,000 units',
         spark: [36, 35, 35, 34, 34, 33, 35, 34, 33, 33, 32, 32],
         color: 'var(--success)',
