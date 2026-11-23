@@ -104,6 +104,15 @@ export const styles = css`
         border-color: transparent;
     }
 
+    /* Glass can't lift text off the ink surface: a panel-like element inside
+       an ink card, such as a stat, paints the solid surface instead. */
+    :host([variant='ink']) slot {
+        --panel-bg: var(--surface-container-low);
+        --panel-bg-strong: var(--surface-container-low);
+        --panel-border: var(--outline-variant);
+        --panel-filter: none;
+    }
+
     :host([variant='accent']) .panel {
         --on-panel: var(--on-primary-container);
         --on-panel-variant: color-mix(

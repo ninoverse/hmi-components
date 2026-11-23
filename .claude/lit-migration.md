@@ -150,7 +150,8 @@ stem (`AreaChart`), the tag is `hmi-<kebab>`, the class is `Hmi<Pascal>`,
   that needs a per-element hook adds a token, `--<element>-<prop>`, to the theme
   file. The hooks defined so far, with defaults in `constants.css` and overrides
   in `structure/journal.css`: `--list-divider-style`, `--progress-track-border`,
-  `--meter-track-border`, `--switch-thumb-shadow`. The meter's fills,
+  `--meter-track-border`, `--switch-thumb-shadow`, and `--stat-divider`, a
+  `0` or `1` the stat multiplies its rule and the rule's spacing by. The meter's fills,
   `--meter-optimal`, `--meter-suboptimal` and `--meter-poor`, have no default:
   the element falls back to `--success`, `--warning` and `--error`, and an app
   that wants them deeper sets them. So does the progress bar's,
@@ -166,7 +167,7 @@ stem (`AreaChart`), the tag is `hmi-<kebab>`, the class is `Hmi<Pascal>`,
   of a different kind: their default in
   `constants.css` is the lowest surface v5 painted, and `glass` and `liquid`
   override them with their strong surface.
-- **Panel-like elements** (card, navbar, sidebar, popover, hover-card,
+- **Panel-like elements** (card, stat, navbar, sidebar, popover, hover-card,
   context-menu, toast, modal, drawer, command-palette, combobox listbox,
   chart-tooltip) expose `part="panel"` and paint from `--panel-bg` (or
   `--panel-bg-strong` for dialogs, drawers and listboxes), `--panel-border`,

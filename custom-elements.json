@@ -2258,7 +2258,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "Elevated surface container for grouping related content.\n\nThe three slots flow in normal block order inside the card's padding; an\nunused `header` or `footer` takes up no space and carries no rule or spacing\nof its own. Each is a box, so `::part(header)` and `::part(footer)` take a\nmargin, a padding or a rule.\n\nOn the `ink` and `accent` surfaces the card sets `--on-panel`,\n`--on-panel-variant` and `--on-panel-link`, so `hmi-text`, `hmi-heading` and\n`hmi-link` inside it take the card's text colours.\n\nThe `ink` card also sets `--on-panel-track`, `--on-panel-fill`,\n`--on-panel-success`, `--on-panel-warning` and `--on-panel-error`, so the\nbars of `hmi-progress`, `hmi-meter` and `hmi-slider` inside it draw an empty\ntrack that reads as empty and fills that show on the inverse surface, and\n`hmi-skeleton` takes its surface from the track. Other cards leave them unset.\n\n`active` is visual only: the card raises and outlines itself, and takes a\nring in forced colours, but tells assistive technology nothing. The control\nthat selects the card says so, with `aria-current` or `aria-selected`.",
+          "description": "Elevated surface container for grouping related content.\n\nThe three slots flow in normal block order inside the card's padding; an\nunused `header` or `footer` takes up no space and carries no rule or spacing\nof its own. Each is a box, so `::part(header)` and `::part(footer)` take a\nmargin, a padding or a rule.\n\nOn the `ink` and `accent` surfaces the card sets `--on-panel`,\n`--on-panel-variant` and `--on-panel-link`, so `hmi-text`, `hmi-heading` and\n`hmi-link` inside it take the card's text colours.\n\nThe `ink` card also sets `--on-panel-track`, `--on-panel-fill`,\n`--on-panel-success`, `--on-panel-warning` and `--on-panel-error`, so the\nbars of `hmi-progress`, `hmi-meter` and `hmi-slider` inside it draw an empty\ntrack that reads as empty and fills that show on the inverse surface, and\n`hmi-skeleton` takes its surface from the track. Other cards leave them unset.\nA panel-like element inside an ink card, such as `hmi-stat`, paints the\nsolid surface under every material, since glass can't lift text off ink.\n\n`active` is visual only: the card raises and outlines itself, and takes a\nring in forced colours, but tells assistive technology nothing. The control\nthat selects the card says so, with `aria-current` or `aria-selected`.",
           "name": "HmiCard",
           "cssProperties": [
             {
@@ -28691,19 +28691,29 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "Compact metric (KPI) block: a label with an optional icon, a large value,\nand an optional footer with a coloured trend delta and help text.\n\nEvery piece of text is a slot. `trend` sets the delta's colour and arrow,\nand the delta shows only while both `trend` and the `delta` slot are set. The\nfooter is drawn only when it has something to show. `divider` draws a dashed\nrule above it, with the spacing the rule needs.",
+          "description": "Compact metric (KPI) block: a label with an optional icon, a large value,\nand an optional footer with a coloured trend delta and help text.\n\nEvery piece of text is a slot. `trend` draws the delta's arrow, and the\ndelta shows only while both `trend` and the `delta` slot are set. An unknown\n`trend` draws as `neutral`, and an empty one as no trend. `tone` colours the\ndelta, in the text colours badge and alert use: `--on-success-container` for\n`positive`, `--on-error-container` for `negative`, the muted text colour for\n`neutral`. In the dark schemes the first two are pale tints. Left unset, it\nfollows `trend`, so a fall that is good news, in errors or cost, sets\n`trend=\"down\" tone=\"positive\"`.\n\nThe stat is a `role=\"group\"` named by its label, so a screen reader reads a\nrow of stats one by one. The arrow is hidden from it: the delta is read with\na word before it, \"up\", \"down\" or \"no change\", which `trend-label` replaces\nfor another language. An `aria-label` on the host does nothing.\n\nThe footer is drawn only when it has something to show. `divider` draws a\ndashed rule above it, with the spacing the rule needs; the journal structure\ndraws the rule without it, through `--stat-divider`. A server renders the\nfooter hidden, since it can't see the slots: it shows once the element\nhydrates.\n\nThe stat paints its own surface and border, from the panel tokens, so it\nturns to glass with the glass and liquid materials. Inside a card it draws\nits border on the card's surface: set `::part(base)` to drop it. In a grid\nor flex row that stretches its items, the surface fills the row's height. A\nvalue too long for the stat wraps.",
           "name": "HmiStat",
+          "cssProperties": [
+            {
+              "description": "`1` draws the footer's dashed rule and its spacing without `divider`, `0` does not. `0` by default; the journal structure sets `1`.",
+              "name": "--stat-divider"
+            }
+          ],
           "cssParts": [
             {
-              "description": "The surface.",
+              "description": "The surface; carries `role=\"group\"`.",
               "name": "base"
+            },
+            {
+              "description": "The surface, as on the other panel-like elements.",
+              "name": "panel"
             },
             {
               "description": "The label wrapper.",
               "name": "label"
             },
             {
-              "description": "The icon slot.",
+              "description": "The icon's box.",
               "name": "icon"
             },
             {
@@ -28713,7 +28723,7 @@
           ],
           "slots": [
             {
-              "description": "Metric name.",
+              "description": "Metric name; also the stat's accessible name.",
               "name": "label"
             },
             {
@@ -28721,7 +28731,7 @@
               "name": "value"
             },
             {
-              "description": "Icon beside the label, such as an `svg`.",
+              "description": "Icon beside the label, such as an `svg` or an `img`, drawn 16px square at the default base.",
               "name": "icon"
             },
             {
@@ -28740,9 +28750,31 @@
               "type": {
                 "text": "StatTrend | undefined"
               },
-              "description": "Direction of change; sets the delta colour and arrow.",
+              "description": "Direction of change; draws the delta's arrow and, unless `tone` is set, its colour. An unknown value draws as `neutral`.",
+              "default": "undefined",
               "attribute": "trend",
               "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "tone",
+              "type": {
+                "text": "StatTone | undefined"
+              },
+              "description": "Whether the change is good news; colours the delta. Unset, or an unknown value, follows `trend`.",
+              "default": "undefined",
+              "attribute": "tone",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "trendLabel",
+              "type": {
+                "text": "| string\n        | undefined"
+              },
+              "description": "Words read before the delta in place of \"up\", \"down\" or \"no change\", such as \"in aumento\".",
+              "default": "undefined",
+              "attribute": "trend-label"
             },
             {
               "kind": "field",
@@ -28774,22 +28806,26 @@
               "default": "false"
             },
             {
-              "kind": "method",
-              "name": "#onSlotChange",
-              "privacy": "private",
-              "return": {
-                "type": {
-                  "text": "void"
-                }
+              "kind": "field",
+              "name": "hasIcon",
+              "type": {
+                "text": "boolean | undefined"
               },
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "Event"
-                  }
-                }
-              ]
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "#read",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "#trend",
+              "privacy": "private",
+              "type": {
+                "text": "StatTrend | undefined"
+              },
+              "readonly": true
             }
           ],
           "attributes": [
@@ -28798,8 +28834,27 @@
               "type": {
                 "text": "StatTrend | undefined"
               },
-              "description": "Direction of change; sets the delta colour and arrow.",
+              "description": "Direction of change; draws the delta's arrow and, unless `tone` is set, its colour. An unknown value draws as `neutral`.",
+              "default": "undefined",
               "fieldName": "trend"
+            },
+            {
+              "name": "tone",
+              "type": {
+                "text": "StatTone | undefined"
+              },
+              "description": "Whether the change is good news; colours the delta. Unset, or an unknown value, follows `trend`.",
+              "default": "undefined",
+              "fieldName": "tone"
+            },
+            {
+              "name": "trend-label",
+              "type": {
+                "text": "| string\n        | undefined"
+              },
+              "description": "Words read before the delta in place of \"up\", \"down\" or \"no change\", such as \"in aumento\".",
+              "default": "undefined",
+              "fieldName": "trendLabel"
             },
             {
               "name": "divider",

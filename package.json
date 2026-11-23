@@ -1139,6 +1139,7 @@
         "@biomejs/biome": "^2.4.9",
         "@custom-elements-manifest/analyzer": "^0.11.0",
         "@lit-labs/ssr": "^4.1.0",
+        "@lit-labs/ssr-client": "^1.1.8",
         "@r2wc/react-to-web-component": "^2.1.1",
         "@storybook/addon-docs": "10.6.0",
         "@storybook/react-vite": "10.6.0",

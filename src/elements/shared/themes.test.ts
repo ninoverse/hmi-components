@@ -1,7 +1,7 @@
 /// <reference types="vite/client" />
 // The Playwright provider's types give `cdp()` its `send`.
 /// <reference types="@vitest/browser-playwright" />
-import { html, render } from 'lit';
+import { html, nothing, render } from 'lit';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { cdp, page } from 'vitest/browser';
 import baseCss from '../../../public/css/base.css?inline';
@@ -19,6 +19,7 @@ import sharpStructure from '../../../public/css/themes/structure/sharp.css?inlin
 import '../card/card.js';
 import '../heading/heading.js';
 import '../link/link.js';
+import '../stat/stat.js';
 import '../text/text.js';
 import { renderLiquidFilter } from './panel.js';
 
@@ -28,7 +29,8 @@ import { renderLiquidFilter } from './panel.js';
    files, paints each pair, and measures what the page shows: the panels' own
    text roles, the translucent glass and liquid surfaces blended over the page
    (liquid's carries a gradient sheen and a refraction filter), and hmi-text,
-   hmi-heading and hmi-link inside a card.
+   hmi-heading and hmi-link inside a card, and hmi-stat's text, its delta in
+   each tone.
 
    For each look it takes one screenshot with the text hidden, then compares
    each text's computed colour with every background pixel under its line
@@ -100,6 +102,18 @@ const card = (variant: string) => html`
     </hmi-card>
 `;
 
+const stat = (trend: string, tone?: string, where = '') => {
+    const t = `${where}stat ${trend}${tone ? ` ${tone}` : ''}`;
+    return html`
+        <hmi-stat trend=${trend} tone=${tone ?? nothing}>
+            <span slot="label" data-t="${t} label">Revenue</span>
+            <span slot="value" data-t="${t} value">$12.4k</span>
+            <span slot="delta" data-t="${t} delta">8%</span>
+            <span slot="help-text" data-t="${t} help">vs last month</span>
+        </hmi-stat>
+    `;
+};
+
 const fixture = html`
     ${renderLiquidFilter()}
     <div class="page" data-t-scope>
@@ -111,6 +125,11 @@ const fixture = html`
         ${['--panel-bg', '--panel-bg-strong', '--drawer-bg', '--listbox-bg', '--palette-bg'].map(panel)}
     </div>
     <div class="row">${['default', 'flat', 'active', 'ink', 'accent'].map(card)}</div>
+    <div class="row">
+        ${stat('up')} ${stat('down')} ${stat('neutral')}
+        ${stat('down', 'positive')} ${stat('up', 'negative')}
+        <hmi-card variant="ink">${stat('down', undefined, 'ink card ')}</hmi-card>
+    </div>
 `;
 
 const fixtureCss = `
@@ -295,7 +314,7 @@ beforeAll(async () => {
     await Promise.all(
         [
             ...root.querySelectorAll(
-                'hmi-card, hmi-text, hmi-heading, hmi-link',
+                'hmi-card, hmi-text, hmi-heading, hmi-link, hmi-stat',
             ),
         ].map(
             (el) =>

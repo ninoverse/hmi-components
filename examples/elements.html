@@ -1583,8 +1583,10 @@ export function Example() {
         <section>
             <h2>Stat</h2>
             <!-- no events: label, value, icon, delta and help-text are slots,
-                 trend sets the arrow and colour of the delta, divider draws the
-                 rule above the footer. -->
+                 trend sets the arrow of the delta and tone its colour, which
+                 follows trend when unset: fewer errors is good news, so that
+                 stat is trend="down" tone="positive". divider draws the rule
+                 above the footer. -->
             <div class="row">
                 <hmi-stat trend="up" divider style="width: 22rem">
                     <span slot="label">Revenue</span>
@@ -1592,7 +1594,7 @@ export function Example() {
                     <span slot="delta">8%</span>
                     <span slot="help-text">vs last month</span>
                 </hmi-stat>
-                <hmi-stat trend="down" divider style="width: 22rem">
+                <hmi-stat trend="down" tone="positive" divider style="width: 22rem">
                     <span slot="label">Errors</span>
                     <svg slot="icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M10 3l8 14H2z M10 8v4 M10 14.5v.01" /></svg>
                     <span slot="value">3</span>

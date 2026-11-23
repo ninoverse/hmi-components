@@ -533,8 +533,9 @@ do **not** cross the boundary, which changes how themes may be written:
   own elevation.
 - **Per-element hooks** replace the journal-specific rules that v5 keeps inside
   component CSS: `--list-divider-style`, `--progress-track-border`,
-  `--meter-track-border`, `--switch-thumb-shadow` (defaults in `constants.css`,
-  overridden by `structure/journal.css`). The meter's fills, `--meter-optimal`,
+  `--meter-track-border`, `--switch-thumb-shadow`, and `--stat-divider`, `1`
+  or `0`, which draws the stat's dashed rule over its footer, with its spacing
+  (defaults in `constants.css`, overridden by `structure/journal.css`). The meter's fills, `--meter-optimal`,
   `--meter-suboptimal` and `--meter-poor`, have no default: the element falls
   back to `--success`, `--warning` and `--error`; in the light schemes the first
   two are 2.1:1 to 2.9:1 against the track. An app that needs 3:1 opts in with

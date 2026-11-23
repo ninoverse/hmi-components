@@ -1,7 +1,10 @@
+// The Playwright provider's types give `cdp()` its `send`.
+import type {} from '@vitest/browser-playwright';
 import { html, render } from 'lit';
 import { act, createElement } from 'react';
 import { createRoot } from 'react-dom/client';
 import { afterEach, describe, expect, it } from 'vitest';
+import { cdp } from 'vitest/browser';
 import './stat.js';
 import type { HmiStat } from './stat.js';
 import { Stat } from './stat.react.js';
@@ -29,6 +32,40 @@ const part = (el: HmiStat, name: string) =>
 const delta = (el: HmiStat) =>
     el.shadowRoot?.querySelector<HTMLElement>('.delta') as HTMLElement;
 const displayOf = (node: Element) => getComputedStyle(node).display;
+const arrowPath = (el: HmiStat) =>
+    delta(el).querySelector('path')?.getAttribute('d');
+
+type AXNode = {
+    ignored: boolean;
+    role?: { value: string };
+    name?: { value: string };
+};
+
+type FrameTree = {
+    frame: { id: string; url: string };
+    childFrames?: FrameTree[];
+};
+
+/* The accessibility tree of the frame the tests run in, as the browser
+   computes it, with the nodes it ignores left out. */
+async function axTree(): Promise<AXNode[]> {
+    const session = cdp();
+    await session.send('Accessibility.enable');
+    /* The tests run in a frame of the runner's page: find it by its URL. */
+    const { frameTree } = (await session.send('Page.getFrameTree')) as {
+        frameTree: FrameTree;
+    };
+    const find = (tree: FrameTree): string | undefined =>
+        tree.frame.url === location.href
+            ? tree.frame.id
+            : tree.childFrames?.map(find).find(Boolean);
+    const frameId = find(frameTree);
+    if (!frameId) throw new Error('The test frame is not in the frame tree');
+    const { nodes } = (await session.send('Accessibility.getFullAXTree', {
+        frameId,
+    })) as { nodes: AXNode[] };
+    return nodes.filter((node) => !node.ignored);
+}
 
 afterEach(() => {
     document.body.replaceChildren();
@@ -155,6 +192,202 @@ describe('hmi-stat', () => {
         expect(style.borderTopStyle).toBe('dashed');
     });
 
+    it('draws an unknown trend as neutral, and an empty one as none', async () => {
+        const el = await fixture(
+            html`<hmi-stat trend="sideways"><span slot="delta">8%</span></hmi-stat>`,
+        );
+        expect(displayOf(delta(el))).not.toBe('none');
+        expect(arrowPath(el)).toBe('M3 8h10');
+        expect(delta(el).dataset.tone).toBe('neutral');
+        el.setAttribute('trend', '');
+        await settle(el);
+        expect(displayOf(part(el, 'footer'))).toBe('none');
+        expect(delta(el).querySelector('svg')).toBeNull();
+    });
+
+    it('colours the delta from its tone, which follows the trend', async () => {
+        const el = await fixture(
+            html`<hmi-stat
+                trend="up"
+                style="--on-success-container: rgb(0, 128, 0); --on-error-container: rgb(255, 0, 0); --on-surface-variant: rgb(0, 0, 255)"
+                ><span slot="delta">8%</span></hmi-stat
+            >`,
+        );
+        const colour = () => getComputedStyle(delta(el)).color;
+        expect(el.tone).toBeUndefined();
+        expect(colour()).toBe('rgb(0, 128, 0)');
+        el.trend = 'down';
+        await settle(el);
+        expect(colour()).toBe('rgb(255, 0, 0)');
+        el.trend = 'neutral';
+        await settle(el);
+        expect(colour()).toBe('rgb(0, 0, 255)');
+        // a fall that is good news: a down arrow, coloured positive
+        el.trend = 'down';
+        el.tone = 'positive';
+        await settle(el);
+        expect(el.getAttribute('tone')).toBe('positive');
+        expect(arrowPath(el)).toBe('M3 5l5 5 5-5');
+        expect(colour()).toBe('rgb(0, 128, 0)');
+        el.tone = 'neutral';
+        await settle(el);
+        expect(colour()).toBe('rgb(0, 0, 255)');
+        // an unknown tone follows the trend
+        el.setAttribute('tone', 'great');
+        await settle(el);
+        expect(colour()).toBe('rgb(255, 0, 0)');
+    });
+
+    it('is a group named by its label, with the direction in words', async () => {
+        await fixture(
+            html`<div>
+                <hmi-stat trend="up"
+                    ><span slot="label">Revenue</span
+                    ><span slot="value">$12.4k</span
+                    ><span slot="delta">8%</span></hmi-stat
+                ><hmi-stat trend="down" trend-label="in calo"
+                    ><span slot="label">Churn</span
+                    ><span slot="value">2%</span
+                    ><span slot="delta">1%</span></hmi-stat
+                ><hmi-stat trend="neutral"
+                    ><span slot="label">Tickets</span
+                    ><span slot="value">31</span
+                    ><span slot="delta">0</span></hmi-stat
+                >
+            </div>`,
+        );
+        const nodes = await axTree();
+        const groups = nodes
+            .filter((node) => node.role?.value === 'group')
+            .map((node) => node.name?.value?.toLowerCase());
+        /* Chromium exposes the label's text-transform: uppercase. */
+        expect(groups).toEqual(['revenue', 'churn', 'tickets']);
+        const text = nodes
+            .filter((node) => node.role?.value === 'StaticText')
+            .map((node) => node.name?.value?.trim());
+        /* The full tree lists its nodes out of reading order. */
+        expect(text.sort()).toEqual(
+            [
+                'REVENUE',
+                '$12.4k',
+                'up',
+                '8%',
+                'CHURN',
+                '2%',
+                'in calo',
+                '1%',
+                'TICKETS',
+                '31',
+                'no change',
+                '0',
+            ].sort(),
+        );
+        const word = document
+            .querySelector('hmi-stat')
+            ?.shadowRoot?.querySelector('.trend') as HTMLElement;
+        expect(word.getBoundingClientRect().width).toBeLessThanOrEqual(1);
+    });
+
+    it('fills the height of a row that stretches it', async () => {
+        const host = await fixture(
+            html`<div
+                style="display: grid; grid-template-columns: 1fr 1fr; width: 600px"
+            >
+                <hmi-stat
+                    ><span slot="label">Open tickets</span
+                    ><span slot="value">31</span></hmi-stat
+                ><hmi-stat trend="up"
+                    ><span slot="label">Revenue</span
+                    ><span slot="value">$12.4k</span
+                    ><span slot="delta">8%</span
+                    ><span slot="help-text">vs last month</span></hmi-stat
+                >
+            </div>`,
+        );
+        const [short, tall] = [
+            ...(host as HTMLElement).querySelectorAll('hmi-stat'),
+        ] as HmiStat[];
+        await settle(short as HmiStat);
+        await settle(tall as HmiStat);
+        const height = (el: HmiStat) =>
+            part(el, 'base').getBoundingClientRect().height;
+        expect(height(short as HmiStat)).toBeGreaterThan(0);
+        expect(height(short as HmiStat)).toBe(height(tall as HmiStat));
+        expect(height(short as HmiStat)).toBe(
+            (short as HmiStat).getBoundingClientRect().height,
+        );
+    });
+
+    it('wraps a long value inside a narrow stat', async () => {
+        const el = await fixture(
+            html`<hmi-stat style="width: 180px"
+                ><span slot="value">$1,234,567,890</span></hmi-stat
+            >`,
+        );
+        const surface = part(el, 'base').getBoundingClientRect();
+        const value = (
+            el.querySelector('[slot="value"]') as HTMLElement
+        ).getBoundingClientRect();
+        expect(value.right).toBeLessThanOrEqual(surface.right);
+    });
+
+    it('draws the footer rule from --stat-divider, as journal does', async () => {
+        const el = await fixture(
+            html`<hmi-stat
+                style="--outline-variant: gray; --space-2: 2px; --space-3: 3px"
+                ><span slot="help-text">note</span></hmi-stat
+            >`,
+        );
+        const footer = () => getComputedStyle(part(el, 'footer'));
+        expect(footer().borderTopWidth).toBe('0px');
+        expect(footer().paddingTop).toBe('0px');
+        el.style.setProperty('--stat-divider', '1');
+        await settle(el);
+        expect(footer().borderTopWidth).toBe('1px');
+        expect(footer().borderTopStyle).toBe('dashed');
+        expect(footer().paddingTop).toBe('3px');
+        expect(footer().marginTop).toBe('2px');
+    });
+
+    it('paints its surface from the panel tokens', async () => {
+        const el = await fixture(
+            html`<hmi-stat
+                style="--panel-bg: rgb(1, 2, 3); --panel-border: rgb(4, 5, 6); --panel-filter: blur(2px)"
+                ><span slot="value">1</span></hmi-stat
+            >`,
+        );
+        const style = getComputedStyle(part(el, 'panel'));
+        expect(style.backgroundColor).toBe('rgb(1, 2, 3)');
+        expect(style.borderTopColor).toBe('rgb(4, 5, 6)');
+        expect(style.backdropFilter).toBe('blur(2px)');
+    });
+
+    it('sizes any slotted icon, and the icon part is a box', async () => {
+        const el = await fixture(
+            html`<hmi-stat
+                ><span slot="label">Users</span
+                ><img
+                    slot="icon"
+                    alt=""
+                    src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='156' height='156'/%3E"
+            /></hmi-stat>`,
+        );
+        const img = el.querySelector('img') as HTMLImageElement;
+        await img.decode();
+        const { width, height } = img.getBoundingClientRect();
+        expect([width, height]).toEqual([16, 16]);
+        const icon = part(el, 'icon');
+        expect(icon.localName).toBe('span');
+        expect(icon.getBoundingClientRect().width).toBe(16);
+    });
+
+    it('keeps no icon box without an icon', async () => {
+        const el = await fixture(
+            html`<hmi-stat><span slot="label">Users</span></hmi-stat>`,
+        );
+        expect(displayOf(part(el, 'icon'))).toBe('none');
+    });
+
     it('mounts through the React wrapper', async () => {
         const mount = document.createElement('div');
         document.body.append(mount);
@@ -162,7 +395,12 @@ describe('hmi-stat', () => {
             createRoot(mount).render(
                 createElement(
                     Stat,
-                    { trend: 'up', divider: true },
+                    {
+                        trend: 'down',
+                        tone: 'positive',
+                        trendLabel: 'in calo',
+                        divider: true,
+                    },
                     createElement('span', { slot: 'label' }, 'Revenue'),
                     createElement('span', { slot: 'value' }, '$12.4k'),
                     createElement('span', { slot: 'delta' }, '8%'),
@@ -171,7 +409,9 @@ describe('hmi-stat', () => {
         });
         const el = mount.querySelector('hmi-stat') as HmiStat;
         await settle(el);
-        expect(el.trend).toBe('up');
+        expect(el.trend).toBe('down');
+        expect(el.tone).toBe('positive');
+        expect(el.trendLabel).toBe('in calo');
         expect(el.divider).toBe(true);
         expect(displayOf(delta(el))).not.toBe('none');
     });

@@ -84,6 +84,7 @@
        flat switch thumb, and key caps in the body font, since Caveat is hard
        to read at a key's size. */
     --list-divider-style: dashed;
+    --stat-divider: 1;
     --progress-track-border: calc(var(--hmi-base, 8px) * 0.125) solid var(--outline);
     --meter-track-border: calc(var(--hmi-base, 8px) * 0.125) solid var(--outline);
     --switch-thumb-shadow: none;

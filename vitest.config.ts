@@ -1,5 +1,23 @@
 import { playwright } from '@vitest/browser-playwright';
 import { defineConfig } from 'vitest/config';
+import type { BrowserCommand } from 'vitest/node';
+
+/* `renderOnServer(markup, modules)`, for the browser tests: renders `markup`
+   with @lit-labs/ssr in Node, after importing the element modules it names
+   (paths from the repository root), and returns the HTML a server would send.
+   `shared/hydration.test.ts` hydrates it in the browser. */
+const renderOnServer: BrowserCommand<
+    [markup: string, modules: string[]]
+> = async ({ project }, markup, modules) => {
+    const { render } = await import('@lit-labs/ssr');
+    const { collectResult } = await import(
+        '@lit-labs/ssr/lib/render-result.js'
+    );
+    const { html } = await import('lit');
+    for (const module of modules) await project.import(`/${module}`);
+    const strings = Object.assign([markup], { raw: [markup] });
+    return collectResult(render(html(strings)));
+};
 
 /* Two projects:
    - browser: `*.test.ts` under src/elements and src/react run in real Chromium
@@ -41,6 +59,7 @@ export default defineConfig({
                         provider: playwright(),
                         instances: [{ browser: 'chromium' }],
                         screenshotFailures: false,
+                        commands: { renderOnServer },
                     },
                 },
             },
