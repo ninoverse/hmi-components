@@ -4,7 +4,7 @@ import { styleMap } from 'lit/directives/style-map.js';
 import '../badge/badge.js';
 import type { BadgeVariant } from '../badge/badge.js';
 import { baseStyles } from '../shared/base.styles.js';
-import { toggleEmpty } from '../shared/dom.js';
+import { readSlots, toggleEmpty } from '../shared/dom.js';
 import { emit } from '../shared/events.js';
 import { styles } from './tree.styles.js';
 
@@ -342,6 +342,11 @@ export class HmiTree extends LitElement {
                 }
             </div>`;
         });
+    }
+
+    /* A hydrated root fires no slotchange for the slots the server filled. */
+    protected override firstUpdated(): void {
+        readSlots(this.renderRoot);
     }
 
     override render() {

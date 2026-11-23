@@ -3,7 +3,7 @@ import { customElement, property, state } from 'lit/decorators.js';
 import '../badge/badge.js';
 import type { BadgeVariant } from '../badge/badge.js';
 import { baseStyles } from '../shared/base.styles.js';
-import { toggleEmpty } from '../shared/dom.js';
+import { readSlots, toggleEmpty } from '../shared/dom.js';
 import { handleNavClick } from '../shared/nav.js';
 import { renderLiquidFilter } from '../shared/panel.js';
 import { styles } from './navbar.styles.js';
@@ -142,6 +142,11 @@ export class HmiNavbar extends LitElement {
                 </slot>
             </a>
         </slot>`;
+    }
+
+    /* A hydrated root fires no slotchange for the slots the server filled. */
+    protected override firstUpdated(): void {
+        readSlots(this.renderRoot);
     }
 
     override render() {

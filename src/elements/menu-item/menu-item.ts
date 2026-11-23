@@ -2,7 +2,7 @@ import { html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { baseStyles } from '../shared/base.styles.js';
-import { toggleEmpty } from '../shared/dom.js';
+import { readSlots, toggleEmpty } from '../shared/dom.js';
 import { styles } from './menu-item.styles.js';
 
 /**
@@ -57,6 +57,11 @@ export class HmiMenuItem extends LitElement {
 
     /** A trailing hint, such as a keyboard shortcut: the default of the `shortcut` slot. */
     @property() accessor shortcut = '';
+
+    /* A hydrated root fires no slotchange for the slots the server filled. */
+    protected override firstUpdated(): void {
+        readSlots(this.renderRoot);
+    }
 
     override render() {
         return html`<button

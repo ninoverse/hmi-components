@@ -2,21 +2,22 @@ import { playwright } from '@vitest/browser-playwright';
 import { defineConfig } from 'vitest/config';
 import type { BrowserCommand } from 'vitest/node';
 
-/* `renderOnServer(markup, modules)`, for the browser tests: renders `markup`
-   with @lit-labs/ssr in Node, after importing the element modules it names
-   (paths from the repository root), and returns the HTML a server would send.
+/* `renderOnServer(strings, values, modules)`, for the browser tests: renders
+   the template `strings` and `values` would make with @lit-labs/ssr in Node,
+   after importing the element modules it names (paths from the repository
+   root), and returns the HTML a server would send. The values cross as JSON.
    `shared/hydration.test.ts` hydrates it in the browser. */
 const renderOnServer: BrowserCommand<
-    [markup: string, modules: string[]]
-> = async ({ project }, markup, modules) => {
+    [strings: string[], values: unknown[], modules: string[]]
+> = async ({ project }, strings, values, modules) => {
     const { render } = await import('@lit-labs/ssr');
     const { collectResult } = await import(
         '@lit-labs/ssr/lib/render-result.js'
     );
     const { html } = await import('lit');
     for (const module of modules) await project.import(`/${module}`);
-    const strings = Object.assign([markup], { raw: [markup] });
-    return collectResult(render(html(strings)));
+    const template = Object.assign([...strings], { raw: [...strings] });
+    return collectResult(render(html(template, ...values)));
 };
 
 /* Two projects:

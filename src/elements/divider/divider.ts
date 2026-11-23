@@ -1,6 +1,7 @@
 import { html, LitElement, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { baseStyles } from '../shared/base.styles.js';
+import { readSlots } from '../shared/dom.js';
 import { styles } from './divider.styles.js';
 
 export type DividerOrientation = 'horizontal' | 'vertical';
@@ -51,6 +52,11 @@ export class HmiDivider extends LitElement {
                     node.nodeType === Node.ELEMENT_NODE ||
                     (node.textContent ?? '').trim() !== '',
             );
+    }
+
+    /* A hydrated root fires no slotchange for the slots the server filled. */
+    protected override firstUpdated(): void {
+        readSlots(this.renderRoot);
     }
 
     override render() {

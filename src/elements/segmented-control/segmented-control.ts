@@ -2,6 +2,7 @@ import { html, nothing, type PropertyValues, type TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { baseStyles } from '../shared/base.styles.js';
+import { readSlots } from '../shared/dom.js';
 import { emit } from '../shared/events.js';
 import { type FormKind, HmiFormField } from '../shared/form.js';
 import { formStyles } from '../shared/form.styles.js';
@@ -196,6 +197,11 @@ export class HmiSegmentedControl extends HmiFormField {
 }</div
               >`
             : nothing;
+    }
+
+    /* A hydrated root fires no slotchange for the slots the server filled. */
+    protected override firstUpdated(): void {
+        readSlots(this.renderRoot);
     }
 
     override render() {

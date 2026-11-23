@@ -2,6 +2,7 @@ import { html, nothing, type PropertyValues, type TemplateResult } from 'lit';
 import { property, query, state } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
+import { readSlots } from './dom.js';
 import { emit } from './events.js';
 import { type FormKind, HmiFormField } from './form.js';
 
@@ -125,6 +126,11 @@ export abstract class HmiCheckable extends HmiFormField {
     /** The label sits inline beside the indicator, not above the control. */
     protected override renderLabel(): typeof nothing {
         return nothing;
+    }
+
+    /* A hydrated root fires no slotchange for the slots the server filled. */
+    protected override firstUpdated(): void {
+        readSlots(this.renderRoot);
     }
 
     override render() {

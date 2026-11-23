@@ -1,6 +1,7 @@
 import { html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { baseStyles } from '../shared/base.styles.js';
+import { readSlots } from '../shared/dom.js';
 import { styles } from './timeline.styles.js';
 
 export type TimelineColor =
@@ -65,6 +66,11 @@ export class HmiTimeline extends LitElement {
 
     /** Draw a hairline between events. @default false */
     @property({ type: Boolean, reflect: true }) accessor divider = false;
+
+    /* A hydrated root fires no slotchange for the slots the server filled. */
+    protected override firstUpdated(): void {
+        readSlots(this.renderRoot);
+    }
 
     override render() {
         return html`<ol part="base" class="base">

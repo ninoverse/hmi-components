@@ -1,6 +1,7 @@
 import { html, LitElement } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { baseStyles } from '../shared/base.styles.js';
+import { readSlots } from '../shared/dom.js';
 import { formStyles } from '../shared/form.styles.js';
 import { styles } from './form-control.styles.js';
 
@@ -61,6 +62,11 @@ export class HmiFormControl extends LitElement {
         if (slot.name === 'label') this.hasLabel = has;
         else if (slot.name === 'hint') this.hasHint = has;
         else this.hasError = has;
+    }
+
+    /* A hydrated root fires no slotchange for the slots the server filled. */
+    protected override firstUpdated(): void {
+        readSlots(this.renderRoot);
     }
 
     override render() {

@@ -39,3 +39,18 @@ export function toggleEmpty(event: Event, hasText: boolean): void {
     (slot.parentElement as HTMLElement).hidden =
         slot.assignedNodes().length === 0 && !hasText;
 }
+
+/**
+ * Runs the `slotchange` listeners of each slot in `root` that has content, as
+ * a client render fires them. An element that reads its slots on `slotchange`
+ * calls it from `firstUpdated()`: a root that Lit hydrates from server output
+ * fires no `slotchange` for the slots the server already filled, so without
+ * it that content stays hidden.
+ */
+export function readSlots(root: ParentNode): void {
+    for (const slot of root.querySelectorAll('slot')) {
+        if (slot.assignedNodes().length > 0) {
+            slot.dispatchEvent(new Event('slotchange'));
+        }
+    }
+}

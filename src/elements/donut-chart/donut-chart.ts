@@ -3,7 +3,7 @@ import { customElement, property } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { baseStyles } from '../shared/base.styles.js';
 import { paletteColor } from '../shared/chart.js';
-import { toggleEmpty } from '../shared/dom.js';
+import { readSlots, toggleEmpty } from '../shared/dom.js';
 import { styles } from './donut-chart.styles.js';
 
 /** One segment of a donut chart. */
@@ -66,6 +66,11 @@ export class HmiDonutChart extends LitElement {
 
     /** The accessible name of the chart. @default 'Donut chart' */
     @property() accessor label = 'Donut chart';
+
+    /* A hydrated root fires no slotchange for the slots the server filled. */
+    protected override firstUpdated(): void {
+        readSlots(this.renderRoot);
+    }
 
     override render() {
         const { size, thickness, gap } = this;

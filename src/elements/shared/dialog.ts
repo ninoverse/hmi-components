@@ -8,7 +8,7 @@ import {
 } from 'lit';
 import { property, query, state } from 'lit/decorators.js';
 import { type DialogAction, renderDialogActions } from './dialog-actions.js';
-import { activeElementDeep } from './dom.js';
+import { activeElementDeep, readSlots } from './dom.js';
 import { emit } from './events.js';
 import { renderLiquidFilter } from './panel.js';
 import { lockScroll } from './scroll-lock.js';
@@ -59,6 +59,11 @@ export class HmiDialogBase extends LitElement {
 
     #restoreFocusTo: HTMLElement | null = null;
     #unlockScroll: (() => void) | undefined;
+
+    /* A hydrated root fires no slotchange for the slots the server filled. */
+    protected override firstUpdated(): void {
+        readSlots(this.renderRoot);
+    }
 
     override connectedCallback(): void {
         super.connectedCallback();
