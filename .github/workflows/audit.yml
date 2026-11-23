@@ -19,4 +19,4 @@ permissions:
 
 jobs:
   audit:
-    uses: ninoverse/.github/.github/workflows/node-audit.yml@v1.7.0
+    uses: ninoverse/.github/.github/workflows/node-audit.yml@v1.11.2
