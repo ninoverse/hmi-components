@@ -59,7 +59,7 @@ jobs:
           CHANNEL: pr-${{ github.event.pull_request.number }}
           # Kept in step with the version firebase-deploy.yml pins.
           # renovate: datasource=npm depName=firebase-tools
-          FIREBASE_TOOLS_VERSION: 15.32.1
+          FIREBASE_TOOLS_VERSION: 15.37.0
         run: |
           npx --yes "firebase-tools@${FIREBASE_TOOLS_VERSION}" hosting:channel:deploy "$CHANNEL" \
             --only demo \
