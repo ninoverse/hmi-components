@@ -1,6 +1,7 @@
 import { html, isServer, LitElement, nothing, type PropertyValues } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { baseStyles } from '../shared/base.styles.js';
+import { readSlots } from '../shared/dom.js';
 import { emit } from '../shared/events.js';
 import { applyTemplate } from '../shared/format.js';
 import { styles } from './carousel.styles.js';
@@ -245,6 +246,11 @@ export class HmiCarousel extends LitElement {
                 <path d=${prev ? 'M10 4l-4 4 4 4' : 'M6 4l4 4-4 4'} />
             </svg>
         </button>`;
+    }
+
+    /* A hydrated root fires no slotchange for the slots the server filled. */
+    protected override firstUpdated(): void {
+        readSlots(this.renderRoot);
     }
 
     override render() {

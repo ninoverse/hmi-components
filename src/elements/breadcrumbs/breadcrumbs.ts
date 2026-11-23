@@ -1,6 +1,7 @@
 import { html, LitElement, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { baseStyles } from '../shared/base.styles.js';
+import { readSlots } from '../shared/dom.js';
 import { handleNavClick } from '../shared/nav.js';
 import { styles } from './breadcrumbs.styles.js';
 
@@ -108,6 +109,11 @@ export class HmiBreadcrumbs extends LitElement {
             index,
             href: item.href,
         });
+    }
+
+    /* A hydrated root fires no slotchange for the slots the server filled. */
+    protected override firstUpdated(): void {
+        readSlots(this.renderRoot);
     }
 
     override render() {

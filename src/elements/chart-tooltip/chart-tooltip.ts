@@ -2,7 +2,7 @@ import { html, LitElement, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { baseStyles } from '../shared/base.styles.js';
-import { toggleEmpty } from '../shared/dom.js';
+import { readSlots, toggleEmpty } from '../shared/dom.js';
 import { renderLiquidFilter } from '../shared/panel.js';
 import { styles } from './chart-tooltip.styles.js';
 
@@ -55,6 +55,11 @@ export class HmiChartTooltip extends LitElement {
     /** The rows, one per series at the hovered point. A property only: there is no attribute. @default [] */
     @property({ type: Array, attribute: false })
     accessor items: ChartTooltipItem[] = [];
+
+    /* A hydrated root fires no slotchange for the slots the server filled. */
+    protected override firstUpdated(): void {
+        readSlots(this.renderRoot);
+    }
 
     override render() {
         return html`<div part="base panel" class="panel" role="tooltip">

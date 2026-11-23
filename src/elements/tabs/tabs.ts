@@ -3,7 +3,7 @@ import { customElement, property, query } from 'lit/decorators.js';
 import '../badge/badge.js';
 import type { BadgeVariant } from '../badge/badge.js';
 import { baseStyles } from '../shared/base.styles.js';
-import { toggleEmpty } from '../shared/dom.js';
+import { readSlots, toggleEmpty } from '../shared/dom.js';
 import { emit } from '../shared/events.js';
 import { styles } from './tabs.styles.js';
 
@@ -100,6 +100,8 @@ export class HmiTabs extends LitElement {
 
     protected override firstUpdated(): void {
         if (this.base) this.#observer?.observe(this.base);
+        /* A hydrated root fires no slotchange for the slots the server filled. */
+        readSlots(this.renderRoot);
     }
 
     protected override updated(): void {

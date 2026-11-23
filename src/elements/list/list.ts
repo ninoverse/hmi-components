@@ -4,6 +4,7 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 import { repeat } from 'lit/directives/repeat.js';
 import '../avatar/avatar.js';
 import { baseStyles } from '../shared/base.styles.js';
+import { readSlots } from '../shared/dom.js';
 import { emit } from '../shared/events.js';
 import { styles } from './list.styles.js';
 
@@ -159,6 +160,11 @@ export class HmiList extends LitElement {
         this.shadowRoot
             ?.querySelectorAll<HTMLElement>('.handle')
             [index]?.focus();
+    }
+
+    /* A hydrated root fires no slotchange for the slots the server filled. */
+    protected override firstUpdated(): void {
+        readSlots(this.renderRoot);
     }
 
     override render() {

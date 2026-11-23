@@ -9,7 +9,7 @@ import { customElement, property, query, state } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
 import { baseStyles } from '../shared/base.styles.js';
-import { supportsPopover, toggleEmpty } from '../shared/dom.js';
+import { readSlots, supportsPopover, toggleEmpty } from '../shared/dom.js';
 import { emit } from '../shared/events.js';
 import { type FormKind, HmiFormField } from '../shared/form.js';
 import { formStyles } from '../shared/form.styles.js';
@@ -528,6 +528,11 @@ export class HmiCombobox extends HmiFormField {
                 ></div
             >
         </div>`;
+    }
+
+    /* A hydrated root fires no slotchange for the slots the server filled. */
+    protected override firstUpdated(): void {
+        readSlots(this.renderRoot);
     }
 
     override render() {

@@ -120,6 +120,12 @@ stem (`AreaChart`), the tag is `hmi-<kebab>`, the class is `Hmi<Pascal>`,
   `src/elements/shared/dom.ts`, never `document.activeElement`.
 - Server rendering must hold for hmi's supported hosts: Next.js, Angular SSR and
   Dioxus fullstack.
+- A root that Lit hydrates from server output fires no `slotchange` for the
+  slots the server already filled. An element that reads its slots on
+  `slotchange` reads them in `firstUpdated()` too, with `readSlots(this.renderRoot)`
+  from `src/elements/shared/dom.ts`, or its own read, as `hmi-stat` does.
+  `shared/hydration.test.ts` compares each such element, hydrated, with its
+  client render: a new one adds its row.
 
 ## R4 — Styles
 
