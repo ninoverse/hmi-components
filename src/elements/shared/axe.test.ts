@@ -123,6 +123,22 @@ const cases: ReadonlyArray<{ name: string; template: TemplateResult }> = [
             >`,
     },
     {
+        name: 'hmi-divider',
+        template: html`<p>Above</p>
+            <hmi-divider></hmi-divider>
+            <p>Below</p>`,
+    },
+    {
+        name: 'hmi-divider with a label',
+        template: html`<hmi-divider align="start">Recent</hmi-divider>`,
+    },
+    {
+        name: 'hmi-divider, vertical',
+        template: html`<span>One</span
+            ><hmi-divider orientation="vertical"></hmi-divider
+            ><span>Two</span>`,
+    },
+    {
         name: 'hmi-empty-state',
         template: html`<hmi-empty-state
             ><svg slot="icon" viewBox="0 0 24 24"><title>Empty inbox</title></svg
@@ -231,6 +247,10 @@ describe('axe finds no violation', () => {
             const el = host.firstElementChild as HTMLElement & {
                 updateComplete: Promise<unknown>;
             };
+            await el.updateComplete;
+            /* An element that reads its slots updates again on slotchange:
+               let it settle, or axe reads the attributes as they change. */
+            await new Promise((resolve) => requestAnimationFrame(resolve));
             await el.updateComplete;
 
             const { violations } = await axe.run(host, {

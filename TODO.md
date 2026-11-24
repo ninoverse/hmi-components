@@ -116,40 +116,21 @@ hover, the names stay out of sight.
 
 ## Divider labeled-variant accessibility
 
-Surfaced during the Phase 1 utilities audit-pass. **Not a defect — left as-is.**
+**Not a defect — left as-is.** `hmi-divider` with a label is a row with the label
+as text and its two rules `aria-hidden`; it is not announced as a separator, as
+v5's labelled `Divider` was not. The plain divider is `role="separator"`.
 
-### The gap
-The plain `Divider` renders a semantic `<hr>` (implicit `role="separator"` +
-`aria-orientation`). The **labeled** variant (e.g. `<Divider>OR</Divider>`)
-instead renders a `<div>` with the rule lines `aria-hidden` and a visible text
-label — it is **not announced as a separator** to assistive technology.
+### Why it stays text
+Lint isn't the reason: the element's base is a `div` in a Lit template, and the
+plain one already carries `role="separator"`. A labelled `role="separator"`
+named by its label with `aria-labelledby` works in Chromium (`separator "OR"`,
+axe clean). But a separator's children are presentational: the label would be
+read only as the separator's name, which screen readers don't all speak, so a
+label read today could go unread, and a link or button in it would be hidden.
 
-### Why the obvious fix doesn't work
-Adding `role="separator"` to the labeled `<div>` is rejected by the project's
-own Biome a11y rules, and the rejections are correct:
-- `useSemanticElements` — `role="separator"` should be a real `<hr>`, but `<hr>`
-  is a void element and **cannot contain a label**, so a labeled separator
-  fundamentally can't be an `<hr>`.
-- `useFocusableInteractive` — Biome treats `role="separator"` as interactive and
-  demands a `tabIndex`, which would create a bogus keyboard tab stop on a purely
-  decorative element.
-
-Forcing it through would require `biome-ignore` suppressions — strictly worse
-than the current clean, lint-passing code.
-
-### Options if revisited
-- **Do nothing** (current): the visible label is real text and reads fine in
-  context; only the explicit "separator" semantic is missing.
-- Use `role="separator"` **plus** `aria-label`/`aria-hidden` restructuring and a
-  single scoped `biome-ignore` for `useFocusableInteractive`, documenting why a
-  decorative separator is intentionally non-focusable.
-- Revisit if/when the labeled divider needs to participate in a `menu`/`listbox`
-  pattern where a separator role is actually consumed by AT.
-
-### Recommendation
-Leave as-is unless a concrete AT/screen-reader requirement appears. The
-trade-off (suppressing the project's a11y lint vs. a missing-but-harmless
-separator semantic) favors the cleaner code today.
+### Revisit
+When a screen reader test shows the name read, or the labelled divider has to
+take part in a `menu` or `listbox`, where a separator role is consumed.
 
 ---
 
@@ -365,16 +346,17 @@ panel near an edge can leave it).
 
 A browser maps an `align` attribute of `start`, `center`, `end`, `left` or `right`
 to `text-align` on any element, custom elements included (checked in Chromium), and
-`text-align` inherits. `hmi-flex`, `hmi-legend` and `hmi-divider` reflect `align`, so
+`text-align` inherits. `hmi-flex` and `hmi-legend` reflect `align`, so
 `<hmi-flex align="center">` sets `text-align: center` on the host, and every child's
 text follows. (`hmi-text` reflects it too, where it is `text-align` on purpose.)
 `hmi-popover` and `hmi-hover-card` met it in the visual check and reset
-`text-align: start` on their inner nodes, with a test. The other three were not
-touched, and how far each one shows it is not measured.
+`text-align: start` on their inner nodes, with a test. The other two were not
+touched, and how far each one shows it is not measured. `hmi-divider` resets it on the
+host, and its label aligns itself where `align` puts it.
 
 To do: reset it on the host of the elements that do not mean it (`:host { text-align:
-start }` beats the presentational hint, and the host is the box in flex, legend and
-divider), with a test per element that `getComputedStyle(child).textAlign` stays
+start }` beats the presentational hint, and the host is the box in flex and legend),
+with a test per element that `getComputedStyle(child).textAlign` stays
 `start` under `align="center"`, or reflect the value under another attribute name. A
 new element that reflects `align` needs the same reset.
 
