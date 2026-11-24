@@ -9,16 +9,26 @@ export type DividerAlign = 'start' | 'center' | 'end';
 
 /**
  * A thin rule that separates stacked or inline content. Horizontal and vertical
- * orientations are supported. With a label in the default slot, a horizontal
- * divider becomes a row with the text in the middle (or aligned to the start or
- * end) and a rule on each side. A vertical divider is never labelled.
+ * orientations are supported. A horizontal divider fills the width its parent
+ * gives it, in a flex row or a centred column too, as the `<hr>` it replaces
+ * did; a vertical one stretches to its flex row's height. With a label in the
+ * default slot, a horizontal divider becomes a row with the text in the middle
+ * (or aligned to the start or end) and a rule on each side. A long label wraps,
+ * aligned the same way, and each rule keeps 1.5 base units. A vertical divider
+ * is never labelled: its label is not shown.
+ *
+ * The rules are `--outline`; the label is `--on-surface-variant`, or the
+ * card's muted text colour inside a card. In forced colours the rules are
+ * `CanvasText`.
  *
  * The plain divider carries `role="separator"` and `aria-orientation`, as the
- * `<hr>` it replaces did. The labelled divider is not announced as a separator,
- * exactly as in the React version: its rules are `aria-hidden` and the visible
- * label is real text (see `TODO.md`). The label is detected from the slot, so
- * before the element upgrades, including in server-rendered HTML, a divider
- * draws as a plain rule.
+ * `<hr>` it replaces did. The labelled divider is not a separator: its rules
+ * are `aria-hidden` and the label is read as text, as in the React version. A
+ * separator's content is presentational, so making it one would leave the
+ * label only as the separator's name, which screen readers don't all speak,
+ * and would hide a link in it. The label is detected from the slot, and
+ * whitespace alone is no label; before the element upgrades, including in
+ * server-rendered HTML, a divider draws as a plain rule.
  *
  * @tag hmi-divider
  * @slot - The label, shown on a horizontal divider.

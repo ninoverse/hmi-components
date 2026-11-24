@@ -9,6 +9,13 @@ import { css } from 'lit';
 export const styles = css`
     :host {
         display: block;
+        text-align: start;
+    }
+
+    :host(:not([orientation='vertical'])) {
+        width: -webkit-fill-available;
+        width: -moz-available;
+        width: stretch;
     }
 
     :host([orientation='vertical']) {
@@ -18,7 +25,7 @@ export const styles = css`
     }
 
     .base {
-        background: var(--outline-variant);
+        background: var(--outline);
         border: 0;
         margin: 0;
         width: 100%;
@@ -41,21 +48,31 @@ export const styles = css`
         display: flex;
         align-items: center;
         gap: var(--space-6);
-        color: var(--on-surface-variant);
+        color: var(--on-panel-variant, var(--on-surface-variant));
         font-family: var(--font-default);
         font-size: calc(var(--_base) * 1.625);
     }
 
     .labeled .line {
         display: block;
-        flex: 1;
+        flex: 1 0 calc(var(--_base) * 1.5);
         height: 1px;
-        background: var(--outline-variant);
+        background: var(--outline);
     }
 
     .labeled .label {
         display: block;
-        white-space: nowrap;
+        min-width: 0;
+        overflow-wrap: anywhere;
+        text-align: center;
+    }
+
+    :host([align='start']) .labeled .label {
+        text-align: start;
+    }
+
+    :host([align='end']) .labeled .label {
+        text-align: end;
     }
 
     :host([align='start']) .labeled .line:first-child {
@@ -64,5 +81,13 @@ export const styles = css`
 
     :host([align='end']) .labeled .line:last-child {
         flex: 0 0 calc(var(--_base) * 1.5);
+    }
+
+    @media (forced-colors: active) {
+        .base:not(.labeled),
+        .labeled .line {
+            background: CanvasText;
+            forced-color-adjust: none;
+        }
     }
 `;
