@@ -22,6 +22,14 @@ const cases: ReadonlyArray<{ name: string; template: TemplateResult }> = [
         >`,
     },
     {
+        name: 'hmi-aspect-ratio',
+        template: html`<hmi-aspect-ratio ratio="16/9"
+            ><img
+                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='90'%3E%3Crect width='160' height='90' fill='%233d7a4f'/%3E%3C/svg%3E"
+                alt="A green field"
+        /></hmi-aspect-ratio>`,
+    },
+    {
         name: 'hmi-avatar',
         template: html`<hmi-avatar name="Ada Lovelace" status="away"></hmi-avatar>`,
     },
