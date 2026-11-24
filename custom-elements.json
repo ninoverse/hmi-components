@@ -1422,7 +1422,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "The foundational layout container. By default an unstyled block; background,\npadding, radius and border are opt-in, so it composes under every other\nsurface. The `leaf` radius mirrors the asymmetric corners of `hmi-card`.\n\nThe host is the box: put `role`, `class` and `style` on it. There is no `as`\nproperty, so wrap the content in the semantic element you need.",
+          "description": "The foundational layout container. By default an unstyled block; background,\npadding, radius and border are opt-in, so it composes under every other\nsurface. The `leaf` radius mirrors the asymmetric corners of `hmi-card`, and\nlike every corner here it is logical, so it mirrors in right-to-left text.\n\nThe host is the box, and the only one: the shadow root holds just a slot,\nso there are no parts. Put `role`, `class` and `style` on the host. There is\nno `as` property, so give the host a `role`, or wrap the content in the\nsemantic element you need.\n\nA box with a `background` gives what it holds the surface text colours, even\ninside an ink or accent card; a box without one lets the card's colours\nthrough.\n\nThe radius rounds the box's own background and border, not its content: an\nimage or a coloured strip that reaches the edge keeps square corners. Add\n`style=\"overflow: hidden\"` to clip the content to the radius, which also\nclips a child's focus ring and shadow at the edge.",
           "name": "HmiBox",
           "slots": [
             {
