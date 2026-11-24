@@ -18,3 +18,13 @@ it('renders declarative shadow DOM with the ratio on the server', async () => {
     expect(out).toContain('aspect-ratio:16/9');
     expect(out).toContain('Frame');
 });
+
+it('renders an unusable ratio as the default square on the server', async () => {
+    const out = await collectResult(
+        render(
+            html`<hmi-aspect-ratio ratio="3:2"><div></div></hmi-aspect-ratio>`,
+        ),
+    );
+    expect(out).toContain('aspect-ratio:1;');
+    expect(out).not.toContain('3:2;');
+});

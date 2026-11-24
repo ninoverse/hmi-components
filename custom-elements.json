@@ -483,7 +483,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "Locks its content to a width-to-height ratio and clips the first child to\nfill the frame, so images and embeds keep their proportions at any width.\n\n`ratio` is a number (`1.5`) or a CSS ratio string (`16/9`). It reaches the\ninner `base` element through the CSSOM, so an invalid value is ignored and\nnothing is written into the host's own `style`.",
+          "description": "Locks its content to a width-to-height ratio and clips the first child to\nfill the frame, so images and embeds keep their proportions at any width.\n\n`ratio` is a positive number (`1.5`) or a CSS ratio string (`16/9`).\nAnything else, such as `3:2`, an empty value or `0`, draws as the default\nsquare. The ratio reaches the inner `base` element as an inline style,\nwritten on the server too, so the frame has its height before any script\nruns; nothing is written into the host's own `style`.\n\nThe host is as wide as its container, as v5's frame was, unless its `style`\nor a class sets a width. A `border-radius` or `border` on the host rounds\nand clips the content, and a `height` on the host wins over the ratio.\n\nPut one child in the frame: only the first is sized, and the rest are\nclipped from view but still read by screen readers and reached by Tab. Only\nthat child is sized, not what it holds: an image inside a link or a\n`<picture>` needs its own `width: 100%; height: 100%; object-fit: cover`.",
           "name": "HmiAspectRatio",
           "cssParts": [
             {
@@ -505,7 +505,7 @@
                 "text": "number | string"
               },
               "default": "1",
-              "description": "Width over height: a number or a CSS ratio such as `16/9`.",
+              "description": "Width over height: a positive number or a CSS ratio such as `16/9`.",
               "attribute": "ratio"
             }
           ],
@@ -516,7 +516,7 @@
                 "text": "number | string"
               },
               "default": "1",
-              "description": "Width over height: a number or a CSS ratio such as `16/9`.",
+              "description": "Width over height: a positive number or a CSS ratio such as `16/9`.",
               "fieldName": "ratio"
             }
           ],
