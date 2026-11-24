@@ -16,10 +16,22 @@ export type BoxRadius = 'none' | 'small' | 'medium' | 'large' | 'full' | 'leaf';
 /**
  * The foundational layout container. By default an unstyled block; background,
  * padding, radius and border are opt-in, so it composes under every other
- * surface. The `leaf` radius mirrors the asymmetric corners of `hmi-card`.
+ * surface. The `leaf` radius mirrors the asymmetric corners of `hmi-card`, and
+ * like every corner here it is logical, so it mirrors in right-to-left text.
  *
- * The host is the box: put `role`, `class` and `style` on it. There is no `as`
- * property, so wrap the content in the semantic element you need.
+ * The host is the box, and the only one: the shadow root holds just a slot,
+ * so there are no parts. Put `role`, `class` and `style` on the host. There is
+ * no `as` property, so give the host a `role`, or wrap the content in the
+ * semantic element you need.
+ *
+ * A box with a `background` gives what it holds the surface text colours, even
+ * inside an ink or accent card; a box without one lets the card's colours
+ * through.
+ *
+ * The radius rounds the box's own background and border, not its content: an
+ * image or a coloured strip that reaches the edge keeps square corners. Add
+ * `style="overflow: hidden"` to clip the content to the radius, which also
+ * clips a child's focus ring and shadow at the edge.
  *
  * @tag hmi-box
  * @slot - Box content.

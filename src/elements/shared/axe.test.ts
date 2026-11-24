@@ -80,6 +80,18 @@ const cases: ReadonlyArray<{ name: string; template: TemplateResult }> = [
         >`,
     },
     {
+        name: 'hmi-box',
+        template: html`<hmi-box
+            background="surface-container"
+            padding="medium"
+            radius="leaf"
+            bordered
+            role="region"
+            aria-label="Summary"
+            ><p>Three items need review.</p></hmi-box
+        >`,
+    },
+    {
         name: 'hmi-card',
         template: html`<hmi-card active
             ><hmi-heading slot="header" level="2" size="small">Line 3</hmi-heading
