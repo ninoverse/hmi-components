@@ -168,6 +168,16 @@ const cases: ReadonlyArray<{ name: string; template: TemplateResult }> = [
         >`,
     },
     {
+        name: 'hmi-heading',
+        template: html`<hmi-heading level="2">Line 3</hmi-heading>`,
+    },
+    {
+        name: 'hmi-heading, primary and truncated',
+        template: html`<hmi-heading level="3" tone="primary" truncate
+            >Pressure rising on line three</hmi-heading
+        >`,
+    },
+    {
         name: 'hmi-kbd',
         template: html`<p>
             Press
