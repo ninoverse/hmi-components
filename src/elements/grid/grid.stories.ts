@@ -7,9 +7,11 @@ type Args = Pick<HmiGrid, 'columns' | 'gap'>;
 
 const gaps = ['none', 'small', 'medium', 'large'] as const;
 
-const cell = (label: string) =>
+const unit = (n: number) => `calc(var(--hmi-base, 8px) * ${n})`;
+
+const cell = (label: string, height = 0) =>
     html`<div
-        style="background: var(--primary-container); color: var(--on-primary-container); padding: 1rem; border-radius: 0.5rem; text-align: center"
+        style="background: var(--primary-container); color: var(--on-primary-container); padding: ${unit(2)}; border-radius: ${unit(1)}; text-align: center${height ? `; height: ${unit(height)}` : ''}"
     >
         ${label}
     </div>`;
@@ -31,7 +33,7 @@ const meta = {
         docs: {
             description: {
                 component:
-                    'React: `import { Grid } from \'@ninoverse/hmi-components/react/grid\'` — `<Grid columns={3} gap="medium">…</Grid>`. A number gives equal tracks; a string is the `grid-template-columns` value. There is no `as` prop.',
+                    "React: `import { Grid } from '@ninoverse/hmi-components/react/grid'` — `<Grid columns={3} gap=\"medium\">…</Grid>`. A number gives equal tracks; a string is the `grid-template-columns` value. The host's `style` and `class` set the gap, the alignment and the implicit tracks, as v5's `style` did; only the columns come from `columns` alone. There is no `as` prop.",
             },
         },
     },
@@ -44,7 +46,7 @@ export const Default: Story = {};
 
 export const Columns: Story = {
     render: () => html`
-        <div style="display: flex; flex-direction: column; gap: 1.5rem">
+        <div style="display: flex; flex-direction: column; gap: ${unit(3)}">
             ${[1, 2, 4].map(
                 (n) =>
                     html`<hmi-grid .columns=${n} gap="small">
@@ -79,7 +81,7 @@ export const SpanningRows: Story = {
 
 export const Gaps: Story = {
     render: () => html`
-        <div style="display: flex; flex-direction: column; gap: 1.5rem">
+        <div style="display: flex; flex-direction: column; gap: ${unit(3)}">
             ${gaps.map(
                 (gap) =>
                     html`<hmi-grid .columns=${3} gap=${gap}>
@@ -88,4 +90,22 @@ export const Gaps: Story = {
             )}
         </div>
     `,
+};
+
+/**
+ * The host's `style` and `class` lay out the grid: its gap beats the
+ * preset, and its alignment, implicit tracks and height reach the items. The
+ * columns come from `columns` alone. `::part(base)` reaches the grid too.
+ */
+export const Styling: Story = {
+    args: { columns: 3, gap: 'small' },
+    render: (args) =>
+        html`<hmi-grid
+            .columns=${args.columns}
+            gap=${args.gap}
+            style="align-items: center; height: ${unit(24)}"
+        >
+            ${cell('centred')} ${cell('taller', 7)} ${cell('centred')}
+            ${cell('the rows share the height')}
+        </hmi-grid>`,
 };

@@ -11566,7 +11566,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "CSS grid layout primitive. A number of `columns` gives equal\n`minmax(0, 1fr)` tracks, and a string is used as the\n`grid-template-columns` value as-is. The gap scale matches `hmi-box` padding\nand `hmi-flex`.\n\nThe grid lives in an inner `base` element that carries the template through\nthe CSSOM, so an arbitrary string cannot escape into the stylesheet and the\nhost's own `style` stays yours. The slotted children are the grid items.\nThere is no `as` property: put `role` on the host or wrap it.",
+          "description": "CSS grid layout primitive. A number of `columns` gives equal\n`minmax(0, 1fr)` tracks, and a string is used as the\n`grid-template-columns` value as-is; without `columns` there are two tracks,\nand a template CSS rejects lays out as one column. The gap scale matches\n`hmi-box` padding and `hmi-flex`.\n\nThe grid lives in an inner `base` element that carries the template through\nthe CSSOM, so the server writes it and an arbitrary string cannot escape\ninto the stylesheet. The host's `style` and `class` still lay out the grid:\nthe base takes the host's `gap`, which beats the `gap` preset, its\n`align-items`, `justify-items`, `align-content`, `justify-content`,\n`grid-auto-rows`, `grid-auto-columns`, `grid-auto-flow`,\n`grid-template-rows` and `grid-template-areas`, and fills a height given to\nthe host. The columns come from `columns` alone: a\n`grid-template-columns` on the host is ignored. `::part(base)` reaches the\ngrid too. For an inline grid, set `display: inline-block` on the host. The\nslotted children are the grid items. There is no `as` property: put `role`\non the host or wrap it.",
           "name": "HmiGrid",
           "cssParts": [
             {
@@ -11585,7 +11585,7 @@
               "kind": "field",
               "name": "columns",
               "type": {
-                "text": "| number\n        | string"
+                "text": "GridColumns"
               },
               "default": "2",
               "description": "Equal tracks when a number (or digits), else a `grid-template-columns` value.",
@@ -11607,7 +11607,7 @@
             {
               "name": "columns",
               "type": {
-                "text": "| number\n        | string"
+                "text": "GridColumns"
               },
               "default": "2",
               "description": "Equal tracks when a number (or digits), else a `grid-template-columns` value.",

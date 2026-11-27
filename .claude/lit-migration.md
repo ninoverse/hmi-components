@@ -286,7 +286,11 @@ stem (`AreaChart`), the tag is `hmi-<kebab>`, the class is `Hmi<Pascal>`,
 box, flex, grid, spacer, aspect-ratio, scroll-area, visually-hidden and divider
 are real elements: `:host { display: … }` plus reflected attributes mapped to
 CSS (`:host([direction='column'])`), numeric values via host custom properties
-(`--_gap`, `--_columns`).
+(`--_gap`). Grid and aspect-ratio keep their value on an inner `base` part
+instead, through `styleMap`, so the server writes it and a string cannot
+escape into a stylesheet: grid's template as `--_columns`, aspect-ratio's
+`aspect-ratio`. Grid's base inherits the host's grid properties, so the host's
+`style` and `class` still lay it out.
 
 ## R10 — React wrapper
 
