@@ -29,8 +29,9 @@ import { renderLiquidFilter } from './panel.js';
    files, paints each pair, and measures what the page shows: the panels' own
    text roles, the translucent glass and liquid surfaces blended over the page
    (liquid's carries a gradient sheen and a refraction filter), and hmi-text,
-   hmi-heading and hmi-link inside a card, and hmi-stat's text, its delta in
-   each tone.
+   hmi-heading and hmi-link inside a card, hmi-heading's primary tone on the
+   page, the panels and each card, and hmi-stat's text, its delta in each
+   tone.
 
    For each look it takes one screenshot with the text hidden, then compares
    each text's computed colour with every background pixel under its line
@@ -55,6 +56,13 @@ const expected: ReadonlyArray<{
         matches: (f) =>
             f.colour === 'default' &&
             f.target.endsWith(' hmi-link') &&
+            !f.target.startsWith('ink '),
+    },
+    {
+        why: "card finding 8: the primary heading paints the link's --ref-primary-40, until HMI-23",
+        matches: (f) =>
+            f.colour === 'default' &&
+            f.target.endsWith(' hmi-heading primary') &&
             !f.target.startsWith('ink '),
     },
 ];
@@ -83,6 +91,9 @@ const panel = (token: string) => html`
             >Muted hmi-text</hmi-text
         >
         <hmi-link href="#" data-t="${token} hmi-link">A link</hmi-link>
+        <hmi-heading level="3" size="small" tone="primary" data-t="${token} hmi-heading primary"
+            >Primary heading</hmi-heading
+        >
     </div>
 `;
 
@@ -90,6 +101,9 @@ const card = (variant: string) => html`
     <hmi-card variant=${variant === 'active' ? 'default' : variant} ?active=${variant === 'active'}>
         <hmi-heading slot="header" level="3" size="small" data-t="${variant} card hmi-heading"
             >Heading</hmi-heading
+        >
+        <hmi-heading level="4" size="small" tone="primary" data-t="${variant} card hmi-heading primary"
+            >Primary heading</hmi-heading
         >
         <p data-t="${variant} card text">Inherited copy</p>
         <hmi-text data-t="${variant} card hmi-text">hmi-text copy</hmi-text>
@@ -120,6 +134,9 @@ const fixture = html`
         <p data-t="page text">Body copy</p>
         <p class="muted" data-t="page muted">Muted copy</p>
         <hmi-link href="#" data-t="page hmi-link">A link</hmi-link>
+        <hmi-heading level="3" size="small" tone="primary" data-t="page hmi-heading primary"
+            >Primary heading</hmi-heading
+        >
     </div>
     <div class="row">
         ${['--panel-bg', '--panel-bg-strong', '--drawer-bg', '--listbox-bg', '--palette-bg'].map(panel)}

@@ -11656,7 +11656,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "Display-level title in the display font. The semantic `level` (an inner\n`<h1>`–`<h6>`) is decoupled from the visual `size`: each level picks a\ndefault size, and `size` overrides it independently. Tones reuse the\nstandard text roles.\n\nThe heading element is inside the shadow root, so it is in the\naccessibility tree and the page outline, but a `querySelectorAll('h2')` on\nthe document does not find it. A `level` outside 1–6 falls back to 2.",
+          "description": "Display-level title in the display font. The semantic `level` (an inner\n`<h1>`–`<h6>`) is decoupled from the visual `size`: each level picks a\ndefault size (1 xlarge, 2 large, 3 medium, 4 and 5 small, 6 xsmall), and\n`size` overrides it independently; a `size` it doesn't know keeps the\nlevel's. Tones reuse the standard text roles; `primary` paints the link's\ntext colour, which each surface sets for itself.\n\nThe host carries the type and the heading inherits it, so the host's\n`style` and `class` (and a React `style`) set its colour, font, size, line\nheight and spacing as on any element; `::part(base)` reaches the inner\nheading itself. A long word breaks rather than overflowing, and a heading\nthat wraps is balanced: set `text-wrap: wrap` on the host to wrap greedily.\nWith `truncate`, the heading also shrinks in a flex row or a grid track.\n\nThe heading element is inside the shadow root, so it is in the\naccessibility tree and the page outline, but a `querySelectorAll('h2')` on\nthe document, or a page rule such as `h2 + p`, does not find it. A `level`\noutside 1–6 falls back to 2.",
           "name": "HmiHeading",
           "cssProperties": [
             {
@@ -11666,6 +11666,10 @@
             {
               "description": "The muted tone inside a panel that sets it; else `--on-surface-variant`.",
               "name": "--on-panel-variant"
+            },
+            {
+              "description": "The primary tone inside a panel that sets it; else `--ref-primary-40`.",
+              "name": "--on-panel-link"
             }
           ],
           "cssParts": [
