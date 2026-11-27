@@ -2,7 +2,7 @@ import { createComponent } from '@lit/react';
 import * as React from 'react';
 import { HmiGrid } from './grid.js';
 
-export type { GridGap } from './grid.js';
+export type { GridColumns, GridGap } from './grid.js';
 
 /**
  * React wrapper for `<hmi-grid>`.
