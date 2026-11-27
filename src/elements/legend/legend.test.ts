@@ -113,12 +113,27 @@ describe('hmi-legend', () => {
         expect(el.align).toBe('center');
         expect(el.getAttribute('align')).toBe('center');
         expect(getComputedStyle(base).justifyContent).toBe('center');
+        /* Where the items land, not the keyword: Chromium 158 reports
+           `flex-start` as `flow-start`, with the same layout. */
+        const row = all(el, 'item');
+        const edges = () => ({
+            start:
+                (row[0] as HTMLElement).getBoundingClientRect().left -
+                base.getBoundingClientRect().left,
+            end:
+                base.getBoundingClientRect().right -
+                (row.at(-1) as HTMLElement).getBoundingClientRect().right,
+        });
+        expect(edges().start).toBeGreaterThan(0);
+        expect(edges().start).toBeCloseTo(edges().end, 0);
         el.align = 'start';
         await el.updateComplete;
-        expect(getComputedStyle(base).justifyContent).toBe('flex-start');
+        expect(edges().start).toBe(0);
+        expect(edges().end).toBeGreaterThan(0);
         el.align = 'end';
         await el.updateComplete;
-        expect(getComputedStyle(base).justifyContent).toBe('flex-end');
+        expect(edges().end).toBe(0);
+        expect(edges().start).toBeGreaterThan(0);
     });
 });
 
