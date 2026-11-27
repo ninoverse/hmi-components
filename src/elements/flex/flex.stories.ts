@@ -20,10 +20,20 @@ const justifies = [
 ] as const;
 const gaps = ['none', 'small', 'medium', 'large'] as const;
 
-const item = (label: string, height = 2) =>
+const unit = (n: number) => `calc(var(--hmi-base, 8px) * ${n})`;
+
+const item = (label: string, height = 4) =>
     html`<span
-        style="background: var(--primary-container); color: var(--on-primary-container); padding: 0.5rem 1rem; border-radius: 0.5rem; height: ${height}rem; display: inline-flex; align-items: center"
+        style="background: var(--primary-container); color: var(--on-primary-container); padding: ${unit(1)} ${unit(2)}; border-radius: ${unit(1)}; height: ${unit(height)}; display: inline-flex; align-items: center"
         >${label}</span
+    >`;
+
+/* An item of two lines: the alignment of its text shows whether `align`
+   reaches it. */
+const paragraph = (label: string) =>
+    html`<span
+        style="background: var(--primary-container); color: var(--on-primary-container); padding: ${unit(1)} ${unit(2)}; border-radius: ${unit(1)}; width: ${unit(18)}"
+        >${label}: a longer item whose text runs onto two lines</span
     >`;
 
 const meta = {
@@ -54,15 +64,15 @@ const meta = {
             gap=${args.gap}
             ?wrap=${args.wrap}
             ?inline=${args.inline}
-            style="min-height: 8rem; border: 1px dashed var(--outline-variant)"
+            style="min-height: ${unit(16)}; border: 1px dashed var(--outline-variant)"
         >
-            ${item('One')} ${item('Two', 3)} ${item('Three')}
+            ${item('One')} ${item('Two', 6)} ${item('Three')}
         </hmi-flex>`,
     parameters: {
         docs: {
             description: {
                 component:
-                    'React: `import { Flex } from \'@ninoverse/hmi-components/react/flex\'` — `<Flex direction="column" gap="medium">…</Flex>`. There is no `as` prop: the host is the flex container.',
+                    'React: `import { Flex } from \'@ninoverse/hmi-components/react/flex\'` — `<Flex direction="column" gap="medium">…</Flex>`. There is no `as` prop: the host is the flex container, and `class` and `style` go on it. `align` places the items and never aligns their text, which follows the parent\'s `text-align`.',
             },
         },
     },
@@ -75,7 +85,7 @@ export const Default: Story = {};
 
 export const Directions: Story = {
     render: () => html`
-        <div style="display: flex; flex-direction: column; gap: 1rem">
+        <div style="display: flex; flex-direction: column; gap: ${unit(2)}">
             ${directions.map(
                 (direction) =>
                     html`<hmi-flex direction=${direction} gap="small">
@@ -88,11 +98,11 @@ export const Directions: Story = {
 
 export const Alignment: Story = {
     render: () => html`
-        <div style="display: flex; flex-direction: column; gap: 1rem">
+        <div style="display: flex; flex-direction: column; gap: ${unit(2)}">
             ${aligns.map(
                 (align) =>
                     html`<hmi-flex align=${align} gap="small" style="border: 1px dashed var(--outline-variant)">
-                        ${item(align)} ${item('tall', 4)} ${item('c')}
+                        ${paragraph(align)} ${item('tall', 8)} ${item('c')}
                     </hmi-flex>`,
             )}
         </div>
@@ -101,7 +111,7 @@ export const Alignment: Story = {
 
 export const Justification: Story = {
     render: () => html`
-        <div style="display: flex; flex-direction: column; gap: 1rem">
+        <div style="display: flex; flex-direction: column; gap: ${unit(2)}">
             ${justifies.map(
                 (justify) =>
                     html`<hmi-flex justify=${justify} style="border: 1px dashed var(--outline-variant)">
@@ -114,7 +124,7 @@ export const Justification: Story = {
 
 export const Gaps: Story = {
     render: () => html`
-        <div style="display: flex; flex-direction: column; gap: 1rem">
+        <div style="display: flex; flex-direction: column; gap: ${unit(2)}">
             ${gaps.map(
                 (gap) =>
                     html`<hmi-flex gap=${gap}>${item(gap)} ${item('b')} ${item('c')}</hmi-flex>`,
@@ -126,7 +136,7 @@ export const Gaps: Story = {
 export const Wrapping: Story = {
     args: { wrap: true, gap: 'small' },
     render: (args) =>
-        html`<hmi-flex gap=${args.gap} ?wrap=${args.wrap} style="width: 18rem">
+        html`<hmi-flex gap=${args.gap} ?wrap=${args.wrap} style="width: ${unit(36)}">
             ${Array.from({ length: 8 }, (_, i) => item(`Item ${i + 1}`))}
         </hmi-flex>`,
 };
