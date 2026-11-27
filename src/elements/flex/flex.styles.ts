@@ -4,10 +4,14 @@ import { css } from 'lit';
    stretch alignment and no gap, and direction, alignment, justification, gap
    and wrapping opt in through reflected attributes. A slot has no box of its
    own, so the slotted children are the flex items. The gap scale matches Box
-   padding. Ported from src/components/styled/flex.styled.css. */
+   padding. A browser maps an `align` attribute to `text-align`, which the
+   items would inherit: `inherit` beats that mapping and passes on what the
+   parent sets, as v5's `<div>` did. Ported from
+   src/components/styled/flex.styled.css. */
 export const styles = css`
     :host {
         display: flex;
+        text-align: inherit;
     }
     :host([inline]) {
         display: inline-flex;

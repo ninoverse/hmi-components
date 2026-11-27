@@ -345,20 +345,22 @@ panel near an edge can leave it).
 ## `align` as an attribute leaks into `text-align`
 
 A browser maps an `align` attribute of `start`, `center`, `end`, `left` or `right`
-to `text-align` on any element, custom elements included (checked in Chromium), and
-`text-align` inherits. `hmi-flex` and `hmi-legend` reflect `align`, so
-`<hmi-flex align="center">` sets `text-align: center` on the host, and every child's
-text follows. (`hmi-text` reflects it too, where it is `text-align` on purpose.)
-`hmi-popover` and `hmi-hover-card` met it in the visual check and reset
-`text-align: start` on their inner nodes, with a test. The other two were not
-touched, and how far each one shows it is not measured. `hmi-divider` resets it on the
-host, and its label aligns itself where `align` puts it.
+(and an unknown value such as `middle`) to `text-align` on any element, custom
+elements included (checked in Chromium), and `text-align` inherits. `hmi-legend`
+reflects `align`, so `<hmi-legend align="center">` sets `text-align: center` on
+the host, and its labels follow. (`hmi-text` reflects it too, where it is
+`text-align` on purpose.) `hmi-popover` and `hmi-hover-card` met it in the visual
+check and reset `text-align: start` on their inner nodes, with a test.
+`hmi-divider` resets it on the host, and its label aligns itself where `align`
+puts it. `hmi-flex` sets `text-align: inherit` on the host, which beats the
+mapping too and passes the parent's alignment on to the items, as v5's `<div>`
+did.
 
-To do: reset it on the host of the elements that do not mean it (`:host { text-align:
-start }` beats the presentational hint, and the host is the box in flex and legend),
-with a test per element that `getComputedStyle(child).textAlign` stays
-`start` under `align="center"`, or reflect the value under another attribute name. A
-new element that reflects `align` needs the same reset.
+To do: legend, at its review. `:host { text-align: inherit }` where the host's
+content should follow its parent, as in flex, or `start` where the element
+aligns its own text, with a test that `getComputedStyle(child).textAlign` stays
+`start` under `align="center"`. A new element that reflects `align` needs the
+same reset.
 
 ---
 

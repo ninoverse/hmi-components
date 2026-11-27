@@ -19,8 +19,13 @@ export type FlexGap = 'none' | 'small' | 'medium' | 'large';
  * default; direction, alignment, justification, gap and wrapping are opt-in.
  * The gap scale matches `hmi-box` padding.
  *
- * The host is the flex container and the slotted children are its items. There
- * is no `as` property: put `role` on the host or wrap it.
+ * The host is the flex container and the slotted children are its items, so
+ * `class` and `style` on it style the container. There is no `as` property:
+ * put `role` on the host or wrap it.
+ *
+ * `align` places the items on the cross axis and never aligns their text: the
+ * host passes on the `text-align` of its parent, as v5's `<div>` did, though a
+ * browser maps an `align` attribute to `text-align`.
  *
  * @tag hmi-flex
  * @slot - The flex items.

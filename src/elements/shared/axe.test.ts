@@ -154,6 +154,13 @@ const cases: ReadonlyArray<{ name: string; template: TemplateResult }> = [
         >`,
     },
     {
+        name: 'hmi-flex',
+        template: html`<hmi-flex align="center" gap="small"
+            ><button type="button">Save</button
+            ><a href="#cancel">Cancel</a></hmi-flex
+        >`,
+    },
+    {
         name: 'hmi-kbd',
         template: html`<p>
             Press

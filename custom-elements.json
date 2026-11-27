@@ -10808,7 +10808,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "Flexbox layout primitive. A plain row with stretch alignment and no gap by\ndefault; direction, alignment, justification, gap and wrapping are opt-in.\nThe gap scale matches `hmi-box` padding.\n\nThe host is the flex container and the slotted children are its items. There\nis no `as` property: put `role` on the host or wrap it.",
+          "description": "Flexbox layout primitive. A plain row with stretch alignment and no gap by\ndefault; direction, alignment, justification, gap and wrapping are opt-in.\nThe gap scale matches `hmi-box` padding.\n\nThe host is the flex container and the slotted children are its items, so\n`class` and `style` on it style the container. There is no `as` property:\nput `role` on the host or wrap it.\n\n`align` places the items on the cross axis and never aligns their text: the\nhost passes on the `text-align` of its parent, as v5's `<div>` did, though a\nbrowser maps an `align` attribute to `text-align`.",
           "name": "HmiFlex",
           "slots": [
             {
